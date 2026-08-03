@@ -24,6 +24,18 @@
         </native:column>
 
         <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Unchanged-value rejection</native:text>
+            <firstlight:segmented
+                :options="$queueOptions"
+                :value="$rejectedQueue"
+                @change="rejectQueue"
+                label="Rejected queue"
+                helper="Try All; Mine stays selected."
+                a11y-hint="The server only allows Mine in this example"
+            />
+        </native:column>
+
+        <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Simple strings</native:text>
             <firstlight:segmented
                 :options="$simpleOptions"

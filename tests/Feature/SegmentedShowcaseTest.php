@@ -42,6 +42,7 @@ it('publishes the complete Segmented catalogue through the native wire tree', fu
         ->and(array_keys($nodes))->toBe([
             'Priority',
             'Queue',
+            'Rejected queue',
             'Simple queue',
             'Stable queue',
             'No initial selection',
@@ -242,4 +243,32 @@ it('dispatches the bound queue selection and server reset through published call
 
     expect($resetNodes['Queue']['props']['selected_value'])->toBe('mine')
         ->and($resetNodes['Stable queue']['props']['selected_value'])->toBe('mine');
+});
+
+it('publishes an unchanged authoritative value when the server rejects a selection', function () {
+    $screen = Native::visit('/segmented');
+    $nodes = firstlightSegmentedNodesByLabel($screen->tree());
+
+    expect(firstlightPropsWithoutCallbacks($nodes['Rejected queue']))->toBe([
+        'a11y_hint' => 'The server only allows Mine in this example',
+        'label' => 'Rejected queue',
+        'helper' => 'Try All; Mine stays selected.',
+        'error' => '',
+        'required' => false,
+        'disabled' => false,
+        'value_type' => 'string',
+        'has_selection' => true,
+        'selected_value' => 'mine',
+        'option_values' => ['mine', 'all'],
+        'option_labels' => ['Mine', 'All'],
+        'option_enabled' => ['1', '1'],
+    ])->and($nodes['Rejected queue']['props']['on_change'])->toBeInt();
+
+    $screen->select('rejectQueue', 'all')
+        ->assertSet('rejectedQueue', 'mine')
+        ->assertSet('rejectedQueueAttempts', 1);
+
+    $publishedNodes = firstlightSegmentedNodesByLabel($screen->tree());
+
+    expect($publishedNodes['Rejected queue']['props']['selected_value'])->toBe('mine');
 });

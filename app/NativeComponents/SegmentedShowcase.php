@@ -11,6 +11,10 @@ class SegmentedShowcase extends NativeComponent
 
     public string $queue = 'mine';
 
+    public string $rejectedQueue = 'mine';
+
+    public int $rejectedQueueAttempts = 0;
+
     public int $priority = 10;
 
     public ?string $unselected = null;
@@ -57,6 +61,11 @@ class SegmentedShowcase extends NativeComponent
     {
         $this->queue = 'mine';
         $this->priority = 10;
+    }
+
+    public function rejectQueue(string $queue): void
+    {
+        $this->rejectedQueueAttempts++;
     }
 
     public function navTitle(): string
