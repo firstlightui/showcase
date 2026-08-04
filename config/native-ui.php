@@ -48,9 +48,9 @@ return [
     'theme' => [
 
         'light' => [
-            // Primary brand color — used for filled buttons, active states, key accents.
-            'primary' => '#0F766E',
-            'on-primary' => '#FFFFFF',
+            // Firstlight Dawn 700 — used for filled buttons, active states, key accents.
+            'primary' => '#AE1515',
+            'on-primary' => '#FFF5EA',
 
             // Secondary / muted action color.
             'secondary' => '#475569',
@@ -88,8 +88,9 @@ return [
         'dark' => [
             // Leave empty or partial to auto-derive from `light` (luminance inversion).
             // Specify any token here to override the derived value.
-            'primary' => '#14B8A6',
-            'on-primary' => '#000000',
+            // Firstlight Dawn 500 with Ink 950 content.
+            'primary' => '#ED4E0C',
+            'on-primary' => '#110805',
 
             'secondary' => '#94A3B8',
             'on-secondary' => '#0F172A',

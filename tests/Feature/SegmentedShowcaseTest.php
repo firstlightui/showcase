@@ -25,10 +25,10 @@ function firstlightPropsWithoutCallbacks(array $node): array
 }
 
 it('defines accessible primary color pairs for both appearances', function () {
-    expect(config('native-ui.theme.light.primary'))->toBe('#0F766E')
-        ->and(config('native-ui.theme.light.on-primary'))->toBe('#FFFFFF')
-        ->and(config('native-ui.theme.dark.primary'))->toBe('#14B8A6')
-        ->and(config('native-ui.theme.dark.on-primary'))->toBe('#000000');
+    expect(config('native-ui.theme.light.primary'))->toBe('#AE1515')
+        ->and(config('native-ui.theme.light.on-primary'))->toBe('#FFF5EA')
+        ->and(config('native-ui.theme.dark.primary'))->toBe('#ED4E0C')
+        ->and(config('native-ui.theme.dark.on-primary'))->toBe('#110805');
 });
 
 it('publishes the complete Segmented catalogue through the native wire tree', function () {
@@ -231,8 +231,7 @@ it('dispatches the bound queue selection and server reset through published call
     expect($selectedNodes['Queue']['props']['selected_value'])->toBe('all')
         ->and($selectedNodes['Stable queue']['props']['selected_value'])->toBe('all');
 
-    $screen->assertElement('button', fn (array $node): bool =>
-        ($node['props']['label'] ?? null) === 'Reset selections'
+    $screen->assertElement('button', fn (array $node): bool => ($node['props']['label'] ?? null) === 'Reset selections'
         && ($node['props']['variant'] ?? null) === 'primary'
         && is_int($node['props']['on_press'] ?? null)
     )->press('resetSelections')
