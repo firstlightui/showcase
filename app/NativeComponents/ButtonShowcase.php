@@ -3,9 +3,8 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
-use Native\Mobile\Edge\NativeComponent;
 
-class ButtonShowcase extends NativeComponent
+class ButtonShowcase extends ShowcaseScreen
 {
     public int $pressCount = 0;
 

@@ -3,9 +3,8 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
-use Native\Mobile\Edge\NativeComponent;
 
-class StatusLabelShowcase extends NativeComponent
+class StatusLabelShowcase extends ShowcaseScreen
 {
     public function navTitle(): string
     {
