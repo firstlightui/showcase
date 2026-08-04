@@ -3,11 +3,13 @@
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
+use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\PillGroupShowcase;
+use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
@@ -32,6 +34,14 @@ Route::native('/pill-group', PillGroupShowcase::class)
 
 Route::native('/captures/pill-group', PillGroupCapture::class)
     ->name('captures.pill-group')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/progress', ProgressShowcase::class)
+    ->name('progress')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/progress', ProgressCapture::class)
+    ->name('captures.progress')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/segmented', SegmentedShowcase::class)
