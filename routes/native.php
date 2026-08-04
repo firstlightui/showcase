@@ -2,6 +2,7 @@
 
 use App\NativeComponents\Captures\SegmentedCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
+use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\StatusLabelShowcase;
@@ -14,6 +15,10 @@ Route::native('/segmented', SegmentedShowcase::class)
 
 Route::native('/captures/segmented', SegmentedCapture::class)
     ->name('captures.segmented')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/switch', SwitchCapture::class)
+    ->name('captures.switch')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/status-label', StatusLabelShowcase::class)
