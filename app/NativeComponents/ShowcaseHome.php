@@ -9,6 +9,12 @@ class ShowcaseHome extends ShowcaseScreen
     /** @var list<array{label: string, tag: string, description: string, path: string}> */
     public array $components = [
         [
+            'label' => 'Activity Indicator',
+            'tag' => '<firstlight:activity-indicator>',
+            'description' => 'Indeterminate native activity with semantic sizes',
+            'path' => '/activity-indicator',
+        ],
+        [
             'label' => 'Button',
             'tag' => '<firstlight:button>',
             'description' => 'Labelled actions, variants, sizes, icons, and states',

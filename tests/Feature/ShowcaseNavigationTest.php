@@ -22,6 +22,7 @@ it('publishes a native front-page menu for every released component', function (
         'title' => 'Firstlight UI',
         'back' => false,
     ])->and(array_column(array_column($items, 'props'), 'headline'))->toBe([
+        'Activity Indicator',
         'Button',
         'Badge',
         'Choice Group',
@@ -40,6 +41,7 @@ it('publishes a native front-page menu for every released component', function (
         'Text Field',
         'Text Area',
     ])->and(array_column(array_column($items, 'props'), 'overline'))->toBe([
+        '<firstlight:activity-indicator>',
         '<firstlight:button>',
         '<firstlight:badge>',
         '<firstlight:choice-group>',
@@ -58,6 +60,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:text-field>',
         '<firstlight:text-area>',
     ])->and(array_column(array_column($items, 'props'), 'supporting'))->toBe([
+        'Indeterminate native activity with semantic sizes',
         'Labelled actions, variants, sizes, icons, and states',
         'Compact display-only counts and semantic markers',
         'Visible single-radio and multiple-checkbox choices',
@@ -89,6 +92,7 @@ it('navigates each catalogue row to its component demo', function (string $label
         ->tap($label)
         ->assertNavigatedTo($path);
 })->with([
+    ['Activity Indicator', '/activity-indicator'],
     ['Button', '/button'],
     ['Badge', '/badge'],
     ['Choice Group', '/choice-group'],
@@ -109,10 +113,11 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/button', '/badge', '/choice-group', '/date-picker', '/time-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
+    foreach (['/activity-indicator', '/button', '/badge', '/choice-group', '/date-picker', '/time-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
+    expect(Native::visit('/captures/activity-indicator')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/button')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/choice-group')->tree()['props']['back'] ?? null)->toBeFalse();

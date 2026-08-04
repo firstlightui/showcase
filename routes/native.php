@@ -1,7 +1,9 @@
 <?php
 
+use App\NativeComponents\ActivityIndicatorShowcase;
 use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\ButtonShowcase;
+use App\NativeComponents\Captures\ActivityIndicatorCapture;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\ChoiceGroupCapture;
@@ -40,6 +42,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::native('/', ShowcaseHome::class)
     ->name('showcase')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/activity-indicator', ActivityIndicatorShowcase::class)
+    ->name('activity-indicator')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/activity-indicator', ActivityIndicatorCapture::class)
+    ->name('captures.activity-indicator')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/button', ButtonShowcase::class)
