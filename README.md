@@ -18,6 +18,16 @@ Android pre-alpha work that depends on authoritative byte-identical tree
 publications must use the guarded [temporary NativePHP publication
 workaround](docs/nativephp-identical-publication-workaround.md).
 
+## Documentation captures
+
+The stable Segmented fixture is available at `/captures/segmented`. Verify its authored native tree before capturing:
+
+```bash
+php artisan test tests/Feature/SegmentedCaptureTest.php
+```
+
+The package repository's `bin/capture-doc-screenshots` workflow supplies the explicit iOS Simulator UDID and Android emulator serial. Do not substitute a physical device or choose a target implicitly.
+
 ## License
 
 Firstlight UI Showcase is open-sourced software licensed under the [MIT license](LICENSE).

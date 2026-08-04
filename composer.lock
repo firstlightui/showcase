@@ -737,7 +737,7 @@
             "dist": {
                 "type": "path",
                 "url": "../firstlight-ui",
-                "reference": "70c2a65d88e57e2b619084da83934b88a5338909"
+                "reference": "ebb472a5a71a06983d8ebc8b4f20682c43bca01d"
             },
             "require": {
                 "nativephp/mobile": "^4.0",
@@ -746,7 +746,8 @@
             },
             "require-dev": {
                 "illuminate/view": "^13.0",
-                "pestphp/pest": "^5.0"
+                "pestphp/pest": "^5.0",
+                "pestphp/pest-plugin-evals": "^5.0"
             },
             "type": "nativephp-ui-plugin",
             "extra": {
@@ -767,6 +768,12 @@
             "scripts": {
                 "test": [
                     "pest"
+                ],
+                "docs:build": [
+                    "bin/build-docs-artifacts"
+                ],
+                "docs:check": [
+                    "bin/check-docs --development"
                 ]
             },
             "license": [
