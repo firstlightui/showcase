@@ -33,6 +33,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/date-picker',
         ],
         [
+            'label' => 'Time Picker',
+            'tag' => '<firstlight:time-picker>',
+            'description' => 'Nullable wall-clock times and native confirmation',
+            'path' => '/time-picker',
+        ],
+        [
             'label' => 'Icon Button',
             'tag' => '<firstlight:icon-button>',
             'description' => 'Compact accessible actions with native icon controls',

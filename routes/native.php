@@ -15,6 +15,7 @@ use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
+use App\NativeComponents\Captures\TimePickerCapture;
 use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
@@ -28,6 +29,7 @@ use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\SwitchShowcase;
 use App\NativeComponents\TextAreaShowcase;
 use App\NativeComponents\TextFieldShowcase;
+use App\NativeComponents\TimePickerShowcase;
 use Illuminate\Support\Facades\Route;
 
 Route::native('/', ShowcaseHome::class)
@@ -64,6 +66,14 @@ Route::native('/date-picker', DatePickerShowcase::class)
 
 Route::native('/captures/date-picker', DatePickerCapture::class)
     ->name('captures.date-picker')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/time-picker', TimePickerShowcase::class)
+    ->name('time-picker')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/time-picker', TimePickerCapture::class)
+    ->name('captures.time-picker')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/icon-button', IconButtonShowcase::class)

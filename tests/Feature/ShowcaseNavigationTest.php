@@ -26,6 +26,7 @@ it('publishes a native front-page menu for every released component', function (
         'Badge',
         'Choice Group',
         'Date Picker',
+        'Time Picker',
         'Icon Button',
         'Pill Group',
         'Progress',
@@ -40,6 +41,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:badge>',
         '<firstlight:choice-group>',
         '<firstlight:date-picker>',
+        '<firstlight:time-picker>',
         '<firstlight:icon-button>',
         '<firstlight:pill-group>',
         '<firstlight:progress>',
@@ -54,6 +56,7 @@ it('publishes a native front-page menu for every released component', function (
         'Compact display-only counts and semantic markers',
         'Visible single-radio and multiple-checkbox choices',
         'Nullable calendar dates, bounds, and native confirmation',
+        'Nullable wall-clock times and native confirmation',
         'Compact accessible actions with native icon controls',
         'Compact single- and multiple-selection options',
         'Determinate and indeterminate work state',
@@ -81,6 +84,7 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Badge', '/badge'],
     ['Choice Group', '/choice-group'],
     ['Date Picker', '/date-picker'],
+    ['Time Picker', '/time-picker'],
     ['Icon Button', '/icon-button'],
     ['Pill Group', '/pill-group'],
     ['Progress', '/progress'],
@@ -93,7 +97,7 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/button', '/badge', '/choice-group', '/date-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
+    foreach (['/button', '/badge', '/choice-group', '/date-picker', '/time-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
@@ -101,6 +105,7 @@ it('shows native back chrome on component pages but not capture routes', functio
     expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/choice-group')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/date-picker')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/time-picker')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/icon-button')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/search-field')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/text-area')->tree()['props']['back'] ?? null)->toBeFalse();
