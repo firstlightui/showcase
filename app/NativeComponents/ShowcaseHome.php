@@ -27,6 +27,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/badge',
         ],
         [
+            'label' => 'Checkbox',
+            'tag' => '<firstlight:checkbox>',
+            'description' => 'Server-authoritative Boolean form and checklist state',
+            'path' => '/checkbox',
+        ],
+        [
             'label' => 'Choice Group',
             'tag' => '<firstlight:choice-group>',
             'description' => 'Visible single-radio and multiple-checkbox choices',

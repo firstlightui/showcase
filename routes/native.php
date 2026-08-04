@@ -6,6 +6,7 @@ use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\Captures\ActivityIndicatorCapture;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
+use App\NativeComponents\Captures\CheckboxCapture;
 use App\NativeComponents\Captures\ChoiceGroupCapture;
 use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
@@ -21,6 +22,7 @@ use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
+use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
@@ -66,6 +68,14 @@ Route::native('/captures/badge', BadgeCapture::class)
 
 Route::native('/captures/button', ButtonCapture::class)
     ->name('captures.button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/checkbox', CheckboxShowcase::class)
+    ->name('checkbox')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/checkbox', CheckboxCapture::class)
+    ->name('captures.checkbox')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/choice-group', ChoiceGroupShowcase::class)
