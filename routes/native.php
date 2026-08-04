@@ -1,29 +1,31 @@
 <?php
 
-use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\BadgeShowcase;
+use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
+use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
-use App\NativeComponents\Captures\SegmentedCapture;
 use App\NativeComponents\Captures\SearchFieldCapture;
+use App\NativeComponents\Captures\SegmentedCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
-use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
-use App\NativeComponents\Layouts\ShowcaseLayout;
+use App\NativeComponents\Captures\TextFieldCapture;
+use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
+use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
-use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SearchFieldShowcase;
+use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\SwitchShowcase;
-use App\NativeComponents\TextFieldShowcase;
 use App\NativeComponents\TextAreaShowcase;
+use App\NativeComponents\TextFieldShowcase;
 use Illuminate\Support\Facades\Route;
 
 Route::native('/', ShowcaseHome::class)
@@ -44,6 +46,14 @@ Route::native('/captures/badge', BadgeCapture::class)
 
 Route::native('/captures/button', ButtonCapture::class)
     ->name('captures.button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/date-picker', DatePickerShowcase::class)
+    ->name('date-picker')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/date-picker', DatePickerCapture::class)
+    ->name('captures.date-picker')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/icon-button', IconButtonShowcase::class)

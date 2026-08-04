@@ -21,6 +21,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/badge',
         ],
         [
+            'label' => 'Date Picker',
+            'tag' => '<firstlight:date-picker>',
+            'description' => 'Nullable calendar dates, bounds, and native confirmation',
+            'path' => '/date-picker',
+        ],
+        [
             'label' => 'Icon Button',
             'tag' => '<firstlight:icon-button>',
             'description' => 'Compact accessible actions with native icon controls',

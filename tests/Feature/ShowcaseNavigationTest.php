@@ -24,6 +24,7 @@ it('publishes a native front-page menu for every released component', function (
     ])->and(array_column(array_column($items, 'props'), 'headline'))->toBe([
         'Button',
         'Badge',
+        'Date Picker',
         'Icon Button',
         'Pill Group',
         'Progress',
@@ -36,6 +37,7 @@ it('publishes a native front-page menu for every released component', function (
     ])->and(array_column(array_column($items, 'props'), 'overline'))->toBe([
         '<firstlight:button>',
         '<firstlight:badge>',
+        '<firstlight:date-picker>',
         '<firstlight:icon-button>',
         '<firstlight:pill-group>',
         '<firstlight:progress>',
@@ -48,6 +50,7 @@ it('publishes a native front-page menu for every released component', function (
     ])->and(array_column(array_column($items, 'props'), 'supporting'))->toBe([
         'Labelled actions, variants, sizes, icons, and states',
         'Compact display-only counts and semantic markers',
+        'Nullable calendar dates, bounds, and native confirmation',
         'Compact accessible actions with native icon controls',
         'Compact single- and multiple-selection options',
         'Determinate and indeterminate work state',
@@ -73,6 +76,7 @@ it('navigates each catalogue row to its component demo', function (string $label
 })->with([
     ['Button', '/button'],
     ['Badge', '/badge'],
+    ['Date Picker', '/date-picker'],
     ['Icon Button', '/icon-button'],
     ['Pill Group', '/pill-group'],
     ['Progress', '/progress'],
@@ -85,12 +89,13 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/button', '/badge', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
+    foreach (['/button', '/badge', '/date-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
     expect(Native::visit('/captures/button')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/date-picker')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/icon-button')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/search-field')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/text-area')->tree()['props']['back'] ?? null)->toBeFalse();
