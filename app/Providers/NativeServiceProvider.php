@@ -35,7 +35,7 @@ class NativeServiceProvider extends ServiceProvider
     {
         return [
             \Native\Mobile\UI\NativeUIServiceProvider::class,
-            \Clinically\Firstlight\FirstlightServiceProvider::class,
+            \FirstlightUI\FirstlightServiceProvider::class,
         ];
     }
 }

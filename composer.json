@@ -1,13 +1,25 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "clinically/firstlight-showcase",
+    "name": "firstlightui/firstlight-showcase",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "The official showcase app for Firstlight UI NativePHP controls.",
+    "keywords": ["android", "ios", "nativephp", "showcase", "ui"],
     "license": "MIT",
+    "homepage": "https://firstlightui.dev",
+    "authors": [
+        {
+            "name": "Firstlight UI",
+            "email": "team@firstlightui.dev"
+        }
+    ],
+    "support": {
+        "email": "team@firstlightui.dev",
+        "issues": "https://github.com/firstlightui/firstlight-showcase/issues",
+        "source": "https://github.com/firstlightui/firstlight-showcase"
+    },
     "require": {
         "php": "^8.4",
-        "clinically/firstlight-ui": "dev-main",
+        "firstlightui/firstlight-ui": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
         "nativephp/mobile": "^4.0",
@@ -90,11 +102,21 @@
     "repositories": [
         {
             "type": "path",
+            "url": "../../wojt-janowski/mobile-air-worktrees/fix-android-tree-publication-revision",
+            "options": {
+                "symlink": false,
+                "versions": {
+                    "nativephp/mobile": "4.0.x-dev"
+                }
+            }
+        },
+        {
+            "type": "path",
             "url": "../firstlight-ui",
             "options": {
-                "symlink": true,
+                "symlink": false,
                 "versions": {
-                    "clinically/firstlight-ui": "dev-main"
+                    "firstlightui/firstlight-ui": "dev-main"
                 }
             }
         }

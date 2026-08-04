@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4db724758b95851696ae8d881fc599f1",
+    "content-hash": "dadf75074ddf7292bc1aa38d5ac45cc9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -188,53 +188,6 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
-        },
-        {
-            "name": "clinically/firstlight-ui",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../firstlight-ui",
-                "reference": "e0a30ec914786f96eec3718f1da79a4660892a21"
-            },
-            "require": {
-                "nativephp/mobile": "^4.0",
-                "nativephp/mobile-ui": "^0.3",
-                "php": "^8.4"
-            },
-            "require-dev": {
-                "illuminate/view": "^13.0",
-                "pestphp/pest": "^5.0"
-            },
-            "type": "nativephp-ui-plugin",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Clinically\\Firstlight\\FirstlightServiceProvider"
-                    ]
-                },
-                "nativephp": {
-                    "manifest": "nativephp.json"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Clinically\\Firstlight\\": "src/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "pest"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Native controls for NativePHP, shaped for each platform.",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         },
         {
             "name": "dasprid/enum",
@@ -777,6 +730,71 @@
                 "source": "https://github.com/igorw/evenement/tree/v3.0.2"
             },
             "time": "2023-08-08T05:53:35+00:00"
+        },
+        {
+            "name": "firstlightui/firstlight-ui",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../firstlight-ui",
+                "reference": "1668559916790b6afd1c0d031917b3211359247d"
+            },
+            "require": {
+                "nativephp/mobile": "^4.0",
+                "nativephp/mobile-ui": "^0.3",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "illuminate/view": "^13.0",
+                "pestphp/pest": "^5.0"
+            },
+            "type": "nativephp-ui-plugin",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FirstlightUI\\FirstlightServiceProvider"
+                    ]
+                },
+                "nativephp": {
+                    "manifest": "nativephp.json"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FirstlightUI\\": "src/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "pest"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Firstlight UI",
+                    "email": "team@firstlightui.dev"
+                }
+            ],
+            "description": "Native controls for NativePHP, shaped for each platform.",
+            "homepage": "https://firstlightui.dev",
+            "keywords": [
+                "android",
+                "ios",
+                "nativephp",
+                "ui"
+            ],
+            "support": {
+                "email": "team@firstlightui.dev",
+                "issues": "https://github.com/firstlightui/firstlight-ui/issues",
+                "source": "https://github.com/firstlightui/firstlight-ui"
+            },
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
         },
         {
             "name": "fruitcake/php-cors",
@@ -2408,17 +2426,11 @@
         },
         {
             "name": "nativephp/mobile",
-            "version": "4.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/NativePHP/mobile-air.git",
-                "reference": "8537aab3fb7fd03f6131d021a64c519238f635c8"
-            },
+            "version": "4.0.x-dev",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/mobile-air/zipball/8537aab3fb7fd03f6131d021a64c519238f635c8",
-                "reference": "8537aab3fb7fd03f6131d021a64c519238f635c8",
-                "shasum": ""
+                "type": "path",
+                "url": "../../wojt-janowski/mobile-air-worktrees/fix-android-tree-publication-revision",
+                "reference": "da6a8e61525aba952067c9556764e391c8183bab"
             },
             "require": {
                 "endroid/qr-code": "^6.0.9",
@@ -2464,14 +2476,40 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
                 "psr-4": {
                     "Native\\Mobile\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "qa": [
+                    "@composer format",
+                    "@composer analyse",
+                    "@composer test"
+                ],
+                "post-autoload-dump": [
+                    "@php ./vendor/bin/testbench package:discover --ansi"
+                ],
+                "analyse": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test-coverage": [
+                    "vendor/bin/pest --coverage"
+                ],
+                "format": [
+                    "vendor/bin/pint"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2495,11 +2533,10 @@
                 "laravel",
                 "nativephp"
             ],
-            "support": {
-                "issues": "https://github.com/NativePHP/mobile-air/issues",
-                "source": "https://github.com/NativePHP/mobile-air/tree/4.0.1"
-            },
-            "time": "2026-07-31T19:44:23+00:00"
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
         },
         {
             "name": "nativephp/mobile-ui",
@@ -10541,7 +10578,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "clinically/firstlight-ui": 20
+        "firstlightui/firstlight-ui": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
