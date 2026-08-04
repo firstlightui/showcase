@@ -118,6 +118,9 @@ it('dispatches accepted, rejected, disabled, and programmatic Switch changes thr
     expect(fn () => $screen->toggle('disabledOff', true))
         ->toThrow('No callback registered');
 
+    expect(fn () => $screen->toggle('disabledOn', false))
+        ->toThrow('No callback registered');
+
     $screen->assertSet('disabledOff', false)
         ->assertSet('disabledOn', true);
 
