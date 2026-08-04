@@ -9,9 +9,14 @@ use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\SegmentedShowcase;
+use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\TextFieldShowcase;
 use Illuminate\Support\Facades\Route;
+
+Route::native('/', ShowcaseHome::class)
+    ->name('showcase')
+    ->layout(ShowcaseLayout::class);
 
 Route::native('/button', ButtonShowcase::class)
     ->name('button')

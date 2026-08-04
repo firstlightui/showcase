@@ -3,9 +3,8 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
-use Native\Mobile\Edge\NativeComponent;
 
-class TextFieldShowcase extends NativeComponent
+class TextFieldShowcase extends ShowcaseScreen
 {
     public string $email = 'clinician@example.com';
 
