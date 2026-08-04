@@ -12,6 +12,7 @@ use App\NativeComponents\Captures\SearchFieldCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
+use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\PillGroupShowcase;
@@ -22,6 +23,7 @@ use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\SwitchShowcase;
 use App\NativeComponents\TextFieldShowcase;
+use App\NativeComponents\TextAreaShowcase;
 use Illuminate\Support\Facades\Route;
 
 Route::native('/', ShowcaseHome::class)
@@ -106,4 +108,12 @@ Route::native('/text-field', TextFieldShowcase::class)
 
 Route::native('/captures/text-field', TextFieldCapture::class)
     ->name('captures.text-field')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/text-area', TextAreaShowcase::class)
+    ->name('text-area')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/text-area', TextAreaCapture::class)
+    ->name('captures.text-area')
     ->layout(ShowcaseLayout::class);

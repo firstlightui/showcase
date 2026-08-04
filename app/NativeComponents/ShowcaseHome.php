@@ -68,6 +68,12 @@ class ShowcaseHome extends ShowcaseScreen
             'description' => 'Native text entry, validation, and affordances',
             'path' => '/text-field',
         ],
+        [
+            'label' => 'Text Area',
+            'tag' => '<firstlight:text-area>',
+            'description' => 'Native multiline editing, validation, and synchronisation',
+            'path' => '/text-area',
+        ],
     ];
 
     public function showsBackButton(): bool
