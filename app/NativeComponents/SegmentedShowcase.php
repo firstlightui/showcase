@@ -3,9 +3,8 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
-use Native\Mobile\Edge\NativeComponent;
 
-class SegmentedShowcase extends NativeComponent
+class SegmentedShowcase extends ShowcaseScreen
 {
     public string $simple = 'Mine';
 
