@@ -15,6 +15,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/button',
         ],
         [
+            'label' => 'Progress',
+            'tag' => '<firstlight:progress>',
+            'description' => 'Determinate and indeterminate work state',
+            'path' => '/progress',
+        ],
+        [
             'label' => 'Segmented',
             'tag' => '<firstlight:segmented>',
             'description' => 'Server-authoritative single selection',

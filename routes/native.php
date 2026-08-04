@@ -2,11 +2,13 @@
 
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\Captures\ButtonCapture;
+use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
+use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
@@ -24,6 +26,14 @@ Route::native('/button', ButtonShowcase::class)
 
 Route::native('/captures/button', ButtonCapture::class)
     ->name('captures.button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/progress', ProgressShowcase::class)
+    ->name('progress')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/progress', ProgressCapture::class)
+    ->name('captures.progress')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/segmented', SegmentedShowcase::class)
