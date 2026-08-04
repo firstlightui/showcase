@@ -34,6 +34,7 @@ it('publishes a native front-page menu for every released component', function (
         'Search Field',
         'Select',
         'Slider',
+        'Stepper',
         'Status Label',
         'Switch',
         'Text Field',
@@ -51,6 +52,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:search-field>',
         '<firstlight:select>',
         '<firstlight:slider>',
+        '<firstlight:stepper>',
         '<firstlight:status-label>',
         '<firstlight:switch>',
         '<firstlight:text-field>',
@@ -68,6 +70,7 @@ it('publishes a native front-page menu for every released component', function (
         'Native query entry, clear, and submission behaviour',
         'Stable single selection with automatic search',
         'Strict stepped numeric ranges with native gestures',
+        'Exact bounded increments with server authority',
         'Compact semantic status metadata',
         'Server-authoritative boolean settings',
         'Native text entry, validation, and affordances',
@@ -98,6 +101,7 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Search Field', '/search-field'],
     ['Select', '/select'],
     ['Slider', '/slider'],
+    ['Stepper', '/stepper'],
     ['Status Label', '/status-label'],
     ['Switch', '/switch'],
     ['Text Field', '/text-field'],
@@ -105,7 +109,7 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/button', '/badge', '/choice-group', '/date-picker', '/time-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
+    foreach (['/button', '/badge', '/choice-group', '/date-picker', '/time-picker', '/icon-button', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
@@ -118,5 +122,6 @@ it('shows native back chrome on component pages but not capture routes', functio
     expect(Native::visit('/captures/search-field')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/select')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/slider')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/stepper')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/text-area')->tree()['props']['back'] ?? null)->toBeFalse();
 });

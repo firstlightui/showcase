@@ -81,6 +81,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/slider',
         ],
         [
+            'label' => 'Stepper',
+            'tag' => '<firstlight:stepper>',
+            'description' => 'Exact bounded increments with server authority',
+            'path' => '/stepper',
+        ],
+        [
             'label' => 'Status Label',
             'tag' => '<firstlight:status-label>',
             'description' => 'Compact semantic status metadata',
