@@ -45,6 +45,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/segmented',
         ],
         [
+            'label' => 'Search Field',
+            'tag' => '<firstlight:search-field>',
+            'description' => 'Native query entry, clear, and submission behaviour',
+            'path' => '/search-field',
+        ],
+        [
             'label' => 'Status Label',
             'tag' => '<firstlight:status-label>',
             'description' => 'Compact semantic status metadata',

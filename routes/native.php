@@ -8,6 +8,7 @@ use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
+use App\NativeComponents\Captures\SearchFieldCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
@@ -16,6 +17,7 @@ use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SegmentedShowcase;
+use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\SwitchShowcase;
@@ -68,6 +70,14 @@ Route::native('/captures/progress', ProgressCapture::class)
 
 Route::native('/segmented', SegmentedShowcase::class)
     ->name('segmented')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/search-field', SearchFieldShowcase::class)
+    ->name('search-field')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/search-field', SearchFieldCapture::class)
+    ->name('captures.search-field')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/captures/segmented', SegmentedCapture::class)
