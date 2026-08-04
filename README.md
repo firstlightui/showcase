@@ -1,6 +1,6 @@
 # Firstlight UI Showcase
 
-The official NativePHP showcase and dogfooding app for [`firstlightui/firstlight-ui`](https://github.com/firstlightui/firstlight-ui).
+The official NativePHP showcase and dogfooding app for [`firstlightui/nativephp`](https://github.com/firstlightui/nativephp).
 
 [firstlightui.dev](https://firstlightui.dev) · [team@firstlightui.dev](mailto:team@firstlightui.dev)
 

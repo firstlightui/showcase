@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dadf75074ddf7292bc1aa38d5ac45cc9",
+    "content-hash": "d2ac6d969961c5b9f972aef5a3472bc8",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -732,12 +732,12 @@
             "time": "2023-08-08T05:53:35+00:00"
         },
         {
-            "name": "firstlightui/firstlight-ui",
+            "name": "firstlightui/nativephp",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../firstlight-ui",
-                "reference": "1668559916790b6afd1c0d031917b3211359247d"
+                "reference": "70c2a65d88e57e2b619084da83934b88a5338909"
             },
             "require": {
                 "nativephp/mobile": "^4.0",
@@ -788,8 +788,8 @@
             ],
             "support": {
                 "email": "team@firstlightui.dev",
-                "issues": "https://github.com/firstlightui/firstlight-ui/issues",
-                "source": "https://github.com/firstlightui/firstlight-ui"
+                "issues": "https://github.com/firstlightui/nativephp/issues",
+                "source": "https://github.com/firstlightui/nativephp"
             },
             "transport-options": {
                 "symlink": false,
@@ -10578,7 +10578,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "firstlightui/firstlight-ui": 20
+        "firstlightui/nativephp": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

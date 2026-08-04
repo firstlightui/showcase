@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "firstlightui/firstlight-showcase",
+    "name": "firstlightui/showcase",
     "type": "project",
     "description": "The official showcase app for Firstlight UI NativePHP controls.",
     "keywords": ["android", "ios", "nativephp", "showcase", "ui"],
@@ -14,12 +14,12 @@
     ],
     "support": {
         "email": "team@firstlightui.dev",
-        "issues": "https://github.com/firstlightui/firstlight-showcase/issues",
-        "source": "https://github.com/firstlightui/firstlight-showcase"
+        "issues": "https://github.com/firstlightui/showcase/issues",
+        "source": "https://github.com/firstlightui/showcase"
     },
     "require": {
         "php": "^8.4",
-        "firstlightui/firstlight-ui": "dev-main",
+        "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
         "nativephp/mobile": "^4.0",
@@ -116,7 +116,7 @@
             "options": {
                 "symlink": false,
                 "versions": {
-                    "firstlightui/firstlight-ui": "dev-main"
+                    "firstlightui/nativephp": "dev-main"
                 }
             }
         }
