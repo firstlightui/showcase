@@ -14,9 +14,27 @@ composer run setup
 
 ## Local NativePHP development
 
-Android pre-alpha work that depends on authoritative byte-identical tree
-publications must use the guarded [temporary NativePHP publication
+### Why NativePHP is temporarily pinned
+
+The showcase currently resolves `nativephp/mobile` from a development
+mobile-air branch. Firstlight's interactive controls must observe every PHP
+response, including a publication whose element tree is byte-for-byte
+identical to the previous tree. NativePHP 4.0.1 can suppress that identical
+publication inside the bundled PHP Element Runtime before iOS or Android can
+reconcile it. A rejected Segmented change can therefore remain visible, while
+a server-authoritative Switch or Pill Group can remain stuck waiting for a
+response.
+
+The branch exposes an Android publication revision, but that platform change
+cannot recover a response already suppressed by the bundled PHP binary. We are
+waiting for an upstream NativePHP release whose PHP runtime provides a
+content-independent publication acknowledgement before returning the showcase
+to an official release. Until then, Android pre-alpha work uses the guarded
+[temporary NativePHP publication
 workaround](docs/nativephp-identical-publication-workaround.md).
+
+The patched PHP binary is development-only and must not be included in a
+release artifact.
 
 ## Documentation captures
 
