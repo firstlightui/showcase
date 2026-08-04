@@ -69,6 +69,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/search-field',
         ],
         [
+            'label' => 'Select',
+            'tag' => '<firstlight:select>',
+            'description' => 'Stable single selection with automatic search',
+            'path' => '/select',
+        ],
+        [
             'label' => 'Status Label',
             'tag' => '<firstlight:status-label>',
             'description' => 'Compact semantic status metadata',

@@ -11,6 +11,7 @@ use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SearchFieldCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
+use App\NativeComponents\Captures\SelectCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
@@ -24,6 +25,7 @@ use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
+use App\NativeComponents\SelectShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\SwitchShowcase;
@@ -110,6 +112,14 @@ Route::native('/search-field', SearchFieldShowcase::class)
 
 Route::native('/captures/search-field', SearchFieldCapture::class)
     ->name('captures.search-field')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/select', SelectShowcase::class)
+    ->name('select')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/select', SelectCapture::class)
+    ->name('captures.select')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/captures/segmented', SegmentedCapture::class)
