@@ -1,8 +1,12 @@
 <?php
 
+use App\NativeComponents\Captures\SegmentedCapture;
+use App\NativeComponents\Captures\StatusLabelCapture;
+use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\SegmentedShowcase;
-use App\NativeComponents\Captures\SegmentedCapture;
+use App\NativeComponents\StatusLabelShowcase;
+use App\NativeComponents\TextFieldShowcase;
 use Illuminate\Support\Facades\Route;
 
 Route::native('/segmented', SegmentedShowcase::class)
@@ -11,4 +15,20 @@ Route::native('/segmented', SegmentedShowcase::class)
 
 Route::native('/captures/segmented', SegmentedCapture::class)
     ->name('captures.segmented')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/status-label', StatusLabelShowcase::class)
+    ->name('status-label')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/status-label', StatusLabelCapture::class)
+    ->name('captures.status-label')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/text-field', TextFieldShowcase::class)
+    ->name('text-field')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/text-field', TextFieldCapture::class)
+    ->name('captures.text-field')
     ->layout(ShowcaseLayout::class);
