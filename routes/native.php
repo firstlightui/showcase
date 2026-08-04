@@ -12,6 +12,7 @@ use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SearchFieldCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
 use App\NativeComponents\Captures\SelectCapture;
+use App\NativeComponents\Captures\SliderCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
@@ -26,6 +27,7 @@ use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SelectShowcase;
+use App\NativeComponents\SliderShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\SwitchShowcase;
@@ -120,6 +122,14 @@ Route::native('/select', SelectShowcase::class)
 
 Route::native('/captures/select', SelectCapture::class)
     ->name('captures.select')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/slider', SliderShowcase::class)
+    ->name('slider')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/slider', SliderCapture::class)
+    ->name('captures.slider')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/captures/segmented', SegmentedCapture::class)

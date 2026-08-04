@@ -75,6 +75,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/select',
         ],
         [
+            'label' => 'Slider',
+            'tag' => '<firstlight:slider>',
+            'description' => 'Strict stepped numeric ranges with native gestures',
+            'path' => '/slider',
+        ],
+        [
             'label' => 'Status Label',
             'tag' => '<firstlight:status-label>',
             'description' => 'Compact semantic status metadata',
