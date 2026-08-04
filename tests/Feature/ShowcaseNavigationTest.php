@@ -23,24 +23,33 @@ it('publishes a native front-page menu for every released component', function (
         'back' => false,
     ])->and(array_column(array_column($items, 'props'), 'headline'))->toBe([
         'Button',
+        'Badge',
         'Icon Button',
+        'Pill Group',
         'Progress',
         'Segmented',
         'Status Label',
+        'Switch',
         'Text Field',
     ])->and(array_column(array_column($items, 'props'), 'overline'))->toBe([
         '<firstlight:button>',
+        '<firstlight:badge>',
         '<firstlight:icon-button>',
+        '<firstlight:pill-group>',
         '<firstlight:progress>',
         '<firstlight:segmented>',
         '<firstlight:status-label>',
+        '<firstlight:switch>',
         '<firstlight:text-field>',
     ])->and(array_column(array_column($items, 'props'), 'supporting'))->toBe([
         'Labelled actions, variants, sizes, icons, and states',
+        'Compact display-only counts and semantic markers',
         'Compact accessible actions with native icon controls',
+        'Compact single- and multiple-selection options',
         'Determinate and indeterminate work state',
         'Server-authoritative single selection',
         'Compact semantic status metadata',
+        'Server-authoritative boolean settings',
         'Native text entry, validation, and affordances',
     ]);
 
@@ -57,18 +66,22 @@ it('navigates each catalogue row to its component demo', function (string $label
         ->assertNavigatedTo($path);
 })->with([
     ['Button', '/button'],
+    ['Badge', '/badge'],
     ['Icon Button', '/icon-button'],
+    ['Pill Group', '/pill-group'],
     ['Progress', '/progress'],
     ['Segmented', '/segmented'],
     ['Status Label', '/status-label'],
+    ['Switch', '/switch'],
     ['Text Field', '/text-field'],
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/button', '/icon-button', '/progress', '/segmented', '/status-label', '/text-field'] as $path) {
+    foreach (['/button', '/badge', '/icon-button', '/pill-group', '/progress', '/segmented', '/status-label', '/switch', '/text-field'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
     expect(Native::visit('/captures/button')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/icon-button')->tree()['props']['back'] ?? null)->toBeFalse();
 });

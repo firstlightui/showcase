@@ -3,9 +3,7 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
-use Native\Mobile\Edge\NativeComponent;
-
-class SwitchShowcase extends NativeComponent
+class SwitchShowcase extends ShowcaseScreen
 {
     public bool $notificationsOff = false;
 

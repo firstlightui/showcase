@@ -3,9 +3,7 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
-use Native\Mobile\Edge\NativeComponent;
-
-class PillGroupShowcase extends NativeComponent
+class PillGroupShowcase extends ShowcaseScreen
 {
     public ?string $queue = 'mine';
 

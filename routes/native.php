@@ -1,6 +1,8 @@
 <?php
 
 use App\NativeComponents\ButtonShowcase;
+use App\NativeComponents\BadgeShowcase;
+use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
@@ -26,6 +28,14 @@ Route::native('/', ShowcaseHome::class)
 
 Route::native('/button', ButtonShowcase::class)
     ->name('button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/badge', BadgeShowcase::class)
+    ->name('badge')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/badge', BadgeCapture::class)
+    ->name('captures.badge')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/captures/button', ButtonCapture::class)

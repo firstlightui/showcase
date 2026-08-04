@@ -15,10 +15,22 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/button',
         ],
         [
+            'label' => 'Badge',
+            'tag' => '<firstlight:badge>',
+            'description' => 'Compact display-only counts and semantic markers',
+            'path' => '/badge',
+        ],
+        [
             'label' => 'Icon Button',
             'tag' => '<firstlight:icon-button>',
             'description' => 'Compact accessible actions with native icon controls',
             'path' => '/icon-button',
+        ],
+        [
+            'label' => 'Pill Group',
+            'tag' => '<firstlight:pill-group>',
+            'description' => 'Compact single- and multiple-selection options',
+            'path' => '/pill-group',
         ],
         [
             'label' => 'Progress',
@@ -37,6 +49,12 @@ class ShowcaseHome extends ShowcaseScreen
             'tag' => '<firstlight:status-label>',
             'description' => 'Compact semantic status metadata',
             'path' => '/status-label',
+        ],
+        [
+            'label' => 'Switch',
+            'tag' => '<firstlight:switch>',
+            'description' => 'Server-authoritative boolean settings',
+            'path' => '/switch',
         ],
         [
             'label' => 'Text Field',
