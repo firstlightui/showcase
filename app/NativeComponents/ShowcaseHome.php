@@ -21,6 +21,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/badge',
         ],
         [
+            'label' => 'Choice Group',
+            'tag' => '<firstlight:choice-group>',
+            'description' => 'Visible single-radio and multiple-checkbox choices',
+            'path' => '/choice-group',
+        ],
+        [
             'label' => 'Date Picker',
             'tag' => '<firstlight:date-picker>',
             'description' => 'Nullable calendar dates, bounds, and native confirmation',

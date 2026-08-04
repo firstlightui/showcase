@@ -4,6 +4,7 @@ use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
+use App\NativeComponents\Captures\ChoiceGroupCapture;
 use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
@@ -14,6 +15,7 @@ use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
+use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\ShowcaseLayout;
@@ -46,6 +48,14 @@ Route::native('/captures/badge', BadgeCapture::class)
 
 Route::native('/captures/button', ButtonCapture::class)
     ->name('captures.button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/choice-group', ChoiceGroupShowcase::class)
+    ->name('choice-group')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/choice-group', ChoiceGroupCapture::class)
+    ->name('captures.choice-group')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/date-picker', DatePickerShowcase::class)
