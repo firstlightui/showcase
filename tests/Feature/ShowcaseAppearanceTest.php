@@ -22,7 +22,7 @@ function showcaseAppearanceNodes(array $tree, string $type): array
 }
 
 it('floats one accessible appearance toggle over every interactive showcase page', function () {
-    foreach (['/', '/button', '/segmented', '/status-label', '/text-field'] as $path) {
+    foreach (['/', '/button', '/progress', '/segmented', '/status-label', '/text-field'] as $path) {
         $screen = Native::visit($path);
         $overlays = showcaseAppearanceNodes($screen->tree(), 'floating_overlay');
         $toggles = showcaseAppearanceNodes($screen->tree(), 'toggle');
