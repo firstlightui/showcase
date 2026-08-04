@@ -15,6 +15,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/button',
         ],
         [
+            'label' => 'Icon Button',
+            'tag' => '<firstlight:icon-button>',
+            'description' => 'Compact accessible actions with native icon controls',
+            'path' => '/icon-button',
+        ],
+        [
             'label' => 'Progress',
             'tag' => '<firstlight:progress>',
             'description' => 'Determinate and indeterminate work state',

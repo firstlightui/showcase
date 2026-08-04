@@ -23,18 +23,21 @@ it('publishes a native front-page menu for every released component', function (
         'back' => false,
     ])->and(array_column(array_column($items, 'props'), 'headline'))->toBe([
         'Button',
+        'Icon Button',
         'Progress',
         'Segmented',
         'Status Label',
         'Text Field',
     ])->and(array_column(array_column($items, 'props'), 'overline'))->toBe([
         '<firstlight:button>',
+        '<firstlight:icon-button>',
         '<firstlight:progress>',
         '<firstlight:segmented>',
         '<firstlight:status-label>',
         '<firstlight:text-field>',
     ])->and(array_column(array_column($items, 'props'), 'supporting'))->toBe([
         'Labelled actions, variants, sizes, icons, and states',
+        'Compact accessible actions with native icon controls',
         'Determinate and indeterminate work state',
         'Server-authoritative single selection',
         'Compact semantic status metadata',
@@ -54,6 +57,7 @@ it('navigates each catalogue row to its component demo', function (string $label
         ->assertNavigatedTo($path);
 })->with([
     ['Button', '/button'],
+    ['Icon Button', '/icon-button'],
     ['Progress', '/progress'],
     ['Segmented', '/segmented'],
     ['Status Label', '/status-label'],
@@ -61,9 +65,10 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/button', '/progress', '/segmented', '/status-label', '/text-field'] as $path) {
+    foreach (['/button', '/icon-button', '/progress', '/segmented', '/status-label', '/text-field'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
     expect(Native::visit('/captures/button')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/icon-button')->tree()['props']['back'] ?? null)->toBeFalse();
 });

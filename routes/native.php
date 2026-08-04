@@ -2,6 +2,7 @@
 
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\Captures\ButtonCapture;
+use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
@@ -9,6 +10,7 @@ use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Layouts\ShowcaseLayout;
+use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SegmentedShowcase;
@@ -28,6 +30,14 @@ Route::native('/button', ButtonShowcase::class)
 
 Route::native('/captures/button', ButtonCapture::class)
     ->name('captures.button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/icon-button', IconButtonShowcase::class)
+    ->name('icon-button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/icon-button', IconButtonCapture::class)
+    ->name('captures.icon-button')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/pill-group', PillGroupShowcase::class)
