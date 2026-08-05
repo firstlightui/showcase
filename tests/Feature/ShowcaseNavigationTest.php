@@ -25,6 +25,7 @@ it('publishes a native front-page menu for every released component', function (
         'Activity Indicator',
         'Button',
         'Callout',
+        'Transient Feedback',
         'Badge',
         'Checkbox',
         'Choice Group',
@@ -48,6 +49,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:activity-indicator>',
         '<firstlight:button>',
         '<firstlight:callout>',
+        'Transient Feedback',
         '<firstlight:badge>',
         '<firstlight:checkbox>',
         '<firstlight:choice-group>',
@@ -71,6 +73,7 @@ it('publishes a native front-page menu for every released component', function (
         'Indeterminate native activity with semantic sizes',
         'Labelled actions, variants, sizes, icons, and states',
         'Persistent semantic messages with an optional action',
+        'Queued app-level outcomes that survive native navigation',
         'Compact display-only counts and semantic markers',
         'Server-authoritative Boolean form and checklist state',
         'Visible single-radio and multiple-checkbox choices',
@@ -107,6 +110,7 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Activity Indicator', '/activity-indicator'],
     ['Button', '/button'],
     ['Callout', '/callout'],
+    ['Transient Feedback', '/transient-feedback'],
     ['Badge', '/badge'],
     ['Checkbox', '/checkbox'],
     ['Choice Group', '/choice-group'],
@@ -129,13 +133,14 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/activity-indicator', '/button', '/callout', '/badge', '/checkbox', '/choice-group', '/confirmation-dialog', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
+    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/choice-group', '/confirmation-dialog', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
     expect(Native::visit('/captures/activity-indicator')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/button')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/callout')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/transient-feedback')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/checkbox')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/choice-group')->tree()['props']['back'] ?? null)->toBeFalse();

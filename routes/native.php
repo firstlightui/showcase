@@ -26,13 +26,14 @@ use App\NativeComponents\Captures\SwitchCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
+use App\NativeComponents\Captures\TransientFeedbackCapture;
 use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\ConfirmationDialogShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
-use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\Layouts\ShowcaseLayout;
+use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SearchFieldShowcase;
@@ -46,6 +47,8 @@ use App\NativeComponents\SwitchShowcase;
 use App\NativeComponents\TextAreaShowcase;
 use App\NativeComponents\TextFieldShowcase;
 use App\NativeComponents\TimePickerShowcase;
+use App\NativeComponents\TransientFeedbackDestination;
+use App\NativeComponents\TransientFeedbackShowcase;
 use Illuminate\Support\Facades\Route;
 
 Route::native('/', ShowcaseHome::class)
@@ -82,6 +85,18 @@ Route::native('/callout', CalloutShowcase::class)
 
 Route::native('/captures/callout', CalloutCapture::class)
     ->name('captures.callout')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/transient-feedback', TransientFeedbackShowcase::class)
+    ->name('transient-feedback')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/transient-feedback/destination', TransientFeedbackDestination::class)
+    ->name('transient-feedback.destination')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/transient-feedback', TransientFeedbackCapture::class)
+    ->name('captures.transient-feedback')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/checkbox', CheckboxShowcase::class)

@@ -2,7 +2,13 @@
 
 namespace App\Providers;
 
+use App\Support\ShowcaseFeedbackLog;
+use FirstlightUI\Events\FeedbackActionPressed;
+use FirstlightUI\Events\FeedbackDismissed;
+use FirstlightUI\FirstlightServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Native\Mobile\UI\NativeUIServiceProvider;
 
 class NativeServiceProvider extends ServiceProvider
 {
@@ -11,7 +17,7 @@ class NativeServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(ShowcaseFeedbackLog::class);
     }
 
     /**
@@ -19,7 +25,13 @@ class NativeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(function (FeedbackActionPressed $event): void {
+            app(ShowcaseFeedbackLog::class)->recordAction($event);
+        });
+
+        Event::listen(function (FeedbackDismissed $event): void {
+            app(ShowcaseFeedbackLog::class)->recordDismissal($event);
+        });
     }
 
     /**
@@ -29,13 +41,13 @@ class NativeServiceProvider extends ServiceProvider
      * This is a security measure to prevent transitive dependencies from
      * automatically registering plugins without your explicit consent.
      *
-     * @return array<int, class-string<\Illuminate\Support\ServiceProvider>>
+     * @return array<int, class-string<ServiceProvider>>
      */
     public function plugins(): array
     {
         return [
-            \Native\Mobile\UI\NativeUIServiceProvider::class,
-            \FirstlightUI\FirstlightServiceProvider::class,
+            NativeUIServiceProvider::class,
+            FirstlightServiceProvider::class,
         ];
     }
 }

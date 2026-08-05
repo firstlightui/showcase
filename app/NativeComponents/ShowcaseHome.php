@@ -27,6 +27,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/callout',
         ],
         [
+            'label' => 'Transient Feedback',
+            'tag' => 'Transient Feedback',
+            'description' => 'Queued app-level outcomes that survive native navigation',
+            'path' => '/transient-feedback',
+        ],
+        [
             'label' => 'Badge',
             'tag' => '<firstlight:badge>',
             'description' => 'Compact display-only counts and semantic markers',

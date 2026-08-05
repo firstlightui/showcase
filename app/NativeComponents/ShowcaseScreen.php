@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use App\Support\ShowcaseAppearance;
+use App\Support\ShowcaseFeedbackLog;
 use Native\Mobile\Edge\NativeComponent;
 
 abstract class ShowcaseScreen extends NativeComponent
@@ -25,5 +26,10 @@ abstract class ShowcaseScreen extends NativeComponent
     public function showsBackButton(): bool
     {
         return true;
+    }
+
+    protected function feedbackEventSummary(): string
+    {
+        return app(ShowcaseFeedbackLog::class)->latest();
     }
 }
