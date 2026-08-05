@@ -63,6 +63,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/icon-button',
         ],
         [
+            'label' => 'List Item',
+            'tag' => '<firstlight:list-item>',
+            'description' => 'Tappable application rows with identity and affordances',
+            'path' => '/list-item',
+        ],
+        [
             'label' => 'Pill Group',
             'tag' => '<firstlight:pill-group>',
             'description' => 'Compact single- and multiple-selection options',
