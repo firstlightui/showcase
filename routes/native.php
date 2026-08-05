@@ -3,9 +3,11 @@
 use App\NativeComponents\ActivityIndicatorShowcase;
 use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\ButtonShowcase;
+use App\NativeComponents\CalloutShowcase;
 use App\NativeComponents\Captures\ActivityIndicatorCapture;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
+use App\NativeComponents\Captures\CalloutCapture;
 use App\NativeComponents\Captures\CheckboxCapture;
 use App\NativeComponents\Captures\ChoiceGroupCapture;
 use App\NativeComponents\Captures\ConfirmationDialogCapture;
@@ -72,6 +74,14 @@ Route::native('/captures/badge', BadgeCapture::class)
 
 Route::native('/captures/button', ButtonCapture::class)
     ->name('captures.button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/callout', CalloutShowcase::class)
+    ->name('callout')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/callout', CalloutCapture::class)
+    ->name('captures.callout')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/checkbox', CheckboxShowcase::class)

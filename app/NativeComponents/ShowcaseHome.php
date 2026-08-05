@@ -21,6 +21,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/button',
         ],
         [
+            'label' => 'Callout',
+            'tag' => '<firstlight:callout>',
+            'description' => 'Persistent semantic messages with an optional action',
+            'path' => '/callout',
+        ],
+        [
             'label' => 'Badge',
             'tag' => '<firstlight:badge>',
             'description' => 'Compact display-only counts and semantic markers',

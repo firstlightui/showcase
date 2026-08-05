@@ -737,12 +737,13 @@
             "dist": {
                 "type": "path",
                 "url": "../firstlight-ui",
-                "reference": "5feceb69992d17c1284639dd86d87c6489dd30b7"
+                "reference": "821954a99d3a865ed0d53fce20a57e24248ab7ed"
             },
             "require": {
                 "nativephp/mobile": "^4.0",
                 "nativephp/mobile-ui": "^0.3",
-                "php": "^8.4"
+                "php": "^8.4",
+                "ramsey/uuid": "^4.7"
             },
             "require-dev": {
                 "illuminate/view": "^13.0",
