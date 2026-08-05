@@ -8,6 +8,7 @@ use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\CheckboxCapture;
 use App\NativeComponents\Captures\ChoiceGroupCapture;
+use App\NativeComponents\Captures\ConfirmationDialogCapture;
 use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
@@ -24,6 +25,7 @@ use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
 use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
+use App\NativeComponents\ConfirmationDialogShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\ShowcaseLayout;
@@ -84,6 +86,14 @@ Route::native('/choice-group', ChoiceGroupShowcase::class)
 
 Route::native('/captures/choice-group', ChoiceGroupCapture::class)
     ->name('captures.choice-group')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/confirmation-dialog', ConfirmationDialogShowcase::class)
+    ->name('confirmation-dialog')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/confirmation-dialog', ConfirmationDialogCapture::class)
+    ->name('captures.confirmation-dialog')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/date-picker', DatePickerShowcase::class)
