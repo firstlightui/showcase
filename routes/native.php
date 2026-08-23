@@ -13,6 +13,7 @@ use App\NativeComponents\Captures\ChoiceGroupCapture;
 use App\NativeComponents\Captures\ConfirmationDialogCapture;
 use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
+use App\NativeComponents\Captures\ListCapture;
 use App\NativeComponents\Captures\ListItemCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
@@ -34,6 +35,7 @@ use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
+use App\NativeComponents\ListShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SearchFieldShowcase;
@@ -153,6 +155,14 @@ Route::native('/list-item', ListItemShowcase::class)
 
 Route::native('/captures/list-item', ListItemCapture::class)
     ->name('captures.list-item')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/list', ListShowcase::class)
+    ->name('list')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/list', ListCapture::class)
+    ->name('captures.list')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/pill-group', PillGroupShowcase::class)

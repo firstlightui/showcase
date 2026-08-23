@@ -81,6 +81,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/list-item',
         ],
         [
+            'label' => 'Collection List',
+            'tag' => '<firstlight:list>',
+            'description' => 'Vertical collections with grouped sections and refresh hooks',
+            'path' => '/list',
+        ],
+        [
             'label' => 'Pill Group',
             'tag' => '<firstlight:pill-group>',
             'description' => 'Compact single- and multiple-selection options',
