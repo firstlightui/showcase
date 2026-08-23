@@ -6,11 +6,11 @@ set -euo pipefail
 # instruction in the shipped Element Runtime so byte-identical frames reach the
 # existing native publication callback. Remove it when the upstream runtime
 # provides a content-independent publication acknowledgement.
-readonly ORIGINAL_OBJECT_SHA256="d9922e5f358878348966cc294d476ea2ebd7313e7661be61ba63a5fb66adc356"
-readonly PATCHED_OBJECT_SHA256="fdb3c9a0577a19f263755ffc8a130bee72318acd2d35d1c43604916e54c73700"
-readonly PATCH_OFFSET=1216
-readonly ORIGINAL_BYTES="200751f9"
-readonly PATCHED_BYTES="4fffff17"
+readonly ORIGINAL_OBJECT_SHA256="cbe83c579c4737527e9af51a309dce495b13a789c5884ee72769f8b57dc0fbb2"
+readonly PATCHED_OBJECT_SHA256="131c6657a2356ff78e4d94fafb7bf853f204451ed87fcd4a596a4eb8e644d885"
+readonly PATCH_OFFSET=1148
+readonly ORIGINAL_BYTES="04000014"
+readonly PATCHED_BYTES="5effff17"
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 project_root="$(cd "${script_dir}/.." && pwd)"
@@ -124,9 +124,19 @@ fi
 [[ "${object_bytes}" == "${ORIGINAL_BYTES}" ]] || fail "unexpected instruction bytes ${object_bytes} at offset ${PATCH_OFFSET}"
 
 section_line="$("${llvm_readelf}" -SW "${object}" | grep -F '.text.nphp_element_publish' | head -n 1)"
-[[ "${section_line}" == *'PROGBITS 0000000000000000 000080 000544'* ]] || fail 'nphp_element_publish has an unexpected ELF section layout'
+[[ "${section_line}" == *'PROGBITS 0000000000000000 000080 0004dc'* ]] || fail 'nphp_element_publish has an unexpected ELF section layout'
 
-printf '\x4f\xff\xff\x17' | dd of="${object}" bs=1 seek="${PATCH_OFFSET}" conv=notrunc 2>/dev/null
+write_patched_bytes() {
+    local hex="${PATCHED_BYTES}"
+    local i byte
+
+    for ((i = 0; i < ${#hex}; i += 2)); do
+        byte="${hex:i:2}"
+        printf "\\x${byte}"
+    done
+}
+
+write_patched_bytes | dd of="${object}" bs=1 seek="${PATCH_OFFSET}" conv=notrunc 2>/dev/null
 
 [[ "$(sha256_file "${object}")" == "${PATCHED_OBJECT_SHA256}" ]] || fail 'patched object hash did not match the reviewed proof-of-concept'
 [[ "$(read_bytes "${object}")" == "${PATCHED_BYTES}" ]] || fail 'patched branch instruction could not be verified'
