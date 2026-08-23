@@ -164,6 +164,12 @@ class ShowcaseHome extends ShowcaseScreen
             'description' => 'Native multiline editing, validation, and synchronisation',
             'path' => '/text-area',
         ],
+        [
+            'label' => 'Validation',
+            'tag' => 'ValidatesFields',
+            'description' => 'Laravel rules bound to native field errors',
+            'path' => '/validation',
+        ],
     ];
 
     public function showsBackButton(): bool

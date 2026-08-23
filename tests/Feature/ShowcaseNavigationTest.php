@@ -48,6 +48,7 @@ it('publishes a native front-page menu for every released component', function (
         'Switch',
         'Text Field',
         'Text Area',
+        'Validation',
     ])->and(array_column(array_column($items, 'props'), 'overline'))->toBe([
         '<firstlight:activity-indicator>',
         '<firstlight:button>',
@@ -75,6 +76,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:switch>',
         '<firstlight:text-field>',
         '<firstlight:text-area>',
+        'ValidatesFields',
     ])->and(array_column(array_column($items, 'props'), 'supporting'))->toBe([
         'Indeterminate native activity with semantic sizes',
         'Labelled actions, variants, sizes, icons, and states',
@@ -102,6 +104,7 @@ it('publishes a native front-page menu for every released component', function (
         'Server-authoritative boolean settings',
         'Native text entry, validation, and affordances',
         'Native multiline editing, validation, and synchronisation',
+        'Laravel rules bound to native field errors',
     ]);
 
     foreach ($items as $item) {
@@ -142,10 +145,11 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Switch', '/switch'],
     ['Text Field', '/text-field'],
     ['Text Area', '/text-area'],
+    ['Validation', '/validation'],
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/choice-group', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area'] as $path) {
+    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/choice-group', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area', '/validation'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 

@@ -55,6 +55,7 @@ use App\NativeComponents\TextFieldShowcase;
 use App\NativeComponents\TimePickerShowcase;
 use App\NativeComponents\TransientFeedbackDestination;
 use App\NativeComponents\TransientFeedbackShowcase;
+use App\NativeComponents\ValidationShowcase;
 use Illuminate\Support\Facades\Route;
 
 Route::native('/', ShowcaseHome::class)
@@ -271,4 +272,8 @@ Route::native('/text-area', TextAreaShowcase::class)
 
 Route::native('/captures/text-area', TextAreaCapture::class)
     ->name('captures.text-area')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/validation', ValidationShowcase::class)
+    ->name('validation')
     ->layout(ShowcaseLayout::class);
