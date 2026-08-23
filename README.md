@@ -12,25 +12,27 @@ The app consumes the adjacent `../firstlight-ui` checkout through Composer's pat
 composer run setup
 ```
 
+After changing NativePHP versions, run `composer update` and `php artisan native:install --force`.
+
 ## Local NativePHP development
 
-### Why NativePHP is temporarily pinned
+### Identical-publication limitation
 
-The showcase currently resolves `nativephp/mobile` from a development
-mobile-air branch. Firstlight's interactive controls must observe every PHP
-response, including a publication whose element tree is byte-for-byte
-identical to the previous tree. NativePHP 4.0.1 can suppress that identical
-publication inside the bundled PHP Element Runtime before iOS or Android can
-reconcile it. A rejected Segmented change can therefore remain visible, while
-a server-authoritative Switch or Pill Group can remain stuck waiting for a
-response.
+Firstlight's interactive controls must observe every PHP response, including a
+publication whose element tree is byte-for-byte identical to the previous tree.
+The bundled PHP Element Runtime can still suppress that identical publication
+before iOS or Android can reconcile it. A rejected Segmented change can therefore
+remain visible, while a server-authoritative Switch or Pill Group can remain
+stuck waiting for a response.
 
-The branch exposes an Android publication revision, but that platform change
-cannot recover a response already suppressed by the bundled PHP binary. We are
-waiting for an upstream NativePHP release whose PHP runtime provides a
-content-independent publication acknowledgement before returning the showcase
-to an official release. Until then, Android pre-alpha work uses the guarded
-[temporary NativePHP publication
+NativePHP Mobile 4.2.0 ships Android equal-tree publication revisions
+([#280](https://github.com/NativePHP/mobile-air/pull/280)). That is necessary
+but not sufficient: the remaining cross-platform gap is tracked upstream as
+[#365](https://github.com/NativePHP/mobile-air/issues/365).
+
+Until an official NativePHP release includes a content-independent publication
+acknowledgement in the bundled PHP runtime, Android pre-alpha work may still
+use the guarded [temporary NativePHP publication
 workaround](docs/nativephp-identical-publication-workaround.md).
 
 The patched PHP binary is development-only and must not be included in a

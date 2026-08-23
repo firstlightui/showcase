@@ -88,7 +88,7 @@ find_llvm_tools() {
 
 [[ -f "${archive}" ]] || fail "missing ${archive}; run native:install android first"
 [[ -f "${bridge}" ]] || fail "missing ${bridge}; run native:install android first"
-grep -q 'treePublicationId' "${bridge}" || fail 'the generated Android bridge does not contain treePublicationId; install from the mobile-air publication-revision branch first'
+grep -q 'treePublicationId' "${bridge}" || fail 'the generated Android bridge does not contain treePublicationId; install NativePHP Mobile 4.1.0 or later first'
 
 find_llvm_tools
 
