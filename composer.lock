@@ -737,7 +737,7 @@
             "dist": {
                 "type": "path",
                 "url": "../firstlight-ui",
-                "reference": "4c53bedc02ac1cce5b9b560a698b0c28ba56ddf4"
+                "reference": "fa8dec5d55931e729c8397aee45b5d2552d210fa"
             },
             "require": {
                 "nativephp/mobile": "^4.2",
