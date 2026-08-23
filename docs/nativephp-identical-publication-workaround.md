@@ -12,8 +12,9 @@ unknown runtime fails instead of being modified silently.
 
 Tracking:
 
-- [NativePHP/mobile-air#279](https://github.com/NativePHP/mobile-air/issues/279)
-- [NativePHP/mobile-air#280](https://github.com/NativePHP/mobile-air/pull/280)
+- [NativePHP/mobile-air#365](https://github.com/NativePHP/mobile-air/issues/365) — cross-platform C-runtime publication acknowledgement (remaining gap)
+- [NativePHP/mobile-air#279](https://github.com/NativePHP/mobile-air/issues/279) — closed Android-only report
+- [NativePHP/mobile-air#280](https://github.com/NativePHP/mobile-air/pull/280) — merged in NativePHP Mobile 4.1.0; Android `treePublicationId`
 
 ## The problem
 
@@ -30,7 +31,7 @@ both byte sequences are identical, `nphp_element_publish()` returns before it:
 - calls the platform `NativeElement_PostTreeUpdate()` callback.
 
 The suppression happens before Kotlin or Swift receives the publication. The
-Android `treePublicationId` added by the draft mobile-air branch can represent
+Android `treePublicationId` shipped in NativePHP Mobile 4.1.0+ can represent
 equal tree publications once they reach Kotlin, but it cannot observe a frame
 that the shared runtime never delivers.
 
@@ -61,8 +62,9 @@ publish.
 
 The workaround is useful only when all three layers are present:
 
-1. `nativephp/mobile` is generated from the draft publication-revision branch,
-   so Android exposes `NativeUIBridge.treePublicationId`.
+1. `nativephp/mobile` is resolved from an official **4.1.0+** release (the
+   showcase currently pins `^4.2`), so Android exposes
+   `NativeUIBridge.treePublicationId`.
 2. The local generated ARM64 `libphp.a` is patched by the
    [repository script](../scripts/patch-nativephp-identical-publication.sh), so
    an identical PHP publication reaches Kotlin.
@@ -77,11 +79,12 @@ optimistic behavior or patch plugin source.
 
 ## Local Android workflow
 
-After resolving `nativephp/mobile` from the draft mobile-air branch, regenerate
-the Android project and immediately apply the workaround:
+After resolving `nativephp/mobile` from Packagist, regenerate the Android
+project and immediately apply the workaround:
 
 ```bash
-php artisan native:install android
+composer update nativephp/mobile nativephp/mobile-ui firstlightui/nativephp
+php artisan native:install android --force
 ./scripts/patch-nativephp-identical-publication.sh
 php artisan native:run android --watch
 ```
@@ -134,5 +137,5 @@ runtime.
   not merely an anonymous increment, if responses may be coalesced.
 
 Delete the script and this workaround document after the released NativePHP
-runtime provides a content-independent publication acknowledgement and the
-app no longer depends on the draft mobile-air branch.
+runtime provides a content-independent publication acknowledgement tracked in
+[#365](https://github.com/NativePHP/mobile-air/issues/365).
