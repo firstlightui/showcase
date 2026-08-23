@@ -2,10 +2,12 @@
 
 use App\NativeComponents\ActivityIndicatorShowcase;
 use App\NativeComponents\BadgeShowcase;
+use App\NativeComponents\BottomSheetShowcase;
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\CalloutShowcase;
 use App\NativeComponents\Captures\ActivityIndicatorCapture;
 use App\NativeComponents\Captures\BadgeCapture;
+use App\NativeComponents\Captures\BottomSheetCapture;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\CalloutCapture;
 use App\NativeComponents\Captures\CheckboxCapture;
@@ -15,6 +17,7 @@ use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\ListCapture;
 use App\NativeComponents\Captures\ListItemCapture;
+use App\NativeComponents\Captures\ModalCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SearchFieldCapture;
@@ -36,6 +39,7 @@ use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
+use App\NativeComponents\ModalShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SearchFieldShowcase;
@@ -123,6 +127,22 @@ Route::native('/confirmation-dialog', ConfirmationDialogShowcase::class)
 
 Route::native('/captures/confirmation-dialog', ConfirmationDialogCapture::class)
     ->name('captures.confirmation-dialog')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/modal', ModalShowcase::class)
+    ->name('modal')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/modal', ModalCapture::class)
+    ->name('captures.modal')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/bottom-sheet', BottomSheetShowcase::class)
+    ->name('bottom-sheet')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/bottom-sheet', BottomSheetCapture::class)
+    ->name('captures.bottom-sheet')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/date-picker', DatePickerShowcase::class)

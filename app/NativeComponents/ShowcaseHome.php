@@ -57,6 +57,18 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/confirmation-dialog',
         ],
         [
+            'label' => 'Modal',
+            'tag' => '<firstlight:modal>',
+            'description' => 'Full-screen overlay for authored content',
+            'path' => '/modal',
+        ],
+        [
+            'label' => 'Bottom Sheet',
+            'tag' => '<firstlight:bottom-sheet>',
+            'description' => 'Bottom panel for authored content',
+            'path' => '/bottom-sheet',
+        ],
+        [
             'label' => 'Date Picker',
             'tag' => '<firstlight:date-picker>',
             'description' => 'Nullable calendar dates, bounds, and native confirmation',
