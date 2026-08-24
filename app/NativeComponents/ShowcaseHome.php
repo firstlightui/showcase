@@ -45,6 +45,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/checkbox',
         ],
         [
+            'label' => 'Media',
+            'tag' => '<firstlight:media>',
+            'description' => 'One image or document with Storage and optional crop',
+            'path' => '/media',
+        ],
+        [
             'label' => 'Choice Group',
             'tag' => '<firstlight:choice-group>',
             'description' => 'Visible single-radio and multiple-checkbox choices',

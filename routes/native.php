@@ -19,6 +19,7 @@ use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\ListCapture;
 use App\NativeComponents\Captures\ListItemCapture;
+use App\NativeComponents\Captures\MediaCapture;
 use App\NativeComponents\Captures\ModalCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
@@ -42,6 +43,7 @@ use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
+use App\NativeComponents\MediaShowcase;
 use App\NativeComponents\ModalShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
@@ -115,6 +117,14 @@ Route::native('/checkbox', CheckboxShowcase::class)
 
 Route::native('/captures/checkbox', CheckboxCapture::class)
     ->name('captures.checkbox')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/media', MediaShowcase::class)
+    ->name('media')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/media', MediaCapture::class)
+    ->name('captures.media')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/choice-group', ChoiceGroupShowcase::class)
