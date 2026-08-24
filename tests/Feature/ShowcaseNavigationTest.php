@@ -29,6 +29,7 @@ it('publishes a native front-page menu for every released component', function (
         'Badge',
         'Checkbox',
         'Choice Group',
+        'Alert Dialog',
         'Confirmation Dialog',
         'Modal',
         'Bottom Sheet',
@@ -57,6 +58,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:badge>',
         '<firstlight:checkbox>',
         '<firstlight:choice-group>',
+        '<firstlight:alert-dialog>',
         '<firstlight:confirmation-dialog>',
         '<firstlight:modal>',
         '<firstlight:bottom-sheet>',
@@ -85,6 +87,7 @@ it('publishes a native front-page menu for every released component', function (
         'Compact display-only counts and semantic markers',
         'Server-authoritative Boolean form and checklist state',
         'Visible single-radio and multiple-checkbox choices',
+        'Native one-button acknowledgement',
         'Native confirmation, cancellation, and destructive roles',
         'Full-screen overlay for authored content',
         'Bottom panel for authored content',
@@ -126,6 +129,7 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Badge', '/badge'],
     ['Checkbox', '/checkbox'],
     ['Choice Group', '/choice-group'],
+    ['Alert Dialog', '/alert-dialog'],
     ['Confirmation Dialog', '/confirmation-dialog'],
     ['Modal', '/modal'],
     ['Bottom Sheet', '/bottom-sheet'],
@@ -149,7 +153,7 @@ it('navigates each catalogue row to its component demo', function (string $label
 ]);
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/choice-group', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area', '/validation'] as $path) {
+    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/choice-group', '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area', '/validation'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
@@ -160,6 +164,7 @@ it('shows native back chrome on component pages but not capture routes', functio
     expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/checkbox')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/choice-group')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/alert-dialog')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/confirmation-dialog')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/modal')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/bottom-sheet')->tree()['props']['back'] ?? null)->toBeFalse();

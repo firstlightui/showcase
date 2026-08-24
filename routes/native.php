@@ -1,10 +1,12 @@
 <?php
 
+use App\NativeComponents\AlertDialogShowcase;
 use App\NativeComponents\ActivityIndicatorShowcase;
 use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\BottomSheetShowcase;
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\CalloutShowcase;
+use App\NativeComponents\Captures\AlertDialogCapture;
 use App\NativeComponents\Captures\ActivityIndicatorCapture;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\BottomSheetCapture;
@@ -121,6 +123,14 @@ Route::native('/choice-group', ChoiceGroupShowcase::class)
 
 Route::native('/captures/choice-group', ChoiceGroupCapture::class)
     ->name('captures.choice-group')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/alert-dialog', AlertDialogShowcase::class)
+    ->name('alert-dialog')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/alert-dialog', AlertDialogCapture::class)
+    ->name('captures.alert-dialog')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/confirmation-dialog', ConfirmationDialogShowcase::class)

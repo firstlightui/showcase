@@ -40,7 +40,9 @@ release artifact.
 
 ## Documentation captures
 
-The stable Segmented fixture is available at `/captures/segmented`. Verify its authored native tree before capturing:
+The stable Segmented fixture is available at `/captures/segmented`. The Alert
+Dialog capture fixture is `/captures/alert-dialog`. Verify its authored native
+tree before capturing:
 
 ```bash
 php artisan test tests/Feature/SegmentedCaptureTest.php

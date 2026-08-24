@@ -51,6 +51,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/choice-group',
         ],
         [
+            'label' => 'Alert Dialog',
+            'tag' => '<firstlight:alert-dialog>',
+            'description' => 'Native one-button acknowledgement',
+            'path' => '/alert-dialog',
+        ],
+        [
             'label' => 'Confirmation Dialog',
             'tag' => '<firstlight:confirmation-dialog>',
             'description' => 'Native confirmation, cancellation, and destructive roles',
