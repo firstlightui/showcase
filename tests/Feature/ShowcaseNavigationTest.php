@@ -173,4 +173,5 @@ it('shows native back chrome on component pages but not capture routes', functio
     expect(Native::visit('/captures/slider')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/stepper')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/text-area')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/validate-fields')->tree()['props']['back'] ?? null)->toBeFalse();
 });

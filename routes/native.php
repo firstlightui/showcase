@@ -31,6 +31,7 @@ use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
 use App\NativeComponents\Captures\TransientFeedbackCapture;
+use App\NativeComponents\Captures\ValidateFieldsCapture;
 use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\ConfirmationDialogShowcase;
@@ -276,4 +277,8 @@ Route::native('/captures/text-area', TextAreaCapture::class)
 
 Route::native('/validation', ValidationShowcase::class)
     ->name('validation')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/validate-fields', ValidateFieldsCapture::class)
+    ->name('captures.validate-fields')
     ->layout(ShowcaseLayout::class);
