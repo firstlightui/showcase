@@ -102,7 +102,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../firstlight-ui",
+            "url": "../nativephp",
             "options": {
                 "symlink": false,
                 "versions": {

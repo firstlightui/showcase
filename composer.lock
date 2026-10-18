@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8a36d8af8c04a3ae48a87f1ed95b7a4",
+    "content-hash": "a22f9724efbf624f2d1b6e2bc2b1d425",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -736,8 +736,8 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../firstlight-ui",
-                "reference": "2a732433429d7989d2a139aab331a0af5d94fd45"
+                "url": "../nativephp",
+                "reference": "35b988ef6860c17b7b743199726a795b293e3058"
             },
             "require": {
                 "illuminate/filesystem": "^10.0|^11.0|^12.0|^13.0",

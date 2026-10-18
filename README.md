@@ -6,7 +6,7 @@ The official NativePHP showcase and dogfooding app for [`firstlightui/nativephp`
 
 ## Setup
 
-The app consumes the adjacent `../firstlight-ui` checkout through Composer's path repository. From this directory:
+The app consumes the adjacent `../nativephp` checkout through Composer's path repository. From this directory:
 
 ```bash
 composer run setup
