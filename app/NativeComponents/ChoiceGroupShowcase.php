@@ -6,6 +6,10 @@ use Illuminate\View\View;
 
 class ChoiceGroupShowcase extends ShowcaseScreen
 {
+    public ?string $errorPriority = null;
+
+    public ?string $nextStep = 'consult';
+
     public ?string $priority = 'routine';
 
     /** @var list<string> */

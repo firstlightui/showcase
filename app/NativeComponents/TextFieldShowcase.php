@@ -6,6 +6,8 @@ use Illuminate\View\View;
 
 class TextFieldShowcase extends ShowcaseScreen
 {
+    public string $errorEmail = 'invalid-address';
+
     public string $email = 'clinician@example.com';
 
     public string $search = 'Referral';
@@ -26,6 +28,7 @@ class TextFieldShowcase extends ShowcaseScreen
     public function scanRecipient(): void
     {
         $this->scanRequests++;
+        $this->recipient = 'PT-2048';
     }
 
     public function navTitle(): string

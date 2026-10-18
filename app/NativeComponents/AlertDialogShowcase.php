@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
+use Native\Mobile\AsyncTask;
 
 class AlertDialogShowcase extends ShowcaseScreen
 {
@@ -13,6 +14,8 @@ class AlertDialogShowcase extends ShowcaseScreen
     public bool $longCopyVisible = false;
 
     public bool $programmaticVisible = false;
+
+    public int $programmaticGeneration = 0;
 
     public int $acknowledgementCount = 0;
 
@@ -53,7 +56,26 @@ class AlertDialogShowcase extends ShowcaseScreen
 
     public function showProgrammatic(): void
     {
+        $this->programmaticGeneration++;
         $this->programmaticVisible = true;
+    }
+
+    public function showTimedProgrammatic(): void
+    {
+        $this->showProgrammatic();
+        $generation = $this->programmaticGeneration;
+
+        AsyncTask::dispatch(static function (): void {
+            sleep(3);
+        })->finished(function () use ($generation): void {
+            if ($this->programmaticVisible && $this->programmaticGeneration === $generation) {
+                $this->closeProgrammatic();
+            }
+        })->failed(function () use ($generation): void {
+            if ($this->programmaticVisible && $this->programmaticGeneration === $generation) {
+                $this->lastOutcome = 'Timed close unavailable; acknowledge normally';
+            }
+        });
     }
 
     public function closeProgrammatic(): void

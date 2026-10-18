@@ -3,8 +3,13 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
+
 class PillGroupShowcase extends ShowcaseScreen
 {
+    public ?string $errorQueue = null;
+
+    public ?string $workflowStatus = 'clinical-review';
+
     public ?string $queue = 'mine';
 
     /** @var list<string> */
@@ -14,7 +19,7 @@ class PillGroupShowcase extends ShowcaseScreen
 
     public int $rejectedAttempts = 0;
 
-    public int $priority = 10;
+    public ?int $priority = 10;
 
     /** @var array<string, string> */
     public array $queueOptions = [

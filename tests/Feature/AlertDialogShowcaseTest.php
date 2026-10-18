@@ -1,5 +1,7 @@
 <?php
 
+use Native\Mobile\Events\Async\AsyncTaskFinished;
+use Native\Mobile\Support\AsyncTaskTransport;
 use Native\Mobile\Testing\Native;
 
 /** @return array<string, array<string, mixed>> */
@@ -76,4 +78,37 @@ it('dispatches acknowledgement repeated use and programmatic closure', function 
         ->assertSet('programmaticVisible', false)
         ->assertSet('acknowledgementCount', 3)
         ->assertSet('lastOutcome', 'Programmatic closure published no user outcome');
+});
+
+it('closes the timed alert on async completion without an acknowledgement', function () {
+    $bridge = Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => true]);
+    $screen = Native::visit('/alert-dialog');
+    $screen->tap('showProgrammatic')->assertSet('programmaticVisible', true);
+    $id = $bridge->callsTo('AsyncTask.Dispatch')[0]['params']['id'];
+
+    $screen->emitNative(AsyncTaskFinished::class, ['id' => $id])
+        ->assertSet('programmaticVisible', false)
+        ->assertSet('acknowledgementCount', 0)
+        ->assertSet('lastOutcome', 'Programmatic closure published no user outcome');
+
+    $screen->tap('showProgrammatic')->dismissSheet('programmaticDialog')
+        ->assertSet('acknowledgementCount', 1)
+        ->assertSet('lastOutcome', 'Programmatic example acknowledged');
+    $oldId = $bridge->callsTo('AsyncTask.Dispatch')[1]['params']['id'];
+    $screen->tap('showProgrammatic')
+        ->emitNative(AsyncTaskFinished::class, ['id' => $oldId])
+        ->assertSet('programmaticVisible', true)
+        ->assertSet('acknowledgementCount', 1);
+
+    foreach ($bridge->callsTo('AsyncTask.Dispatch') as $call) {
+        AsyncTaskTransport::forgetPayload($call['params']['id']);
+    }
+});
+
+it('keeps the alert usable when timed dispatch is unavailable', function () {
+    Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => false]);
+    Native::visit('/alert-dialog')->tap('showProgrammatic')
+        ->assertSet('programmaticVisible', true)
+        ->assertSet('lastOutcome', 'Timed close unavailable; acknowledge normally')
+        ->dismissSheet('programmaticDialog')->assertSet('acknowledgementCount', 1);
 });

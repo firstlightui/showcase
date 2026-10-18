@@ -63,12 +63,22 @@ it('publishes automatic forced validation disabled and rejection fixtures', func
 });
 
 it('updates string and integer bindings while preserving a rejected publication', function () {
-    Native::visit('/select')
+    $screen = Native::visit('/select');
+    $screen
+        ->press("__syncProperty('errorPriority', \"urgent\")")
+        ->assertSet('errorPriority', 'urgent')
+        ->assertSee('PHP accepted state: urgent')
         ->press('__syncProperty(\'priority\', "urgent")')
         ->assertSet('priority', 'urgent')
         ->press("__syncProperty('triageLevel', 30)")
         ->assertSet('triageLevel', 30)
         ->press('rejectQueue("mine")')
         ->assertSet('approvedQueue', 'all')
-        ->assertSet('rejectedAttempts', 1);
+        ->assertSet('rejectedAttempts', 1)
+        ->assertSee('Rejected attempts: 1');
+
+    $nodes = firstlightSelectsByLabel($screen->tree());
+    expect($nodes['Required priority']['props']['selected_values'])->toBe(['urgent'])
+        ->and($nodes['Required priority']['props']['error'])->toBe('Choose a priority.')
+        ->and($nodes['Triage level']['props']['selected_values'])->toBe(['30']);
 });

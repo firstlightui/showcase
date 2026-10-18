@@ -12,6 +12,7 @@ function firstlightTextAreasByLabel(array $tree): array
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightTextAreasByLabel($child)];
     }
+
     return $nodes;
 }
 
@@ -62,14 +63,28 @@ it('publishes validation disabled read-only and reconciliation fixtures', functi
 });
 
 it('updates bound text rejects one proposal and applies programmatic publications', function () {
-    Native::visit('/text-area')
+    $screen = Native::visit('/text-area');
+    $screen
+        ->select('errorNotes', 'Complete note')
+        ->assertSet('errorNotes', 'Complete note')
+        ->assertSee('PHP accepted state: Complete note')
+        ->select('handover', 'Next shift')
+        ->assertSee('PHP accepted state: Next shift')
+        ->select('summary', 'Updated summary')
+        ->assertSee('PHP accepted state: Updated summary')
         ->select('notes', "Updated history\nUpdated plan")
         ->assertSet('notes', "Updated history\nUpdated plan")
         ->select('rejectedNotes', 'Unapproved wording')
         ->assertSet('approved', 'Approved clinical wording.')
         ->assertSet('rejectedAttempts', 1)
-        ->press('replaceProgrammaticNotes')
+        ->assertSee('Rejected attempts: 1')
+        ->tap('Replace note')
         ->assertSet('programmatic', "Programmatic update.\nSecond line retained.")
-        ->press('resetProgrammaticNotes')
+        ->tap('Reset note')
         ->assertSet('programmatic', 'Initial programmatic note.');
+
+    $nodes = firstlightTextAreasByLabel($screen->tree());
+    expect($nodes['Note with error']['props']['value'])->toBe('Complete note')
+        ->and($nodes['Handover note']['props']['value'])->toBe('Next shift')
+        ->and($nodes['Debounced summary']['props']['value'])->toBe('Updated summary');
 });

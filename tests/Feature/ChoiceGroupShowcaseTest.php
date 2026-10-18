@@ -47,11 +47,23 @@ it('publishes the complete Choice Group catalogue through the native tree', func
 it('dispatches complete single and multiple proposals through PRESS callbacks', function () {
     $screen = Native::visit('/choice-group');
 
+    $screen->press("__syncProperty('errorPriority', \"urgent\")")
+        ->assertSet('errorPriority', 'urgent')
+        ->assertSee('PHP accepted state: urgent')
+        ->press("__syncProperty('nextStep', \"escalate\")")
+        ->assertSet('nextStep', 'escalate')
+        ->assertSee('PHP accepted state: escalate');
+
     $screen->press("__syncProperty('priority', \"urgent\")")
         ->assertSet('priority', 'urgent');
 
     $screen->press("__syncProperty('notifications', [\"push\"])")
         ->assertSet('notifications', ['push']);
+
+    $nodes = firstlightChoiceGroupNodesByLabel($screen->tree());
+    expect($nodes['Priority with error']['props']['selected_values'])->toBe(['urgent'])
+        ->and($nodes['Next step']['props']['selected_values'])->toBe(['escalate']);
+    $screen->tap('Reset choices')->assertSee('PHP accepted state: email, push');
 });
 
 it('publishes an unchanged authoritative choice after rejection', function () {
@@ -60,6 +72,8 @@ it('publishes an unchanged authoritative choice after rejection', function () {
     $screen->press('rejectPriority("urgent")')
         ->assertSet('rejectedPriority', 'routine')
         ->assertSet('rejectedAttempts', 1);
+
+    $screen->assertSee('Rejected attempts: 1');
 
     expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Locked priority']['props']['selected_values'])
         ->toBe(['routine']);

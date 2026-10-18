@@ -6,6 +6,8 @@ use Illuminate\View\View;
 
 class TextAreaShowcase extends ShowcaseScreen
 {
+    public string $errorNotes = 'Incomplete note';
+
     public string $notes = "Patient reports improved sleep.\nNo new adverse effects.";
 
     public string $handover = '';

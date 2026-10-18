@@ -12,6 +12,7 @@ function firstlightSearchFieldsByA11yLabel(array $tree): array
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightSearchFieldsByA11yLabel($child)];
     }
+
     return $nodes;
 }
 
@@ -52,9 +53,28 @@ it('publishes the complete Search Field catalogue through the native wire tree',
 });
 
 it('updates the live binding and programmatic reset', function () {
-    Native::visit('/search-field')
+    $screen = Native::visit('/search-field');
+    $screen
         ->select('query', 'Neurology')
         ->assertSet('query', 'Neurology')
-        ->press('resetQuery')
+        ->assertSee('PHP accepted state: Neurology')
+        ->select('debouncedQuery', 'Smith')
+        ->assertSee('PHP accepted state: Smith')
+        ->select('blurQuery', 'Respiratory')
+        ->assertSee('PHP accepted state: Respiratory')
+        ->submit('liveSearch', 'Neurology')
+        ->assertSet('lastSubmitted', 'Neurology')
+        ->assertSet('submitCount', 1)
+        ->assertSee('Last submitted: Neurology; submissions: 1')
+        ->submit('debouncedSearch', 'Smith')
+        ->assertSee('Last submitted: Smith; submissions: 2')
+        ->submit('blurSearch', 'Respiratory')
+        ->assertSee('Last submitted: Respiratory; submissions: 3')
+        ->tap('Reset query')
         ->assertSet('query', 'Referral');
+
+    $nodes = firstlightSearchFieldsByA11yLabel($screen->tree());
+    expect($nodes['Search referrals']['props']['value'])->toBe('Referral')
+        ->and($nodes['Search clinicians']['props']['value'])->toBe('Smith')
+        ->and($nodes['Search specialties']['props']['value'])->toBe('Respiratory');
 });

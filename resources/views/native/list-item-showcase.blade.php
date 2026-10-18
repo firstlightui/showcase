@@ -1,5 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 pb-24 gap-5">
+        <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">Tap each row: Recorded presses increases and Last row names it. Notifications records only; no navigation. Managed account should not change the result.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Content</native:text>
             <firstlight:list-item headline="Account" @press="recordAccount" />
@@ -42,8 +44,8 @@
                 trailing-icon="chevron-right"
                 trailing-icon-ios="chevron.right"
                 trailing-icon-android="chevron_right"
-                a11y-hint="Opens notification preferences"
-                @press="recordAccount"
+                a11y-hint="Records a Notifications press; does not navigate"
+                @press="recordNotifications"
             />
         </native:column>
 

@@ -1,5 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 gap-5 pb-32">
+        <native:text class="text-sm text-theme-on-surface">On-device checks: these badges are display-only, not buttons. Compare zero, one, 99 and overflow 100; the overflow display is 99+ but the accessible count is 100. Check every tone, large text, and the Prescription ready accessibility override.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Count formatting</native:text>
             <firstlight:badge :count="0" a11y-label="No unread messages" />

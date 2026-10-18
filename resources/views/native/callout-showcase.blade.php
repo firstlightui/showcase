@@ -1,5 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 gap-5 pb-32">
+        <native:text class="text-sm text-theme-on-surface">On-device checks: inspect every tone and long-message wrapping. Only Review changes is actionable; each activation increments the visible count once. The messages remain until the screen changes. Check labels and hints with a screen reader.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Semantic tones</native:text>
             <firstlight:callout message="This is a neutral notice." tone="neutral" />

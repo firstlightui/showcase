@@ -6,6 +6,8 @@ use Illuminate\View\View;
 
 class SelectShowcase extends ShowcaseScreen
 {
+    public ?string $errorPriority = null;
+
     public ?string $priority = null;
 
     public int $triageLevel = 20;

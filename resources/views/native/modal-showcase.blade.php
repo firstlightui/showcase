@@ -1,5 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 pb-24 gap-5">
+        <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">Native close increments dismissed once. In the programmatic example, tap Close from PHP: dismissed stays unchanged. Reopen and use native close: dismissed increases. Required notice stays open until Acknowledge.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Default overlay</native:text>
             <native:button ref="showDefault" label="Open account details" variant="primary" @press="showDefault" />
@@ -49,7 +51,8 @@
         >
             <native:column class="w-full p-4 gap-3">
                 <firstlight:status-label label="Programmatic closure" />
-                <native:text class="text-sm text-theme-on-surface">Tests publish visible false directly to prove closure.</native:text>
+                <native:text class="text-sm text-theme-on-surface">Close from PHP should not record a native dismissal.</native:text>
+                <firstlight:button ref="closeProgrammatic" label="Close from PHP" variant="primary" @press="closeProgrammatic" />
             </native:column>
         </firstlight:modal>
     </native:column>

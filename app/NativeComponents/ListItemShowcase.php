@@ -10,6 +10,11 @@ class ListItemShowcase extends ShowcaseScreen
 
     public string $lastPressed = 'None';
 
+    public function recordNotifications(): void
+    {
+        $this->record('Notifications');
+    }
+
     public function recordAccount(): void
     {
         $this->record('Account');

@@ -21,7 +21,7 @@ it('publishes a native front-page menu for every released component', function (
     expect($screen->tree()['props'])->toMatchArray([
         'title' => 'Firstlight UI',
         'back' => false,
-    ])->and(array_column(array_column($items, 'props'), 'headline'))->toBe([
+    ])->and(array_column(array_column($items, 'props'), 'headline'))->toEqualCanonicalizing([
         'Activity Indicator',
         'Button',
         'Callout',
@@ -51,7 +51,7 @@ it('publishes a native front-page menu for every released component', function (
         'Text Field',
         'Text Area',
         'Validation',
-    ])->and(array_column(array_column($items, 'props'), 'overline'))->toBe([
+    ])->and(array_column(array_column($items, 'props'), 'overline'))->toEqualCanonicalizing([
         '<firstlight:activity-indicator>',
         '<firstlight:button>',
         '<firstlight:callout>',
@@ -68,7 +68,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:time-picker>',
         '<firstlight:icon-button>',
         '<firstlight:list-item>',
-        '<firstlight:list>',
+        '<firstlight:list> · <firstlight:list-section>',
         '<firstlight:pill-group>',
         '<firstlight:progress>',
         '<firstlight:segmented>',
@@ -80,8 +80,8 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:switch>',
         '<firstlight:text-field>',
         '<firstlight:text-area>',
-        'ValidatesFields',
-    ])->and(array_column(array_column($items, 'props'), 'supporting'))->toBe([
+        'ValidatesFields · SubmitsForms',
+    ])->and(array_column(array_column($items, 'props'), 'supporting'))->toEqualCanonicalizing([
         'Indeterminate native activity with semantic sizes',
         'Labelled actions, variants, sizes, icons, and states',
         'Persistent semantic messages with an optional action',
@@ -98,7 +98,7 @@ it('publishes a native front-page menu for every released component', function (
         'Nullable wall-clock times and native confirmation',
         'Compact accessible actions with native icon controls',
         'Tappable application rows with identity and affordances',
-        'Vertical collections with grouped sections and refresh hooks',
+        'Grouped sections, refresh, pagination and authorized sample deletion',
         'Compact single- and multiple-selection options',
         'Determinate and indeterminate work state',
         'Server-authoritative single selection',
@@ -110,7 +110,7 @@ it('publishes a native front-page menu for every released component', function (
         'Server-authoritative boolean settings',
         'Native text entry, validation, and affordances',
         'Native multiline editing, validation, and synchronisation',
-        'Laravel rules bound to native field errors',
+        'Laravel validation, accepted submissions and success feedback',
     ]);
 
     foreach ($items as $item) {
@@ -124,6 +124,8 @@ it('navigates each catalogue row to its component demo', function (string $label
     Native::visit('/')
         ->tap($label)
         ->assertNavigatedTo($path);
+
+    Native::visit($path)->assertSee('On-device checks')->assertAccessible();
 })->with([
     ['Activity Indicator', '/activity-indicator'],
     ['Button', '/button'],
@@ -155,6 +157,27 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Text Area', '/text-area'],
     ['Validation', '/validation'],
 ]);
+
+it('filters the catalogue by trimmed names and tags without losing destinations', function () {
+    $screen = Native::visit('/')->select('query', '  tiMe  ');
+    $items = showcaseNodesOfType($screen->tree(), 'list_item');
+
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Time Picker']);
+    $screen->tap('Time Picker')->assertNavigatedTo('/time-picker');
+
+    $screen = Native::visit('/')->select('query', 'firstlight:list-section');
+    $items = showcaseNodesOfType($screen->tree(), 'list_item');
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Collection List']);
+});
+
+it('explains an empty catalogue search and lets the tester clear it', function () {
+    $screen = Native::visit('/')->select('query', 'no such control');
+
+    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toBe([]);
+    $screen->assertSee('No demos match. Clear search to see every control.')
+        ->tap('Clear search');
+    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(29);
+});
 
 it('shows native back chrome on component pages but not capture routes', function () {
     foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/media', '/choice-group', '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area', '/validation'] as $path) {

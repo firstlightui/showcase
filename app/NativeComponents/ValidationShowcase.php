@@ -17,6 +17,8 @@ class ValidationShowcase extends ShowcaseScreen
 
     public ?string $saved = null;
 
+    public int $saveCount = 0;
+
     /** @var array<string, string> */
     protected array $rules = [
         'email' => 'required|email',
@@ -31,8 +33,14 @@ class ValidationShowcase extends ShowcaseScreen
 
     public function save(): void
     {
-        $this->validate();
-        $this->saved = 'Thanks, '.$this->name.'.';
+        $this->saved = null;
+        $this->submit(
+            action: function (): void {
+                $this->saveCount++;
+                $this->saved = 'Thanks, '.$this->name.'.';
+            },
+            successMessage: 'Sample form accepted',
+        );
     }
 
     public function resetForm(): void
@@ -41,6 +49,7 @@ class ValidationShowcase extends ShowcaseScreen
         $this->name = '';
         $this->accepted = false;
         $this->saved = null;
+        $this->saveCount = 0;
         $this->resetValidation();
     }
 

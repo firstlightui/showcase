@@ -1,5 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 pb-24 gap-5">
+        <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">Confirm increments confirmed only; cancel increments cancelled only. Open the timed example and wait without tapping: it closes after about 3 seconds with both counts unchanged. If async is unavailable, choose normally and check the outcome below. Check large text and both appearances.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Default confirmation</native:text>
             <native:button ref="showDefault" label="Review changes" variant="primary" @press="showDefault" />
@@ -17,7 +19,7 @@
 
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Programmatic reconciliation</native:text>
-            <native:button ref="showProgrammatic" label="Open programmatic example" variant="secondary" @press="showProgrammatic" />
+            <native:button ref="showProgrammatic" label="Open timed close example" variant="secondary" @press="showTimedProgrammatic" />
             <native:text class="text-sm text-theme-on-surface-variant">{{ $lastOutcome }} · {{ $confirmationCount }} confirmed · {{ $dismissalCount }} cancelled</native:text>
         </native:column>
 
@@ -60,7 +62,7 @@
             ref="programmaticDialog"
             :visible="$programmaticVisible"
             title="Programmatic closure"
-            message="Tests publish visible false directly to prove closure emits no user callback."
+            message="Wait without tapping. PHP will close this dialog after about 3 seconds without recording a confirmation or cancellation."
             confirm-label="Confirm example"
             cancel-label="Cancel example"
             @press="confirmProgrammatic"

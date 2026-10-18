@@ -1,5 +1,7 @@
 <?php
 
+use Native\Mobile\Events\Async\AsyncTaskFinished;
+use Native\Mobile\Support\AsyncTaskTransport;
 use Native\Mobile\Testing\Native;
 
 /** @return array<string, array<string, mixed>> */
@@ -80,4 +82,39 @@ it('dispatches confirmation dismissal repeated use and programmatic closure', fu
         ->assertSet('confirmationCount', 2)
         ->assertSet('dismissalCount', 1)
         ->assertSet('lastOutcome', 'Programmatic closure published no user outcome');
+});
+
+it('closes the timed confirmation on async completion without a user decision', function () {
+    $bridge = Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => true]);
+    $screen = Native::visit('/confirmation-dialog');
+    $screen->tap('showProgrammatic')->assertSet('programmaticVisible', true);
+    $id = $bridge->callsTo('AsyncTask.Dispatch')[0]['params']['id'];
+
+    $screen->emitNative(AsyncTaskFinished::class, ['id' => $id])
+        ->assertSet('programmaticVisible', false)
+        ->assertSet('confirmationCount', 0)->assertSet('dismissalCount', 0)
+        ->assertSet('lastOutcome', 'Programmatic closure published no user outcome');
+
+    $screen->tap('showProgrammatic')->tap('programmaticDialog')
+        ->assertSet('confirmationCount', 1)->assertSet('dismissalCount', 0)
+        ->assertSet('lastOutcome', 'Programmatic example confirmed');
+    $oldId = $bridge->callsTo('AsyncTask.Dispatch')[1]['params']['id'];
+    $screen->tap('showProgrammatic')
+        ->emitNative(AsyncTaskFinished::class, ['id' => $oldId])
+        ->assertSet('programmaticVisible', true)
+        ->dismissSheet('programmaticDialog')
+        ->assertSet('confirmationCount', 1)->assertSet('dismissalCount', 1)
+        ->assertSet('lastOutcome', 'Programmatic example cancelled');
+
+    foreach ($bridge->callsTo('AsyncTask.Dispatch') as $call) {
+        AsyncTaskTransport::forgetPayload($call['params']['id']);
+    }
+});
+
+it('keeps the confirmation usable when timed dispatch is unavailable', function () {
+    Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => false]);
+    Native::visit('/confirmation-dialog')->tap('showProgrammatic')
+        ->assertSet('programmaticVisible', true)
+        ->assertSet('lastOutcome', 'Timed close unavailable; confirm or cancel normally')
+        ->dismissSheet('programmaticDialog')->assertSet('dismissalCount', 1);
 });

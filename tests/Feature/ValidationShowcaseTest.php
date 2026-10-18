@@ -40,6 +40,7 @@ it('fails real Laravel rules then passes and clears field errors', function () {
     expect($failed['Name']['props']['error'])->not->toBe('')
         ->and($failed['Email']['props']['error'])->not->toBe('')
         ->and($failed['I agree to the terms']['props']['error'])->not->toBe('');
+    $screen->assertSet('saveCount', 0)->assertSet('saved', null);
 
     $screen->select('name', 'Al')
         ->select('email', 'not-an-email');
@@ -59,5 +60,10 @@ it('fails real Laravel rules then passes and clears field errors', function () {
         ->and($passed['Email']['props']['error'])->toBe('')
         ->and($passed['I agree to the terms']['props']['error'])->toBe('');
 
-    $screen->assertSet('saved', 'Thanks, Alex Rivera.');
+    $screen->assertSet('saved', 'Thanks, Alex Rivera.')
+        ->assertSee('accepted submissions 1');
+
+    $screen->select('name', '')->press('save')
+        ->assertSet('saved', null)->assertSet('saveCount', 1)
+        ->tap('Reset')->assertSee('accepted submissions 0');
 });

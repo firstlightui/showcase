@@ -6,6 +6,8 @@ use Illuminate\View\View;
 
 class SliderShowcase extends ShowcaseScreen
 {
+    public float $errorDose = 4.0;
+
     public float $liveDose = 5.0;
 
     public float $blurTemperature = 0.25;

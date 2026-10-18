@@ -65,14 +65,27 @@ it('publishes omitted error localized disabled and reconciliation fixtures', fun
 });
 
 it('updates bound times rejects one proposal and applies programmatic publications', function () {
-    Native::visit('/time-picker')
+    $screen = Native::visit('/time-picker');
+    $screen
+        ->select('errorTime', '11:20')
+        ->assertSet('errorTime', '11:20')
+        ->assertSee('PHP accepted state: 11:20')
+        ->select('berlinTime', '19:45')
+        ->assertSee('PHP accepted state: 19:45')
         ->select('appointmentTime', '10:45')
         ->assertSet('appointmentTime', '10:45')
         ->select('rejectedTime', '09:30')
         ->assertSet('approvedTime', '09:15')
         ->assertSet('rejectedAttempts', 1)
-        ->press('publishLaterTime')
+        ->assertSee('Rejected attempts: 1')
+        ->tap('Publish later time')
         ->assertSet('programmaticTime', '17:45')
-        ->press('clearProgrammaticTime')
+        ->tap('Clear time')
         ->assertSet('programmaticTime', null);
+
+    $nodes = firstlightTimePickersByLabel($screen->tree());
+    expect($nodes['Arrival time']['props']['value'])->toBe('11:20')
+        ->and($nodes['Arrival time']['props']['error'])->toBe('Choose an arrival time.')
+        ->and($nodes['Berlin clinic time']['props']['value'])->toBe('19:45')
+        ->and($nodes['Programmatic time']['props']['has_value'])->toBeFalse();
 });

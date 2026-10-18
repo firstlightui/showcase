@@ -6,6 +6,10 @@ use Illuminate\View\View;
 
 class TimePickerShowcase extends ShowcaseScreen
 {
+    public ?string $errorTime = null;
+
+    public ?string $berlinTime = '18:30';
+
     public ?string $appointmentTime = null;
 
     public ?string $reviewTime = '14:30';

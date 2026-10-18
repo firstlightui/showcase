@@ -50,4 +50,9 @@ it('dispatches an ordinary icon press and publishes the accepted PHP result', fu
 
     expect($screen->get('pressCount'))->toBe(1);
     $screen->assertSee('Recorded presses: 1');
+
+    $screen->tap('Share item')->assertSet('pressCount', 2)
+        ->assertSee('Last action: Share item');
+    $screen->tap('Delete draft')->assertSet('pressCount', 3)
+        ->assertSee('Last action: Delete draft');
 });

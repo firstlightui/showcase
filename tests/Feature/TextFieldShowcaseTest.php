@@ -77,7 +77,7 @@ it('publishes read-only, error, and authored trailing-action semantics', functio
         'error' => 'Enter a valid email address.',
     ])->and($nodes['Recipient']['props'])->toMatchArray([
         'trailing_icon' => 'qr-code-scanner',
-        'trailing_a11y_label' => 'Scan recipient code',
+        'trailing_a11y_label' => 'Simulate recipient entry',
     ])->and($nodes['Recipient']['on_press'])->toBeInt();
 });
 
@@ -86,8 +86,32 @@ it('updates bound values and dispatches the authored trailing action', function 
 
     $screen->select('email', 'updated@example.com')
         ->assertSet('email', 'updated@example.com')
-        ->press('scanRecipient')
+        ->select('errorEmail', 'test@example.com')
+        ->assertSet('errorEmail', 'test@example.com')
+        ->assertSee('PHP accepted state: test@example.com')
+        ->select('search', 'Updated search')
+        ->assertSee('PHP accepted state: Updated search')
+        ->select('password', 'secret-value')
+        ->assertSee('PHP accepted password length: 12')
+        ->tap('recipientAction')
         ->assertSet('scanRequests', 1)
-        ->press('resetEmail')
+        ->assertSet('recipient', 'PT-2048')
+        ->assertSee('Simulated actions: 1')
+        ->assertSee('PHP accepted state: PT-2048')
+        ->tap('Reset email')
         ->assertSet('email', 'clinician@example.com');
+
+    $nodes = firstlightTextFieldNodesByLabel($screen->tree());
+    expect($nodes['Email with error']['props']['value'])->toBe('test@example.com')
+        ->and($nodes['Recipient']['props']['value'])->toBe('PT-2048');
+    // Inspect text nodes only: the secure field must still receive its wire value.
+    $text = function (array $node) use (&$text): array {
+        return [
+            ...(($node['type'] ?? '') === 'text' ? [$node['props']['text'] ?? ''] : []),
+            ...array_merge([], ...array_map($text, $node['children'] ?? [])),
+        ];
+    };
+    expect(implode(' ', $text($screen->tree())))
+        ->toContain('PHP accepted password length: 12')
+        ->not->toContain('secret-value');
 });

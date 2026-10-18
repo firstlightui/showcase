@@ -46,11 +46,24 @@ it('publishes the complete Pill Group catalogue through the native tree', functi
 it('dispatches complete single and multiple proposals through PRESS callbacks', function () {
     $screen = Native::visit('/pill-group');
 
+    $screen->press("__syncProperty('errorQueue', \"all\")")
+        ->assertSet('errorQueue', 'all')
+        ->assertSee('PHP accepted state: all')
+        ->press("__syncProperty('workflowStatus', \"assignment\")")
+        ->assertSet('workflowStatus', 'assignment')
+        ->assertSee('PHP accepted state: assignment');
+
     $screen->press("__syncProperty('queue', \"all\")")
         ->assertSet('queue', 'all');
 
     $screen->press("__syncProperty('queues', [\"urgent\"])")
         ->assertSet('queues', ['urgent']);
+
+    $nodes = firstlightPillGroupNodesByLabel($screen->tree());
+    expect($nodes['Queue with error']['props']['selected_values'])->toBe(['all'])
+        ->and($nodes['Workflow status']['props']['selected_values'])->toBe(['assignment']);
+    $screen->press("__syncProperty('priority', null)")->assertSet('priority', null)
+        ->tap('Reset selections')->assertSee('PHP accepted state: mine, urgent');
 });
 
 it('publishes the unchanged authoritative selection after rejection', function () {
@@ -59,6 +72,8 @@ it('publishes the unchanged authoritative selection after rejection', function (
     $screen->press('rejectQueue("all")')
         ->assertSet('rejectedQueue', 'mine')
         ->assertSet('rejectedAttempts', 1);
+
+    $screen->assertSee('Rejected attempts: 1');
 
     expect(firstlightPillGroupNodesByLabel($screen->tree())['Locked queue']['props']['selected_values'])
         ->toBe(['mine']);

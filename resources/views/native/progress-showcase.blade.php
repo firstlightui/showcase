@@ -1,5 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 gap-5 pb-32">
+        <native:text class="text-sm text-theme-on-surface">On-device checks: compare 0%, 42%, 87%, 100% and indeterminate examples. Advance the interactive value from 25% to 100%; another press must not exceed 100%. Reset returns to 25%. Check accessible progress values and Reduced Motion.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Determinate progress</native:text>
 

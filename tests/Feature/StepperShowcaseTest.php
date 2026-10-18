@@ -67,7 +67,16 @@ it('publishes error disabled rejection and programmatic fixtures', function () {
 });
 
 it('dispatches integer float rejection and programmatic publication callbacks', function () {
-    Native::visit('/stepper')
+    $screen = Native::visit('/stepper');
+    $screen
+        ->fireEvent('minimumQuantity', 1, [], ['on_increment'])
+        ->assertSet('minimumQuantity', 1)
+        ->assertSee('PHP accepted state: 1')
+        ->fireEvent('maximumQuantity', 1, [], ['on_decrement'])
+        ->assertSet('maximumQuantity', 9)
+        ->fireEvent('errorQuantity', 1, [], ['on_increment'])
+        ->assertSet('errorQuantity', 5)
+        ->assertSee('PHP accepted state: 5')
         ->press('__syncProperty("quantity",6)')
         ->assertSet('quantity', 6)
         ->press('__syncProperty("fractionalDose",0.75)')
@@ -75,6 +84,14 @@ it('dispatches integer float rejection and programmatic publication callbacks', 
         ->press('rejectQuantity(5)')
         ->assertSet('approvedQuantity', 4)
         ->assertSet('rejectedAttempts', 1)
-        ->press('publishHigherQuantity')
+        ->assertSee('Rejected attempts: 1')
+        ->tap('Publish higher quantity')
         ->assertSet('programmaticQuantity', 8);
+
+    $nodes = firstlightSteppersByLabel($screen->tree());
+    expect($nodes['Minimum quantity']['props']['value'])->toBe(1)
+        ->and($nodes['Minimum quantity']['props']['can_decrement'])->toBeTrue()
+        ->and($nodes['Maximum quantity']['props']['value'])->toBe(9)
+        ->and($nodes['Maximum quantity']['props']['can_increment'])->toBeTrue()
+        ->and($nodes['Quantity with error']['props']['value'])->toBe(5);
 });

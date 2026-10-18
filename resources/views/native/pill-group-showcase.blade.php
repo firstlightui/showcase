@@ -1,5 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 gap-5 pb-32">
+        <native:text class="text-sm text-theme-on-surface">On-device checks: tap a selected single pill to clear; toggle multiple queues, then reset to Mine and Mine/Urgent. Integer priority preserves identity; unavailable options cannot be chosen. Locked queue stays Mine and counts rejections. Long pills should wrap and remain selectable.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Single selection</native:text>
             <firstlight:pill-group
@@ -9,6 +10,7 @@
                 helper="Tap the selected pill to clear it."
                 a11y-hint="Choose zero or one queue"
             />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $queue ?? '(empty)' }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
@@ -21,6 +23,7 @@
                 multiple
                 required
             />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ implode(', ', $queues) ?: '(empty)' }}</native:text>
             <native:button label="Reset selections" variant="secondary" @press="resetSelections" />
         </native:column>
 
@@ -32,6 +35,7 @@
                 label="Priority"
                 helper="Urgent is unavailable."
             />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $priority ?? '(empty)' }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
@@ -43,17 +47,20 @@
                 label="Locked queue"
                 helper="The server keeps Mine selected."
             />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $rejectedQueue }}; Rejected attempts: {{ $rejectedAttempts }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Validation and disabled state</native:text>
+            <native:text class="text-sm text-theme-on-surface">Static error presentation example; editing does not clear the message. Use Validation for real rules. Disabled queue stays All.</native:text>
             <firstlight:pill-group
                 :options="$queueOptions"
-                :value="null"
+                native:model="errorQueue"
                 label="Queue with error"
                 error="Choose at least one queue."
                 required
             />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $errorQueue ?? '(empty)' }}</native:text>
             <firstlight:pill-group
                 :options="$queueOptions"
                 :value="'all'"
@@ -66,10 +73,11 @@
             <native:text class="text-sm font-semibold text-theme-on-surface">Long labels and wrapping</native:text>
             <firstlight:pill-group
                 :options="$longOptions"
-                :value="'clinical-review'"
+                native:model="workflowStatus"
                 label="Workflow status"
                 a11y-hint="Choose a workflow status"
             />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $workflowStatus ?? '(empty)' }}</native:text>
         </native:column>
     </native:column>
 </native:scroll-view>

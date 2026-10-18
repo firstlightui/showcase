@@ -6,6 +6,8 @@ use Illuminate\View\View;
 
 class ShowcaseHome extends ShowcaseScreen
 {
+    public string $query = '';
+
     /** @var list<array{label: string, tag: string, description: string, path: string}> */
     public array $components = [
         [
@@ -106,8 +108,8 @@ class ShowcaseHome extends ShowcaseScreen
         ],
         [
             'label' => 'Collection List',
-            'tag' => '<firstlight:list>',
-            'description' => 'Vertical collections with grouped sections and refresh hooks',
+            'tag' => '<firstlight:list> · <firstlight:list-section>',
+            'description' => 'Grouped sections, refresh, pagination and authorized sample deletion',
             'path' => '/list',
         ],
         [
@@ -178,11 +180,16 @@ class ShowcaseHome extends ShowcaseScreen
         ],
         [
             'label' => 'Validation',
-            'tag' => 'ValidatesFields',
-            'description' => 'Laravel rules bound to native field errors',
+            'tag' => 'ValidatesFields · SubmitsForms',
+            'description' => 'Laravel validation, accepted submissions and success feedback',
             'path' => '/validation',
         ],
     ];
+
+    public function clearSearch(): void
+    {
+        $this->query = '';
+    }
 
     public function showsBackButton(): bool
     {
@@ -196,6 +203,24 @@ class ShowcaseHome extends ShowcaseScreen
 
     public function render(): View
     {
-        return view('native.showcase-home');
+        $query = mb_strtolower(trim($this->query));
+        $sections = collect($this->components)
+            ->filter(fn (array $component): bool => $query === '' || str_contains(
+                mb_strtolower(implode(' ', $component)), $query,
+            ))
+            ->sortBy('label')
+            ->groupBy(fn (array $component): string => match ($component['path']) {
+                '/button', '/icon-button' => 'Actions',
+                '/checkbox', '/choice-group', '/pill-group', '/segmented', '/select', '/switch' => 'Choices and settings',
+                '/date-picker', '/time-picker', '/slider', '/stepper' => 'Dates and numbers',
+                '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet' => 'Dialogs and overlays',
+                '/list', '/list-item' => 'Lists and sections',
+                '/media', '/search-field', '/text-field', '/text-area' => 'Text and media',
+                '/validation' => 'Laravel workflows',
+                default => 'Status and feedback',
+            })
+            ->sortKeys();
+
+        return view('native.showcase-home', ['sections' => $sections]);
     }
 }

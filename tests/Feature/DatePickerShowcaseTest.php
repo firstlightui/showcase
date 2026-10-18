@@ -67,14 +67,27 @@ it('publishes omitted error localized disabled and reconciliation fixtures', fun
 });
 
 it('updates bound dates rejects one proposal and applies programmatic publications', function () {
-    Native::visit('/date-picker')
+    $screen = Native::visit('/date-picker');
+    $screen
+        ->select('errorDate', '2026-08-19')
+        ->assertSet('errorDate', '2026-08-19')
+        ->assertSee('PHP accepted state: 2026-08-19')
+        ->select('berlinDate', '2026-12-25')
+        ->assertSee('PHP accepted state: 2026-12-25')
         ->select('appointmentDate', '2026-08-18')
         ->assertSet('appointmentDate', '2026-08-18')
         ->select('rejectedDate', '2026-08-13')
         ->assertSet('approvedDate', '2026-08-12')
         ->assertSet('rejectedAttempts', 1)
-        ->press('publishLaterDate')
+        ->assertSee('Rejected attempts: 1')
+        ->tap('Publish later date')
         ->assertSet('programmaticDate', '2026-11-15')
-        ->press('clearProgrammaticDate')
+        ->tap('Clear date')
         ->assertSet('programmaticDate', null);
+
+    $nodes = firstlightDatePickersByLabel($screen->tree());
+    expect($nodes['Discharge date']['props']['value'])->toBe('2026-08-19')
+        ->and($nodes['Discharge date']['props']['error'])->toBe('Choose a discharge date.')
+        ->and($nodes['Berlin clinic date']['props']['value'])->toBe('2026-12-25')
+        ->and($nodes['Programmatic date']['props']['has_value'])->toBeFalse();
 });

@@ -1,22 +1,24 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 pb-24 gap-5">
+        <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">Enabled icons record a press and name the action below; they do not share, delete or navigate. Disabled and loading icons should leave the result unchanged.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Semantic variants</native:text>
             <native:row class="w-full gap-3 flex-wrap">
-                <firstlight:icon-button icon="plus" a11y-label="Primary add" @press="recordPress" />
-                <firstlight:icon-button icon="info" variant="secondary" a11y-label="Secondary information" @press="recordPress" />
-                <firstlight:icon-button icon="trash" variant="destructive" a11y-label="Delete draft" @press="recordPress" />
-                <firstlight:icon-button icon="check" variant="success" a11y-label="Confirm selection" @press="recordPress" />
-                <firstlight:icon-button icon="ellipsis" variant="ghost" a11y-label="More actions" @press="recordPress" />
+                <firstlight:icon-button icon="plus" a11y-label="Primary add" @press="recordPress('Primary add')" />
+                <firstlight:icon-button icon="info" variant="secondary" a11y-label="Secondary information" @press="recordPress('Secondary information')" />
+                <firstlight:icon-button icon="trash" variant="destructive" a11y-label="Delete draft" @press="recordPress('Delete draft')" />
+                <firstlight:icon-button icon="check" variant="success" a11y-label="Confirm selection" @press="recordPress('Confirm selection')" />
+                <firstlight:icon-button icon="ellipsis" variant="ghost" a11y-label="More actions" @press="recordPress('More actions')" />
             </native:row>
         </native:column>
 
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Native sizes</native:text>
             <native:row class="w-full gap-3">
-                <firstlight:icon-button icon="plus" size="sm" a11y-label="Add small item" @press="recordPress" />
-                <firstlight:icon-button icon="plus" size="md" a11y-label="Add medium item" @press="recordPress" />
-                <firstlight:icon-button icon="plus" size="lg" a11y-label="Add large item" @press="recordPress" />
+                <firstlight:icon-button icon="plus" size="sm" a11y-label="Add small item" @press="recordPress('Add small item')" />
+                <firstlight:icon-button icon="plus" size="md" a11y-label="Add medium item" @press="recordPress('Add medium item')" />
+                <firstlight:icon-button icon="plus" size="lg" a11y-label="Add large item" @press="recordPress('Add large item')" />
             </native:row>
         </native:column>
 
@@ -27,8 +29,8 @@
                 icon-ios="square.and.arrow.up"
                 icon-android="share"
                 a11y-label="Share item"
-                a11y-hint="Opens available sharing destinations"
-                @press="recordPress"
+                a11y-hint="Records a Share item press; does not open sharing destinations"
+                @press="recordPress('Share item')"
             />
         </native:column>
 
@@ -44,6 +46,7 @@
             <native:text class="text-sm font-semibold text-theme-on-surface">Interaction</native:text>
             <firstlight:icon-button icon="plus" variant="primary" a11y-label="Record press" @press="recordPress" />
             <native:text class="text-sm text-theme-on-surface">Recorded presses: {{ $pressCount }}</native:text>
+            <native:text class="text-sm text-theme-on-surface">Last action: {{ $lastAction }}</native:text>
         </native:column>
     </native:column>
 </native:scroll-view>

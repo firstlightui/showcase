@@ -6,6 +6,12 @@ use Illuminate\View\View;
 
 class StepperShowcase extends ShowcaseScreen
 {
+    public int $minimumQuantity = 0;
+
+    public int $maximumQuantity = 10;
+
+    public int $errorQuantity = 4;
+
     public int $quantity = 5;
 
     public float $fractionalDose = 0.5;

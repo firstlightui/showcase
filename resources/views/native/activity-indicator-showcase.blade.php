@@ -1,5 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5">
+    <native:column class="w-full p-4 gap-5 pb-32">
+        <native:text class="text-sm text-theme-on-surface">On-device checks: compare all three sizes, hide then show conditional activity, and background/resume. The three size examples remain visible. Check animation with Reduced Motion and that a screen reader does not announce every animation frame.</native:text>
+        <native:text class="text-sm text-theme-on-surface">PHP accepted state: conditional activity {{ $loading ? 'visible' : 'hidden' }}</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Semantic sizes</native:text>
 

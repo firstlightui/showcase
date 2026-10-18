@@ -46,7 +46,7 @@ it('publishes every List Item content and state fixture through the native wire 
         ->and($nodes[4]['props'])->toMatchArray([
             'leading_type' => 'icon',
             'trailing_type' => 'icon',
-            'a11y_hint' => 'Opens notification preferences',
+            'a11y_hint' => 'Records a Notifications press; does not navigate',
         ])
         ->and($nodes[5]['props']['disabled'])->toBeTrue();
 
@@ -66,4 +66,8 @@ it('dispatches ordinary row presses and publishes the PHP result', function () {
         ->and($screen->get('lastPressed'))->toBe('Team');
     $screen->assertSee('Recorded presses: 2');
     $screen->assertSee('Last row: Team');
+
+    $screen->tap('Notifications')->assertSet('pressCount', 3)
+        ->assertSet('lastPressed', 'Notifications')
+        ->assertSee('Last row: Notifications');
 });

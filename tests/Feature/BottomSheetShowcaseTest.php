@@ -52,8 +52,13 @@ it('dispatches sheet dismissal and programmatic closure', function () {
 
     $screen->tap('showProgrammatic')
         ->assertSet('programmaticVisible', true)
-        ->call('closeProgrammatic')
+        ->tap('closeProgrammatic')
         ->assertSet('programmaticVisible', false)
         ->assertSet('dismissalCount', 1)
         ->assertSet('lastOutcome', 'Programmatic closure published no user outcome');
+
+    $screen->tap('showProgrammatic')->dismissSheet('programmaticSheet')
+        ->assertSet('programmaticVisible', false)
+        ->assertSet('dismissalCount', 2)
+        ->assertSet('lastOutcome', 'Programmatic example dismissed');
 });

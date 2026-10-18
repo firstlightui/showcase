@@ -69,16 +69,27 @@ it('publishes error disabled rejection and programmatic fixtures', function () {
 });
 
 it('updates synchronization fixtures rejects one proposal and applies programmatic publication', function () {
-    Native::visit('/slider')
+    $screen = Native::visit('/slider');
+    $screen
+        ->slide('errorDose', 6.0)
+        ->assertSet('errorDose', 6.0)
+        ->assertSee('PHP accepted state: 6')
         ->slide('liveDose', 7.0)
         ->assertSet('liveDose', 7.0)
         ->slide('blurTemperature', 0.75)
         ->assertSet('blurTemperature', 0.75)
+        ->assertSee('PHP accepted state: 0.75 (blur)')
         ->slide('debouncedRatio', 0.8)
         ->assertSet('debouncedRatio', 0.8)
+        ->assertSee('PHP accepted state: 0.8 (debounced)')
         ->slide('rejectedDose', 6.0)
         ->assertSet('approvedDose', 4.0)
         ->assertSet('rejectedAttempts', 1)
-        ->press('publishHigherDose')
+        ->assertSee('Rejected attempts: 1')
+        ->tap('Publish higher dose')
         ->assertSet('programmaticDose', 8.0);
+
+    $nodes = firstlightSlidersByLabel($screen->tree());
+    expect($nodes['Live dose']['props']['a11y_value'])->toBe('7 milligrams')
+        ->and($nodes['Dose with error']['props']['value'])->toBe(6.0);
 });

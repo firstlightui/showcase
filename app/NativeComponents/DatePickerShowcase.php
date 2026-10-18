@@ -6,6 +6,10 @@ use Illuminate\View\View;
 
 class DatePickerShowcase extends ShowcaseScreen
 {
+    public ?string $errorDate = null;
+
+    public ?string $berlinDate = '2026-12-24';
+
     public ?string $appointmentDate = null;
 
     public ?string $boundedDate = '2026-08-04';

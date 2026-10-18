@@ -8,9 +8,12 @@ class IconButtonShowcase extends ShowcaseScreen
 {
     public int $pressCount = 0;
 
-    public function recordPress(): void
+    public string $lastAction = 'None';
+
+    public function recordPress(string $action = 'Record press'): void
     {
         $this->pressCount++;
+        $this->lastAction = $action;
     }
 
     public function navTitle(): string
