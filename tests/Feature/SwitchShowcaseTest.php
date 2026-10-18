@@ -124,12 +124,18 @@ it('dispatches accepted, rejected, disabled, and programmatic Switch changes thr
     $screen->assertSet('disabledOff', false)
         ->assertSet('disabledOn', true);
 
+    $previousRevision = $screen->tree()['props']['firstlight_response_revision'] ?? null;
+    expect($previousRevision)->toBeInt();
+
     foreach ([true, false, true] as $attempt => $value) {
         $screen->toggle('rejectedSwitch', $value)
             ->assertSet('rejected', false)
             ->assertSet('rejectedAttempts', $attempt + 1);
 
-        expect(firstlightSwitchNodesByLabel($screen->tree())['Rejected setting']['props']['value'])->toBeFalse();
+        $revision = $screen->tree()['props']['firstlight_response_revision'];
+        expect(firstlightSwitchNodesByLabel($screen->tree())['Rejected setting']['props']['value'])->toBeFalse()
+            ->and($revision)->toBeGreaterThan($previousRevision);
+        $previousRevision = $revision;
     }
 
     $screen->call('enableProgrammaticSwitch')

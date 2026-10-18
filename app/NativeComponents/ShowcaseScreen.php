@@ -4,7 +4,7 @@ namespace App\NativeComponents;
 
 use App\Support\ShowcaseAppearance;
 use App\Support\ShowcaseFeedbackLog;
-use Native\Mobile\Edge\NativeComponent;
+use FirstlightUI\NativeComponent;
 
 abstract class ShowcaseScreen extends NativeComponent
 {

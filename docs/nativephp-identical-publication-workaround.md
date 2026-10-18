@@ -1,146 +1,94 @@
-# Temporary NativePHP identical-publication workaround
+# Firstlight response revisions and official runtime migration
 
 ## Status
 
-This is a local Android/ARM64 development workaround for the NativePHP v4
-Element Runtime. It is intended only for First Light pre-alpha development
-while the shared runtime fix is being designed and released upstream.
+The temporary Android binary workaround is retired. Do not patch `libphp.a`,
+change runtime object hashes, or modify vendor/runtime code. Firstlight uses a
+PHP screen response contract on official NativePHP Mobile `^4.6` and Mobile UI
+`^0.8` binaries instead. The old document URL is retained for existing links.
 
-Do not ship this patched runtime. Do not copy the patched `libphp.a` into a
-release artifact. The committed script is deliberately strict so a changed or
-unknown runtime fails instead of being modified silently.
+## Supported screen contract
 
-The October 2026 Android PHP 8.5.11 bundle still suppresses identical frames,
-but its `nphp_element.o` hash differs from the script's reviewed object. The
-script will refuse that bundle. The workflow below documents the older proof;
-do not bypass its hash or instruction guards to use it with a new runtime.
+`ShowcaseScreen` extends `FirstlightUI\NativeComponent`, not the upstream
+EDGE base. Consumer screens should do the same:
 
-Tracking:
+```php
+use FirstlightUI\NativeComponent;
 
-- [NativePHP/mobile-air#365](https://github.com/NativePHP/mobile-air/issues/365) — cross-platform C-runtime publication acknowledgement (remaining gap)
-- [NativePHP/mobile-air#279](https://github.com/NativePHP/mobile-air/issues/279) — closed Android-only report
-- [NativePHP/mobile-air#280](https://github.com/NativePHP/mobile-air/pull/280) — merged in NativePHP Mobile 4.1.0; Android `treePublicationId`
+class SettingsScreen extends NativeComponent
+{
+    // Normal Blade rendering is automatic.
+}
+```
 
-## The problem
+Firstlight stamps the final chrome-wrapped root with the integer prop
+`firstlight_response_revision`. A private process-wide counter increases across
+screen instances within the PHP process, making an otherwise unchanged full
+response distinct. Do not bind, persist, or author this internal prop.
 
-An optimistic native control may send a value to PHP and then receive the same
-authoritative tree that PHP published previously. That repeated publication is
-still a response: the control must use it to discard its tentative value.
+- A global Laravel `View` returned from `render()`, `$this->view()`, and inferred
+  views are automatic.
+- For a hand-built Element root, return `$this->response($element)` from
+  `render()`. This also adds normal screen chrome.
+- Nested children are emitted untouched; partials are unstamped.
+- `renderStreaming()` is final and returns `false`; streaming cannot be opted
+  into because it bypasses the revision-bearing response.
+- Existing traits remain usable separately, but do not provide this publication
+  contract when added to the upstream base.
 
-The shared C Element Runtime currently compares the encoded frame with its
-shadow frame. When the node count, flat-buffer size, property-buffer size, and
-both byte sequences are identical, `nphp_element_publish()` returns before it:
+## Migrate back to official binaries
 
-- advances the runtime tree version;
-- signals the publication condition; or
-- calls the platform `NativeElement_PostTreeUpdate()` callback.
-
-The suppression happens before Kotlin or Swift receives the publication. The
-Android `treePublicationId` shipped in NativePHP Mobile 4.1.0+ can represent
-equal tree publications once they reach Kotlin, but it cannot observe a frame
-that the shared runtime never delivers.
-
-## What was proved locally
-
-The First Light Showcase `Rejected queue` fixture was tested on an Android
-ARM64 emulator.
-
-Before the runtime patch, two rejected selections produced one
-`postTreeUpdate()` followed by `BENCH_C shadow_skip` for the second identical
-frame. After the patch:
-
-- both responses reached Kotlin, as runtime tree versions 2 and 3;
-- `postTreeUpdate()` ran twice;
-- no `shadow_skip` occurred; and
-- the optimistic `All` selection reconciled back to `Mine` after both attempts.
-
-The focused publication-revision and segmented-selection reconciliation tests
-passed, as did the Android JVM test and debug build tasks.
-
-This proves the required behavior, not the final implementation. The proof
-routes an identical frame through the existing full publication path. The
-upstream implementation should retain content deduplication and emit a
-separate publication/response acknowledgement for every successful PHP
-publish.
-
-## Required layers
-
-The workaround is useful only when all three layers are present:
-
-1. `nativephp/mobile` is resolved from an official **4.1.0+** release (the
-   showcase currently requires `^4.6`), so Android exposes
-   `NativeUIBridge.treePublicationId`.
-2. The local generated ARM64 `libphp.a` is patched by the
-   [repository script](../scripts/patch-nativephp-identical-publication.sh), so
-   an identical PHP publication reaches Kotlin.
-3. The optimistic control observes `treePublicationId` and reconciles from
-   `NativeUIBridge.currentTree` on each revision, rather than observing only
-   equality changes to `currentTree`.
-
-For the First Light segmented control, its local selection state must also
-actually assign the tentative selection before sending the event. Those are
-normal First Light source changes; the binary workaround does not manufacture
-optimistic behavior or patch plugin source.
-
-## Local Android workflow
-
-After resolving `nativephp/mobile` from Packagist, regenerate the Android
-project and immediately apply the workaround:
+Stop any watch/build loop first. Remove any local automation that invokes the
+retired patch script; do not reapply it or update its hash guards. From the
+showcase directory, restore the generated projects from the resolved official
+NativePHP release:
 
 ```bash
-composer update nativephp/mobile nativephp/mobile-ui firstlightui/nativephp
-php artisan native:install android --force
-./scripts/patch-nativephp-identical-publication.sh
-php artisan native:run android --watch
+php artisan native:install --force
 ```
 
-Once the patched APK is installed, PHP and Blade changes can use the normal
-watch loop without rebuilding the native shell:
+Then perform a clean native rebuild through the normal NativePHP build/run
+workflow for each platform you use. Do not reuse an APK or native build output
+linked against the patched archive. `native:install --force` restores the
+official bundled binaries; a clean rebuild ensures they are linked into the
+application. Do not uninstall the app, clear its data, or delete application
+storage as part of this migration. No application-data deletion is required.
 
-```bash
-php artisan native:watch android
-```
+## Limits and qualification
 
-`native:run android` is also safe after the generated project is patched. It
-rebuilds and reinstalls the APK from `nativephp/android`, including its patched
-static library.
+The revision is not a per-event acknowledgement. It does not prevent response
+coalescing or serialize simultaneous proposals, and it does not guarantee a
+separately observable publication for every event. It applies to complete
+nonstreaming responses, not nested children or partials.
 
-Run the patch script again after any operation that replaces or regenerates
-the native project, including:
+The permanent implementation passed 14 nonstreaming phases on each platform
+on October 19, 2026, with Mobile 4.6.0, Mobile UI 0.8.0, and official PHP 8.5.11.
+Each phase delivered three proposals using a normal Blade screen with no
+app-authored revision props: repeated Switch/Pill and Segmented rejection,
+validation, accepted Switch changes, 500 ms rejection, and rapid same-control
+bursts. Rapid bursts intentionally collapse a second tap while pending; this
+does not establish one response per physical tap. The earlier spike did not
+reproduce a baseline Segmented failure, so this is not evidence of a Segmented
+fix. Firstlight remains pre-alpha pending physical-device, soak/performance,
+and wider application qualification, including simultaneous controls.
 
-- `native:install`;
-- deleting or recreating `nativephp/android`;
-- changing the embedded PHP version; or
-- upgrading the NativePHP runtime bundle.
+## Historical context
 
-The script is idempotent. It exits successfully when the reviewed patch is
-already present. It refuses to run when:
+The shared C Element Runtime suppresses byte-identical frames before either
+platform reader receives them. Android `treePublicationId`, shipped in Mobile
+4.1.0, only helps once a tree reaches Kotlin. The old Android ARM64 experiment
+forced repeated identical frames through full publication: two rejected
+Segmented selections then both reconciled from `All` to `Mine`, rather than
+the second response being shadow-skipped. That established the missing delivery
+path, not a supported binary distribution or final acknowledgement design.
 
-- the generated bridge does not contain `treePublicationId`;
-- the runtime object hash is not the reviewed proof-of-concept hash;
-- the expected instruction or ELF section layout has changed; or
-- the configured Android NDK tools cannot be found.
+The October 2026 PHP 8.5.11 bundles still contain the upstream suppression, and
+the old patch's reviewed object hash no longer matched. The patch is retired
+rather than extended. The response revision avoids byte-identical full frames
+without changing the runtime; Firstlight no longer plans to wait for upstream.
 
-On its first successful run it preserves the generated original alongside the
-archive as:
+Tracking retained for context:
 
-```text
-libphp.a.before-identical-publication-workaround
-```
-
-Both the patched archive and backup are generated development artifacts. A
-fresh `native:install android` is the authoritative way to restore the upstream
-runtime.
-
-## Limits and removal
-
-- Only Android ARM64 has been verified.
-- iOS still requires the upstream acknowledgement path and its own tests.
-- The patched path performs a full publication for identical frames, so it
-  intentionally gives up the current whole-frame optimization.
-- Rapid queued interactions ultimately need an acknowledged event sequence,
-  not merely an anonymous increment, if responses may be coalesced.
-
-Delete the script and this workaround document after the released NativePHP
-runtime provides a content-independent publication acknowledgement tracked in
-[#365](https://github.com/NativePHP/mobile-air/issues/365).
+- [#365](https://github.com/NativePHP/mobile-air/issues/365): remaining cross-platform identical-frame bug.
+- [#279](https://github.com/NativePHP/mobile-air/issues/279): closed Android-only report.
+- [#280](https://github.com/NativePHP/mobile-air/pull/280): Android `treePublicationId`, shipped in Mobile 4.1.0.

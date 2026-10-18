@@ -16,28 +16,25 @@ After changing NativePHP versions, run `composer update` and `php artisan native
 
 ## Local NativePHP development
 
-### Identical-publication limitation
+### Response-revision contract
 
-Firstlight's interactive controls must observe every PHP response, including a
-publication whose element tree is byte-for-byte identical to the previous tree.
-The bundled PHP Element Runtime can still suppress that identical publication
-before iOS or Android can reconcile it. A rejected Segmented change can therefore
-remain visible, while a server-authoritative Switch or Pill Group can remain
-stuck waiting for a response.
+The supported screen base is `FirstlightUI\NativeComponent`; `ShowcaseScreen`
+extends it. On Mobile `^4.6` / Mobile UI `^0.8`, it adds a process-wide
+increasing revision to each complete nonstreaming response's final chrome root.
+Blade paths are automatic; programmatic Element roots must return
+`$this->response($element)`. Nested children are untouched, partials are
+unstamped, and streaming is final-disabled.
 
-NativePHP Mobile 4.6.0 ships Android equal-tree publication revisions
-([#280](https://github.com/NativePHP/mobile-air/pull/280)). That is necessary
-but not sufficient: the remaining cross-platform gap is tracked upstream as
-[#365](https://github.com/NativePHP/mobile-air/issues/365).
+Use official, unpatched binaries. The old Android binary patch is retired, not
+updated for new runtime hashes. See the [contract and migration guide](docs/nativephp-identical-publication-workaround.md)
+to restore official binaries without deleting application data.
 
-Until an official NativePHP release includes a content-independent publication
-acknowledgement in the bundled PHP runtime, Firstlight remains blocked for
-public release. The guarded [temporary NativePHP publication
-workaround](docs/nativephp-identical-publication-workaround.md) targets an older
-runtime object and must not be applied to the latest bundle without review.
-
-The patched PHP binary is development-only and must not be included in a
-release artifact.
+Upstream [#365](https://github.com/NativePHP/mobile-air/issues/365) remains, but
+Firstlight no longer waits for it. A revision is not a per-event acknowledgement:
+it does not prevent coalescing or serialize simultaneous proposals. Firstlight
+remains pre-alpha pending physical-device, soak/performance, and wider app
+qualification. The permanent implementation passed 14 emulator/simulator
+phases per platform on unpatched PHP 8.5.11; this is not production readiness.
 
 ## Documentation captures
 
