@@ -25,15 +25,16 @@ before iOS or Android can reconcile it. A rejected Segmented change can therefor
 remain visible, while a server-authoritative Switch or Pill Group can remain
 stuck waiting for a response.
 
-NativePHP Mobile 4.2.0 ships Android equal-tree publication revisions
+NativePHP Mobile 4.6.0 ships Android equal-tree publication revisions
 ([#280](https://github.com/NativePHP/mobile-air/pull/280)). That is necessary
 but not sufficient: the remaining cross-platform gap is tracked upstream as
 [#365](https://github.com/NativePHP/mobile-air/issues/365).
 
 Until an official NativePHP release includes a content-independent publication
-acknowledgement in the bundled PHP runtime, Android pre-alpha work may still
-use the guarded [temporary NativePHP publication
-workaround](docs/nativephp-identical-publication-workaround.md).
+acknowledgement in the bundled PHP runtime, Firstlight remains blocked for
+public release. The guarded [temporary NativePHP publication
+workaround](docs/nativephp-identical-publication-workaround.md) targets an older
+runtime object and must not be applied to the latest bundle without review.
 
 The patched PHP binary is development-only and must not be included in a
 release artifact.

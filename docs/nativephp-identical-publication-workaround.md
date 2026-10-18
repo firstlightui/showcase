@@ -10,6 +10,11 @@ Do not ship this patched runtime. Do not copy the patched `libphp.a` into a
 release artifact. The committed script is deliberately strict so a changed or
 unknown runtime fails instead of being modified silently.
 
+The October 2026 Android PHP 8.5.11 bundle still suppresses identical frames,
+but its `nphp_element.o` hash differs from the script's reviewed object. The
+script will refuse that bundle. The workflow below documents the older proof;
+do not bypass its hash or instruction guards to use it with a new runtime.
+
 Tracking:
 
 - [NativePHP/mobile-air#365](https://github.com/NativePHP/mobile-air/issues/365) — cross-platform C-runtime publication acknowledgement (remaining gap)
@@ -63,7 +68,7 @@ publish.
 The workaround is useful only when all three layers are present:
 
 1. `nativephp/mobile` is resolved from an official **4.1.0+** release (the
-   showcase currently pins `^4.2`), so Android exposes
+   showcase currently requires `^4.6`), so Android exposes
    `NativeUIBridge.treePublicationId`.
 2. The local generated ARM64 `libphp.a` is patched by the
    [repository script](../scripts/patch-nativephp-identical-publication.sh), so
