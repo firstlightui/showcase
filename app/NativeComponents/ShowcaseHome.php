@@ -185,6 +185,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/text-area',
         ],
         [
+            'label' => 'Code Editor',
+            'tag' => '<firstlight:code-editor>',
+            'description' => 'Monospaced JSON, YAML, and env editing with a key row and live-log follow',
+            'path' => '/code-editor',
+        ],
+        [
             'label' => 'Validation',
             'tag' => 'ValidatesFields · SubmitsForms',
             'description' => 'Laravel validation, accepted submissions and success feedback',
@@ -221,7 +227,7 @@ class ShowcaseHome extends ShowcaseScreen
                 '/date-picker', '/time-picker', '/slider', '/stepper' => 'Dates and numbers',
                 '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet' => 'Dialogs and overlays',
                 '/list', '/list-item' => 'Lists and sections',
-                '/media', '/search-field', '/text-field', '/text-area' => 'Text and media',
+                '/media', '/search-field', '/text-field', '/text-area', '/code-editor' => 'Text and media',
                 '/validation' => 'Laravel workflows',
                 default => 'Status and feedback',
             })

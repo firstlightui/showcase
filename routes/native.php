@@ -31,6 +31,7 @@ use App\NativeComponents\Captures\SliderCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\StepperCapture;
 use App\NativeComponents\Captures\SwitchCapture;
+use App\NativeComponents\Captures\CodeEditorCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
@@ -57,6 +58,7 @@ use App\NativeComponents\SliderShowcase;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\StepperShowcase;
 use App\NativeComponents\SwitchShowcase;
+use App\NativeComponents\CodeEditorShowcase;
 use App\NativeComponents\TextAreaShowcase;
 use App\NativeComponents\TextFieldShowcase;
 use App\NativeComponents\TimePickerShowcase;
@@ -303,6 +305,14 @@ Route::native('/text-area', TextAreaShowcase::class)
 
 Route::native('/captures/text-area', TextAreaCapture::class)
     ->name('captures.text-area')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/code-editor', CodeEditorShowcase::class)
+    ->name('code-editor')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/code-editor', CodeEditorCapture::class)
+    ->name('captures.code-editor')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/validation', ValidationShowcase::class)
