@@ -89,7 +89,7 @@
                 ref="log"
                 :value="$log"
                 label="Deployment log"
-                helper="Capped at the last 2,000 lines."
+                helper="Capped at the last 1,500 lines."
                 :read-only="true"
                 :follow="true"
                 :wrap="false"
@@ -99,7 +99,7 @@
             <native:text class="text-sm text-theme-on-surface">Lines written: {{ $logLines }}</native:text>
             <native:row class="w-full gap-2">
                 <native:button label="Append 25 lines" variant="secondary" @press="appendLogLines" />
-                <native:button label="Fill 2,000 lines" variant="secondary" @press="fillLog" />
+                <native:button label="Fill 1,500 lines" variant="secondary" @press="fillLog" />
                 <native:button label="Clear log" variant="ghost" @press="clearLog" />
             </native:row>
         </native:column>

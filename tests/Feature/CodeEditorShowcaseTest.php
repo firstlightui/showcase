@@ -79,11 +79,11 @@ it('grows the live log and trims its head at the cap', function () {
     expect(explode("\n", $log))->toHaveCount(25)
         ->and($log)->toStartWith('[00001] deploy: step 1 completed');
 
-    $screen->tap('Fill 2,000 lines');
+    $screen->tap('Fill 1,500 lines');
     $lines = explode("\n", firstlightCodeEditorsByLabel($screen->tree())['Deployment log']['props']['value']);
     expect($lines)->toHaveCount(CodeEditorShowcase::LOG_CAP)
         ->and($lines[0])->toBe('[00026] deploy: step 26 completed')
-        ->and(end($lines))->toBe('[02025] deploy: step 2025 completed');
+        ->and(end($lines))->toBe('[01525] deploy: step 1525 completed');
 
     $screen->tap('Clear log')->assertSet('logLines', 0);
 });

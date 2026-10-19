@@ -6,7 +6,8 @@ use Illuminate\View\View;
 
 class CodeEditorShowcase extends ShowcaseScreen
 {
-    public const LOG_CAP = 2000;
+    /** NativePHP publishes at most 64 KB of props per element; 1,500 log lines stay well under it. */
+    public const LOG_CAP = 1500;
 
     public string $payload = "{\n  \"event\": \"deployment.finished\",\n  \"site\": 42\n}";
 
