@@ -2,9 +2,21 @@
 
 use Native\Mobile\Testing\Native;
 
+/** @return array<string, array<string, mixed>> */
+function tabsCaptureNodesByLabel(array $tree): array
+{
+    $nodes = ($tree['type'] ?? null) === 'firstlight.tabs' ? [$tree['props']['a11y_label'] => $tree] : [];
+
+    foreach ($tree['children'] ?? [] as $child) {
+        $nodes = [...$nodes, ...tabsCaptureNodesByLabel($child)];
+    }
+
+    return $nodes;
+}
+
 it('publishes the stable Tabs documentation capture fixture', function () {
     $tree = Native::visit('/captures/tabs')->tree();
-    $nodes = firstlightTabsNodesByLabel($tree);
+    $nodes = tabsCaptureNodesByLabel($tree);
 
     expect($tree['props']['title'] ?? null)->toBe('Firstlight Tabs')
         ->and(array_keys($nodes))->toBe(['Server sections', 'Site sections'])
