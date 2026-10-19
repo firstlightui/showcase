@@ -131,6 +131,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/segmented',
         ],
         [
+            'label' => 'Tabs',
+            'tag' => '<firstlight:tabs>',
+            'description' => 'Server-authoritative sections with counts',
+            'path' => '/tabs',
+        ],
+        [
             'label' => 'Search Field',
             'tag' => '<firstlight:search-field>',
             'description' => 'Native query entry, clear, and submission behaviour',
@@ -211,7 +217,7 @@ class ShowcaseHome extends ShowcaseScreen
             ->sortBy('label')
             ->groupBy(fn (array $component): string => match ($component['path']) {
                 '/button', '/icon-button' => 'Actions',
-                '/checkbox', '/choice-group', '/pill-group', '/segmented', '/select', '/switch' => 'Choices and settings',
+                '/checkbox', '/choice-group', '/pill-group', '/segmented', '/select', '/switch', '/tabs' => 'Choices and settings',
                 '/date-picker', '/time-picker', '/slider', '/stepper' => 'Dates and numbers',
                 '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet' => 'Dialogs and overlays',
                 '/list', '/list-item' => 'Lists and sections',

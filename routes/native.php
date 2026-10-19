@@ -25,6 +25,7 @@ use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SearchFieldCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
+use App\NativeComponents\Captures\TabsCapture;
 use App\NativeComponents\Captures\SelectCapture;
 use App\NativeComponents\Captures\SliderCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
@@ -49,6 +50,7 @@ use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
+use App\NativeComponents\TabsShowcase;
 use App\NativeComponents\SelectShowcase;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\SliderShowcase;
@@ -261,6 +263,14 @@ Route::native('/captures/stepper', StepperCapture::class)
 
 Route::native('/captures/segmented', SegmentedCapture::class)
     ->name('captures.segmented')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/tabs', TabsShowcase::class)
+    ->name('tabs')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/tabs', TabsCapture::class)
+    ->name('captures.tabs')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/captures/switch', SwitchCapture::class)

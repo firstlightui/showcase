@@ -48,6 +48,7 @@ it('publishes a native front-page menu for every released component', function (
         'Stepper',
         'Status Label',
         'Switch',
+        'Tabs',
         'Text Field',
         'Text Area',
         'Validation',
@@ -78,6 +79,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:stepper>',
         '<firstlight:status-label>',
         '<firstlight:switch>',
+        '<firstlight:tabs>',
         '<firstlight:text-field>',
         '<firstlight:text-area>',
         'ValidatesFields · SubmitsForms',
@@ -108,6 +110,7 @@ it('publishes a native front-page menu for every released component', function (
         'Exact bounded increments with server authority',
         'Compact semantic status metadata',
         'Server-authoritative boolean settings',
+        'Server-authoritative sections with counts',
         'Native text entry, validation, and affordances',
         'Native multiline editing, validation, and synchronisation',
         'Laravel validation, accepted submissions and success feedback',
@@ -153,6 +156,7 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Stepper', '/stepper'],
     ['Status Label', '/status-label'],
     ['Switch', '/switch'],
+    ['Tabs', '/tabs'],
     ['Text Field', '/text-field'],
     ['Text Area', '/text-area'],
     ['Validation', '/validation'],
@@ -176,11 +180,11 @@ it('explains an empty catalogue search and lets the tester clear it', function (
     expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toBe([]);
     $screen->assertSee('No demos match. Clear search to see every control.')
         ->tap('Clear search');
-    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(29);
+    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(30);
 });
 
 it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/media', '/choice-group', '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/text-field', '/text-area', '/validation'] as $path) {
+    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/media', '/choice-group', '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/tabs', '/text-field', '/text-area', '/validation'] as $path) {
         expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
     }
 
@@ -198,6 +202,7 @@ it('shows native back chrome on component pages but not capture routes', functio
     expect(Native::visit('/captures/bottom-sheet')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/date-picker')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/time-picker')->tree()['props']['back'] ?? null)->toBeFalse();
+    expect(Native::visit('/captures/tabs')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/icon-button')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/list-item')->tree()['props']['back'] ?? null)->toBeFalse();
     expect(Native::visit('/captures/list')->tree()['props']['back'] ?? null)->toBeFalse();

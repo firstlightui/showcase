@@ -737,7 +737,7 @@
             "dist": {
                 "type": "path",
                 "url": "../nativephp",
-                "reference": "09eb460c2ca0349251e129677402b304df547eea"
+                "reference": "5e5a06ab4558a9fd58c2a4e2d6fd0f4dbf206682"
             },
             "require": {
                 "illuminate/filesystem": "^10.0|^11.0|^12.0|^13.0",
