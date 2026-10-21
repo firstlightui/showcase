@@ -50,6 +50,49 @@
         </native:column>
 
         <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Swipe actions</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">Swipe either way, then tap an action. Long swipes never execute. Delete records only: the row stays visible. Toggle disabled while a drawer is open to check reconciliation.</native:text>
+            <firstlight:button label="Toggle swipe rows" @press="toggleSwipeRows" />
+            <firstlight:list plain separator class="w-full h-80">
+                <firstlight:list-item
+                    headline="Message"
+                    supporting="Archive, flag, or request deletion"
+                    :disabled="$swipeRowsDisabled"
+                    :leading-actions="[
+                        ['method' => 'recordSwipe(\'Archive\',42)', 'label' => 'Archive', 'icon' => 'archive', 'ios' => 'archivebox'],
+                    ]"
+                    :trailing-actions="[
+                        ['method' => 'recordSwipe(\'Delete\',42)', 'label' => 'Delete', 'icon' => 'delete', 'ios' => 'trash', 'role' => 'destructive'],
+                        ['method' => 'recordSwipe(\'Flag\',42)', 'label' => 'Flag', 'icon' => 'flag'],
+                    ]"
+                    @press="recordMessage"
+                />
+                <firstlight:list-section header="Grouped rows">
+                    <firstlight:list-item
+                        headline="Grouped message"
+                        supporting="Actions also work inside a section"
+                        :disabled="$swipeRowsDisabled"
+                        :trailing-actions="[
+                            ['method' => 'recordSwipe(\'Flag\',73)', 'label' => 'Flag', 'icon' => 'flag'],
+                        ]"
+                        @press="recordMessage"
+                    />
+                    <firstlight:list-item
+                        headline="Disabled message"
+                        supporting="Neither edge nor accessibility actions can activate"
+                        disabled
+                        :trailing-actions="[
+                            ['method' => 'recordSwipe(\'Delete\',99)', 'label' => 'Delete', 'role' => 'destructive'],
+                        ]"
+                        @press="recordMessage"
+                    />
+                </firstlight:list-section>
+            </firstlight:list>
+            <native:text class="text-sm text-theme-on-surface">Recorded swipe actions: {{ $swipeCount }}</native:text>
+            <native:text class="text-sm text-theme-on-surface">Last swipe action: {{ $lastSwipe }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Disabled</native:text>
             <firstlight:list-item
                 headline="Managed account"
