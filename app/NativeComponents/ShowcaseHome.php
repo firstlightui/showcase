@@ -167,6 +167,12 @@ class ShowcaseHome extends ShowcaseScreen
             'path' => '/status-label',
         ],
         [
+            'label' => 'Metric',
+            'tag' => '<firstlight:metric>',
+            'description' => 'One accessible measurement with tabular figures',
+            'path' => '/metric',
+        ],
+        [
             'label' => 'Switch',
             'tag' => '<firstlight:switch>',
             'description' => 'Server-authoritative boolean settings',

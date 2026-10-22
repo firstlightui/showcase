@@ -291,6 +291,14 @@ Route::native('/captures/status-label', StatusLabelCapture::class)
     ->name('captures.status-label')
     ->layout(ShowcaseLayout::class);
 
+Route::native('/metric', \App\NativeComponents\MetricShowcase::class)
+    ->name('metric')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/metric', \App\NativeComponents\Captures\MetricCapture::class)
+    ->name('captures.metric')
+    ->layout(ShowcaseLayout::class);
+
 Route::native('/text-field', TextFieldShowcase::class)
     ->name('text-field')
     ->layout(ShowcaseLayout::class);

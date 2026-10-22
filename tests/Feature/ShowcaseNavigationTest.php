@@ -47,6 +47,7 @@ it('publishes a native front-page menu for every released component', function (
         'Slider',
         'Stepper',
         'Status Label',
+        'Metric',
         'Switch',
         'Tabs',
         'Text Field',
@@ -79,6 +80,7 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:slider>',
         '<firstlight:stepper>',
         '<firstlight:status-label>',
+        '<firstlight:metric>',
         '<firstlight:switch>',
         '<firstlight:tabs>',
         '<firstlight:text-field>',
@@ -111,6 +113,7 @@ it('publishes a native front-page menu for every released component', function (
         'Strict stepped numeric ranges with native gestures',
         'Exact bounded increments with server authority',
         'Compact semantic status metadata',
+        'One accessible measurement with tabular figures',
         'Server-authoritative boolean settings',
         'Server-authoritative sections with counts',
         'Native text entry, validation, and affordances',
@@ -158,6 +161,7 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Slider', '/slider'],
     ['Stepper', '/stepper'],
     ['Status Label', '/status-label'],
+    ['Metric', '/metric'],
     ['Switch', '/switch'],
     ['Tabs', '/tabs'],
     ['Text Field', '/text-field'],
@@ -184,7 +188,7 @@ it('explains an empty catalogue search and lets the tester clear it', function (
     expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toBe([]);
     $screen->assertSee('No demos match. Clear search to see every control.')
         ->tap('Clear search');
-    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(31);
+    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(32);
 });
 
 it('shows native back chrome on component pages but not capture routes', function () {

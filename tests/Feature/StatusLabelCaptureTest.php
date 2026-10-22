@@ -35,4 +35,8 @@ it('publishes the stable Status Label documentation capture fixture', function (
         ]);
 
     $screen->assertAccessible();
+
+    expect($nodes[0]['props'])->not->toHaveKey('icon')
+        ->and(array_column(array_column(array_slice($nodes, 1), 'props'), 'icon'))
+        ->toBe(['info', 'check_circle', 'warning', 'error']);
 });
