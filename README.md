@@ -14,6 +14,23 @@ composer run setup
 
 After changing NativePHP versions, run `composer update` and `php artisan native:install --force`.
 
+## App artwork
+
+The sunrise identity follows the showcase's dawn-and-ink palette. NativePHP 4.6
+automatically consumes these files when preparing a native build:
+
+- [`public/icon.png`](public/icon.png) — opaque 1024 × 1024 app icon; platform masks supply the rounded corners.
+- [`public/splash.png`](public/splash.png) — 887 × 1774 light launch artwork.
+- [`public/splash-dark.png`](public/splash-dark.png) — matching dark launch artwork.
+
+The splash pair keeps the emblem and wordmark centered, with generous margins
+for different screen proportions. iOS selects its appearance variant and
+Android generates density-specific light and night resources. Rebuild the
+native app to pick up artwork changes; a web refresh does not update them.
+
+Artwork was generated with the built-in image generation tool. The final
+[prompts](resources/branding/prompts.json) are saved for future revisions.
+
 ## Local NativePHP development
 
 ### Response-revision contract
