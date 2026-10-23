@@ -32,9 +32,20 @@ to restore official binaries without deleting application data.
 Upstream [#365](https://github.com/NativePHP/mobile-air/issues/365) remains, but
 Firstlight no longer waits for it. A revision is not a per-event acknowledgement:
 it does not prevent coalescing or serialize simultaneous proposals. Firstlight
-remains pre-alpha pending physical-device, soak/performance, and wider app
-qualification. The permanent implementation passed 14 emulator/simulator
+1.0.0 is a release candidate pending physical-device, soak/performance, and
+wider app qualification. The permanent implementation passed 14 emulator/simulator
 phases per platform on unpatched PHP 8.5.11; this is not production readiness.
+
+## Live device testing
+
+- **iOS:** set `NATIVEPHP_DEVELOPMENT_TEAM` in `.env` to your Apple Team ID so
+  builds sign for a physical iPhone. The Media screen's Camera option uses the
+  `NSCameraUsageDescription` in `config/nativephp.php`.
+- **Android:** the showcase targets API 29, Firstlight's floor, rather than
+  NativePHP's default of 33, so older supported devices install it too.
+- Each screen starts with its on-device checks. Media and Transient Feedback
+  (screen-local Undo) exercise paths that simulators and emulators cannot
+  fully cover: the real camera, system pickers and native event delivery.
 
 ## Documentation captures
 

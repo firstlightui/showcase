@@ -132,7 +132,7 @@ return [
     */
 
     'permissions' => [
-        // 'NSCameraUsageDescription' => 'Used to take a profile photo.',
+        'NSCameraUsageDescription' => 'The showcase uses the camera to test the Media field.',
         // 'NSMicrophoneUsageDescription' => 'Used to record audio with your videos.',
         // 'NSPhotoLibraryUsageDescription' => 'Used to select photos for your post.',
     ],
@@ -260,7 +260,8 @@ return [
         |
         */
         'compile_sdk' => env('NATIVEPHP_ANDROID_COMPILE_SDK', 36),
-        'min_sdk' => env('NATIVEPHP_ANDROID_MIN_SDK', 33),
+        // Firstlight supports API 29+; test the package floor, not NativePHP's 33 default.
+        'min_sdk' => (int) env('NATIVEPHP_ANDROID_MIN_SDK', 29),
         'target_sdk' => env('NATIVEPHP_ANDROID_TARGET_SDK', 36),
 
         /*
