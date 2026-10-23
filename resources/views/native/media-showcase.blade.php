@@ -1,6 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-32">
-        <native:text class="text-sm text-theme-on-surface">On-device checks: pick from camera and library, cancel each picker, zoom and confirm or cancel crop, Skip optional crop, replace a selection, then clear. Cancellation must retain the previous value. Try a PDF and an invalid document, then validate. Use sample files only; Clear demo media deletes only this screen's selected copies.</native:text>
+        <native:text class="text-sm text-theme-on-surface">On-device checks: pick from camera and library, cancel each picker, zoom and confirm or cancel crop (the stored preview must match the crop frame), Skip optional crop, replace a selection, then clear. Cancellation must retain the previous value. Try a PDF and an invalid document, then validate. Use sample files only; Clear demo media deletes only this screen's selected copies.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Image with required aspect</native:text>
             <firstlight:media

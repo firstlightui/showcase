@@ -2,12 +2,20 @@
 
 namespace App\NativeComponents;
 
+use FirstlightUI\Events\FeedbackActionPressed;
+use FirstlightUI\Events\FeedbackDismissed;
 use FirstlightUI\Facades\Feedback;
+use FirstlightUI\Feedback\FeedbackDismissReason;
 use Illuminate\View\View;
+use Native\Mobile\Attributes\On;
 
 final class TransientFeedbackShowcase extends ShowcaseScreen
 {
     public bool $lastRemovalSucceeded = false;
+
+    public bool $archived = false;
+
+    public ?string $undoFeedbackId = null;
 
     public function publishDefault(): void
     {
@@ -35,6 +43,34 @@ final class TransientFeedbackShowcase extends ShowcaseScreen
             ->id('feedback-action')
             ->action('Undo', 'undo-save')
             ->send();
+    }
+
+    public function archive(): void
+    {
+        if ($this->archived) {
+            return;
+        }
+
+        $this->archived = true;
+        $this->undoFeedbackId = Feedback::success('Item archived')
+            ->action('Undo', 'undo-archive')
+            ->send();
+    }
+
+    #[On(FeedbackActionPressed::class)]
+    public function undoArchive(string $id, string $actionKey): void
+    {
+        if ($id === $this->undoFeedbackId && $actionKey === 'undo-archive') {
+            $this->archived = false;
+        }
+    }
+
+    #[On(FeedbackDismissed::class)]
+    public function undoWindowEnded(string $id, FeedbackDismissReason $reason): void
+    {
+        if ($id === $this->undoFeedbackId) {
+            $this->undoFeedbackId = null;
+        }
     }
 
     public function publishHeld(): void

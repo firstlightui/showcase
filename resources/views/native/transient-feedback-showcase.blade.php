@@ -1,6 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-32">
-        <native:text class="text-sm text-theme-on-surface">On-device checks: show every tone, activate Undo and inspect the latest event, hold and remove feedback, and queue three messages. Dismiss Updated in place to reveal Still second. Navigate with held feedback, remove it on the destination, then use native Back. Repeat with a keyboard open and a screen reader.</native:text>
+        <native:text class="text-sm text-theme-on-surface">On-device checks: show every tone, activate Undo and inspect the latest event, archive the item and Undo it from the feedback (Item returns to active), hold and remove feedback, and queue three messages. Dismiss Updated in place to reveal Still second. Navigate with held feedback, remove it on the destination, then use native Back. Repeat with a keyboard open and a screen reader.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Message-only tones</native:text>
             <native:button ref="publishDefault" label="Show neutral" variant="secondary" @press="publishDefault" />
@@ -15,6 +15,12 @@
             <native:button ref="publishHeld" label="Hold until dismissed" variant="secondary" @press="publishHeld" />
             <native:button ref="removeHeld" label="Remove held feedback" variant="secondary" @press="removeHeld" />
             <native:text class="text-sm text-theme-on-surface-variant">Programmatic removal: {{ $lastRemovalSucceeded ? 'removed' : 'not requested' }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Screen-local Undo</native:text>
+            <native:button ref="archive" label="Archive item" variant="secondary" @press="archive" />
+            <native:text class="text-sm text-theme-on-surface-variant">Item: {{ $archived ? 'archived' : 'active' }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-3">

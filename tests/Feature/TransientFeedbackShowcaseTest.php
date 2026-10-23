@@ -166,3 +166,20 @@ it('records the exact most recent action and dismissal event payloads', function
     Native::visit('/transient-feedback/destination')
         ->assertSee('Dismissed · id=held-feedback · reason=manual');
 });
+
+it('restores the archived item when the screen-local Undo action is pressed', function () {
+    $screen = Native::test(TransientFeedbackShowcase::class)
+        ->assertSee('Item: active')
+        ->press('archive')
+        ->assertSee('Item: archived');
+
+    expect(app(FeedbackStore::class)->all()[0]->actionKey)->toBe('undo-archive');
+
+    $screen->fireEvent('action', 1)
+        ->assertSet('archived', false)
+        ->assertSet('undoFeedbackId', null)
+        ->assertSee('Item: active');
+
+    expect(app(FeedbackStore::class)->all())->toBe([])
+        ->and(app(ShowcaseFeedbackLog::class)->latest())->toContain('Dismissed');
+});
