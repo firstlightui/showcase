@@ -25,7 +25,7 @@
             @dismiss="dismissDefault"
         >
             <native:column class="w-full p-4 gap-3">
-                <firstlight:status-label label="Account details" />
+                <native:text class="text-lg font-semibold text-theme-on-surface">Account details</native:text>
                 <native:text class="text-sm text-theme-on-surface">Use the native close control to dismiss this overlay.</native:text>
             </native:column>
         </firstlight:modal>
@@ -38,7 +38,7 @@
             @dismiss="dismissLocked"
         >
             <native:column class="w-full p-4 gap-3">
-                <firstlight:status-label label="Required notice" />
+                <native:text class="text-lg font-semibold text-theme-on-surface">Required notice</native:text>
                 <firstlight:button ref="acknowledgeLocked" label="Acknowledge" variant="primary" @press="acknowledgeLocked" />
             </native:column>
         </firstlight:modal>
@@ -50,7 +50,7 @@
             @dismiss="dismissProgrammatic"
         >
             <native:column class="w-full p-4 gap-3">
-                <firstlight:status-label label="Programmatic closure" />
+                <native:text class="text-lg font-semibold text-theme-on-surface">Programmatic closure</native:text>
                 <native:text class="text-sm text-theme-on-surface">Close from PHP should not record a native dismissal.</native:text>
                 <firstlight:button ref="closeProgrammatic" label="Close from PHP" variant="primary" @press="closeProgrammatic" />
             </native:column>
