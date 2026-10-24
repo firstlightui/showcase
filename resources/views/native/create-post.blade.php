@@ -6,13 +6,13 @@
             label="Title"
             autocapitalize="sentences"
             submit-label="next"
-            native:model.blur="title"
+            native:model="title"
             required
         />
 
         <firstlight:text-area
             label="Body"
-            native:model.blur="body"
+            native:model="body"
             required
         />
 
