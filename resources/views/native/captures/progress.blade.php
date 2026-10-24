@@ -4,27 +4,27 @@
 
         <native:column class="w-full gap-2">
             <native:text class="text-sm text-theme-on-surface">Not started · 0%</native:text>
-            <firstlight:progress :value="0" a11y-label="Document upload not started" />
+            <firstlight:progress class="w-full" :value="0" a11y-label="Document upload not started" />
         </native:column>
 
         <native:column class="w-full gap-2">
             <native:text class="text-sm text-theme-on-surface">Preparing · 25%</native:text>
-            <firstlight:progress :value="0.25" a11y-label="Preparing document upload" />
+            <firstlight:progress class="w-full" :value="0.25" a11y-label="Preparing document upload" />
         </native:column>
 
         <native:column class="w-full gap-2">
             <native:text class="text-sm text-theme-on-surface">Uploading · 50%</native:text>
-            <firstlight:progress :value="0.5" a11y-label="Uploading documents" />
+            <firstlight:progress class="w-full" :value="0.5" a11y-label="Uploading documents" />
         </native:column>
 
         <native:column class="w-full gap-2">
             <native:text class="text-sm text-theme-on-surface">Processing · 75%</native:text>
-            <firstlight:progress :value="0.75" a11y-label="Processing uploaded documents" />
+            <firstlight:progress class="w-full" :value="0.75" a11y-label="Processing uploaded documents" />
         </native:column>
 
         <native:column class="w-full gap-2">
             <native:text class="text-sm text-theme-on-surface">Complete · 100%</native:text>
-            <firstlight:progress :value="1" a11y-label="Document upload complete" />
+            <firstlight:progress class="w-full" :value="1" a11y-label="Document upload complete" />
         </native:column>
 
     </native:column>
