@@ -1,0 +1,205 @@
+{
+    "id": "components/icon-button",
+    "title": "Icon Button",
+    "description": "Public API, variants, sizes, loading and disabled states, accessibility, and native platform behaviour for Firstlight Icon Button.",
+    "group": "Components",
+    "anchors": {
+        "icon-button": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "variants-and-sizes": "variants-and-sizes",
+        "loading-and-disabled-behaviour": "loading-and-disabled-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-excluded-apis": "validation-and-excluded-apis",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Icon Button triggers one compact action represented by an icon. It renders as\na genuine SwiftUI button on iOS and the Material 3 Icon Button family on\nAndroid while keeping one portable Firstlight API."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:icon-button\n    icon=\"plus\"\n    icon-ios=\"plus.circle\"\n    icon-android=\"add_circle\"\n    a11y-label=\"Add item\"\n    a11y-hint=\"Adds a blank item\"\n    variant=\"primary\"\n    size=\"md\"\n    :loading=\"$adding\"\n    :disabled=\"! $canAdd\"\n    @press=\"addItem\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Icon Button is self-closing and has no visible text slot. Use\n<firstlight:button> when the action needs a visible label, or\n<native:icon> for a decorative or display-only glyph."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "icon",
+                    "text": "Accepted type: non-empty string\nPurpose: Required shared icon name and cross-platform fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "icon-ios",
+                    "text": "Accepted type: `IosSymbol\nPurpose: string`"
+                },
+                {
+                    "type": "definition",
+                    "label": "icon-android",
+                    "text": "Accepted type: `AndroidSymbol\nPurpose: string`"
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: non-empty string\nPurpose: Required accessible action name. Firstlight never derives it from the machine icon name."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Optional supplementary VoiceOver or TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "variant",
+                    "text": "Accepted type: primary, secondary, destructive, success, or ghost\nPurpose: Semantic action intent. Defaults to primary."
+                },
+                {
+                    "type": "definition",
+                    "label": "size",
+                    "text": "Accepted type: sm, md, or lg\nPurpose: Native glyph and container size. Defaults to md; the touch target remains at least 44 points or 48 dp."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents interaction and exposes native disabled state. Defaults to false."
+                },
+                {
+                    "type": "definition",
+                    "label": "loading",
+                    "text": "Accepted type: bool\nPurpose: Replaces the glyph with native progress, announces loading, and prevents duplicate presses. Defaults to false."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                },
+                {
+                    "type": "text",
+                    "text": "Blade documentation uses icon-ios and icon-android. The equivalent\niconIos and iconAndroid aliases are accepted for parity with NativePHP."
+                }
+            ],
+            "links": []
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@press is required and invokes the named PHP action once for a native user\npress:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function addItem(): void\n{\n    // Persist the action and publish any resulting state.\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Icon Button has no value, native:model, or @change. Disabled and loading\nbuttons do not emit. Programmatic publications never emit a press."
+                }
+            ],
+            "links": []
+        },
+        "variants-and-sizes": {
+            "title": "Variants and sizes",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The variants share the same semantic vocabulary as Firstlight Button. iOS\nuses Apple-native prominent or plain button expression and theme tints.\nAndroid uses FilledIconButton, FilledTonalIconButton, or IconButton\naccording to intent. sm, md, and lg scale the visible glyph and native\ncontainer without shrinking the accessible interaction target."
+                }
+            ],
+            "links": []
+        },
+        "loading-and-disabled-behaviour": {
+            "title": "Loading and disabled behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "loading keeps the explicit accessible name, substitutes a native progress\nindicator, exposes a loading value or state description, and disables the\naction until PHP publishes a non-loading state. disabled retains the icon\nand name while exposing native disabled appearance and semantics."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Every Icon Button requires a11y-label; familiar-looking icon names are not\naccepted as an accessible-name substitute. The glyph is decorative inside one\nbutton accessibility node. Native renderers expose the button role, optional\nhint, disabled or loading state, focus and press feedback, and interaction\ntargets of at least 44 points on iOS and 48 dp on Android."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-excluded-apis": {
+            "title": "Validation and excluded APIs",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight rejects missing or blank icons, missing or blank accessibility\nlabels, missing @press, non-boolean state props, invalid variants and sizes,\nunsupported platform icon values, visible labels or slots, trailing icons,\nmenus, navigation directives, extra gesture callbacks, bindings, field props,\nand per-control colour or typography escape hatches."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Icon Button supports the versions listed in the current\ncompatibility reference and requires both\nFirstlight native renderers to be compiled into the host application."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/icon-button/ios-light.png",
+                    "text": "Icon Button on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/icon-button/ios-dark.png",
+                    "text": "Icon Button on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/icon-button/android-light.png",
+                    "text": "Icon Button on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/icon-button/android-dark.png",
+                    "text": "Icon Button on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

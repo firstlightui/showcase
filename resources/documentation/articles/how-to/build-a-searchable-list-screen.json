@@ -1,0 +1,204 @@
+{
+    "id": "how-to/build-a-searchable-list-screen",
+    "title": "Build a searchable list screen",
+    "description": "Recipe for a complete screen with native search, a paginated List, pull-to-refresh, row navigation, and confirmed swipe deletion.",
+    "group": "Guides",
+    "anchors": {
+        "build-a-searchable-list-screen": "overview",
+        "1-register-the-route": "1-register-the-route",
+        "2-write-the-screen": "2-write-the-screen",
+        "3-write-the-view": "3-write-the-view",
+        "what-each-platform-shows": "what-each-platform-shows",
+        "rules-to-keep": "rules-to-keep",
+        "adapt-the-recipe": "adapt-the-recipe"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe builds the index screen most apps need: a search field above a\nlist of records, with pull-to-refresh, infinite scrolling, a tap that opens\nthe record, and a swipe action that deletes it after native confirmation."
+                },
+                {
+                    "type": "text",
+                    "text": "This recipe runs unchanged in the\nshowcase app, where\nSearchableListRecipeTest\nexercises it."
+                },
+                {
+                    "type": "text",
+                    "text": "Use it when a screen shows many records of one model and the user needs to\nfind, open, or remove one. Use List without search for\nshort, fixed collections, and a settings layout when rows change preferences\ninstead of opening records."
+                },
+                {
+                    "type": "text",
+                    "text": "Every piece is an existing Firstlight tag or NativeComponent helper. There is\nno list-screen tag to learn."
+                }
+            ],
+            "links": [
+                {
+                    "label": "showcase app",
+                    "url": "https://github.com/firstlightui/showcase"
+                },
+                {
+                    "label": "SearchableListRecipeTest",
+                    "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/SearchableListRecipeTest.php"
+                },
+                {
+                    "label": "List",
+                    "url": "../components/list.md"
+                }
+            ]
+        },
+        "1-register-the-route": {
+            "title": "1. Register the route",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\Layouts\\AppLayout;\nuse App\\NativeComponents\\PostsScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/posts', PostsScreen::class)\n    ->name('posts')\n    ->layout(AppLayout::class);"
+                },
+                {
+                    "type": "text",
+                    "text": "AppLayout gives the screen a native title bar and back navigation. It is\ndefined in Build a list and detail flow."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Build a list and detail flow",
+                    "url": "build-a-list-detail-flow.md"
+                }
+            ]
+        },
+        "2-write-the-screen": {
+            "title": "2. Write the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend FirstlightUI\\NativeComponent. It already includes\nPaginatesLists, DestroysListItems,\nand AuthorizesActions."
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\NativeComponent;\nuse FirstlightUI\\Pagination\\ListPage;\nuse Illuminate\\View\\View;\n\nclass PostsScreen extends NativeComponent\n{\n    public string $query = '';\n\n    public function mount(): void\n    {\n        $this->reload();\n    }\n\n    public function updatedQuery(): void\n    {\n        $this->reload();\n    }\n\n    public function reload(): void\n    {\n        $this->refreshList(fn (ListPage $page) => $this->posts($page));\n    }\n\n    public function loadMore(): void\n    {\n        $this->loadMoreList(fn (ListPage $page) => $this->posts($page));\n    }\n\n    public function openPost(int $id): void\n    {\n        $this->navigate('/posts/'.$id);\n    }\n\n    public function requestDeletion(int $id): void\n    {\n        $this->requestDestructiveListAction($id, 'delete');\n    }\n\n    public function cancelDeletion(): void\n    {\n        $this->cancelDestructiveListAction();\n    }\n\n    public function deletePost(): void\n    {\n        $this->confirmDestructiveListAction(\n            destroy: fn (Post $post) => $post->delete(),\n            ability: 'delete',\n            successMessage: 'Post deleted',\n        );\n    }\n\n    public function navTitle(): string\n    {\n        return 'Posts';\n    }\n\n    public function render(): View\n    {\n        return view('native.posts');\n    }\n\n    private function posts(ListPage $page)\n    {\n        return Post::query()\n            ->when($this->query !== '', fn ($query) => $query->where('title', 'like', '%'.$this->query.'%'))\n            ->latest()\n            ->paginate(perPage: 20, page: $page->page);\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "updatedQuery() runs whenever PHP accepts a new query, so the list restarts\nfrom page one for each search. Keys passed to openPost() and\nrequestDeletion() are model ids, never loop positions."
+                }
+            ],
+            "links": [
+                {
+                    "label": "PaginatesLists",
+                    "url": "paginate-lists.md"
+                },
+                {
+                    "label": "DestroysListItems",
+                    "url": "destroy-list-items.md"
+                },
+                {
+                    "label": "AuthorizesActions",
+                    "url": "authorize-actions.md"
+                }
+            ]
+        },
+        "3-write-the-view": {
+            "title": "3. Write the view",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Save this as resources/views/native/posts.blade.php:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:column class=\"w-full flex-1\">\n    <firstlight:search-field\n        placeholder=\"Search posts\"\n        a11y-label=\"Search posts\"\n        native:model.debounce.300ms=\"query\"\n        class=\"mx-4 my-2\"\n    />\n\n    @if (count($listItems) === 0)\n        <firstlight:status-label\n            label=\"{{ $query === '' ? 'No posts yet' : 'No matching posts' }}\"\n            tone=\"neutral\"\n            class=\"mx-4\"\n        />\n    @endif\n\n    <firstlight:list separator @refresh=\"reload\" @endReached=\"loadMore\" class=\"flex-1\">\n        @foreach ($listItems as $post)\n            <firstlight:list-item\n                :headline=\"$post->title\"\n                :supporting=\"$post->excerpt\"\n                trailing-icon=\"chevron-right\"\n                trailing-icon-ios=\"chevron.right\"\n                trailing-icon-android=\"chevron_right\"\n                @press=\"openPost({{ $post->id }})\"\n                :trailing-actions=\"[\n                    ['method' => 'requestDeletion('.$post->id.')', 'label' => 'Delete', 'role' => 'destructive'],\n                ]\"\n            />\n        @endforeach\n    </firstlight:list>\n\n    <firstlight:confirmation-dialog\n        :visible=\"$confirmingListDestruction\"\n        title=\"Delete post?\"\n        message=\"This action cannot be undone.\"\n        confirm-label=\"Delete\"\n        cancel-label=\"Keep post\"\n        tone=\"destructive\"\n        @press=\"deletePost\"\n        @dismiss=\"cancelDeletion\"\n    />\n</native:column>"
+                }
+            ],
+            "links": []
+        },
+        "what-each-platform-shows": {
+            "title": "What each platform shows",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "Search",
+                    "text": "iOS: UISearchTextField with the system clear button\nAndroid: Material 3 search field with the search IME action"
+                },
+                {
+                    "type": "definition",
+                    "label": "Rows",
+                    "text": "iOS: SwiftUI List rows with dividers\nAndroid: LazyColumn Material list items with dividers"
+                },
+                {
+                    "type": "definition",
+                    "label": "Refresh",
+                    "text": "iOS: System pull-to-refresh\nAndroid: Material pull-to-refresh"
+                },
+                {
+                    "type": "definition",
+                    "label": "Delete",
+                    "text": "iOS: Trailing swipe action, then a native confirmation dialog\nAndroid: Trailing swipe action, then a native confirmation dialog"
+                },
+                {
+                    "type": "definition",
+                    "label": "Feedback",
+                    "text": "iOS: \"Post deleted\" through Transient Feedback\nAndroid: \"Post deleted\" through Transient Feedback"
+                },
+                {
+                    "type": "text",
+                    "text": "The same Blade works on both platforms. Swipe actions are also exposed as\nVoiceOver and TalkBack actions, so screen-reader users can delete without a\nswipe gesture."
+                }
+            ],
+            "links": []
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Keep @endReached bound even on the last page; extra events are ignored."
+                },
+                {
+                    "type": "text",
+                    "text": "• Do not omit the Delete action for rows the Policy denies. Disable the row\nwith :disabled instead, as described in Authorize actions."
+                },
+                {
+                    "type": "text",
+                    "text": "• Full swipes never delete. The swipe only opens the confirmation dialog, and\nPHP authorizes again before deleting."
+                },
+                {
+                    "type": "text",
+                    "text": "• Use native:model.debounce.300ms for search so each keystroke does not\nquery the database."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Authorize actions",
+                    "url": "authorize-actions.md"
+                }
+            ]
+        },
+        "adapt-the-recipe": {
+            "title": "Adapt the recipe",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• No deletion: remove trailing-actions, the dialog, and the three\ndeletion methods."
+                },
+                {
+                    "type": "text",
+                    "text": "• Cursor pagination: pass $page->cursor to cursorPaginate(), as shown\nin Paginate lists."
+                },
+                {
+                    "type": "text",
+                    "text": "• Search on submit instead of while typing: bind native:model.lazy=\"query\"."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Paginate lists",
+                    "url": "paginate-lists.md#cursor-pagination"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,215 @@
+{
+    "id": "components/progress",
+    "title": "Progress",
+    "description": "Determinate and indeterminate work progress, values, accessibility, validation, adapter behaviour, and platform evidence.",
+    "group": "Components",
+    "anchors": {
+        "progress": "overview",
+        "complete-examples": "complete-examples",
+        "props": "props",
+        "events-and-state-timing": "events-and-state-timing",
+        "disabled-loading-and-failure-behaviour": "disabled-loading-and-failure-behaviour",
+        "accessibility": "accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "why-an-adapter": "why-an-adapter",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Progress communicates the completion of ongoing work. Publish a fraction when\ncompletion is measurable, or use indeterminate progress while the duration is\nunknown."
+                },
+                {
+                    "type": "text",
+                    "text": "Firstlight wraps the native progress component from nativephp/mobile-ui. The\npublic <firstlight:progress> API adds strict values, reliable mode defaults,\nand actionable diagnostics while retaining the official SwiftUI and Material 3\nrenderers."
+                }
+            ],
+            "links": []
+        },
+        "complete-examples": {
+            "title": "Complete examples",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Publish a determinate fraction from 0.0 through 1.0:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:progress\n    :value=\"$completed / $total\"\n    a11y-label=\"Uploading documents\"\n    class=\"w-full\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Use indeterminate progress when no meaningful fraction is available:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:progress\n    indeterminate\n    a11y-label=\"Preparing documents\"\n    class=\"w-full\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Omitting value also selects indeterminate progress."
+                },
+                {
+                    "type": "text",
+                    "text": "Add class=\"w-full\" to span the container. Without it, Android keeps the\nMaterial default track width while iOS fills the available width."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value",
+                    "text": "Accepted type: finite int, float, or null\nPurpose: Published completion fraction from 0.0 through 1.0. A non-null value selects determinate mode."
+                },
+                {
+                    "type": "definition",
+                    "label": "indeterminate",
+                    "text": "Accepted type: bool\nPurpose: Explicitly selects or rejects indeterminate mode. Normally inferred from value."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: non-empty string\nPurpose: Required accessible name describing the work."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                },
+                {
+                    "type": "text",
+                    "text": "An integer value is published as a float. 0 means determinate progress that\nhas not advanced; it is different from an omitted or null value. 1 means\nthe reported work is complete, but the application decides when to remove the\nindicator or present its result."
+                },
+                {
+                    "type": "text",
+                    "text": "Explicit indeterminate=\"true\" cannot be combined with a non-null value.\nExplicit indeterminate=\"false\" requires a non-null value."
+                }
+            ],
+            "links": []
+        },
+        "events-and-state-timing": {
+            "title": "Events and state timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Progress has no event or model binding. PHP publishes the current value or\nmode through the ordinary Element Tree, and programmatic updates change the\nnative presentation without producing a callback."
+                },
+                {
+                    "type": "text",
+                    "text": "Indeterminate animation stays within the native control. Firstlight does not\nrun a timer, publish animation frames, or use a separate bridge."
+                }
+            ],
+            "links": []
+        },
+        "disabled-loading-and-failure-behaviour": {
+            "title": "Disabled, loading, and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Progress already describes loading work, so it has no separate loading\nstate. It is display-only and therefore has no disabled, error, helper,\nrequired, selected, or pressed state."
+                },
+                {
+                    "type": "text",
+                    "text": "Values must be actual finite PHP integers or floats within 0.0...1.0.\nNumeric strings, booleans, NaN, infinities, negative values, and values above\n1.0 fail instead of being clamped. A missing, empty, or non-string\na11y-label also fails."
+                },
+                {
+                    "type": "text",
+                    "text": "Firstlight does not expose Mobile UI's arbitrary color or Android-only\ntrack-color overrides. It also rejects label, a11y-hint, tone,\nvariant, size, icons, events, and field props. The installed native\nProgress renderers do not consume a11y-hint, so Firstlight does not pretend\nthat the metadata reaches assistive technology."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Progress has no visible text inside its bounds, so a11y-label is required.\nVoiceOver and TalkBack combine that name with the native progress role and the\nsystem-formatted value for determinate progress. Indeterminate progress\ncommunicates ongoing activity without inventing a percentage."
+                },
+                {
+                    "type": "text",
+                    "text": "The native controls retain platform contrast, right-to-left behaviour,\nIncreased Contrast, and Reduced Motion or disabled-animation policy. Progress\ncontains no text that needs a custom scaling treatment."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses SwiftUI ProgressView(): the indeterminate initializer for unknown\nduration and ProgressView(value:) for a published fraction. Android uses the\ncorresponding indeterminate or determinate Material 3\nLinearProgressIndicator overload."
+                },
+                {
+                    "type": "text",
+                    "text": "Both inherit the host Mobile UI semantic theme. The platforms retain their own\ngeometry and motion; behavioural parity does not require identical pixels."
+                }
+            ],
+            "links": []
+        },
+        "why-an-adapter": {
+            "title": "Why an adapter?",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Mobile UI already provides genuine native linear indicators, determinate and\nindeterminate presentation, semantic theme colours, native animation, and\naccessible progress values on both platforms. Firstlight therefore keeps its\nown namespace and strict public contract while delegating rendering rather\nthan duplicating those controls."
+                },
+                {
+                    "type": "text",
+                    "text": "The public Element Tree type remains firstlight.progress. Firstlight can move\nto package-owned renderers later without changing consumer markup if a durable\ncross-platform requirement genuinely outgrows the official primitive."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Progress supports the versions in the current compatibility\nreference. The host application must compile\nthe installed nativephp/mobile-ui iOS and Android progress renderers declared\nby the Firstlight adapter."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility\nreference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/progress/ios-light.png",
+                    "text": "Progress on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/progress/ios-dark.png",
+                    "text": "Progress on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/progress/android-light.png",
+                    "text": "Progress on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/progress/android-dark.png",
+                    "text": "Progress on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

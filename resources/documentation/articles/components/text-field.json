@@ -1,0 +1,275 @@
+{
+    "id": "components/text-field",
+    "title": "Text Field",
+    "description": "Public API, focused editing, semantic input hints, icons, accessibility, and platform behaviour for Firstlight Text Field.",
+    "group": "Components",
+    "anchors": {
+        "text-field": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events-and-synchronisation": "events-and-synchronisation",
+        "icons-and-trailing-actions": "icons-and-trailing-actions",
+        "validation-and-accessibility": "validation-and-accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Text Field enters and edits one line of text using the native field, keyboard,\nautofill, selection, and accessibility behaviour of each platform."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field\n    label=\"Email\"\n    placeholder=\"you@example.com\"\n    helper=\"Used for appointment updates.\"\n    keyboard=\"email\"\n    content-type=\"email\"\n    autocapitalize=\"none\"\n    :autocorrect=\"false\"\n    clearable\n    native:model.blur=\"email\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string\nPurpose: Published PHP value; omission defaults to ''."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible label and accessibility-name fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "placeholder",
+                    "text": "Accepted type: string\nPurpose: Short example; never a replacement for a label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting guidance below the field."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required metadata without performing validation."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents focus, editing, and every action."
+                },
+                {
+                    "type": "definition",
+                    "label": "read-only",
+                    "text": "Accepted type: bool\nPurpose: Allows native selection and copy while preventing edits and changes."
+                },
+                {
+                    "type": "definition",
+                    "label": "keyboard",
+                    "text": "Accepted type: enum string\nPurpose: text, email, phone, url, number, or decimal."
+                },
+                {
+                    "type": "definition",
+                    "label": "content-type",
+                    "text": "Accepted type: enum string\nPurpose: name, username, email, password, new-password, or one-time-code."
+                },
+                {
+                    "type": "definition",
+                    "label": "secure",
+                    "text": "Accepted type: bool\nPurpose: Masks display without changing the stored string."
+                },
+                {
+                    "type": "definition",
+                    "label": "autocapitalize",
+                    "text": "Accepted type: enum string\nPurpose: none, sentences, words, or characters; omission keeps platform policy."
+                },
+                {
+                    "type": "definition",
+                    "label": "autocorrect",
+                    "text": "Accepted type: bool\nPurpose: Explicitly enables or disables platform autocorrection."
+                },
+                {
+                    "type": "definition",
+                    "label": "submit-label",
+                    "text": "Accepted type: enum string\nPurpose: done, go, next, search, or send; omission keeps the platform default."
+                },
+                {
+                    "type": "definition",
+                    "label": "leading-icon",
+                    "text": "Accepted type: string\nPurpose: Shared decorative leading icon fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "leading-icon-ios",
+                    "text": "Accepted type: `IosSymbol\nPurpose: string`"
+                },
+                {
+                    "type": "definition",
+                    "label": "leading-icon-android",
+                    "text": "Accepted type: `AndroidSymbol\nPurpose: string`"
+                },
+                {
+                    "type": "definition",
+                    "label": "trailing-icon",
+                    "text": "Accepted type: string\nPurpose: Shared decorative or authored-action icon fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "trailing-icon-ios",
+                    "text": "Accepted type: `IosSymbol\nPurpose: string`"
+                },
+                {
+                    "type": "definition",
+                    "label": "trailing-icon-android",
+                    "text": "Accepted type: `AndroidSymbol\nPurpose: string`"
+                },
+                {
+                    "type": "definition",
+                    "label": "trailing-a11y-label",
+                    "text": "Accepted type: string\nPurpose: Required accessible name when trailing-icon has @press."
+                },
+                {
+                    "type": "definition",
+                    "label": "clearable",
+                    "text": "Accepted type: bool\nPurpose: Adds a native clear action while editable text is non-empty. The clear accessibility label is package chrome; see Localize chrome."
+                },
+                {
+                    "type": "definition",
+                    "label": "revealable",
+                    "text": "Accepted type: bool\nPurpose: Adds native show/hide password state; requires secure. Show and hide accessibility labels are package chrome; see Localize chrome."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "events-and-synchronisation": {
+            "title": "Events and synchronisation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the current string. @submit flushes any pending change,\nthen receives the same current string. An authored interactive trailing icon\nuses standard @press and receives no text argument."
+                },
+                {
+                    "type": "text",
+                    "text": "Plain native:model and .live publish while editing. .blur and .lazy\npublish on focus loss or submit. .debounce.500ms publishes after the quiet\nperiod and flushes on blur or submit; durations below 50 ms are rejected.\nNative typing, selection, cursor position, and marked-text composition remain\nlocal while focused so PHP acknowledgements do not cause keyboard jumps."
+                },
+                {
+                    "type": "text",
+                    "text": "On iOS, pressing a <firstlight:button> while the field is focused publishes\nits pending .blur or .debounce change before the press, so the handler reads\nthe current value. Icon Button and List Item presses do not flush the field\nfirst. On Android, blur/debounce changes are not yet guaranteed to reach PHP\nbefore a button press, so for forms submitted by a separate button use\nnative:model.live=\"email\" (or plain native:model). A button press is not the\nfield's @submit event; for keyboard submission, the field's own @submit\nhandler receives the current string directly."
+                }
+            ],
+            "links": []
+        },
+        "icons-and-trailing-actions": {
+            "title": "Icons and trailing actions",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The shared icon is the fallback; the active platform override wins. Blade uses\nthe exact -ios and -android suffixes above, and typed Android symbols retain\ntheir filled or outlined variant on the wire. Decorative icons are silent."
+                },
+                {
+                    "type": "text",
+                    "text": "An authored trailing action requires all of trailing-icon,\ntrailing-a11y-label, and @press. clearable and revealable instead own\ntheir platform-native icon and localized accessibility state. These semantic\nactions are mutually exclusive and cannot share the trailing slot with an\nauthored action."
+                },
+                {
+                    "type": "text",
+                    "text": "Clearing retains focus and immediately publishes '' through @change, even\nunder blur or debounce sync. Revealing changes presentation only and never\npublishes the password value."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-accessibility": {
+            "title": "Validation and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject invalid types, unsupported enums, incomplete\ntrailing actions, and conflicting affordances before publication. User\nvalidation is separate: screens that use ValidatesFields auto-bind the first\nMessageBag message for the field's native:model or error-for name. An\nauthored error wins. required is display metadata and does not run Laravel\nrules. See Validate fields."
+                },
+                {
+                    "type": "text",
+                    "text": "Error text replaces helper text without replacing the field's accessible name\nor value. Decorative icons stay hidden from assistive technology. Icon actions\nare separate native accessibility nodes with a minimum 44-point target on iOS\nand 48-dp target on Android. A visible label or explicit a11y-label is\nrequired during development."
+                },
+                {
+                    "type": "text",
+                    "text": "The editable input uses a11y-label when supplied, otherwise label, in both\nplain and secure presentation; a11y-hint remains additional guidance rather\nthan replacing the name."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses an Apple SwiftUI TextField or SecureField composition with system\nfield treatment, SF Symbols, Dynamic Type, native keyboard and autofill hints,\nand Apple spacing. Android uses Material 3 OutlinedTextField, Material label\nand supporting/error slots, TextFieldValue selection and composition,\nkeyboard/IME options, and Compose autofill content types."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-field/ios-light.png",
+                    "text": "Text Field on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-field/ios-dark.png",
+                    "text": "Text Field error on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-field/android-light.png",
+                    "text": "Text Field on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-field/android-dark.png",
+                    "text": "Text Field error on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

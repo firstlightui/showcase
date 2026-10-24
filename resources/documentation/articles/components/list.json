@@ -1,0 +1,174 @@
+{
+    "id": "components/list",
+    "title": "List",
+    "description": "Finite vertical collections of List Item rows with optional grouped sections, separators, and refresh or pagination hooks.",
+    "group": "Components",
+    "anchors": {
+        "list": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "composition-rules": "composition-rules",
+        "platform-expression": "platform-expression",
+        "adapter-note": "adapter-note",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "List presents a finite vertical collection of application rows. Compose rows\nwith List Item and optional grouped sections with\nList Section."
+                }
+            ],
+            "links": [
+                {
+                    "label": "List Item",
+                    "url": "list-item.md"
+                },
+                {
+                    "label": "List Section",
+                    "url": "list-section.md"
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list separator @refresh=\"reloadItems\" @endReached=\"loadMore\">\n    <firstlight:list-item headline=\"Account\" @press=\"openAccount\" />\n\n    <firstlight:list-section header=\"Preferences\" footer=\"Changes sync automatically\">\n        <firstlight:list-item headline=\"Notifications\" @press=\"openNotifications\" />\n        <firstlight:list-item headline=\"Privacy\" @press=\"openPrivacy\" />\n    </firstlight:list-section>\n</firstlight:list>"
+                },
+                {
+                    "type": "text",
+                    "text": "List is a paired container. Only List Item and List Section children are\naccepted."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "separator",
+                    "text": "Accepted type: bool\nPurpose: Shows native dividers between rows. Defaults to false."
+                },
+                {
+                    "type": "definition",
+                    "label": "plain",
+                    "text": "Accepted type: bool\nPurpose: When sections are present, keeps flat rows with sticky headers instead of grouped inset cards. Defaults to false."
+                },
+                {
+                    "type": "definition",
+                    "label": "shows-indicators",
+                    "text": "Accepted type: bool\nPurpose: Controls native scroll indicator visibility. Defaults to upstream platform behaviour when omitted."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@refresh enables native pull-to-refresh and invokes the named PHP action when\nthe user pulls to refresh."
+                },
+                {
+                    "type": "text",
+                    "text": "@endReached invokes the named PHP action when the viewport nears the final\nleaf row. It is intended for pagination rather than precise scroll offsets.\nSee Paginate lists to bind Laravel paginators\nto these events. To delete a row through Confirmation Dialog authorization,\nsee Destroy list items."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Paginate lists",
+                    "url": "../how-to/paginate-lists.md"
+                },
+                {
+                    "label": "Destroy list items",
+                    "url": "../how-to/destroy-list-items.md"
+                }
+            ]
+        },
+        "composition-rules": {
+            "title": "Composition rules",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Every row is a firstlight:list-item with its own required @press handler."
+                },
+                {
+                    "type": "text",
+                    "text": "• Rows may define leading and trailing swipe actions,\nincluding rows inside sections. Swiping reveals actions; it never deletes a row."
+                },
+                {
+                    "type": "text",
+                    "text": "• Group related rows with firstlight:list-section. Sections require at least\none List Item child."
+                },
+                {
+                    "type": "text",
+                    "text": "• Horizontal lists, virtualized windows, selectable collections, and arbitrary\nchild components are outside the Firstlight List contract."
+                }
+            ],
+            "links": [
+                {
+                    "label": "leading and trailing swipe actions",
+                    "url": "list-item.md#swipe-actions"
+                }
+            ]
+        },
+        "platform-expression": {
+            "title": "Platform expression",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "List delegates scrolling, separators, grouped section chrome, pull-to-refresh,\nand end-reached detection to the official Mobile UI list renderer on both\nplatforms while retaining Firstlight List Item rows."
+                }
+            ],
+            "links": []
+        },
+        "adapter-note": {
+            "title": "Adapter note",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "List is an adapter over Mobile UI list. List Section publishes the upstream\nwire type list_section so the delegated renderer recognizes grouped sections\nwhile the public tag remains <firstlight:list-section>."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list/ios-light.png",
+                    "text": "List on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list/ios-dark.png",
+                    "text": "List on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list/android-light.png",
+                    "text": "List on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list/android-dark.png",
+                    "text": "List on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

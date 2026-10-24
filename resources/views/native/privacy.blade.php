@@ -18,6 +18,7 @@
         <native:text class="text-base text-theme-on-surface">Bookings, messages and other example records are fictional. Booking actions do not make real reservations or charge money. The settings recipe saves sample preferences locally and does not send email or register push notifications.</native:text>
 
         <native:text class="text-base font-semibold text-theme-on-surface">Apple and Google services</native:text>
+        <native:text class="text-base text-theme-on-surface">Documentation, code examples and screenshots are included in the app and can be read offline. External references open in your browser only when you choose them. Those websites receive the normal browser request and follow their own privacy policies.</native:text>
         <native:text class="text-base text-theme-on-surface">The App Store, Google Play, operating system diagnostics and device backup services are governed by their providers' privacy policies and your settings. If you contact support, Firstlight UI receives the information you choose to include and uses it to respond.</native:text>
 
         <native:text class="text-base font-semibold text-theme-on-surface">Privacy and support contact</native:text>

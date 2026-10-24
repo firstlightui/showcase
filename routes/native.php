@@ -1,70 +1,80 @@
 <?php
 
-use App\NativeComponents\AlertDialogShowcase;
 use App\NativeComponents\ActivityIndicatorShowcase;
+use App\NativeComponents\AlertDialogShowcase;
 use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\BottomSheetShowcase;
 use App\NativeComponents\ButtonShowcase;
 use App\NativeComponents\CalloutShowcase;
-use App\NativeComponents\Captures\AlertDialogCapture;
 use App\NativeComponents\Captures\ActivityIndicatorCapture;
+use App\NativeComponents\Captures\AlertDialogCapture;
 use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\BottomSheetCapture;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\CalloutCapture;
 use App\NativeComponents\Captures\CheckboxCapture;
 use App\NativeComponents\Captures\ChoiceGroupCapture;
+use App\NativeComponents\Captures\CodeEditorCapture;
 use App\NativeComponents\Captures\ConfirmationDialogCapture;
 use App\NativeComponents\Captures\DatePickerCapture;
+use App\NativeComponents\Captures\FormErrorsCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\ListCapture;
-use App\NativeComponents\Captures\ListSectionCapture;
 use App\NativeComponents\Captures\ListItemCapture;
 use App\NativeComponents\Captures\ListItemContextMenuCapture;
+use App\NativeComponents\Captures\ListSectionCapture;
 use App\NativeComponents\Captures\MediaCapture;
+use App\NativeComponents\Captures\MetricCapture;
 use App\NativeComponents\Captures\ModalCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
 use App\NativeComponents\Captures\ProgressCapture;
 use App\NativeComponents\Captures\SearchFieldCapture;
 use App\NativeComponents\Captures\SegmentedCapture;
-use App\NativeComponents\Captures\TabsCapture;
 use App\NativeComponents\Captures\SelectCapture;
 use App\NativeComponents\Captures\SliderCapture;
 use App\NativeComponents\Captures\StatusLabelCapture;
 use App\NativeComponents\Captures\StepperCapture;
 use App\NativeComponents\Captures\SwitchCapture;
-use App\NativeComponents\Captures\CodeEditorCapture;
+use App\NativeComponents\Captures\TabsCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
 use App\NativeComponents\Captures\TransientFeedbackCapture;
-use App\NativeComponents\Captures\FormErrorsCapture;
 use App\NativeComponents\Captures\ValidateFieldsCapture;
 use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
+use App\NativeComponents\CodeEditorShowcase;
 use App\NativeComponents\ConfirmationDialogShowcase;
+use App\NativeComponents\CreatePostScreen;
 use App\NativeComponents\DatePickerShowcase;
+use App\NativeComponents\DocumentationArticleScreen;
+use App\NativeComponents\DocumentationScreen;
 use App\NativeComponents\GalleryInboxScreen;
 use App\NativeComponents\GalleryScreen;
 use App\NativeComponents\IconButtonShowcase;
+use App\NativeComponents\Layouts\AppLayout;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
 use App\NativeComponents\MediaShowcase;
+use App\NativeComponents\MetricShowcase;
 use App\NativeComponents\ModalShowcase;
 use App\NativeComponents\PillGroupShowcase;
+use App\NativeComponents\PostScreen;
+use App\NativeComponents\PostsScreen;
+use App\NativeComponents\PrivacyScreen;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\RecipesScreen;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
-use App\NativeComponents\TabsShowcase;
 use App\NativeComponents\SelectShowcase;
+use App\NativeComponents\SettingsScreen;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\SliderShowcase;
 use App\NativeComponents\StatusLabelShowcase;
 use App\NativeComponents\StepperShowcase;
 use App\NativeComponents\SwitchShowcase;
-use App\NativeComponents\CodeEditorShowcase;
+use App\NativeComponents\TabsShowcase;
 use App\NativeComponents\TextAreaShowcase;
 use App\NativeComponents\TextFieldShowcase;
 use App\NativeComponents\TimePickerShowcase;
@@ -89,6 +99,9 @@ Route::native('/recipes', RecipesScreen::class)
 Route::native('/components', ShowcaseHome::class)
     ->name('components')
     ->layout(ShowcaseLayout::class);
+
+Route::native('/docs', DocumentationScreen::class)->name('docs')->layout(ShowcaseLayout::class);
+Route::native('/docs/{group}/{slug}', DocumentationArticleScreen::class)->name('docs.article')->layout(ShowcaseLayout::class);
 
 // Component demos live under /components so they push inside that tab.
 
@@ -320,11 +333,11 @@ Route::native('/captures/status-label', StatusLabelCapture::class)
     ->name('captures.status-label')
     ->layout(ShowcaseLayout::class);
 
-Route::native('/components/metric', \App\NativeComponents\MetricShowcase::class)
+Route::native('/components/metric', MetricShowcase::class)
     ->name('metric')
     ->layout(ShowcaseLayout::class);
 
-Route::native('/captures/metric', \App\NativeComponents\Captures\MetricCapture::class)
+Route::native('/captures/metric', MetricCapture::class)
     ->name('captures.metric')
     ->layout(ShowcaseLayout::class);
 
@@ -365,22 +378,22 @@ Route::native('/captures/form-errors', FormErrorsCapture::class)
     ->layout(ShowcaseLayout::class);
 
 // Recipe screens: copied verbatim from docs/how-to recipes so tests prove them.
-Route::native('/posts', \App\NativeComponents\PostsScreen::class)
+Route::native('/posts', PostsScreen::class)
     ->name('recipes.posts')
-    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+    ->layout(AppLayout::class);
 
-Route::native('/posts/create', \App\NativeComponents\CreatePostScreen::class)
+Route::native('/posts/create', CreatePostScreen::class)
     ->name('recipes.posts.create')
-    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+    ->layout(AppLayout::class);
 
-Route::native('/posts/{post}', \App\NativeComponents\PostScreen::class)
+Route::native('/posts/{post}', PostScreen::class)
     ->name('recipes.post')
-    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+    ->layout(AppLayout::class);
 
-Route::native('/settings', \App\NativeComponents\SettingsScreen::class)
+Route::native('/settings', SettingsScreen::class)
     ->name('recipes.settings')
-    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+    ->layout(AppLayout::class);
 
-Route::native('/settings/privacy', \App\NativeComponents\PrivacyScreen::class)
+Route::native('/settings/privacy', PrivacyScreen::class)
     ->name('recipes.privacy')
-    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+    ->layout(AppLayout::class);

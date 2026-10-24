@@ -1,0 +1,216 @@
+{
+    "id": "components/badge",
+    "title": "Badge",
+    "description": "Public API, count formatting, tones, accessibility, validation, compatibility, and visual evidence for Firstlight Badge.",
+    "group": "Components",
+    "anchors": {
+        "badge": "overview",
+        "complete-examples": "complete-examples",
+        "props": "props",
+        "events-and-values": "events-and-values",
+        "count-behaviour": "count-behaviour",
+        "state-timing": "state-timing",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Badge presents a compact display-only count or short marker. Use Status Label for longer status text and an interactive control when the interface must respond to a press."
+                }
+            ],
+            "links": []
+        },
+        "complete-examples": {
+            "title": "Complete examples",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:badge\n    :count=\"$unreadCount\"\n    tone=\"danger\"\n    a11y-label=\"{{ $unreadCount }} unread messages\"\n    a11y-hint=\"Open the inbox to review them\"\n/>\n\n<firstlight:badge label=\"New\" tone=\"info\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "The same authored tags render on iOS and Android."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "count",
+                    "text": "Accepted type: non-negative int\nPurpose: Numeric marker. Counts above 99 display as 99+; zero is hidden. Exactly one of count or label is required."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: non-empty string\nPurpose: Short visible marker text. Exactly one of count or label is required."
+                },
+                {
+                    "type": "definition",
+                    "label": "tone",
+                    "text": "Accepted type: neutral, info, success, warning, or danger\nPurpose: Semantic colour intent. Defaults to neutral."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Accessible name. Required and non-empty for count badges; replaces the visible label for text badges."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Supplementary VoiceOver or TalkBack context."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "events-and-values": {
+            "title": "Events and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Badge has no model binding or events. A later server publication may replace its count, label, tone, or accessibility metadata without producing a callback."
+                },
+                {
+                    "type": "text",
+                    "text": "Do not use native:model, @change, @press, value, disabled, loading, helper, error, required, icons, variants, or colour escape props. Firstlight rejects those attributes instead of silently adding interactive or field semantics."
+                }
+            ],
+            "links": []
+        },
+        "count-behaviour": {
+            "title": "Count behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight formats the visible count once in PHP so both platforms publish and render the same label:"
+                },
+                {
+                    "type": "text",
+                    "text": "• 0 publishes an empty display label and renders no badge."
+                },
+                {
+                    "type": "text",
+                    "text": "• 1 through 99 display the complete decimal count."
+                },
+                {
+                    "type": "text",
+                    "text": "• 100 and above display 99+."
+                },
+                {
+                    "type": "text",
+                    "text": "A count badge always requires a contextual a11y-label; the formatted visual text alone is not a useful accessible name. A text badge uses its visible label as the accessible name unless a11y-label replaces it."
+                }
+            ],
+            "links": []
+        },
+        "state-timing": {
+            "title": "State timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Badge renders the latest published Element Tree metadata. It keeps no native selection, editing buffer, pending proposal, or animation state. Programmatic updates reconcile by the element's stable node ID and emit nothing."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Both platforms expose static-text semantics without button, selected, disabled, or live-region traits. Hidden zero badges expose no element. Text follows Dynamic Type on iOS and system font scaling on Android."
+                },
+                {
+                    "type": "text",
+                    "text": "Warning badges use the shared warning / on-warning theme pair for the active native appearance, independently of brand accent. After Theme::merge(), republish the component tree to refresh custom warning colours; see theming."
+                },
+                {
+                    "type": "text",
+                    "text": "Semantic theme colours are checked at render time. When a customised foreground and background are below 4.5:1 contrast, Firstlight uses whichever of black or white provides the stronger contrast."
+                }
+            ],
+            "links": [
+                {
+                    "label": "theming",
+                    "url": "../getting-started/theming.md#set-warning-colours"
+                }
+            ]
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Missing both display sources, providing both, a negative or non-integer count, an empty label, or an unsupported tone throws an InvalidArgumentException before publication. Malformed tone data that unexpectedly reaches a native renderer falls back defensively to neutral rather than crashing the host."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS composes SwiftUI Text in a native capsule-style marker. Android composes Material 3 Badge. Both inherit NativePHP semantic theme tokens while retaining platform-native typography, scaling, colour-scheme, and layout behaviour."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Badge supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/badge/ios-light.png",
+                    "text": "Badge on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/badge/ios-dark.png",
+                    "text": "Badge on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/badge/android-light.png",
+                    "text": "Badge on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/badge/android-dark.png",
+                    "text": "Badge on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

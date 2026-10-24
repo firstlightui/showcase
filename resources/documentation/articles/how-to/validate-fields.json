@@ -1,0 +1,365 @@
+{
+    "id": "how-to/validate-fields",
+    "title": "Validate Firstlight fields",
+    "description": "Show Laravel validation messages on Firstlight fields with validate(), validateOnly(), and Form Requests.",
+    "group": "Guides",
+    "anchors": {
+        "validate-firstlight-fields": "overview",
+        "opt-in": "opt-in",
+        "declare-rules-and-bind-fields": "declare-rules-and-bind-fields",
+        "validate-one-field-on-blur-or-live": "validate-one-field-on-blur-or-live",
+        "use-a-form-request": "use-a-form-request",
+        "bind-a-different-messagebag-key": "bind-a-different-messagebag-key",
+        "let-an-authored-error-win": "let-an-authored-error-win",
+        "add-and-clear-messages": "add-and-clear-messages",
+        "show-form-level-errors": "show-form-level-errors",
+        "screen-reader-announcements": "screen-reader-announcements",
+        "do-not-validate-during-mount-or-render": "do-not-validate-during-mount-or-render",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "NativePHP EDGE has no built-in validate(). Firstlight adds a Livewire-shaped\nLaravel Validator layer. A screen that opts in can call $this->validate() or\n$this->validateOnly(), and participating fields show the first MessageBag\nmessage in the native error slot."
+                },
+                {
+                    "type": "text",
+                    "text": "Do not place @nativeError next to Firstlight fields. That directive emits a\nsibling text node and skips native field error colour, helper replacement, and\naccessibility. Use ValidatesFields, error-for, or an authored error\ninstead."
+                },
+                {
+                    "type": "text",
+                    "text": "The method contract, participating fields, and current limitations are listed\nin the ValidatesFields reference."
+                }
+            ],
+            "links": [
+                {
+                    "label": "ValidatesFields reference",
+                    "url": "../reference/validates-fields.md"
+                }
+            ]
+        },
+        "opt-in": {
+            "title": "Opt in",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend FirstlightUI\\NativeComponent, which includes ValidatesFields and\nthe full nonstreaming response-revision contract:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\NativeComponent;\n\nclass SignupScreen extends NativeComponent\n{\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "The trait remains usable separately, but adding it to the upstream EDGE base\ndoes not provide the publication contract. Blade render paths are automatic;\nprogrammatic Element roots must return $this->response($element) to add normal\nchrome and the revision. Nested children are untouched, partials are unstamped,\nand streaming cannot be opted into. Repeated validation responses use this\nsame contract, not a per-event acknowledgement. See\nCompatibility."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Compatibility",
+                    "url": "../reference/compatibility.md#runtime-response-contract"
+                }
+            ]
+        },
+        "declare-rules-and-bind-fields": {
+            "title": "Declare rules and bind fields",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Rule keys must match public property names (email ↔ native:model=\"email\").\nNested and wildcard keys are not supported."
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public string $name = '';\n\npublic string $email = '';\n\npublic bool $accepted = false;\n\n/** @var array<string, string> */\nprotected array $rules = [\n    'name' => 'required|min:2',\n    'email' => 'required|email',\n    'accepted' => 'accepted',\n];\n\n/** @var array<string, string> */\nprotected array $validationAttributes = [\n    'accepted' => 'terms',\n];\n\npublic function updatedEmail(): void\n{\n    $this->validateOnly('email');\n}\n\npublic function save(): void\n{\n    $this->validate();\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field label=\"Name\" native:model.blur=\"name\" />\n<firstlight:text-field\n    label=\"Email\"\n    keyboard=\"email\"\n    content-type=\"email\"\n    autocapitalize=\"none\"\n    :autocorrect=\"false\"\n    native:model.blur=\"email\"\n/>\n<firstlight:checkbox label=\"I agree to the terms\" native:model=\"accepted\" />\n<firstlight:button label=\"Continue\" @press=\"save\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "No :error wiring is required. After a failed validate() or\nvalidateOnly(), the next published frame fills each field's error from\nMessageBag::first($field). required on a field is display metadata only;\nLaravel required, accepted, and other rules remain the enforcement."
+                },
+                {
+                    "type": "text",
+                    "text": "You do not wrap @press handlers in try/catch. Firstlight stores the\nexception's bag and republishes the screen with field messages."
+                }
+            ],
+            "links": []
+        },
+        "validate-one-field-on-blur-or-live": {
+            "title": "Validate one field on blur or live",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "updated{Property} runs when PHP accepts that property. Pair it with the sync\nmode that should trigger the check."
+                },
+                {
+                    "type": "text",
+                    "text": "Blur publishes on focus loss, then validates only that key:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field label=\"Email\" native:model.blur=\"email\" />"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function updatedEmail(): void\n{\n    $this->validateOnly('email');\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Live publishes while editing:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field label=\"Email\" native:model.live=\"email\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "validateOnly('email') replaces only the email messages. Other keys already\nin the bag stay put. A passing validateOnly() clears that key."
+                },
+                {
+                    "type": "text",
+                    "text": "You can call validateOnly() from @change or @submit instead of\nupdated{Property} when the field should invoke a named method."
+                }
+            ],
+            "links": []
+        },
+        "use-a-form-request": {
+            "title": "Use a Form Request",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Pass a class name to validate() or validateOnly(). Firstlight reads that\nobject's rules(), messages(), and attributes() and runs them against the\nscreen's public properties. It does not perform an HTTP redirect."
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use Illuminate\\Foundation\\Http\\FormRequest;\n\nclass StoreSignupRequest extends FormRequest\n{\n    public function rules(): array\n    {\n        return [\n            'name' => 'required|min:2',\n            'email' => 'required|email',\n            'accepted' => 'accepted',\n        ];\n    }\n\n    public function messages(): array\n    {\n        return [\n            'email.required' => 'Need an email address.',\n        ];\n    }\n\n    public function attributes(): array\n    {\n        return [\n            'accepted' => 'terms',\n        ];\n    }\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function save(): void\n{\n    $this->validate(StoreSignupRequest::class);\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "authorize() and other Form Request HTTP behaviour are unused. You can also\npass a plain class that implements those three methods."
+                }
+            ],
+            "links": []
+        },
+        "bind-a-different-messagebag-key": {
+            "title": "Bind a different MessageBag key",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "When the rule key differs from the model name, set error-for:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field\n    label=\"Work email\"\n    native:model=\"email\"\n    error-for=\"contact_email\"\n/>"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "protected array $rules = [\n    'contact_email' => 'required|email',\n];"
+                },
+                {
+                    "type": "text",
+                    "text": "error-for wins over native:model when both are present."
+                }
+            ],
+            "links": []
+        },
+        "let-an-authored-error-win": {
+            "title": "Let an authored error win",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A non-empty authored error attribute wins over the MessageBag. Use it for\napplication-specific copy that should not come from Laravel rules:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field\n    label=\"Email\"\n    native:model=\"email\"\n    error=\"This account is already registered.\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "An empty authored error is treated as unset, so the bag can still fill the\nslot. You can also bind explicitly from the $errorBag the trait shares with\nthe view:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field\n    label=\"Email\"\n    native:model.blur=\"email\"\n    :error=\"$errorBag->first('email')\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "add-and-clear-messages": {
+            "title": "Add and clear messages",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Use the same bag for server-side checks that are not Laravel rules:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function save(): void\n{\n    $this->validate();\n\n    if ($this->emailIsTaken()) {\n        $this->addError('email', 'This account is already registered.');\n\n        return;\n    }\n\n    $this->resetValidation();\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "resetValidation('email') forgets one key. resetValidation() clears the\nbag. hasError('email') and getErrorBag() inspect the current messages."
+                }
+            ],
+            "links": []
+        },
+        "show-form-level-errors": {
+            "title": "Show form-level errors",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Some failures belong to the form, not one field: wrong credentials, a declined\ncard, a server conflict. Add them under a key no field uses and show that key\nwith a Callout:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function signIn(): void\n{\n    $this->validate();\n\n    if (! Auth::attempt(['email' => $this->email, 'password' => $this->password])) {\n        $this->addError('form', 'These credentials do not match our records.');\n    }\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:callout error-for=\"form\" />\n<firstlight:text-field label=\"Email\" native:model.blur=\"email\" />\n<firstlight:text-field label=\"Password\" secure native:model.blur=\"password\" />\n<firstlight:button label=\"Sign in\" @press=\"signIn\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "To summarise every message above a long form, use error-summary:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:callout error-summary />"
+                },
+                {
+                    "type": "text",
+                    "text": "The summary lists each key's first message in bag order, which follows your\nrules, so declare rules in the order the fields appear. One message is shown\nalone; two or more get a heading such as There are 3 errors. and one message\nper line."
+                },
+                {
+                    "type": "text",
+                    "text": "Both Callouts default to the danger tone, take their text from the bag (so\nmessage is rejected), and render nothing while there is nothing to show. You\ncan still set tone or add an action-label with @press. error-for and\nerror-summary cannot be combined."
+                }
+            ],
+            "links": []
+        },
+        "screen-reader-announcements": {
+            "title": "Screen-reader announcements",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "After a failed interaction, Firstlight announces the errors once:"
+                },
+                {
+                    "type": "text",
+                    "text": "• A press or keyboard submit (Button @press, field @submit) speaks the\nwhole summary, for example There are 2 errors. The name field is required. The email field is required., and moves screen-reader focus to the first\ninvalid field on the screen."
+                },
+                {
+                    "type": "text",
+                    "text": "• A field update (native:model.blur, .live, @change, and\nupdated{Property} hooks) speaks only the message that update just added\nand leaves focus where it is."
+                },
+                {
+                    "type": "text",
+                    "text": "On iOS, VoiceOver focus moves to the first invalid field and the announcement\nfollows it; the keyboard does not open. On Android, while TalkBack is on, Text\nField, Text Area, and Code Editor take input focus, which TalkBack follows and\nreads with the error, and the keyboard opens; other fields only announce,\nbecause Android moves focus only to editable text. Nothing is spoken when no message was added, and republishing\nthe same screen does not repeat the announcement."
+                },
+                {
+                    "type": "text",
+                    "text": "The summary heading is package chrome. Translate it by publishing the language\nfiles (see Localize chrome) and editing\nlang/vendor/firstlight/{locale}/validation.php."
+                },
+                {
+                    "type": "text",
+                    "text": "The /captures/form-errors showcase route shows a summary above failed\nfields:"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/form-errors/ios-light.png",
+                    "text": "Form error summary on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/form-errors/ios-dark.png",
+                    "text": "Form error summary on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/form-errors/android-light.png",
+                    "text": "Form error summary on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/form-errors/android-dark.png",
+                    "text": "Form error summary on Android in dark mode"
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "localize.md"
+                }
+            ]
+        },
+        "do-not-validate-during-mount-or-render": {
+            "title": "Do not validate during mount or render",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "mount() and render() still sit on NativePHP's generic Throwable overlay\npath. Throwing ValidationException there paints the red error overlay instead\nof field messages. Call validate() and validateOnly() from actions,\n@submit / @change handlers, and updated{Property} hooks."
+                },
+                {
+                    "type": "text",
+                    "text": "addError() does not throw and is safe from render() when a fixture needs a\nstable failed frame."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "These development screenshots were captured from the dedicated\n/captures/validate-fields showcase route. The interactive dogfood screen is\n/validation."
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/validate-fields/ios-light.png",
+                    "text": "Failed Laravel field validation on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/validate-fields/ios-dark.png",
+                    "text": "Failed Laravel field validation on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/validate-fields/android-light.png",
+                    "text": "Failed Laravel field validation on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/validate-fields/android-dark.png",
+                    "text": "Failed Laravel field validation on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

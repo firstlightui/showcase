@@ -1,0 +1,169 @@
+{
+    "id": "components/search-field",
+    "title": "Search Field",
+    "description": "Public API, focused query synchronisation, native clear and submit behaviour, accessibility, and platform expression for Firstlight Search Field.",
+    "group": "Components",
+    "anchors": {
+        "search-field": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events-and-synchronisation": "events-and-synchronisation",
+        "validation-and-accessibility": "validation-and-accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Search Field enters and submits one query using each platform's native search,\nkeyboard, selection, clear, focus, and accessibility behaviour."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:search-field\n    placeholder=\"Search referrals\"\n    a11y-label=\"Search referrals\"\n    a11y-hint=\"Enter a patient, provider, or specialty\"\n    autocapitalize=\"words\"\n    :autocorrect=\"false\"\n    native:model.debounce.300ms=\"query\"\n    @submit=\"search\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string\nPurpose: Published query; omission defaults to ''."
+                },
+                {
+                    "type": "definition",
+                    "label": "placeholder",
+                    "text": "Accepted type: string\nPurpose: Empty-query prompt; never the accessible name."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents focus, editing, clearing, change, and submit."
+                },
+                {
+                    "type": "definition",
+                    "label": "autocapitalize",
+                    "text": "Accepted type: enum string\nPurpose: none, sentences, words, or characters; omission keeps platform policy."
+                },
+                {
+                    "type": "definition",
+                    "label": "autocorrect",
+                    "text": "Accepted type: bool\nPurpose: Explicitly enables or disables correction; omission keeps platform policy."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: non-empty string\nPurpose: Required accessible name."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                },
+                {
+                    "type": "text",
+                    "text": "The search icon and clear button are semantic native affordances. They are not\nconfigurable icon slots. Both platforms use the package chrome\nclear_search accessibility label on the clear control. See\nLocalize chrome. Search Field has no visible label,\nhelper, error, required, read-only, secure, keyboard, content-type, size, tone,\nor variant API."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "events-and-synchronisation": {
+            "title": "Events and synchronisation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the current query string. @submit first flushes any pending\nchange and then receives the query. Submitting an empty query still calls the\nhandler."
+                },
+                {
+                    "type": "text",
+                    "text": "Plain native:model and .live publish every edit. .blur and .lazy publish\non focus loss or submit. .debounce.300ms publishes after the quiet period and\nflushes on focus loss or submit; durations below 50 ms fail."
+                },
+                {
+                    "type": "text",
+                    "text": "On iOS, pressing a <firstlight:button> while the field is focused publishes\nits pending .blur or .debounce change before the press. Icon Button and\nList Item presses do not flush the field first. On Android, blur/debounce\nchanges are not yet guaranteed to reach PHP before a button press, so if a\nseparate button submits the query, use native:model.live=\"query\" (or plain\nnative:model). For keyboard submission, accept the current query argument\nfrom @submit rather than relying on a separate button to flush it."
+                },
+                {
+                    "type": "text",
+                    "text": "Native typing, selection, cursor position, and marked-text composition stay in\nthe focused editing buffer. PHP acknowledgements do not reset focus or selection,\nand programmatic values received while unfocused never emit user events."
+                },
+                {
+                    "type": "text",
+                    "text": "The native clear action appears for a non-empty enabled query. It retains focus\nand immediately publishes '' through @change, including under blur or\ndebounce synchronisation."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-accessibility": {
+            "title": "Validation and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Values, placeholders, labels, and hints are strict strings. a11y-label is\nmandatory and cannot be blank. Unsupported general-field attributes, invalid\ncapitalization or sync modes, and invalid debounce durations fail with\nactionable exceptions."
+                },
+                {
+                    "type": "text",
+                    "text": "The field keeps its native editable-text role, value, focus, and disabled state.\nThe semantic search icon is decorative. The clear action has its own localized\naccessible name and meets the 44-point iOS or 48-dp Android target baseline."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS embeds UISearchTextField, so UIKit owns search chrome, the search and clear\naffordances, cursor, selection, marked text, keyboard, and Dynamic Type. Android\nuses a Material 3 search-field composition with TextFieldValue, the search IME\naction, Material search/clear affordances, Compose semantics, and font scaling."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/search-field/ios-light.png",
+                    "text": "Search Field on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/search-field/ios-dark.png",
+                    "text": "Search Field on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/search-field/android-light.png",
+                    "text": "Search Field on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/search-field/android-dark.png",
+                    "text": "Search Field on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

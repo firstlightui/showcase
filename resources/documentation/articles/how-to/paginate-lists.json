@@ -1,0 +1,102 @@
+{
+    "id": "how-to/paginate-lists",
+    "title": "Paginate Firstlight lists",
+    "description": "Bind Laravel paginators to List pull-to-refresh and end-reached without a new Firstlight tag.",
+    "group": "Guides",
+    "anchors": {
+        "paginate-firstlight-lists": "overview",
+        "declare-the-screen": "declare-the-screen",
+        "render-the-rows": "render-the-rows",
+        "cursor-pagination": "cursor-pagination"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight paginates lists in PHP. List already exposes @refresh and\n@endReached. The helper accumulates Laravel paginator pages into\n$this->listItems so Blade can render ordinary List Item rows."
+                },
+                {
+                    "type": "text",
+                    "text": "There is no <firstlight:empty> tag and no second scroll-event API."
+                }
+            ],
+            "links": []
+        },
+        "declare-the-screen": {
+            "title": "Declare the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend FirstlightUI\\NativeComponent (or use PaginatesLists):"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Native;\n\nuse App\\Models\\Conversation;\nuse FirstlightUI\\NativeComponent;\nuse FirstlightUI\\Pagination\\ListPage;\n\nclass InboxScreen extends NativeComponent\n{\n    public function mount(): void\n    {\n        $this->reload();\n    }\n\n    public function reload(): void\n    {\n        $this->refreshList(\n            fn (ListPage $page) => Conversation::query()->latest()->paginate(\n                perPage: 20,\n                page: $page->page,\n            ),\n        );\n    }\n\n    public function loadMore(): void\n    {\n        $this->loadMoreList(\n            fn (ListPage $page) => Conversation::query()->latest()->paginate(\n                perPage: 20,\n                page: $page->page,\n            ),\n        );\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "refreshList() replaces $this->listItems with the first page.\nloadMoreList() appends the next page. Both return false when a fetch is\nalready running. loadMoreList() also returns false without querying when\n$this->listHasMore is false."
+                },
+                {
+                    "type": "text",
+                    "text": "Pass the paginator's page from ListPage. NativePHP has no HTTP ?page=\nquery string for these events."
+                }
+            ],
+            "links": []
+        },
+        "render-the-rows": {
+            "title": "Render the rows",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "@if (count($this->listItems) === 0)\n    <firstlight:status-label\n        label=\"No conversations yet\"\n        tone=\"neutral\"\n    />\n    <firstlight:callout\n        message=\"Pull to refresh after you add a conversation.\"\n        tone=\"info\"\n    />\n@endif\n\n<firstlight:list separator @refresh=\"reload\" @endReached=\"loadMore\">\n    @foreach ($this->listItems as $conversation)\n        <firstlight:list-item\n            :headline=\"$conversation->title\"\n            @press=\"openConversation\"\n        />\n    @endforeach\n</firstlight:list>"
+                },
+                {
+                    "type": "text",
+                    "text": "Keep @endReached bound even on the last page. Extra events are ignored."
+                },
+                {
+                    "type": "text",
+                    "text": "Empty copy is ordinary Blade around List. Compose Status Label, Callout, and\nButton when you need a retry action."
+                }
+            ],
+            "links": []
+        },
+        "cursor-pagination": {
+            "title": "Cursor pagination",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "ListPage::$cursor is null on refresh and the previous paginator's next\ncursor afterward. Pass it through to cursorPaginate():"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use Illuminate\\Pagination\\Cursor;\n\n$this->refreshList(\n    fn (ListPage $page) => Conversation::query()->latest()->cursorPaginate(\n        perPage: 20,\n        cursor: $page->cursor !== null ? Cursor::fromEncoded($page->cursor) : null,\n    ),\n);"
+                },
+                {
+                    "type": "text",
+                    "text": "Use the same callable with loadMoreList()."
+                },
+                {
+                    "type": "text",
+                    "text": "Unexpected exceptions from the query are not converted to Feedback. Screens\nthat extend NativePHP's component directly can opt in with\nFirstlightUI\\Concerns\\PaginatesLists."
+                },
+                {
+                    "type": "text",
+                    "text": "To delete a row after Confirmation Dialog authorization, see\nDestroy list items."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Destroy list items",
+                    "url": "destroy-list-items.md"
+                }
+            ]
+        }
+    }
+}

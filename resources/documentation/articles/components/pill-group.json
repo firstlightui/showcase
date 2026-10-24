@@ -1,0 +1,276 @@
+{
+    "id": "components/pill-group",
+    "title": "Pill Group",
+    "description": "Public API, selection modes, state timing, accessibility, validation, and platform behaviour for Firstlight Pill Group.",
+    "group": "Components",
+    "anchors": {
+        "pill-group": "overview",
+        "complete-examples": "complete-examples",
+        "props": "props",
+        "options-and-values": "options-and-values",
+        "events-and-state-timing": "events-and-state-timing",
+        "disabled-and-required-behaviour": "disabled-and-required-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Pill Group presents compact, individually shaped options for selecting zero or one value, or zero or more values."
+                }
+            ],
+            "links": []
+        },
+        "complete-examples": {
+            "title": "Complete examples",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Single selection is the default:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public ?string $queue = 'mine';\n\npublic array $queueOptions = [\n    ['value' => 'mine', 'label' => 'Mine'],\n    ['value' => 'all', 'label' => 'All'],\n    ['value' => 'archived', 'label' => 'Archived', 'disabled' => true],\n];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:pill-group\n    :options=\"$queueOptions\"\n    native:model=\"queue\"\n    label=\"Queue\"\n    helper=\"Choose the queue to include.\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Use multiple with an array-valued property:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public array $queues = ['mine'];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:pill-group\n    :options=\"$queueOptions\"\n    native:model=\"queues\"\n    label=\"Queues\"\n    helper=\"Choose any that apply.\"\n    multiple\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "options",
+                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays."
+                },
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string, int, array, or null\nPurpose: Stable selection. Use a scalar or null in single mode and a homogeneous list or null in multiple mode."
+                },
+                {
+                    "type": "definition",
+                    "label": "multiple",
+                    "text": "Accepted type: bool\nPurpose: Enables zero-or-more selection. Defaults to false."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible field label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting text below the pills."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Error text and native error semantics."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required state; PHP still owns validation."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Disables the complete group."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessibility label when a visible label is inappropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "options-and-values": {
+            "title": "Options and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Simple strings use the same value and label:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['Mine', 'All']"
+                },
+                {
+                    "type": "text",
+                    "text": "A map separates stable values from labels and may use all-string or all-integer keys:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['mine' => 'Mine', 'all' => 'All']"
+                },
+                {
+                    "type": "text",
+                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "[\n    ['value' => 'mine', 'label' => 'Mine'],\n    ['value' => 'all', 'label' => 'All', 'disabled' => true],\n]"
+                },
+                {
+                    "type": "text",
+                    "text": "All values in one group must be unique and must all be strings or all be integers. In single mode, tapping the selected pill proposes null. In multiple mode, tapping toggles that stable value while preserving the order of the others. null and [] both mean no multiple selection."
+                }
+            ],
+            "links": []
+        },
+        "events-and-state-timing": {
+            "title": "Events and state timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the complete proposed selection: a scalar or null in single mode and a list in multiple mode. native:model normally generates this callback for property synchronisation."
+                },
+                {
+                    "type": "text",
+                    "text": "Pill Group is server-authoritative. A tap emits immediately, but selected visuals wait for PHP's next publication. Further taps are ignored while that proposal is in flight so a rapid second tap cannot be calculated from stale state. Programmatic updates and reconciliation do not emit."
+                },
+                {
+                    "type": "text",
+                    "text": "Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
+                }
+            ],
+            "links": [
+                {
+                    "label": "server-authoritative",
+                    "url": "../concepts/server-authoritative-state.md"
+                }
+            ]
+        },
+        "disabled-and-required-behaviour": {
+            "title": "Disabled and required behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "disabled prevents every pill from emitting. A rich option's disabled: true affects only that pill. An empty option set becomes an inert disabled group."
+                },
+                {
+                    "type": "text",
+                    "text": "required is metadata rather than client-side enforcement. It does not prevent clearing the final pill; validate the resulting value in PHP and publish error when needed."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. Each pill exposes its label, selected state, and disabled state through native platform semantics. Selection also has a visible checkmark, so it does not depend on colour alone. Pills wrap at larger text sizes and retain at least a 44-point iOS or 48-dp Android interaction target."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject malformed options, mixed selections, and\nunsupported presentation props before publication. User validation is\nseparate: screens that use ValidatesFields auto-bind the first MessageBag\nmessage for the field's native:model or error-for name. An authored\nerror wins. required is display metadata and does not run Laravel rules.\nSee Validate fields. A same-typed selected\nvalue absent from options remains unselected rather than selecting a\nfallback."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses native SwiftUI capsule buttons in a wrapping layout. Android uses Material 3 FilterChip controls in a wrapping FlowRow. Both inherit NativePHP semantic theme tokens and preserve native press, focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Pill Group supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/pill-group/ios-light.png",
+                    "text": "Pill Group on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/pill-group/ios-dark.png",
+                    "text": "Pill Group on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/pill-group/android-light.png",
+                    "text": "Pill Group on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/pill-group/android-dark.png",
+                    "text": "Pill Group on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

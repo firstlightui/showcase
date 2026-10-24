@@ -1,0 +1,307 @@
+{
+    "id": "components/tabs",
+    "title": "Tabs",
+    "description": "Public API, state, badges, accessibility, validation, and platform behaviour for Firstlight Tabs.",
+    "group": "Components",
+    "anchors": {
+        "tabs": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "state-timing": "state-timing",
+        "open-a-specific-tab": "open-a-specific-tab",
+        "tabs-and-values": "tabs-and-values",
+        "disabled-behaviour": "disabled-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Tabs switches between sections of the same object within one screen, such as a server's Overview, Sites, Deployments, and Manage. Tabs draws only the selector; your component renders the active section, so inactive sections do no work until someone selects them."
+                },
+                {
+                    "type": "text",
+                    "text": "Use Segmented to choose a value or filter for the content already on screen. Use Tabs to choose which content is on screen."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Segmented",
+                    "url": "segmented.md"
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public string $tab = 'overview';\n\npublic int $failedDeployments = 2;\n\npublic function render(): View\n{\n    return view('native.server', [\n        'sections' => [\n            ['value' => 'overview', 'label' => 'Overview'],\n            ['value' => 'sites', 'label' => 'Sites'],\n            [\n                'value' => 'deploys',\n                'label' => 'Deployments',\n                'badge' => $this->failedDeployments,\n                'badge-a11y-label' => \"{$this->failedDeployments} failed\",\n            ],\n            ['value' => 'manage', 'label' => 'Manage'],\n        ],\n    ]);\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:tabs native:model=\"tab\" :tabs=\"$sections\" label=\"Server sections\" />\n\n@if ($tab === 'overview')\n    {{-- Overview rows --}}\n@elseif ($tab === 'sites')\n    {{-- Sites list --}}\n@elseif ($tab === 'deploys')\n    {{-- Deployments list --}}\n@else\n    {{-- Manage rows --}}\n@endif"
+                },
+                {
+                    "type": "text",
+                    "text": "A value-to-label map is enough when no tab needs a badge or availability:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:tabs\n    native:model=\"tab\"\n    :tabs=\"['overview' => 'Overview', 'sites' => 'Sites', 'deploys' => 'Deployments', 'manage' => 'Manage']\"\n    label=\"Server sections\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "tabs",
+                    "text": "Accepted type: array\nPurpose: A value-to-label map, or a list of rich tabs."
+                },
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string or null\nPurpose: Stable value of the visible section. null selects no tab."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Accessible name of the tab group. Tabs draws no visible group label."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Disables every tab."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Overrides label as the group's accessible name."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance for the group."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                },
+                {
+                    "type": "text",
+                    "text": "Rich tabs accept these fields:"
+                },
+                {
+                    "type": "definition",
+                    "label": "value",
+                    "text": "Accepted type: non-empty string\nPurpose: Stable tab value. Required."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: non-blank string\nPurpose: Visible tab label. Required."
+                },
+                {
+                    "type": "definition",
+                    "label": "badge",
+                    "text": "Accepted type: non-negative int or null\nPurpose: Count shown on the tab. 0 and null hide it; counts above 99 show 99+."
+                },
+                {
+                    "type": "definition",
+                    "label": "badge-a11y-label / badgeA11yLabel",
+                    "text": "Accepted type: string\nPurpose: Spoken badge text, such as 2 failed. Defaults to the displayed count."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Makes one tab unavailable."
+                }
+            ],
+            "links": []
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the selected tab's stable value. native:model normally generates this callback. Tapping the selected tab or a disabled tab emits nothing."
+                }
+            ],
+            "links": []
+        },
+        "state-timing": {
+            "title": "State timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Tabs is server-authoritative. A tap emits immediately, but the selection moves only when PHP publishes the new value. To reject a change, bind :value and decide in your handler:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:tabs :value=\"$tab\" @change=\"selectTab\" :tabs=\"$sections\" label=\"Server sections\" />"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function selectTab(string $tab): void\n{\n    if ($tab === 'manage' && ! $this->canManage) {\n        return; // Overview stays selected.\n    }\n\n    $this->tab = $tab;\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Changing $tab from PHP, including in mount(), selects that tab without emitting @change. Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
+                }
+            ],
+            "links": [
+                {
+                    "label": "server-authoritative",
+                    "url": "../concepts/server-authoritative-state.md"
+                }
+            ]
+        },
+        "open-a-specific-tab": {
+            "title": "Open a specific tab",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "NativePHP hydrates public properties from matching route parameters, so an optional route segment can open a tab directly, for example from a notification:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "Route::native('/servers/{server}/{tab?}', ServerScreen::class);"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public string $tab = 'overview';\n\npublic function mount(): void\n{\n    if (! in_array($this->tab, ['overview', 'sites', 'deploys', 'manage'], true)) {\n        $this->tab = 'overview';\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "The NativePHP router passes route parameters, not query strings, so use /servers/12/deploys rather than /servers/12?tab=deploys."
+                }
+            ],
+            "links": []
+        },
+        "tabs-and-values": {
+            "title": "Tabs and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A tab group has two to five tabs. Keep each hub to five sections and move anything else into rows on a Manage tab. An empty collection renders an inert disabled control, so a permission-filtered list never fails at runtime; one tab or more than five tabs fail with guidance."
+                },
+                {
+                    "type": "text",
+                    "text": "Values are non-empty strings and must be unique. PHP turns numeric-string array keys such as '1' into integers, so integer values are rejected: use words such as 'overview'. A selected value that is not in tabs leaves every tab unselected; Tabs never selects the first tab for you."
+                },
+                {
+                    "type": "text",
+                    "text": "Per-tab icons are not supported yet. A native iOS segment shows a title or an image but not both, so Firstlight defers icons rather than ship them on one platform."
+                }
+            ],
+            "links": []
+        },
+        "disabled-behaviour": {
+            "title": "Disabled behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "disabled prevents every tab from emitting. A rich tab's disabled: true prevents only that tab from emitting and dims it."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Provide label or a11y-label; Firstlight warns during development when both are blank. VoiceOver and TalkBack announce each tab with its label and badge text, its tab role, its selected or disabled state, and its position, such as \"Tab 2 of 4\". Selection is shown by the native indicator or segment fill, not by colour alone, and every tab meets the platform minimum target of 44 points on iOS and 48 dp on Android."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Tabs fails before publication when tabs is not an array, has one or more than five entries, has blank labels, duplicate or non-string values, unknown rich fields, a non-integer or negative badge, a non-boolean disabled, or icon fields. It also rejects options, helper, error, required, multiple, icon, variant, and scrollable because they do not belong to tab navigation, and a non-string selected value."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses a native UISegmentedControl. Place Tabs full width directly under the navigation bar: iOS insets the segmented control by the system margin, while the Android tab row spans the width. Segments size to their labels, and a visible count follows the label, such as Deployments (2). VoiceOver receives the group as a tab bar with one selectable tab per segment. Like Segmented, segment titles stop growing at accessibility text sizes and may truncate; VoiceOver still reads each full name."
+                },
+                {
+                    "type": "text",
+                    "text": "Android uses Material 3 PrimaryTabRow with its moving indicator and a Material 3 Badge after the label. When a label does not fit its equal share of the width on one line, including at large font scales, the row switches to Material's PrimaryScrollableTabRow, as TabLayout does in its automatic mode."
+                },
+                {
+                    "type": "text",
+                    "text": "Tabs does not pin itself under the top bar or animate between sections. Swiping between sections is not supported."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Tabs supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/tabs/ios-light.png",
+                    "text": "Tabs on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/tabs/ios-dark.png",
+                    "text": "Tabs on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/tabs/android-light.png",
+                    "text": "Tabs on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/tabs/android-dark.png",
+                    "text": "Tabs on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

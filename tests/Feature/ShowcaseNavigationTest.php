@@ -58,12 +58,13 @@ dataset('component demos', [
     ['Validation', '/components/validation'],
 ]);
 
-it('puts Gallery, Recipes and Components in one native tab bar', function (string $path, string $title, string $activeTab) {
+it('puts Gallery, Recipes, Components and Docs in one native tab bar', function (string $path, string $title, string $activeTab) {
     $screen = Native::visit($path)
         ->assertHasTabBar()
         ->assertHasTab('Gallery')
         ->assertHasTab('Recipes')
         ->assertHasTab('Components')
+        ->assertHasTab('Docs')
         ->assertTabActive($activeTab)
         ->assertNavTitle($title)
         ->assertAccessible();
@@ -71,7 +72,7 @@ it('puts Gallery, Recipes and Components in one native tab bar', function (strin
     $tabs = showcaseNodesOfType($screen->tree(), 'bottom_nav_item');
     $root = showcaseNodesOfType($screen->tree(), 'native_root_tabs')[0];
 
-    expect(array_column(array_column($tabs, 'props'), 'url'))->toBe(['/', '/recipes', '/components'])
+    expect(array_column(array_column($tabs, 'props'), 'url'))->toBe(['/', '/recipes', '/components', '/docs'])
         ->and($root['props']['nav_back'])->toBeFalse()
         // System-drawn bars: no colours, so both platforms follow the device appearance.
         ->and($root['props'])->not->toHaveKeys(['background_color', 'active_color', 'text_color', 'dark', 'nav_background_color']);
@@ -79,6 +80,7 @@ it('puts Gallery, Recipes and Components in one native tab bar', function (strin
     'gallery' => ['/', 'Gallery', 'Gallery'],
     'recipes' => ['/recipes', 'Recipes', 'Recipes'],
     'components' => ['/components', 'Components', 'Components'],
+    'documentation' => ['/docs', 'Documentation', 'Docs'],
 ]);
 
 it('lists every published component with a tinted icon and no Blade tag overline', function () {

@@ -1,0 +1,102 @@
+{
+    "id": "how-to/authorize-actions",
+    "title": "Authorize Firstlight actions",
+    "description": "Apply Laravel Gate and Policy decisions to Firstlight actions with explicit hide, disable, and destructive confirmation patterns.",
+    "group": "Guides",
+    "anchors": {
+        "authorize-firstlight-actions": "overview",
+        "choose-hide-or-disable": "choose-hide-or-disable",
+        "keep-destructive-actions-visible": "keep-destructive-actions-visible"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend FirstlightUI\\NativeComponent (or use AuthorizesActions) so a screen\ncan evaluate the current Laravel Gate or Policy before publishing or performing\nan action:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\Models\\Post;\nuse FirstlightUI\\NativeComponent;\n\nclass PostScreen extends NativeComponent\n{\n    public Post $post;\n    public bool $confirmingDeletion = false;\n\n    public function updatePost(): void\n    {\n        if (! $this->authorize('update', $this->post)) {\n            return;\n        }\n\n        $this->post->save();\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "allows() and denies() return booleans. authorize() also returns a\nboolean; unlike Laravel's throwing Gate method, a denial publishes danger\nFeedback with This action is unauthorized. and returns false. Keep the\nguard at the start of every PHP action, even when the published control is\nalready hidden or disabled, because authorization can change after a frame is\npublished."
+                }
+            ],
+            "links": []
+        },
+        "choose-hide-or-disable": {
+            "title": "Choose hide or disable",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Hide an ordinary action when its absence is unsurprising:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "@if ($this->allows('edit', $post))\n    <firstlight:button @press=\"editPost\">\n        Edit post\n    </firstlight:button>\n@endif"
+                },
+                {
+                    "type": "text",
+                    "text": "Disable an action when preserving its location helps explain the available\nworkflow:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list-item\n    headline=\"Publishing settings\"\n    supporting=\"Only editors can change publication access\"\n    :disabled=\"$this->denies('update', $post)\"\n    @press=\"openPublishingSettings\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Button, Icon Button, and List Item all accept the existing disabled prop.\nFirstlight does not add a can attribute or evaluate authorization in a\nnative renderer."
+                }
+            ],
+            "links": []
+        },
+        "keep-destructive-actions-visible": {
+            "title": "Keep destructive actions visible",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Never silently omit a destructive action. Keep the Button, Icon Button, or\nList Item visible and disable it when denied. Supporting copy should explain\nwhy the action is unavailable when the surrounding interface does not make\nthat clear."
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:button\n    variant=\"destructive\"\n    :disabled=\"$this->denies('delete', $post)\"\n    @press=\"requestDeletion\"\n>\n    Delete post\n</firstlight:button>"
+                },
+                {
+                    "type": "text",
+                    "text": "Confirmation Dialog has no disabled or loading prop. Authorize before\nsetting its visible state, and authorize again when confirmation arrives:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function requestDeletion(): void\n{\n    if (! $this->authorize('delete', $this->post)) {\n        $this->confirmingDeletion = false;\n\n        return;\n    }\n\n    $this->confirmingDeletion = true;\n}\n\npublic function deletePost(): void\n{\n    $this->confirmingDeletion = false;\n\n    if (! $this->authorize('delete', $this->post)) {\n        return;\n    }\n\n    $this->post->delete();\n}\n\npublic function cancelDeletion(): void\n{\n    $this->confirmingDeletion = false;\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:confirmation-dialog\n    :visible=\"$confirmingDeletion\"\n    title=\"Delete post?\"\n    message=\"This action cannot be undone.\"\n    confirm-label=\"Delete\"\n    cancel-label=\"Keep post\"\n    tone=\"destructive\"\n    @press=\"deletePost\"\n    @dismiss=\"cancelDeletion\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "The denied request does not open the dialog, and authorize() supplies danger\nFeedback instead of allowing an uncaught AuthorizationException to reach\nNativePHP's error overlay."
+                },
+                {
+                    "type": "text",
+                    "text": "For deleting rows from an accumulated $listItems collection by stable key,\nuse Destroy list items."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Destroy list items",
+                    "url": "destroy-list-items.md"
+                }
+            ]
+        }
+    }
+}

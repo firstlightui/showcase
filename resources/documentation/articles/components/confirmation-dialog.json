@@ -1,0 +1,128 @@
+{
+    "id": "components/confirmation-dialog",
+    "title": "Confirmation Dialog",
+    "description": "Ask for one native confirmation with explicit cancellation and destructive action semantics.",
+    "group": "Components",
+    "anchors": {
+        "confirmation-dialog": "overview",
+        "props-and-events": "props-and-events",
+        "behavior-and-accessibility": "behavior-and-accessibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Confirmation Dialog asks the user to confirm or cancel one consequential\naction using the platform's native presentation and action ordering."
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:confirmation-dialog\n    :visible=\"$confirmingDeletion\"\n    title=\"Delete appointment?\"\n    message=\"This action cannot be undone.\"\n    confirm-label=\"Delete\"\n    cancel-label=\"Keep appointment\"\n    tone=\"destructive\"\n    @press=\"deleteAppointment\"\n    @dismiss=\"cancelDeletion\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Both handlers should set $confirmingDeletion to false. The confirmation\nhandler also performs the action; the dismissal handler only cancels the\nrequest."
+                }
+            ],
+            "links": []
+        },
+        "props-and-events": {
+            "title": "Props and events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• visible: server-controlled presentation request; defaults to false."
+                },
+                {
+                    "type": "text",
+                    "text": "• title: required visible heading and accessible dialog name."
+                },
+                {
+                    "type": "text",
+                    "text": "• message: required explanation of the decision or consequence."
+                },
+                {
+                    "type": "text",
+                    "text": "• confirm-label: confirmation action text; defaults to the package chrome\nstring Confirm. See Localize chrome."
+                },
+                {
+                    "type": "text",
+                    "text": "• cancel-label: cancellation action text; defaults to the package chrome\nstring Cancel."
+                },
+                {
+                    "type": "text",
+                    "text": "• tone: default or destructive; defaults to default."
+                },
+                {
+                    "type": "text",
+                    "text": "• @press: required callback for explicit confirmation."
+                },
+                {
+                    "type": "text",
+                    "text": "• @dismiss: required callback for cancellation, back, or outside dismissal."
+                },
+                {
+                    "type": "text",
+                    "text": "• class: external EDGE layout only."
+                },
+                {
+                    "type": "text",
+                    "text": "The component always presents one confirm action and one cancel action. It\ndoes not support arbitrary action lists, icons, loading or disabled states,\nnative:model, per-platform styling, or an undismissable mode. Use\nAlert Dialog when the user only needs to acknowledge a\nmessage."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                },
+                {
+                    "label": "Alert Dialog",
+                    "url": "alert-dialog.md"
+                }
+            ]
+        },
+        "behavior-and-accessibility": {
+            "title": "Behavior and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "One user outcome produces one callback. Programmatic closure produces none.\nAfter a user dismisses the dialog, copy-only publications do not reopen it; a\nlater server transition from false to true presents a new decision."
+                },
+                {
+                    "type": "text",
+                    "text": "iOS uses a UIKit action sheet (UIAlertController); Android uses Material 3\nAlertDialog.\nTheir native controls own modal focus, action order, destructive expression,\nDynamic Type or font scaling, dark appearance, contrast, reduced motion, and\nright-to-left behavior. Use specific action labels such as Delete rather\nthan generic text when the consequence can be named."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/confirmation-dialog/ios-light.png",
+                    "text": "Confirmation Dialog on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/confirmation-dialog/ios-dark.png",
+                    "text": "Confirmation Dialog on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/confirmation-dialog/android-light.png",
+                    "text": "Confirmation Dialog on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/confirmation-dialog/android-dark.png",
+                    "text": "Confirmation Dialog on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

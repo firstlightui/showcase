@@ -1,0 +1,257 @@
+{
+    "id": "reference/validates-fields",
+    "title": "ValidatesFields",
+    "description": "Public contract for Firstlight Laravel field validation, MessageBag binding, and validate() timing.",
+    "group": "Reference",
+    "anchors": {
+        "validatesfields": "overview",
+        "methods": "methods",
+        "field-binding": "field-binding",
+        "form-level-callouts": "form-level-callouts",
+        "announcements-and-focus": "announcements-and-focus",
+        "participating-fields": "participating-fields",
+        "current-limitations": "current-limitations"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "FirstlightUI\\Concerns\\ValidatesFields is a Livewire-shaped Laravel Validator\nlayer for NativePHP EDGE screens. FirstlightUI\\NativeComponent includes the\ntrait. See Validate fields for a complete\nworking screen."
+                },
+                {
+                    "type": "text",
+                    "text": "Do not place @nativeError next to Firstlight fields. That directive emits a\nsibling text node and skips native field error colour, helper replacement, and\naccessibility."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "methods": {
+            "title": "Methods",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "validate($rules = null, $messages = [], $attributes = [])",
+                    "text": "Contract: Validates public properties. Returns the validated array. On failure, stores the exception bag and rethrows ValidationException. On success, clears messages for the validated keys."
+                },
+                {
+                    "type": "definition",
+                    "label": "validateOnly($field, $rules = null, $messages = [], $attributes = [])",
+                    "text": "Contract: Validates one key. On failure, replaces only that key. On success, forgets that key. Other bag keys stay put."
+                },
+                {
+                    "type": "definition",
+                    "label": "addError($field, $message)",
+                    "text": "Contract: Appends one message without throwing."
+                },
+                {
+                    "type": "definition",
+                    "label": "resetValidation($field = null)",
+                    "text": "Contract: Forgets one key, an array of keys, or the whole bag."
+                },
+                {
+                    "type": "definition",
+                    "label": "getErrorBag()",
+                    "text": "Contract: Returns the current Illuminate\\Support\\MessageBag."
+                },
+                {
+                    "type": "definition",
+                    "label": "hasError($field)",
+                    "text": "Contract: Whether that key currently has messages."
+                },
+                {
+                    "type": "text",
+                    "text": "$rules may be an array, null (use the screen's rules), or a class name.\nA class name is resolved through the container when possible, then\n$source->rules(), and optionally messages() and attributes(). This is\nthe Form Request path: Firstlight does not perform an HTTP redirect."
+                },
+                {
+                    "type": "text",
+                    "text": "When $messages or $attributes are empty, the trait reads the screen's\nmessages() / $messages and validationAttributes() /\n$validationAttributes."
+                },
+                {
+                    "type": "text",
+                    "text": "Action dispatch catches ValidationException from @press, @change,\n@submit, and updated{Property} handlers, stores the bag, and republishes\nthe screen. Other exceptions still propagate."
+                }
+            ],
+            "links": []
+        },
+        "field-binding": {
+            "title": "Field binding",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "During the screen's view pass, participating fields read the current bag and\nset their native error slot from the first message for the resolved name:"
+                },
+                {
+                    "type": "text",
+                    "text": "1. A non-empty authored error attribute wins and skips the bag."
+                },
+                {
+                    "type": "text",
+                    "text": "2. Otherwise error-for (or errorFor) selects the bag key."
+                },
+                {
+                    "type": "text",
+                    "text": "3. Otherwise the native:model / native:model.* property name is used."
+                },
+                {
+                    "type": "text",
+                    "text": "4. Otherwise a compiled __syncProperty('name') change callback is used."
+                },
+                {
+                    "type": "text",
+                    "text": "An empty authored error is treated as unset. Fields without a resolvable\nname stay empty. Only the first message for a key is published."
+                },
+                {
+                    "type": "text",
+                    "text": "The view also receives $errorBag for explicit :error=\"$errorBag->first('email')\"\nbindings."
+                }
+            ],
+            "links": []
+        },
+        "form-level-callouts": {
+            "title": "Form-level Callouts",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Callout displays bag messages that belong to no\nfield:"
+                },
+                {
+                    "type": "definition",
+                    "label": "error-for=\"key\"",
+                    "text": "Shows: MessageBag::first('key')\nPublishes nothing when: the key has no message"
+                },
+                {
+                    "type": "definition",
+                    "label": "error-summary",
+                    "text": "Shows: every key's first message, in bag order; a firstlight::validation.summary heading when there are two or more\nPublishes nothing when: the bag is empty"
+                },
+                {
+                    "type": "text",
+                    "text": "Both default to danger, reject message, and are mutually exclusive. They\nnever receive field focus. The summary follows bag order, which is the order\nof your rules, so list rules in screen order."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Callout",
+                    "url": "../components/callout.md"
+                }
+            ]
+        },
+        "announcements-and-focus": {
+            "title": "Announcements and focus",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "@press or @submit that adds messages",
+                    "text": "Spoken once: the summary of the whole bag\nScreen-reader focus: first invalid field in render order"
+                },
+                {
+                    "type": "definition",
+                    "label": "any other event (model sync, @change, updated{Property}) that adds messages",
+                    "text": "Spoken once: only the messages it added\nScreen-reader focus: unchanged"
+                },
+                {
+                    "type": "definition",
+                    "label": "an interaction that adds no message",
+                    "text": "Spoken once: nothing\nScreen-reader focus: unchanged"
+                },
+                {
+                    "type": "text",
+                    "text": "\"Adds messages\" means a failed validate() or validateOnly(), or\naddError(). Frames republished before the next interaction carry the same\nalert, and the platforms act on it once. iOS moves\nVoiceOver focus and posts an announcement. Android acts while TalkBack is on:\nText Field, Text Area, and Code Editor take input focus, and every field\nannounces."
+                }
+            ],
+            "links": []
+        },
+        "participating-fields": {
+            "title": "Participating fields",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "These components apply bag messages when the screen uses ValidatesFields:"
+                },
+                {
+                    "type": "text",
+                    "text": "Text Field,\nText Area,\nCheckbox,\nSwitch,\nSelect,\nSegmented,\nChoice Group,\nPill Group,\nDate Picker,\nTime Picker,\nSlider,\nand Stepper."
+                },
+                {
+                    "type": "text",
+                    "text": "required on those fields is display metadata and does not run Laravel rules."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Text Field",
+                    "url": "../components/text-field.md"
+                },
+                {
+                    "label": "Text Area",
+                    "url": "../components/text-area.md"
+                },
+                {
+                    "label": "Checkbox",
+                    "url": "../components/checkbox.md"
+                },
+                {
+                    "label": "Switch",
+                    "url": "../components/switch.md"
+                },
+                {
+                    "label": "Select",
+                    "url": "../components/select.md"
+                },
+                {
+                    "label": "Segmented",
+                    "url": "../components/segmented.md"
+                },
+                {
+                    "label": "Choice Group",
+                    "url": "../components/choice-group.md"
+                },
+                {
+                    "label": "Pill Group",
+                    "url": "../components/pill-group.md"
+                },
+                {
+                    "label": "Date Picker",
+                    "url": "../components/date-picker.md"
+                },
+                {
+                    "label": "Time Picker",
+                    "url": "../components/time-picker.md"
+                },
+                {
+                    "label": "Slider",
+                    "url": "../components/slider.md"
+                },
+                {
+                    "label": "Stepper",
+                    "url": "../components/stepper.md"
+                }
+            ]
+        },
+        "current-limitations": {
+            "title": "Current limitations",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Only public instance properties are validated. Nested and wildcard rule keys\nare not supported."
+                },
+                {
+                    "type": "text",
+                    "text": "• Call validate() and validateOnly() from actions and property hooks, not\nfrom mount() or render(). Those lifecycle methods still sit on\nNativePHP's generic Throwable overlay path, so a ValidationException\npaints the red overlay instead of field messages."
+                },
+                {
+                    "type": "text",
+                    "text": "• addError() does not throw and may run from render() when a fixture needs\na stable failed frame."
+                }
+            ],
+            "links": []
+        }
+    }
+}

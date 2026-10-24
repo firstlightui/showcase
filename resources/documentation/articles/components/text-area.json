@@ -1,0 +1,200 @@
+{
+    "id": "components/text-area",
+    "title": "Text Area",
+    "description": "Public API, multiline editing, line bounds, synchronisation, accessibility, and native platform behaviour for Firstlight Text Area.",
+    "group": "Components",
+    "anchors": {
+        "text-area": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events-and-synchronisation": "events-and-synchronisation",
+        "validation-and-accessibility": "validation-and-accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Text Area enters and edits plain multiline text using each platform's native\nselection, composition, focus, scrolling, autocapitalization, and autocorrection\nbehaviour."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-area\n    label=\"Clinical notes\"\n    placeholder=\"Add relevant history and observations\"\n    helper=\"Do not include information that is not required.\"\n    :required=\"true\"\n    :min-lines=\"4\"\n    :max-lines=\"10\"\n    autocapitalize=\"sentences\"\n    native:model.debounce.500ms=\"notes\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string\nPurpose: Published PHP value; omission defaults to ''."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible label and accessibility-name fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "placeholder",
+                    "text": "Accepted type: string\nPurpose: Short empty-state guidance; never replaces a label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting guidance below the field."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required metadata without performing validation."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents focus and editing."
+                },
+                {
+                    "type": "definition",
+                    "label": "read-only",
+                    "text": "Accepted type: bool\nPurpose: Keeps native selection, copy, and scrolling while preventing edits."
+                },
+                {
+                    "type": "definition",
+                    "label": "min-lines",
+                    "text": "Accepted type: positive int\nPurpose: Minimum visible lines; defaults to 3."
+                },
+                {
+                    "type": "definition",
+                    "label": "max-lines",
+                    "text": "Accepted type: positive int\nPurpose: Maximum visible lines before native scrolling; defaults to 8."
+                },
+                {
+                    "type": "definition",
+                    "label": "autocapitalize",
+                    "text": "Accepted type: enum string\nPurpose: none, sentences, words, or characters; omission keeps platform policy."
+                },
+                {
+                    "type": "definition",
+                    "label": "autocorrect",
+                    "text": "Accepted type: bool\nPurpose: Explicitly enables or disables platform autocorrection."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver or TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                },
+                {
+                    "type": "text",
+                    "text": "max-lines must be greater than or equal to min-lines. Public Blade examples\nuse kebab-case. The PHP element also accepts minLines, maxLines, and\nreadOnly aliases."
+                }
+            ],
+            "links": []
+        },
+        "events-and-synchronisation": {
+            "title": "Events and synchronisation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the complete current string, including newline characters.\nPlain native:model and .live publish while editing. .blur and .lazy\npublish on focus loss. .debounce.500ms publishes after the quiet period and\nflushes on blur. Durations below 50 milliseconds are rejected."
+                },
+                {
+                    "type": "text",
+                    "text": "On iOS, pressing a <firstlight:button> while the editor is focused publishes\nits pending .blur or .debounce change before the press, so the handler reads\nthe current value. Icon Button and List Item presses do not flush the editor\nfirst. On Android, blur/debounce changes are not yet guaranteed to reach PHP\nbefore a button press, so for forms submitted by a separate button use\nnative:model.live=\"notes\" (or plain native:model). Keyboard dismissal alone\nis not an ordering guarantee there."
+                },
+                {
+                    "type": "text",
+                    "text": "Typing, selection, cursor position, marked text or IME composition, focus,\nkeyboard, and scroll position remain native while focused. PHP acknowledgements\ntherefore do not replace the active buffer. Different server publications wait\nfor safe reconciliation, while unfocused programmatic updates replace the\ndisplayed string without emitting @change."
+                },
+                {
+                    "type": "text",
+                    "text": "Text Area intentionally has no @submit, @press, icons, secure mode,\nsingle-line keyboard or content hints, clear/reveal affordances, loading state,\nprefix, suffix, or styling escape props."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-accessibility": {
+            "title": "Validation and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject invalid types, unordered line bounds, and\nunsupported sync modes before publication. User validation is separate:\nscreens that use ValidatesFields auto-bind the first MessageBag message for\nthe field's native:model or error-for name. An authored error wins.\nrequired is display metadata and does not run Laravel rules. See\nValidate fields."
+                },
+                {
+                    "type": "text",
+                    "text": "A visible label or explicit a11y-label is required during development.\nError text replaces helper text while preserving the current accessible name\nand value. Disabled and read-only states remain distinct. Native type scaling,\nlight and dark appearance, increased contrast, Reduced Motion, and RTL remain\nplatform-owned."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses a genuine SwiftUI TextEditor in Apple-native field composition.\nAndroid uses Material 3 OutlinedTextField with TextFieldValue, multiline\nline bounds, supporting and error slots, and Compose selection and composition."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-area/ios-light.png",
+                    "text": "Text Area on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-area/ios-dark.png",
+                    "text": "Text Area on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-area/android-light.png",
+                    "text": "Text Area on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/text-area/android-dark.png",
+                    "text": "Text Area on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

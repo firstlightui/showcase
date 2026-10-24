@@ -1,0 +1,296 @@
+{
+    "id": "components/code-editor",
+    "title": "Code Editor",
+    "description": "Public API, language-aware indentation, key row, follow mode, synchronisation, accessibility, and native platform behaviour for Firstlight Code Editor.",
+    "group": "Components",
+    "anchors": {
+        "code-editor": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "editing": "editing",
+        "key-row": "editing",
+        "events-and-synchronisation": "events-and-synchronisation",
+        "scroll-position-and-follow": "events-and-synchronisation",
+        "validation-and-accessibility": "validation-and-accessibility",
+        "security": "security",
+        "platform-behaviour": "platform-behaviour",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Code Editor edits plain-text configuration and code — JSON, YAML, .env\nfiles, and plain text — in a monospaced native text view with line numbers,\nlanguage-aware indentation, and a key row above the software keyboard. It has\nno syntax highlighting."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:code-editor\n    label=\"Environment\"\n    language=\"env\"\n    helper=\"One KEY=value per line.\"\n    native:model.debounce.500ms=\"environment\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "A read-only live log that stays at the newest line:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:code-editor\n    label=\"Deployment log\"\n    :read-only=\"true\"\n    :follow=\"true\"\n    :wrap=\"false\"\n    :max-lines=\"24\"\n    :value=\"$log\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string\nPurpose: Published PHP value, sent verbatim; omission defaults to ''."
+                },
+                {
+                    "type": "definition",
+                    "label": "language",
+                    "text": "Accepted type: enum string\nPurpose: plain, json, yaml, or env; defaults to plain. Selects indentation rules and key-row symbols. It never validates or reformats content."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible label and accessibility-name fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting guidance below the field."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required metadata without performing validation."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents focus and editing."
+                },
+                {
+                    "type": "definition",
+                    "label": "read-only",
+                    "text": "Accepted type: bool\nPurpose: Keeps native selection, copy, and scrolling while preventing edits; hides the key row."
+                },
+                {
+                    "type": "definition",
+                    "label": "line-numbers",
+                    "text": "Accepted type: bool\nPurpose: Shows the line-number gutter; defaults to true."
+                },
+                {
+                    "type": "definition",
+                    "label": "wrap",
+                    "text": "Accepted type: bool\nPurpose: Wraps long lines; defaults to true. false scrolls horizontally."
+                },
+                {
+                    "type": "definition",
+                    "label": "indent",
+                    "text": "Accepted type: int\nPurpose: 2 or 4 spaces per level; defaults to 2."
+                },
+                {
+                    "type": "definition",
+                    "label": "follow",
+                    "text": "Accepted type: bool\nPurpose: Keeps the view pinned to the end across programmatic updates; defaults to false. Requires read-only."
+                },
+                {
+                    "type": "definition",
+                    "label": "min-lines",
+                    "text": "Accepted type: positive int\nPurpose: Minimum visible lines; defaults to 6."
+                },
+                {
+                    "type": "definition",
+                    "label": "max-lines",
+                    "text": "Accepted type: positive int\nPurpose: Maximum visible lines before native scrolling; defaults to 20."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver or TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                },
+                {
+                    "type": "text",
+                    "text": "max-lines must be greater than or equal to min-lines."
+                },
+                {
+                    "type": "text",
+                    "text": "NativePHP publishes at most 64 KB of props for one element, so the value must\nstay under about 60 KB of UTF-8. Larger content throws a contract exception\ninstead of reaching the device as an empty editor. For live logs, keep only\nthe newest lines. Public Blade examples\nuse kebab-case. The PHP element also accepts lineNumbers, readOnly,\nminLines, and maxLines aliases."
+                },
+                {
+                    "type": "text",
+                    "text": "Code Editor always turns off autocorrect, autocapitalization, and spell\nchecking, and uses the system monospaced font at the platform's text size.\nplaceholder, autocorrect, autocapitalize, keyboard, content-type,\nicons, secure, @submit, and styling attributes are rejected."
+                }
+            ],
+            "links": []
+        },
+        "editing": {
+            "title": "Editing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Return keeps the current line's leading spaces or tabs. In json, Return after\nan opening { or [ adds one level, and Return between a bracket pair splits\nit onto three lines. Typing } or ] at the start of a line removes one\nlevel. In yaml, Return after a line ending in : adds one level; comments\nare ignored. env and plain only keep the current indentation."
+                },
+                {
+                    "type": "text",
+                    "text": "Indent and Outdent act on the current line or every selected line. Toggle\ncomment, in yaml and env, adds or removes #  on the current or selected\nlines. Indentation always inserts spaces; existing tabs are kept."
+                },
+                {
+                    "type": "heading",
+                    "text": "Key row"
+                },
+                {
+                    "type": "text",
+                    "text": "While the field is focused and editable, a key row sits above the software\nkeyboard. It is hidden when a hardware keyboard is attached, where Tab and\nShift-Tab indent and outdent."
+                },
+                {
+                    "type": "definition",
+                    "label": "json",
+                    "text": "Keys after Indent, Outdent, Undo, Redo: { } [ ] \" : ,"
+                },
+                {
+                    "type": "definition",
+                    "label": "yaml",
+                    "text": "Keys after Indent, Outdent, Undo, Redo: : - # \" ' |, Toggle comment"
+                },
+                {
+                    "type": "definition",
+                    "label": "env",
+                    "text": "Keys after Indent, Outdent, Undo, Redo: = # \" $ { } _, Toggle comment"
+                },
+                {
+                    "type": "definition",
+                    "label": "plain",
+                    "text": "Keys after Indent, Outdent, Undo, Redo: ( ) [ ] { } \" '"
+                },
+                {
+                    "type": "text",
+                    "text": "Each key press is one undoable edit. Key names and accessible names are\npackage chrome; see Localize Firstlight chrome."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize Firstlight chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "events-and-synchronisation": {
+            "title": "Events and synchronisation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the complete current string. Plain native:model and\n.live publish while editing. .blur and .lazy publish on focus loss.\n.debounce.500ms publishes after the quiet period and flushes on blur.\nDurations below 50 milliseconds are rejected."
+                },
+                {
+                    "type": "text",
+                    "text": "While the field is focused, the native buffer, cursor, selection, IME\ncomposition, scroll position, and undo history stay local. PHP\nacknowledgements do not replace them. Unfocused programmatic updates replace\nthe text, clear undo history, and never emit @change."
+                },
+                {
+                    "type": "heading",
+                    "text": "Scroll position and follow"
+                },
+                {
+                    "type": "text",
+                    "text": "A programmatic update never jumps to the top. The first visible line stays in\nplace when lines are appended or removed from the start, and otherwise the\nprevious scroll offset is kept."
+                },
+                {
+                    "type": "text",
+                    "text": "With follow, the view starts at the end and stays there across updates while\nit is within one line of the end, including when PHP trims the start of the\ncontent. Scrolling up stops following; scrolling back to the end resumes it.\nWhile a person holds a selection in a read-only editor, updates wait until the\nselection collapses so copying is never interrupted. Updates are not announced\nto VoiceOver or TalkBack."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-accessibility": {
+            "title": "Validation and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions reject invalid types, unknown languages, indents other\nthan 2 or 4, unordered line bounds, follow without read-only, and\nunsupported sync modes before publication. Screens that use ValidatesFields\nauto-bind the first MessageBag message for the field's native:model or\nerror-for name; an authored error wins. See\nValidate fields."
+                },
+                {
+                    "type": "text",
+                    "text": "A visible label or explicit a11y-label is required during development.\nLine numbers are hidden from assistive technology, so validation messages\nshould quote the offending key or content rather than only a line number.\nEvery key-row key has an accessible name and meets the 44 pt / 48 dp target.\nCode text stays left-to-right in right-to-left layouts."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "security": {
+            "title": "Security",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": ".env content often contains secrets. Code Editor is not a secure field: it\ndoes not mask values, block screenshots, or guarantee that keyboards skip\nlearning what is typed. Decide whether editing secrets on the device is\nacceptable for your application."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses a TextKit 2 UITextView in Apple-native field composition, with a\nline-number gutter, an input-accessory key row with a Done button, and the\ntext view's own undo manager. Android uses Compose BasicTextField on\nTextFieldState inside Material 3 outlined decoration, with a line-number\ngutter, a Material key row above the keyboard, and the text field's undo\nhistory. Both platforms run the same indentation and scroll-anchor rules,\nchecked against shared test fixtures."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/code-editor/ios-light.png",
+                    "text": "Code Editor on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/code-editor/ios-dark.png",
+                    "text": "Code Editor on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/code-editor/android-light.png",
+                    "text": "Code Editor on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/code-editor/android-dark.png",
+                    "text": "Code Editor on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

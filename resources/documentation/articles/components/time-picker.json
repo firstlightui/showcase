@@ -1,0 +1,121 @@
+{
+    "id": "components/time-picker",
+    "title": "Time Picker",
+    "description": "Choose a wall-clock time with a native, server-authoritative picker.",
+    "group": "Components",
+    "anchors": {
+        "time-picker": "overview",
+        "values-and-props": "values-and-props",
+        "validation-and-accessibility": "validation-and-accessibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Time Picker chooses an optional wall-clock time using the platform's native\ntime control. The model value is always exact 24-hour HH:mm or null, even\nwhen the platform displays a localized 12-hour clock."
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:time-picker\n    native:model=\"appointmentTime\"\n    label=\"Appointment time\"\n    placeholder=\"Choose a time\"\n    helper=\"Clinic local time\"\n    locale=\"en-AU\"\n    timezone=\"Australia/Sydney\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "The user edits a temporary native draft. Cancel discards it and Confirm sends\n@change; the closed trigger continues to show the server-accepted value\nuntil PHP republishes the tree."
+                }
+            ],
+            "links": []
+        },
+        "values-and-props": {
+            "title": "Values and props",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• value / native:model: exact HH:mm or null."
+                },
+                {
+                    "type": "text",
+                    "text": "• label, placeholder, helper, and error: field copy."
+                },
+                {
+                    "type": "text",
+                    "text": "• required and disabled: field state."
+                },
+                {
+                    "type": "text",
+                    "text": "• locale: BCP-47 tag used only for display. Omission inherits the\napplication translator locale."
+                },
+                {
+                    "type": "text",
+                    "text": "• timezone: IANA identifier used only to seed a null draft with the current\nlocal minute. Omission inherits config('app.timezone') when it is a valid\nIANA identifier."
+                },
+                {
+                    "type": "text",
+                    "text": "• a11y-label and a11y-hint: explicit accessibility copy."
+                },
+                {
+                    "type": "text",
+                    "text": "• class: external EDGE layout."
+                },
+                {
+                    "type": "text",
+                    "text": "Use plain native:model or native:model.live. Time Picker commits only on\nconfirmation, so blur, lazy, and debounce modes are rejected. It deliberately\ndoes not expose min/max, seconds, steps, ranges, hour-format overrides,\npresentation styles, clear affordances, read-only state, icons, or colours.\nSheet Confirm and Cancel labels are package chrome, not Blade attributes; see\nLocalize chrome."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "validation-and-accessibility": {
+            "title": "Validation and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject coerced or non-canonical time strings before\npublication. User validation is separate: screens that use ValidatesFields\nauto-bind the first MessageBag message for the field's native:model or\nerror-for name. An authored error wins. required is display metadata\nand does not run Laravel rules. See\nValidate fields."
+                },
+                {
+                    "type": "text",
+                    "text": "Always provide either a visible label or a11y-label. Errors replace helper\ntext visually and are announced by platform semantics. The native presentation\nretains standard VoiceOver or TalkBack traversal and Cancel/Confirm actions."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/time-picker/ios-light.png",
+                    "text": "Time Picker on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/time-picker/ios-dark.png",
+                    "text": "Time Picker on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/time-picker/android-light.png",
+                    "text": "Time Picker on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/time-picker/android-dark.png",
+                    "text": "Time Picker on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

@@ -1,0 +1,292 @@
+{
+    "id": "components/choice-group",
+    "title": "Choice Group",
+    "description": "Public API, selection modes, state timing, accessibility, and platform behaviour for Firstlight Choice Group.",
+    "group": "Components",
+    "anchors": {
+        "choice-group": "overview",
+        "complete-examples": "complete-examples",
+        "props": "props",
+        "options-and-values": "options-and-values",
+        "events-and-state-timing": "events-and-state-timing",
+        "disabled-and-required-behaviour": "disabled-and-required-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Choice Group presents a visible list of labelled options for selecting zero or one value, or zero or more values."
+                }
+            ],
+            "links": []
+        },
+        "complete-examples": {
+            "title": "Complete examples",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Single choice is the default:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public ?string $priority = 'routine';\n\npublic array $priorityOptions = [\n    ['value' => 'routine', 'label' => 'Routine'],\n    ['value' => 'urgent', 'label' => 'Urgent'],\n    ['value' => 'critical', 'label' => 'Critical', 'disabled' => true],\n];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:choice-group\n    :options=\"$priorityOptions\"\n    native:model=\"priority\"\n    label=\"Priority\"\n    helper=\"Choose one priority.\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Use multiple with a list-valued property:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public array $notifications = ['email'];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:choice-group\n    :options=\"['email' => 'Email', 'sms' => 'SMS', 'push' => 'Push notification']\"\n    native:model=\"notifications\"\n    label=\"Notifications\"\n    helper=\"Choose any that apply.\"\n    multiple\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "options",
+                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays. Labels must contain visible text."
+                },
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string, int, array, or null\nPurpose: Stable selection. Use a scalar or null in single mode and a homogeneous list or null in multiple mode."
+                },
+                {
+                    "type": "definition",
+                    "label": "multiple",
+                    "text": "Accepted type: bool\nPurpose: Enables zero-or-more selection. Defaults to false."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible field label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting text shown when there is no error."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Error text and native error semantics; replaces helper text."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required state; PHP still owns validation."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Disables the complete group."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessibility label when a visible label is inappropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "options-and-values": {
+            "title": "Options and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Simple strings use the same value and label:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['Routine', 'Urgent']"
+                },
+                {
+                    "type": "text",
+                    "text": "A map separates stable values from labels and may use all-string or all-integer keys:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['routine' => 'Routine', 'urgent' => 'Urgent']"
+                },
+                {
+                    "type": "text",
+                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "[\n    ['value' => 'routine', 'label' => 'Routine'],\n    ['value' => 'urgent', 'label' => 'Urgent', 'disabled' => true],\n]"
+                },
+                {
+                    "type": "text",
+                    "text": "All option labels must contain visible text. Values in one group must be unique and must all be strings or all be integers."
+                },
+                {
+                    "type": "text",
+                    "text": "In single mode, tapping an unselected row proposes its value. Tapping the selected row does nothing, matching radio-choice semantics. PHP can publish null to clear the field programmatically."
+                },
+                {
+                    "type": "text",
+                    "text": "In multiple mode, tapping toggles that stable value while preserving the order of the other values. null and [] both mean no selection."
+                }
+            ],
+            "links": []
+        },
+        "events-and-state-timing": {
+            "title": "Events and state timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the complete proposed selection: a scalar in single mode and a list in multiple mode. native:model normally generates this callback for property synchronisation."
+                },
+                {
+                    "type": "text",
+                    "text": "Choice Group is server-authoritative. A tap emits immediately, but selected visuals wait for PHP's next publication. Further taps are ignored while that proposal is in flight so a second proposal cannot be calculated from stale state. Rejected and programmatic publications do not emit."
+                },
+                {
+                    "type": "text",
+                    "text": "An unchanged PHP response must also release the pending-interaction guard.\nHost the control in FirstlightUI\\NativeComponent for the\nnonstreaming response-revision contract.\nRevisions are not per-event acknowledgements\nand do not prevent coalescing or serialize simultaneous proposals."
+                },
+                {
+                    "type": "text",
+                    "text": "Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
+                }
+            ],
+            "links": [
+                {
+                    "label": "server-authoritative",
+                    "url": "../concepts/server-authoritative-state.md"
+                },
+                {
+                    "label": "nonstreaming response-revision contract",
+                    "url": "../reference/compatibility.md#runtime-response-contract"
+                }
+            ]
+        },
+        "disabled-and-required-behaviour": {
+            "title": "Disabled and required behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "disabled prevents every row from emitting. A rich option's disabled: true affects only that row. An empty option set becomes an inert disabled group."
+                },
+                {
+                    "type": "text",
+                    "text": "required is metadata rather than client-side enforcement. Validate the value in PHP and publish error when needed. Error text replaces helper text on both platforms."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. Each complete row is one accessibility target with its label, selected or checked state, and disabled state. Selection is also shown with a native indicator, so it does not depend on colour alone. Rows support wrapping labels and retain at least a 44-point iOS or 48-dp Android interaction target."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject malformed options, mixed selections, and\nunsupported presentation props before publication. User validation is\nseparate: screens that use ValidatesFields auto-bind the first MessageBag\nmessage for the field's native:model or error-for name. An authored\nerror wins. required is display metadata and does not run Laravel rules.\nSee Validate fields. A same-typed selected\nvalue absent from options remains unselected rather than choosing a\nfallback."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses native SwiftUI option rows with trailing checkmarks. Android renders one Material 3 radio-row set for single choice and one homogeneous checkbox-row set for multiple choice. Both inherit NativePHP semantic theme tokens and preserve native focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Choice Group supports the versions listed in the current compatibility reference and requires both native renderers in the host application plus Firstlight's screen response contract above. It does not require an unreleased runtime fix."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/choice-group/ios-light.png",
+                    "text": "Choice Group on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/choice-group/ios-dark.png",
+                    "text": "Choice Group on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/choice-group/android-light.png",
+                    "text": "Choice Group on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/choice-group/android-dark.png",
+                    "text": "Choice Group on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

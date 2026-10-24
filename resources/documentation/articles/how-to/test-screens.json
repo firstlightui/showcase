@@ -1,0 +1,127 @@
+{
+    "id": "how-to/test-screens",
+    "title": "Test Firstlight screens",
+    "description": "Scaffold a screen with make:firstlight-screen and test its fields, lists, dialogs, and Feedback with Native::test().",
+    "group": "Guides",
+    "anchors": {
+        "test-firstlight-screens": "overview",
+        "scaffold-a-screen": "scaffold-a-screen",
+        "register-the-checks": "register-the-checks",
+        "test-a-form": "test-a-form",
+        "test-a-list-and-its-destructive-action": "test-a-list-and-its-destructive-action"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight screens are tested with NativePHP's screen test harness,\nNative\\Mobile\\Testing\\Native::test(). The harness mounts the screen,\nrenders the Element Tree, and sends taps and input through the same callbacks a\ndevice uses. Firstlight adds checks for its own controls: field errors,\nList rows, Confirmation Dialog, and Feedback."
+                }
+            ],
+            "links": []
+        },
+        "scaffold-a-screen": {
+            "title": "Scaffold a screen",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan make:firstlight-screen Posts --form --destroy --test"
+                },
+                {
+                    "type": "text",
+                    "text": "This creates the following files:"
+                },
+                {
+                    "type": "text",
+                    "text": "• app/NativeComponents/Posts.php: a FirstlightUI\\NativeComponent with a\nvalidated name field and save() (--form), and paginated\nreload(), loadMore(), and listQuery() (--list). It also has\nrequestDeletion(), cancelDeletion(), and deleteItem() (--destroy,\nwhich turns on --list)."
+                },
+                {
+                    "type": "text",
+                    "text": "• resources/views/native/posts.blade.php: the matching Text Field, Button,\nList, and Confirmation Dialog markup."
+                },
+                {
+                    "type": "text",
+                    "text": "• tests/Feature/NativeComponents/PostsTest.php: a Pest test that uses the\nchecks below (--test)."
+                },
+                {
+                    "type": "text",
+                    "text": "Nested names such as Settings/Notifications create\nApp\\NativeComponents\\Settings\\Notifications and the view\nnative.settings.notifications. The command does not overwrite existing files\nunless you pass --force. Register the route it prints in routes/mobile.php."
+                },
+                {
+                    "type": "text",
+                    "text": "Replace the body of listQuery() with your paginator query, for example\nPost::query()->latest()->paginate(perPage: 20, page: $page->page)."
+                }
+            ],
+            "links": []
+        },
+        "register-the-checks": {
+            "title": "Register the checks",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Register the Firstlight checks once from tests/Pest.php:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "FirstlightUI\\Testing\\ScreenAssertions::register();"
+                },
+                {
+                    "type": "text",
+                    "text": "Calling it again has no effect. The generated test also calls it in\nbeforeEach()."
+                }
+            ],
+            "links": []
+        },
+        "test-a-form": {
+            "title": "Test a form",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\EditProfile;\nuse FirstlightUI\\Facades\\Feedback;\nuse FirstlightUI\\Feedback\\FeedbackTone;\nuse Native\\Mobile\\Testing\\Native;\n\nit('validates and saves the profile', function () {\n    Feedback::fake();\n\n    Native::test(EditProfile::class)\n        ->input('email', 'not-an-email')\n        ->tap('Save')\n        ->assertFieldError('email', 'The email must be a valid email address.')\n        ->assertNoFeedbackSent()\n        ->input('email', 'ada@example.com')\n        ->tap('Save')\n        ->assertNoFieldError('email')\n        ->assertHasNoErrors()\n        ->assertFeedbackSent('Profile saved', FeedbackTone::Success);\n});"
+                },
+                {
+                    "type": "text",
+                    "text": "assertFieldError() reads the error value the field shows in the rendered\ntree, so it confirms the message reached the control, not only the\nMessageBag. Use assertHasErrors() to check the bag directly."
+                },
+                {
+                    "type": "text",
+                    "text": "Select a Select, Segmented, Pill Group, or Choice Group option by its stable\nvalue, never by its label or position:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "Native::test(EditProfile::class)\n    ->choose('plan', 'team')\n    ->assertSet('plan', 'team');"
+                }
+            ],
+            "links": []
+        },
+        "test-a-list-and-its-destructive-action": {
+            "title": "Test a list and its destructive action",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "it('deletes a post after confirmation', function () {\n    Feedback::fake();\n\n    Native::test(PostsScreen::class)\n        ->assertListItem('Draft', fn (array $row) => $row['props']['disabled'] === false)\n        ->pressListItem('Draft', 'Delete')\n        ->assertConfirmationDialog('Delete post?')\n        ->confirmDialog()\n        ->assertMissingListItem('Draft')\n        ->assertFeedbackSent('Post deleted');\n});"
+                },
+                {
+                    "type": "text",
+                    "text": "pressListItem('Draft') presses the row. Pass a swipe action label as the\nsecond argument to press that action. Both fail when the row is disabled, as\nthe device would ignore the press. cancelDialog() sends the dismissal that\nboth platforms send for Cancel and system dismissal."
+                },
+                {
+                    "type": "text",
+                    "text": "See Screen assertions for every method."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Screen assertions",
+                    "url": "../reference/screen-assertions.md"
+                }
+            ]
+        }
+    }
+}

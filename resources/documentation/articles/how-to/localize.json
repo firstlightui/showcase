@@ -1,0 +1,77 @@
+{
+    "id": "how-to/localize",
+    "title": "Localize Firstlight chrome",
+    "description": "Override Firstlight-owned chrome labels and inherit application locale and timezone for Date and Time pickers.",
+    "group": "Guides",
+    "anchors": {
+        "localize-firstlight-chrome": "overview",
+        "publish-the-language-files": "publish-the-language-files",
+        "date-and-time-picker-locale-and-timezone": "date-and-time-picker-locale-and-timezone"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight-owned chrome (Confirm, Cancel, OK, dismiss, clear, skip, Done,\ncrop, zoom, media source chooser, and password reveal) comes from one Laravel\nlanguage file. Authored labels on Confirmation Dialog and Alert Dialog still\nwin. Date Picker and Time Picker keep rejecting Blade confirm-label and\ncancel-label; their sheet buttons are package chrome only."
+                },
+                {
+                    "type": "text",
+                    "text": "The package ships English. There is no translation UI. Applications add other\nlocales through Laravel vendor language publishing."
+                }
+            ],
+            "links": []
+        },
+        "publish-the-language-files": {
+            "title": "Publish the language files",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan vendor:publish --tag=firstlight-lang"
+                },
+                {
+                    "type": "text",
+                    "text": "Laravel copies the files to lang/vendor/firstlight. validation.php holds\nthe pluralised error summary heading ('summary' => 'There is :count error.|There are :count errors.') used by error-summary Callouts and\nscreen-reader announcements. Add a locale next to\nEnglish, for example lang/vendor/firstlight/fr/chrome.php, and keep the same\nkeys:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nreturn [\n    'confirm' => 'Confirmer',\n    'cancel' => 'Annuler',\n    'ok' => 'OK',\n    'dismiss' => 'Fermer',\n    'dismiss_feedback' => 'Fermer le message',\n    'clear' => 'Effacer',\n    'clear_search' => 'Effacer la recherche',\n    'clear_text' => 'Effacer le texte',\n    'skip' => 'Ignorer',\n    'done' => 'OK',\n    'crop' => 'Recadrer',\n    'zoom_in' => 'Zoom avant',\n    'zoom_out' => 'Zoom arrière',\n    'choose_media' => 'Choisir un média',\n    'photo_library' => 'Photothèque',\n    'camera' => 'Appareil photo',\n    'browse_files' => 'Parcourir les fichiers',\n    'show_password' => 'Afficher le mot de passe',\n    'hide_password' => 'Masquer le mot de passe',\n];"
+                },
+                {
+                    "type": "text",
+                    "text": "Missing keys fall back to the packaged English strings."
+                }
+            ],
+            "links": []
+        },
+        "date-and-time-picker-locale-and-timezone": {
+            "title": "Date and Time picker locale and timezone",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "When locale or timezone is omitted, Date Picker and Time Picker inherit\nthe application:"
+                },
+                {
+                    "type": "text",
+                    "text": "• locale from the translator (en_AU and en_AU.UTF-8 become en-AU)"
+                },
+                {
+                    "type": "text",
+                    "text": "• timezone from config('app.timezone') when it is a real IANA identifier"
+                },
+                {
+                    "type": "text",
+                    "text": "Explicit picker props still win. Invalid inherited values are omitted so the\ndevice calendar and clock are used; they do not throw. Authored malformed\nlocale or timezone attributes still fail before publication."
+                },
+                {
+                    "type": "text",
+                    "text": "Authored field labels, helpers, errors, dialog titles, and Feedback messages\nare ordinary Blade strings; translate those with __() as you already would."
+                }
+            ],
+            "links": []
+        }
+    }
+}

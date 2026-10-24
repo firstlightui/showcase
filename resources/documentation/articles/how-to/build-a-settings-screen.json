@@ -1,0 +1,170 @@
+{
+    "id": "how-to/build-a-settings-screen",
+    "title": "Build a settings screen",
+    "description": "Recipe for a grouped settings screen with native section headers and footers, Switch and Select rows, and save-on-change.",
+    "group": "Guides",
+    "anchors": {
+        "build-a-settings-screen": "overview",
+        "how-the-pieces-fit": "how-the-pieces-fit",
+        "1-register-the-route": "1-register-the-route",
+        "2-write-the-screen": "2-write-the-screen",
+        "3-write-the-view": "3-write-the-view",
+        "what-each-platform-shows": "what-each-platform-shows",
+        "rules-to-keep": "rules-to-keep"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe builds a standard settings screen: grouped sections with headers\nand footers, switches and pickers that save as soon as they change, and rows\nthat open other screens."
+                },
+                {
+                    "type": "text",
+                    "text": "This recipe runs unchanged in the\nshowcase app, where\nSettingsRecipeTest\nexercises it."
+                },
+                {
+                    "type": "text",
+                    "text": "Use it for preferences the user changes one at a time. Use the\nform recipe instead when several fields must be\nvalidated and saved together with a button."
+                }
+            ],
+            "links": [
+                {
+                    "label": "showcase app",
+                    "url": "https://github.com/firstlightui/showcase"
+                },
+                {
+                    "label": "SettingsRecipeTest",
+                    "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/SettingsRecipeTest.php"
+                },
+                {
+                    "label": "form recipe",
+                    "url": "build-a-form-screen.md"
+                }
+            ]
+        },
+        "how-the-pieces-fit": {
+            "title": "How the pieces fit",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Settings controls are not List Item rows, so the container is Mobile UI's\nnative:list with native:list-section, not firstlight:list. Mobile UI\nrenders that container with a SwiftUI List in the inset-grouped style on iOS\nand grouped Material sections on Android. There is no settings tag to learn."
+                },
+                {
+                    "type": "text",
+                    "text": "Mobile UI gives each row no padding and, on iOS, no background. List Item pads\nitself, but Switch and Select do not, so their labels would touch the card edge\nand the first letter can be clipped. Wrap each row in a native:column with\npx-4 py-3 bg-theme-surface: the padding gives the native row insets, and the\nsurface colour draws the grouped card on iOS and matches List Item's surface on\nAndroid. Add separator to the list so iOS draws dividers between rows in a\ncard; Android always does."
+                }
+            ],
+            "links": []
+        },
+        "1-register-the-route": {
+            "title": "1. Register the route",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\SettingsScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/settings', SettingsScreen::class)->name('settings');"
+                }
+            ],
+            "links": []
+        },
+        "2-write-the-screen": {
+            "title": "2. Write the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Each setting is a public property. updated{Property} runs when PHP accepts a\nnew value, so it is where the value is saved. This example stores values with\nLaravel's cache; use your own model or storage instead."
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Support\\Facades\\Cache;\nuse Illuminate\\View\\View;\n\nclass SettingsScreen extends NativeComponent\n{\n    public bool $notifications = true;\n\n    public bool $marketing = false;\n\n    public string $digest = 'weekly';\n\n    /** @var array<string, string> */\n    public array $digestOptions = [\n        'daily' => 'Daily',\n        'weekly' => 'Weekly',\n        'never' => 'Never',\n    ];\n\n    public function mount(): void\n    {\n        $this->notifications = Cache::get('settings.notifications', true);\n        $this->marketing = Cache::get('settings.marketing', false);\n        $this->digest = Cache::get('settings.digest', 'weekly');\n    }\n\n    public function updatedNotifications(bool $value): void\n    {\n        Cache::forever('settings.notifications', $value);\n    }\n\n    public function updatedMarketing(bool $value): void\n    {\n        Cache::forever('settings.marketing', $value);\n    }\n\n    public function updatedDigest(string $value): void\n    {\n        Cache::forever('settings.digest', $value);\n    }\n\n    public function openPrivacy(): void\n    {\n        $this->navigate('/settings/privacy');\n    }\n\n    public function navTitle(): string\n    {\n        return 'Settings';\n    }\n\n    public function render(): View\n    {\n        return view('native.settings');\n    }\n}"
+                }
+            ],
+            "links": []
+        },
+        "3-write-the-view": {
+            "title": "3. Write the view",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Save this as resources/views/native/settings.blade.php:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:list class=\"w-full flex-1\" separator>\n    <native:list-section header=\"Notifications\" footer=\"Alerts for replies and mentions.\">\n        <native:column class=\"w-full px-4 py-3 bg-theme-surface\">\n            <firstlight:switch label=\"Push notifications\" native:model=\"notifications\" />\n        </native:column>\n        <native:column class=\"w-full px-4 py-3 bg-theme-surface\">\n            <firstlight:switch label=\"Product news\" native:model=\"marketing\" />\n        </native:column>\n    </native:list-section>\n\n    <native:list-section header=\"Email\" footer=\"A summary of activity you missed.\">\n        <native:column class=\"w-full px-4 py-3 bg-theme-surface\">\n            <firstlight:select label=\"Digest\" :options=\"$digestOptions\" native:model=\"digest\" />\n        </native:column>\n    </native:list-section>\n\n    <native:list-section header=\"Account\">\n        <native:column class=\"w-full bg-theme-surface\">\n            <firstlight:list-item\n                headline=\"Privacy\"\n                trailing-icon=\"chevron-right\"\n                trailing-icon-ios=\"chevron.right\"\n                trailing-icon-android=\"chevron_right\"\n                @press=\"openPrivacy\"\n            />\n        </native:column>\n    </native:list-section>\n</native:list>"
+                }
+            ],
+            "links": []
+        },
+        "what-each-platform-shows": {
+            "title": "What each platform shows",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "Grouping",
+                    "text": "iOS: SwiftUI List in the inset-grouped style; the row columns paint the cards\nAndroid: Rounded section cards with headers and footers, drawn by Mobile UI"
+                },
+                {
+                    "type": "definition",
+                    "label": "Row insets",
+                    "text": "iOS: The row column's px-4 py-3\nAndroid: The row column's px-4 py-3 inside the card's 16 dp margin"
+                },
+                {
+                    "type": "definition",
+                    "label": "Dividers",
+                    "text": "iOS: Between rows when the list sets separator\nAndroid: Always between rows in a card"
+                },
+                {
+                    "type": "definition",
+                    "label": "Switches",
+                    "text": "iOS: SwiftUI Toggle\nAndroid: Material 3 Switch"
+                },
+                {
+                    "type": "definition",
+                    "label": "Digest",
+                    "text": "iOS: Native menu picker\nAndroid: Material 3 exposed dropdown"
+                },
+                {
+                    "type": "definition",
+                    "label": "Privacy row",
+                    "text": "iOS: List Item row with a chevron\nAndroid: Material list item with a chevron"
+                }
+            ],
+            "links": []
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Save in updated{Property}, not in a Save button. Settings screens apply each\nchange immediately."
+                },
+                {
+                    "type": "text",
+                    "text": "• Wrap every control row in a padded native:column with\nbg-theme-surface. Rows placed straight in a section have no insets."
+                },
+                {
+                    "type": "text",
+                    "text": "• Keep a section footer short. It explains the section, not each control."
+                },
+                {
+                    "type": "text",
+                    "text": "• Use firstlight:list only when every row is a List Item, such as a list of\nrecords. Settings mix controls, so they use native:list."
+                },
+                {
+                    "type": "text",
+                    "text": "• Put the screen under a layout that uses native chrome, as described in\nBuild a list and detail flow, so the title and\nback navigation come from the platform."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Build a list and detail flow",
+                    "url": "build-a-list-detail-flow.md"
+                }
+            ]
+        }
+    }
+}
