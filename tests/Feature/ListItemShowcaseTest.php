@@ -39,8 +39,8 @@ it('publishes every List Item content and state fixture through the native wire 
             'trailing_value' => 'Open',
         ])
         ->and($nodes[2]['props'])->toMatchArray([
-            'leading_type' => 'avatar',
-            'leading_value' => 'https://placehold.co/80x80/png?text=AJ',
+            'leading_type' => 'monogram',
+            'leading_value' => 'AJ',
         ])
         ->and($nodes[3]['props'])->toMatchArray([
             'leading_type' => 'monogram',
