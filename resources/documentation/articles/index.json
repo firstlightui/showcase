@@ -1,0 +1,517 @@
+{
+    "id": "index",
+    "title": "Firstlight UI documentation",
+    "description": "Build a standard NativePHP forms app, by hand or with a coding agent, from genuine SwiftUI and Jetpack Compose controls, Laravel validation, and tested recipes.",
+    "group": "Overview",
+    "anchors": {
+        "firstlight-ui-documentation": "overview",
+        "start-with-a-recipe": "start-with-a-recipe",
+        "get-started": "get-started",
+        "laravel-on-native-screens": "laravel-on-native-screens",
+        "understand-firstlight": "understand-firstlight",
+        "components": "components",
+        "reference": "reference"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight is the app-shell layer for NativePHP. Install it with Laravel Boost,\nand you or your coding agent have what a standard forms app needs: lists and\ndetail, search, forms with Laravel validation, settings, sheets and dialogs, and\nfeedback."
+                },
+                {
+                    "type": "text",
+                    "text": "Every control is a genuine SwiftUI control on iOS and a Jetpack Compose\nMaterial 3 control on Android. One Blade API becomes the right pattern on each\nplatform. Navigation chrome comes from NativePHP's own native chrome, and\nVoiceOver, TalkBack, larger text, right-to-left layout, and Reduce Motion reach\nevery control the way they reach the platform's own apps."
+                },
+                {
+                    "type": "text",
+                    "text": "Firstlight 1.0.0 is a release candidate (v1.0.0-RC6). Physical-device,\nspoken screen-reader, soak/performance, and wider application checks are still\noutstanding."
+                }
+            ],
+            "links": []
+        },
+        "start-with-a-recipe": {
+            "title": "Start with a recipe",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Each recipe is a complete screen you can copy. Each one runs unchanged in the\nshowcase app, whose Pest tests\nexercise it. Build the list and detail flow first: it is the app shell the other\nrecipes run inside."
+                },
+                {
+                    "type": "text",
+                    "text": "• Build a list and detail flow — Give the app a native navigation shell with a list screen that pushes a detail screen."
+                },
+                {
+                    "type": "text",
+                    "text": "• Build a searchable list screen — Search, paginate, refresh, open, and delete records from one native List."
+                },
+                {
+                    "type": "text",
+                    "text": "• Build a form screen — Validate with a Form Request, show field and form-level errors, and save with Feedback."
+                },
+                {
+                    "type": "text",
+                    "text": "• Build a settings screen — Group switches and pickers in native sections that save on change."
+                }
+            ],
+            "links": [
+                {
+                    "label": "showcase app",
+                    "url": "https://github.com/firstlightui/showcase"
+                },
+                {
+                    "label": "Build a list and detail flow",
+                    "url": "how-to/build-a-list-detail-flow.md"
+                },
+                {
+                    "label": "Build a searchable list screen",
+                    "url": "how-to/build-a-searchable-list-screen.md"
+                },
+                {
+                    "label": "Build a form screen",
+                    "url": "how-to/build-a-form-screen.md"
+                },
+                {
+                    "label": "Build a settings screen",
+                    "url": "how-to/build-a-settings-screen.md"
+                }
+            ]
+        },
+        "get-started": {
+            "title": "Get started",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Installation — Install Firstlight and Laravel Boost, and make the native renderers available to a NativePHP application."
+                },
+                {
+                    "type": "text",
+                    "text": "• Build with a coding agent — What the Boost guideline, the firstlight-init and building-firstlight-screens skills, and llms.txt give your agent."
+                },
+                {
+                    "type": "text",
+                    "text": "• Add your first component — Add a complete Segmented control with server-backed state."
+                },
+                {
+                    "type": "text",
+                    "text": "• Theming — Configure the semantic NativePHP theme tokens inherited by Firstlight components."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Installation",
+                    "url": "getting-started/installation.md"
+                },
+                {
+                    "label": "Build with a coding agent",
+                    "url": "getting-started/build-with-a-coding-agent.md"
+                },
+                {
+                    "label": "Add your first component",
+                    "url": "getting-started/first-component.md"
+                },
+                {
+                    "label": "Theming",
+                    "url": "getting-started/theming.md"
+                }
+            ]
+        },
+        "laravel-on-native-screens": {
+            "title": "Laravel on native screens",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Validate fields — Show Laravel validation messages on Firstlight fields with validate(), validateOnly(), and Form Requests."
+                },
+                {
+                    "type": "text",
+                    "text": "• Submit forms — Validate Firstlight fields, run a PHP action once, and publish success Feedback."
+                },
+                {
+                    "type": "text",
+                    "text": "• Authorize actions — Hide, disable, or guard Firstlight actions with Laravel Gate and Policy decisions."
+                },
+                {
+                    "type": "text",
+                    "text": "• Paginate lists — Bind Laravel paginators to List pull-to-refresh and end-reached."
+                },
+                {
+                    "type": "text",
+                    "text": "• Destroy list items — Authorize Confirmation Dialog deletion of List rows by stable keys."
+                },
+                {
+                    "type": "text",
+                    "text": "• Test screens — Scaffold a screen with make:firstlight-screen and test fields, lists, dialogs, and Feedback with Native::test()."
+                },
+                {
+                    "type": "text",
+                    "text": "• Localize chrome — Override Firstlight-owned chrome labels and inherit application locale and timezone for Date and Time pickers."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "how-to/validate-fields.md"
+                },
+                {
+                    "label": "Submit forms",
+                    "url": "how-to/submit-forms.md"
+                },
+                {
+                    "label": "Authorize actions",
+                    "url": "how-to/authorize-actions.md"
+                },
+                {
+                    "label": "Paginate lists",
+                    "url": "how-to/paginate-lists.md"
+                },
+                {
+                    "label": "Destroy list items",
+                    "url": "how-to/destroy-list-items.md"
+                },
+                {
+                    "label": "Test screens",
+                    "url": "how-to/test-screens.md"
+                },
+                {
+                    "label": "Localize chrome",
+                    "url": "how-to/localize.md"
+                }
+            ]
+        },
+        "understand-firstlight": {
+            "title": "Understand Firstlight",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• What Firstlight is — The app-shell layer for NativePHP: what Firstlight provides, what NativePHP and Mobile UI provide, and what Firstlight is not."
+                },
+                {
+                    "type": "text",
+                    "text": "• Accessibility — What VoiceOver, TalkBack, larger-text, right-to-left, and Reduce Motion users get, what is tested, what is still unverified, and what your app owns."
+                },
+                {
+                    "type": "text",
+                    "text": "• SuperNative components — Understand how an EDGE component becomes genuine platform UI."
+                },
+                {
+                    "type": "text",
+                    "text": "• Server-authoritative state — Understand interaction, PHP acceptance, and native reconciliation."
+                }
+            ],
+            "links": [
+                {
+                    "label": "What Firstlight is",
+                    "url": "concepts/firstlight-and-mobile-ui.md"
+                },
+                {
+                    "label": "Accessibility",
+                    "url": "concepts/accessibility.md"
+                },
+                {
+                    "label": "SuperNative components",
+                    "url": "concepts/supernative-components.md"
+                },
+                {
+                    "label": "Server-authoritative state",
+                    "url": "concepts/server-authoritative-state.md"
+                }
+            ]
+        },
+        "components": {
+            "title": "Components",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Activity Indicator — Communicate indeterminate native activity with semantic sizes and one polite appearance announcement."
+                },
+                {
+                    "type": "text",
+                    "text": "• Button — Look up labelled actions, semantic variants, loading and disabled states, accessibility, and adapter behaviour."
+                },
+                {
+                    "type": "text",
+                    "text": "• Callout — Present persistent semantic messages with one optional labelled action."
+                },
+                {
+                    "type": "text",
+                    "text": "• Transient Feedback — Publish queued app-level outcomes with semantic tones, optional actions, and automatic or held lifetime."
+                },
+                {
+                    "type": "text",
+                    "text": "• Badge — Present compact display-only counts or short markers with semantic tones and contextual accessibility."
+                },
+                {
+                    "type": "text",
+                    "text": "• Checkbox — Configure strict Boolean form and checklist state with server-authoritative proposals."
+                },
+                {
+                    "type": "text",
+                    "text": "• Choice Group — Configure visible single-radio or multiple-checkbox choice rows with stable values."
+                },
+                {
+                    "type": "text",
+                    "text": "• Media — Capture one image or document into Storage with optional crop and ValidatesFields."
+                },
+                {
+                    "type": "text",
+                    "text": "• Alert Dialog — Present one native acknowledgement with a single action."
+                },
+                {
+                    "type": "text",
+                    "text": "• Confirmation Dialog — Ask for one native confirmation with explicit cancellation and destructive action semantics."
+                },
+                {
+                    "type": "text",
+                    "text": "• Modal — Present authored content in a full-screen native overlay with server-controlled dismissal."
+                },
+                {
+                    "type": "text",
+                    "text": "• Bottom Sheet — Present authored content in a native bottom sheet with server-controlled dismissal."
+                },
+                {
+                    "type": "text",
+                    "text": "• Date Picker — Choose strict nullable calendar dates with inclusive bounds and native confirmation."
+                },
+                {
+                    "type": "text",
+                    "text": "• Time Picker — Choose strict nullable wall-clock times with localized native confirmation."
+                },
+                {
+                    "type": "text",
+                    "text": "• Icon Button — Configure compact icon-only actions, platform icon overrides, semantic variants, states, and accessibility."
+                },
+                {
+                    "type": "text",
+                    "text": "• List Item — Configure tappable application rows with leading identity, trailing affordances, disabled behaviour, and platform icon overrides."
+                },
+                {
+                    "type": "text",
+                    "text": "• List — Compose finite vertical collections of List Item rows with optional grouped sections and refresh or pagination hooks."
+                },
+                {
+                    "type": "text",
+                    "text": "• List Section — Group List Item rows with optional headers and footers inside a parent List."
+                },
+                {
+                    "type": "text",
+                    "text": "• Pill Group — Configure compact single- or multiple-selection native options."
+                },
+                {
+                    "type": "text",
+                    "text": "• Progress — Communicate determinate or indeterminate work with strict values and native accessibility."
+                },
+                {
+                    "type": "text",
+                    "text": "• Segmented — Look up the Segmented control's complete public contract and platform evidence."
+                },
+                {
+                    "type": "text",
+                    "text": "• Tabs — Switch between sections of one object with stable values, counts, and native tab semantics."
+                },
+                {
+                    "type": "text",
+                    "text": "• Search Field — Configure native query entry, clear, submission, and synchronisation behaviour."
+                },
+                {
+                    "type": "text",
+                    "text": "• Select — Choose one stable string or integer value with automatic searchable presentation for larger option sets."
+                },
+                {
+                    "type": "text",
+                    "text": "• Slider — Choose one strictly validated numeric value from an evenly spaced native range."
+                },
+                {
+                    "type": "text",
+                    "text": "• Stepper — Increment or decrement an exact bounded number while PHP remains authoritative."
+                },
+                {
+                    "type": "text",
+                    "text": "• Status Label — Look up display-only status text, semantic tones, accessibility, and platform evidence."
+                },
+                {
+                    "type": "text",
+                    "text": "• Metric — Display one labelled value with tabular figures, optional detail and grouped accessibility."
+                },
+                {
+                    "type": "text",
+                    "text": "• Text Field — Configure native single-line editing, input hints, icons, and synchronisation."
+                },
+                {
+                    "type": "text",
+                    "text": "• Text Area — Configure native multiline editing, line bounds, validation, accessibility, and synchronisation."
+                },
+                {
+                    "type": "text",
+                    "text": "• Code Editor — Edit JSON, YAML, env, and plain text with native indentation, a key row, and follow mode for live logs."
+                },
+                {
+                    "type": "text",
+                    "text": "• Switch — Configure native boolean settings, server-authoritative state, and accessibility."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Activity Indicator",
+                    "url": "components/activity-indicator.md"
+                },
+                {
+                    "label": "Button",
+                    "url": "components/button.md"
+                },
+                {
+                    "label": "Callout",
+                    "url": "components/callout.md"
+                },
+                {
+                    "label": "Transient Feedback",
+                    "url": "components/transient-feedback.md"
+                },
+                {
+                    "label": "Badge",
+                    "url": "components/badge.md"
+                },
+                {
+                    "label": "Checkbox",
+                    "url": "components/checkbox.md"
+                },
+                {
+                    "label": "Choice Group",
+                    "url": "components/choice-group.md"
+                },
+                {
+                    "label": "Media",
+                    "url": "components/media.md"
+                },
+                {
+                    "label": "Alert Dialog",
+                    "url": "components/alert-dialog.md"
+                },
+                {
+                    "label": "Confirmation Dialog",
+                    "url": "components/confirmation-dialog.md"
+                },
+                {
+                    "label": "Modal",
+                    "url": "components/modal.md"
+                },
+                {
+                    "label": "Bottom Sheet",
+                    "url": "components/bottom-sheet.md"
+                },
+                {
+                    "label": "Date Picker",
+                    "url": "components/date-picker.md"
+                },
+                {
+                    "label": "Time Picker",
+                    "url": "components/time-picker.md"
+                },
+                {
+                    "label": "Icon Button",
+                    "url": "components/icon-button.md"
+                },
+                {
+                    "label": "List Item",
+                    "url": "components/list-item.md"
+                },
+                {
+                    "label": "List",
+                    "url": "components/list.md"
+                },
+                {
+                    "label": "List Section",
+                    "url": "components/list-section.md"
+                },
+                {
+                    "label": "Pill Group",
+                    "url": "components/pill-group.md"
+                },
+                {
+                    "label": "Progress",
+                    "url": "components/progress.md"
+                },
+                {
+                    "label": "Segmented",
+                    "url": "components/segmented.md"
+                },
+                {
+                    "label": "Tabs",
+                    "url": "components/tabs.md"
+                },
+                {
+                    "label": "Search Field",
+                    "url": "components/search-field.md"
+                },
+                {
+                    "label": "Select",
+                    "url": "components/select.md"
+                },
+                {
+                    "label": "Slider",
+                    "url": "components/slider.md"
+                },
+                {
+                    "label": "Stepper",
+                    "url": "components/stepper.md"
+                },
+                {
+                    "label": "Status Label",
+                    "url": "components/status-label.md"
+                },
+                {
+                    "label": "Metric",
+                    "url": "components/metric.md"
+                },
+                {
+                    "label": "Text Field",
+                    "url": "components/text-field.md"
+                },
+                {
+                    "label": "Text Area",
+                    "url": "components/text-area.md"
+                },
+                {
+                    "label": "Code Editor",
+                    "url": "components/code-editor.md"
+                },
+                {
+                    "label": "Switch",
+                    "url": "components/switch.md"
+                }
+            ]
+        },
+        "reference": {
+            "title": "Reference",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• ValidatesFields — Look up the public validate() contract, MessageBag binding, and current limitations."
+                },
+                {
+                    "type": "text",
+                    "text": "• Screen assertions — Look up the Firstlight Native::test() assertions and the make:firstlight-screen options."
+                },
+                {
+                    "type": "text",
+                    "text": "• Compatibility — Check the currently supported PHP, NativePHP, iOS, Android, and Swift versions."
+                }
+            ],
+            "links": [
+                {
+                    "label": "ValidatesFields",
+                    "url": "reference/validates-fields.md"
+                },
+                {
+                    "label": "Screen assertions",
+                    "url": "reference/screen-assertions.md"
+                },
+                {
+                    "label": "Compatibility",
+                    "url": "reference/compatibility.md"
+                }
+            ]
+        }
+    }
+}

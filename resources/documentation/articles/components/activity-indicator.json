@@ -1,0 +1,210 @@
+{
+    "id": "components/activity-indicator",
+    "title": "Activity Indicator",
+    "description": "Indeterminate native activity, semantic sizes, conditional presence, accessibility announcements, validation, and platform behaviour.",
+    "group": "Components",
+    "anchors": {
+        "activity-indicator": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "visible-text": "visible-text",
+        "events-and-state-timing": "events-and-state-timing",
+        "disabled-loading-and-failure-behaviour": "disabled-loading-and-failure-behaviour",
+        "accessibility": "accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "activity-indicator-or-progress": "activity-indicator-or-progress",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Activity Indicator communicates that work is active when no meaningful\ncompletion value is available. It renders a circular, indeterminate native\nindicator with no visible text inside the component."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Render the component only while the work is active:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "@if ($loading)\n    <firstlight:activity-indicator\n        size=\"md\"\n        a11y-label=\"Loading appointments\"\n    />\n@endif"
+                },
+                {
+                    "type": "text",
+                    "text": "Presence is the activity state. Removing the element stops the presentation;\nthe component has no separate loading, active, or visible prop. Use the\nsame conditional server state that decides whether the work is active rather\nthan attaching wire:loading to this native element."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "size",
+                    "text": "Accepted type: sm, md, or lg\nPurpose: Semantic native size. Defaults to md."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: non-empty string\nPurpose: Required accessible name describing the active work. The a11yLabel authoring alias is also accepted."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                },
+                {
+                    "type": "text",
+                    "text": "Size is semantic, not a shared point or dp measurement. Firstlight maps each\nvalue to an appropriate native size on each platform."
+                },
+                {
+                    "type": "text",
+                    "text": "Colour comes from the host NativePHP theme's primary token. Activity Indicator\nhas no color, tone, or variant escape prop."
+                }
+            ],
+            "links": []
+        },
+        "visible-text": {
+            "title": "Visible text",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "a11y-label is not displayed. Compose separate visible text when sighted users\nalso need context:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:row class=\"items-center gap-3\">\n    <firstlight:activity-indicator\n        size=\"sm\"\n        a11y-label=\"Refreshing appointments\"\n    />\n\n    <native:text>Refreshing appointments…</native:text>\n</native:row>"
+                },
+                {
+                    "type": "text",
+                    "text": "The visible text and accessible name may use the same wording, but they remain\nseparate responsibilities. Activity Indicator is self-closing and has no label\nor content slot."
+                }
+            ],
+            "links": []
+        },
+        "events-and-state-timing": {
+            "title": "Events and state timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Activity Indicator has no event, callback, or model binding. PHP publishes the\nelement while work is active, and the native control owns its indeterminate\nanimation without timer callbacks or animation frames crossing the bridge."
+                },
+                {
+                    "type": "text",
+                    "text": "On a new mount, assistive technology receives one polite announcement using\nthe authored a11y-label. Ordinary server reconciliation, size changes, label\nchanges, and body recomputation do not repeat that announcement. Removing the\nelement and later adding a new mounted element begins a new appearance."
+                }
+            ],
+            "links": []
+        },
+        "disabled-loading-and-failure-behaviour": {
+            "title": "Disabled, loading, and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The component is display-only, so disabled, selected, pressed, error, helper,\nrequired, and validation states do not apply. Its presence already means\nloading; a second loading flag would create contradictory state."
+                },
+                {
+                    "type": "text",
+                    "text": "A missing, empty, whitespace-only, or non-string a11y-label throws an\nInvalidArgumentException. Unsupported sizes and content, state, event,\nstyling, hint, value, or synchronization attributes also fail before the\nElement Tree is published. Firstlight does not silently coerce small,\nlarge, xs, xl, integers, booleans, arrays, or null into a size."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The required label names the work rather than the generic visual, for example\nLoading appointments instead of Spinner. The indicator has no accessibility\nhint, percentage, click action, or interactive role. The polite appearance\nannouncement does not move screen-reader focus."
+                },
+                {
+                    "type": "text",
+                    "text": "VoiceOver receives the SwiftUI control's accessible label plus one guarded\nappearance announcement. TalkBack receives the label as its content\ndescription and the indicator as a polite live region. Both retain native\ncontrast, right-to-left behaviour, Increased Contrast, and Reduced Motion or\nsystem animation policy."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses a genuine circular SwiftUI ProgressView, native ControlSize\nmapping, and the host theme's primary colour. Android uses Material 3\nCircularProgressIndicator at Material-appropriate 20.dp, 32.dp, and\n48.dp dimensions for sm, md, and lg."
+                },
+                {
+                    "type": "text",
+                    "text": "The platforms retain their own geometry and animation. The shared guarantee is\npurpose, semantic size order, theme intent, accessibility, and lifecycle—not\npixel parity."
+                }
+            ],
+            "links": []
+        },
+        "activity-indicator-or-progress": {
+            "title": "Activity Indicator or Progress?",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Use Activity Indicator for circular, indeterminate activity whose completion\ncannot be measured. Use Progress when you have a fraction from\n0.0 through 1.0, or when a linear progress treatment better communicates\nthe task. Neither component starts or controls the underlying work."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Progress",
+                    "url": "progress.md"
+                }
+            ]
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Activity Indicator supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility\nreference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/activity-indicator/ios-light.png",
+                    "text": "Activity Indicator on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/activity-indicator/ios-dark.png",
+                    "text": "Activity Indicator on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/activity-indicator/android-light.png",
+                    "text": "Activity Indicator on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/activity-indicator/android-dark.png",
+                    "text": "Activity Indicator on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

@@ -1,0 +1,281 @@
+{
+    "id": "components/checkbox",
+    "title": "Checkbox",
+    "description": "Strict Boolean form and checklist state, field metadata, server-authoritative proposals, accessibility, and native platform behaviour.",
+    "group": "Components",
+    "anchors": {
+        "checkbox": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "accepted-values": "accepted-values",
+        "state-timing": "state-timing",
+        "disabled-behaviour": "disabled-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Checkbox represents one Boolean form or checklist value. Use it for explicit\nacknowledgements and selections that are normally saved with a form. Use\nSwitch for a setting that takes effect immediately, or Choice\nGroup for selection from a visible collection."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Switch",
+                    "url": "switch.md"
+                },
+                {
+                    "label": "Choice\nGroup",
+                    "url": "choice-group.md"
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Declare a Boolean property on the native component, then bind it with\nnative:model:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse Illuminate\\View\\View;\nuse FirstlightUI\\NativeComponent;\n\nclass Registration extends NativeComponent\n{\n    public bool $acceptedTerms = false;\n\n    public function render(): View\n    {\n        return view('native.registration');\n    }\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:checkbox\n    native:model=\"acceptedTerms\"\n    label=\"I agree to the terms\"\n    helper=\"Required before continuing.\"\n    required\n    a11y-hint=\"Required before creating your account\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value",
+                    "text": "Accepted type: bool\nPurpose: Accepted value. Defaults to false when omitted."
+                },
+                {
+                    "type": "definition",
+                    "label": "native:model",
+                    "text": "Accepted type: a Boolean component property\nPurpose: Synchronises the accepted value through NativePHP. native:model.live is also accepted."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible checkbox label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting text below the label."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Validation text and error semantics; shown instead of helper when non-empty."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Marks the field as required visually and for assistive technology."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents proposals and change events while retaining the accepted value."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible name when a visible label is inappropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                },
+                {
+                    "type": "text",
+                    "text": "The camel-case authoring aliases a11yLabel and a11yHint are accepted and\npublish the same native props."
+                }
+            ],
+            "links": []
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the proposed Boolean value. Use it when PHP decides whether\nto accept a change:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public bool $acceptedTerms = false;\n\npublic function updateAcceptedTerms(bool $value): void\n{\n    $this->acceptedTerms = $value;\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:checkbox\n    :value=\"$acceptedTerms\"\n    @change=\"updateAcceptedTerms\"\n    label=\"I agree to the terms\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "native:model normally supplies the same callback for property\nsynchronisation."
+                }
+            ],
+            "links": []
+        },
+        "accepted-values": {
+            "title": "Accepted values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Checkbox accepts only strict PHP booleans: true and false. Bind a literal\nBoolean with ::"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:checkbox :value=\"false\" label=\"I agree to the terms\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "value=\"false\" is invalid because Blade passes it as a string. null,\nintegers, string booleans, arrays, and objects are also rejected. Checkbox has\nno nullable or indeterminate state."
+                }
+            ],
+            "links": []
+        },
+        "state-timing": {
+            "title": "State timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Host the control in FirstlightUI\\NativeComponent so unchanged full responses\nreceive the response revision."
+                },
+                {
+                    "type": "text",
+                    "text": "Checkbox is server-authoritative.\nA tap emits the inverse Boolean as one proposal, but the visible checkmark\nremains at the last value published by PHP. An accepted response changes the\nvisible state; a rejected response republishes the previous state. Either\nresponse clears the pending proposal guard. Programmatic publications update\nthe checkmark without emitting @change."
+                },
+                {
+                    "type": "text",
+                    "text": "Use native:model or native:model.live. Deferred blur, lazy, and\ndebounce synchronisation modes are rejected."
+                }
+            ],
+            "links": [
+                {
+                    "label": "response revision",
+                    "url": "../reference/compatibility.md#runtime-response-contract"
+                },
+                {
+                    "label": "server-authoritative",
+                    "url": "../concepts/server-authoritative-state.md"
+                }
+            ]
+        },
+        "disabled-behaviour": {
+            "title": "Disabled behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "When disabled is true, Checkbox stays visible with its accepted checked or\nunchecked state. It cannot emit a proposal or @change event."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Provide a visible label or an explicit a11y-label; Firstlight warns during\ndevelopment when both are blank. Label, value, required state, hint, helper or\nerror feedback, and the native checkbox role form one accessibility target.\nThe visual checkmark is decorative to avoid a second focus stop."
+                },
+                {
+                    "type": "text",
+                    "text": "iOS provides a minimum 44-point target and exposes a toggle trait with checked\nstate. Android provides a minimum 48-dp target with Role.Checkbox and one\nTalkBack focus stop. Both platforms support wrapping text and system text\nscaling."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject non-Boolean props and unsupported attributes\nbefore publication. User validation is separate: screens that\nuse ValidatesFields auto-bind the first MessageBag message for the field's\nnative:model or error-for name. An authored error wins. required is\ndisplay metadata and does not run Laravel rules. See\nValidate fields. Error text replaces helper\ntext and is included in accessibility semantics."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses an idiomatic SwiftUI checkmarked row built from a native Button and\nSF Symbol state affordance. Android uses a genuine Material 3 Checkbox inside\na row-owned checkbox target. The public EDGE API and server-authoritative state\ncontract are shared, while geometry and interaction presentation remain native\nto each platform."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Checkbox supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility\nreference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/checkbox/ios-light.png",
+                    "text": "Checkbox on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/checkbox/ios-dark.png",
+                    "text": "Checkbox on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/checkbox/android-light.png",
+                    "text": "Checkbox on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/checkbox/android-dark.png",
+                    "text": "Checkbox on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

@@ -1,0 +1,252 @@
+{
+    "id": "components/segmented",
+    "title": "Segmented",
+    "description": "Public API, state, accessibility, validation, compatibility, and visual evidence for Firstlight Segmented.",
+    "group": "Components",
+    "anchors": {
+        "segmented": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "options-and-accepted-values": "options-and-accepted-values",
+        "state-timing": "state-timing",
+        "disabled-behaviour": "disabled-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Segmented presents a small set of mutually exclusive choices as a native segmented control."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public int $priority = 10;\n\npublic array $priorityOptions = [\n    ['value' => 10, 'label' => 'Routine'],\n    ['value' => 20, 'label' => 'Urgent', 'disabled' => true],\n];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:segmented\n    :options=\"$priorityOptions\"\n    native:model=\"priority\"\n    label=\"Priority\"\n    helper=\"Choose a response priority.\"\n    a11y-hint=\"Urgent may be unavailable.\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "options",
+                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays."
+                },
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string, int, or null\nPurpose: Stable selected value. Its type must match the option values."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible field label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting text below the control."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Error text and error semantics."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Marks the field as required."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Disables the complete control."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessibility label when a visible label is inappropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the selected stable value. native:model normally generates this callback for property synchronisation. A user selection emits immediately; server reconciliation and programmatic updates do not emit."
+                }
+            ],
+            "links": []
+        },
+        "options-and-accepted-values": {
+            "title": "Options and accepted values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Simple string options use the same value and label:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['Mine', 'All']"
+                },
+                {
+                    "type": "text",
+                    "text": "A map separates stable values from labels and may use all-string or all-integer keys:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['mine' => 'Mine', 'all' => 'All']"
+                },
+                {
+                    "type": "text",
+                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "[\n    ['value' => 'mine', 'label' => 'Mine'],\n    ['value' => 'all', 'label' => 'All', 'disabled' => true],\n]"
+                },
+                {
+                    "type": "text",
+                    "text": "All values in one control must be uniquely typed strings or uniquely typed integers. null represents no selection; an empty string remains a distinct string value."
+                }
+            ],
+            "links": []
+        },
+        "state-timing": {
+            "title": "State timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Segmented is server-authoritative. A tap emits immediately, while PHP's next published value determines the visible selection. Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
+                }
+            ],
+            "links": [
+                {
+                    "label": "server-authoritative",
+                    "url": "../concepts/server-authoritative-state.md"
+                }
+            ]
+        },
+        "disabled-behaviour": {
+            "title": "Disabled behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "disabled prevents every choice from emitting. A rich option's disabled: true prevents only that option from emitting. An empty option set becomes an inert disabled control. A disabled or already-selected choice does not emit a new change."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. The renderers expose the label or explicit accessibility label, optional hint, selected state, disabled state, required indication, helper text, and error text through native platform semantics."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject mixed or duplicate option values and\nunsupported types before publication. User validation is separate: screens\nthat use ValidatesFields auto-bind the first MessageBag message for the\nfield's native:model or error-for name. An authored error wins.\nrequired is display metadata and does not run Laravel rules. See\nValidate fields. A same-typed value absent\nfrom options remains visibly unselected rather than selecting the first\noption."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses a native SwiftUI field backed by UISegmentedControl. Android uses Material 3 SingleChoiceSegmentedButtonRow and SegmentedButton. The controls share behaviour and authored API while retaining platform-native styling, layout, and interaction."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Segmented supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/segmented/ios-light.png",
+                    "text": "Segmented on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/segmented/ios-dark.png",
+                    "text": "Segmented on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/segmented/android-light.png",
+                    "text": "Segmented on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/segmented/android-dark.png",
+                    "text": "Segmented on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

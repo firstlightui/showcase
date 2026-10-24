@@ -1,0 +1,287 @@
+{
+    "id": "components/select",
+    "title": "Select",
+    "description": "Public API, stable values, searchable presentation, state timing, accessibility, and platform behaviour for Firstlight Select.",
+    "group": "Components",
+    "anchors": {
+        "select": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "options-and-values": "options-and-values",
+        "compact-and-searchable-presentation": "compact-and-searchable-presentation",
+        "events-and-state-timing": "events-and-state-timing",
+        "disabled-required-and-error-behaviour": "disabled-required-and-error-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Select presents a collapsed, single-choice field and publishes one stable string or integer value."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public ?string $priority = null;\n\npublic array $priorityOptions = [\n    ['value' => 'routine', 'label' => 'Routine'],\n    ['value' => 'urgent', 'label' => 'Urgent'],\n    ['value' => 'critical', 'label' => 'Critical', 'disabled' => true],\n];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:select\n    :options=\"$priorityOptions\"\n    native:model=\"priority\"\n    label=\"Priority\"\n    placeholder=\"Select a priority\"\n    helper=\"Choose one priority.\"\n/>"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "options",
+                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays. Labels must contain visible text."
+                },
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: string, int, or null\nPurpose: Stable selection. Every non-null value must exactly match one option by type and value."
+                },
+                {
+                    "type": "definition",
+                    "label": "searchable",
+                    "text": "Accepted type: bool\nPurpose: Forces search for a collection with 12 or fewer options. Collections with 13 or more are always searchable."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible field label."
+                },
+                {
+                    "type": "definition",
+                    "label": "placeholder",
+                    "text": "Accepted type: string\nPurpose: Trigger text when the published value is null; it is not the accessible name."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting text shown when there is no error."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Error text and native error semantics; replaces helper text."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required state; PHP still owns validation."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Disables the trigger and all options."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible label when a visible label is inappropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "options-and-values": {
+            "title": "Options and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Simple strings use the same value and label:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['Routine', 'Urgent']"
+                },
+                {
+                    "type": "text",
+                    "text": "A map separates stable values from labels and may use all-string or all-integer keys:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "['routine' => 'Routine', 'urgent' => 'Urgent']"
+                },
+                {
+                    "type": "text",
+                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "[\n    ['value' => 10, 'label' => 'Routine'],\n    ['value' => 20, 'label' => 'Urgent', 'disabled' => true],\n]"
+                },
+                {
+                    "type": "text",
+                    "text": "Values in one collection must be unique and all strings or all integers. Matching is strict: integer 10 does not match string '10'. null means no selection and displays the placeholder. Empty options accept only null and produce an inert trigger."
+                }
+            ],
+            "links": []
+        },
+        "compact-and-searchable-presentation": {
+            "title": "Compact and searchable presentation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Select chooses its platform presentation from the option count. Up to 12 options use a compact menu or dropdown. Thirteen or more options use a searchable presentation automatically. Set searchable to force search for a smaller collection."
+                },
+                {
+                    "type": "text",
+                    "text": "Search filters labels locally in authored order. Typing, dismissing search, or selecting the accepted value does not publish an event. The iOS searchable sheet Done action is package chrome; see Localize chrome."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "events-and-state-timing": {
+            "title": "Events and state timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the proposed stable scalar with its authored PHP type. native:model normally generates this callback for property synchronisation."
+                },
+                {
+                    "type": "text",
+                    "text": "Select is server-authoritative. Choosing an enabled option emits immediately, but the trigger continues to show PHP's accepted value until the next publication. Further choices are ignored while that proposal is in flight. Rejected and programmatic publications do not emit."
+                },
+                {
+                    "type": "text",
+                    "text": "An unchanged PHP response must also release the pending-interaction guard.\nHost the control in FirstlightUI\\NativeComponent for the\nnonstreaming response-revision contract.\nRevisions are not per-event acknowledgements\nand do not prevent coalescing or serialize simultaneous proposals."
+                },
+                {
+                    "type": "text",
+                    "text": "Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
+                }
+            ],
+            "links": [
+                {
+                    "label": "server-authoritative",
+                    "url": "../concepts/server-authoritative-state.md"
+                },
+                {
+                    "label": "nonstreaming response-revision contract",
+                    "url": "../reference/compatibility.md#runtime-response-contract"
+                }
+            ]
+        },
+        "disabled-required-and-error-behaviour": {
+            "title": "Disabled, required, and error behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "disabled prevents the trigger and every option from emitting. A rich option's disabled: true affects only that choice. required communicates state but does not add client-side validation. Publish error from PHP when validation fails; it replaces helper text on both platforms."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. The trigger exposes its accessible name, accepted value or placeholder, hint, required state, disabled state, and error. Option rows expose labels, selection, and disabled state. Native search retains editable-text semantics, labels wrap at accessibility sizes, and controls preserve platform minimum interaction targets."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Contract exceptions still reject malformed options, type mismatches, and\nunsupported presentation props before publication. User validation is\nseparate: screens that use ValidatesFields auto-bind the first MessageBag\nmessage for the field's native:model or error-for name. An authored\nerror wins. required is display metadata and does not run Laravel rules.\nSee Validate fields."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS uses a SwiftUI Menu for compact collections and a native searchable sheet with checkmarked rows for searchable collections. Android uses a Material 3 exposed dropdown for compact collections and a searchable Material dialog with radio rows for searchable collections. Both preserve the same stable-value, disabled-option, threshold, publication, and stale-selection semantics."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Select supports the versions listed in the current compatibility reference and requires both native renderers in the host application plus Firstlight's screen response contract above. It does not require an unreleased runtime fix."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/select/ios-light.png",
+                    "text": "Select on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/select/ios-dark.png",
+                    "text": "Select on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/select/android-light.png",
+                    "text": "Select on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/select/android-dark.png",
+                    "text": "Select on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

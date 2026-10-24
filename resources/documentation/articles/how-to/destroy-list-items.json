@@ -1,0 +1,111 @@
+{
+    "id": "how-to/destroy-list-items",
+    "title": "Destroy Firstlight list items",
+    "description": "Authorize Confirmation Dialog deletion of List rows by stable keys, then Feedback and list republish.",
+    "group": "Guides",
+    "anchors": {
+        "destroy-firstlight-list-items": "overview",
+        "declare-the-screen": "declare-the-screen",
+        "keep-denied-rows-visible": "keep-denied-rows-visible",
+        "custom-keys-or-database-resolve": "custom-keys-or-database-resolve"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight deletes list rows in PHP. Pass a stable domain key into the helper,\nconfirm with Confirmation Dialog, authorize again, destroy the model, and let\n$listItems republish without that row."
+                },
+                {
+                    "type": "text",
+                    "text": "An optional labelled List Item swipe action\ncan invoke the same request helper. There is no automatic swipe deletion or\nrenderer index. See Authorize actions for\nhide-versus-disable rules and Paginate lists for $listItems."
+                }
+            ],
+            "links": [
+                {
+                    "label": "List Item swipe action",
+                    "url": "../components/list-item.md#swipe-actions"
+                },
+                {
+                    "label": "Authorize actions",
+                    "url": "authorize-actions.md"
+                },
+                {
+                    "label": "Paginate lists",
+                    "url": "paginate-lists.md"
+                }
+            ]
+        },
+        "declare-the-screen": {
+            "title": "Declare the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend FirstlightUI\\NativeComponent (or use AuthorizesActions,\nDestroysListItems, and a $listItems array):"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Native;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\NativeComponent;\n\nclass PostsScreen extends NativeComponent\n{\n    public function requestDeletion(int $id): void\n    {\n        $this->requestDestructiveListAction($id, 'delete');\n    }\n\n    public function cancelDeletion(): void\n    {\n        $this->cancelDestructiveListAction();\n    }\n\n    public function deletePost(): void\n    {\n        $this->confirmDestructiveListAction(\n            destroy: fn (Post $post) => $post->delete(),\n            ability: 'delete',\n            successMessage: 'Post deleted',\n        );\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "requestDestructiveListAction() resolves the row by key from $listItems,\ncalls authorize(), and sets $confirmingListDestruction when allowed.\nconfirmDestructiveListAction() closes the dialog, authorizes again, runs the\ndestroy callable, removes the row from $listItems, and optionally sends\nsuccess Feedback."
+                },
+                {
+                    "type": "text",
+                    "text": "Keys must be stable identities such as model ids. Do not pass loop indexes."
+                }
+            ],
+            "links": []
+        },
+        "keep-denied-rows-visible": {
+            "title": "Keep denied rows visible",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list separator>\n    @foreach ($this->listItems as $post)\n        <firstlight:list-item\n            :headline=\"$post->title\"\n            supporting=\"Delete permanently\"\n            :disabled=\"$this->denies('delete', $post)\"\n            @press=\"requestDeletion({{ $post->id }})\"\n        />\n    @endforeach\n</firstlight:list>\n\n<firstlight:confirmation-dialog\n    :visible=\"$confirmingListDestruction\"\n    title=\"Delete post?\"\n    message=\"This action cannot be undone.\"\n    confirm-label=\"Delete\"\n    cancel-label=\"Keep post\"\n    tone=\"destructive\"\n    @press=\"deletePost\"\n    @dismiss=\"cancelDeletion\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Never omit a destructive List Item when the Policy denies it. Disable the row\nand keep supporting copy that explains the unavailable action when the\nsurrounding interface does not already make that clear."
+                },
+                {
+                    "type": "text",
+                    "text": "To offer deletion from a swipe, add the following binding to the List Item\nabove. It opens the same confirmation dialog and does not remove the row:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": ":trailing-actions=\"[\n    ['method' => 'requestDeletion('.$post->id.')', 'label' => 'Delete', 'role' => 'destructive'],\n]\""
+                },
+                {
+                    "type": "text",
+                    "text": "Swipe callbacks use stable keys just like @press. A disabled row exposes no\nswipe actions; authorization still runs in PHP when the action is requested and\nagain when deletion is confirmed."
+                }
+            ],
+            "links": []
+        },
+        "custom-keys-or-database-resolve": {
+            "title": "Custom keys or database resolve",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Override destructiveListItemKey() when rows do not expose getKey(), id,\nor an id array key. Override resolveDestructiveListItem() to reload the\nmodel from the database instead of trusting the in-memory $listItems copy:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "protected function resolveDestructiveListItem(mixed $key): mixed\n{\n    return Post::query()->find($key);\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "When you resolve from the database, $listItems is still updated after a\nsuccessful destroy so the published List matches the mutation."
+                }
+            ],
+            "links": []
+        }
+    }
+}

@@ -1,0 +1,224 @@
+{
+    "id": "components/date-picker",
+    "title": "Date Picker",
+    "description": "Canonical nullable dates, inclusive bounds, native confirmation, localisation, and accessibility for Firstlight Date Picker.",
+    "group": "Components",
+    "anchors": {
+        "date-picker": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events-and-synchronisation": "events-and-synchronisation",
+        "validation-and-accessibility": "validation-and-accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Date Picker chooses one calendar date with the native date picker on each\nplatform. PHP remains authoritative: the closed field always shows the value\nPHP most recently published."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:date-picker\n    label=\"Appointment date\"\n    placeholder=\"Choose a date\"\n    helper=\"Dates use the clinic's local calendar.\"\n    min=\"2026-01-01\"\n    max=\"2026-12-31\"\n    locale=\"en-AU\"\n    timezone=\"Australia/Sydney\"\n    required\n    native:model=\"appointmentDate\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "The bound property must contain a canonical YYYY-MM-DD string or null:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public ?string $appointmentDate = null;"
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "value / native:model",
+                    "text": "Accepted type: `string\nPurpose: null`"
+                },
+                {
+                    "type": "definition",
+                    "label": "min",
+                    "text": "Accepted type: `string\nPurpose: null`"
+                },
+                {
+                    "type": "definition",
+                    "label": "max",
+                    "text": "Accepted type: `string\nPurpose: null`"
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible field label and accessibility-name fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "placeholder",
+                    "text": "Accepted type: string\nPurpose: Field text while the accepted value is null."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting guidance below the field."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Communicates required metadata; validation remains in PHP."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents opening and confirmation."
+                },
+                {
+                    "type": "definition",
+                    "label": "locale",
+                    "text": "Accepted type: BCP-47 string\nPurpose: Formats the field and native calendar without changing the wire date. Omission inherits the application translator locale."
+                },
+                {
+                    "type": "definition",
+                    "label": "timezone",
+                    "text": "Accepted type: IANA timezone string\nPurpose: Determines today and Swift date mapping without shifting the wire date. Omission inherits config('app.timezone') when it is a valid IANA identifier."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                },
+                {
+                    "type": "text",
+                    "text": "Omitted value and explicit null publish the same empty state. The component does not accept\nDateTimeInterface, timestamps, whitespace, unpadded dates, or year zero.\nYears 0001 through 9999 use proleptic Gregorian leap-year rules."
+                },
+                {
+                    "type": "text",
+                    "text": "min and max are inclusive, must be ordered, and must contain an accepted\nnon-null value. Null bounds are omitted. Firstlight never silently clamps an\nauthored value."
+                }
+            ],
+            "links": []
+        },
+        "events-and-synchronisation": {
+            "title": "Events and synchronisation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives a canonical date string only after the user confirms the\nnative presentation. In normal use, native:model registers this callback and\nupdates the bound property."
+                },
+                {
+                    "type": "text",
+                    "text": "Plain native:model and native:model.live are equivalent because a date is\na discrete choice. Blur, lazy, and debounce modifiers are rejected."
+                },
+                {
+                    "type": "text",
+                    "text": "Opening the picker, moving its draft, cancelling, confirming the already\naccepted date, and programmatic PHP updates emit nothing. The trigger never\nshows a draft optimistically. PHP may accept, reject, or replace a proposal;\nthe next tree publication remains the source of truth."
+                },
+                {
+                    "type": "text",
+                    "text": "If accepted value, bounds, locale, timezone, or disabled state changes while\nthe picker is open, Firstlight dismisses it and discards its draft. A null\nvalue initially drafts today in timezone, clamped to the nearest bound when\nnecessary, but does not publish until confirmation."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-accessibility": {
+            "title": "Validation and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Invalid inherited application locale or timezone is omitted so the device\ncalendar is used. Authored malformed locale or timezone still fail before\npublication. Sheet Confirm and Cancel labels are package chrome, not Blade\nattributes; see Localize chrome."
+                },
+                {
+                    "type": "text",
+                    "text": "User validation is separate: screens that use ValidatesFields\nauto-bind the first MessageBag message for the field's native:model or\nerror-for name. An authored error wins. required is display metadata\nand does not run Laravel rules. See\nValidate fields."
+                },
+                {
+                    "type": "text",
+                    "text": "A visible label or explicit a11y-label is required during development.\nError text replaces helper text without replacing the control's accessible\nname or value. The field exposes its accepted localized value or placeholder,\nhint, disabled state, and platform error semantics."
+                },
+                {
+                    "type": "text",
+                    "text": "The calendar keeps native traversal, focus, selection, today, cancel, and\nconfirm behaviour. The field and actions retain at least a 44-point target on\niOS and 48-dp target on Android, and support Dynamic Type or font scaling,\ndark mode, increased contrast, and right-to-left layout."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                },
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS presents a genuine graphical SwiftUI DatePicker restricted to calendar\ndates, with explicit Cancel and Confirm actions. On iPhone it opens in a sheet\nsized to the calendar and actions, which grows with Dynamic Type; on iPad it\nopens in a popover anchored to the field. Android presents the Material 3 DatePickerDialog from a\nread-only Material field. Android maps Material's selected UTC-midnight cell\nback to the same canonical date rather than treating it as a local instant."
+                },
+                {
+                    "type": "text",
+                    "text": "Date Picker deliberately has no time or datetime mode, picker-style override,\nhour format, clear action, custom presentation labels or icons, range mode, or\nvisual variant props."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/date-picker/ios-light.png",
+                    "text": "Date Picker on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/date-picker/ios-dark.png",
+                    "text": "Date Picker on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/date-picker/android-light.png",
+                    "text": "Date Picker on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/date-picker/android-dark.png",
+                    "text": "Date Picker on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

@@ -1,0 +1,108 @@
+{
+    "id": "getting-started/first-component",
+    "title": "Add your first Firstlight component",
+    "description": "Add a Segmented control whose selected value is managed by PHP.",
+    "group": "Getting started",
+    "anchors": {
+        "add-your-first-firstlight-component": "overview",
+        "define-the-state": "define-the-state",
+        "render-the-control": "render-the-control",
+        "handle-a-selection-explicitly": "handle-a-selection-explicitly"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This tutorial adds a native Segmented control for choosing a queue. The same EDGE markup renders as a platform-appropriate control on iOS and Android."
+                }
+            ],
+            "links": []
+        },
+        "define-the-state": {
+            "title": "Define the state",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend Firstlight's base for your screen, rather than the upstream EDGE base:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\NativeComponent;\n\nclass QueueScreen extends NativeComponent\n{\n    // Add the state below; use your normal Blade view.\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Normal Blade renders (a global View returned from render(), $this->view(),\nor an inferred view) automatically receive normal chrome and a root response\nrevision. For a hand-built Element root, return $this->response($element)\nfrom render() instead of returning the Element directly. Nested children are\nuntouched and partials are unstamped. Streaming is disabled and cannot be opted\ninto. See the full contract and limits."
+                },
+                {
+                    "type": "text",
+                    "text": "Add the selected value and stable value-to-label options to your component:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public string $queue = 'mine';\n\npublic array $queueOptions = [\n    'mine' => 'Mine',\n    'all' => 'All',\n];"
+                },
+                {
+                    "type": "text",
+                    "text": "The array keys are the public values stored in $queue; the labels are display text."
+                }
+            ],
+            "links": [
+                {
+                    "label": "full contract and limits",
+                    "url": "../reference/compatibility.md#runtime-response-contract"
+                }
+            ]
+        },
+        "render-the-control": {
+            "title": "Render the control",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Bind the property with native:model:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:segmented\n    :options=\"$queueOptions\"\n    native:model=\"queue\"\n    label=\"Queue\"\n    helper=\"Choose the active queue.\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "Run the application natively. A selection emits its stable value to PHP, and the published $queue value determines the visible selection."
+                }
+            ],
+            "links": []
+        },
+        "handle-a-selection-explicitly": {
+            "title": "Handle a selection explicitly",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Use @change when the selection should call a method instead of directly synchronising a property:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:segmented\n    :options=\"$queueOptions\"\n    :value=\"$queue\"\n    @change=\"selectQueue\"\n    label=\"Queue\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "The method receives the selected string value. See the Segmented reference for integer values, disabled choices, accessibility, and validation rules. When the screen should show Laravel messages on Firstlight fields, follow Validate fields."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Segmented reference",
+                    "url": "../components/segmented.md"
+                },
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        }
+    }
+}

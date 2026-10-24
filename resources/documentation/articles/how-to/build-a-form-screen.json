@@ -1,0 +1,184 @@
+{
+    "id": "how-to/build-a-form-screen",
+    "title": "Build a form screen",
+    "description": "Recipe for a create form with a Form Request, native field errors, a form-level error, a loading Save button, success Feedback, and return navigation.",
+    "group": "Guides",
+    "anchors": {
+        "build-a-form-screen": "overview",
+        "1-register-the-route": "1-register-the-route",
+        "2-write-the-form-request": "2-write-the-form-request",
+        "3-write-the-screen": "3-write-the-screen",
+        "4-write-the-view": "4-write-the-view",
+        "what-each-platform-shows": "what-each-platform-shows",
+        "rules-to-keep": "rules-to-keep",
+        "adapt-the-recipe": "adapt-the-recipe"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe builds the create screen most apps need: labelled fields, Laravel\nvalidation through a Form Request, errors shown by each native field, an error\nfor problems that belong to the whole form, a Save button with a loading state,\nand a return to the previous screen with success Feedback."
+                },
+                {
+                    "type": "text",
+                    "text": "This recipe runs unchanged in the\nshowcase app, where\nFormRecipeTest\nexercises it."
+                },
+                {
+                    "type": "text",
+                    "text": "Use it when several values are checked and saved together. Use the\nsettings recipe when each value saves on its own."
+                }
+            ],
+            "links": [
+                {
+                    "label": "showcase app",
+                    "url": "https://github.com/firstlightui/showcase"
+                },
+                {
+                    "label": "FormRecipeTest",
+                    "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/FormRecipeTest.php"
+                },
+                {
+                    "label": "settings recipe",
+                    "url": "build-a-settings-screen.md"
+                }
+            ]
+        },
+        "1-register-the-route": {
+            "title": "1. Register the route",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\CreatePostScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/posts/create', CreatePostScreen::class)->name('posts.create');"
+                },
+                {
+                    "type": "text",
+                    "text": "Register it before any /posts/{post} route so create is not read as an id."
+                }
+            ],
+            "links": []
+        },
+        "2-write-the-form-request": {
+            "title": "2. Write the Form Request",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Http\\Requests;\n\nuse Illuminate\\Foundation\\Http\\FormRequest;\n\nclass StorePostRequest extends FormRequest\n{\n    public function rules(): array\n    {\n        return [\n            'title' => 'required|min:3|max:80',\n            'body' => 'required|min:10',\n        ];\n    }\n\n    public function messages(): array\n    {\n        return [\n            'body.min' => 'Write at least a sentence.',\n        ];\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Declare rules in the order the fields appear. The error summary lists messages\nin rule order."
+                }
+            ],
+            "links": []
+        },
+        "3-write-the-screen": {
+            "title": "3. Write the screen",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Http\\Requests\\StorePostRequest;\nuse App\\Models\\Post;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Validation\\ValidationException;\nuse Illuminate\\View\\View;\n\nclass CreatePostScreen extends NativeComponent\n{\n    public string $title = '';\n\n    public string $body = '';\n\n    public function save(): void\n    {\n        $saved = $this->submit(\n            action: function (): void {\n                $this->validate(StorePostRequest::class);\n\n                if (Post::query()->where('title', $this->title)->exists()) {\n                    throw ValidationException::withMessages([\n                        'form' => 'A post with this title already exists.',\n                    ]);\n                }\n\n                Post::query()->create([\n                    'title' => $this->title,\n                    'excerpt' => str($this->body)->limit(60)->toString(),\n                    'body' => $this->body,\n                ]);\n            },\n            successMessage: 'Post created',\n            validate: false,\n        );\n\n        if ($saved) {\n            $this->back();\n        }\n    }\n\n    public function navTitle(): string\n    {\n        return 'New post';\n    }\n\n    public function render(): View\n    {\n        return view('native.create-post');\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "validate: false stops submit() from running $rules first, because the Form\nRequest supplies them inside the action. Any ValidationException thrown inside\nthe action, from the Form Request or from your own check, is shown on the\nscreen and submit() returns false."
+                }
+            ],
+            "links": []
+        },
+        "4-write-the-view": {
+            "title": "4. Write the view",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Save this as resources/views/native/create-post.blade.php:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:scroll-view class=\"w-full flex-1\">\n    <native:column class=\"w-full p-4 gap-4\">\n        <firstlight:callout error-for=\"form\" />\n\n        <firstlight:text-field\n            label=\"Title\"\n            autocapitalize=\"sentences\"\n            submit-label=\"next\"\n            native:model=\"title\"\n            required\n        />\n\n        <firstlight:text-area\n            label=\"Body\"\n            native:model=\"body\"\n            required\n        />\n\n        <firstlight:button variant=\"primary\" :loading=\"$submitting\" @press=\"save\">\n            Save post\n        </firstlight:button>\n    </native:column>\n</native:scroll-view>"
+                },
+                {
+                    "type": "text",
+                    "text": "No :error wiring is needed. After a failed save, each field shows its first\nmessage in its native error slot, and the Callout shows the form message.\nFor long forms, add <firstlight:callout error-summary /> above the fields to\nlist every message in one place."
+                }
+            ],
+            "links": []
+        },
+        "what-each-platform-shows": {
+            "title": "What each platform shows",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "Field errors",
+                    "text": "iOS: Error text under the field with error colouring\nAndroid: Material 3 supporting text in the error state"
+                },
+                {
+                    "type": "definition",
+                    "label": "Form error",
+                    "text": "iOS: Danger Callout\nAndroid: Danger Callout"
+                },
+                {
+                    "type": "definition",
+                    "label": "Screen reader",
+                    "text": "iOS: VoiceOver reads the errors and moves to the first invalid field\nAndroid: TalkBack reads the errors and moves to the first invalid field"
+                },
+                {
+                    "type": "definition",
+                    "label": "Success",
+                    "text": "iOS: Returns to the previous screen and shows \"Post created\"\nAndroid: Returns to the previous screen and shows \"Post created\""
+                }
+            ],
+            "links": []
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Do not wrap save() in try/catch. Firstlight shows validation errors for\nyou."
+                },
+                {
+                    "type": "text",
+                    "text": "• Do not place @nativeError next to Firstlight fields. It skips native error\ncolouring and screen-reader announcements."
+                },
+                {
+                    "type": "text",
+                    "text": "• Use a key that is not a field name, such as form, for errors that belong to\nthe whole form."
+                },
+                {
+                    "type": "text",
+                    "text": "• required on a field is display only. The Form Request enforces it."
+                }
+            ],
+            "links": []
+        },
+        "adapt-the-recipe": {
+            "title": "Adapt the recipe",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Edit instead of create: load the model in mount(), copy its values into\nthe properties, and call update() instead of create()."
+                },
+                {
+                    "type": "text",
+                    "text": "• Validate as the user leaves a field: add\npublic function updatedTitle(): void { $this->validateOnly('title', StorePostRequest::class); }."
+                },
+                {
+                    "type": "text",
+                    "text": "• Test it: see Test screens."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Test screens",
+                    "url": "test-screens.md"
+                }
+            ]
+        }
+    }
+}

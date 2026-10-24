@@ -1,0 +1,129 @@
+{
+    "id": "components/alert-dialog",
+    "title": "Alert Dialog",
+    "description": "Present one native acknowledgement with a single action and server-controlled visibility.",
+    "group": "Components",
+    "anchors": {
+        "alert-dialog": "overview",
+        "props-and-events": "props-and-events",
+        "behavior-and-accessibility": "behavior-and-accessibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Alert Dialog tells the user one fact they must acknowledge. It uses the\nplatform's native one-button alert, not a custom full-screen overlay."
+                },
+                {
+                    "type": "text",
+                    "text": "Use Confirmation Dialog when the user must choose\nbetween confirm and cancel. Use Transient Feedback\nfor a non-blocking toast. Use Modal only when the surface needs\nauthored child content."
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:alert-dialog\n    :visible=\"$showingSaved\"\n    title=\"Changes saved\"\n    message=\"Your profile was updated.\"\n    action-label=\"OK\"\n    @dismiss=\"acknowledgeSaved\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "The dismiss handler should set $showingSaved to false. The same handler\nruns for the action button, back, and outside dismissal."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Confirmation Dialog",
+                    "url": "confirmation-dialog.md"
+                },
+                {
+                    "label": "Transient Feedback",
+                    "url": "transient-feedback.md"
+                },
+                {
+                    "label": "Modal",
+                    "url": "modal.md"
+                }
+            ]
+        },
+        "props-and-events": {
+            "title": "Props and events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• visible: server-controlled presentation request; defaults to false."
+                },
+                {
+                    "type": "text",
+                    "text": "• title: required visible heading and accessible dialog name."
+                },
+                {
+                    "type": "text",
+                    "text": "• message: required explanation."
+                },
+                {
+                    "type": "text",
+                    "text": "• action-label: acknowledgement action text; defaults to the package chrome\nstring OK. The actionLabel alias is accepted. See\nLocalize chrome."
+                },
+                {
+                    "type": "text",
+                    "text": "• @dismiss: required callback for the action, back, or outside dismissal."
+                },
+                {
+                    "type": "text",
+                    "text": "• class: external EDGE layout only."
+                },
+                {
+                    "type": "text",
+                    "text": "The component always presents one action. It does not support @press, a\ncancel action, tones, icons, loading or disabled states, native:model,\nauthored children, or an undismissable mode."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "behavior-and-accessibility": {
+            "title": "Behavior and accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "One user acknowledgement produces one @dismiss callback. Programmatic\nclosure produces none. After the user dismisses the dialog, copy-only\npublications do not reopen it; a later server transition from false to\ntrue presents it again."
+                },
+                {
+                    "type": "text",
+                    "text": "iOS uses SwiftUI alert. Android uses Material 3 AlertDialog with a single\nconfirm button. Native chrome owns modal focus, action placement, Dynamic Type\nor font scaling, dark appearance, contrast, reduced motion, and right-to-left\nbehavior. The title is the accessible name."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/alert-dialog/ios-light.png",
+                    "text": "Alert Dialog on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/alert-dialog/ios-dark.png",
+                    "text": "Alert Dialog on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/alert-dialog/android-light.png",
+                    "text": "Alert Dialog on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/alert-dialog/android-dark.png",
+                    "text": "Alert Dialog on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

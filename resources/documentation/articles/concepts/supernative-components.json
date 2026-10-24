@@ -1,0 +1,71 @@
+{
+    "id": "concepts/supernative-components",
+    "title": "SuperNative components",
+    "description": "How Firstlight turns shared EDGE markup into genuine iOS and Android controls.",
+    "group": "Concepts",
+    "anchors": {
+        "supernative-components": "overview",
+        "from-edge-to-an-element-tree": "from-edge-to-an-element-tree",
+        "genuine-platform-renderers": "genuine-platform-renderers",
+        "semantic-events-and-reconciliation": "semantic-events-and-reconciliation"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight is a NativePHP SuperNative UI plugin. It participates in the same EDGE, Element Tree, native renderer, and wire-event lifecycle as NativePHP's own native UI components."
+                }
+            ],
+            "links": []
+        },
+        "from-edge-to-an-element-tree": {
+            "title": "From EDGE to an Element Tree",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The Firstlight precompiler maps an authored tag such as <firstlight:segmented> to its Blade component during a native render. The component declares the firstlight.segmented element type. Its PHP element validates authored input, normalises options, and publishes a primitive Element Tree payload."
+                },
+                {
+                    "type": "text",
+                    "text": "The payload carries stable values, labels, enabled state, field metadata, accessibility text, and callback identifiers. It does not carry SwiftUI or Compose objects and does not introduce a separate JSON bridge."
+                }
+            ],
+            "links": []
+        },
+        "genuine-platform-renderers": {
+            "title": "Genuine platform renderers",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The plugin manifest maps the same element type to SegmentedRenderer on iOS and dev.firstlightui.plugins.firstlight_ui.ui.SegmentedRenderer on Android. The iOS renderer creates a native SwiftUI/UIKit control. The Android renderer creates a Material 3 Jetpack Compose control."
+                },
+                {
+                    "type": "text",
+                    "text": "The shared API guarantees the component's meaning and behaviour. Each platform retains its own geometry, materials, typography, state layers, motion, and accessibility conventions."
+                }
+            ],
+            "links": []
+        },
+        "semantic-events-and-reconciliation": {
+            "title": "Semantic events and reconciliation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A native interaction sends a semantic change event with the stable public value, not a renderer index or display label. PHP processes that event and publishes the next Element Tree. The renderer reconciles its control from the newly published value."
+                },
+                {
+                    "type": "text",
+                    "text": "That lifecycle keeps application decisions in PHP while ordinary native interaction and presentation remain on the platform UI thread. Read server-authoritative state for the selection timing contract."
+                }
+            ],
+            "links": [
+                {
+                    "label": "server-authoritative state",
+                    "url": "server-authoritative-state.md"
+                }
+            ]
+        }
+    }
+}

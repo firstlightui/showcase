@@ -221,6 +221,9 @@ return [
     */
 
     'cleanup_exclude_files' => [
+        'credentials',
+        'output',
+        '.impeccable',
         'storage/framework/sessions',
         'storage/framework/cache',
         'storage/framework/testing',

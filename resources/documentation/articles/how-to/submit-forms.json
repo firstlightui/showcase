@@ -1,0 +1,116 @@
+{
+    "id": "how-to/submit-forms",
+    "title": "Submit Firstlight forms",
+    "description": "Validate Firstlight fields, run a PHP action once, and publish success Feedback.",
+    "group": "Guides",
+    "anchors": {
+        "submit-firstlight-forms": "overview",
+        "declare-the-screen": "declare-the-screen",
+        "bind-the-fields-and-button": "bind-the-fields-and-button",
+        "loading-and-duplicate-submissions": "loading-and-duplicate-submissions"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight submits forms through an ordinary Button press and a PHP screen\nmethod. There is no <firstlight:form> container, client-side validator, or\nform schema."
+                }
+            ],
+            "links": []
+        },
+        "declare-the-screen": {
+            "title": "Declare the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Extend FirstlightUI\\NativeComponent to use the form submission and field\nvalidation helpers. Declare Laravel rules against the public properties bound\nby your fields:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Native;\n\nuse App\\Models\\Profile;\nuse FirstlightUI\\NativeComponent;\n\nclass EditProfileScreen extends NativeComponent\n{\n    public string $name = '';\n\n    public string $email = '';\n\n    protected array $rules = [\n        'name' => 'required',\n        'email' => 'required|email',\n    ];\n\n    public function save(): void\n    {\n        $this->submit(\n            action: fn () => Profile::query()->updateOrCreate(\n                ['user_id' => auth()->id()],\n                ['name' => $this->name, 'email' => $this->email],\n            ),\n            successMessage: 'Profile saved',\n        );\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Screens that extend Native\\Mobile\\Edge\\NativeComponent directly can opt in\nwith both FirstlightUI\\Concerns\\ValidatesFields and\nFirstlightUI\\Concerns\\SubmitsForms."
+                }
+            ],
+            "links": []
+        },
+        "bind-the-fields-and-button": {
+            "title": "Bind the fields and Button",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Use the existing fields, native:model, and Button:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field\n    label=\"Name\"\n    native:model.blur=\"name\"\n/>\n\n<firstlight:text-field\n    label=\"Email\"\n    native:model.blur=\"email\"\n/>\n\n<firstlight:button @press=\"save\">\n    Save profile\n</firstlight:button>"
+                },
+                {
+                    "type": "text",
+                    "text": "submit() runs $this->validate() first. A validation failure returns\nfalse, skips the callable and success Feedback, and lets\nValidatesFields publish each first Laravel message through the matching\nfield's native error slot. Screen readers hear a summary and move to the\nfirst invalid field; add <firstlight:callout error-summary /> for a visible\nsummary. See Validate Firstlight fields\nfor rule sources, Form Requests, custom messages, and explicit error binding. The\nValidatesFields reference lists the method\ncontract and participating fields."
+                },
+                {
+                    "type": "text",
+                    "text": "After successful validation, submit() runs the callable and sends\nFeedback::success($successMessage)->send() when the message is non-empty.\nIt then returns true. Pass validate: false only when the action does not\nneed field validation:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "$sent = $this->submit(\n    action: fn () => $this->sendVerificationEmail(),\n    successMessage: 'Verification email sent',\n    validate: false,\n);"
+                },
+                {
+                    "type": "text",
+                    "text": "To fail the whole form from inside the action, throw Laravel's\nValidationException. Its messages replace the screen's error bag, submit()\nreturns false, and no success Feedback is sent:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use Illuminate\\Validation\\ValidationException;\n\n$this->submit(\n    action: function (): void {\n        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password])) {\n            throw ValidationException::withMessages([\n                'form' => 'These credentials do not match our records.',\n            ]);\n        }\n    },\n    successMessage: 'Signed in',\n);"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:callout error-for=\"form\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "Other unexpected exceptions from the callable are not converted to Feedback or\nswallowed."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate Firstlight fields",
+                    "url": "validate-fields.md"
+                },
+                {
+                    "label": "ValidatesFields reference",
+                    "url": "../reference/validates-fields.md"
+                }
+            ]
+        },
+        "loading-and-duplicate-submissions": {
+            "title": "Loading and duplicate submissions",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "$submitting is true while validation and the callable run. Re-entering\nsubmit() on the same PHP component during that interval returns false\nwithout validating, calling the action, or sending Feedback. submit() always\nclears $submitting in finally, so binding Button loading or disabled to\n$this->submitting does not flash during the default one-request path."
+                },
+                {
+                    "type": "text",
+                    "text": "NativePHP handles a press and then compiles one Element Tree afterward. A\ndevice-visible loading frame requires application code to set $this->submitting = true outside submit(), publish that tree, and clear the flag on a later\nrequest."
+                },
+                {
+                    "type": "text",
+                    "text": "The helper does not publish an intermediate tree, call publishPlaceholder(),\nor add a client-side loading mechanism. publishPlaceholder() belongs to\nlazy screen mounting, not form submission."
+                }
+            ],
+            "links": []
+        }
+    }
+}

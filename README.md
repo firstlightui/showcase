@@ -64,6 +64,26 @@ phases per platform on unpatched PHP 8.5.11; this is not production readiness.
   (screen-local Undo) exercise paths that simulators and emulators cannot
   fully cover: the real camera, system pickers and native event delivery.
 
+## Offline documentation
+
+The Docs tab bundles all Firstlight guides, API references, code examples and
+screenshots for the revision installed in `composer.lock`. Search covers article
+contents and ranks title matches first. Articles have section navigation, native
+text selection for copying code, internal links and shortcuts to live examples.
+External references open in the system browser.
+
+After updating Firstlight, regenerate the bundle from its local Git repository:
+
+```bash
+php artisan documentation:sync
+php artisan test tests/Feature/DocumentationTest.php
+```
+
+The command reads the locked commit, rather than the repository's working tree.
+Commit `resources/documentation/` and `public/documentation/` together. PNG source
+provenance is embedded without changing image pixels. No network connection is
+needed to read bundled articles or view their screenshots.
+
 ## Documentation captures
 
 The stable Segmented fixture is available at `/captures/segmented`. The Alert

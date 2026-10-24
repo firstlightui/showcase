@@ -1,0 +1,242 @@
+{
+    "id": "components/status-label",
+    "title": "Status Label",
+    "description": "Public API, tones, accessibility, validation, compatibility, and visual evidence for Firstlight Status Label.",
+    "group": "Components",
+    "anchors": {
+        "status-label": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "icons": "icons",
+        "events-and-values": "events-and-values",
+        "state-timing": "state-timing",
+        "disabled-loading-and-error-behaviour": "disabled-loading-and-error-behaviour",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Status Label presents short display-only metadata or status text as a native capsule. Use an appropriate interactive control when the interface must respond to a press."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:status-label\n    label=\"Awaiting review\"\n    tone=\"warning\"\n    icon=\"warning\"\n    icon-ios=\"exclamationmark.triangle\"\n    icon-android=\"warning\"\n    a11y-label=\"Referral status: awaiting review\"\n    a11y-hint=\"Updated by the referrals team\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "text": "The same authored tag renders on iOS and Android."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: non-empty string\nPurpose: Visible status text. Required."
+                },
+                {
+                    "type": "definition",
+                    "label": "tone",
+                    "text": "Accepted type: neutral, info, success, warning, or danger\nPurpose: Semantic colour intent. Defaults to neutral."
+                },
+                {
+                    "type": "definition",
+                    "label": "icon",
+                    "text": "Accepted type: string or null\nPurpose: Optional decorative leading icon; shared fallback."
+                },
+                {
+                    "type": "definition",
+                    "label": "icon-ios",
+                    "text": "Accepted type: IosSymbol, string, or null\nPurpose: iOS override of icon."
+                },
+                {
+                    "type": "definition",
+                    "label": "icon-android",
+                    "text": "Accepted type: AndroidSymbol, string, or null\nPurpose: Android override of icon."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Replaces the visible text as the accessible name."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Adds supplementary VoiceOver or TalkBack context."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "icons": {
+            "title": "Icons",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Icons use NativePHP's Native\\Mobile\\Icon\\IconResolver. PHP also accepts iconIos and iconAndroid aliases. The fluent API is StatusLabel::make('Warning')->icon('warning', ios: 'exclamationmark.triangle', android: 'warning'); typed symbols implement Native\\Mobile\\Icon\\IosSymbol or AndroidSymbol. Each platform uses its override when supplied, otherwise the shared name; tooling with no platform uses the shared name. Omitting icons keeps the text-only presentation. Android typed variants are retained in the published props; NativePHP's current Material icon-font helper renders the resolved name, not a separate variant font."
+                }
+            ],
+            "links": []
+        },
+        "events-and-values": {
+            "title": "Events and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Status Label has no value, options, model binding, or events. It is static text from the user's perspective. A later server publication may replace its label, tone, or accessibility metadata without producing a callback."
+                },
+                {
+                    "type": "text",
+                    "text": "Do not use native:model, @change, @press, value, disabled, loading, error, required, or helper. Firstlight rejects those attributes instead of silently adding interactive or field semantics."
+                }
+            ],
+            "links": []
+        },
+        "state-timing": {
+            "title": "State timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The component renders the latest published Element Tree metadata. It keeps no native selection, editing buffer, pending proposal, or animation state. Programmatic updates reconcile by the element's stable node ID and do not emit events."
+                }
+            ],
+            "links": []
+        },
+        "disabled-loading-and-error-behaviour": {
+            "title": "Disabled, loading, and error behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Disabled, loading, and validation states do not apply to display-only status text. Choose the semantic tone that describes the current metadata and publish a new label or tone when that status changes."
+                }
+            ],
+            "links": []
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The visible label is the accessible name by default. a11y-label replaces that name, and a11y-hint adds context. Both renderers expose static text semantics without a button, selected, disabled, or live-region role."
+                },
+                {
+                    "type": "text",
+                    "text": "The optional icon is decorative and silent to VoiceOver and TalkBack. It uses the same contrast-checked tone foreground as the text in light and dark appearances; it never replaces the required label. Leading placement follows the native layout direction."
+                },
+                {
+                    "type": "text",
+                    "text": "Text follows Dynamic Type on iOS and system font scaling on Android. Long labels and accessibility sizes expand or wrap rather than truncating their meaning. Semantic theme colours are checked at render time; when a customised foreground and background are below 4.5:1 contrast, Firstlight uses whichever of black or white has the stronger ratio."
+                }
+            ],
+            "links": []
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A missing, null, empty, or whitespace-only label throws an InvalidArgumentException. An unsupported tone also throws and lists the accepted values. Malformed tone data that reaches a native renderer unexpectedly falls back defensively to neutral instead of crashing the host."
+                },
+                {
+                    "type": "text",
+                    "text": "Non-string shared icons and platform overrides other than strings, matching platform symbol types, or null throw with the public prop name."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS composes SwiftUI Text with native text accessibility. A single line keeps its pill shape; for wrapped labels, the corner radius is capped at half the scaled single-line height plus vertical padding so all text remains on the contrasting background. Android composes Material 3 Text in a capsule-shaped Surface with merged TalkBack semantics. Both use NativePHP semantic theme tokens while retaining platform-native typography, scaling, colour-scheme, and layout behaviour."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Status Label supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility reference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "These native captures use iPhone 17 Pro / iOS 26.5 and an Android 17 (API 37)\nemulator. Draft retains the optional text-only presentation; the other\ntones include decorative platform icons."
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/status-label/ios-light.png",
+                    "text": "Status Label on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/status-label/ios-dark.png",
+                    "text": "Status Label on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/status-label/android-light.png",
+                    "text": "Status Label on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/status-label/android-dark.png",
+                    "text": "Status Label on Android in dark mode"
+                },
+                {
+                    "type": "text",
+                    "text": "Long labels wrap within their fill at maximum iOS accessibility text size and\nAndroid font scale 2.0. The interactive showcase is scrolled to show the complete\nlong label below."
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/status-label/ios-largest-text.png",
+                    "text": "Status Label with a wrapped long label on iOS"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/status-label/android-largest-text.png",
+                    "text": "Status Label with a wrapped long label on Android"
+                },
+                {
+                    "type": "text",
+                    "text": "These are simulator/emulator visual checks, not spoken VoiceOver/TalkBack or\nphysical-device release qualification."
+                }
+            ],
+            "links": []
+        }
+    }
+}

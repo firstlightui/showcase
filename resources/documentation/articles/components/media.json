@@ -1,0 +1,299 @@
+{
+    "id": "components/media",
+    "title": "Media",
+    "description": "One image or document field with Storage-backed MediaValue, optional Firstlight crop, and ValidatesFields participation.",
+    "group": "Components",
+    "anchors": {
+        "media": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "crop-rules": "props",
+        "events": "events",
+        "mediavalue": "mediavalue",
+        "validation": "validation",
+        "accessibility": "accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "host-application-setup": "host-application-setup",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Media captures exactly one image or one document into Laravel Storage and\nbinds a MediaValue on your native component. Use it when you need a form\nfield with preview, clear, optional crop, and the same error slot as other\nFirstlight fields."
+                }
+            ],
+            "links": []
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Use FirstlightUI\\NativeComponent for the full nonstreaming\nresponse-revision contract."
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\Media\\MediaStorage;\nuse FirstlightUI\\Media\\MediaValue;\nuse Illuminate\\View\\View;\nuse FirstlightUI\\NativeComponent;\n\nclass Profile extends NativeComponent\n{\n    public ?MediaValue $avatar = null;\n\n    /** @var array<string, string> */\n    protected array $rules = [\n        'avatar' => 'required|image|max:2048',\n    ];\n\n    public function avatarChosen(string $tempPath): void\n    {\n        $previous = $this->avatar;\n        $this->avatar = MediaStorage::commit(\n            $tempPath,\n            'mobile_public',\n            'avatars',\n        );\n        MediaStorage::delete($previous);\n    }\n\n    public function avatarCleared(): void\n    {\n        MediaStorage::delete($this->avatar);\n        $this->avatar = null;\n    }\n\n    public function render(): View\n    {\n        return view('native.profile');\n    }\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:media\n    mode=\"image\"\n    label=\"Profile photo\"\n    helper=\"Square crop required\"\n    aspect=\"1:1\"\n    disk=\"mobile_public\"\n    directory=\"avatars\"\n    native:model=\"avatar\"\n    @change=\"avatarChosen\"\n    @clear=\"avatarCleared\"\n/>"
+                }
+            ],
+            "links": [
+                {
+                    "label": "response-revision contract",
+                    "url": "../reference/compatibility.md#runtime-response-contract"
+                }
+            ]
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "mode",
+                    "text": "Accepted type: image | document\nPurpose: Required. Image allows camera/library and crop; document uses the system file picker only."
+                },
+                {
+                    "type": "definition",
+                    "label": "value",
+                    "text": "Accepted type: MediaValue | null\nPurpose: Committed value. Empty is null."
+                },
+                {
+                    "type": "definition",
+                    "label": "native:model",
+                    "text": "Accepted type: a ?MediaValue component property\nPurpose: Synchronises the accepted value. native:model.live is also accepted."
+                },
+                {
+                    "type": "definition",
+                    "label": "label",
+                    "text": "Accepted type: string\nPurpose: Visible field label."
+                },
+                {
+                    "type": "definition",
+                    "label": "helper",
+                    "text": "Accepted type: string\nPurpose: Supporting text below the control."
+                },
+                {
+                    "type": "definition",
+                    "label": "error",
+                    "text": "Accepted type: string\nPurpose: Validation text; shown instead of helper when non-empty."
+                },
+                {
+                    "type": "definition",
+                    "label": "required",
+                    "text": "Accepted type: bool\nPurpose: Marks the field as required visually and for assistive technology."
+                },
+                {
+                    "type": "definition",
+                    "label": "disabled",
+                    "text": "Accepted type: bool\nPurpose: Prevents pick and clear while retaining the accepted value."
+                },
+                {
+                    "type": "definition",
+                    "label": "disk",
+                    "text": "Accepted type: string\nPurpose: Laravel Storage disk. Defaults to mobile_public."
+                },
+                {
+                    "type": "definition",
+                    "label": "directory",
+                    "text": "Accepted type: string\nPurpose: Directory prefix under the disk. Defaults to media."
+                },
+                {
+                    "type": "definition",
+                    "label": "aspect",
+                    "text": "Accepted type: ratio string such as 1:1\nPurpose: Image only. Implies required crop to that aspect."
+                },
+                {
+                    "type": "definition",
+                    "label": "crop",
+                    "text": "Accepted type: optional | required\nPurpose: Image only. Freeform crop when aspect is omitted."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: string\nPurpose: Explicit accessible name when needed."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                },
+                {
+                    "type": "text",
+                    "text": "Document mode rejects crop and aspect. Unsupported attributes such as\nmultiple and video are rejected before publication."
+                },
+                {
+                    "type": "heading",
+                    "text": "Crop rules"
+                },
+                {
+                    "type": "text",
+                    "text": "• Neither crop nor aspect → store without a crop sheet."
+                },
+                {
+                    "type": "text",
+                    "text": "• aspect → required crop locked to that aspect."
+                },
+                {
+                    "type": "text",
+                    "text": "• crop=\"optional\" without aspect → freeform crop; Skip is allowed."
+                },
+                {
+                    "type": "text",
+                    "text": "• crop=\"required\" without aspect → freeform crop; Confirm is required."
+                },
+                {
+                    "type": "text",
+                    "text": "Confirm stores the region the crop sheet shows: the largest centred rectangle\nat the locked aspect (or the photo's own aspect when freeform), narrowed by the\nzoom controls. Skip stores the whole photo. Image mode always stores a JPEG."
+                },
+                {
+                    "type": "text",
+                    "text": "Clear, Skip, Confirm, Cancel, Crop, zoom, and source-chooser copy are package\nchrome; see Localize chrome."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Localize chrome",
+                    "url": "../how-to/localize.md"
+                }
+            ]
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@change receives the temporary absolute file path after the user confirms a\npick (and crop when required). Commit with MediaStorage::commit before\nassigning MediaValue."
+                },
+                {
+                    "type": "text",
+                    "text": "@clear fires when the user clears a present value. Delete the previous\nobject with MediaStorage::delete and set the model to null."
+                }
+            ],
+            "links": []
+        },
+        "mediavalue": {
+            "title": "MediaValue",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "new MediaValue(\n    disk: 'mobile_public',\n    path: 'avatars/a.jpg',\n    mime: 'image/jpeg',\n    size: 1200,\n    width: 100,\n    height: 100,\n);"
+                },
+                {
+                    "type": "text",
+                    "text": "Display with Storage::disk($value->disk)->url($value->path)."
+                }
+            ],
+            "links": []
+        },
+        "validation": {
+            "title": "Validation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Media participates in Validate fields. Public\nMediaValue properties are adapted to Laravel UploadedFile values so stock\nimage, file, mimes, max, and dimensions rules work. null fails\nrequired. Authored error wins over the MessageBag binder."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Validate fields",
+                    "url": "../how-to/validate-fields.md"
+                }
+            ]
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The field exposes a labelled control with helper or error text. Crop sheets\ninclude Confirm, Cancel, optional Skip, and explicit zoom in/out controls\nmeeting 44-point (iOS) and 48-dp (Android) minima. Zoom is not pinch-only."
+                }
+            ],
+            "links": []
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "iOS offers Photo Library (PhotosPicker) and Camera in a confirmation dialog,\nuses fileImporter for documents, and shows a Firstlight SwiftUI crop sheet.\nAndroid offers Photo Library (the system photo picker) and Camera (the system\ncamera app) in a Material bottom sheet, uses the system document picker, and\nshows a Firstlight Compose crop dialog. Picked files are copied to the app's\ntemporary directory before @change receives the path. Geometry and system\npickers stay platform-native; crop semantics stay shared."
+                }
+            ],
+            "links": []
+        },
+        "host-application-setup": {
+            "title": "Host application setup",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "On iOS, image mode's Camera option requires a camera usage description, or\niOS terminates the app when the camera opens. Firstlight's plugin manifest\nsupplies a generic one (\"Used to take a photo for a form field.\"). Override it\nin config/nativephp.php with wording specific to your app for App Store\nreview; app entries win over plugin entries:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "'permissions' => [\n    'NSCameraUsageDescription' => 'Used to take a photo for your profile.',\n],"
+                },
+                {
+                    "type": "text",
+                    "text": "The photo picker and document picker need no permission on either platform.\nAndroid needs no manifest change: the system camera app writes through the\nFileProvider that NativePHP's Android host already declares. If your app adds\nthe CAMERA permission for another feature, grant it before offering Camera."
+                }
+            ],
+            "links": []
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Media supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
+                }
+            ],
+            "links": [
+                {
+                    "label": "compatibility\nreference",
+                    "url": "../reference/compatibility.md"
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/media/ios-light.png",
+                    "text": "Media on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/media/ios-dark.png",
+                    "text": "Media on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/media/android-light.png",
+                    "text": "Media on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/media/android-dark.png",
+                    "text": "Media on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

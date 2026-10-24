@@ -22,6 +22,8 @@ Bookings, messages and other example records are fictional. Booking actions do n
 
 ## Apple and Google services
 
+Documentation, code examples and screenshots are included in the app and can be read offline. External references open in your browser only when you choose them. Those websites receive the normal browser request and follow their own privacy policies.
+
 The App Store, Google Play, operating system diagnostics and device backup services are governed by their providers' privacy policies and your settings. If you contact support, Firstlight UI receives the information you choose to include and uses it to respond.
 
 ## Privacy and support contact

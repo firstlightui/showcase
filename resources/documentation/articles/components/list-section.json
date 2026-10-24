@@ -1,0 +1,139 @@
+{
+    "id": "components/list-section",
+    "title": "List Section",
+    "description": "Grouped headers, footers, and List Item rows inside a parent List container.",
+    "group": "Components",
+    "anchors": {
+        "list-section": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "composition-rules": "composition-rules",
+        "platform-expression": "platform-expression",
+        "adapter-note": "adapter-note",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "List Section groups related List Item rows under an optional\nheader and footer inside a parent List."
+                }
+            ],
+            "links": [
+                {
+                    "label": "List Item",
+                    "url": "list-item.md"
+                },
+                {
+                    "label": "List",
+                    "url": "list.md"
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list>\n    <firstlight:list-section header=\"Account\" footer=\"Signed in as Alex\">\n        <firstlight:list-item headline=\"Profile\" @press=\"openProfile\" />\n        <firstlight:list-item headline=\"Security\" @press=\"openSecurity\" />\n    </firstlight:list-section>\n</firstlight:list>"
+                },
+                {
+                    "type": "text",
+                    "text": "List Section is a paired container and must live inside List. A section\nauthored on its own does not render application content."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "header",
+                    "text": "Accepted type: non-empty string\nPurpose: Optional section title."
+                },
+                {
+                    "type": "definition",
+                    "label": "footer",
+                    "text": "Accepted type: non-empty string\nPurpose: Optional section footnote."
+                },
+                {
+                    "type": "text",
+                    "text": "At least one List Item child is required."
+                }
+            ],
+            "links": []
+        },
+        "composition-rules": {
+            "title": "Composition rules",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "• Child slot accepts only firstlight:list-item."
+                },
+                {
+                    "type": "text",
+                    "text": "• Nested sections, refresh hooks, separators, and field props belong on the\nparent List instead."
+                }
+            ],
+            "links": []
+        },
+        "platform-expression": {
+            "title": "Platform expression",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The parent List renderer consumes List Section inline:"
+                },
+                {
+                    "type": "text",
+                    "text": "• iOS renders SwiftUI section headers and footers."
+                },
+                {
+                    "type": "text",
+                    "text": "• Android renders sticky headers, grouped card rows, and footer text."
+                }
+            ],
+            "links": []
+        },
+        "adapter-note": {
+            "title": "Adapter note",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The public tag is <firstlight:list-section>, but the published wire type\nremains list_section so the delegated Mobile UI list renderer can apply\ngrouped section styling."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list-section/ios-light.png",
+                    "text": "List Section on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list-section/ios-dark.png",
+                    "text": "List Section on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list-section/android-light.png",
+                    "text": "List Section on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/list-section/android-dark.png",
+                    "text": "List Section on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

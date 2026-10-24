@@ -1,0 +1,143 @@
+{
+    "id": "components/modal",
+    "title": "Modal",
+    "description": "Full-screen native overlay for authored content with server-controlled visibility and dismissal.",
+    "group": "Components",
+    "anchors": {
+        "modal": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "platform-expression": "platform-expression",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Modal presents authored content in a full-screen native overlay. PHP owns\nwhether the overlay is requested; each platform owns cover or dialog chrome\nand motion."
+                },
+                {
+                    "type": "text",
+                    "text": "Use Alert Dialog for a single acknowledgement. Use\nConfirmation Dialog for a confirm/cancel decision.\nUse Bottom Sheet for a panel that slides up from the\nbottom."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Alert Dialog",
+                    "url": "alert-dialog.md"
+                },
+                {
+                    "label": "Confirmation Dialog",
+                    "url": "confirmation-dialog.md"
+                },
+                {
+                    "label": "Bottom Sheet",
+                    "url": "bottom-sheet.md"
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:modal\n    :visible=\"$showingAccount\"\n    a11y-label=\"Account details\"\n    @dismiss=\"closeAccount\"\n>\n    <native:text class=\"text-lg font-semibold text-theme-on-surface\">Account details</native:text>\n</firstlight:modal>"
+                },
+                {
+                    "type": "text",
+                    "text": "The dismiss handler should set $showingAccount to false."
+                },
+                {
+                    "type": "text",
+                    "text": "The visible title is ordinary text styled as a heading. Mobile UI text has no\nheading role yet, so screen readers announce the surface by its a11y-label."
+                }
+            ],
+            "links": []
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "visible",
+                    "text": "Accepted type: bool\nPurpose: Server-controlled presentation request. Defaults to closed."
+                },
+                {
+                    "type": "definition",
+                    "label": "dismissible",
+                    "text": "Accepted type: bool\nPurpose: When true, native close, back, and outside dismissal are enabled. Defaults to the upstream native default of true. The dismissable alias is accepted."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-label",
+                    "text": "Accepted type: non-empty string\nPurpose: Accessible name for the presented surface."
+                },
+                {
+                    "type": "definition",
+                    "label": "a11y-hint",
+                    "text": "Accepted type: non-empty string\nPurpose: Supplementary screen-reader guidance."
+                },
+                {
+                    "type": "definition",
+                    "label": "class",
+                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                }
+            ],
+            "links": []
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "@dismiss is required. It runs when the user closes the overlay. Set the\nbound visibility property to false in that handler. Dismiss handlers must\nbe safe to run more than once because the delegated iOS cover can also notify\nPHP when a programmatic close is published."
+                },
+                {
+                    "type": "text",
+                    "text": "There is no overlay @press, native:model, or detent API. Actions belong\non child controls."
+                }
+            ],
+            "links": []
+        },
+        "platform-expression": {
+            "title": "Platform expression",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Modal is an adapter over Mobile UI modal. iOS uses SwiftUI\n.fullScreenCover; Android uses a Material full-screen dialog. Theme tokens\nown surface colour. Close controls, when shown, use the native Close name."
+                }
+            ],
+            "links": []
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/modal/ios-light.png",
+                    "text": "Modal on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/modal/ios-dark.png",
+                    "text": "Modal on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/modal/android-light.png",
+                    "text": "Modal on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/modal/android-dark.png",
+                    "text": "Modal on Android in dark mode"
+                }
+            ],
+            "links": []
+        }
+    }
+}

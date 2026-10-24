@@ -1,0 +1,219 @@
+{
+    "id": "reference/screen-assertions",
+    "title": "Screen assertions",
+    "description": "Firstlight methods added to NativePHP's Native::test() harness, and the make:firstlight-screen options.",
+    "group": "Reference",
+    "anchors": {
+        "screen-assertions": "overview",
+        "targets": "targets",
+        "fields-and-validation": "fields-and-validation",
+        "lists": "lists",
+        "confirmation-dialog": "confirmation-dialog",
+        "feedback": "feedback",
+        "pest-expectations": "pest-expectations",
+        "makefirstlight-screen": "makefirstlight-screen"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "FirstlightUI\\Testing\\ScreenAssertions::register() adds the methods below to\nNativePHP's Native\\Mobile\\Testing\\TestableComponent, the object returned by\nNative::test() and Native::visit(). They read the most recently published\nElement Tree. Interactions send the event type and callback id that the\nFirstlight iOS and Android renderers send, then re-render the screen as the\nharness does after tap() or input()."
+                },
+                {
+                    "type": "text",
+                    "text": "NativePHP's own methods are unchanged and work on Firstlight controls. These\ninclude input(), tap(), toggle(), check(), set(), assertSee(),\nassertSet(), and assertElement(). For example, input('email', ...) types\ninto a Text Field bound with native:model=\"email\"."
+                }
+            ],
+            "links": []
+        },
+        "targets": {
+            "title": "Targets",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A field target is either an element ref or the property name in the\nelement's native:model binding. A List row is identified by its exact\nheadline."
+                }
+            ],
+            "links": []
+        },
+        "fields-and-validation": {
+            "title": "Fields and validation",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "field($target)",
+                    "text": "Contract: Returns the wire node for the target, or fails."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertFieldError($target, $message = null)",
+                    "text": "Contract: The field's published error is not empty and, when given, equals $message."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertNoFieldError($target)",
+                    "text": "Contract: The field's published error is empty."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertHasErrors($keys)",
+                    "text": "Contract: The screen's ValidatesFields MessageBag has each key. ['email' => 'message'] also requires that message."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertHasNoErrors($keys = null)",
+                    "text": "Contract: The bag is empty, or has none of the given keys."
+                },
+                {
+                    "type": "definition",
+                    "label": "choose($target, $value)",
+                    "text": "Contract: Chooses the option whose stable value equals $value (compared as a string) in a Select, Segmented, Pill Group, or Choice Group. Fails when no option has that value, or the option is disabled or cannot be chosen. A Select option that is already selected cannot be chosen."
+                }
+            ],
+            "links": []
+        },
+        "lists": {
+            "title": "Lists",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "listItem($headline)",
+                    "text": "Contract: Returns the first List Item node with that headline, or fails and lists the headlines."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertListItem($headline, $matcher = null)",
+                    "text": "Contract: A row exists. $matcher receives the wire node and must return true."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertMissingListItem($headline)",
+                    "text": "Contract: No row has that headline."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertListItemCount($count)",
+                    "text": "Contract: The tree contains exactly $count List Item rows."
+                },
+                {
+                    "type": "definition",
+                    "label": "pressListItem($headline, $action = null)",
+                    "text": "Contract: Presses the row, or the leading or trailing swipe action with the label $action. Fails for a disabled row."
+                }
+            ],
+            "links": []
+        },
+        "confirmation-dialog": {
+            "title": "Confirmation Dialog",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "assertConfirmationDialog($title = null)",
+                    "text": "Contract: A Confirmation Dialog is visible, optionally with that title."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertNoConfirmationDialog()",
+                    "text": "Contract: No Confirmation Dialog is visible."
+                },
+                {
+                    "type": "definition",
+                    "label": "confirmDialog($title = null)",
+                    "text": "Contract: Sends the visible dialog's @press."
+                },
+                {
+                    "type": "definition",
+                    "label": "cancelDialog($title = null)",
+                    "text": "Contract: Sends the visible dialog's @dismiss."
+                }
+            ],
+            "links": []
+        },
+        "feedback": {
+            "title": "Feedback",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Call FirstlightUI\\Facades\\Feedback::fake() before the screen sends Feedback."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertFeedbackSent($message, $tone = null)",
+                    "text": "Contract: Feedback with that message, and optionally that FeedbackTone, was sent."
+                },
+                {
+                    "type": "definition",
+                    "label": "assertNoFeedbackSent()",
+                    "text": "Contract: No Feedback was sent."
+                }
+            ],
+            "links": []
+        },
+        "pest-expectations": {
+            "title": "Pest expectations",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "register() also adds two expectations when Pest is loaded:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "expect(Native::test(SignupScreen::class))\n    ->toHaveFieldError('email')\n    ->toHaveListItem('Inbox');"
+                },
+                {
+                    "type": "text",
+                    "text": "They pair with NativePHP's Native\\Mobile\\Testing\\PestExpectations."
+                }
+            ],
+            "links": []
+        },
+        "makefirstlight-screen": {
+            "title": "make:firstlight-screen",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan make:firstlight-screen {name} [--form] [--list] [--destroy] [--test] [--force]"
+                },
+                {
+                    "type": "definition",
+                    "label": "none",
+                    "text": "Generates: App\\NativeComponents\\{name} extending FirstlightUI\\NativeComponent, with render() returning native.{kebab-name}, and a Blade view with a title."
+                },
+                {
+                    "type": "definition",
+                    "label": "--form",
+                    "text": "Generates: A required name property, $rules, save() calling submit(), a Text Field bound with native:model, and a Save Button with :loading=\"$submitting\"."
+                },
+                {
+                    "type": "definition",
+                    "label": "--list",
+                    "text": "Generates: mount(), reload(), loadMore(), open(), and a listQuery() stub. A List bound to @refresh and @endReached renders $this->listItems."
+                },
+                {
+                    "type": "definition",
+                    "label": "--destroy",
+                    "text": "Generates: Includes --list. Adds requestDeletion(), cancelDeletion(), and deleteItem(); rows disabled by denies('delete', $item); a Delete swipe action; and a destructive Confirmation Dialog."
+                },
+                {
+                    "type": "definition",
+                    "label": "--test",
+                    "text": "Generates: tests/Feature/NativeComponents/{name}Test.php that uses Native::test() and these assertions."
+                },
+                {
+                    "type": "definition",
+                    "label": "--force",
+                    "text": "Generates: Overwrites existing files. Without it the command fails and writes nothing if any target exists."
+                },
+                {
+                    "type": "text",
+                    "text": "The command is registered only when the application runs in the console."
+                }
+            ],
+            "links": []
+        }
+    }
+}

@@ -1,0 +1,187 @@
+{
+    "id": "getting-started/build-with-a-coding-agent",
+    "title": "Build with a coding agent",
+    "description": "What the Boost guideline, the firstlight-init and building-firstlight-screens skills, and llms.txt give your coding agent, and how to set them up.",
+    "group": "Getting started",
+    "anchors": {
+        "build-with-a-coding-agent": "overview",
+        "set-up-boost": "set-up-boost",
+        "what-your-agent-gets": "what-your-agent-gets",
+        "the-guidelines-rules": "what-your-agent-gets",
+        "ask-for-an-app": "ask-for-an-app",
+        "what-still-needs-a-person": "what-still-needs-a-person"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight is written to be built with by coding agents. The package ships a\nLaravel Boost guideline and two Boost skills,\nand its documentation is published as llms.txt and llms-full.txt. Together\nthey tell an agent which screens to build from which recipe, which control to\nuse for each value, and which mistakes to avoid."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Laravel Boost",
+                    "url": "https://laravel.com/docs/boost"
+                }
+            ]
+        },
+        "set-up-boost": {
+            "title": "Set up Boost",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Install Firstlight as described in Installation, then add\nLaravel Boost to the application and run its installer:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer require laravel/boost --dev\nphp artisan boost:install"
+                },
+                {
+                    "type": "text",
+                    "text": "Boost finds the guideline and skills in Firstlight's resources/boost\ndirectory and writes them into your agent's files, such as AGENTS.md,\nCLAUDE.md, and its skills directory. If Boost is already installed, pick up\nFirstlight with:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan boost:update --discover"
+                },
+                {
+                    "type": "text",
+                    "text": "Run php artisan boost:update after each Firstlight update so the guideline\nand skills match the installed version."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Installation",
+                    "url": "installation.md"
+                }
+            ]
+        },
+        "what-your-agent-gets": {
+            "title": "What your agent gets",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "label": "Guideline",
+                    "text": "When the agent reads it: Always, as part of the agent's instructions\nWhat it contains: The rules every Firstlight screen follows, the four recipes, the screen generator, and a tested example"
+                },
+                {
+                    "type": "definition",
+                    "label": "firstlight-init skill",
+                    "text": "When the agent reads it: When asked to set up or scaffold a Firstlight app\nWhat it contains: An interview, an install check, the theme, the native-chrome layout, and the chosen recipe screens with tests"
+                },
+                {
+                    "type": "definition",
+                    "label": "building-firstlight-screens skill",
+                    "text": "When the agent reads it: When adding or changing a screen, form, list, or settings page\nWhat it contains: Which recipe to start from, which control fits each value, the workflow, and what never to do"
+                },
+                {
+                    "type": "definition",
+                    "label": "llms.txt",
+                    "text": "When the agent reads it: When the agent needs a page\nWhat it contains: Every documentation page with a one-line summary"
+                },
+                {
+                    "type": "definition",
+                    "label": "llms-full.txt",
+                    "text": "When the agent reads it: When the agent needs the whole reference\nWhat it contains: The full text of every documentation page in one file"
+                },
+                {
+                    "type": "text",
+                    "text": "The package also includes llms-full.txt at\nvendor/firstlightui/nativephp/llms-full.txt, so an agent can read the\nreference for the installed version without network access."
+                },
+                {
+                    "type": "heading",
+                    "text": "The guideline's rules"
+                },
+                {
+                    "type": "text",
+                    "text": "The guideline keeps an agent on the same path as the recipes:"
+                },
+                {
+                    "type": "text",
+                    "text": "• Screens extend FirstlightUI\\NativeComponent."
+                },
+                {
+                    "type": "text",
+                    "text": "• Controls are <firstlight:*> tags, with one Blade view for both platforms."
+                },
+                {
+                    "type": "text",
+                    "text": "• Navigation chrome comes from NativePHP: layouts return true from\nusesNativeChrome(). No custom-drawn tab bars, drawers, charts, or carousels."
+                },
+                {
+                    "type": "text",
+                    "text": "• Validation is Laravel validation, with $rules or a Form Request passed to\n$this->validate(). Fields show their own errors."
+                },
+                {
+                    "type": "text",
+                    "text": "• Destructive actions open a Confirmation Dialog and authorize in PHP."
+                },
+                {
+                    "type": "text",
+                    "text": "• Colours come from the NativePHP theme, not from markup."
+                }
+            ],
+            "links": [
+                {
+                    "label": "llms.txt",
+                    "url": "https://firstlightui.dev/llms.txt"
+                },
+                {
+                    "label": "llms-full.txt",
+                    "url": "https://firstlightui.dev/llms-full.txt"
+                }
+            ]
+        },
+        "ask-for-an-app": {
+            "title": "Ask for an app",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "With Boost installed, describe the app rather than the controls. For example:"
+                },
+                {
+                    "type": "text",
+                    "text": "Set up this app with Firstlight. The main record is a job. I want a\nsearchable list of jobs, a form to create one, and a settings screen."
+                },
+                {
+                    "type": "text",
+                    "text": "The firstlight-init skill asks about the record, the recipes, brand colours,\ntabs, deletion rules, and locale one question at a time, and makes no change\nyou have not agreed to. It then scaffolds each chosen\nrecipe with a Pest test and runs the\ntest suite."
+                },
+                {
+                    "type": "text",
+                    "text": "For later screens, ask for the outcome, such as \"add a screen to edit a job\".\nThe building-firstlight-screens skill picks the matching recipe, or starts\nfrom the generator:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan make:firstlight-screen EditJob --form --test"
+                }
+            ],
+            "links": [
+                {
+                    "label": "recipe",
+                    "url": "../how-to/build-a-list-detail-flow.md"
+                }
+            ]
+        },
+        "what-still-needs-a-person": {
+            "title": "What still needs a person",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "An agent can write screens and run their Pest tests. It cannot see the app on\na device. Both skills end by asking you to run the app on an iOS simulator and\nan Android emulator and check navigation, field errors, and deletion on both.\nCheck accessibility too. See Accessibility for\nwhat Firstlight covers and what your app still owns."
+                }
+            ],
+            "links": [
+                {
+                    "label": "Accessibility",
+                    "url": "../concepts/accessibility.md"
+                }
+            ]
+        }
+    }
+}
