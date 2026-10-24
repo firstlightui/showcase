@@ -10,13 +10,14 @@
         />
 
         <firstlight:time-picker
-            value="14:30"
+            native:model="reviewTime"
             label="Review time"
             helper="A required accepted wall-clock time."
             required
         />
 
         <firstlight:time-picker
+            native:model="arrivalTime"
             label="Arrival time"
             placeholder="Choose an arrival time"
             error="Choose an arrival time."

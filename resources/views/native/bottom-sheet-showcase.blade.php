@@ -20,7 +20,7 @@
             @dismiss="dismissDefault"
         >
             <native:column class="w-full p-4 gap-3">
-                <firstlight:status-label label="Filters" />
+                <native:text class="text-lg font-semibold text-theme-on-surface">Filters</native:text>
                 <native:text class="text-sm text-theme-on-surface">Drag down or tap outside to dismiss this sheet.</native:text>
             </native:column>
         </firstlight:bottom-sheet>
@@ -32,7 +32,7 @@
             @dismiss="dismissProgrammatic"
         >
             <native:column class="w-full p-4 gap-3">
-                <firstlight:status-label label="Programmatic closure" />
+                <native:text class="text-lg font-semibold text-theme-on-surface">Programmatic closure</native:text>
                 <native:text class="text-sm text-theme-on-surface">Close from PHP should not record a native dismissal.</native:text>
                 <firstlight:button ref="closeProgrammatic" label="Close from PHP" variant="primary" @press="closeProgrammatic" />
             </native:column>

@@ -7,7 +7,7 @@
         <firstlight:button label="Confirm selection" variant="success" />
         <firstlight:button label="Ghost action" variant="ghost" />
         <firstlight:button label="Add item" icon="plus" />
-        <firstlight:button label="Continue" icon-trailing="chevron-right" />
+        <firstlight:button label="Continue" icon-trailing="chevron-right" icon-trailing-ios="chevron.right" icon-trailing-android="chevron_right" />
         <firstlight:button label="Unavailable" disabled />
         <firstlight:button label="Saving changes" loading a11y-hint="Saving is in progress" />
     </native:column>

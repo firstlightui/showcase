@@ -9,6 +9,10 @@ class TimePickerCapture extends NativeComponent
 {
     public ?string $appointmentTime = null;
 
+    public ?string $reviewTime = '14:30';
+
+    public ?string $arrivalTime = null;
+
     public function navTitle(): string
     {
         return 'Firstlight Time Picker';

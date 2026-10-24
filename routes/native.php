@@ -18,6 +18,7 @@ use App\NativeComponents\Captures\ConfirmationDialogCapture;
 use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\ListCapture;
+use App\NativeComponents\Captures\ListSectionCapture;
 use App\NativeComponents\Captures\ListItemCapture;
 use App\NativeComponents\Captures\ListItemContextMenuCapture;
 use App\NativeComponents\Captures\MediaCapture;
@@ -233,6 +234,10 @@ Route::native('/components/list', ListShowcase::class)
 
 Route::native('/captures/list', ListCapture::class)
     ->name('captures.list')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/list-section', ListSectionCapture::class)
+    ->name('captures.list-section')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/components/pill-group', PillGroupShowcase::class)
