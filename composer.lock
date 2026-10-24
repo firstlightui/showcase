@@ -737,7 +737,7 @@
             "dist": {
                 "type": "path",
                 "url": "../nativephp",
-                "reference": "8008f508f62eaf1ff92fbb5fc720eac0f3f6cb88"
+                "reference": "d61c7e2300f20fcfb110ad68850fa3427028dc85"
             },
             "require": {
                 "illuminate/console": "^10.0|^11.0|^12.0|^13.0",
@@ -794,7 +794,7 @@
                     "email": "team@firstlightui.dev"
                 }
             ],
-            "description": "Native controls for NativePHP, shaped for each platform.",
+            "description": "The app-shell layer for NativePHP: genuine SwiftUI and Jetpack Compose controls with Laravel validation, forms, lists, dialogs and feedback.",
             "homepage": "https://firstlightui.dev",
             "keywords": [
                 "android",
