@@ -10,11 +10,11 @@ The app does not transmit your form entries, selected media or usage history to 
 
 ## On-device data
 
-Sample records, preferences and media you choose are processed in the app on your device. Some are saved in local app storage. Device backups may include app data according to your operating system and backup settings. Removing the app removes its local app data; copies in backups are managed through your backup service.
+Sample records, preferences and media you choose are processed in the app on your device. Some are saved in local app storage. Device backups may include app data according to your operating system and backup settings. Deleting the app removes its local app data; copies in backups are managed through your backup service.
 
 ## Camera, photos and files
 
-The Media examples can use the camera or system photo and document pickers when you choose those actions. Selected files may be copied into the app's local storage so you can try previewing, cropping and validation. The app does not upload them. Use the Media screen's clear controls to remove its saved copies. Permission can be managed in device settings.
+The Media examples can use the camera or system photo and document pickers when you choose those actions. Selected files may be copied into the app's local storage so you can try previewing, cropping and validation. The app does not upload them. Clear controls remove the copies currently selected on the Media screen. Earlier copies may remain in app storage until the app is deleted. Permission can be managed in device settings.
 
 ## Sample content
 
