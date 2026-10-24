@@ -19,7 +19,7 @@ it('publishes every List Item content and state fixture through the native wire 
     $nodes = listItemShowcaseNodes($screen->tree());
 
     expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight List Item')
-        ->and($nodes)->toHaveCount(9)
+        ->and($nodes)->toHaveCount(10)
         ->and(array_column(array_column($nodes, 'props'), 'headline'))->toBe([
             'Account',
             'Billing',
@@ -29,6 +29,7 @@ it('publishes every List Item content and state fixture through the native wire 
             'Message',
             'Grouped message',
             'Disabled message',
+            'Message from Alex',
             'Managed account',
         ])
         ->and($nodes[0]['props'])->not->toHaveKeys(['supporting', 'leading_type', 'trailing_type'])
@@ -52,7 +53,7 @@ it('publishes every List Item content and state fixture through the native wire 
             'a11y_hint' => 'Records a Notifications press; does not navigate',
         ])
         ->and($nodes[7]['props']['disabled'])->toBeTrue()
-        ->and($nodes[8]['props']['disabled'])->toBeTrue();
+        ->and($nodes[9]['props']['disabled'])->toBeTrue();
 
     foreach ($nodes as $node) {
         expect($node['on_press'] ?? null)->toBeInt();
@@ -89,10 +90,33 @@ it('dispatches independent swipe callbacks with stable keys without removing row
     $screen->press("recordSwipe('Flag',73)")
         ->assertSet('swipeCount', 3)->assertSet('lastSwipe', 'Flag #73')
         ->assertSet('pressCount', 0);
-    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(9);
+    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(10);
 
     $screen->tap('Toggle swipe rows');
     $nodes = listItemShowcaseNodes($screen->tree());
     expect($nodes[5]['props']['disabled'])->toBeTrue()
         ->and($nodes[6]['props']['disabled'])->toBeTrue();
+});
+
+it('dispatches context menu callbacks and republishes item and row availability', function () {
+    $screen = Native::visit('/list-item');
+    $menu = fn () => json_decode(listItemShowcaseNodes($screen->tree())[8]['props']['firstlight_context_menu_json'] ?? '[]', true, flags: JSON_THROW_ON_ERROR);
+
+    expect(array_column($menu(), 'label'))->toBe(['Reply', 'Forward', 'Pin', 'Delete'])
+        ->and(array_column($menu(), 'disabled'))->toBe([false, true, false, false])
+        ->and($menu()[3]['role'])->toBe('destructive');
+
+    $screen->press("recordMenu('Reply',42)")
+        ->assertSet('menuCount', 1)->assertSet('lastMenu', 'Reply #42');
+    $screen->press("recordMenu('Delete',42)")
+        ->assertSet('menuCount', 2)->assertSet('lastMenu', 'Delete #42')
+        ->assertSet('pressCount', 0)
+        ->assertSee('Last menu action: Delete #42');
+    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(10);
+
+    $screen->tap('Toggle Forward');
+    expect($menu()[1]['disabled'])->toBeFalse()->and($menu()[1]['cb'])->toBeGreaterThan(0);
+
+    $screen->tap('Toggle menu row');
+    expect(listItemShowcaseNodes($screen->tree())[8]['props']['disabled'])->toBeTrue();
 });

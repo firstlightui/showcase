@@ -103,7 +103,7 @@ class ShowcaseHome extends ShowcaseScreen
         [
             'label' => 'List Item',
             'tag' => '<firstlight:list-item>',
-            'description' => 'Tappable application rows with identity and affordances',
+            'description' => 'Tappable application rows with identity, affordances and context menus',
             'path' => '/list-item',
         ],
         [

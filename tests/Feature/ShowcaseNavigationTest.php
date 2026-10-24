@@ -103,7 +103,7 @@ it('publishes a native front-page menu for every released component', function (
         'Nullable calendar dates, bounds, and native confirmation',
         'Nullable wall-clock times and native confirmation',
         'Compact accessible actions with native icon controls',
-        'Tappable application rows with identity and affordances',
+        'Tappable application rows with identity, affordances and context menus',
         'Grouped sections, refresh, pagination and authorized sample deletion',
         'Compact single- and multiple-selection options',
         'Determinate and indeterminate work state',

@@ -16,6 +16,30 @@ class ListItemShowcase extends ShowcaseScreen
 
     public bool $swipeRowsDisabled = false;
 
+    public int $menuCount = 0;
+
+    public string $lastMenu = 'None';
+
+    public bool $canForward = false;
+
+    public bool $menuRowDisabled = false;
+
+    public function recordMenu(string $action, int $id): void
+    {
+        $this->menuCount++;
+        $this->lastMenu = "{$action} #{$id}";
+    }
+
+    public function toggleForward(): void
+    {
+        $this->canForward = ! $this->canForward;
+    }
+
+    public function toggleMenuRow(): void
+    {
+        $this->menuRowDisabled = ! $this->menuRowDisabled;
+    }
+
     public function recordMessage(): void
     {
         $this->record('Message');

@@ -93,6 +93,28 @@
         </native:column>
 
         <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Context menu</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">Long-press the row to open the menu, or use the VoiceOver Actions rotor or TalkBack actions menu without a long press. Forward starts disabled. Delete records only: the row stays visible. A plain tap still records a row press.</native:text>
+            <firstlight:button label="Toggle Forward" @press="toggleForward" />
+            <firstlight:button label="Toggle menu row" @press="toggleMenuRow" />
+            <firstlight:list-item
+                headline="Message from Alex"
+                supporting="Long-press for more actions"
+                leading-monogram="AL"
+                :disabled="$menuRowDisabled"
+                :context-menu="[
+                    ['method' => 'recordMenu(\'Reply\',42)', 'label' => 'Reply', 'icon' => 'reply', 'ios' => 'arrowshape.turn.up.left'],
+                    ['method' => 'recordMenu(\'Forward\',42)', 'label' => 'Forward', 'icon' => 'forward', 'ios' => 'arrowshape.turn.up.right', 'disabled' => ! $canForward],
+                    ['method' => 'recordMenu(\'Pin\',42)', 'label' => 'Pin', 'icon' => 'push_pin', 'ios' => 'pin'],
+                    ['method' => 'recordMenu(\'Delete\',42)', 'label' => 'Delete', 'icon' => 'delete', 'ios' => 'trash', 'role' => 'destructive'],
+                ]"
+                @press="recordMessage"
+            />
+            <native:text class="text-sm text-theme-on-surface">Recorded menu actions: {{ $menuCount }}</native:text>
+            <native:text class="text-sm text-theme-on-surface">Last menu action: {{ $lastMenu }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Disabled</native:text>
             <firstlight:list-item
                 headline="Managed account"

@@ -19,6 +19,7 @@ use App\NativeComponents\Captures\DatePickerCapture;
 use App\NativeComponents\Captures\IconButtonCapture;
 use App\NativeComponents\Captures\ListCapture;
 use App\NativeComponents\Captures\ListItemCapture;
+use App\NativeComponents\Captures\ListItemContextMenuCapture;
 use App\NativeComponents\Captures\MediaCapture;
 use App\NativeComponents\Captures\ModalCapture;
 use App\NativeComponents\Captures\PillGroupCapture;
@@ -201,6 +202,10 @@ Route::native('/list-item', ListItemShowcase::class)
 
 Route::native('/captures/list-item', ListItemCapture::class)
     ->name('captures.list-item')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/list-item-context-menu', ListItemContextMenuCapture::class)
+    ->name('captures.list-item-context-menu')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/list', ListShowcase::class)
