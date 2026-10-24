@@ -44,6 +44,10 @@ WebView.
   `simctl ui appearance` and `adb shell cmd uimode night` and must keep
   working.
 - Recipe screens mirror the package's how-to guides verbatim.
+- The Docs tab bundles the installed Firstlight revision's full reference for
+  offline search and reading, with selectable code, bundled screenshots,
+  internal article links and links to live examples. External references need
+  a connection.
 
 ## Capabilities and Constraints
 
