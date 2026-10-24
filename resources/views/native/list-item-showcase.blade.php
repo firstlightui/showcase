@@ -18,7 +18,7 @@
             <firstlight:list-item
                 headline="Profile"
                 supporting="Personal details and security"
-                leading-avatar="https://placehold.co/80x80/png?text=AJ"
+                leading-monogram="AJ"
                 trailing-icon="chevron-right"
                 trailing-icon-ios="chevron.right"
                 trailing-icon-android="chevron_right"

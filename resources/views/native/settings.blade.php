@@ -1,5 +1,5 @@
 <native:list class="w-full flex-1" separator>
-    <native:list-section header="Notifications" footer="Alerts for replies and mentions.">
+    <native:list-section header="Notifications" footer="Sample preferences saved on this device. These controls do not register push notifications.">
         <native:column class="w-full px-4 py-3 bg-theme-surface">
             <firstlight:switch label="Push notifications" native:model="notifications" />
         </native:column>
@@ -8,7 +8,7 @@
         </native:column>
     </native:list-section>
 
-    <native:list-section header="Email" footer="A summary of activity you missed.">
+    <native:list-section header="Email" footer="Sample preference only. The showcase does not send email.">
         <native:column class="w-full px-4 py-3 bg-theme-surface">
             <firstlight:select label="Digest" :options="$digestOptions" native:model="digest" />
         </native:column>
