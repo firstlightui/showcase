@@ -9,6 +9,10 @@ class DatePickerCapture extends NativeComponent
 {
     public ?string $appointmentDate = null;
 
+    public ?string $reviewDate = '2026-08-04';
+
+    public ?string $dischargeDate = null;
+
     public function navTitle(): string
     {
         return 'Firstlight Date Picker';

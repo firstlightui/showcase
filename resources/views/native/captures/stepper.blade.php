@@ -9,7 +9,7 @@
         />
 
         <firstlight:stepper
-            :value="0.5"
+            native:model="fraction"
             :min="0.0"
             :max="1.0"
             :step="0.25"
@@ -18,7 +18,7 @@
         />
 
         <firstlight:stepper
-            :value="4"
+            native:model="reviewQuantity"
             :min="0"
             :max="10"
             label="Quantity with error"

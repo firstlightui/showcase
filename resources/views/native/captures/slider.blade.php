@@ -10,7 +10,7 @@
         />
 
         <firstlight:slider
-            :value="0.25"
+            native:model="offset"
             :min="-1.5"
             :max="1.5"
             :step="0.25"
@@ -19,7 +19,7 @@
         />
 
         <firstlight:slider
-            :value="4"
+            native:model="reviewDose"
             :min="0"
             :max="10"
             label="Dose with error"

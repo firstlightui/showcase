@@ -10,7 +10,7 @@
         />
 
         <firstlight:date-picker
-            value="2026-08-04"
+            native:model="reviewDate"
             label="Review date"
             helper="Choose a date during August 2026."
             min="2026-08-01"
@@ -19,6 +19,7 @@
         />
 
         <firstlight:date-picker
+            native:model="dischargeDate"
             label="Discharge date"
             placeholder="Choose a discharge date"
             error="Choose a discharge date."

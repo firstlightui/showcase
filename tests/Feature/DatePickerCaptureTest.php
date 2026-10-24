@@ -39,7 +39,9 @@ it('publishes the stable Date Picker documentation capture fixture', function ()
             'required' => true,
         ])
         ->and($nodes[2]['props']['error'])->toBe('Choose a discharge date.')
-        ->and($nodes[3]['props']['disabled'])->toBeTrue();
+        ->and($nodes[3]['props']['disabled'])->toBeTrue()
+        // Every non-disabled fixture is bound, so captures show interactive styling.
+        ->and(array_map(fn (array $node): bool => isset($node['props']['on_change']), $nodes))->toBe([true, true, true, false]);
 
     $screen->assertAccessible();
 });

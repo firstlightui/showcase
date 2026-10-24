@@ -9,6 +9,10 @@ class StepperCapture extends NativeComponent
 {
     public int $quantity = 5;
 
+    public float $fraction = 0.5;
+
+    public int $reviewQuantity = 4;
+
     public function navTitle(): string
     {
         return 'Firstlight Stepper';
