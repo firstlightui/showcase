@@ -1,12 +1,14 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-32">
-        <native:text class="text-sm text-theme-on-surface">On-device checks: submit empty; all three fields show real Laravel errors and accepted submissions stays zero. Correct one field at a time, agree and Continue; errors clear and one success feedback appears. Submit invalid data again; no stale success should remain. Reset clears the form and count. No account is created.</native:text>
+        <native:text class="text-sm text-theme-on-surface">On-device checks: submit empty; a summary appears above the fields, all three fields show real Laravel errors and accepted submissions stays zero. With VoiceOver or TalkBack on, Continue speaks the summary once and focus moves to Name; leaving Email invalid speaks only the email message. Enter taken@example.com with a valid name and agreement; a form-level error appears above Continue and no success feedback is sent. Correct the form and Continue; errors clear and one success feedback appears. Reset clears the form and count. No account is created.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Laravel rules</native:text>
             <native:text class="text-sm text-theme-on-surface-variant">
                 Submit empty to fail, then enter a valid name, email, and agreement to pass. Email also validates on blur.
             </native:text>
         </native:column>
+
+        <firstlight:callout ref="summary" error-summary />
 
         <native:column class="w-full gap-3">
             <firstlight:text-field
@@ -31,6 +33,8 @@
                 native:model="accepted"
             />
         </native:column>
+
+        <firstlight:callout ref="formError" error-for="form" />
 
         @if ($saved)
             <firstlight:callout tone="success" :message="$saved" />

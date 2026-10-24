@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use FirstlightUI\Concerns\ValidatesFields;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ValidationShowcase extends ShowcaseScreen
@@ -21,8 +22,9 @@ class ValidationShowcase extends ShowcaseScreen
 
     /** @var array<string, string> */
     protected array $rules = [
-        'email' => 'required|email',
+        // Listed in screen order: the error summary follows rule order.
         'name' => 'required|min:2',
+        'email' => 'required|email',
         'accepted' => 'accepted',
     ];
 
@@ -36,6 +38,13 @@ class ValidationShowcase extends ShowcaseScreen
         $this->saved = null;
         $this->submit(
             action: function (): void {
+                // A server-side check that belongs to the form, not one field.
+                if (strcasecmp($this->email, 'taken@example.com') === 0) {
+                    throw ValidationException::withMessages([
+                        'form' => 'An account already exists for this email. Sign in instead.',
+                    ]);
+                }
+
                 $this->saveCount++;
                 $this->saved = 'Thanks, '.$this->name.'.';
             },
