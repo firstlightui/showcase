@@ -340,3 +340,24 @@ Route::native('/captures/validate-fields', ValidateFieldsCapture::class)
 Route::native('/captures/form-errors', FormErrorsCapture::class)
     ->name('captures.form-errors')
     ->layout(ShowcaseLayout::class);
+
+// Recipe screens: copied verbatim from docs/how-to recipes so tests prove them.
+Route::native('/posts', \App\NativeComponents\PostsScreen::class)
+    ->name('recipes.posts')
+    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+
+Route::native('/posts/create', \App\NativeComponents\CreatePostScreen::class)
+    ->name('recipes.posts.create')
+    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+
+Route::native('/posts/{post}', \App\NativeComponents\PostScreen::class)
+    ->name('recipes.post')
+    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+
+Route::native('/settings', \App\NativeComponents\SettingsScreen::class)
+    ->name('recipes.settings')
+    ->layout(\App\NativeComponents\Layouts\AppLayout::class);
+
+Route::native('/settings/privacy', \App\NativeComponents\PrivacyScreen::class)
+    ->name('recipes.privacy')
+    ->layout(\App\NativeComponents\Layouts\AppLayout::class);

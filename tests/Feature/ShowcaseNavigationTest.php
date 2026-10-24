@@ -54,6 +54,9 @@ it('publishes a native front-page menu for every released component', function (
         'Text Area',
         'Code Editor',
         'Validation',
+        'Searchable list recipe',
+        'Form screen recipe',
+        'Settings screen recipe',
     ])->and(array_column(array_column($items, 'props'), 'overline'))->toEqualCanonicalizing([
         '<firstlight:activity-indicator>',
         '<firstlight:button>',
@@ -87,6 +90,9 @@ it('publishes a native front-page menu for every released component', function (
         '<firstlight:text-area>',
         '<firstlight:code-editor>',
         'ValidatesFields · SubmitsForms',
+        'Recipe · list and detail',
+        'Recipe · Form Request',
+        'Recipe · grouped settings',
     ])->and(array_column(array_column($items, 'props'), 'supporting'))->toEqualCanonicalizing([
         'Indeterminate native activity with semantic sizes',
         'Labelled actions, variants, sizes, icons, and states',
@@ -120,6 +126,9 @@ it('publishes a native front-page menu for every released component', function (
         'Native multiline editing, validation, and synchronisation',
         'Monospaced JSON, YAML, and env editing with a key row and live-log follow',
         'Laravel validation, accepted submissions and success feedback',
+        'Search, pagination, swipe deletion and a pushed detail screen',
+        'Field and form-level errors, loading Save and return',
+        'Native grouped sections with save-on-change controls',
     ]);
 
     foreach ($items as $item) {
@@ -170,6 +179,20 @@ it('navigates each catalogue row to its component demo', function (string $label
     ['Validation', '/validation'],
 ]);
 
+it('navigates each recipe row to its documented screen', function (string $label, string $path) {
+    $this->artisan('migrate');
+
+    Native::visit('/')
+        ->tap($label)
+        ->assertNavigatedTo($path);
+
+    Native::visit($path)->assertAccessible();
+})->with([
+    ['Searchable list recipe', '/posts'],
+    ['Form screen recipe', '/posts/create'],
+    ['Settings screen recipe', '/settings'],
+]);
+
 it('filters the catalogue by trimmed names and tags without losing destinations', function () {
     $screen = Native::visit('/')->select('query', '  tiMe  ');
     $items = showcaseNodesOfType($screen->tree(), 'list_item');
@@ -188,7 +211,7 @@ it('explains an empty catalogue search and lets the tester clear it', function (
     expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toBe([]);
     $screen->assertSee('No demos match. Clear search to see every control.')
         ->tap('Clear search');
-    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(32);
+    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(35);
 });
 
 it('shows native back chrome on component pages but not capture routes', function () {

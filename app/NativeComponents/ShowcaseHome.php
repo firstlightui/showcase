@@ -202,6 +202,24 @@ class ShowcaseHome extends ShowcaseScreen
             'description' => 'Laravel validation, accepted submissions and success feedback',
             'path' => '/validation',
         ],
+        [
+            'label' => 'Searchable list recipe',
+            'tag' => 'Recipe · list and detail',
+            'description' => 'Search, pagination, swipe deletion and a pushed detail screen',
+            'path' => '/posts',
+        ],
+        [
+            'label' => 'Form screen recipe',
+            'tag' => 'Recipe · Form Request',
+            'description' => 'Field and form-level errors, loading Save and return',
+            'path' => '/posts/create',
+        ],
+        [
+            'label' => 'Settings screen recipe',
+            'tag' => 'Recipe · grouped settings',
+            'description' => 'Native grouped sections with save-on-change controls',
+            'path' => '/settings',
+        ],
     ];
 
     public function clearSearch(): void
@@ -235,6 +253,7 @@ class ShowcaseHome extends ShowcaseScreen
                 '/list', '/list-item' => 'Lists and sections',
                 '/media', '/search-field', '/text-field', '/text-area', '/code-editor' => 'Text and media',
                 '/validation' => 'Laravel workflows',
+                '/posts', '/posts/create', '/settings' => 'App recipes',
                 default => 'Status and feedback',
             })
             ->sortKeys();
