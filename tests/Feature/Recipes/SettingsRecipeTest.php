@@ -23,10 +23,12 @@ it('renders grouped native sections with Firstlight controls inside', function (
 
     expect(array_map(fn ($s) => $s['props']['header'] ?? null, $sections))
         ->toBe(['Notifications', 'Email', 'Account'])
-        ->and(array_map(fn ($c) => $c['type'], $sections[0]['children']))
+        // Each row is a padded column so controls sit inside the grouped card's insets.
+        ->and(array_map(fn ($c) => $c['type'], $sections[0]['children']))->toBe(['column', 'column'])
+        ->and(array_map(fn ($c) => $c['children'][0]['type'], $sections[0]['children']))
         ->toBe(['firstlight.switch', 'firstlight.switch'])
-        ->and($sections[1]['children'][0]['type'])->toBe('firstlight.select')
-        ->and($sections[2]['children'][0]['type'])->toBe('firstlight.list-item');
+        ->and($sections[1]['children'][0]['children'][0]['type'])->toBe('firstlight.select')
+        ->and($sections[2]['children'][0]['children'][0]['type'])->toBe('firstlight.list-item');
 });
 
 it('saves each setting as soon as it changes and restores it on reopen', function () {
