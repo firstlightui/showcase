@@ -30,7 +30,6 @@ class ListShowcase extends ShowcaseScreen
 
     public function mount(): void
     {
-        parent::mount();
         $this->refreshList($this->samplePage(...));
     }
 

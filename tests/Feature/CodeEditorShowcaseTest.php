@@ -18,11 +18,11 @@ function firstlightCodeEditorsByLabel(array $tree): array
 }
 
 it('publishes every documented Code Editor state through the native wire tree', function () {
-    $screen = Native::visit('/code-editor');
+    $screen = Native::visit('/components/code-editor');
     $tree = $screen->tree();
     $nodes = firstlightCodeEditorsByLabel($tree);
 
-    expect($tree['props']['title'] ?? null)->toBe('Firstlight Code Editor')
+    expect($tree['props']['nav_title'] ?? null)->toBe('Firstlight Code Editor')
         ->and(array_keys($nodes))->toBe([
             'Webhook payload',
             'Deploy workflow',
@@ -51,7 +51,7 @@ it('publishes every documented Code Editor state through the native wire tree', 
 });
 
 it('binds edits validates JSON in PHP and applies programmatic replacements', function () {
-    $screen = Native::visit('/code-editor')
+    $screen = Native::visit('/components/code-editor')
         ->select('payload', '{"event": ')
         ->assertSet('payload', '{"event": ');
 
@@ -74,7 +74,7 @@ it('binds edits validates JSON in PHP and applies programmatic replacements', fu
 });
 
 it('grows the live log and trims its head at the cap', function () {
-    $screen = Native::visit('/code-editor')->tap('Append 25 lines');
+    $screen = Native::visit('/components/code-editor')->tap('Append 25 lines');
     $log = firstlightCodeEditorsByLabel($screen->tree())['Deployment log']['props']['value'];
     expect(explode("\n", $log))->toHaveCount(25)
         ->and($log)->toStartWith('[00001] deploy: step 1 completed');

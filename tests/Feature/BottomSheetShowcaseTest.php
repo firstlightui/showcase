@@ -19,10 +19,10 @@ function bottomSheetShowcaseNodesByRef(array $tree): array
 }
 
 it('publishes the complete Bottom Sheet catalogue through the native wire tree', function () {
-    $screen = Native::visit('/bottom-sheet');
+    $screen = Native::visit('/components/bottom-sheet');
     $nodes = bottomSheetShowcaseNodesByRef($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Bottom Sheet')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Bottom Sheet')
         ->and(array_keys($nodes))->toBe([
             'defaultSheet',
             'programmaticSheet',
@@ -41,7 +41,7 @@ it('publishes the complete Bottom Sheet catalogue through the native wire tree',
 });
 
 it('dispatches sheet dismissal and programmatic closure', function () {
-    $screen = Native::visit('/bottom-sheet');
+    $screen = Native::visit('/components/bottom-sheet');
 
     $screen->tap('showDefault')
         ->assertSet('defaultVisible', true)

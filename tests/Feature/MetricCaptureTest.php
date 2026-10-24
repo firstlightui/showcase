@@ -22,7 +22,7 @@ it('publishes the stable Metric capture through real Blade registration', functi
 });
 
 it('publishes long values and accessible overrides in the Metric gallery', function () {
-    $screen = Native::visit('/metric');
+    $screen = Native::visit('/components/metric');
     $nodes = metricCaptureNodes($screen->tree());
     expect($nodes[1]['props']['a11y_label'])->toBe('No affected users')
         ->and($nodes[2]['props']['value'])->toBe('1,234.50 milliseconds');

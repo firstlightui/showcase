@@ -21,10 +21,10 @@ function confirmationDialogNodesByRef(array $tree): array
 }
 
 it('publishes the complete Confirmation Dialog catalogue through the native wire tree', function () {
-    $screen = Native::visit('/confirmation-dialog');
+    $screen = Native::visit('/components/confirmation-dialog');
     $nodes = confirmationDialogNodesByRef($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Confirmation Dialog')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Confirmation Dialog')
         ->and(array_keys($nodes))->toBe([
             'defaultDialog',
             'destructiveDialog',
@@ -56,7 +56,7 @@ it('publishes the complete Confirmation Dialog catalogue through the native wire
 });
 
 it('dispatches confirmation dismissal repeated use and programmatic closure', function () {
-    $screen = Native::visit('/confirmation-dialog');
+    $screen = Native::visit('/components/confirmation-dialog');
 
     $screen->tap('showDefault')
         ->assertSet('defaultVisible', true)
@@ -86,7 +86,7 @@ it('dispatches confirmation dismissal repeated use and programmatic closure', fu
 
 it('closes the timed confirmation on async completion without a user decision', function () {
     $bridge = Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => true]);
-    $screen = Native::visit('/confirmation-dialog');
+    $screen = Native::visit('/components/confirmation-dialog');
     $screen->tap('showProgrammatic')->assertSet('programmaticVisible', true);
     $id = $bridge->callsTo('AsyncTask.Dispatch')[0]['params']['id'];
 
@@ -113,7 +113,7 @@ it('closes the timed confirmation on async completion without a user decision', 
 
 it('keeps the confirmation usable when timed dispatch is unavailable', function () {
     Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => false]);
-    Native::visit('/confirmation-dialog')->tap('showProgrammatic')
+    Native::visit('/components/confirmation-dialog')->tap('showProgrammatic')
         ->assertSet('programmaticVisible', true)
         ->assertSet('lastOutcome', 'Timed close unavailable; confirm or cancel normally')
         ->dismissSheet('programmaticDialog')->assertSet('dismissalCount', 1);

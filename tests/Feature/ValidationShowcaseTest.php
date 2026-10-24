@@ -19,10 +19,10 @@ function firstlightValidationFieldsByLabel(array $tree): array
 }
 
 it('publishes an empty signup form without authored field errors', function () {
-    $screen = Native::visit('/validation');
+    $screen = Native::visit('/components/validation');
     $fields = firstlightValidationFieldsByLabel($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Validation')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Validation')
         ->and(array_keys($fields))->toBe(['Name', 'Email', 'I agree to the terms'])
         ->and($fields['Name']['props']['error'])->toBe('')
         ->and($fields['Email']['props']['error'])->toBe('')
@@ -32,7 +32,7 @@ it('publishes an empty signup form without authored field errors', function () {
 });
 
 it('fails real Laravel rules then passes and clears field errors', function () {
-    $screen = Native::visit('/validation');
+    $screen = Native::visit('/components/validation');
 
     $screen->press('save');
     $failed = firstlightValidationFieldsByLabel($screen->tree());
@@ -93,7 +93,7 @@ function firstlightValidationAlerts(array $tree): array
 }
 
 it('summarises a failed submit, announces it once and focuses the first invalid field', function () {
-    $screen = Native::visit('/validation');
+    $screen = Native::visit('/components/validation');
 
     expect(firstlightValidationNodes($screen->tree(), 'firstlight.callout'))->toBe([]);
 
@@ -124,7 +124,7 @@ it('summarises a failed submit, announces it once and focuses the first invalid 
 });
 
 it('shows a form-level error thrown by the submit action without success feedback', function () {
-    $screen = Native::visit('/validation')
+    $screen = Native::visit('/components/validation')
         ->select('name', 'Alex Rivera')
         ->select('email', 'taken@example.com')
         ->toggle('accepted', true)

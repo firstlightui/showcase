@@ -19,10 +19,10 @@ function firstlightPillGroupNodesByLabel(array $tree): array
 }
 
 it('publishes the complete Pill Group catalogue through the native tree', function () {
-    $screen = Native::visit('/pill-group');
+    $screen = Native::visit('/components/pill-group');
     $nodes = firstlightPillGroupNodesByLabel($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Pill Group')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Pill Group')
         ->and(array_keys($nodes))->toBe([
             'Queue',
             'Queues',
@@ -44,7 +44,7 @@ it('publishes the complete Pill Group catalogue through the native tree', functi
 });
 
 it('dispatches complete single and multiple proposals through PRESS callbacks', function () {
-    $screen = Native::visit('/pill-group');
+    $screen = Native::visit('/components/pill-group');
 
     $screen->press("__syncProperty('errorQueue', \"all\")")
         ->assertSet('errorQueue', 'all')
@@ -67,7 +67,7 @@ it('dispatches complete single and multiple proposals through PRESS callbacks', 
 });
 
 it('publishes the unchanged authoritative selection after rejection', function () {
-    $screen = Native::visit('/pill-group');
+    $screen = Native::visit('/components/pill-group');
 
     $screen->press('rejectQueue("all")')
         ->assertSet('rejectedQueue', 'mine')

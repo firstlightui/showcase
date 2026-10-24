@@ -15,10 +15,10 @@ function progressShowcaseNodes(array $tree): array
 }
 
 it('publishes the complete Progress gallery through the native wire tree', function () {
-    $screen = Native::visit('/progress');
+    $screen = Native::visit('/components/progress');
     $nodes = progressShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Progress')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Progress')
         ->and(count($nodes))->toBe(8)
         ->and(array_column(array_column($nodes, 'props'), 'a11y_label'))->toBe([
             'Upload not started',
@@ -45,7 +45,7 @@ it('publishes the complete Progress gallery through the native wire tree', funct
 });
 
 it('publishes programmatic progress changes without a Progress callback', function () {
-    $screen = Native::visit('/progress');
+    $screen = Native::visit('/components/progress');
 
     $screen->tap('Advance progress')->assertSet('uploadProgress', 0.5);
     $screen->tap('Advance progress')->assertSet('uploadProgress', 0.75);

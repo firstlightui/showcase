@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full gap-5 pb-32">
+    <native:column class="w-full gap-5 pb-8">
         <firstlight:tabs
             native:model="tab"
             :tabs="$serverSections"

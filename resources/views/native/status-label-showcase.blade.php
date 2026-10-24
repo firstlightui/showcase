@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: these labels are display-only. Check each tone in both appearances, long-label wrapping at large text sizes, and the final accessible label Referral status: ready. Nothing should gain button behaviour.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Semantic tones</native:text>

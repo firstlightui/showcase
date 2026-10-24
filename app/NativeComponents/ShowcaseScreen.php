@@ -2,27 +2,15 @@
 
 namespace App\NativeComponents;
 
-use App\Support\ShowcaseAppearance;
 use App\Support\ShowcaseFeedbackLog;
 use FirstlightUI\NativeComponent;
 
 abstract class ShowcaseScreen extends NativeComponent
 {
-    public bool $darkMode = false;
-
-    public function mount(): void
-    {
-        $appearance = app(ShowcaseAppearance::class);
-
-        $this->darkMode = $appearance->prefersDark();
-        $appearance->apply($this->darkMode);
-    }
-
-    public function updatedDarkMode(bool $darkMode): void
-    {
-        app(ShowcaseAppearance::class)->remember($darkMode);
-    }
-
+    /**
+     * Tab roots (Gallery, Recipes, Components) show no back button; every
+     * screen pushed from them does.
+     */
     public function showsBackButton(): bool
     {
         return true;

@@ -17,12 +17,12 @@ function firstlightDatePickersByLabel(array $tree): array
 }
 
 it('publishes the complete Date Picker catalogue through the native wire tree', function () {
-    $screen = Native::visit('/date-picker');
+    $screen = Native::visit('/components/date-picker');
     $tree = $screen->tree();
     $nodes = firstlightDatePickersByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Date Picker')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Date Picker')
         ->and(array_keys($nodes))->toBe([
             'Appointment date',
             'Review date',
@@ -51,7 +51,7 @@ it('publishes the complete Date Picker catalogue through the native wire tree', 
 });
 
 it('publishes omitted error localized disabled and reconciliation fixtures', function () {
-    $nodes = firstlightDatePickersByLabel(Native::visit('/date-picker')->tree());
+    $nodes = firstlightDatePickersByLabel(Native::visit('/components/date-picker')->tree());
 
     expect($nodes['Discharge date']['props'])->toMatchArray([
         'has_value' => false,
@@ -67,7 +67,7 @@ it('publishes omitted error localized disabled and reconciliation fixtures', fun
 });
 
 it('updates bound dates rejects one proposal and applies programmatic publications', function () {
-    $screen = Native::visit('/date-picker');
+    $screen = Native::visit('/components/date-picker');
     $screen
         ->select('errorDate', '2026-08-19')
         ->assertSet('errorDate', '2026-08-19')

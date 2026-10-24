@@ -15,10 +15,10 @@ function buttonShowcaseNodes(array $tree): array
 }
 
 it('publishes the complete Button gallery through the native wire tree', function () {
-    $screen = Native::visit('/button');
+    $screen = Native::visit('/components/button');
     $nodes = buttonShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Button')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Button')
         ->and(array_column(array_column($nodes, 'props'), 'label'))->toBe([
             'Primary action',
             'Secondary action',
@@ -55,7 +55,7 @@ it('publishes the complete Button gallery through the native wire tree', functio
 });
 
 it('dispatches an ordinary press and publishes the accepted PHP result', function () {
-    $screen = Native::visit('/button');
+    $screen = Native::visit('/components/button');
     $screen->tap('Record press');
 
     expect($screen->get('pressCount'))->toBe(1);
@@ -63,7 +63,7 @@ it('dispatches an ordinary press and publishes the accepted PHP result', functio
 });
 
 it('does not register callbacks for disabled and loading examples', function () {
-    $nodes = buttonShowcaseNodes(Native::visit('/button')->tree());
+    $nodes = buttonShowcaseNodes(Native::visit('/components/button')->tree());
 
     expect($nodes[10]['props'])->not->toHaveKey('on_press')
         ->and($nodes[11]['props'])->not->toHaveKey('on_press');

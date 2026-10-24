@@ -25,10 +25,10 @@ function firstlightCheckboxPrimitiveProps(array $node): array
 }
 
 it('publishes the complete Checkbox catalogue through the native wire tree', function () {
-    $screen = Native::visit('/checkbox');
+    $screen = Native::visit('/components/checkbox');
     $nodes = firstlightCheckboxNodesByLabel($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Checkbox')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Checkbox')
         ->and(array_keys($nodes))->toBe([
             'Unchecked',
             'Checked and required',
@@ -68,7 +68,7 @@ it('publishes the complete Checkbox catalogue through the native wire tree', fun
 });
 
 it('dispatches accepted rejected disabled and programmatic Checkbox changes', function () {
-    $screen = Native::visit('/checkbox');
+    $screen = Native::visit('/components/checkbox');
 
     $screen->toggle('unchecked', true)
         ->assertSet('unchecked', true)

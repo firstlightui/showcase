@@ -32,13 +32,13 @@ it('defines accessible primary color pairs for both appearances', function () {
 });
 
 it('publishes the complete Segmented catalogue through the native wire tree', function () {
-    $screen = Native::visit('/segmented');
+    $screen = Native::visit('/components/segmented');
 
     $tree = $screen->tree();
     $nodes = firstlightSegmentedNodesByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Segmented')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Segmented')
         ->and(array_keys($nodes))->toBe([
             'Priority',
             'Queue',
@@ -57,7 +57,7 @@ it('publishes the complete Segmented catalogue through the native wire tree', fu
 });
 
 it('publishes simple and stable string values with distinct model callbacks', function () {
-    $nodes = firstlightSegmentedNodesByLabel(Native::visit('/segmented')->tree());
+    $nodes = firstlightSegmentedNodesByLabel(Native::visit('/components/segmented')->tree());
 
     $simple = $nodes['Simple queue'];
     $stable = $nodes['Stable queue'];
@@ -92,7 +92,7 @@ it('publishes simple and stable string values with distinct model callbacks', fu
 });
 
 it('serializes integer values with per-option availability and callback IDs', function () {
-    $priority = firstlightSegmentedNodesByLabel(Native::visit('/segmented')->tree())['Priority'];
+    $priority = firstlightSegmentedNodesByLabel(Native::visit('/components/segmented')->tree())['Priority'];
     $callbacks = $priority['props']['option_callbacks'];
 
     expect(firstlightPropsWithoutCallbacks($priority))->toBe([
@@ -116,7 +116,7 @@ it('serializes integer values with per-option availability and callback IDs', fu
 });
 
 it('publishes null and empty options without an implicit selection', function () {
-    $nodes = firstlightSegmentedNodesByLabel(Native::visit('/segmented')->tree());
+    $nodes = firstlightSegmentedNodesByLabel(Native::visit('/components/segmented')->tree());
 
     $unselected = $nodes['No initial selection'];
     $empty = $nodes['No available options'];
@@ -150,7 +150,7 @@ it('publishes null and empty options without an implicit selection', function ()
 });
 
 it('publishes disabled, validation, helper, and accessibility metadata', function () {
-    $nodes = firstlightSegmentedNodesByLabel(Native::visit('/segmented')->tree());
+    $nodes = firstlightSegmentedNodesByLabel(Native::visit('/components/segmented')->tree());
 
     expect(firstlightPropsWithoutCallbacks($nodes['Disabled group']))->toBe([
         'label' => 'Disabled group',
@@ -205,7 +205,7 @@ it('publishes disabled, validation, helper, and accessibility metadata', functio
 });
 
 it('dispatches the bound queue selection and server reset through published callbacks', function () {
-    $screen = Native::visit('/segmented');
+    $screen = Native::visit('/components/segmented');
     $nodes = firstlightSegmentedNodesByLabel($screen->tree());
 
     expect(firstlightPropsWithoutCallbacks($nodes['Queue']))->toBe([
@@ -245,7 +245,7 @@ it('dispatches the bound queue selection and server reset through published call
 });
 
 it('publishes an unchanged authoritative value when the server rejects a selection', function () {
-    $screen = Native::visit('/segmented');
+    $screen = Native::visit('/components/segmented');
     $nodes = firstlightSegmentedNodesByLabel($screen->tree());
 
     expect(firstlightPropsWithoutCallbacks($nodes['Rejected queue']))->toBe([

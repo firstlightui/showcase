@@ -17,12 +17,12 @@ function firstlightSteppersByLabel(array $tree): array
 }
 
 it('publishes the complete Stepper catalogue through the native wire tree', function () {
-    $screen = Native::visit('/stepper');
+    $screen = Native::visit('/components/stepper');
     $tree = $screen->tree();
     $nodes = firstlightSteppersByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Stepper')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Stepper')
         ->and(array_keys($nodes))->toBe([
             'Quantity',
             'Fractional dose',
@@ -58,7 +58,7 @@ it('publishes the complete Stepper catalogue through the native wire tree', func
 });
 
 it('publishes error disabled rejection and programmatic fixtures', function () {
-    $nodes = firstlightSteppersByLabel(Native::visit('/stepper')->tree());
+    $nodes = firstlightSteppersByLabel(Native::visit('/components/stepper')->tree());
 
     expect($nodes['Quantity with error']['props']['error'])->toBe('Quantity needs clinical review.')
         ->and($nodes['Disabled quantity']['props']['disabled'])->toBeTrue()
@@ -67,7 +67,7 @@ it('publishes error disabled rejection and programmatic fixtures', function () {
 });
 
 it('dispatches integer float rejection and programmatic publication callbacks', function () {
-    $screen = Native::visit('/stepper');
+    $screen = Native::visit('/components/stepper');
     $screen
         ->fireEvent('minimumQuantity', 1, [], ['on_increment'])
         ->assertSet('minimumQuantity', 1)

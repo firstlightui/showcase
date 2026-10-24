@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: change each enabled selection, reset Queue to Mine, and check both Queue controls agree. Rejected queue stays Mine while attempts increase. Null begins unselected; empty and disabled groups stay inert. Check long labels at large text sizes. The error is a static presentation example.</native:text>
         <native:text class="text-sm text-theme-on-surface">PHP accepted state: queue {{ $queue }}; priority {{ $priority }}; simple {{ $simple }}; initially empty {{ $unselected ?? '(none)' }}; error {{ $errorSelection }}; required {{ $requiredSelection }}; long label {{ $longSelection }}; rejected attempts {{ $rejectedQueueAttempts }}</native:text>
         <native:column class="w-full gap-2">

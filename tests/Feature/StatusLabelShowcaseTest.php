@@ -15,10 +15,10 @@ function statusLabelShowcaseNodes(array $tree): array
 }
 
 it('publishes the complete display-only Status Label gallery', function () {
-    $screen = Native::visit('/status-label');
+    $screen = Native::visit('/components/status-label');
     $nodes = statusLabelShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Status Label')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Status Label')
         ->and(array_column(array_column($nodes, 'props'), 'label'))->toBe([
             'Draft',
             'In progress',
@@ -48,7 +48,7 @@ it('publishes the complete display-only Status Label gallery', function () {
 });
 
 it('publishes no callback or mutable state props', function () {
-    foreach (statusLabelShowcaseNodes(Native::visit('/status-label')->tree()) as $node) {
+    foreach (statusLabelShowcaseNodes(Native::visit('/components/status-label')->tree()) as $node) {
         expect($node['props'])->not->toHaveKeys([
             'value',
             'disabled',

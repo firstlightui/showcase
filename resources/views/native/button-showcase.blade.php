@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: tap each enabled variant, size and icon example. Each tap adds one recorded press below. Unavailable and Saving changes must not act. Try rapid taps, large text and screen-reader activation.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Semantic variants</native:text>

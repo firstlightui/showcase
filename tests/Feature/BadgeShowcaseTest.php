@@ -15,10 +15,10 @@ function badgeShowcaseNodes(array $tree): array
 }
 
 it('publishes count boundaries, semantic tones, and accessible marker text', function () {
-    $screen = Native::visit('/badge');
+    $screen = Native::visit('/components/badge');
     $nodes = badgeShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Badge')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Badge')
         ->and($nodes)->toHaveCount(11)
         ->and(array_column(array_slice(array_column($nodes, 'props'), 0, 5), 'label'))->toBe([
             '', '1', '9', '99', '99+',
@@ -33,7 +33,7 @@ it('publishes count boundaries, semantic tones, and accessible marker text', fun
 });
 
 it('publishes no callback or mutable state props', function () {
-    foreach (badgeShowcaseNodes(Native::visit('/badge')->tree()) as $node) {
+    foreach (badgeShowcaseNodes(Native::visit('/components/badge')->tree()) as $node) {
         expect($node)->not->toHaveKeys(['on_press', 'on_change'])
             ->and($node['props'])->not->toHaveKeys([
                 'value', 'disabled', 'loading', 'error', 'required', 'helper',

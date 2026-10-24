@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: enter multiple lines; live notes update PHP while typing, handover on blur, summary after 500 ms quiet. Read-only permits copy, disabled cannot edit. Rejected edits keep approved wording and count attempts. Replace/reset must update the editor and PHP.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Live multiline notes</native:text>

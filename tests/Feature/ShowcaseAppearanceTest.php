@@ -21,58 +21,28 @@ function showcaseAppearanceNodes(array $tree, string $type): array
     return $nodes;
 }
 
-it('floats one accessible appearance toggle over every interactive showcase page', function () {
-    foreach (['/', '/button', '/progress', '/segmented', '/status-label', '/text-field'] as $path) {
-        $screen = Native::visit($path);
-        $overlays = showcaseAppearanceNodes($screen->tree(), 'floating_overlay');
-        $toggles = showcaseAppearanceNodes($screen->tree(), 'toggle');
+it('follows the system appearance with the configured light and dark palettes', function () {
+    $config = require config_path('native-ui.php');
 
-        expect($overlays)->toHaveCount(1)
-            ->and($overlays[0]['props'])->toBe([
-                'alignment' => 'bottom',
-                'offset' => 12,
-            ])->and($toggles)->toHaveCount(1)
-            ->and($toggles[0]['props'])->toMatchArray([
-                'label' => 'Dark mode',
-                'value' => false,
-                'a11y_label' => 'Preview dark appearance',
-            ])->and($toggles[0]['props']['on_change'] ?? null)->toBeInt();
+    foreach (['/', '/gallery/inbox', '/recipes', '/components', '/components/button', '/components/media', '/captures/button'] as $path) {
+        Native::visit($path);
 
-        $screen->assertAccessible();
+        // Screens must never copy one palette into both slots: the native
+        // renderers pick light or dark from the device, so each slot keeps
+        // its own configured tokens.
+        expect(config('native-ui.theme.light'))->toBe($config['theme']['light'])
+            ->and(config('native-ui.theme.dark'))->toBe($config['theme']['dark'])
+            ->and(config('native-ui.theme.light.background'))->toBe('#F8FAFC')
+            ->and(config('native-ui.theme.dark.background'))->toBe('#0F172A');
     }
 });
 
-it('keeps deterministic capture routes free of interactive showcase chrome', function () {
-    expect(showcaseAppearanceNodes(Native::visit('/captures/button')->tree(), 'floating_overlay'))
-        ->toBe([]);
-});
+it('offers no in-app appearance override', function () {
+    foreach (['/', '/gallery/inbox', '/recipes', '/components', '/components/button', '/components/progress', '/components/text-field', '/captures/button'] as $path) {
+        $tree = Native::visit($path)->tree();
 
-it('persists a dark preview across routes and applies the dark palette to both native schemes', function () {
-    Native::visit('/')
-        ->select('darkMode', true)
-        ->assertSet('darkMode', true);
-
-    expect(config('native-ui.theme.light.background'))->toBe('#0F172A')
-        ->and(config('native-ui.theme.dark.background'))->toBe('#0F172A')
-        ->and(config('native-ui.theme.light.on-background'))->toBe('#F8FAFC')
-        ->and(config('native-ui.theme.dark.on-background'))->toBe('#F8FAFC');
-
-    $detail = Native::visit('/button');
-    $toggle = showcaseAppearanceNodes($detail->tree(), 'toggle')[0];
-
-    expect($detail->get('darkMode'))->toBeTrue()
-        ->and($toggle['props']['value'])->toBeTrue()
-        ->and($toggle['props']['a11y_label'])->toBe('Preview light appearance');
-});
-
-it('restores the light palette when dark preview is switched off', function () {
-    $screen = Native::visit('/')
-        ->select('darkMode', true)
-        ->select('darkMode', false)
-        ->assertSet('darkMode', false);
-
-    expect(config('native-ui.theme.light.background'))->toBe('#F8FAFC')
-        ->and(config('native-ui.theme.dark.background'))->toBe('#F8FAFC')
-        ->and(showcaseAppearanceNodes($screen->tree(), 'toggle')[0]['props']['a11y_label'])
-        ->toBe('Preview dark appearance');
+        expect(showcaseAppearanceNodes($tree, 'floating_overlay'))->toBe([])
+            ->and(showcaseAppearanceNodes($tree, 'toggle'))->toBe([])
+            ->and($tree['props'])->not->toHaveKey('dark');
+    }
 });

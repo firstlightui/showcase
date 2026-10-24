@@ -19,12 +19,12 @@ function firstlightTextFieldNodesByLabel(array $tree): array
 }
 
 it('publishes the complete Text Field catalogue through the native wire tree', function () {
-    $screen = Native::visit('/text-field');
+    $screen = Native::visit('/components/text-field');
     $tree = $screen->tree();
     $nodes = firstlightTextFieldNodesByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Text Field')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Text Field')
         ->and(array_keys($nodes))->toBe([
             'Email',
             'Search referrals',
@@ -38,7 +38,7 @@ it('publishes the complete Text Field catalogue through the native wire tree', f
 });
 
 it('publishes input policy, sync mode, icons, and semantic affordances', function () {
-    $nodes = firstlightTextFieldNodesByLabel(Native::visit('/text-field')->tree());
+    $nodes = firstlightTextFieldNodesByLabel(Native::visit('/components/text-field')->tree());
 
     expect($nodes['Email']['props'])->toMatchArray([
         'value' => 'clinician@example.com',
@@ -66,7 +66,7 @@ it('publishes input policy, sync mode, icons, and semantic affordances', functio
 });
 
 it('publishes read-only, error, and authored trailing-action semantics', function () {
-    $nodes = firstlightTextFieldNodesByLabel(Native::visit('/text-field')->tree());
+    $nodes = firstlightTextFieldNodesByLabel(Native::visit('/components/text-field')->tree());
 
     expect($nodes['Patient ID']['props'])->toMatchArray([
         'value' => 'PT-2048',
@@ -82,7 +82,7 @@ it('publishes read-only, error, and authored trailing-action semantics', functio
 });
 
 it('updates bound values and dispatches the authored trailing action', function () {
-    $screen = Native::visit('/text-field');
+    $screen = Native::visit('/components/text-field');
 
     $screen->select('email', 'updated@example.com')
         ->assertSet('email', 'updated@example.com')

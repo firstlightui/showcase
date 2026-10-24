@@ -2,18 +2,26 @@
 
 namespace App\NativeComponents\Layouts;
 
-use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\ShowcaseScreen;
 use Native\Mobile\Edge\Layouts\Builders\NavBar;
+use Native\Mobile\Edge\Layouts\Builders\Tab;
+use Native\Mobile\Edge\Layouts\Builders\TabBar;
 use Native\Mobile\Edge\Layouts\NativeLayout;
 use Native\Mobile\Edge\NativeComponent;
-use Native\Mobile\UI\Builders\FloatingOverlay;
-use Native\Mobile\UI\Concerns\HasFloatingOverlay;
 
+/**
+ * Native tab shell for the interactive showcase: SwiftUI TabView (Liquid
+ * Glass on iOS 26+) and a Material 3 NavigationBar. Bars carry no colours,
+ * so both platforms follow the system appearance.
+ *
+ * Tabs own screens by URL prefix: a screen pushed from Components lives at
+ * /components/<slug>. Gallery is the root URL, so it must stay the first
+ * tab; native chrome assigns any URI no tab prefixes to the first tab.
+ *
+ * Capture fixtures (not ShowcaseScreen) keep a plain inline bar and no tabs.
+ */
 class ShowcaseLayout extends NativeLayout
 {
-    use HasFloatingOverlay;
-
     public function usesNativeChrome(): bool
     {
         return true;
@@ -21,25 +29,26 @@ class ShowcaseLayout extends NativeLayout
 
     public function navBar(NativeComponent $screen): ?NavBar
     {
-        $bar = NavBar::make()
-            ->title($screen->navTitle())
-            ->displayMode($screen instanceof ShowcaseHome ? 'large' : 'inline');
+        $bar = NavBar::make()->title($screen->navTitle());
 
-        if ($screen instanceof ShowcaseScreen) {
-            $bar->back($screen->showsBackButton());
+        if (! $screen instanceof ShowcaseScreen) {
+            return $bar->displayMode('inline');
         }
 
-        return $bar;
+        return $bar
+            ->displayMode($screen->showsBackButton() ? 'inline' : 'large')
+            ->back($screen->showsBackButton());
     }
 
-    public function floatingOverlay(NativeComponent $screen): ?FloatingOverlay
+    public function tabBar(NativeComponent $screen): ?TabBar
     {
         if (! $screen instanceof ShowcaseScreen) {
             return null;
         }
 
-        return FloatingOverlay::make(view('native.partials.appearance-toggle'))
-            ->bottom()
-            ->offset(12);
+        return TabBar::make()
+            ->add(Tab::link('Gallery', '/', icon: 'star', ios: 'sparkles', android: 'auto_awesome'))
+            ->add(Tab::link('Recipes', '/recipes', icon: 'apps', ios: 'square.stack.3d.up', android: 'layers'))
+            ->add(Tab::link('Components', '/components', icon: 'widgets', ios: 'square.grid.2x2', android: 'widgets'));
     }
 }

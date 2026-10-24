@@ -19,10 +19,10 @@ function modalShowcaseNodesByRef(array $tree): array
 }
 
 it('publishes the complete Modal catalogue through the native wire tree', function () {
-    $screen = Native::visit('/modal');
+    $screen = Native::visit('/components/modal');
     $nodes = modalShowcaseNodesByRef($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Modal')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Modal')
         ->and(array_keys($nodes))->toBe([
             'defaultModal',
             'lockedModal',
@@ -46,7 +46,7 @@ it('publishes the complete Modal catalogue through the native wire tree', functi
 });
 
 it('dispatches overlay dismissal and programmatic closure', function () {
-    $screen = Native::visit('/modal');
+    $screen = Native::visit('/components/modal');
 
     $screen->tap('showDefault')
         ->assertSet('defaultVisible', true)

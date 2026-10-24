@@ -15,10 +15,10 @@ function iconButtonShowcaseNodes(array $tree): array
 }
 
 it('publishes the complete Icon Button gallery through the native wire tree', function () {
-    $screen = Native::visit('/icon-button');
+    $screen = Native::visit('/components/icon-button');
     $nodes = iconButtonShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Icon Button')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Icon Button')
         ->and($nodes)->toHaveCount(12)
         ->and(array_column(array_slice(array_column($nodes, 'props'), 0, 5), 'variant'))->toBe([
             'primary',
@@ -45,7 +45,7 @@ it('publishes the complete Icon Button gallery through the native wire tree', fu
 });
 
 it('dispatches an ordinary icon press and publishes the accepted PHP result', function () {
-    $screen = Native::visit('/icon-button');
+    $screen = Native::visit('/components/icon-button');
     $screen->tap('Record press');
 
     expect($screen->get('pressCount'))->toBe(1);

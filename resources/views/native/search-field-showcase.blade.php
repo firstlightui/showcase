@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: type/clear live query, then reset to Referral. Debounced query updates PHP after 500 ms quiet; blur query on leaving focus. Submit each keyboard Search action: last submitted text and count must update. Disabled search cannot edit or submit.</native:text>
         <native:text class="text-sm text-theme-on-surface">Last submitted: {{ $lastSubmitted ?: '(none)' }}; submissions: {{ $submitCount }}</native:text>
         <native:column class="w-full gap-2">

@@ -118,7 +118,7 @@ final class TransientFeedbackShowcase extends ShowcaseScreen
             ->hold()
             ->send();
 
-        $this->navigate('/transient-feedback/destination');
+        $this->navigate('/components/transient-feedback/destination');
     }
 
     public function navTitle(): string

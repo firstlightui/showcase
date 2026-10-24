@@ -21,10 +21,10 @@ function alertDialogNodesByRef(array $tree): array
 }
 
 it('publishes the complete Alert Dialog catalogue through the native wire tree', function () {
-    $screen = Native::visit('/alert-dialog');
+    $screen = Native::visit('/components/alert-dialog');
     $nodes = alertDialogNodesByRef($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Alert Dialog')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Alert Dialog')
         ->and(array_keys($nodes))->toBe([
             'defaultDialog',
             'customActionDialog',
@@ -53,7 +53,7 @@ it('publishes the complete Alert Dialog catalogue through the native wire tree',
 });
 
 it('dispatches acknowledgement repeated use and programmatic closure', function () {
-    $screen = Native::visit('/alert-dialog');
+    $screen = Native::visit('/components/alert-dialog');
 
     $screen->tap('showDefault')
         ->assertSet('defaultVisible', true)
@@ -82,7 +82,7 @@ it('dispatches acknowledgement repeated use and programmatic closure', function 
 
 it('closes the timed alert on async completion without an acknowledgement', function () {
     $bridge = Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => true]);
-    $screen = Native::visit('/alert-dialog');
+    $screen = Native::visit('/components/alert-dialog');
     $screen->tap('showProgrammatic')->assertSet('programmaticVisible', true);
     $id = $bridge->callsTo('AsyncTask.Dispatch')[0]['params']['id'];
 
@@ -107,7 +107,7 @@ it('closes the timed alert on async completion without an acknowledgement', func
 
 it('keeps the alert usable when timed dispatch is unavailable', function () {
     Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => false]);
-    Native::visit('/alert-dialog')->tap('showProgrammatic')
+    Native::visit('/components/alert-dialog')->tap('showProgrammatic')
         ->assertSet('programmaticVisible', true)
         ->assertSet('lastOutcome', 'Timed close unavailable; acknowledge normally')
         ->dismissSheet('programmaticDialog')->assertSet('acknowledgementCount', 1);

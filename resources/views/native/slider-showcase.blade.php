@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: drag live to update PHP each step; blur updates on release; debounce updates after 500 ms quiet or release. Check fractional bounds and accessibility value. Disabled stays fixed; rejected dose stays 4 and counts attempts; publish sets 8.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Synchronization policies</native:text>

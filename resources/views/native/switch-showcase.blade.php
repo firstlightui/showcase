@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: toggle enabled switches and compare PHP state. Disabled values stay fixed. Rejected setting stays false while attempts increase. Programmatic buttons set true then false. The error is a static presentation example; use Validation to test real rules.</native:text>
         <native:text class="text-sm text-theme-on-surface">PHP accepted state: off example {{ $notificationsOff ? 'true' : 'false' }}; on example {{ $notificationsOn ? 'true' : 'false' }}; helper {{ $helper ? 'true' : 'false' }}; error {{ $error ? 'true' : 'false' }}; long label {{ $longLabel ? 'true' : 'false' }}; programmatic {{ $programmatic ? 'true' : 'false' }}; rejected {{ $rejected ? 'true' : 'false' }}; rejected attempts {{ $rejectedAttempts }}</native:text>
         <native:column class="w-full gap-3">

@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: Return keeps indentation; in JSON it adds a level after { or [ and splits {} pairs, and typing } outdents. YAML indents after a trailing colon. The key row sits above the keyboard (hidden with a hardware keyboard, where Tab and Shift-Tab indent); Undo and Redo reverse key presses. Line numbers stay silent to VoiceOver and TalkBack. The live log stays at the newest line until you scroll up, then holds your place while lines arrive and old lines are trimmed.</native:text>
 
         <native:column class="w-full gap-2">

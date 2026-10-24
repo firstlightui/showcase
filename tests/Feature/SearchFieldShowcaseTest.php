@@ -17,12 +17,12 @@ function firstlightSearchFieldsByA11yLabel(array $tree): array
 }
 
 it('publishes the complete Search Field catalogue through the native wire tree', function () {
-    $screen = Native::visit('/search-field');
+    $screen = Native::visit('/components/search-field');
     $tree = $screen->tree();
     $nodes = firstlightSearchFieldsByA11yLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Search Field')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Search Field')
         ->and(array_keys($nodes))->toBe([
             'Search referrals',
             'Search clinicians',
@@ -53,7 +53,7 @@ it('publishes the complete Search Field catalogue through the native wire tree',
 });
 
 it('updates the live binding and programmatic reset', function () {
-    $screen = Native::visit('/search-field');
+    $screen = Native::visit('/components/search-field');
     $screen
         ->select('query', 'Neurology')
         ->assertSet('query', 'Neurology')

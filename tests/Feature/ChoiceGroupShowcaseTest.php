@@ -19,10 +19,10 @@ function firstlightChoiceGroupNodesByLabel(array $tree): array
 }
 
 it('publishes the complete Choice Group catalogue through the native tree', function () {
-    $screen = Native::visit('/choice-group');
+    $screen = Native::visit('/components/choice-group');
     $nodes = firstlightChoiceGroupNodesByLabel($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Choice Group')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Choice Group')
         ->and(array_keys($nodes))->toBe([
             'Priority',
             'Notifications',
@@ -45,7 +45,7 @@ it('publishes the complete Choice Group catalogue through the native tree', func
 });
 
 it('dispatches complete single and multiple proposals through PRESS callbacks', function () {
-    $screen = Native::visit('/choice-group');
+    $screen = Native::visit('/components/choice-group');
 
     $screen->press("__syncProperty('errorPriority', \"urgent\")")
         ->assertSet('errorPriority', 'urgent')
@@ -67,7 +67,7 @@ it('dispatches complete single and multiple proposals through PRESS callbacks', 
 });
 
 it('publishes an unchanged authoritative choice after rejection', function () {
-    $screen = Native::visit('/choice-group');
+    $screen = Native::visit('/components/choice-group');
 
     $screen->press('rejectPriority("urgent")')
         ->assertSet('rejectedPriority', 'routine')

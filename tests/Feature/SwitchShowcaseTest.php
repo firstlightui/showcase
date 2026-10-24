@@ -25,10 +25,10 @@ function firstlightSwitchPrimitiveProps(array $node): array
 }
 
 it('publishes the complete Switch catalogue through the native wire tree', function () {
-    $screen = Native::visit('/switch');
+    $screen = Native::visit('/components/switch');
     $nodes = firstlightSwitchNodesByLabel($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Switch')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Switch')
         ->and(array_keys($nodes))->toBe([
             'Notifications off',
             'Notifications on',
@@ -108,7 +108,7 @@ it('publishes the complete Switch catalogue through the native wire tree', funct
 });
 
 it('dispatches accepted, rejected, disabled, and programmatic Switch changes through the native harness', function () {
-    $screen = Native::visit('/switch');
+    $screen = Native::visit('/components/switch');
 
     $screen->toggle('notificationsOff', true)
         ->assertSet('notificationsOff', true)

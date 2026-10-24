@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Post;
+use App\NativeComponents\ShowcaseHome;
 use Native\Mobile\Testing\Native;
 
 /** @return list<array<string, mixed>> */
@@ -14,234 +16,170 @@ function showcaseNodesOfType(array $tree, string $type): array
     return $nodes;
 }
 
-it('publishes a native front-page menu for every released component', function () {
-    $screen = Native::visit('/');
-    $items = showcaseNodesOfType($screen->tree(), 'list_item');
+/** @return list<string> */
+function showcaseHeadlines(array $tree): array
+{
+    return array_column(array_column(showcaseNodesOfType($tree, 'firstlight.list-item'), 'props'), 'headline');
+}
 
-    expect($screen->tree()['props'])->toMatchArray([
-        'title' => 'Firstlight UI',
-        'back' => false,
-    ])->and(array_column(array_column($items, 'props'), 'headline'))->toEqualCanonicalizing([
-        'Activity Indicator',
-        'Button',
-        'Callout',
-        'Transient Feedback',
-        'Badge',
-        'Checkbox',
-        'Media',
-        'Choice Group',
-        'Alert Dialog',
-        'Confirmation Dialog',
-        'Modal',
-        'Bottom Sheet',
-        'Date Picker',
-        'Time Picker',
-        'Icon Button',
-        'List Item',
-        'Collection List',
-        'Pill Group',
-        'Progress',
-        'Segmented',
-        'Search Field',
-        'Select',
-        'Slider',
-        'Stepper',
-        'Status Label',
-        'Metric',
-        'Switch',
-        'Tabs',
-        'Text Field',
-        'Text Area',
-        'Code Editor',
-        'Validation',
-        'Searchable list recipe',
-        'Form screen recipe',
-        'Settings screen recipe',
-    ])->and(array_column(array_column($items, 'props'), 'overline'))->toEqualCanonicalizing([
-        '<firstlight:activity-indicator>',
-        '<firstlight:button>',
-        '<firstlight:callout>',
-        'Transient Feedback',
-        '<firstlight:badge>',
-        '<firstlight:checkbox>',
-        '<firstlight:media>',
-        '<firstlight:choice-group>',
-        '<firstlight:alert-dialog>',
-        '<firstlight:confirmation-dialog>',
-        '<firstlight:modal>',
-        '<firstlight:bottom-sheet>',
-        '<firstlight:date-picker>',
-        '<firstlight:time-picker>',
-        '<firstlight:icon-button>',
-        '<firstlight:list-item>',
-        '<firstlight:list> · <firstlight:list-section>',
-        '<firstlight:pill-group>',
-        '<firstlight:progress>',
-        '<firstlight:segmented>',
-        '<firstlight:search-field>',
-        '<firstlight:select>',
-        '<firstlight:slider>',
-        '<firstlight:stepper>',
-        '<firstlight:status-label>',
-        '<firstlight:metric>',
-        '<firstlight:switch>',
-        '<firstlight:tabs>',
-        '<firstlight:text-field>',
-        '<firstlight:text-area>',
-        '<firstlight:code-editor>',
-        'ValidatesFields · SubmitsForms',
-        'Recipe · list and detail',
-        'Recipe · Form Request',
-        'Recipe · grouped settings',
-    ])->and(array_column(array_column($items, 'props'), 'supporting'))->toEqualCanonicalizing([
-        'Indeterminate native activity with semantic sizes',
-        'Labelled actions, variants, sizes, icons, and states',
-        'Persistent semantic messages with an optional action',
-        'Queued app-level outcomes that survive native navigation',
-        'Compact display-only counts and semantic markers',
-        'Server-authoritative Boolean form and checklist state',
-        'One image or document with Storage and optional crop',
-        'Visible single-radio and multiple-checkbox choices',
-        'Native one-button acknowledgement',
-        'Native confirmation, cancellation, and destructive roles',
-        'Full-screen overlay for authored content',
-        'Bottom panel for authored content',
-        'Nullable calendar dates, bounds, and native confirmation',
-        'Nullable wall-clock times and native confirmation',
-        'Compact accessible actions with native icon controls',
-        'Tappable application rows with identity, affordances and context menus',
-        'Grouped sections, refresh, pagination and authorized sample deletion',
-        'Compact single- and multiple-selection options',
-        'Determinate and indeterminate work state',
-        'Server-authoritative single selection',
-        'Native query entry, clear, and submission behaviour',
-        'Stable single selection with automatic search',
-        'Strict stepped numeric ranges with native gestures',
-        'Exact bounded increments with server authority',
-        'Compact semantic status metadata',
-        'One accessible measurement with tabular figures',
-        'Server-authoritative boolean settings',
-        'Server-authoritative sections with counts',
-        'Native text entry, validation, and affordances',
-        'Native multiline editing, validation, and synchronisation',
-        'Monospaced JSON, YAML, and env editing with a key row and live-log follow',
-        'Laravel validation, accepted submissions and success feedback',
-        'Search, pagination, swipe deletion and a pushed detail screen',
-        'Field and form-level errors, loading Save and return',
-        'Native grouped sections with save-on-change controls',
-    ]);
+/** Every published component demo, keyed by catalogue headline. */
+dataset('component demos', [
+    ['Activity Indicator', '/components/activity-indicator'],
+    ['Button', '/components/button'],
+    ['Callout', '/components/callout'],
+    ['Transient Feedback', '/components/transient-feedback'],
+    ['Badge', '/components/badge'],
+    ['Checkbox', '/components/checkbox'],
+    ['Media', '/components/media'],
+    ['Choice Group', '/components/choice-group'],
+    ['Alert Dialog', '/components/alert-dialog'],
+    ['Confirmation Dialog', '/components/confirmation-dialog'],
+    ['Modal', '/components/modal'],
+    ['Bottom Sheet', '/components/bottom-sheet'],
+    ['Date Picker', '/components/date-picker'],
+    ['Time Picker', '/components/time-picker'],
+    ['Icon Button', '/components/icon-button'],
+    ['List Item', '/components/list-item'],
+    ['Collection List', '/components/list'],
+    ['Pill Group', '/components/pill-group'],
+    ['Progress', '/components/progress'],
+    ['Segmented', '/components/segmented'],
+    ['Search Field', '/components/search-field'],
+    ['Select', '/components/select'],
+    ['Slider', '/components/slider'],
+    ['Stepper', '/components/stepper'],
+    ['Status Label', '/components/status-label'],
+    ['Metric', '/components/metric'],
+    ['Switch', '/components/switch'],
+    ['Tabs', '/components/tabs'],
+    ['Text Field', '/components/text-field'],
+    ['Text Area', '/components/text-area'],
+    ['Code Editor', '/components/code-editor'],
+    ['Validation', '/components/validation'],
+]);
+
+it('puts Gallery, Recipes and Components in one native tab bar', function (string $path, string $title, string $activeTab) {
+    $screen = Native::visit($path)
+        ->assertHasTabBar()
+        ->assertHasTab('Gallery')
+        ->assertHasTab('Recipes')
+        ->assertHasTab('Components')
+        ->assertTabActive($activeTab)
+        ->assertNavTitle($title)
+        ->assertAccessible();
+
+    $tabs = showcaseNodesOfType($screen->tree(), 'bottom_nav_item');
+    $root = showcaseNodesOfType($screen->tree(), 'native_root_tabs')[0];
+
+    expect(array_column(array_column($tabs, 'props'), 'url'))->toBe(['/', '/recipes', '/components'])
+        ->and($root['props']['nav_back'])->toBeFalse()
+        // System-drawn bars: no colours, so both platforms follow the device appearance.
+        ->and($root['props'])->not->toHaveKeys(['background_color', 'active_color', 'text_color', 'dark', 'nav_background_color']);
+})->with([
+    'gallery' => ['/', 'Gallery', 'Gallery'],
+    'recipes' => ['/recipes', 'Recipes', 'Recipes'],
+    'components' => ['/components', 'Components', 'Components'],
+]);
+
+it('lists every published component with a tinted icon and no Blade tag overline', function () {
+    $screen = Native::visit('/components');
+    $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
+    $catalogue = (new ShowcaseHome)->components;
+
+    expect(showcaseHeadlines($screen->tree()))->toEqualCanonicalizing(array_column($catalogue, 'label'))
+        ->and($items)->toHaveCount(32);
 
     foreach ($items as $item) {
-        expect($item['on_press'] ?? null)->toBeInt();
+        expect($item['props'])->not->toHaveKey('overline')
+            ->and($item['props']['leading_type'] ?? null)->toBe('icon')
+            ->and($item['props']['leading_icon_tone'] ?? null)->toBeIn(['neutral', 'info', 'success', 'warning'])
+            ->and($item['props']['supporting'] ?? '')->not->toBe('')
+            ->and($item['props']['supporting'])->not->toContain('<firstlight:');
     }
 
-    $screen->assertAccessible();
+    expect(array_column(array_column(showcaseNodesOfType($screen->tree(), 'list_section'), 'props'), 'header'))->toBe([
+        'Actions', 'Choices and settings', 'Dates and numbers', 'Dialogs and overlays',
+        'Laravel workflows', 'Lists', 'Status and feedback', 'Text and media',
+    ]);
 });
 
-it('navigates each catalogue row to its component demo', function (string $label, string $path) {
-    Native::visit('/')
+it('keeps the exact Blade tag of every catalogue entry searchable', function () {
+    foreach ((new ShowcaseHome)->components as $component) {
+        expect($component['tag'])->not->toBe('');
+    }
+
+    $screen = Native::visit('/components')->select('query', '  FIRSTLIGHT:list-section ');
+    expect(showcaseHeadlines($screen->tree()))->toBe(['Collection List']);
+
+    $screen->select('query', ' CLOCK ');
+    expect(showcaseHeadlines($screen->tree()))->toBe(['Time Picker']);
+    $screen->tap('Time Picker')->assertNavigatedTo('/components/time-picker');
+});
+
+it('explains an empty catalogue search and clears it', function () {
+    $screen = Native::visit('/components')
+        ->select('query', 'no such control')
+        ->assertAccessible();
+    $callout = showcaseNodesOfType($screen->tree(), 'firstlight.callout')[0];
+
+    expect(showcaseHeadlines($screen->tree()))->toBe([])
+        ->and($callout['props'])->toMatchArray([
+            'message' => 'No component matches that search.',
+            'action_label' => 'Clear search',
+        ]);
+
+    $screen->press('clearSearch')->assertSet('query', '');
+    expect(showcaseHeadlines($screen->tree()))->toHaveCount(32);
+});
+
+it('pushes each component demo inside the Components tab', function (string $label, string $path) {
+    Native::visit('/components')
         ->tap($label)
         ->assertNavigatedTo($path);
 
-    Native::visit($path)->assertSee('On-device checks')->assertAccessible();
-})->with([
-    ['Activity Indicator', '/activity-indicator'],
-    ['Button', '/button'],
-    ['Callout', '/callout'],
-    ['Transient Feedback', '/transient-feedback'],
-    ['Badge', '/badge'],
-    ['Checkbox', '/checkbox'],
-    ['Media', '/media'],
-    ['Choice Group', '/choice-group'],
-    ['Alert Dialog', '/alert-dialog'],
-    ['Confirmation Dialog', '/confirmation-dialog'],
-    ['Modal', '/modal'],
-    ['Bottom Sheet', '/bottom-sheet'],
-    ['Date Picker', '/date-picker'],
-    ['Time Picker', '/time-picker'],
-    ['Icon Button', '/icon-button'],
-    ['List Item', '/list-item'],
-    ['Collection List', '/list'],
-    ['Pill Group', '/pill-group'],
-    ['Progress', '/progress'],
-    ['Segmented', '/segmented'],
-    ['Search Field', '/search-field'],
-    ['Select', '/select'],
-    ['Slider', '/slider'],
-    ['Stepper', '/stepper'],
-    ['Status Label', '/status-label'],
-    ['Metric', '/metric'],
-    ['Switch', '/switch'],
-    ['Tabs', '/tabs'],
-    ['Text Field', '/text-field'],
-    ['Text Area', '/text-area'],
-    ['Code Editor', '/code-editor'],
-    ['Validation', '/validation'],
-]);
+    Native::visit($path)
+        ->assertSee('On-device checks')
+        ->assertTabActive('Components')
+        ->assertAccessible();
 
-it('navigates each recipe row to its documented screen', function (string $label, string $path) {
+    expect(Native::visit($path)->tree()['props']['nav_back'] ?? null)->toBeTrue();
+})->with('component demos');
+
+it('opens each documented recipe from the Recipes tab', function (string $label) {
     $this->artisan('migrate');
+    $newest = Post::query()->latest()->orderByDesc('id')->value('id');
+    $path = match ($label) {
+        'Posts' => '/posts',
+        'Post detail' => '/posts/'.$newest,
+        'New post' => '/posts/create',
+        'Settings' => '/settings',
+    };
 
-    Native::visit('/')
+    Native::visit('/recipes')
         ->tap($label)
         ->assertNavigatedTo($path);
 
     Native::visit($path)->assertAccessible();
-})->with([
-    ['Searchable list recipe', '/posts'],
-    ['Form screen recipe', '/posts/create'],
-    ['Settings screen recipe', '/settings'],
-]);
+})->with(['Posts', 'Post detail', 'New post', 'Settings']);
 
-it('filters the catalogue by trimmed names and tags without losing destinations', function () {
-    $screen = Native::visit('/')->select('query', '  tiMe  ');
-    $items = showcaseNodesOfType($screen->tree(), 'list_item');
+it('presents the recipes as app entry points with icons and descriptions', function () {
+    $screen = Native::visit('/recipes')->assertAccessible();
+    $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
 
-    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Time Picker']);
-    $screen->tap('Time Picker')->assertNavigatedTo('/time-picker');
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'New post', 'Settings']);
 
-    $screen = Native::visit('/')->select('query', 'firstlight:list-section');
-    $items = showcaseNodesOfType($screen->tree(), 'list_item');
-    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Collection List']);
-});
-
-it('explains an empty catalogue search and lets the tester clear it', function () {
-    $screen = Native::visit('/')->select('query', 'no such control');
-
-    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toBe([]);
-    $screen->assertSee('No demos match. Clear search to see every control.')
-        ->tap('Clear search');
-    expect(showcaseNodesOfType($screen->tree(), 'list_item'))->toHaveCount(35);
-});
-
-it('shows native back chrome on component pages but not capture routes', function () {
-    foreach (['/activity-indicator', '/button', '/callout', '/transient-feedback', '/transient-feedback/destination', '/badge', '/checkbox', '/media', '/choice-group', '/alert-dialog', '/confirmation-dialog', '/modal', '/bottom-sheet', '/date-picker', '/time-picker', '/icon-button', '/list-item', '/list', '/pill-group', '/progress', '/segmented', '/search-field', '/select', '/slider', '/stepper', '/status-label', '/switch', '/tabs', '/text-field', '/text-area', '/code-editor', '/validation'] as $path) {
-        expect(Native::visit($path)->tree()['props']['back'] ?? null)->toBeTrue();
+    foreach ($items as $item) {
+        expect($item['props']['leading_type'] ?? null)->toBe('icon')
+            ->and($item['props']['supporting'] ?? '')->not->toBe('');
     }
+});
 
-    expect(Native::visit('/captures/activity-indicator')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/button')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/callout')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/transient-feedback')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/badge')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/checkbox')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/media')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/choice-group')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/alert-dialog')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/confirmation-dialog')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/modal')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/bottom-sheet')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/date-picker')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/time-picker')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/tabs')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/icon-button')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/list-item')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/list')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/search-field')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/select')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/slider')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/stepper')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/text-area')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/code-editor')->tree()['props']['back'] ?? null)->toBeFalse();
-    expect(Native::visit('/captures/validate-fields')->tree()['props']['back'] ?? null)->toBeFalse();
+it('keeps capture fixtures free of tabs and back navigation', function () {
+    foreach (['/captures/activity-indicator', '/captures/button', '/captures/callout', '/captures/transient-feedback', '/captures/badge', '/captures/checkbox', '/captures/media', '/captures/choice-group', '/captures/alert-dialog', '/captures/confirmation-dialog', '/captures/modal', '/captures/bottom-sheet', '/captures/date-picker', '/captures/time-picker', '/captures/tabs', '/captures/icon-button', '/captures/list-item', '/captures/list', '/captures/search-field', '/captures/select', '/captures/slider', '/captures/stepper', '/captures/text-area', '/captures/code-editor', '/captures/validate-fields'] as $path) {
+        $tree = Native::visit($path)->tree();
+
+        expect($tree['type'])->toBe('native_root_stack')
+            ->and($tree['props']['back'] ?? null)->toBeFalse()
+            ->and(showcaseNodesOfType($tree, 'bottom_nav_item'))->toBe([]);
+    }
 });

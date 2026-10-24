@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: choose string and integer options; unavailable triage cannot be chosen. Search both queue pickers and select a result; cancelling leaves PHP unchanged. Disabled priority stays Routine; rejected queue stays All and counts attempts.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Compact stable values</native:text>

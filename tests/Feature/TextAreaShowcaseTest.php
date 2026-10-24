@@ -17,12 +17,12 @@ function firstlightTextAreasByLabel(array $tree): array
 }
 
 it('publishes the complete Text Area catalogue through the native wire tree', function () {
-    $screen = Native::visit('/text-area');
+    $screen = Native::visit('/components/text-area');
     $tree = $screen->tree();
     $nodes = firstlightTextAreasByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Text Area')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Text Area')
         ->and(array_keys($nodes))->toBe([
             'Clinical notes',
             'Handover note',
@@ -54,7 +54,7 @@ it('publishes the complete Text Area catalogue through the native wire tree', fu
 });
 
 it('publishes validation disabled read-only and reconciliation fixtures', function () {
-    $nodes = firstlightTextAreasByLabel(Native::visit('/text-area')->tree());
+    $nodes = firstlightTextAreasByLabel(Native::visit('/components/text-area')->tree());
     expect($nodes['Note with error']['props']['error'])->toBe('Add at least one observation.')
         ->and($nodes['Read-only note']['props']['read_only'])->toBeTrue()
         ->and($nodes['Disabled note']['props']['disabled'])->toBeTrue()
@@ -63,7 +63,7 @@ it('publishes validation disabled read-only and reconciliation fixtures', functi
 });
 
 it('updates bound text rejects one proposal and applies programmatic publications', function () {
-    $screen = Native::visit('/text-area');
+    $screen = Native::visit('/components/text-area');
     $screen
         ->select('errorNotes', 'Complete note')
         ->assertSet('errorNotes', 'Complete note')

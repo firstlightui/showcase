@@ -15,10 +15,10 @@ function calloutShowcaseNodes(array $tree): array
 }
 
 it('publishes every Callout tone, an action, accessibility metadata, and long copy', function () {
-    $screen = Native::visit('/callout');
+    $screen = Native::visit('/components/callout');
     $nodes = calloutShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Callout')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Callout')
         ->and(array_column(array_column($nodes, 'props'), 'tone'))->toBe([
             'neutral', 'info', 'success', 'warning', 'danger', 'warning', 'info',
         ])
@@ -36,7 +36,7 @@ it('publishes every Callout tone, an action, accessibility metadata, and long co
 });
 
 it('dispatches the optional action exactly once per press', function () {
-    Native::visit('/callout')
+    Native::visit('/components/callout')
         ->tap('actionCallout')
         ->assertSet('actionCount', 1)
         ->assertSet('lastAction', 'Review changes pressed');

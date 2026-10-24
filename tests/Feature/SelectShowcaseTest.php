@@ -17,12 +17,12 @@ function firstlightSelectsByLabel(array $tree): array
 }
 
 it('publishes the complete Select catalogue through the native wire tree', function () {
-    $screen = Native::visit('/select');
+    $screen = Native::visit('/components/select');
     $tree = $screen->tree();
     $nodes = firstlightSelectsByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Select')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Select')
         ->and(array_keys($nodes))->toBe([
             'Priority',
             'Triage level',
@@ -48,7 +48,7 @@ it('publishes the complete Select catalogue through the native wire tree', funct
 });
 
 it('publishes automatic forced validation disabled and rejection fixtures', function () {
-    $nodes = firstlightSelectsByLabel(Native::visit('/select')->tree());
+    $nodes = firstlightSelectsByLabel(Native::visit('/components/select')->tree());
 
     expect($nodes['Large queue']['props']['option_values'])->toHaveCount(13)
         ->and($nodes['Large queue']['props']['search_enabled'])->toBeTrue()
@@ -63,7 +63,7 @@ it('publishes automatic forced validation disabled and rejection fixtures', func
 });
 
 it('updates string and integer bindings while preserving a rejected publication', function () {
-    $screen = Native::visit('/select');
+    $screen = Native::visit('/components/select');
     $screen
         ->press("__syncProperty('errorPriority', \"urgent\")")
         ->assertSet('errorPriority', 'urgent')

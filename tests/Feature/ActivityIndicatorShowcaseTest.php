@@ -15,10 +15,10 @@ function activityIndicatorShowcaseNodes(array $tree): array
 }
 
 it('publishes all Activity Indicator sizes and conditional presence', function () {
-    $screen = Native::visit('/activity-indicator');
+    $screen = Native::visit('/components/activity-indicator');
     $nodes = activityIndicatorShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight Activity Indicator')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Activity Indicator')
         ->and(array_column(array_column($nodes, 'props'), 'size'))->toBe([
             'sm',
             'md',

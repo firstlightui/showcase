@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: tap a selected single pill to clear; toggle multiple queues, then reset to Mine and Mine/Urgent. Integer priority preserves identity; unavailable options cannot be chosen. Locked queue stays Mine and counts rejections. Long pills should wrap and remain selectable.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Single selection</native:text>

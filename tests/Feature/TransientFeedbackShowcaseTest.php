@@ -31,19 +31,22 @@ afterEach(function () {
     app(ShowcaseFeedbackLog::class)->reset();
 });
 
-it('registers Transient Feedback on the showcase home screen', function () {
-    $screen = Native::visit('/');
-    $items = transientFeedbackShowcaseNodesOfType($screen->tree(), 'list_item');
+it('registers Transient Feedback in the Components catalogue', function () {
+    $screen = Native::visit('/components');
+    $items = transientFeedbackShowcaseNodesOfType($screen->tree(), 'firstlight.list-item');
     $transientFeedback = collect($items)->first(
         fn (array $item): bool => ($item['props']['headline'] ?? null) === 'Transient Feedback',
     );
 
-    expect($transientFeedback)->not->toBeNull()
-        ->and($transientFeedback['props']['overline'])->toBe('Transient Feedback');
+    expect($transientFeedback)->not->toBeNull();
+
+    $screen->select('query', 'transient feedback');
+    expect(array_column(array_column(transientFeedbackShowcaseNodesOfType($screen->tree(), 'firstlight.list-item'), 'props'), 'headline'))
+        ->toBe(['Transient Feedback']);
 });
 
 it('publishes the complete interactive demonstration through its native route', function () {
-    Native::visit('/transient-feedback')
+    Native::visit('/components/transient-feedback')
         ->assertSee('Message-only tones')
         ->assertSee('Show neutral')
         ->assertSee('Show success')
@@ -137,7 +140,7 @@ it('updates a duplicate stable id in place', function () {
 it('keeps held feedback queued while navigating to the dedicated destination', function () {
     Native::test(TransientFeedbackShowcase::class)
         ->call('navigateWithFeedback')
-        ->assertNavigatedTo('/transient-feedback/destination');
+        ->assertNavigatedTo('/components/transient-feedback/destination');
 
     $items = app(FeedbackStore::class)->all();
 
@@ -145,7 +148,7 @@ it('keeps held feedback queued while navigating to the dedicated destination', f
         ->and($items[0]->id)->toBe('navigation-feedback')
         ->and($items[0]->hold)->toBeTrue();
 
-    Native::visit('/transient-feedback/destination')
+    Native::visit('/components/transient-feedback/destination')
         ->assertSee('Feedback survives navigation')
         ->call('removeNavigationFeedback')
         ->assertSet('lastRemovalSucceeded', true);
@@ -158,12 +161,12 @@ it('records the exact most recent action and dismissal event payloads', function
 
     event(new FeedbackActionPressed('feedback-action', 'undo-save'));
     expect($log->latest())->toBe('Action pressed · id=feedback-action · actionKey=undo-save');
-    Native::visit('/transient-feedback')
+    Native::visit('/components/transient-feedback')
         ->assertSee('Action pressed · id=feedback-action · actionKey=undo-save');
 
     event(new FeedbackDismissed('held-feedback', FeedbackDismissReason::Manual));
     expect($log->latest())->toBe('Dismissed · id=held-feedback · reason=manual');
-    Native::visit('/transient-feedback/destination')
+    Native::visit('/components/transient-feedback/destination')
         ->assertSee('Dismissed · id=held-feedback · reason=manual');
 });
 

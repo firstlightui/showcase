@@ -17,12 +17,12 @@ function firstlightTimePickersByLabel(array $tree): array
 }
 
 it('publishes the complete Time Picker catalogue through the native wire tree', function () {
-    $screen = Native::visit('/time-picker');
+    $screen = Native::visit('/components/time-picker');
     $tree = $screen->tree();
     $nodes = firstlightTimePickersByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Time Picker')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Time Picker')
         ->and(array_keys($nodes))->toBe([
             'Appointment time',
             'Review time',
@@ -49,7 +49,7 @@ it('publishes the complete Time Picker catalogue through the native wire tree', 
 });
 
 it('publishes omitted error localized disabled and reconciliation fixtures', function () {
-    $nodes = firstlightTimePickersByLabel(Native::visit('/time-picker')->tree());
+    $nodes = firstlightTimePickersByLabel(Native::visit('/components/time-picker')->tree());
 
     expect($nodes['Arrival time']['props'])->toMatchArray([
         'has_value' => false,
@@ -65,7 +65,7 @@ it('publishes omitted error localized disabled and reconciliation fixtures', fun
 });
 
 it('updates bound times rejects one proposal and applies programmatic publications', function () {
-    $screen = Native::visit('/time-picker');
+    $screen = Native::visit('/components/time-picker');
     $screen
         ->select('errorTime', '11:20')
         ->assertSet('errorTime', '11:20')

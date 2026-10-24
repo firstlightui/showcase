@@ -22,7 +22,7 @@ it('commits replaces and clears a picked document through its published callback
     Storage::fake('mobile_public');
     $first = UploadedFile::fake()->createWithContent('first.pdf', "%PDF-1.4\nFirst document");
     $second = UploadedFile::fake()->createWithContent('second.pdf', "%PDF-1.4\nReplacement document");
-    $screen = Native::visit('/media');
+    $screen = Native::visit('/components/media');
 
     $screen->select('document', $first->getPathname());
     $path = $screen->get('document')->path;
@@ -51,7 +51,7 @@ it('validates actual selected media and resets the published errors', function (
     $image = UploadedFile::fake()->image('profile.png', 64, 48);
     $invalid = UploadedFile::fake()->createWithContent('notes.txt', 'Not a PDF document');
     $pdf = UploadedFile::fake()->createWithContent('contract.pdf', "%PDF-1.4\nSample document");
-    $screen = Native::visit('/media')->tap('Validate media');
+    $screen = Native::visit('/components/media')->tap('Validate media');
     expect(mediaShowcaseFieldsByRef($screen->tree())['avatar']['props']['error'])->not->toBe('');
 
     $screen->select('avatar', $image->getPathname())->select('document', $invalid->getPathname())
@@ -69,10 +69,4 @@ it('validates actual selected media and resets the published errors', function (
     $screen->tap('Clear demo media')->assertSet('avatar', null)->assertSet('document', null);
     expect(mediaShowcaseFieldsByRef($screen->tree())['avatar']['props']['error'])->toBe('');
     expect(Storage::disk('mobile_public')->allFiles())->toBe([]);
-});
-
-it('applies the shared appearance when opening the Media screen', function () {
-    Native::visit('/')->select('darkMode', true);
-
-    Native::visit('/media')->assertSet('darkMode', true);
 });

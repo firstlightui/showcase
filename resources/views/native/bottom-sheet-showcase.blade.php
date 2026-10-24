@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 pb-24 gap-5">
+    <native:column class="w-full p-4 pb-8 gap-5">
         <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
         <native:text class="text-sm text-theme-on-surface-variant">Drag down or tap outside: dismissed increases once. In the programmatic example, tap Close from PHP: dismissed stays unchanged. Reopen and dismiss natively: dismissed increases.</native:text>
         <native:column class="w-full gap-3">

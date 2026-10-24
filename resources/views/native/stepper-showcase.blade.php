@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: step whole and quarter values. Minimum can increase and maximum can decrease; bounds block the opposite action. Disabled stays fixed. Rejected proposals increment the count without changing 4; publish changes to 8.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Exact numeric models</native:text>

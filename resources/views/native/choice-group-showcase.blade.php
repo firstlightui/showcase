@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 gap-5 pb-32">
+    <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: change one priority, toggle multiple notifications, then reset to Routine and Email/Push. Integer triage preserves identity; unavailable options cannot be chosen. Locked priority stays Routine and counts rejections. Long labels should wrap and remain selectable.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Single radio choice</native:text>

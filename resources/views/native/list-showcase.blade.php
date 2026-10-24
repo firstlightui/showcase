@@ -47,7 +47,7 @@
         @endif
     </firstlight:list>
 
-    <native:column class="w-full gap-2 px-4 pt-2 pb-24">
+    <native:column class="w-full gap-2 px-4 pt-2 pb-8">
         <native:text class="text-sm text-theme-on-surface">PHP: {{ $empty ? 'Empty list' : count($listItems).' rows' }} · {{ $listHasMore ? 'More available' : 'End of sample data' }} · refreshed {{ $refreshCount }}</native:text>
         <native:text class="text-sm text-theme-on-surface">{{ $pressCount }} presses · Last row: {{ $lastPressed }}</native:text>
         <native:row class="gap-3 flex-wrap">

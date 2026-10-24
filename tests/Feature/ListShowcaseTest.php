@@ -27,11 +27,11 @@ function listShowcaseItemNodes(array $tree): array
 }
 
 it('publishes grouped list fixtures through the native wire tree', function () {
-    $screen = Native::visit('/list');
+    $screen = Native::visit('/components/list');
     $lists = listShowcaseNodes($screen->tree());
     $items = listShowcaseItemNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight List')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight List')
         ->and($lists)->toHaveCount(1)
         ->and($lists[0]['props']['separator'] ?? null)->toBeTrue()
         ->and($lists[0]['props']['on_refresh'] ?? null)->toBeInt()
@@ -62,7 +62,7 @@ it('publishes grouped list fixtures through the native wire tree', function () {
 });
 
 it('dispatches row presses and refresh callbacks through PHP', function () {
-    $screen = Native::visit('/list');
+    $screen = Native::visit('/components/list');
     $screen->tap('Privacy');
 
     expect($screen->get('pressCount'))->toBe(1)
@@ -70,7 +70,7 @@ it('dispatches row presses and refresh callbacks through PHP', function () {
 });
 
 it('loads sample pages once and refreshes to the first page', function () {
-    $screen = Native::visit('/list');
+    $screen = Native::visit('/components/list');
     expect(array_column($screen->get('listItems'), 'id'))->toBe(range(1001, 1008));
 
     $screen->press('loadMore')->press('loadMore')->press('loadMore');
@@ -83,7 +83,7 @@ it('loads sample pages once and refreshes to the first page', function () {
 });
 
 it('keeps a cancelled sample row and removes only a confirmed stable key', function () {
-    $screen = Native::visit('/list')->tap('Sample item 1003')
+    $screen = Native::visit('/components/list')->tap('Sample item 1003')
         ->dismissSheet('deleteSampleDialog');
     expect(array_column($screen->get('listItems'), 'id'))->toBe(range(1001, 1008));
 
@@ -101,7 +101,7 @@ it('keeps a cancelled sample row and removes only a confirmed stable key', funct
 });
 
 it('rechecks sample authorization when confirmation arrives', function () {
-    $screen = Native::visit('/list')->tap('Sample item 1003')
+    $screen = Native::visit('/components/list')->tap('Sample item 1003')
         ->select('deletionAllowed', false)->tap('deleteSampleDialog');
 
     expect(array_column($screen->get('listItems'), 'id'))->toBe(range(1001, 1008));
@@ -109,7 +109,7 @@ it('rechecks sample authorization when confirmation arrives', function () {
 });
 
 it('lets the tester switch list presentation and restore an empty preview', function () {
-    $screen = Native::visit('/list')->tap('Test options')->assertSet('testOptionsVisible', true)
+    $screen = Native::visit('/components/list')->tap('Test options')->assertSet('testOptionsVisible', true)
         ->select('plain', true)->select('separators', false)
         ->select('deletionAllowed', false);
     $list = listShowcaseNodes($screen->tree())[0];

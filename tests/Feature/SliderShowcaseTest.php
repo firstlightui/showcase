@@ -17,12 +17,12 @@ function firstlightSlidersByLabel(array $tree): array
 }
 
 it('publishes the complete Slider catalogue through the native wire tree', function () {
-    $screen = Native::visit('/slider');
+    $screen = Native::visit('/components/slider');
     $tree = $screen->tree();
     $nodes = firstlightSlidersByLabel($tree);
 
-    expect($tree['type'])->toBe('native_root_stack')
-        ->and($tree['props']['title'] ?? null)->toBe('Firstlight Slider')
+    expect($tree['type'])->toBe('native_root_tabs')
+        ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Slider')
         ->and(array_keys($nodes))->toBe([
             'Live dose',
             'Blur temperature offset',
@@ -60,7 +60,7 @@ it('publishes the complete Slider catalogue through the native wire tree', funct
 });
 
 it('publishes error disabled rejection and programmatic fixtures', function () {
-    $nodes = firstlightSlidersByLabel(Native::visit('/slider')->tree());
+    $nodes = firstlightSlidersByLabel(Native::visit('/components/slider')->tree());
 
     expect($nodes['Dose with error']['props']['error'])->toBe('Dose needs clinical review.')
         ->and($nodes['Disabled dose']['props']['disabled'])->toBeTrue()
@@ -69,7 +69,7 @@ it('publishes error disabled rejection and programmatic fixtures', function () {
 });
 
 it('updates synchronization fixtures rejects one proposal and applies programmatic publication', function () {
-    $screen = Native::visit('/slider');
+    $screen = Native::visit('/components/slider');
     $screen
         ->slide('errorDose', 6.0)
         ->assertSet('errorDose', 6.0)

@@ -1,5 +1,5 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full p-4 pb-24 gap-5">
+    <native:column class="w-full p-4 pb-8 gap-5">
         <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
         <native:text class="text-sm text-theme-on-surface-variant">Confirm increments confirmed only; cancel increments cancelled only. Open the timed example and wait without tapping: it closes after about 3 seconds with both counts unchanged. If async is unavailable, choose normally and check the outcome below. Check large text and both appearances.</native:text>
         <native:column class="w-full gap-3">

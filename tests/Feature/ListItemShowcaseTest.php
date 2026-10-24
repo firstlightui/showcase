@@ -15,10 +15,10 @@ function listItemShowcaseNodes(array $tree): array
 }
 
 it('publishes every List Item content and state fixture through the native wire tree', function () {
-    $screen = Native::visit('/list-item');
+    $screen = Native::visit('/components/list-item');
     $nodes = listItemShowcaseNodes($screen->tree());
 
-    expect($screen->tree()['props']['title'] ?? null)->toBe('Firstlight List Item')
+    expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight List Item')
         ->and($nodes)->toHaveCount(10)
         ->and(array_column(array_column($nodes, 'props'), 'headline'))->toBe([
             'Account',
@@ -63,7 +63,7 @@ it('publishes every List Item content and state fixture through the native wire 
 });
 
 it('dispatches ordinary row presses and publishes the PHP result', function () {
-    $screen = Native::visit('/list-item');
+    $screen = Native::visit('/components/list-item');
     $screen->tap('Account');
     $screen->tap('Team');
 
@@ -78,7 +78,7 @@ it('dispatches ordinary row presses and publishes the PHP result', function () {
 });
 
 it('dispatches independent swipe callbacks with stable keys without removing rows', function () {
-    $screen = Native::visit('/list-item');
+    $screen = Native::visit('/components/list-item');
     $nodes = listItemShowcaseNodes($screen->tree());
     $trailing = json_decode($nodes[5]['props']['firstlight_trailing_actions_json'], true, flags: JSON_THROW_ON_ERROR);
 
@@ -99,7 +99,7 @@ it('dispatches independent swipe callbacks with stable keys without removing row
 });
 
 it('dispatches context menu callbacks and republishes item and row availability', function () {
-    $screen = Native::visit('/list-item');
+    $screen = Native::visit('/components/list-item');
     $menu = fn () => json_decode(listItemShowcaseNodes($screen->tree())[8]['props']['firstlight_context_menu_json'] ?? '[]', true, flags: JSON_THROW_ON_ERROR);
 
     expect(array_column($menu(), 'label'))->toBe(['Reply', 'Forward', 'Pin', 'Delete'])
