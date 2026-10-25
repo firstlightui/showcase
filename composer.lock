@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a763f3cf8f88c87060c9a8b030e64eef",
+    "content-hash": "60d0780057f4d171ac375851ca0c7602",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2445,16 +2445,16 @@
         },
         {
             "name": "nativephp/mobile",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NativePHP/mobile-air.git",
-                "reference": "ee03682ee7fd9939c229e8414123a795771c70e7"
+                "reference": "fd8ebf9d93ef59718267434bcb731bb381dc5e31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/mobile-air/zipball/ee03682ee7fd9939c229e8414123a795771c70e7",
-                "reference": "ee03682ee7fd9939c229e8414123a795771c70e7",
+                "url": "https://api.github.com/repos/NativePHP/mobile-air/zipball/fd8ebf9d93ef59718267434bcb731bb381dc5e31",
+                "reference": "fd8ebf9d93ef59718267434bcb731bb381dc5e31",
                 "shasum": ""
             },
             "require": {
@@ -2536,9 +2536,9 @@
             ],
             "support": {
                 "issues": "https://github.com/NativePHP/mobile-air/issues",
-                "source": "https://github.com/NativePHP/mobile-air/tree/4.6.0"
+                "source": "https://github.com/NativePHP/mobile-air/tree/4.6.1"
             },
-            "time": "2026-10-02T23:19:44+00:00"
+            "time": "2026-10-25T15:51:00+00:00"
         },
         {
             "name": "nativephp/mobile-browser",
