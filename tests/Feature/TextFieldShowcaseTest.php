@@ -27,6 +27,8 @@ it('publishes the complete Text Field catalogue through the native wire tree', f
         ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Text Field')
         ->and(array_keys($nodes))->toBe([
             'Email',
+            'Card number',
+            'Postal code',
             'Search referrals',
             'Password',
             'Patient ID',
@@ -63,6 +65,28 @@ it('publishes input policy, sync mode, icons, and semantic affordances', functio
         'secure' => true,
         'revealable' => true,
     ]);
+});
+
+it('publishes input masks without changing the bound values or keyboards', function () {
+    $screen = Native::visit('/components/text-field');
+    $nodes = firstlightTextFieldNodesByLabel($screen->tree());
+
+    expect($nodes['Card number']['props'])->toMatchArray([
+        'value' => '',
+        'mask' => '#### #### #### ####',
+        'keyboard' => 'number',
+        'sync_mode' => 'live',
+        'clearable' => true,
+    ])->and($nodes['Postal code']['props'])->toMatchArray([
+        'value' => 'K1A0B1',
+        'mask' => 'A#A #A#',
+        'autocapitalize' => 'characters',
+        'sync_mode' => 'blur',
+    ])->and($nodes['Postal code']['props'])->not->toHaveKey('keyboard');
+
+    $screen->select('cardNumber', '4111111111111111')
+        ->assertSet('cardNumber', '4111111111111111')
+        ->assertSee('PHP accepted state: 4111111111111111');
 });
 
 it('publishes read-only, error, and authored trailing-action semantics', function () {
