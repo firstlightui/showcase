@@ -18,6 +18,10 @@ class TextFieldShowcase extends ShowcaseScreen
 
     public string $recipient = '';
 
+    public string $cardNumber = '';
+
+    public string $postcode = 'K1A0B1';
+
     public int $scanRequests = 0;
 
     public function resetEmail(): void

@@ -24,6 +24,29 @@
         </native:column>
 
         <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Formatting masks</native:text>
+            <native:text class="text-sm text-theme-on-surface">Spaces are inserted as you type; PHP receives only the slot characters. Letters are dropped from digit slots and input stops when the pattern is full.</native:text>
+            <firstlight:text-field
+                native:model="cardNumber"
+                label="Card number"
+                placeholder="1234 5678 9012 3456"
+                mask="#### #### #### ####"
+                keyboard="number"
+                clearable
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $cardNumber ?: '(empty)' }}</native:text>
+            <firstlight:text-field
+                native:model.blur="postcode"
+                label="Postal code"
+                helper="Letter, digit, letter, space, digit, letter, digit."
+                mask="A#A #A#"
+                autocapitalize="characters"
+                :autocorrect="false"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $postcode ?: '(empty)' }} (blur)</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Debounced search</native:text>
             <firstlight:text-field
                 native:model.debounce.500ms="search"
