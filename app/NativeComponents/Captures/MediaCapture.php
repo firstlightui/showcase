@@ -3,6 +3,7 @@
 namespace App\NativeComponents\Captures;
 
 use FirstlightUI\Media\MediaValue;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Native\Mobile\Edge\NativeComponent;
 
@@ -18,14 +19,7 @@ class MediaCapture extends NativeComponent
 
     public function mount(): void
     {
-        $this->profilePhoto = new MediaValue(
-            'mobile_public',
-            'avatars/profile.jpg',
-            'image/jpeg',
-            18432,
-            320,
-            320,
-        );
+        $this->profilePhoto = $this->samplePhoto('profile.jpg');
 
         $this->contract = new MediaValue(
             'mobile_public',
@@ -34,16 +28,28 @@ class MediaCapture extends NativeComponent
             65536,
         );
 
-        $this->disabledPhoto = new MediaValue(
-            'mobile_public',
-            'avatars/locked.jpg',
-            'image/jpeg',
-            10240,
-            200,
-            200,
-        );
+        $this->disabledPhoto = $this->samplePhoto('locked.jpg');
 
         $this->photoWithError = null;
+    }
+
+    /**
+     * Copies a bundled sample photo to mobile_public on first use, so the
+     * field shows a real thumbnail in documentation captures.
+     */
+    private function samplePhoto(string $name): MediaValue
+    {
+        $source = resource_path('fixtures/media/'.$name);
+        $path = 'avatars/'.$name;
+        $disk = Storage::disk('mobile_public');
+
+        if (! $disk->exists($path)) {
+            $disk->put($path, (string) file_get_contents($source));
+        }
+
+        [$width, $height] = getimagesize($source) ?: [null, null];
+
+        return new MediaValue('mobile_public', $path, 'image/jpeg', (int) filesize($source), $width, $height);
     }
 
     public function navTitle(): string

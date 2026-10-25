@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
 use Native\Mobile\Testing\Native;
 
 /** @return list<array<string, mixed>> */
@@ -15,6 +16,8 @@ function mediaCaptureNodes(array $tree): array
 }
 
 it('publishes the stable Media documentation capture fixture', function () {
+    Storage::fake('mobile_public');
+
     $screen = Native::visit('/captures/media');
     $nodes = mediaCaptureNodes($screen->tree());
 
@@ -35,6 +38,9 @@ it('publishes the stable Media documentation capture fixture', function () {
             'path' => 'avatars/profile.jpg',
             'helper' => 'Square crop required',
         ])
+        ->and($nodes[0]['props']['preview_path'])->toBe(Storage::disk('mobile_public')->path('avatars/profile.jpg'))
+        ->and($nodes[0]['props']['preview_path'])->toBeFile()
+        ->and(getimagesize($nodes[0]['props']['preview_path'])['mime'])->toBe('image/jpeg')
         ->and($nodes[1]['props'])->toMatchArray([
             'mode' => 'document',
             'has_value' => true,
@@ -42,10 +48,13 @@ it('publishes the stable Media documentation capture fixture', function () {
             'mime' => 'application/pdf',
         ])
         ->and($nodes[1]['props'])->not->toHaveKeys(['aspect', 'crop'])
+        ->and($nodes[1]['props']['preview_path'])->toBe('')
         ->and($nodes[2]['props'])->toMatchArray([
             'disabled' => true,
             'has_value' => true,
+            'path' => 'avatars/locked.jpg',
         ])
+        ->and($nodes[2]['props']['preview_path'])->toBeFile()
         ->and($nodes[3]['props'])->toMatchArray([
             'mode' => 'image',
             'crop' => 'optional',

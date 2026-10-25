@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use App\NativeComponents\ShowcaseHome;
+use Illuminate\Support\Facades\Storage;
 use Native\Mobile\Testing\Native;
 
 /** @return list<array<string, mixed>> */
@@ -179,6 +180,9 @@ it('presents the recipes as app entry points with icons and descriptions', funct
 });
 
 it('keeps capture fixtures free of tabs and back navigation', function () {
+    // The Media fixture seeds sample photos on the device's mobile_public disk.
+    Storage::fake('mobile_public');
+
     foreach (['/captures/activity-indicator', '/captures/button', '/captures/callout', '/captures/transient-feedback', '/captures/badge', '/captures/checkbox', '/captures/media', '/captures/choice-group', '/captures/alert-dialog', '/captures/confirmation-dialog', '/captures/modal', '/captures/bottom-sheet', '/captures/date-picker', '/captures/time-picker', '/captures/tabs', '/captures/icon-button', '/captures/list-item', '/captures/list', '/captures/search-field', '/captures/select', '/captures/slider', '/captures/stepper', '/captures/text-area', '/captures/code-editor', '/captures/validate-fields'] as $path) {
         $tree = Native::visit($path)->tree();
 
