@@ -1,0 +1,439 @@
+{
+    "id": "how-to/build-a-large-list-screen",
+    "title": "Build a large list screen",
+    "description": "Recipe for a list of thousands of local records with native:virtual-list, Firstlight List Item rows, and one query per visible window.",
+    "group": "Guides",
+    "anchors": {
+        "build-a-large-list-screen": "overview",
+        "virtualise-or-paginate": "virtualise-or-paginate",
+        "1-register-the-routes": "1-register-the-routes",
+        "2-write-the-screen": "2-write-the-screen",
+        "3-write-the-views": "3-write-the-views",
+        "4-test-it": "4-test-it",
+        "rules-to-keep": "rules-to-keep",
+        "adapt-the-recipe": "adapt-the-recipe"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe shows thousands of records in one scrolling list without building them all. Native renders the full scroll extent, PHP builds only the rows near the visible window, and the next slice is built as the user scrolls."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "This recipe runs unchanged in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "LargeListRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it against 5,000 contacts."
+                        }
+                    ]
+                }
+            ]
+        },
+        "virtualise-or-paginate": {
+            "title": "Virtualise or paginate?",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Is local (SQLite on the device) or has a cheap count and offset query"
+                    },
+                    "items": [
+                        {
+                            "label": "Use",
+                            "runs": [
+                                {
+                                    "text": "This recipe: "
+                                },
+                                {
+                                    "text": "native:virtual-list",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Comes from a remote API with cursors or no known total"
+                    },
+                    "items": [
+                        {
+                            "label": "Use",
+                            "runs": [
+                                {
+                                    "text": "Paginate lists",
+                                    "link": 2
+                                },
+                                {
+                                    "text": " with "
+                                },
+                                {
+                                    "text": "@endReached",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Is short and fixed, or needs sections and pull-to-refresh"
+                    },
+                    "items": [
+                        {
+                            "label": "Use",
+                            "runs": [
+                                {
+                                    "text": "List",
+                                    "link": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Prefer virtualisation for large local collections. A paginated List keeps every loaded row in the published tree, so a long scroll keeps growing what PHP renders and sends. A virtual list stays at about 80 rows however far the user scrolls, and its scroll bar reflects the whole collection."
+                }
+            ]
+        },
+        "1-register-the-routes": {
+            "title": "1. Register the routes",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\ContactScreen;\nuse App\\NativeComponents\\ContactsScreen;\nuse App\\NativeComponents\\Layouts\\AppLayout;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/contacts', ContactsScreen::class)\n    ->name('recipes.contacts')\n    ->layout(AppLayout::class);\n\nRoute::native('/contacts/{contact}', ContactScreen::class)\n    ->name('recipes.contact')\n    ->layout(AppLayout::class);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "AppLayout",
+                            "code": true
+                        },
+                        {
+                            "text": " is defined in "
+                        },
+                        {
+                            "text": "Build a list and detail flow",
+                            "link": 4
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "2-write-the-screen": {
+            "title": "2. Write the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "NativePHP's "
+                        },
+                        {
+                            "text": "HasVirtualListWindow",
+                            "code": true
+                        },
+                        {
+                            "text": " trait holds the window ("
+                        },
+                        {
+                            "text": "$virtualWindowFrom",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "$virtualWindowTo",
+                            "code": true
+                        },
+                        {
+                            "text": ", rows 0–79 at first) and its "
+                        },
+                        {
+                            "text": "setVirtualWindow()",
+                            "code": true
+                        },
+                        {
+                            "text": " handler. The screen loads the window's rows with one query and shares them, keyed by absolute index, with the row view."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Models\\Contact;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Support\\Facades\\View as ViewFactory;\nuse Illuminate\\View\\View;\nuse Native\\Mobile\\Edge\\Concerns\\HasVirtualListWindow;\n\nclass ContactsScreen extends NativeComponent\n{\n    use HasVirtualListWindow;\n\n    public function openContact(int $id): void\n    {\n        $this->navigate('/contacts/'.$id);\n    }\n\n    public function navTitle(): string\n    {\n        return 'Contacts';\n    }\n\n    public function render(): View\n    {\n        // One query for the rows in the current window, keyed by their\n        // absolute index so each row view can find its own contact.\n        $from = $this->virtualWindowFrom;\n\n        $window = Contact::query()\n            ->orderBy('name')\n            ->orderBy('id')\n            ->skip($from)\n            ->take($this->virtualWindowTo - $from + 1)\n            ->get()\n            ->values()\n            ->keyBy(fn (Contact $contact, int $offset) => $from + $offset);\n\n        ViewFactory::share('contactWindow', $window);\n\n        return view('native.contacts', [\n            'total' => Contact::query()->count(),\n        ]);\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Do not query inside the row view. The row view renders once per index, so a query there runs about 80 times for every window change."
+                }
+            ]
+        },
+        "3-write-the-views": {
+            "title": "3. Write the views",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The screen view is one self-closing tag. "
+                        },
+                        {
+                            "text": "item",
+                            "code": true
+                        },
+                        {
+                            "text": " names the row view."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "{{-- resources/views/native/contacts.blade.php --}}\n<native:virtual-list\n    class=\"w-full flex-1\"\n    :count=\"$total\"\n    :from=\"$virtualWindowFrom\"\n    :to=\"$virtualWindowTo\"\n    item=\"native.rows.contact\"\n    on-window-change=\"setVirtualWindow\"\n    :estimated-row-height=\"\\Native\\Mobile\\Platform::isIos() ? 64 : 72\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The row view receives "
+                        },
+                        {
+                            "text": "$index",
+                            "code": true
+                        },
+                        {
+                            "text": " and renders one ordinary List Item:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "{{-- resources/views/native/rows/contact.blade.php --}}\n@php($contact = $contactWindow[$index])\n\n<firstlight:list-item\n    :headline=\"$contact->name\"\n    :supporting=\"$contact->email\"\n    trailing-icon=\"chevron-right\"\n    trailing-icon-ios=\"chevron.right\"\n    trailing-icon-android=\"chevron_right\"\n    @press=\"openContact({{ $contact->id }})\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The detail screen is the same as in the "
+                        },
+                        {
+                            "text": "list and detail flow",
+                            "link": 5
+                        },
+                        {
+                            "text": ", with "
+                        },
+                        {
+                            "text": "public Contact $contact",
+                            "code": true
+                        },
+                        {
+                            "text": " bound from the route."
+                        }
+                    ]
+                }
+            ]
+        },
+        "4-test-it": {
+            "title": "4. Test it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "setVirtualWindow()",
+                            "code": true
+                        },
+                        {
+                            "text": " is a public method, so a test moves the window the way native does:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nuse App\\Models\\Contact;\nuse FirstlightUI\\Testing\\ScreenAssertions;\nuse Illuminate\\Foundation\\Testing\\RefreshDatabase;\nuse Native\\Mobile\\Testing\\Native;\n\nuses(RefreshDatabase::class);\n\nbeforeEach(fn () => ScreenAssertions::register());\n\nit('builds only the rows in the first window', function () {\n    Native::visit('/contacts')\n        ->assertListItemCount(80)\n        ->assertListItem('Contact 0001')\n        ->assertListItem('Contact 0080')\n        ->assertMissingListItem('Contact 0081');\n});\n\nit('builds the new slice when the native window moves', function () {\n    Native::visit('/contacts')\n        ->call('setVirtualWindow', 4000, 4079)\n        ->assertListItemCount(80)\n        ->assertListItem('Contact 4001')\n        ->assertListItem('Contact 4080')\n        ->assertMissingListItem('Contact 0001');\n});\n\nit('clips the last window to the end of the collection', function () {\n    Native::visit('/contacts')\n        ->call('setVirtualWindow', 4960, 5039)\n        ->assertListItemCount(40)\n        ->assertListItem('Contact 5000');\n});\n\nit('opens the detail screen for the pressed row', function () {\n    Native::visit('/contacts')\n        ->call('setVirtualWindow', 2000, 2079)\n        ->pressListItem('Contact 2042')\n        ->assertNavigatedTo('/contacts/'.Contact::where('name', 'Contact 2042')->value('id'));\n});"
+                }
+            ]
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "One virtual list per screen. This is a NativePHP limit."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Rows outside the window are fixed-height placeholders sized by "
+                        },
+                        {
+                            "text": "estimated-row-height",
+                            "code": true
+                        },
+                        {
+                            "text": ". Set it close to the real row height so the scroll bar does not jump. A List Item with supporting text is 64 points on iOS and 72 dp on Android at the default text size, so the example picks the value per platform."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Order by a unique column last ("
+                        },
+                        {
+                            "text": "orderBy('id')",
+                            "code": true
+                        },
+                        {
+                            "text": ") so a window always holds the same rows."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Pass model keys, not "
+                        },
+                        {
+                            "text": "$index",
+                            "code": true
+                        },
+                        {
+                            "text": ", into "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " and other callbacks."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Virtual lists have no sections, separators, pull-to-refresh, or end-reached event. Use "
+                        },
+                        {
+                            "text": "List",
+                            "link": 3
+                        },
+                        {
+                            "text": " when you need those."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Returning from the detail screen rebuilds the list at the top. NativePHP navigation does not restore scroll position, for a virtual list or a List."
+                }
+            ]
+        },
+        "adapt-the-recipe": {
+            "title": "Adapt the recipe",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Swipe and context-menu actions:",
+                            "strong": true
+                        },
+                        {
+                            "text": " add "
+                        },
+                        {
+                            "text": "trailing-actions",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "context-menu",
+                            "code": true
+                        },
+                        {
+                            "text": " to the row's List Item exactly as on a List row."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "LargeListRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/LargeListRecipeTest.php"
+        },
+        {
+            "label": "Paginate lists",
+            "url": "paginate-lists.md"
+        },
+        {
+            "label": "List",
+            "url": "../components/list.md"
+        },
+        {
+            "label": "Build a list and detail flow",
+            "url": "build-a-list-detail-flow.md"
+        },
+        {
+            "label": "list and detail flow",
+            "url": "build-a-list-detail-flow.md"
+        }
+    ]
+}

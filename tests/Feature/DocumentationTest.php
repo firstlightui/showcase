@@ -19,7 +19,7 @@ it('bundles the entire reference for the installed Firstlight revision', functio
     $package = collect($packages)->firstWhere('name', 'firstlightui/nativephp');
 
     expect($library->manifest()['revision'])->toBe($package['dist']['reference'])
-        ->and($library->articles())->toHaveCount(55)
+        ->and($library->articles())->toHaveCount(57)
         ->and(array_unique(array_column($library->articles(), 'group')))->toHaveCount(6);
 
     foreach ($library->articles() as $summary) {

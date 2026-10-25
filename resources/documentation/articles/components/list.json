@@ -294,7 +294,25 @@
                     "type": "item",
                     "marker": "•",
                     "depth": 0,
-                    "text": "Horizontal lists, virtualized windows, selectable collections, and arbitrary child components are outside the Firstlight List contract."
+                    "runs": [
+                        {
+                            "text": "Horizontal lists, virtualized windows, selectable collections, and arbitrary child components are outside the Firstlight List contract. For thousands of rows, render List Items in Mobile UI's "
+                        },
+                        {
+                            "text": "native:virtual-list",
+                            "code": true
+                        },
+                        {
+                            "text": "; see "
+                        },
+                        {
+                            "text": "Build a large list screen",
+                            "link": 5
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -387,6 +405,10 @@
         {
             "label": "leading and trailing swipe actions",
             "url": "list-item.md#swipe-actions"
+        },
+        {
+            "label": "Build a large list screen",
+            "url": "../how-to/build-a-large-list-screen.md"
         }
     ]
 }

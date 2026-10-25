@@ -8,6 +8,7 @@
         "complete-example": "complete-example",
         "props": "props",
         "events-and-synchronisation": "events-and-synchronisation",
+        "input-masks": "input-masks",
         "icons-and-trailing-actions": "icons-and-trailing-actions",
         "validation-and-accessibility": "validation-and-accessibility",
         "platform-behaviour": "platform-behaviour",
@@ -421,6 +422,64 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "mask",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Formats the display as the person types: "
+                                },
+                                {
+                                    "text": "#",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is a digit, "
+                                },
+                                {
+                                    "text": "A",
+                                    "code": true
+                                },
+                                {
+                                    "text": " a letter, "
+                                },
+                                {
+                                    "text": "*",
+                                    "code": true
+                                },
+                                {
+                                    "text": " either, and every other character a literal. The bound value keeps only slot characters. See "
+                                },
+                                {
+                                    "text": "Input masks",
+                                    "link": 0
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "autocapitalize",
                                 "code": true
                             }
@@ -757,7 +816,7 @@
                                 },
                                 {
                                     "text": "Localize chrome",
-                                    "link": 0
+                                    "link": 1
                                 },
                                 {
                                     "text": "."
@@ -801,7 +860,7 @@
                                 },
                                 {
                                     "text": "Localize chrome",
-                                    "link": 0
+                                    "link": 1
                                 },
                                 {
                                     "text": "."
@@ -1021,6 +1080,195 @@
                 }
             ]
         },
+        "input-masks": {
+            "title": "Input masks",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:text-field\n    label=\"Card number\"\n    mask=\"#### #### #### ####\"\n    keyboard=\"number\"\n    clearable\n    native:model=\"cardNumber\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The field inserts literals while the person types, drops characters that do not fit the next slot, and stops accepting input when every slot is filled. Literals appear only once the slot after them is filled, so an empty field shows its placeholder. Paste accepts raw or formatted text: "
+                        },
+                        {
+                            "text": "(415) 555-0123",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "4155550123",
+                            "code": true
+                        },
+                        {
+                            "text": " both fill "
+                        },
+                        {
+                            "text": "(###) ###-####",
+                            "code": true
+                        },
+                        {
+                            "text": ". Backspacing over a literal on its own deletes the slot character before it. The caret stays beside the edit."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "PHP, "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": " receive only slot characters, for example "
+                        },
+                        {
+                            "text": "4111111111111111",
+                            "code": true
+                        },
+                        {
+                            "text": ", under every "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " modifier. A keystroke that is rejected publishes nothing. Digit slots accept any Unicode decimal digit and store it as ASCII; letter slots accept "
+                        },
+                        {
+                            "text": "a",
+                            "code": true
+                        },
+                        {
+                            "text": "–"
+                        },
+                        {
+                            "text": "z",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "A",
+                            "code": true
+                        },
+                        {
+                            "text": "–"
+                        },
+                        {
+                            "text": "Z",
+                            "code": true
+                        },
+                        {
+                            "text": " and keep their case."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "There are no presets: write the pattern for your market. The mask never changes the keyboard, capitalization, or autocorrection, so set "
+                        },
+                        {
+                            "text": "keyboard",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "autocapitalize",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "autocorrect",
+                            "code": true
+                        },
+                        {
+                            "text": " yourself. A published value that does not fit the pattern is displayed conformed without an event; PHP keeps the original until the person next edits. "
+                        },
+                        {
+                            "text": "mask",
+                            "code": true
+                        },
+                        {
+                            "text": " cannot be combined with "
+                        },
+                        {
+                            "text": "secure",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "revealable",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "mask=\"\"",
+                            "code": true
+                        },
+                        {
+                            "text": " turns masking off."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "VoiceOver and TalkBack read the formatted text that is on screen. Describe the expected format with "
+                        },
+                        {
+                            "text": "placeholder",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "helper",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
         "icons-and-trailing-actions": {
             "title": "Icons and trailing actions",
             "blocks": [
@@ -1120,7 +1368,7 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Contract exceptions still reject invalid types, unsupported enums, incomplete trailing actions, and conflicting affordances before publication. User validation is separate: screens that "
+                            "text": "Contract exceptions still reject invalid types, unsupported enums, incomplete trailing actions, conflicting affordances, masks without a slot, and masked secure fields before publication. User validation is separate: screens that "
                         },
                         {
                             "text": "use ValidatesFields",
@@ -1159,7 +1407,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": "."
@@ -1287,6 +1535,10 @@
         }
     },
     "links": [
+        {
+            "label": "Input masks",
+            "url": "#input-masks"
+        },
         {
             "label": "Localize chrome",
             "url": "../how-to/localize.md"

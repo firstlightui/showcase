@@ -1,0 +1,453 @@
+{
+    "id": "how-to/build-a-photo-upload-screen",
+    "title": "Build a photo upload screen",
+    "description": "Recipe for a Media field that crops a photo, validates it with Laravel rules, and saves it to a model only when the user taps Save.",
+    "group": "Guides",
+    "anchors": {
+        "build-a-photo-upload-screen": "overview",
+        "how-the-pieces-fit": "how-the-pieces-fit",
+        "1-store-the-value": "1-store-the-value",
+        "2-register-the-route": "2-register-the-route",
+        "3-write-the-screen": "3-write-the-screen",
+        "4-write-the-view": "4-write-the-view",
+        "5-test-it": "5-test-it",
+        "rules-to-keep": "rules-to-keep",
+        "adapt-the-recipe": "adapt-the-recipe"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe adds a cover photo to a post: the user picks or takes a photo, crops it to 16:9, and taps Save. Laravel validation checks the file, the post stores where it lives, and replaced files are deleted."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "This recipe runs unchanged in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "MediaUploadRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it."
+                        }
+                    ]
+                }
+            ]
+        },
+        "how-the-pieces-fit": {
+            "title": "How the pieces fit",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Media",
+                            "link": 2
+                        },
+                        {
+                            "text": " copies a picked file to Storage as soon as the user confirms it and binds a "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": ". Until Save, that file is a draft:"
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Picking again or clearing deletes the draft, never the saved cover."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Save stores the new "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": " on the post, then deletes the old cover."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "So leaving without saving, or replacing a photo twice, never loses the saved cover."
+                }
+            ]
+        },
+        "1-store-the-value": {
+            "title": "1. Store the value",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": " is a small readonly object. Store its fields as JSON:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "Schema::table('posts', function (Blueprint $table) {\n    $table->json('cover')->nullable();\n});"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Post extends Model\n{\n    protected $fillable = ['title', 'excerpt', 'body', 'cover'];\n\n    protected function casts(): array\n    {\n        return [\n            'cover' => 'array',\n        ];\n    }\n}"
+                }
+            ]
+        },
+        "2-register-the-route": {
+            "title": "2. Register the route",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\Layouts\\AppLayout;\nuse App\\NativeComponents\\PostCoverScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/posts/{post}/cover', PostCoverScreen::class)\n    ->name('recipes.post.cover')\n    ->layout(AppLayout::class);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Register it before "
+                        },
+                        {
+                            "text": "/posts/{post}",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "3-write-the-screen": {
+            "title": "3. Write the screen",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\Media\\MediaStorage;\nuse FirstlightUI\\Media\\MediaValue;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\View\\View;\n\nclass PostCoverScreen extends NativeComponent\n{\n    public Post $post;\n\n    public ?MediaValue $cover = null;\n\n    /** @var array<string, string> */\n    protected array $rules = [\n        'cover' => 'nullable|image|max:4096',\n    ];\n\n    public function mount(): void\n    {\n        $this->cover = $this->savedCover();\n    }\n\n    public function coverChosen(string $tempPath): void\n    {\n        $this->discardDraft();\n        $this->cover = MediaStorage::commit($tempPath, 'mobile_public', 'covers');\n    }\n\n    public function coverCleared(): void\n    {\n        $this->discardDraft();\n        $this->cover = null;\n    }\n\n    public function save(): void\n    {\n        $saved = $this->submit(\n            action: function (): void {\n                $previous = $this->savedCover();\n\n                $this->post->update([\n                    'cover' => $this->cover === null ? null : get_object_vars($this->cover),\n                ]);\n\n                if ($previous !== null && $previous->path !== $this->cover?->path) {\n                    MediaStorage::delete($previous);\n                }\n            },\n            successMessage: 'Cover saved',\n        );\n\n        if ($saved) {\n            $this->back();\n        }\n    }\n\n    public function navTitle(): string\n    {\n        return 'Cover photo';\n    }\n\n    public function render(): View\n    {\n        return view('native.post-cover');\n    }\n\n    private function savedCover(): ?MediaValue\n    {\n        return $this->post->cover === null ? null : new MediaValue(...$this->post->cover);\n    }\n\n    /** Deletes the picked file only while it is an unsaved draft. */\n    private function discardDraft(): void\n    {\n        if ($this->cover !== null && $this->cover->path !== $this->savedCover()?->path) {\n            MediaStorage::delete($this->cover);\n        }\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " validates "
+                        },
+                        {
+                            "text": "$rules",
+                            "code": true
+                        },
+                        {
+                            "text": " first. Media adapts the "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": " to an "
+                        },
+                        {
+                            "text": "UploadedFile",
+                            "code": true
+                        },
+                        {
+                            "text": ", so "
+                        },
+                        {
+                            "text": "image",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "mimes",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "max",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "dimensions",
+                            "code": true
+                        },
+                        {
+                            "text": " work as they do for web uploads. "
+                        },
+                        {
+                            "text": "nullable",
+                            "code": true
+                        },
+                        {
+                            "text": " lets the user remove the cover by clearing the field and saving."
+                        }
+                    ]
+                }
+            ]
+        },
+        "4-write-the-view": {
+            "title": "4. Write the view",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:scroll-view class=\"w-full flex-1\">\n    <native:column class=\"w-full p-4 gap-4\">\n        <firstlight:media\n            mode=\"image\"\n            label=\"Cover photo\"\n            helper=\"Cropped to 16:9. Saved when you tap Save cover.\"\n            aspect=\"16:9\"\n            directory=\"covers\"\n            native:model=\"cover\"\n            @change=\"coverChosen\"\n            @clear=\"coverCleared\"\n        />\n\n        <firstlight:button variant=\"primary\" :loading=\"$submitting\" @press=\"save\">\n            Save cover\n        </firstlight:button>\n    </native:column>\n</native:scroll-view>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "aspect=\"16:9\"",
+                            "code": true
+                        },
+                        {
+                            "text": " makes the crop required and locked to that ratio. A failed rule shows under the field, as on every Firstlight field."
+                        }
+                    ]
+                }
+            ]
+        },
+        "5-test-it": {
+            "title": "5. Test it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "coverChosen()",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the path native hands over after the pick, so a test calls it with a fake upload:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nuse App\\Models\\Post;\nuse FirstlightUI\\Facades\\Feedback;\nuse FirstlightUI\\Testing\\ScreenAssertions;\nuse Illuminate\\Foundation\\Testing\\RefreshDatabase;\nuse Illuminate\\Http\\UploadedFile;\nuse Illuminate\\Support\\Facades\\Storage;\nuse Native\\Mobile\\Testing\\Native;\n\nuses(RefreshDatabase::class);\n\nbeforeEach(function () {\n    ScreenAssertions::register();\n    Storage::fake('mobile_public');\n    $this->post = Post::where('title', 'Sample post 1')->firstOrFail();\n});\n\nit('saves a picked cover to the post and goes back', function () {\n    Feedback::fake();\n    $photo = UploadedFile::fake()->image('beach.jpg', 1600, 900);\n\n    $screen = Native::visit(\"/posts/{$this->post->id}/cover\")\n        ->call('coverChosen', $photo->getPathname())\n        ->call('save')\n        ->assertHasNoErrors()\n        ->assertFeedbackSent('Cover saved')\n        ->assertWentBack();\n\n    $cover = $this->post->fresh()->cover;\n    expect($cover['path'])->toStartWith('covers/')\n        ->and($cover['width'])->toBe(1600)\n        ->and($cover['height'])->toBe(900);\n    Storage::disk('mobile_public')->assertExists($cover['path']);\n});\n\nit('rejects a file that is not an image and saves nothing', function () {\n    $notes = UploadedFile::fake()->createWithContent('notes.txt', 'Not an image');\n\n    Native::visit(\"/posts/{$this->post->id}/cover\")\n        ->call('coverChosen', $notes->getPathname())\n        ->call('save')\n        ->assertHasErrors(['cover' => 'The cover field must be an image.'])\n        ->assertElement('firstlight.media', fn (array $node) => $node['props']['error'] === 'The cover field must be an image.');\n\n    expect($this->post->fresh()->cover)->toBeNull();\n});\n\nit('deletes a replaced draft but keeps the saved cover until Save', function () {\n    $first = UploadedFile::fake()->image('first.jpg', 1600, 900);\n    $draft = UploadedFile::fake()->image('draft.jpg', 1600, 900);\n    $final = UploadedFile::fake()->image('final.jpg', 1600, 900);\n\n    Native::visit(\"/posts/{$this->post->id}/cover\")\n        ->call('coverChosen', $first->getPathname())\n        ->call('save');\n    $saved = $this->post->fresh()->cover['path'];\n\n    $screen = Native::visit(\"/posts/{$this->post->id}/cover\")\n        ->call('coverChosen', $draft->getPathname());\n    $draftPath = $screen->get('cover')->path;\n\n    $screen->call('coverChosen', $final->getPathname());\n    $finalPath = $screen->get('cover')->path;\n\n    $disk = Storage::disk('mobile_public');\n    $disk->assertMissing($draftPath);\n    $disk->assertExists($saved);\n\n    $screen->call('save');\n    $disk->assertMissing($saved);\n    $disk->assertExists($finalPath);\n    expect($this->post->fresh()->cover['path'])->toBe($finalPath);\n});\n\nit('removes the cover only when the cleared field is saved', function () {\n    $photo = UploadedFile::fake()->image('beach.jpg', 1600, 900);\n\n    Native::visit(\"/posts/{$this->post->id}/cover\")\n        ->call('coverChosen', $photo->getPathname())\n        ->call('save');\n    $saved = $this->post->fresh()->cover['path'];\n\n    $screen = Native::visit(\"/posts/{$this->post->id}/cover\")\n        ->assertSet('cover.path', $saved)\n        ->call('coverCleared');\n    Storage::disk('mobile_public')->assertExists($saved);\n\n    $screen->call('save');\n    Storage::disk('mobile_public')->assertMissing($saved);\n    expect($this->post->fresh()->cover)->toBeNull();\n});"
+                }
+            ]
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Commit picks with "
+                        },
+                        {
+                            "text": "MediaStorage::commit()",
+                            "code": true
+                        },
+                        {
+                            "text": " in "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": "; never keep the temporary path."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Delete only drafts in "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "@clear",
+                            "code": true
+                        },
+                        {
+                            "text": ". Delete the old saved file after the model is updated."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "On iOS, set a camera usage description written for your app; see "
+                        },
+                        {
+                            "text": "Media host application setup",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "adapt-the-recipe": {
+            "title": "Adapt the recipe",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Profile photo:",
+                            "strong": true
+                        },
+                        {
+                            "text": " use "
+                        },
+                        {
+                            "text": "aspect=\"1:1\"",
+                            "code": true
+                        },
+                        {
+                            "text": " and store the value on the user."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Documents:",
+                            "strong": true
+                        },
+                        {
+                            "text": " use "
+                        },
+                        {
+                            "text": "mode=\"document\"",
+                            "code": true
+                        },
+                        {
+                            "text": " and a "
+                        },
+                        {
+                            "text": "mimes:pdf",
+                            "code": true
+                        },
+                        {
+                            "text": " rule. Document mode has no crop."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Upload to a server:",
+                            "strong": true
+                        },
+                        {
+                            "text": " in the "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " action, send "
+                        },
+                        {
+                            "text": "Storage::disk($this->cover->disk)->path($this->cover->path)",
+                            "code": true
+                        },
+                        {
+                            "text": " to your API before updating the model, and throw "
+                        },
+                        {
+                            "text": "ValidationException::withMessages(['cover' => ...])",
+                            "code": true
+                        },
+                        {
+                            "text": " if it fails."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "MediaUploadRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/MediaUploadRecipeTest.php"
+        },
+        {
+            "label": "Media",
+            "url": "../components/media.md"
+        },
+        {
+            "label": "Media host application setup",
+            "url": "../components/media.md#host-application-setup"
+        }
+    ]
+}

@@ -36,7 +36,74 @@
                 },
                 {
                     "type": "text",
-                    "text": "The package ships English. There is no translation UI. Applications add other locales through Laravel vendor language publishing."
+                    "runs": [
+                        {
+                            "text": "The package ships English, German ("
+                        },
+                        {
+                            "text": "de",
+                            "code": true
+                        },
+                        {
+                            "text": "), Spanish ("
+                        },
+                        {
+                            "text": "es",
+                            "code": true
+                        },
+                        {
+                            "text": "), French ("
+                        },
+                        {
+                            "text": "fr",
+                            "code": true
+                        },
+                        {
+                            "text": "), Italian ("
+                        },
+                        {
+                            "text": "it",
+                            "code": true
+                        },
+                        {
+                            "text": "), Japanese ("
+                        },
+                        {
+                            "text": "ja",
+                            "code": true
+                        },
+                        {
+                            "text": "), Dutch ("
+                        },
+                        {
+                            "text": "nl",
+                            "code": true
+                        },
+                        {
+                            "text": "), Polish ("
+                        },
+                        {
+                            "text": "pl",
+                            "code": true
+                        },
+                        {
+                            "text": "), Brazilian Portuguese ("
+                        },
+                        {
+                            "text": "pt_BR",
+                            "code": true
+                        },
+                        {
+                            "text": ") and Simplified Chinese ("
+                        },
+                        {
+                            "text": "zh_CN",
+                            "code": true
+                        },
+                        {
+                            "text": "). Laravel picks the strings for the application locale, so no setup is needed for those. There is no translation UI. To change a packaged string or add another locale, publish the language files."
+                        }
+                    ]
                 }
             ]
         },
@@ -52,14 +119,14 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Laravel copies the files to "
+                            "text": "Laravel copies every packaged locale to "
                         },
                         {
                             "text": "lang/vendor/firstlight",
                             "code": true
                         },
                         {
-                            "text": ". "
+                            "text": ". Edit a published file to change a packaged string; your copy wins over the package. "
                         },
                         {
                             "text": "validation.php",
@@ -80,10 +147,25 @@
                             "code": true
                         },
                         {
-                            "text": " Callouts and screen-reader announcements. Add a locale next to English, for example "
+                            "text": " Callouts and screen-reader announcements. Keep its "
                         },
                         {
-                            "text": "lang/vendor/firstlight/fr/chrome.php",
+                            "text": ":count",
+                            "code": true
+                        },
+                        {
+                            "text": " placeholder and one plural form per rule of the language, as Polish does with three."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "To add a locale Firstlight does not ship, create its directory next to the others, for example "
+                        },
+                        {
+                            "text": "lang/vendor/firstlight/sv/chrome.php",
                             "code": true
                         },
                         {
@@ -94,7 +176,7 @@
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "<?php\n\nreturn [\n    'confirm' => 'Confirmer',\n    'cancel' => 'Annuler',\n    'ok' => 'OK',\n    'dismiss' => 'Fermer',\n    'dismiss_feedback' => 'Fermer le message',\n    'clear' => 'Effacer',\n    'clear_search' => 'Effacer la recherche',\n    'clear_text' => 'Effacer le texte',\n    'skip' => 'Ignorer',\n    'done' => 'OK',\n    'crop' => 'Recadrer',\n    'zoom_in' => 'Zoom avant',\n    'zoom_out' => 'Zoom arrière',\n    'choose_media' => 'Choisir un média',\n    'photo_library' => 'Photothèque',\n    'camera' => 'Appareil photo',\n    'browse_files' => 'Parcourir les fichiers',\n    'show_password' => 'Afficher le mot de passe',\n    'hide_password' => 'Masquer le mot de passe',\n];"
+                    "text": "<?php\n\nreturn [\n    'confirm' => 'Bekräfta',\n    'cancel' => 'Avbryt',\n    'ok' => 'OK',\n    'dismiss' => 'Stäng',\n    'clear_search' => 'Rensa sökning',\n    'show_password' => 'Visa lösenord',\n    'hide_password' => 'Dölj lösenord',\n    // ...the remaining keys from lang/vendor/firstlight/en/chrome.php\n];"
                 },
                 {
                     "type": "text",

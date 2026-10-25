@@ -93,8 +93,22 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "Build a form screen",
+                            "text": "Build a large list screen",
                             "link": 3
+                        },
+                        {
+                            "text": " — Scroll thousands of local records with a virtual list that builds only the visible rows."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Build a form screen",
+                            "link": 4
                         },
                         {
                             "text": " — Validate with a Form Request, show field and form-level errors, and save with Feedback."
@@ -108,10 +122,24 @@
                     "runs": [
                         {
                             "text": "Build a settings screen",
-                            "link": 4
+                            "link": 5
                         },
                         {
                             "text": " — Group switches and pickers in native sections that save on change."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Build a photo upload screen",
+                            "link": 6
+                        },
+                        {
+                            "text": " — Crop, validate, and save a photo to a model only when the user taps Save."
                         }
                     ]
                 }
@@ -127,7 +155,7 @@
                     "runs": [
                         {
                             "text": "Installation",
-                            "link": 5
+                            "link": 7
                         },
                         {
                             "text": " — Install Firstlight and Laravel Boost, and make the native renderers available to a NativePHP application."
@@ -141,7 +169,7 @@
                     "runs": [
                         {
                             "text": "Build with a coding agent",
-                            "link": 6
+                            "link": 8
                         },
                         {
                             "text": " — What the Boost guideline, the "
@@ -176,7 +204,7 @@
                     "runs": [
                         {
                             "text": "Add your first component",
-                            "link": 7
+                            "link": 9
                         },
                         {
                             "text": " — Add a complete Segmented control with server-backed state."
@@ -190,7 +218,7 @@
                     "runs": [
                         {
                             "text": "Theming",
-                            "link": 8
+                            "link": 10
                         },
                         {
                             "text": " — Configure the semantic NativePHP theme tokens inherited by Firstlight components."
@@ -209,7 +237,7 @@
                     "runs": [
                         {
                             "text": "Validate fields",
-                            "link": 9
+                            "link": 11
                         },
                         {
                             "text": " — Show Laravel validation messages on Firstlight fields with "
@@ -237,7 +265,7 @@
                     "runs": [
                         {
                             "text": "Submit forms",
-                            "link": 10
+                            "link": 12
                         },
                         {
                             "text": " — Validate Firstlight fields, run a PHP action once, and publish success Feedback."
@@ -251,7 +279,7 @@
                     "runs": [
                         {
                             "text": "Authorize actions",
-                            "link": 11
+                            "link": 13
                         },
                         {
                             "text": " — Hide, disable, or guard Firstlight actions with Laravel Gate and Policy decisions."
@@ -265,7 +293,7 @@
                     "runs": [
                         {
                             "text": "Paginate lists",
-                            "link": 12
+                            "link": 14
                         },
                         {
                             "text": " — Bind Laravel paginators to List pull-to-refresh and end-reached."
@@ -279,7 +307,7 @@
                     "runs": [
                         {
                             "text": "Destroy list items",
-                            "link": 13
+                            "link": 15
                         },
                         {
                             "text": " — Authorize Confirmation Dialog deletion of List rows by stable keys."
@@ -293,7 +321,7 @@
                     "runs": [
                         {
                             "text": "Test screens",
-                            "link": 14
+                            "link": 16
                         },
                         {
                             "text": " — Scaffold a screen with "
@@ -321,7 +349,7 @@
                     "runs": [
                         {
                             "text": "Localize chrome",
-                            "link": 15
+                            "link": 17
                         },
                         {
                             "text": " — Override Firstlight-owned chrome labels and inherit application locale and timezone for Date and Time pickers."
@@ -340,7 +368,7 @@
                     "runs": [
                         {
                             "text": "What Firstlight is",
-                            "link": 16
+                            "link": 18
                         },
                         {
                             "text": " — The app-shell layer for NativePHP: what Firstlight provides, what NativePHP and Mobile UI provide, and what Firstlight is not."
@@ -354,7 +382,7 @@
                     "runs": [
                         {
                             "text": "Accessibility",
-                            "link": 17
+                            "link": 19
                         },
                         {
                             "text": " — What VoiceOver, TalkBack, larger-text, right-to-left, and Reduce Motion users get, what is tested, what is still unverified, and what your app owns."
@@ -368,7 +396,7 @@
                     "runs": [
                         {
                             "text": "SuperNative components",
-                            "link": 18
+                            "link": 20
                         },
                         {
                             "text": " — Understand how an EDGE component becomes genuine platform UI."
@@ -382,7 +410,7 @@
                     "runs": [
                         {
                             "text": "Server-authoritative state",
-                            "link": 19
+                            "link": 21
                         },
                         {
                             "text": " — Understand interaction, PHP acceptance, and native reconciliation."
@@ -401,7 +429,7 @@
                     "runs": [
                         {
                             "text": "Activity Indicator",
-                            "link": 20
+                            "link": 22
                         },
                         {
                             "text": " — Communicate indeterminate native activity with semantic sizes and one polite appearance announcement."
@@ -415,7 +443,7 @@
                     "runs": [
                         {
                             "text": "Button",
-                            "link": 21
+                            "link": 23
                         },
                         {
                             "text": " — Look up labelled actions, semantic variants, loading and disabled states, accessibility, and adapter behaviour."
@@ -429,7 +457,7 @@
                     "runs": [
                         {
                             "text": "Callout",
-                            "link": 22
+                            "link": 24
                         },
                         {
                             "text": " — Present persistent semantic messages with one optional labelled action."
@@ -443,7 +471,7 @@
                     "runs": [
                         {
                             "text": "Transient Feedback",
-                            "link": 23
+                            "link": 25
                         },
                         {
                             "text": " — Publish queued app-level outcomes with semantic tones, optional actions, and automatic or held lifetime."
@@ -457,7 +485,7 @@
                     "runs": [
                         {
                             "text": "Badge",
-                            "link": 24
+                            "link": 26
                         },
                         {
                             "text": " — Present compact display-only counts or short markers with semantic tones and contextual accessibility."
@@ -471,7 +499,7 @@
                     "runs": [
                         {
                             "text": "Checkbox",
-                            "link": 25
+                            "link": 27
                         },
                         {
                             "text": " — Configure strict Boolean form and checklist state with server-authoritative proposals."
@@ -485,7 +513,7 @@
                     "runs": [
                         {
                             "text": "Choice Group",
-                            "link": 26
+                            "link": 28
                         },
                         {
                             "text": " — Configure visible single-radio or multiple-checkbox choice rows with stable values."
@@ -499,7 +527,7 @@
                     "runs": [
                         {
                             "text": "Media",
-                            "link": 27
+                            "link": 29
                         },
                         {
                             "text": " — Capture one image or document into Storage with optional crop and ValidatesFields."
@@ -513,7 +541,7 @@
                     "runs": [
                         {
                             "text": "Alert Dialog",
-                            "link": 28
+                            "link": 30
                         },
                         {
                             "text": " — Present one native acknowledgement with a single action."
@@ -527,7 +555,7 @@
                     "runs": [
                         {
                             "text": "Confirmation Dialog",
-                            "link": 29
+                            "link": 31
                         },
                         {
                             "text": " — Ask for one native confirmation with explicit cancellation and destructive action semantics."
@@ -541,7 +569,7 @@
                     "runs": [
                         {
                             "text": "Modal",
-                            "link": 30
+                            "link": 32
                         },
                         {
                             "text": " — Present authored content in a full-screen native overlay with server-controlled dismissal."
@@ -555,7 +583,7 @@
                     "runs": [
                         {
                             "text": "Bottom Sheet",
-                            "link": 31
+                            "link": 33
                         },
                         {
                             "text": " — Present authored content in a native bottom sheet with server-controlled dismissal."
@@ -569,7 +597,7 @@
                     "runs": [
                         {
                             "text": "Date Picker",
-                            "link": 32
+                            "link": 34
                         },
                         {
                             "text": " — Choose strict nullable calendar dates with inclusive bounds and native confirmation."
@@ -583,7 +611,7 @@
                     "runs": [
                         {
                             "text": "Time Picker",
-                            "link": 33
+                            "link": 35
                         },
                         {
                             "text": " — Choose strict nullable wall-clock times with localized native confirmation."
@@ -597,7 +625,7 @@
                     "runs": [
                         {
                             "text": "Icon Button",
-                            "link": 34
+                            "link": 36
                         },
                         {
                             "text": " — Configure compact icon-only actions, platform icon overrides, semantic variants, states, and accessibility."
@@ -611,7 +639,7 @@
                     "runs": [
                         {
                             "text": "List Item",
-                            "link": 35
+                            "link": 37
                         },
                         {
                             "text": " — Configure tappable application rows with leading identity, trailing affordances, disabled behaviour, and platform icon overrides."
@@ -625,7 +653,7 @@
                     "runs": [
                         {
                             "text": "List",
-                            "link": 36
+                            "link": 38
                         },
                         {
                             "text": " — Compose finite vertical collections of List Item rows with optional grouped sections and refresh or pagination hooks."
@@ -639,7 +667,7 @@
                     "runs": [
                         {
                             "text": "List Section",
-                            "link": 37
+                            "link": 39
                         },
                         {
                             "text": " — Group List Item rows with optional headers and footers inside a parent List."
@@ -653,7 +681,7 @@
                     "runs": [
                         {
                             "text": "Pill Group",
-                            "link": 38
+                            "link": 40
                         },
                         {
                             "text": " — Configure compact single- or multiple-selection native options."
@@ -667,7 +695,7 @@
                     "runs": [
                         {
                             "text": "Progress",
-                            "link": 39
+                            "link": 41
                         },
                         {
                             "text": " — Communicate determinate or indeterminate work with strict values and native accessibility."
@@ -681,7 +709,7 @@
                     "runs": [
                         {
                             "text": "Segmented",
-                            "link": 40
+                            "link": 42
                         },
                         {
                             "text": " — Look up the Segmented control's complete public contract and platform evidence."
@@ -695,7 +723,7 @@
                     "runs": [
                         {
                             "text": "Tabs",
-                            "link": 41
+                            "link": 43
                         },
                         {
                             "text": " — Switch between sections of one object with stable values, counts, and native tab semantics."
@@ -709,7 +737,7 @@
                     "runs": [
                         {
                             "text": "Search Field",
-                            "link": 42
+                            "link": 44
                         },
                         {
                             "text": " — Configure native query entry, clear, submission, and synchronisation behaviour."
@@ -723,7 +751,7 @@
                     "runs": [
                         {
                             "text": "Select",
-                            "link": 43
+                            "link": 45
                         },
                         {
                             "text": " — Choose one stable string or integer value with automatic searchable presentation for larger option sets."
@@ -737,7 +765,7 @@
                     "runs": [
                         {
                             "text": "Slider",
-                            "link": 44
+                            "link": 46
                         },
                         {
                             "text": " — Choose one strictly validated numeric value from an evenly spaced native range."
@@ -751,7 +779,7 @@
                     "runs": [
                         {
                             "text": "Stepper",
-                            "link": 45
+                            "link": 47
                         },
                         {
                             "text": " — Increment or decrement an exact bounded number while PHP remains authoritative."
@@ -765,7 +793,7 @@
                     "runs": [
                         {
                             "text": "Status Label",
-                            "link": 46
+                            "link": 48
                         },
                         {
                             "text": " — Look up display-only status text, semantic tones, accessibility, and platform evidence."
@@ -779,7 +807,7 @@
                     "runs": [
                         {
                             "text": "Metric",
-                            "link": 47
+                            "link": 49
                         },
                         {
                             "text": " — Display one labelled value with tabular figures, optional detail and grouped accessibility."
@@ -793,7 +821,7 @@
                     "runs": [
                         {
                             "text": "Text Field",
-                            "link": 48
+                            "link": 50
                         },
                         {
                             "text": " — Configure native single-line editing, input hints, icons, and synchronisation."
@@ -807,7 +835,7 @@
                     "runs": [
                         {
                             "text": "Text Area",
-                            "link": 49
+                            "link": 51
                         },
                         {
                             "text": " — Configure native multiline editing, line bounds, validation, accessibility, and synchronisation."
@@ -821,7 +849,7 @@
                     "runs": [
                         {
                             "text": "Code Editor",
-                            "link": 50
+                            "link": 52
                         },
                         {
                             "text": " — Edit JSON, YAML, env, and plain text with native indentation, a key row, and follow mode for live logs."
@@ -835,7 +863,7 @@
                     "runs": [
                         {
                             "text": "Switch",
-                            "link": 51
+                            "link": 53
                         },
                         {
                             "text": " — Configure native boolean settings, server-authoritative state, and accessibility."
@@ -854,7 +882,7 @@
                     "runs": [
                         {
                             "text": "ValidatesFields",
-                            "link": 52
+                            "link": 54
                         },
                         {
                             "text": " — Look up the public "
@@ -875,7 +903,7 @@
                     "runs": [
                         {
                             "text": "Screen assertions",
-                            "link": 53
+                            "link": 55
                         },
                         {
                             "text": " — Look up the Firstlight "
@@ -903,7 +931,7 @@
                     "runs": [
                         {
                             "text": "Compatibility",
-                            "link": 54
+                            "link": 56
                         },
                         {
                             "text": " — Check the currently supported PHP, NativePHP, iOS, Android, and Swift versions."
@@ -927,12 +955,20 @@
             "url": "how-to/build-a-searchable-list-screen.md"
         },
         {
+            "label": "Build a large list screen",
+            "url": "how-to/build-a-large-list-screen.md"
+        },
+        {
             "label": "Build a form screen",
             "url": "how-to/build-a-form-screen.md"
         },
         {
             "label": "Build a settings screen",
             "url": "how-to/build-a-settings-screen.md"
+        },
+        {
+            "label": "Build a photo upload screen",
+            "url": "how-to/build-a-photo-upload-screen.md"
         },
         {
             "label": "Installation",

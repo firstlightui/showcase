@@ -122,6 +122,7 @@ class DocumentationLibrary
             'how-to/build-a-settings-screen' => '/settings',
             'how-to/build-a-form-screen' => '/posts/create',
             'how-to/build-a-list-detail-flow', 'how-to/build-a-searchable-list-screen' => '/posts',
+            'how-to/build-a-large-list-screen' => '/contacts',
             'how-to/validate-fields', 'how-to/submit-forms', 'reference/validates-fields' => '/components/validation',
             'how-to/paginate-lists', 'how-to/destroy-list-items' => '/components/list',
             default => null,

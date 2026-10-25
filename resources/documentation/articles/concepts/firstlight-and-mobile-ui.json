@@ -766,7 +766,18 @@
                 },
                 {
                     "type": "text",
-                    "text": "Layout, typography, and generic media stay in Mobile UI, and navigation chrome stays in NativePHP Mobile. Firstlight does not ship columns, bottom tabs, input masks, or a schema/form builder. Compose screens with Blade, Mobile UI layout, and Firstlight fields."
+                    "runs": [
+                        {
+                            "text": "Layout, typography, and generic media stay in Mobile UI, and navigation chrome stays in NativePHP Mobile. Firstlight does not ship columns, bottom tabs, a separate masked-input or currency control, or a schema/form builder; Text Field's "
+                        },
+                        {
+                            "text": "mask",
+                            "code": true
+                        },
+                        {
+                            "text": " pattern formats structured codes. Compose screens with Blade, Mobile UI layout, and Firstlight fields."
+                        }
+                    ]
                 },
                 {
                     "type": "heading",

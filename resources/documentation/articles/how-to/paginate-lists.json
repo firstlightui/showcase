@@ -56,6 +56,21 @@
                             "text": " tag and no second scroll-event API."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Paginate when rows come from a remote API with cursors or no known total. Every loaded page stays in the published tree, so for thousands of local records use a virtual list instead; see "
+                        },
+                        {
+                            "text": "Build a large list screen",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -282,7 +297,7 @@
                         },
                         {
                             "text": "Destroy list items",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": "."
@@ -293,6 +308,10 @@
         }
     },
     "links": [
+        {
+            "label": "Build a large list screen",
+            "url": "build-a-large-list-screen.md"
+        },
         {
             "label": "Destroy list items",
             "url": "destroy-list-items.md"

@@ -676,7 +676,28 @@
                             "code": true
                         },
                         {
-                            "text": " renderer with native button styles, control sizes, progress presentation, icon layout, VoiceOver metadata, and semantic theme tokens. Android uses the official Mobile UI Material 3 "
+                            "text": " renderer for every variant except "
+                        },
+                        {
+                            "text": "ghost",
+                            "code": true
+                        },
+                        {
+                            "text": ", with native button styles, control sizes, progress presentation, icon layout, VoiceOver metadata, and semantic theme tokens. On iOS, "
+                        },
+                        {
+                            "text": "ghost",
+                            "code": true
+                        },
+                        {
+                            "text": " uses a Firstlight renderer: the same plain, tinted SwiftUI "
+                        },
+                        {
+                            "text": "Button",
+                            "code": true
+                        },
+                        {
+                            "text": ", with at least a 44-point touch target. Mobile UI's plain ghost button only responds to taps on its text. Android uses the official Mobile UI Material 3 "
                         },
                         {
                             "text": "Button",
