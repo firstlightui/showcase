@@ -1,4 +1,4 @@
-<native:column class="w-full flex-1">
+<native:column class="w-full flex-1 bg-theme-background">
     <firstlight:search-field
         placeholder="Search posts"
         a11y-label="Search posts"
