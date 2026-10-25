@@ -228,6 +228,11 @@ return [
         'storage/framework/cache',
         'storage/framework/testing',
         'storage/logs/laravel.log',
+        // The local Firstlight path repository is copied into vendor with its
+        // build caches; they are not runtime files and bloat the app by ~1.6 GB.
+        'vendor/firstlightui/nativephp/.build',
+        'vendor/firstlightui/nativephp/.amp',
+        'vendor/firstlightui/nativephp/.git',
     ],
 
     /*
