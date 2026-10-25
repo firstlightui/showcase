@@ -4,6 +4,7 @@ namespace App\NativeComponents;
 
 use App\Support\DocumentationLibrary;
 use Illuminate\View\View;
+use Native\Mobile\Edge\Transition;
 use Native\Mobile\Facades\Browser;
 
 class DocumentationArticleScreen extends ShowcaseScreen
@@ -28,9 +29,22 @@ class DocumentationArticleScreen extends ShowcaseScreen
         $this->chapter = isset($article['chapters'][$requested]) ? $requested : array_key_first($article['chapters']);
     }
 
+    /**
+     * A section change replaces the screen rather than re-rendering it: the
+     * fresh scroll view opens at the top, and Back still returns to the index.
+     */
     public function showSection(string $chapter): void
     {
-        $this->chapter = $chapter;
+        $library = app(DocumentationLibrary::class);
+        if (isset($library->read($this->articleId)['chapters'][$chapter])) {
+            $this->replace($library->url($this->articleId, $chapter))->transition(Transition::Fade);
+        }
+    }
+
+    /** @return array<string, string> section titles keyed by chapter */
+    public function contents(): array
+    {
+        return array_map(fn (array $section): string => $section['title'], app(DocumentationLibrary::class)->read($this->articleId)['chapters']);
     }
 
     public function tryExample(): void
@@ -73,15 +87,17 @@ class DocumentationArticleScreen extends ShowcaseScreen
 
         return view('native.documentation-article', [
             'article' => $article,
+            'groupLabel' => $article['group'],
             'sections' => array_map(fn (string $key): array => [
                 'title' => $article['chapters'][$key]['title'],
+                'number' => array_search($key, array_keys($article['chapters']), true) + 1,
                 'blocks' => $this->galleries($article['chapters'][$key]['blocks']),
             ], $pages[$current]),
             'page' => $current,
+            'pageCount' => count($pages),
             'previous' => $pages[$current - 1][0] ?? null,
             'next' => $pages[$current + 1][0] ?? null,
             'chapters' => array_map(fn (array $section): string => $section['title'], $article['chapters']),
-            'example' => $current === 0 ? $library->example($this->articleId) : null,
         ]);
     }
 
@@ -91,7 +107,8 @@ class DocumentationArticleScreen extends ShowcaseScreen
         $pages = [];
         $weight = PHP_INT_MAX;
         foreach ($chapters as $key => $chapter) {
-            if ($weight >= self::PAGE_WEIGHT) {
+            // The chosen section always opens its page, so Contents lands on its heading.
+            if ($weight >= self::PAGE_WEIGHT || $key === $this->chapter) {
                 $pages[] = [];
                 $weight = 0;
             }

@@ -52,12 +52,18 @@ it('searches article contents without a connection and clears an empty result', 
 
 it('shows selectable code and readable property tables in the native article reader', function () {
     $screen = Native::visit('/docs/components/button')->assertNavTitle('Button')->assertTabActive('Docs')->assertAccessible();
-    $screen->press('__syncProperty(\'chapter\', "complete-example")')->assertSet('chapter', 'complete-example')->assertSee('<firstlight:button');
+    $screen->press('showSection(\'complete-example\')')->assertReplacedWith('/docs/components/button?heading=complete-example');
+    $screen = Native::visit('/docs/components/button?heading=complete-example')->assertSee('<firstlight:button');
     $code = collect(documentationNodes($screen->tree(), 'text'))->first(fn (array $node): bool => str_contains($node['props']['text'] ?? '', '<firstlight:button'));
     expect($code['props']['selectable'] ?? null)->toBe(1)->and($code['props']['font_family'] ?? null)->toBe(2);
     expect($code['props']['text'])->toBe(app(DocumentationLibrary::class)->read('components/button')['chapters']['complete-example']['blocks'][0]['text']);
-    $screen->press('__syncProperty(\'chapter\', "props")')->assertSet('chapter', 'props')->assertSee('variant')->assertSee('Semantic action intent');
-    $screen->press('tryExample')->assertNavigatedTo('/components/button');
+    $screen = Native::visit('/docs/components/button?heading=props')->assertSee('variant')->assertSee('Semantic action intent')->assertAccessible();
+    // Reader controls sit in the bar, not above the article text.
+    $actions = collect(documentationNodes($screen->tree(), 'top_bar_action'))->keyBy('props.id');
+    expect($actions['example']['props']['url'])->toBe('/components/button')->and($actions)->toHaveKeys(['contents', 'section-props'])
+        // VoiceOver and TalkBack name the bar actions, not their icons.
+        ->and($actions['contents']['props']['a11y_label'])->toBe('Contents')->and($actions['example']['props']['a11y_label'])->toBe('Try the live example')
+        ->and(documentationNodes($screen->tree(), 'firstlight.select'))->toBe([]);
 });
 
 it('follows bundled article links and preserves section anchors', function () {
@@ -72,8 +78,7 @@ it('follows bundled article links and preserves section anchors', function () {
     Native::visit('/docs/components/button?heading=props')->assertSet('chapter', 'props')->assertSee('variant');
     Native::visit('/docs/reference/compatibility?heading=supported-response-revision-contract')
         ->assertSet('chapter', 'runtime-response-contract')->assertSee('response');
-    $screen = Native::visit('/docs/components/button')->press('__syncProperty(\'chapter\', "compatibility")');
-    $screen->press('openLink(0)')->assertNavigatedTo('/docs/reference/compatibility');
+    Native::visit('/docs/components/button?heading=compatibility')->press('openLink(0)')->assertNavigatedTo('/docs/reference/compatibility');
 });
 
 it('renders every bundled article section through the native wire tree', function () {
@@ -81,7 +86,7 @@ it('renders every bundled article section through the native wire tree', functio
     foreach ($library->articles() as $summary) {
         $screen = Native::visit($library->url($summary['id']));
         foreach ($library->read($summary['id'])['chapters'] as $id => $chapter) {
-            $screen->call('__syncProperty', 'chapter', $id)->assertSet('chapter', $id)->assertAccessible();
+            $screen = Native::visit($library->url($summary['id'], $id))->assertSet('chapter', $id)->assertAccessible();
             if ($id !== 'overview') {
                 $screen->assertSee($chapter['title']);
             }
@@ -103,6 +108,12 @@ it('reads as continuous prose with inline links and next-section paging', functi
         ->and($intro['runs'][1])->toMatchArray(['text' => 'showcase app', 'link' => 0]);
 
     $screen = Native::visit('/docs/how-to/build-a-form-screen')->assertSee('showcase app')->assertSee('1. Register the route')->assertSee('Next: 2. Write the Form Request');
-    $screen->press('showSection(\'2-write-the-form-request\')')->assertSet('chapter', '2-write-the-form-request')->assertSee('2. Write the Form Request')->assertAccessible();
+    // A page change replaces the screen so the next page opens at its top without a history entry.
+    $screen->press('showSection(\'2-write-the-form-request\')')->assertReplacedWith('/docs/how-to/build-a-form-screen?heading=2-write-the-form-request');
     Native::visit('/docs/how-to/build-a-form-screen')->press('openLink(2)')->assertNavigatedTo('/docs/how-to/build-a-settings-screen');
+});
+
+it('opens a section chosen from Contents at the top of its own page', function () {
+    // Screenshots normally shares a page with earlier sections; chosen directly it leads.
+    Native::visit('/docs/components/button?heading=screenshots')->assertSee('Previous: Why an adapter?')->assertAccessible();
 });

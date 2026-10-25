@@ -1,21 +1,19 @@
-<native:scroll-view native:key="page-{{ $page }}" class="w-full flex-1 bg-theme-background">
-    <native:column class="w-full px-4 pt-2 pb-10 gap-8">
-        @if ($page === 0)
-            <native:column class="w-full gap-4">
-                <native:text class="text-lg leading-snug text-theme-on-surface-variant select-text">{{ $article['description'] }}</native:text>
-                @if ($example)
-                    <firstlight:button variant="secondary" icon="play" icon-ios="play.circle" icon-android="play_circle" @press="tryExample">Try the live example</firstlight:button>
-                @endif
-            </native:column>
-        @endif
-        @if (count($chapters) > 1)
-            <firstlight:select :options="$chapters" native:model="chapter" label="On this page" />
-        @endif
-
+@php
+    // Body copy is leaf text so it follows Dynamic Type and Android font scale;
+    // composed inline runs render at a fixed size on iOS.
+    $plain = fn (array $inline): string => $inline['text'] ?? implode('', array_column($inline['runs'], 'text'));
+    $linksOf = fn (array $inline): array => array_values(array_unique(array_column($inline['runs'] ?? [], 'link')));
+@endphp
+<native:scroll-view class="w-full flex-1 bg-theme-background">
+    <native:column class="w-full px-5 pt-1 pb-10 gap-10">
         @foreach ($sections as $sectionIndex => $section)
-            <native:column class="w-full gap-4">
+            <native:column class="w-full gap-3">
                 @unless ($page === 0 && $sectionIndex === 0 && $section['title'] === 'Overview')
-                    <native:text class="text-2xl font-bold text-theme-on-surface">{{ $section['title'] }}</native:text>
+                    <native:column class="w-full gap-1">
+                        <native:column class="w-full h-[1] bg-theme-outline-variant" />
+                        <native:text class="pt-3 text-xs font-semibold tracking-wide text-theme-primary">{{ strtoupper($groupLabel) }} · {{ $section['number'] }} OF {{ count($chapters) }}</native:text>
+                        <native:text class="text-[22] leading-tight font-bold text-theme-on-surface">{{ $section['title'] }}</native:text>
+                    </native:column>
                 @endunless
                 @foreach ($section['blocks'] as $block)
                     @if ($block['type'] === 'code')
@@ -23,28 +21,10 @@
                             @if ($block['language'] !== '')
                                 <native:text class="text-xs font-semibold text-theme-on-surface-variant">{{ strtoupper($block['language']) }}</native:text>
                             @endif
-                            <native:text :text="$block['text']" class="w-full p-3 text-[13] leading-snug font-mono whitespace-pre-wrap text-theme-on-surface bg-theme-surface border border-theme-outline-variant rounded-lg select-text" />
-                        </native:column>
-                    @elseif ($block['type'] === 'heading')
-                        <native:text class="pt-2 text-lg font-semibold text-theme-on-surface">@include('native.partials.documentation-runs', ['inline' => $block])</native:text>
-                    @elseif ($block['type'] === 'item')
-                        <native:row class="w-full gap-2 {{ $block['depth'] > 0 ? 'pl-5' : '' }}">
-                            <native:text class="w-[20] text-base leading-relaxed text-theme-on-surface-variant">{{ $block['marker'] }}</native:text>
-                            <native:text class="flex-1 text-base leading-relaxed text-theme-on-surface select-text">@include('native.partials.documentation-runs', ['inline' => $block])</native:text>
-                        </native:row>
-                    @elseif ($block['type'] === 'definition')
-                        @php
-                            $body = count($block['items']) === 1 ? $block['items'] : array_filter($block['items'], fn (array $item): bool => $item['label'] === 'Purpose');
-                            $details = array_diff_key($block['items'], $body);
-                        @endphp
-                        <native:column class="w-full gap-1 pb-4 border-b border-theme-outline-variant">
-                            <native:text class="text-base font-semibold text-theme-on-surface select-text">@include('native.partials.documentation-runs', ['inline' => $block['term']])</native:text>
-                            @foreach ($body as $item)
-                                <native:text class="text-base leading-relaxed text-theme-on-surface select-text">@include('native.partials.documentation-runs', ['inline' => $item])</native:text>
-                            @endforeach
-                            @foreach ($details as $item)
-                                <native:text class="text-sm leading-snug text-theme-on-surface select-text"><native:text :text="$item['label'].'  '" class="text-theme-on-surface-variant" />@include('native.partials.documentation-runs', ['inline' => $item])</native:text>
-                            @endforeach
+                            {{-- Lines scroll sideways rather than breaking mid-token. --}}
+                            <native:scroll-view axis="horizontal" class="w-full bg-theme-surface rounded-lg">
+                                <native:text :text="$block['text']" class="p-3 text-[13] leading-snug font-mono whitespace-pre-wrap text-theme-on-surface select-text" />
+                            </native:scroll-view>
                         </native:column>
                     @elseif ($block['type'] === 'gallery')
                         @foreach ($block['rows'] as $row)
@@ -58,14 +38,49 @@
                             </native:row>
                         @endforeach
                     @else
-                        <native:text class="text-base leading-relaxed text-theme-on-surface select-text">@include('native.partials.documentation-runs', ['inline' => $block])</native:text>
+                        @if ($block['type'] === 'heading')
+                            <native:text :text="$plain($block)" class="pt-3 text-[17] font-semibold text-theme-on-surface" />
+                        @elseif ($block['type'] === 'item')
+                            <native:row class="w-full gap-2 {{ $block['depth'] > 0 ? 'pl-5' : '' }}">
+                                <native:text class="w-[20] text-[17] leading-snug text-theme-on-surface-variant">{{ $block['marker'] }}</native:text>
+                                <native:text :text="$plain($block)" class="flex-1 text-[17] leading-snug text-theme-on-surface select-text" />
+                            </native:row>
+                        @elseif ($block['type'] === 'definition')
+                            @php
+                                $body = count($block['items']) === 1 ? $block['items'] : array_filter($block['items'], fn (array $item): bool => $item['label'] === 'Purpose');
+                                $details = array_diff_key($block['items'], $body);
+                                $codeTerm = isset($block['term']['runs']) && ! in_array(false, array_map(fn (array $run): bool => ! empty($run['code']) || trim($run['text'], ' ,') === '', $block['term']['runs']), true);
+                            @endphp
+                            <native:column class="w-full gap-1 pt-1">
+                                <native:text :text="$plain($block['term'])" class="text-[17] font-semibold text-theme-on-surface select-text {{ $codeTerm ? 'font-mono' : '' }}" />
+                                @foreach ($body as $item)
+                                    <native:text :text="$plain($item)" class="text-[17] leading-snug text-theme-on-surface select-text" />
+                                @endforeach
+                                @foreach ($details as $item)
+                                    <native:text :text="$item['label'].': '.$plain($item)" class="text-[15] leading-snug text-theme-on-surface-variant select-text" />
+                                @endforeach
+                            </native:column>
+                        @else
+                            <native:text :text="$plain($block)" class="text-[17] leading-snug text-theme-on-surface select-text" />
+                        @endif
+                        @php($links = [...$linksOf($block), ...($block['type'] === 'definition' ? array_merge(...array_map($linksOf, $block['items'])) : [])])
+                        @if ($links !== [])
+                            {{-- Real buttons so VoiceOver and TalkBack announce them as actionable. --}}
+                            <native:column class="w-full items-start gap-4 pt-1">
+                                @foreach ($links as $index)
+                                    @php($external = parse_url($article['links'][$index]['url'], PHP_URL_SCHEME) === 'https')
+                                    <firstlight:button variant="ghost" :a11y-label="$article['links'][$index]['label']" :a11y-hint="$external ? 'Opens in your browser' : 'Opens the bundled article'" @press="openLink({{ $index }})">{{ ($external ? '↗ ' : '→ ').$article['links'][$index]['label'] }}</firstlight:button>
+                                @endforeach
+                            </native:column>
+                        @endif
                     @endif
                 @endforeach
             </native:column>
         @endforeach
 
         @if ($previous || $next)
-            <native:column class="w-full gap-2 pt-4 border-t border-theme-outline-variant">
+            <native:column class="w-full gap-2">
+                <native:column class="w-full h-[1] bg-theme-outline-variant" />
                 @if ($next)
                     <firstlight:button variant="secondary" icon-trailing="chevron-right" icon-trailing-ios="chevron.right" icon-trailing-android="chevron_right" @press="showSection('{{ $next }}')">Next: {{ $chapters[$next] }}</firstlight:button>
                 @endif

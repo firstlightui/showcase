@@ -2,6 +2,7 @@
 
 namespace App\NativeComponents\Layouts;
 
+use App\NativeComponents\DocumentationArticleScreen;
 use App\NativeComponents\ShowcaseScreen;
 use App\Support\DocumentationLibrary;
 use Illuminate\Support\Str;
@@ -38,6 +39,26 @@ class ShowcaseLayout extends NativeLayout
             return $bar->displayMode('inline');
         }
 
+        if ($screen instanceof DocumentationArticleScreen) {
+            // Reader controls live in the bar so the first viewport is the article.
+            $bar->action(NavAction::make('contents')
+                ->label('Contents')
+                ->a11yLabel('Contents')
+                ->icon(ios: 'list.bullet', android: 'toc')
+                ->items(array_map(function (string $key, string $title) use ($screen): NavAction {
+                    $item = NavAction::make('section-'.$key)->label($title)->press("showSection('{$key}')");
+
+                    return $key === $screen->chapter ? $item->icon(ios: 'checkmark', android: 'check') : $item;
+                }, array_keys($screen->contents()), $screen->contents())));
+            if ($example = app(DocumentationLibrary::class)->example($screen->articleId)) {
+                $bar->action(NavAction::make('example')
+                    ->label('Try the live example')
+                    ->a11yLabel('Try the live example')
+                    ->icon(ios: 'play.circle', android: 'play_circle')
+                    ->url($example));
+            }
+        }
+
         $class = class_basename($screen);
         if (str_ends_with($class, 'Showcase')) {
             $slug = Str::kebab(Str::beforeLast($class, 'Showcase'));
@@ -46,6 +67,7 @@ class ShowcaseLayout extends NativeLayout
             if ($library->find($id)) {
                 $bar->action(NavAction::make('documentation')
                     ->label('Documentation')
+                    ->a11yLabel('Documentation')
                     ->icon(ios: 'book', android: 'menu_book')
                     ->url($library->url($id)));
             }
