@@ -1,5 +1,5 @@
 <firstlight:list class="w-full flex-1">
-    <firstlight:list-section header="Lists" footer="Thirty sample posts live in this app's SQLite database.">
+    <firstlight:list-section header="Lists" footer="Thirty sample posts and 5,000 contacts live in this app's SQLite database.">
         <firstlight:list-item
             headline="Posts"
             supporting="Search, pull to refresh, load more and swipe to delete"
@@ -25,6 +25,19 @@
             trailing-icon-android="chevron_right"
             a11y-hint="Opens the list and detail recipe"
             @press="openPostDetail"
+        />
+        <firstlight:list-item
+            headline="Contacts"
+            supporting="5,000 rows in a virtual list that builds only what is visible"
+            leading-icon="contacts"
+            leading-icon-ios="person.2.fill"
+            leading-icon-android="contacts"
+            leading-icon-tone="info"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens the large list recipe"
+            @press="openContacts"
         />
     </firstlight:list-section>
 
@@ -54,6 +67,19 @@
             trailing-icon-android="chevron_right"
             a11y-hint="Opens the settings screen recipe"
             @press="openSettings"
+        />
+        <firstlight:list-item
+            headline="Cover photo"
+            supporting="Crop, validate and save a photo to the newest post"
+            leading-icon="photo"
+            leading-icon-ios="photo.fill"
+            leading-icon-android="photo"
+            leading-icon-tone="success"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens the photo upload recipe"
+            @press="openPostCover"
         />
     </firstlight:list-section>
 </firstlight:list>
