@@ -66,7 +66,7 @@
                         @php($links = [...$linksOf($block), ...($block['type'] === 'definition' ? array_merge(...array_map($linksOf, $block['items'])) : [])])
                         @if ($links !== [])
                             {{-- Real buttons so VoiceOver and TalkBack announce them as actionable. --}}
-                            <native:column class="w-full items-start gap-4 pt-1">
+                            <native:column class="w-full items-start">
                                 @foreach ($links as $index)
                                     @php($external = parse_url($article['links'][$index]['url'], PHP_URL_SCHEME) === 'https')
                                     <firstlight:button variant="ghost" :a11y-label="$article['links'][$index]['label']" :a11y-hint="$external ? 'Opens in your browser' : 'Opens the bundled article'" @press="openLink({{ $index }})">{{ ($external ? '↗ ' : '→ ').$article['links'][$index]['label'] }}</firstlight:button>
