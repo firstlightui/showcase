@@ -61,7 +61,10 @@ use App\NativeComponents\MetricShowcase;
 use App\NativeComponents\ModalShowcase;
 use App\NativeComponents\PillGroupShowcase;
 use App\NativeComponents\PostScreen;
+use App\NativeComponents\PostCoverScreen;
 use App\NativeComponents\PostsScreen;
+use App\NativeComponents\ContactScreen;
+use App\NativeComponents\ContactsScreen;
 use App\NativeComponents\PrivacyScreen;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\RecipesScreen;
@@ -386,8 +389,20 @@ Route::native('/posts/create', CreatePostScreen::class)
     ->name('recipes.posts.create')
     ->layout(AppLayout::class);
 
+Route::native('/posts/{post}/cover', PostCoverScreen::class)
+    ->name('recipes.post.cover')
+    ->layout(AppLayout::class);
+
 Route::native('/posts/{post}', PostScreen::class)
     ->name('recipes.post')
+    ->layout(AppLayout::class);
+
+Route::native('/contacts', ContactsScreen::class)
+    ->name('recipes.contacts')
+    ->layout(AppLayout::class);
+
+Route::native('/contacts/{contact}', ContactScreen::class)
+    ->name('recipes.contact')
     ->layout(AppLayout::class);
 
 Route::native('/settings', SettingsScreen::class)

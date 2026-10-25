@@ -23,6 +23,18 @@ class RecipesScreen extends ShowcaseScreen
         $this->navigate($id === null ? '/posts' : '/posts/'.$id);
     }
 
+    public function openContacts(): void
+    {
+        $this->navigate('/contacts');
+    }
+
+    public function openPostCover(): void
+    {
+        $id = Post::query()->latest()->orderByDesc('id')->value('id');
+
+        $this->navigate($id === null ? '/posts' : '/posts/'.$id.'/cover');
+    }
+
     public function openNewPost(): void
     {
         $this->navigate('/posts/create');
