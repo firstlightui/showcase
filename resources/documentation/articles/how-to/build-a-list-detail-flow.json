@@ -18,44 +18,136 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "This recipe gives an app its shell: a layout with the platform's own title bar\nand back navigation, a list screen, and a detail screen it pushes. Every other\nrecipe runs inside this layout."
+                    "text": "This recipe gives an app its shell: a layout with the platform's own title bar and back navigation, a list screen, and a detail screen it pushes. Every other recipe runs inside this layout."
                 },
                 {
                     "type": "text",
-                    "text": "This recipe runs unchanged in the\nshowcase app, where\nListDetailRecipeTest\nexercises it."
+                    "runs": [
+                        {
+                            "text": "This recipe runs unchanged in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "ListDetailRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Firstlight does not draw navigation. NativePHP Mobile renders it natively when\na layout opts in with usesNativeChrome():"
+                    "runs": [
+                        {
+                            "text": "Firstlight does not draw navigation. NativePHP Mobile renders it natively when a layout opts in with "
+                        },
+                        {
+                            "text": "usesNativeChrome()",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Stack",
-                    "text": "iOS: SwiftUI NavigationStack\nAndroid: Material 3 Scaffold"
+                    "term": {
+                        "text": "Stack"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "runs": [
+                                {
+                                    "text": "SwiftUI "
+                                },
+                                {
+                                    "text": "NavigationStack",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Android",
+                            "runs": [
+                                {
+                                    "text": "Material 3 "
+                                },
+                                {
+                                    "text": "Scaffold",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Title",
-                    "text": "iOS: Large title that collapses to inline on scroll\nAndroid: LargeTopAppBar / TopAppBar"
+                    "term": {
+                        "text": "Title"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Large title that collapses to inline on scroll"
+                        },
+                        {
+                            "label": "Android",
+                            "runs": [
+                                {
+                                    "text": "LargeTopAppBar",
+                                    "code": true
+                                },
+                                {
+                                    "text": " / "
+                                },
+                                {
+                                    "text": "TopAppBar",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Back",
-                    "text": "iOS: System back button and edge swipe\nAndroid: Top app bar back arrow and system back"
+                    "term": {
+                        "text": "Back"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "System back button and edge swipe"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Top app bar back arrow and system back"
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "PHP stays in charge of the screen stack. A back swipe or back press pops PHP's\nstack, so mount() and screen state behave the same on both platforms."
-                }
-            ],
-            "links": [
-                {
-                    "label": "showcase app",
-                    "url": "https://github.com/firstlightui/showcase"
-                },
-                {
-                    "label": "ListDetailRecipeTest",
-                    "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/ListDetailRecipeTest.php"
+                    "runs": [
+                        {
+                            "text": "PHP stays in charge of the screen stack. A back swipe or back press pops PHP's stack, so "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": " and screen state behave the same on both platforms."
+                        }
+                    ]
                 }
             ]
         },
@@ -64,7 +156,18 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Save this as app/NativeComponents/Layouts/AppLayout.php:"
+                    "runs": [
+                        {
+                            "text": "Save this as "
+                        },
+                        {
+                            "text": "app/NativeComponents/Layouts/AppLayout.php",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -73,10 +176,31 @@
                 },
                 {
                     "type": "text",
-                    "text": "isRootScreen() is true when nothing is below the screen on PHP's stack. The\nfirst screen gets a large title and no back button; every pushed screen gets an\ninline title and a back button. Android shows a back arrow only when the bar\nasks for one, so pushed screens must pass back(true). Each screen supplies its\ntitle through navTitle()."
+                    "runs": [
+                        {
+                            "text": "isRootScreen()",
+                            "code": true
+                        },
+                        {
+                            "text": " is true when nothing is below the screen on PHP's stack. The first screen gets a large title and no back button; every pushed screen gets an inline title and a back button. Android shows a back arrow only when the bar asks for one, so pushed screens must pass "
+                        },
+                        {
+                            "text": "back(true)",
+                            "code": true
+                        },
+                        {
+                            "text": ". Each screen supplies its title through "
+                        },
+                        {
+                            "text": "navTitle()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "2-register-the-routes": {
             "title": "2. Register the routes",
@@ -86,15 +210,25 @@
                     "language": "php",
                     "text": "use App\\NativeComponents\\Layouts\\AppLayout;\nuse App\\NativeComponents\\PostScreen;\nuse App\\NativeComponents\\PostsScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/posts', PostsScreen::class)->layout(AppLayout::class);\nRoute::native('/posts/{post}', PostScreen::class)->layout(AppLayout::class);"
                 }
-            ],
-            "links": []
+            ]
         },
         "3-write-the-list-screen": {
             "title": "3. Write the list screen",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use the searchable list recipe. Its row\npress pushes the detail screen:"
+                    "runs": [
+                        {
+                            "text": "Use the "
+                        },
+                        {
+                            "text": "searchable list recipe",
+                            "link": 2
+                        },
+                        {
+                            "text": ". Its row press pushes the detail screen:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -103,13 +237,29 @@
                 },
                 {
                     "type": "text",
-                    "text": "navigate() pushes. Use replace() to swap the current screen without adding\nto the stack, and back() to pop it from PHP, for example after saving."
-                }
-            ],
-            "links": [
-                {
-                    "label": "searchable list recipe",
-                    "url": "build-a-searchable-list-screen.md"
+                    "runs": [
+                        {
+                            "text": "navigate()",
+                            "code": true
+                        },
+                        {
+                            "text": " pushes. Use "
+                        },
+                        {
+                            "text": "replace()",
+                            "code": true
+                        },
+                        {
+                            "text": " to swap the current screen without adding to the stack, and "
+                        },
+                        {
+                            "text": "back()",
+                            "code": true
+                        },
+                        {
+                            "text": " to pop it from PHP, for example after saving."
+                        }
+                    ]
                 }
             ]
         },
@@ -123,55 +273,168 @@
                 },
                 {
                     "type": "text",
-                    "text": "NativePHP fills a typed public property from the route parameter with the same\nname, using Laravel route model binding: {post} becomes a Post loaded by id.\nNo mount() is needed."
+                    "runs": [
+                        {
+                            "text": "NativePHP fills a typed public property from the route parameter with the same name, using Laravel route model binding: "
+                        },
+                        {
+                            "text": "{post}",
+                            "code": true
+                        },
+                        {
+                            "text": " becomes a "
+                        },
+                        {
+                            "text": "Post",
+                            "code": true
+                        },
+                        {
+                            "text": " loaded by id. No "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": " is needed."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Save the view as resources/views/native/post.blade.php:"
+                    "runs": [
+                        {
+                            "text": "Save the view as "
+                        },
+                        {
+                            "text": "resources/views/native/post.blade.php",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
                     "language": "blade",
                     "text": "<native:scroll-view class=\"w-full flex-1\">\n    <native:column class=\"w-full p-4 gap-3\">\n        <native:text class=\"text-sm text-theme-on-surface-variant\">{{ $post->created_at->diffForHumans() }}</native:text>\n        <native:text class=\"text-base text-theme-on-surface\">{{ $post->body }}</native:text>\n    </native:column>\n</native:scroll-view>"
                 }
-            ],
-            "links": []
+            ]
         },
         "rules-to-keep": {
             "title": "Rules to keep",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Return true from usesNativeChrome(). Without it, NativePHP falls back to\ndrawn bars that do not support large titles or the iOS back swipe."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Return "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " from "
+                        },
+                        {
+                            "text": "usesNativeChrome()",
+                            "code": true
+                        },
+                        {
+                            "text": ". Without it, NativePHP falls back to drawn bars that do not support large titles or the iOS back swipe."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Do not add the custom attribute to <native:top-bar> or\n<native:bottom-nav>. It keeps the drawn bar."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Do not add the "
+                        },
+                        {
+                            "text": "custom",
+                            "code": true
+                        },
+                        {
+                            "text": " attribute to "
+                        },
+                        {
+                            "text": "<native:top-bar>",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "<native:bottom-nav>",
+                            "code": true
+                        },
+                        {
+                            "text": ". It keeps the drawn bar."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Pass stable ids in URLs, never list positions."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Pass stable ids in URLs, never list positions."
                 },
                 {
-                    "type": "text",
-                    "text": "• Let the platform draw the back button. Do not add your own back Button."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Let the platform draw the back button. Do not add your own back Button."
                 }
-            ],
-            "links": []
+            ]
         },
         "known-limits": {
             "title": "Known limits",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Tabs added with tabBar() share PHP's single stack. Switching tabs replaces\nthe screen, so each tab does not keep its own history."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Tabs added with "
+                        },
+                        {
+                            "text": "tabBar()",
+                            "code": true
+                        },
+                        {
+                            "text": " share PHP's single stack. Switching tabs replaces the screen, so each tab does not keep its own history."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Android receives back only when the gesture completes. It does not show the\npredictive-back preview while the user drags."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Android receives back only when the gesture completes. It does not show the predictive-back preview while the user drags."
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "ListDetailRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/ListDetailRecipeTest.php"
+        },
+        {
+            "label": "searchable list recipe",
+            "url": "build-a-searchable-list-screen.md"
+        }
+    ]
 }

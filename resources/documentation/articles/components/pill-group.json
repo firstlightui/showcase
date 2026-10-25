@@ -24,8 +24,7 @@
                     "type": "text",
                     "text": "Pill Group presents compact, individually shaped options for selecting zero or one value, or zero or more values."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-examples": {
             "title": "Complete examples",
@@ -46,7 +45,18 @@
                 },
                 {
                     "type": "text",
-                    "text": "Use multiple with an array-valued property:"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "multiple",
+                            "code": true
+                        },
+                        {
+                            "text": " with an array-valued property:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -58,69 +68,355 @@
                     "language": "blade",
                     "text": "<firstlight:pill-group\n    :options=\"$queueOptions\"\n    native:model=\"queues\"\n    label=\"Queues\"\n    helper=\"Choose any that apply.\"\n    multiple\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "options",
-                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "options",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Simple strings, a value-to-label map, or rich option arrays."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string, int, array, or null\nPurpose: Stable selection. Use a scalar or null in single mode and a homogeneous list or null in multiple mode."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "array",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Stable selection. Use a scalar or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": " in single mode and a homogeneous list or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": " in multiple mode."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "multiple",
-                    "text": "Accepted type: bool\nPurpose: Enables zero-or-more selection. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "multiple",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Enables zero-or-more selection. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible field label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting text below the pills."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text below the pills."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Error text and native error semantics."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Error text and native error semantics."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Communicates required state; PHP still owns validation."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Communicates required state; PHP still owns validation."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Disables the complete group."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Disables the complete group."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessibility label when a visible label is inappropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessibility label when a visible label is inappropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "options-and-values": {
             "title": "Options and values",
@@ -145,7 +441,32 @@
                 },
                 {
                     "type": "text",
-                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                    "runs": [
+                        {
+                            "text": "Rich options accept only "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ", and optional "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " fields:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -154,31 +475,114 @@
                 },
                 {
                     "type": "text",
-                    "text": "All values in one group must be unique and must all be strings or all be integers. In single mode, tapping the selected pill proposes null. In multiple mode, tapping toggles that stable value while preserving the order of the others. null and [] both mean no multiple selection."
+                    "runs": [
+                        {
+                            "text": "All values in one group must be unique and must all be strings or all be integers. In single mode, tapping the selected pill proposes "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": ". In multiple mode, tapping toggles that stable value while preserving the order of the others. "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "[]",
+                            "code": true
+                        },
+                        {
+                            "text": " both mean no multiple selection."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-state-timing": {
             "title": "Events and state timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the complete proposed selection: a scalar or null in single mode and a list in multiple mode. native:model normally generates this callback for property synchronisation."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the complete proposed selection: a scalar or "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " in single mode and a list in multiple mode. "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally generates this callback for property synchronisation."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Pill Group is server-authoritative. A tap emits immediately, but selected visuals wait for PHP's next publication. Further taps are ignored while that proposal is in flight so a rapid second tap cannot be calculated from stale state. Programmatic updates and reconciliation do not emit."
+                    "runs": [
+                        {
+                            "text": "Pill Group is "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 0
+                        },
+                        {
+                            "text": ". A tap emits immediately, but selected visuals wait for PHP's next publication. Further taps are ignored while that proposal is in flight so a rapid second tap cannot be calculated from stale state. Programmatic updates and reconciliation do not emit."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
-                }
-            ],
-            "links": [
-                {
-                    "label": "server-authoritative",
-                    "url": "../concepts/server-authoritative-state.md"
+                    "runs": [
+                        {
+                            "text": "Use plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": "; deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " modes are rejected."
+                        }
+                    ]
                 }
             ]
         },
@@ -187,37 +591,130 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "disabled prevents every pill from emitting. A rich option's disabled: true affects only that pill. An empty option set becomes an inert disabled group."
+                    "runs": [
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " prevents every pill from emitting. A rich option's "
+                        },
+                        {
+                            "text": "disabled: true",
+                            "code": true
+                        },
+                        {
+                            "text": " affects only that pill. An empty option set becomes an inert disabled group."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "required is metadata rather than client-side enforcement. It does not prevent clearing the final pill; validate the resulting value in PHP and publish error when needed."
+                    "runs": [
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is metadata rather than client-side enforcement. It does not prevent clearing the final pill; validate the resulting value in PHP and publish "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " when needed."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. Each pill exposes its label, selected state, and disabled state through native platform semantics. Selection also has a visible checkmark, so it does not depend on colour alone. Pills wrap at larger text sizes and retain at least a 44-point iOS or 48-dp Android interaction target."
+                    "runs": [
+                        {
+                            "text": "Provide either a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight warns during development when both are blank. Each pill exposes its label, selected state, and disabled state through native platform semantics. Selection also has a visible checkmark, so it does not depend on colour alone. Pills wrap at larger text sizes and retain at least a 44-point iOS or 48-dp Android interaction target."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject malformed options, mixed selections, and\nunsupported presentation props before publication. User validation is\nseparate: screens that use ValidatesFields auto-bind the first MessageBag\nmessage for the field's native:model or error-for name. An authored\nerror wins. required is display metadata and does not run Laravel rules.\nSee Validate fields. A same-typed selected\nvalue absent from options remains unselected rather than selecting a\nfallback."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject malformed options, mixed selections, and unsupported presentation props before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is display metadata and does not run Laravel rules. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": ". A same-typed selected value absent from "
+                        },
+                        {
+                            "text": "options",
+                            "code": true
+                        },
+                        {
+                            "text": " remains unselected rather than selecting a fallback."
+                        }
+                    ]
                 }
             ]
         },
@@ -226,23 +723,45 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses native SwiftUI capsule buttons in a wrapping layout. Android uses Material 3 FilterChip controls in a wrapping FlowRow. Both inherit NativePHP semantic theme tokens and preserve native press, focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
+                    "runs": [
+                        {
+                            "text": "iOS uses native SwiftUI capsule buttons in a wrapping layout. Android uses Material 3 "
+                        },
+                        {
+                            "text": "FilterChip",
+                            "code": true
+                        },
+                        {
+                            "text": " controls in a wrapping "
+                        },
+                        {
+                            "text": "FlowRow",
+                            "code": true
+                        },
+                        {
+                            "text": ". Both inherit NativePHP semantic theme tokens and preserve native press, focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Pill Group supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Pill Group supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 2
+                        },
+                        {
+                            "text": " and requires both native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -269,8 +788,21 @@
                     "src": "documentation/screenshots/pill-group/android-dark.png",
                     "text": "Pill Group on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

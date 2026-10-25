@@ -24,21 +24,29 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight is the app-shell layer for NativePHP. It covers what a standard\nforms app needs (lists and detail, search, forms with Laravel validation,\nsettings, sheets and dialogs, and feedback) with genuine SwiftUI controls on\niOS and Jetpack Compose Material 3 controls on Android, from one Blade API."
+                    "text": "Firstlight is the app-shell layer for NativePHP. It covers what a standard forms app needs (lists and detail, search, forms with Laravel validation, settings, sheets and dialogs, and feedback) with genuine SwiftUI controls on iOS and Jetpack Compose Material 3 controls on Android, from one Blade API."
                 },
                 {
                     "type": "text",
-                    "text": "It is built for agentic coding. Four recipes\nshow each kind of screen end to end, and a Laravel Boost guideline and two\nskills point coding agents at them. See\nBuild with a coding agent."
-                }
-            ],
-            "links": [
-                {
-                    "label": "recipes",
-                    "url": "../how-to/build-a-list-detail-flow.md"
-                },
-                {
-                    "label": "Build with a coding agent",
-                    "url": "../getting-started/build-with-a-coding-agent.md"
+                    "runs": [
+                        {
+                            "text": "It is built for agentic coding. Four "
+                        },
+                        {
+                            "text": "recipes",
+                            "link": 0
+                        },
+                        {
+                            "text": " show each kind of screen end to end, and a Laravel Boost guideline and two skills point coding agents at them. See "
+                        },
+                        {
+                            "text": "Build with a coding agent",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -51,61 +59,205 @@
                 },
                 {
                     "type": "definition",
-                    "label": "NativePHP Mobile",
-                    "text": "Provides: EDGE, the Element Tree, the event lifecycle, and native navigation chrome: layouts that return true from usesNativeChrome() get SwiftUI NavigationStack and TabView on iOS and a Material 3 Scaffold and top app bar on Android"
+                    "term": {
+                        "text": "NativePHP Mobile"
+                    },
+                    "items": [
+                        {
+                            "label": "Provides",
+                            "runs": [
+                                {
+                                    "text": "EDGE, the Element Tree, the event lifecycle, and native navigation chrome: layouts that return "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": " from "
+                                },
+                                {
+                                    "text": "usesNativeChrome()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " get SwiftUI "
+                                },
+                                {
+                                    "text": "NavigationStack",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "TabView",
+                                    "code": true
+                                },
+                                {
+                                    "text": " on iOS and a Material 3 "
+                                },
+                                {
+                                    "text": "Scaffold",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and top app bar on Android"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "NativePHP Mobile UI",
-                    "text": "Provides: Layout primitives such as columns, scroll views, and grouped lists, the semantic theme, and the native renderer foundation"
+                    "term": {
+                        "text": "NativePHP Mobile UI"
+                    },
+                    "items": [
+                        {
+                            "label": "Provides",
+                            "text": "Layout primitives such as columns, scroll views, and grouped lists, the semantic theme, and the native renderer foundation"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Firstlight UI",
-                    "text": "Provides: Form, list, selection, overlay, status, and feedback controls with one contract on both platforms; Laravel validation, submission, authorization, pagination, and deletion on screens; Pest screen assertions and a screen generator; recipes, a Boost guideline, skills, and llms.txt"
+                    "term": {
+                        "text": "Firstlight UI"
+                    },
+                    "items": [
+                        {
+                            "label": "Provides",
+                            "runs": [
+                                {
+                                    "text": "Form, list, selection, overlay, status, and feedback controls with one contract on both platforms; Laravel validation, submission, authorization, pagination, and deletion on screens; Pest screen assertions and a screen generator; recipes, a Boost guideline, skills, and "
+                                },
+                                {
+                                    "text": "llms.txt",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Firstlight depends on Mobile UI, follows its EDGE conventions, inherits its\ntheme, and uses the same Element Tree and event lifecycle. Mobile UI is the\nbroad native toolkit; Firstlight decides common form and list behaviour once so\neach application does not assemble it again."
+                    "text": "Firstlight depends on Mobile UI, follows its EDGE conventions, inherits its theme, and uses the same Element Tree and event lifecycle. Mobile UI is the broad native toolkit; Firstlight decides common form and list behaviour once so each application does not assemble it again."
                 }
-            ],
-            "links": []
+            ]
         },
         "one-api-the-right-pattern-on-each-platform": {
             "title": "One API, the right pattern on each platform",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "A Firstlight tag means the same thing on both platforms, and each platform\ndraws it its own way. Tabs are a segmented control on iOS and Material 3 tabs\non Android. A Confirmation Dialog is a SwiftUI confirmationDialog on iOS\nand a Material 3 AlertDialog on Android. Date Picker opens the graphical\nSwiftUI DatePicker on iOS and the Material 3 DatePickerDialog on Android.\nField errors\nappear under the field on iOS and as Material 3 supporting text in the error\nstate on Android."
+                    "runs": [
+                        {
+                            "text": "A Firstlight tag means the same thing on both platforms, and each platform draws it its own way. Tabs are a segmented control on iOS and Material 3 tabs on Android. A Confirmation Dialog is a SwiftUI "
+                        },
+                        {
+                            "text": "confirmationDialog",
+                            "code": true
+                        },
+                        {
+                            "text": " on iOS and a Material 3 "
+                        },
+                        {
+                            "text": "AlertDialog",
+                            "code": true
+                        },
+                        {
+                            "text": " on Android. Date Picker opens the graphical SwiftUI "
+                        },
+                        {
+                            "text": "DatePicker",
+                            "code": true
+                        },
+                        {
+                            "text": " on iOS and the Material 3 "
+                        },
+                        {
+                            "text": "DatePickerDialog",
+                            "code": true
+                        },
+                        {
+                            "text": " on Android. Field errors appear under the field on iOS and as Material 3 supporting text in the error state on Android."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Every control is a real platform control. Firstlight draws nothing to imitate\none, and there is no WebView."
+                    "text": "Every control is a real platform control. Firstlight draws nothing to imitate one, and there is no WebView."
                 }
-            ],
-            "links": []
+            ]
         },
         "what-firstlight-is-not": {
             "title": "What Firstlight is not",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Not navigation chrome. Stacks, title bars, back navigation, and tab bars\ncome from NativePHP's native chrome. Firstlight runs inside them. Do not use\nthe custom attribute on top bars or bottom navs to draw your own."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Not navigation chrome.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Stacks, title bars, back navigation, and tab bars come from NativePHP's native chrome. Firstlight runs inside them. Do not use the "
+                        },
+                        {
+                            "text": "custom",
+                            "code": true
+                        },
+                        {
+                            "text": " attribute on top bars or bottom navs to draw your own."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Not a design system. Firstlight does not define a visual style.\nControls take colours and fonts from the NativePHP theme and keep each\nplatform's geometry, motion, and materials."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Not a design system.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Firstlight does not define a visual style. Controls take colours and fonts from the NativePHP theme and keep each platform's geometry, motion, and materials."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Not a catalogue of everything. There are no charts, carousels, or other\ncustom-drawn controls. A new tag is added only for a semantic control with an\nequal native contract on iOS and Android."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Not a catalogue of everything.",
+                            "strong": true
+                        },
+                        {
+                            "text": " There are no charts, carousels, or other custom-drawn controls. A new tag is added only for a semantic control with an equal native contract on iOS and Android."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Not a form builder. Screens are ordinary Blade views with PHP state, not\nschemas."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Not a form builder.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Screens are ordinary Blade views with PHP state, not schemas."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "additional-dedicated-components": {
             "title": "Additional dedicated components",
@@ -115,23 +267,69 @@
                     "text": "Mobile UI provides primitives from which many interfaces can be composed. Firstlight adds dedicated components where one reusable semantic contract is valuable:"
                 },
                 {
-                    "type": "text",
-                    "text": "• Icon Button uses the compact native icon-button family, requires an accessible action name, guarantees minimum interaction targets, and supports disabled and loading states. Mobile UI provides capable Button and Icon primitives, but does not expose this complete contract as a standalone manifest component."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Icon Button",
+                            "strong": true
+                        },
+                        {
+                            "text": " uses the compact native icon-button family, requires an accessible action name, guarantees minimum interaction targets, and supports disabled and loading states. Mobile UI provides capable Button and Icon primitives, but does not expose this complete contract as a standalone manifest component."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Search Field makes native search behaviour an invariant. It owns the platform search and clear affordances, submit flushing, focused query state, and accessible clear action instead of requiring an application to configure a general text input each time."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Search Field",
+                            "strong": true
+                        },
+                        {
+                            "text": " makes native search behaviour an invariant. It owns the platform search and clear affordances, submit flushing, focused query state, and accessible clear action instead of requiring an application to configure a general text input each time."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Stepper provides exact bounded increment and decrement over integer or floating-point grids. It uses SwiftUI Stepper on iOS and an idiomatic Material 3 decrement/value/increment composition on Android."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Stepper",
+                            "strong": true
+                        },
+                        {
+                            "text": " provides exact bounded increment and decrement over integer or floating-point grids. It uses SwiftUI "
+                        },
+                        {
+                            "text": "Stepper",
+                            "code": true
+                        },
+                        {
+                            "text": " on iOS and an idiomatic Material 3 decrement/value/increment composition on Android."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Status Label provides a display-only status capsule with semantic tones, accessible static-text semantics, text scaling, and contrast protection. It avoids giving non-interactive status metadata the behaviour of a button or selectable chip."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Status Label",
+                            "strong": true
+                        },
+                        {
+                            "text": " provides a display-only status capsule with semantic tones, accessible static-text semantics, text scaling, and contrast protection. It avoids giving non-interactive status metadata the behaviour of a button or selectable chip."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "higher-level-components-over-existing-primitives": {
             "title": "Higher-level components over existing primitives",
@@ -141,27 +339,80 @@
                     "text": "Some Firstlight components package several Mobile UI capabilities into one stable application-facing value:"
                 },
                 {
-                    "type": "text",
-                    "text": "• Choice Group presents single-choice radio rows or multiple-choice checkbox rows through one option-array API and one complete scalar-or-list value."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Choice Group",
+                            "strong": true
+                        },
+                        {
+                            "text": " presents single-choice radio rows or multiple-choice checkbox rows through one option-array API and one complete scalar-or-list value."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Pill Group composes native chip intents into one single- or multiple-selection field. The group publishes one stable scalar or list rather than requiring a separate Boolean model for every chip."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Pill Group",
+                            "strong": true
+                        },
+                        {
+                            "text": " composes native chip intents into one single- or multiple-selection field. The group publishes one stable scalar or list rather than requiring a separate Boolean model for every chip."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Text Area turns multiline editing into a dedicated, deliberately narrow field with native focused-state preservation, line bounds, validation feedback, and a genuine SwiftUI TextEditor expression on iOS."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Text Area",
+                            "strong": true
+                        },
+                        {
+                            "text": " turns multiline editing into a dedicated, deliberately narrow field with native focused-state preservation, line bounds, validation feedback, and a genuine SwiftUI "
+                        },
+                        {
+                            "text": "TextEditor",
+                            "code": true
+                        },
+                        {
+                            "text": " expression on iOS."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Time Picker separates nullable HH:mm selection from a combined date/time/datetime API and gives it the same explicit draft, confirmation, validation, and accepted-value rules as the rest of Firstlight."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Time Picker",
+                            "strong": true
+                        },
+                        {
+                            "text": " separates nullable "
+                        },
+                        {
+                            "text": "HH:mm",
+                            "code": true
+                        },
+                        {
+                            "text": " selection from a combined date/time/datetime API and gives it the same explicit draft, confirmation, validation, and accepted-value rules as the rest of Firstlight."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "These are not claims that Mobile UI cannot build the corresponding interface. Firstlight supplies the reusable product contract so each consuming application does not need to design that contract independently."
                 }
-            ],
-            "links": []
+            ]
         },
         "richer-contracts-around-familiar-controls": {
             "title": "Richer contracts around familiar controls",
@@ -172,41 +423,146 @@
                 },
                 {
                     "type": "definition",
-                    "label": "Segmented",
-                    "text": "Additional Firstlight contract: Stable string or integer values instead of renderer indexes, nullable selection, rich options, individual disabled choices, field metadata, strict diagnostics, and PHP-authoritative acceptance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Segmented",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "text": "Stable string or integer values instead of renderer indexes, nullable selection, rich options, individual disabled choices, field metadata, strict diagnostics, and PHP-authoritative acceptance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Badge",
-                    "text": "Additional Firstlight contract: Exactly one count or label, hidden zero, contextual accessibility for numeric counts, five semantic tones, strict authoring diagnostics, and a Material 3 Badge on Android."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Badge",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "runs": [
+                                {
+                                    "text": "Exactly one count or label, hidden zero, contextual accessibility for numeric counts, five semantic tones, strict authoring diagnostics, and a Material 3 "
+                                },
+                                {
+                                    "text": "Badge",
+                                    "code": true
+                                },
+                                {
+                                    "text": " on Android."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Text Field",
-                    "text": "Additional Firstlight contract: A single semantic field API with content and autofill hints, platform icon overrides, accessible trailing actions, clear and reveal affordances, and focused editing reconciliation that preserves selection and text composition."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Text Field",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "text": "A single semantic field API with content and autofill hints, platform icon overrides, accessible trailing actions, clear and reveal affordances, and focused editing reconciliation that preserves selection and text composition."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Date Picker",
-                    "text": "Additional Firstlight contract: A strict nullable YYYY-MM-DD value, inclusive bound validation, a temporary native draft, explicit confirmation, and a closed trigger that continues to display PHP's accepted value."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Date Picker",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "runs": [
+                                {
+                                    "text": "A strict nullable "
+                                },
+                                {
+                                    "text": "YYYY-MM-DD",
+                                    "code": true
+                                },
+                                {
+                                    "text": " value, inclusive bound validation, a temporary native draft, explicit confirmation, and a closed trigger that continues to display PHP's accepted value."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Select",
-                    "text": "Additional Firstlight contract: Stable string or integer values, rich and individually disabled options, automatic searchable presentation for larger collections, field validation semantics, and PHP-authoritative selection."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Select",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "text": "Stable string or integer values, rich and individually disabled options, automatic searchable presentation for larger collections, field validation semantics, and PHP-authoritative selection."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Slider",
-                    "text": "Additional Firstlight contract: Strict finite-number and step-grid validation, helper and error treatment, an optional spoken accessibility value, and explicit live, blur, or debounce synchronisation."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Slider",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "text": "Strict finite-number and step-grid validation, helper and error treatment, an optional spoken accessibility value, and explicit live, blur, or debounce synchronisation."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Switch",
-                    "text": "Additional Firstlight contract: Consistent helper and error semantics, strict Boolean values, one accessible setting row, and visible state reconciled from the value accepted by PHP."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Switch",
+                                "strong": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Additional Firstlight contract",
+                            "text": "Consistent helper and error semantics, strict Boolean values, one accessible setting row, and visible state reconciled from the value accepted by PHP."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "server-authoritative-application-state": {
             "title": "Server-authoritative application state",
@@ -219,8 +575,7 @@
                     "type": "text",
                     "text": "This differs from treating a local optimistic change as accepted application state. It is useful when permissions, validation, dependent fields, or business rules can reject or replace a choice. Focused text and continuous gestures still retain the native draft state needed for responsive editing and movement; Firstlight applies the state model appropriate to each type of control."
                 }
-            ],
-            "links": []
+            ]
         },
         "consistency-and-diagnostics": {
             "title": "Consistency and diagnostics",
@@ -230,42 +585,184 @@
                     "text": "Across the catalogue, Firstlight applies the same rules:"
                 },
                 {
-                    "type": "text",
-                    "text": "• selection binds stable domain strings or integers rather than display labels or renderer indexes;"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "selection binds stable domain strings or integers rather than display labels or renderer indexes;"
                 },
                 {
-                    "type": "text",
-                    "text": "• null consistently represents no selection;"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " consistently represents no selection;"
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• rich options can separate values, labels, and disabled state;"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "rich options can separate values, labels, and disabled state;"
                 },
                 {
-                    "type": "text",
-                    "text": "• malformed options, duplicate or mixed values, impossible ranges, contradictory props, and unsupported sync modes fail before publication;"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "malformed options, duplicate or mixed values, impossible ranges, contradictory props, and unsupported sync modes fail before publication;"
                 },
                 {
-                    "type": "text",
-                    "text": "• labels, helper text, errors, required metadata, accessibility hints, disabled state, and minimum interaction targets follow familiar conventions;"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "labels, helper text, errors, required metadata, accessibility hints, disabled state, and minimum interaction targets follow familiar conventions;"
                 },
                 {
-                    "type": "text",
-                    "text": "• the same authored component works on iOS and Android while each platform retains its native geometry, motion, presentation, and accessibility behaviour."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "the same authored component works on iOS and Android while each platform retains its native geometry, motion, presentation, and accessibility behaviour."
                 },
                 {
                     "type": "text",
                     "text": "Firstlight deliberately exposes fewer visual escape hatches and platform-only options than a general-purpose primitive library. This narrower surface keeps application code portable and allows the components to behave consistently as the native platforms evolve."
                 }
-            ],
-            "links": []
+            ]
         },
         "laravel-shaped-php-extensions": {
             "title": "Laravel-shaped PHP extensions",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Some Firstlight behaviour is not a new control. Field validation (ValidatesFields) runs Laravel's Validator in PHP and publishes the first MessageBag message into each field's existing error slot. Form submission (SubmitsForms) validates, runs a PHP callable once, and optionally sends success Feedback. Action authorization (AuthorizesActions) evaluates Laravel Gate/Policy decisions for hide, disable, and action-time guards. List pagination (PaginatesLists) binds Laravel paginators to List @refresh and @endReached. Destructive list actions (DestroysListItems) authorize Confirmation Dialog deletion by stable keys and republish $listItems. Package locale chrome publishes Firstlight-owned chrome strings from one Laravel language file, and Date/Time pickers inherit omitted locale and timezone from the application. Transient Feedback is an application-level outcome queue, not a Blade field. See Validate fields, Submit forms, Authorize actions, Paginate lists, Destroy list items, and Localize chrome."
+                    "runs": [
+                        {
+                            "text": "Some Firstlight behaviour is not a new control. Field validation ("
+                        },
+                        {
+                            "text": "ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": ") runs Laravel's "
+                        },
+                        {
+                            "text": "Validator",
+                            "code": true
+                        },
+                        {
+                            "text": " in PHP and publishes the first "
+                        },
+                        {
+                            "text": "MessageBag",
+                            "code": true
+                        },
+                        {
+                            "text": " message into each field's existing "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " slot. Form submission ("
+                        },
+                        {
+                            "text": "SubmitsForms",
+                            "code": true
+                        },
+                        {
+                            "text": ") validates, runs a PHP callable once, and optionally sends success Feedback. Action authorization ("
+                        },
+                        {
+                            "text": "AuthorizesActions",
+                            "code": true
+                        },
+                        {
+                            "text": ") evaluates Laravel Gate/Policy decisions for hide, disable, and action-time guards. List pagination ("
+                        },
+                        {
+                            "text": "PaginatesLists",
+                            "code": true
+                        },
+                        {
+                            "text": ") binds Laravel paginators to List "
+                        },
+                        {
+                            "text": "@refresh",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "@endReached",
+                            "code": true
+                        },
+                        {
+                            "text": ". Destructive list actions ("
+                        },
+                        {
+                            "text": "DestroysListItems",
+                            "code": true
+                        },
+                        {
+                            "text": ") authorize Confirmation Dialog deletion by stable keys and republish "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": ". Package locale chrome publishes Firstlight-owned chrome strings from one Laravel language file, and Date/Time pickers inherit omitted locale and timezone from the application. Transient Feedback is an application-level outcome queue, not a Blade field. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 2
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Submit forms",
+                            "link": 3
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Authorize actions",
+                            "link": 4
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Paginate lists",
+                            "link": 5
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Destroy list items",
+                            "link": 6
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 7
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -277,49 +774,61 @@
                 },
                 {
                     "type": "text",
-                    "text": "NativePHP core owns arbitrary-content native:pressable surfaces. In the supported\nMobile 4.6 implementation, Blade preserves their authored accessibility labels,\nbut the generic native renderers do not consume those labels/hints or explicitly\nmap a button role and disabled/selected state. Android's clickable supplies implicit\nCompose grouping; iOS uses a tap gesture without explicit accessibility grouping.\nAdding a11y-label to a native:column does not turn it into one accessible\nmeasurement either. Do not assume a visual tap target is accessible."
+                    "runs": [
+                        {
+                            "text": "NativePHP core owns arbitrary-content "
+                        },
+                        {
+                            "text": "native:pressable",
+                            "code": true
+                        },
+                        {
+                            "text": " surfaces. In the supported Mobile 4.6 implementation, Blade preserves their authored accessibility labels, but the generic native renderers do not consume those labels/hints or explicitly map a button role and disabled/selected state. Android's clickable supplies implicit Compose grouping; iOS uses a tap gesture without explicit accessibility grouping. Adding "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " to a "
+                        },
+                        {
+                            "text": "native:column",
+                            "code": true
+                        },
+                        {
+                            "text": " does not turn it into one accessible measurement either. Do not assume a visual tap target is accessible."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use Button for labelled actions and\nList Item for application rows when their content\ncontracts fit. Use Metric for a static grouped statistic.\nThere is no supported arbitrary-content accessible action wrapper in Firstlight;\ncustom interactive banners need an upstream core accessibility fix. Panels,\ndividers and tile grids remain Mobile UI layout, not catalogue controls."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
-                },
-                {
-                    "label": "Submit forms",
-                    "url": "../how-to/submit-forms.md"
-                },
-                {
-                    "label": "Authorize actions",
-                    "url": "../how-to/authorize-actions.md"
-                },
-                {
-                    "label": "Paginate lists",
-                    "url": "../how-to/paginate-lists.md"
-                },
-                {
-                    "label": "Destroy list items",
-                    "url": "../how-to/destroy-list-items.md"
-                },
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
-                },
-                {
-                    "label": "Button",
-                    "url": "../components/button.md"
-                },
-                {
-                    "label": "List Item",
-                    "url": "../components/list-item.md"
-                },
-                {
-                    "label": "Metric",
-                    "url": "../components/metric.md"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "Button",
+                            "link": 8
+                        },
+                        {
+                            "text": " for labelled actions and "
+                        },
+                        {
+                            "text": "List Item",
+                            "link": 9
+                        },
+                        {
+                            "text": " for application rows when their content contracts fit. Use "
+                        },
+                        {
+                            "text": "Metric",
+                            "link": 10
+                        },
+                        {
+                            "text": " for a static grouped statistic. There is no supported arbitrary-content accessible action wrapper in Firstlight; custom interactive banners need an upstream core accessibility fix. Panels, dividers and tile grids remain Mobile UI layout, not catalogue controls."
+                        }
+                    ]
                 }
             ]
         },
@@ -328,14 +837,31 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight does not maintain duplicate native code merely to put every control under its own namespace. Button and Progress currently keep public Firstlight element types while delegating directly to the official Mobile UI SwiftUI and Material 3 renderers."
+                    "runs": [
+                        {
+                            "text": "Firstlight does not maintain duplicate native code merely to put every control under its own namespace. "
+                        },
+                        {
+                            "text": "Button",
+                            "strong": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "Progress",
+                            "strong": true
+                        },
+                        {
+                            "text": " currently keep public Firstlight element types while delegating directly to the official Mobile UI SwiftUI and Material 3 renderers."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Firstlight adds strict authoring boundaries, documentation, tests, and catalogue consistency around those primitives, but does not claim new native rendering functionality. If a durable cross-platform requirement later outgrows an adapter, Firstlight can introduce paired renderers without changing consumer markup. Generally useful improvements remain good candidates for contribution to Mobile UI itself."
                 }
-            ],
-            "links": []
+            ]
         },
         "one-native-ecosystem": {
             "title": "One native ecosystem",
@@ -346,19 +872,82 @@
                 },
                 {
                     "type": "text",
-                    "text": "The relationship is intentionally complementary: NativePHP provides the native foundation and chrome; Firstlight provides the app-shell layer of controls, Laravel contracts, and recipes on top of it."
+                    "runs": [
+                        {
+                            "text": "The relationship is intentionally complementary: "
+                        },
+                        {
+                            "text": "NativePHP provides the native foundation and chrome; Firstlight provides the app-shell layer of controls, Laravel contracts, and recipes on top of it.",
+                            "strong": true
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Review the current compatibility requirements before releasing an application, particularly where server-authoritative controls depend on unchanged-tree publication acknowledgements from NativePHP Mobile."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility requirements",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Review the current "
+                        },
+                        {
+                            "text": "compatibility requirements",
+                            "link": 11
+                        },
+                        {
+                            "text": " before releasing an application, particularly where server-authoritative controls depend on unchanged-tree publication acknowledgements from NativePHP Mobile."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "recipes",
+            "url": "../how-to/build-a-list-detail-flow.md"
+        },
+        {
+            "label": "Build with a coding agent",
+            "url": "../getting-started/build-with-a-coding-agent.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "Submit forms",
+            "url": "../how-to/submit-forms.md"
+        },
+        {
+            "label": "Authorize actions",
+            "url": "../how-to/authorize-actions.md"
+        },
+        {
+            "label": "Paginate lists",
+            "url": "../how-to/paginate-lists.md"
+        },
+        {
+            "label": "Destroy list items",
+            "url": "../how-to/destroy-list-items.md"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "Button",
+            "url": "../components/button.md"
+        },
+        {
+            "label": "List Item",
+            "url": "../components/list-item.md"
+        },
+        {
+            "label": "Metric",
+            "url": "../components/metric.md"
+        },
+        {
+            "label": "compatibility requirements",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

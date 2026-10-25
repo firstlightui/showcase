@@ -15,11 +15,36 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Alert Dialog tells the user one fact they must acknowledge. It uses the\nplatform's native one-button alert, not a custom full-screen overlay."
+                    "text": "Alert Dialog tells the user one fact they must acknowledge. It uses the platform's native one-button alert, not a custom full-screen overlay."
                 },
                 {
                     "type": "text",
-                    "text": "Use Confirmation Dialog when the user must choose\nbetween confirm and cancel. Use Transient Feedback\nfor a non-blocking toast. Use Modal only when the surface needs\nauthored child content."
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "Confirmation Dialog",
+                            "link": 0
+                        },
+                        {
+                            "text": " when the user must choose between confirm and cancel. Use "
+                        },
+                        {
+                            "text": "Transient Feedback",
+                            "link": 1
+                        },
+                        {
+                            "text": " for a non-blocking toast. Use "
+                        },
+                        {
+                            "text": "Modal",
+                            "link": 2
+                        },
+                        {
+                            "text": " only when the surface needs authored child content."
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -28,21 +53,25 @@
                 },
                 {
                     "type": "text",
-                    "text": "The dismiss handler should set $showingSaved to false. The same handler\nruns for the action button, back, and outside dismissal."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Confirmation Dialog",
-                    "url": "confirmation-dialog.md"
-                },
-                {
-                    "label": "Transient Feedback",
-                    "url": "transient-feedback.md"
-                },
-                {
-                    "label": "Modal",
-                    "url": "modal.md"
+                    "runs": [
+                        {
+                            "text": "The dismiss handler should set "
+                        },
+                        {
+                            "text": "$showingSaved",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". The same handler runs for the action button, back, and outside dismissal."
+                        }
+                    ]
                 }
             ]
         },
@@ -50,38 +79,138 @@
             "title": "Props and events",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• visible: server-controlled presentation request; defaults to false."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "visible",
+                            "code": true
+                        },
+                        {
+                            "text": ": server-controlled presentation request; defaults to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "title",
+                            "code": true
+                        },
+                        {
+                            "text": ": required visible heading and accessible dialog name."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "message",
+                            "code": true
+                        },
+                        {
+                            "text": ": required explanation."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "action-label",
+                            "code": true
+                        },
+                        {
+                            "text": ": acknowledgement action text; defaults to the package chrome string "
+                        },
+                        {
+                            "text": "OK",
+                            "code": true
+                        },
+                        {
+                            "text": ". The "
+                        },
+                        {
+                            "text": "actionLabel",
+                            "code": true
+                        },
+                        {
+                            "text": " alias is accepted. See "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": ": required callback for the action, back, or outside dismissal."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "class",
+                            "code": true
+                        },
+                        {
+                            "text": ": external EDGE layout only."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• title: required visible heading and accessible dialog name."
-                },
-                {
-                    "type": "text",
-                    "text": "• message: required explanation."
-                },
-                {
-                    "type": "text",
-                    "text": "• action-label: acknowledgement action text; defaults to the package chrome\nstring OK. The actionLabel alias is accepted. See\nLocalize chrome."
-                },
-                {
-                    "type": "text",
-                    "text": "• @dismiss: required callback for the action, back, or outside dismissal."
-                },
-                {
-                    "type": "text",
-                    "text": "• class: external EDGE layout only."
-                },
-                {
-                    "type": "text",
-                    "text": "The component always presents one action. It does not support @press, a\ncancel action, tones, icons, loading or disabled states, native:model,\nauthored children, or an undismissable mode."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
+                    "runs": [
+                        {
+                            "text": "The component always presents one action. It does not support "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", a cancel action, tones, icons, loading or disabled states, "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", authored children, or an undismissable mode."
+                        }
+                    ]
                 }
             ]
         },
@@ -90,14 +219,56 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "One user acknowledgement produces one @dismiss callback. Programmatic\nclosure produces none. After the user dismisses the dialog, copy-only\npublications do not reopen it; a later server transition from false to\ntrue presents it again."
+                    "runs": [
+                        {
+                            "text": "One user acknowledgement produces one "
+                        },
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " callback. Programmatic closure produces none. After the user dismisses the dialog, copy-only publications do not reopen it; a later server transition from "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " presents it again."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "iOS uses SwiftUI alert. Android uses Material 3 AlertDialog with a single\nconfirm button. Native chrome owns modal focus, action placement, Dynamic Type\nor font scaling, dark appearance, contrast, reduced motion, and right-to-left\nbehavior. The title is the accessible name."
+                    "runs": [
+                        {
+                            "text": "iOS uses SwiftUI "
+                        },
+                        {
+                            "text": "alert",
+                            "code": true
+                        },
+                        {
+                            "text": ". Android uses Material 3 "
+                        },
+                        {
+                            "text": "AlertDialog",
+                            "code": true
+                        },
+                        {
+                            "text": " with a single confirm button. Native chrome owns modal focus, action placement, Dynamic Type or font scaling, dark appearance, contrast, reduced motion, and right-to-left behavior. The title is the accessible name."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -122,8 +293,25 @@
                     "src": "documentation/screenshots/alert-dialog/android-dark.png",
                     "text": "Alert Dialog on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Confirmation Dialog",
+            "url": "confirmation-dialog.md"
+        },
+        {
+            "label": "Transient Feedback",
+            "url": "transient-feedback.md"
+        },
+        {
+            "label": "Modal",
+            "url": "modal.md"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        }
+    ]
 }

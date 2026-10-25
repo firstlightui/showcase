@@ -15,38 +15,102 @@
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "PHP",
-                    "text": "Current requirement: ^8.4"
+                    "term": {
+                        "text": "PHP"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "runs": [
+                                {
+                                    "text": "^8.4",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "NativePHP Mobile",
-                    "text": "Current requirement: ^4.6"
+                    "term": {
+                        "text": "NativePHP Mobile"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "runs": [
+                                {
+                                    "text": "^4.6",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "NativePHP Mobile UI",
-                    "text": "Current requirement: ^0.8"
+                    "term": {
+                        "text": "NativePHP Mobile UI"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "runs": [
+                                {
+                                    "text": "^0.8",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "iOS application target",
-                    "text": "Current requirement: iOS 18.0 or later"
+                    "term": {
+                        "text": "iOS application target"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "text": "iOS 18.0 or later"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Android application target",
-                    "text": "Current requirement: API 29 or later"
+                    "term": {
+                        "text": "Android application target"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "text": "API 29 or later"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Firstlight Swift package",
-                    "text": "Current requirement: iOS 18 or later"
+                    "term": {
+                        "text": "Firstlight Swift package"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "text": "iOS 18 or later"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Swift tools",
-                    "text": "Current requirement: Swift 6.2"
+                    "term": {
+                        "text": "Swift tools"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "text": "Swift 6.2"
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -54,10 +118,27 @@
                 },
                 {
                     "type": "text",
-                    "text": "After changing NativePHP versions, run composer update and php artisan native:install --force so bundled PHP binaries, native project files, and plugin copies match the resolved release."
+                    "runs": [
+                        {
+                            "text": "After changing NativePHP versions, run "
+                        },
+                        {
+                            "text": "composer update",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "php artisan native:install --force",
+                            "code": true
+                        },
+                        {
+                            "text": " so bundled PHP binaries, native project files, and plugin copies match the resolved release."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "runtime-response-contract": {
             "title": "Runtime response contract",
@@ -68,39 +149,186 @@
                 },
                 {
                     "type": "text",
-                    "text": "Extend FirstlightUI\\NativeComponent, not the upstream EDGE base, for screens\nusing Firstlight controls, with NativePHP at the floors above."
+                    "runs": [
+                        {
+                            "text": "Extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": ", not the upstream EDGE base, for screens using Firstlight controls, with NativePHP at the floors above."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The base stamps the final chrome-wrapped root with the integer prop\nfirstlight_response_revision. Its counter is private, process-wide, and\nmonotonically increasing across screen instances within the PHP process, not\ncomponent state to bind, persist, or set yourself. An otherwise unchanged full\nresponse therefore differs from the previous frame and reaches the renderers.\nThe one exception is the final frame back() publishes before popping the\nscreen: it keeps the current revision, so an unchanged screen is not republished\nmid-pop. On iOS such a frame would re-push the screen being left."
+                    "runs": [
+                        {
+                            "text": "The base stamps the "
+                        },
+                        {
+                            "text": "final chrome-wrapped root",
+                            "strong": true
+                        },
+                        {
+                            "text": " with the integer prop "
+                        },
+                        {
+                            "text": "firstlight_response_revision",
+                            "code": true
+                        },
+                        {
+                            "text": ". Its counter is private, process-wide, and monotonically increasing across screen instances within the PHP process, not component state to bind, persist, or set yourself. An otherwise unchanged full response therefore differs from the previous frame and reaches the renderers. The one exception is the final frame "
+                        },
+                        {
+                            "text": "back()",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes before popping the screen: it keeps the current revision, so an unchanged screen is not republished mid-pop. On iOS such a frame would re-push the screen being left."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "This deliberately bypasses whole-frame equality suppression for each completed\nscreen response. It trades that deduplication saving for reliable reconciliation\nof unchanged values; publication cost still needs soak/performance qualification."
+                    "text": "This deliberately bypasses whole-frame equality suppression for each completed screen response. It trades that deduplication saving for reliable reconciliation of unchanged values; publication cost still needs soak/performance qualification."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Normal Blade paths are automatic: a global Laravel "
+                        },
+                        {
+                            "text": "View",
+                            "code": true
+                        },
+                        {
+                            "text": " returned from "
+                        },
+                        {
+                            "text": "render()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "$this->view()",
+                            "code": true
+                        },
+                        {
+                            "text": ", and the inferred view all receive the revision."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Programmatic Element roots must return "
+                        },
+                        {
+                            "text": "$this->response($element)",
+                            "code": true
+                        },
+                        {
+                            "text": " from "
+                        },
+                        {
+                            "text": "render()",
+                            "code": true
+                        },
+                        {
+                            "text": ". This adds normal screen chrome as well as the root revision. Use it only for raw Element content, not an already-completed "
+                        },
+                        {
+                            "text": "view()",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "fromView()",
+                            "code": true
+                        },
+                        {
+                            "text": " response. Custom "
+                        },
+                        {
+                            "text": "wrapWithChrome()",
+                            "code": true
+                        },
+                        {
+                            "text": " overrides must call the parent."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Nested children are emitted untouched; partials are unstamped. Neither is an independent full response under this contract."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "renderStreaming()",
+                            "code": true
+                        },
+                        {
+                            "text": " is final and returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". Streaming bypasses this contract and cannot be opted into by a subclass."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Existing concerns such as "
+                        },
+                        {
+                            "text": "ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " remain usable separately, but adding a trait to the upstream base does not provide this publication contract."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• Normal Blade paths are automatic: a global Laravel View returned from\nrender(), $this->view(), and the inferred view all receive the revision."
-                },
-                {
-                    "type": "text",
-                    "text": "• Programmatic Element roots must return $this->response($element) from\nrender(). This adds normal screen chrome as well as the root revision.\nUse it only for raw Element content, not an already-completed view() or\nfromView() response. Custom wrapWithChrome() overrides must call the parent."
-                },
-                {
-                    "type": "text",
-                    "text": "• Nested children are emitted untouched; partials are unstamped. Neither is an\nindependent full response under this contract."
-                },
-                {
-                    "type": "text",
-                    "text": "• renderStreaming() is final and returns false. Streaming bypasses this\ncontract and cannot be opted into by a subclass."
-                },
-                {
-                    "type": "text",
-                    "text": "• Existing concerns such as ValidatesFields remain usable separately, but\nadding a trait to the upstream base does not provide this publication contract."
-                },
-                {
-                    "type": "text",
-                    "text": "The revision is not a per-event acknowledgement. It does not prevent\npublication coalescing or serialize simultaneous proposals. Applications must\nnot infer that every event receives a separately observable response.\nThis is a screen-rendering contract, not a replacement for NativePHP's generic\npublisher: framework-owned loading placeholders and error/dump overlays are\noutside it."
+                    "runs": [
+                        {
+                            "text": "The revision is "
+                        },
+                        {
+                            "text": "not a per-event acknowledgement",
+                            "strong": true
+                        },
+                        {
+                            "text": ". It does not prevent publication coalescing or serialize simultaneous proposals. Applications must not infer that every event receives a separately observable response. This is a screen-rendering contract, not a replacement for NativePHP's generic publisher: framework-owned loading placeholders and error/dump overlays are outside it."
+                        }
+                    ]
                 },
                 {
                     "type": "heading",
@@ -108,27 +336,52 @@
                 },
                 {
                     "type": "text",
-                    "text": "The October 2026 Android and iOS PHP 8.5.11 bundles still suppress byte-identical\nframes in the shared C runtime. Android treePublicationId, shipped in Mobile\n4.1.0 (#280), only helps after\na publication reaches Kotlin. The cross-platform bug\n#365 remains upstream;\nthe response revision makes Firstlight independent of it."
+                    "runs": [
+                        {
+                            "text": "The October 2026 Android and iOS PHP 8.5.11 bundles still suppress byte-identical frames in the shared C runtime. Android "
+                        },
+                        {
+                            "text": "treePublicationId",
+                            "code": true
+                        },
+                        {
+                            "text": ", shipped in Mobile 4.1.0 ("
+                        },
+                        {
+                            "text": "#280",
+                            "link": 0
+                        },
+                        {
+                            "text": "), only helps after a publication reaches Kotlin. The cross-platform bug "
+                        },
+                        {
+                            "text": "#365",
+                            "link": 1
+                        },
+                        {
+                            "text": " remains upstream; the response revision makes Firstlight independent of it."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The permanent implementation was checked on October 19, 2026 with Mobile 4.6.0,\nMobile UI 0.8.0, and the official PHP 8.5.11 bundles: 14 nonstreaming phases each\non an Android emulator and iOS simulator. Each phase delivered three proposals\nthrough a normal Blade screen using Firstlight's base, without app-authored\nrevision props. Repeated Switch/Pill rejection, Segmented rejection, validation,\naccepted Switch changes, 500 ms rejection, and rapid same-control bursts passed.\nRapid bursts deliberately coalesce a second tap while pending; they do not\nprove one response per physical tap. The earlier spike did not reproduce a\nbaseline Segmented failure, so these results do not establish a Segmented fix."
+                    "text": "The permanent implementation was checked on October 19, 2026 with Mobile 4.6.0, Mobile UI 0.8.0, and the official PHP 8.5.11 bundles: 14 nonstreaming phases each on an Android emulator and iOS simulator. Each phase delivered three proposals through a normal Blade screen using Firstlight's base, without app-authored revision props. Repeated Switch/Pill rejection, Segmented rejection, validation, accepted Switch changes, 500 ms rejection, and rapid same-control bursts passed. Rapid bursts deliberately coalesce a second tap while pending; they do not prove one response per physical tap. The earlier spike did not reproduce a baseline Segmented failure, so these results do not establish a Segmented fix."
                 },
                 {
                     "type": "text",
-                    "text": "Package regression tests cover Blade, inferred views, hand-built responses,\nremounts, nested children, and unstamped partials. This is not production\nqualification. Firstlight 1.0.0 is a release candidate pending physical-device,\nsoak/performance, and wider app qualification, including simultaneous controls."
-                }
-            ],
-            "links": [
-                {
-                    "label": "#280",
-                    "url": "https://github.com/NativePHP/mobile-air/pull/280"
-                },
-                {
-                    "label": "#365",
-                    "url": "https://github.com/NativePHP/mobile-air/issues/365"
+                    "text": "Package regression tests cover Blade, inferred views, hand-built responses, remounts, nested children, and unstamped partials. This is not production qualification. Firstlight 1.0.0 is a release candidate pending physical-device, soak/performance, and wider app qualification, including simultaneous controls."
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "#280",
+            "url": "https://github.com/NativePHP/mobile-air/pull/280"
+        },
+        {
+            "label": "#365",
+            "url": "https://github.com/NativePHP/mobile-air/issues/365"
+        }
+    ]
 }

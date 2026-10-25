@@ -22,10 +22,9 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Activity Indicator communicates that work is active when no meaningful\ncompletion value is available. It renders a circular, indeterminate native\nindicator with no visible text inside the component."
+                    "text": "Activity Indicator communicates that work is active when no meaningful completion value is available. It renders a circular, indeterminate native indicator with no visible text inside the component."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -41,46 +40,211 @@
                 },
                 {
                     "type": "text",
-                    "text": "Presence is the activity state. Removing the element stops the presentation;\nthe component has no separate loading, active, or visible prop. Use the\nsame conditional server state that decides whether the work is active rather\nthan attaching wire:loading to this native element."
+                    "runs": [
+                        {
+                            "text": "Presence is the activity state. Removing the element stops the presentation; the component has no separate "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "active",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "visible",
+                            "code": true
+                        },
+                        {
+                            "text": " prop. Use the same conditional server state that decides whether the work is active rather than attaching "
+                        },
+                        {
+                            "text": "wire:loading",
+                            "code": true
+                        },
+                        {
+                            "text": " to this native element."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "size",
-                    "text": "Accepted type: sm, md, or lg\nPurpose: Semantic native size. Defaults to md."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "size",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "sm",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Semantic native size. Defaults to "
+                                },
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Required accessible name describing the active work. The a11yLabel authoring alias is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Required accessible name describing the active work. The "
+                                },
+                                {
+                                    "text": "a11yLabel",
+                                    "code": true
+                                },
+                                {
+                                    "text": " authoring alias is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Size is semantic, not a shared point or dp measurement. Firstlight maps each\nvalue to an appropriate native size on each platform."
+                    "text": "Size is semantic, not a shared point or dp measurement. Firstlight maps each value to an appropriate native size on each platform."
                 },
                 {
                     "type": "text",
-                    "text": "Colour comes from the host NativePHP theme's primary token. Activity Indicator\nhas no color, tone, or variant escape prop."
+                    "runs": [
+                        {
+                            "text": "Colour comes from the host NativePHP theme's primary token. Activity Indicator has no "
+                        },
+                        {
+                            "text": "color",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "variant",
+                            "code": true
+                        },
+                        {
+                            "text": " escape prop."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "visible-text": {
             "title": "Visible text",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "a11y-label is not displayed. Compose separate visible text when sighted users\nalso need context:"
+                    "runs": [
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is not displayed. Compose separate visible text when sighted users also need context:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -89,79 +253,242 @@
                 },
                 {
                     "type": "text",
-                    "text": "The visible text and accessible name may use the same wording, but they remain\nseparate responsibilities. Activity Indicator is self-closing and has no label\nor content slot."
+                    "text": "The visible text and accessible name may use the same wording, but they remain separate responsibilities. Activity Indicator is self-closing and has no label or content slot."
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-state-timing": {
             "title": "Events and state timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Activity Indicator has no event, callback, or model binding. PHP publishes the\nelement while work is active, and the native control owns its indeterminate\nanimation without timer callbacks or animation frames crossing the bridge."
+                    "text": "Activity Indicator has no event, callback, or model binding. PHP publishes the element while work is active, and the native control owns its indeterminate animation without timer callbacks or animation frames crossing the bridge."
                 },
                 {
                     "type": "text",
-                    "text": "On a new mount, assistive technology receives one polite announcement using\nthe authored a11y-label. Ordinary server reconciliation, size changes, label\nchanges, and body recomputation do not repeat that announcement. Removing the\nelement and later adding a new mounted element begins a new appearance."
+                    "runs": [
+                        {
+                            "text": "On a new mount, assistive technology receives one polite announcement using the authored "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Ordinary server reconciliation, size changes, label changes, and body recomputation do not repeat that announcement. Removing the element and later adding a new mounted element begins a new appearance."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "disabled-loading-and-failure-behaviour": {
             "title": "Disabled, loading, and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The component is display-only, so disabled, selected, pressed, error, helper,\nrequired, and validation states do not apply. Its presence already means\nloading; a second loading flag would create contradictory state."
+                    "text": "The component is display-only, so disabled, selected, pressed, error, helper, required, and validation states do not apply. Its presence already means loading; a second loading flag would create contradictory state."
                 },
                 {
                     "type": "text",
-                    "text": "A missing, empty, whitespace-only, or non-string a11y-label throws an\nInvalidArgumentException. Unsupported sizes and content, state, event,\nstyling, hint, value, or synchronization attributes also fail before the\nElement Tree is published. Firstlight does not silently coerce small,\nlarge, xs, xl, integers, booleans, arrays, or null into a size."
+                    "runs": [
+                        {
+                            "text": "A missing, empty, whitespace-only, or non-string "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " throws an "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": ". Unsupported sizes and content, state, event, styling, hint, value, or synchronization attributes also fail before the Element Tree is published. Firstlight does not silently coerce "
+                        },
+                        {
+                            "text": "small",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "large",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "xs",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "xl",
+                            "code": true
+                        },
+                        {
+                            "text": ", integers, booleans, arrays, or "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " into a size."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The required label names the work rather than the generic visual, for example\nLoading appointments instead of Spinner. The indicator has no accessibility\nhint, percentage, click action, or interactive role. The polite appearance\nannouncement does not move screen-reader focus."
+                    "runs": [
+                        {
+                            "text": "The required label names the work rather than the generic visual, for example "
+                        },
+                        {
+                            "text": "Loading appointments",
+                            "code": true
+                        },
+                        {
+                            "text": " instead of "
+                        },
+                        {
+                            "text": "Spinner",
+                            "code": true
+                        },
+                        {
+                            "text": ". The indicator has no accessibility hint, percentage, click action, or interactive role. The polite appearance announcement does not move screen-reader focus."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "VoiceOver receives the SwiftUI control's accessible label plus one guarded\nappearance announcement. TalkBack receives the label as its content\ndescription and the indicator as a polite live region. Both retain native\ncontrast, right-to-left behaviour, Increased Contrast, and Reduced Motion or\nsystem animation policy."
+                    "text": "VoiceOver receives the SwiftUI control's accessible label plus one guarded appearance announcement. TalkBack receives the label as its content description and the indicator as a polite live region. Both retain native contrast, right-to-left behaviour, Increased Contrast, and Reduced Motion or system animation policy."
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a genuine circular SwiftUI ProgressView, native ControlSize\nmapping, and the host theme's primary colour. Android uses Material 3\nCircularProgressIndicator at Material-appropriate 20.dp, 32.dp, and\n48.dp dimensions for sm, md, and lg."
+                    "runs": [
+                        {
+                            "text": "iOS uses a genuine circular SwiftUI "
+                        },
+                        {
+                            "text": "ProgressView",
+                            "code": true
+                        },
+                        {
+                            "text": ", native "
+                        },
+                        {
+                            "text": "ControlSize",
+                            "code": true
+                        },
+                        {
+                            "text": " mapping, and the host theme's primary colour. Android uses Material 3 "
+                        },
+                        {
+                            "text": "CircularProgressIndicator",
+                            "code": true
+                        },
+                        {
+                            "text": " at Material-appropriate "
+                        },
+                        {
+                            "text": "20.dp",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "32.dp",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "48.dp",
+                            "code": true
+                        },
+                        {
+                            "text": " dimensions for "
+                        },
+                        {
+                            "text": "sm",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "md",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The platforms retain their own geometry and animation. The shared guarantee is\npurpose, semantic size order, theme intent, accessibility, and lifecycle—not\npixel parity."
+                    "text": "The platforms retain their own geometry and animation. The shared guarantee is purpose, semantic size order, theme intent, accessibility, and lifecycle—not pixel parity."
                 }
-            ],
-            "links": []
+            ]
         },
         "activity-indicator-or-progress": {
             "title": "Activity Indicator or Progress?",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use Activity Indicator for circular, indeterminate activity whose completion\ncannot be measured. Use Progress when you have a fraction from\n0.0 through 1.0, or when a linear progress treatment better communicates\nthe task. Neither component starts or controls the underlying work."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Progress",
-                    "url": "progress.md"
+                    "runs": [
+                        {
+                            "text": "Use Activity Indicator for circular, indeterminate activity whose completion cannot be measured. Use "
+                        },
+                        {
+                            "text": "Progress",
+                            "link": 0
+                        },
+                        {
+                            "text": " when you have a fraction from "
+                        },
+                        {
+                            "text": "0.0",
+                            "code": true
+                        },
+                        {
+                            "text": " through "
+                        },
+                        {
+                            "text": "1.0",
+                            "code": true
+                        },
+                        {
+                            "text": ", or when a linear progress treatment better communicates the task. Neither component starts or controls the underlying work."
+                        }
+                    ]
                 }
             ]
         },
@@ -170,13 +497,18 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Activity Indicator supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility\nreference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Activity Indicator supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 1
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
                 }
             ]
         },
@@ -203,8 +535,17 @@
                     "src": "documentation/screenshots/activity-indicator/android-dark.png",
                     "text": "Activity Indicator on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Progress",
+            "url": "progress.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

@@ -31,10 +31,10 @@ it('bundles the entire reference for the installed Firstlight revision', functio
                     expect(is_file(public_path($block['src'])))->toBeTrue();
                 }
             }
-            foreach ($chapter['links'] as $link) {
-                if (str_ends_with(explode('#', $link['url'])[0], '.md')) {
-                    expect($library->resolve($article['id'], $link['url']))->not->toBeNull();
-                }
+        }
+        foreach ($article['links'] as $link) {
+            if (str_ends_with(explode('#', $link['url'])[0], '.md')) {
+                expect($library->resolve($article['id'], $link['url']))->not->toBeNull();
             }
         }
     }
@@ -81,7 +81,10 @@ it('renders every bundled article section through the native wire tree', functio
     foreach ($library->articles() as $summary) {
         $screen = Native::visit($library->url($summary['id']));
         foreach ($library->read($summary['id'])['chapters'] as $id => $chapter) {
-            $screen->call('__syncProperty', 'chapter', $id)->assertSet('chapter', $id)->assertSee($chapter['title'])->assertAccessible();
+            $screen->call('__syncProperty', 'chapter', $id)->assertSet('chapter', $id)->assertAccessible();
+            if ($id !== 'overview') {
+                $screen->assertSee($chapter['title']);
+            }
         }
     }
 });
@@ -90,4 +93,16 @@ it('keeps document navigation restricted to the bundled catalogue', function () 
     Native::visit('/docs')->call('openArticle', '../../.env')->assertNoNavigation();
     Native::visit('/docs/components/button')->call('openLink', 999)->assertNoNavigation();
     expect(app(DocumentationLibrary::class)->find('../../.env'))->toBeNull();
+});
+
+it('reads as continuous prose with inline links and next-section paging', function () {
+    $article = app(DocumentationLibrary::class)->read('how-to/build-a-form-screen');
+    $intro = $article['chapters']['overview']['blocks'][1];
+    // Hard-wrapped Markdown must not break sentences on the device.
+    expect(implode('', array_column($intro['runs'], 'text')))->toBe('This recipe runs unchanged in the showcase app, where FormRecipeTest exercises it.')
+        ->and($intro['runs'][1])->toMatchArray(['text' => 'showcase app', 'link' => 0]);
+
+    $screen = Native::visit('/docs/how-to/build-a-form-screen')->assertSee('showcase app')->assertSee('1. Register the route')->assertSee('Next: 2. Write the Form Request');
+    $screen->press('showSection(\'2-write-the-form-request\')')->assertSet('chapter', '2-write-the-form-request')->assertSee('2. Write the Form Request')->assertAccessible();
+    Native::visit('/docs/how-to/build-a-form-screen')->press('openLink(2)')->assertNavigatedTo('/docs/how-to/build-a-settings-screen');
 });

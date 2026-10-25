@@ -21,10 +21,9 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Icon Button triggers one compact action represented by an icon. It renders as\na genuine SwiftUI button on iOS and the Material 3 Icon Button family on\nAndroid while keeping one portable Firstlight API."
+                    "text": "Icon Button triggers one compact action represented by an icon. It renders as a genuine SwiftUI button on iOS and the Material 3 Icon Button family on Android while keeping one portable Firstlight API."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -36,77 +35,425 @@
                 },
                 {
                     "type": "text",
-                    "text": "Icon Button is self-closing and has no visible text slot. Use\n<firstlight:button> when the action needs a visible label, or\n<native:icon> for a decorative or display-only glyph."
+                    "runs": [
+                        {
+                            "text": "Icon Button is self-closing and has no visible text slot. Use "
+                        },
+                        {
+                            "text": "<firstlight:button>",
+                            "code": true
+                        },
+                        {
+                            "text": " when the action needs a visible label, or "
+                        },
+                        {
+                            "text": "<native:icon>",
+                            "code": true
+                        },
+                        {
+                            "text": " for a decorative or display-only glyph."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "icon",
-                    "text": "Accepted type: non-empty string\nPurpose: Required shared icon name and cross-platform fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required shared icon name and cross-platform fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-ios",
-                    "text": "Accepted type: `IosSymbol\nPurpose: string`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-ios",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`IosSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-android",
-                    "text": "Accepted type: `AndroidSymbol\nPurpose: string`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`AndroidSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Required accessible action name. Firstlight never derives it from the machine icon name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required accessible action name. Firstlight never derives it from the machine icon name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Optional supplementary VoiceOver or TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional supplementary VoiceOver or TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "variant",
-                    "text": "Accepted type: primary, secondary, destructive, success, or ghost\nPurpose: Semantic action intent. Defaults to primary."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "variant",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "secondary",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "destructive",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "ghost",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Semantic action intent. Defaults to "
+                                },
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "size",
-                    "text": "Accepted type: sm, md, or lg\nPurpose: Native glyph and container size. Defaults to md; the touch target remains at least 44 points or 48 dp."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "size",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "sm",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Native glyph and container size. Defaults to "
+                                },
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; the touch target remains at least 44 points or 48 dp."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents interaction and exposes native disabled state. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Prevents interaction and exposes native disabled state. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "loading",
-                    "text": "Accepted type: bool\nPurpose: Replaces the glyph with native progress, announces loading, and prevents duplicate presses. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "loading",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Replaces the glyph with native progress, announces loading, and prevents duplicate presses. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Blade documentation uses icon-ios and icon-android. The equivalent\niconIos and iconAndroid aliases are accepted for parity with NativePHP."
+                    "runs": [
+                        {
+                            "text": "Blade documentation uses "
+                        },
+                        {
+                            "text": "icon-ios",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "icon-android",
+                            "code": true
+                        },
+                        {
+                            "text": ". The equivalent "
+                        },
+                        {
+                            "text": "iconIos",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "iconAndroid",
+                            "code": true
+                        },
+                        {
+                            "text": " aliases are accepted for parity with NativePHP."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@press is required and invokes the named PHP action once for a native user\npress:"
+                    "runs": [
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " is required and invokes the named PHP action once for a native user press:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -115,63 +462,171 @@
                 },
                 {
                     "type": "text",
-                    "text": "Icon Button has no value, native:model, or @change. Disabled and loading\nbuttons do not emit. Programmatic publications never emit a press."
+                    "runs": [
+                        {
+                            "text": "Icon Button has no "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ". Disabled and loading buttons do not emit. Programmatic publications never emit a press."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "variants-and-sizes": {
             "title": "Variants and sizes",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The variants share the same semantic vocabulary as Firstlight Button. iOS\nuses Apple-native prominent or plain button expression and theme tints.\nAndroid uses FilledIconButton, FilledTonalIconButton, or IconButton\naccording to intent. sm, md, and lg scale the visible glyph and native\ncontainer without shrinking the accessible interaction target."
+                    "runs": [
+                        {
+                            "text": "The variants share the same semantic vocabulary as Firstlight Button. iOS uses Apple-native prominent or plain button expression and theme tints. Android uses "
+                        },
+                        {
+                            "text": "FilledIconButton",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "FilledTonalIconButton",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "IconButton",
+                            "code": true
+                        },
+                        {
+                            "text": " according to intent. "
+                        },
+                        {
+                            "text": "sm",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "md",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": " scale the visible glyph and native container without shrinking the accessible interaction target."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "loading-and-disabled-behaviour": {
             "title": "Loading and disabled behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "loading keeps the explicit accessible name, substitutes a native progress\nindicator, exposes a loading value or state description, and disables the\naction until PHP publishes a non-loading state. disabled retains the icon\nand name while exposing native disabled appearance and semantics."
+                    "runs": [
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": " keeps the explicit accessible name, substitutes a native progress indicator, exposes a loading value or state description, and disables the action until PHP publishes a non-loading state. "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " retains the icon and name while exposing native disabled appearance and semantics."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Every Icon Button requires a11y-label; familiar-looking icon names are not\naccepted as an accessible-name substitute. The glyph is decorative inside one\nbutton accessibility node. Native renderers expose the button role, optional\nhint, disabled or loading state, focus and press feedback, and interaction\ntargets of at least 44 points on iOS and 48 dp on Android."
+                    "runs": [
+                        {
+                            "text": "Every Icon Button requires "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "; familiar-looking icon names are not accepted as an accessible-name substitute. The glyph is decorative inside one button accessibility node. Native renderers expose the button role, optional hint, disabled or loading state, focus and press feedback, and interaction targets of at least 44 points on iOS and 48 dp on Android."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-excluded-apis": {
             "title": "Validation and excluded APIs",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight rejects missing or blank icons, missing or blank accessibility\nlabels, missing @press, non-boolean state props, invalid variants and sizes,\nunsupported platform icon values, visible labels or slots, trailing icons,\nmenus, navigation directives, extra gesture callbacks, bindings, field props,\nand per-control colour or typography escape hatches."
+                    "runs": [
+                        {
+                            "text": "Firstlight rejects missing or blank icons, missing or blank accessibility labels, missing "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", non-boolean state props, invalid variants and sizes, unsupported platform icon values, visible labels or slots, trailing icons, menus, navigation directives, extra gesture callbacks, bindings, field props, and per-control colour or typography escape hatches."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Icon Button supports the versions listed in the current\ncompatibility reference and requires both\nFirstlight native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Icon Button supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 0
+                        },
+                        {
+                            "text": " and requires both Firstlight native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -198,8 +653,13 @@
                     "src": "documentation/screenshots/icon-button/android-dark.png",
                     "text": "Icon Button on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

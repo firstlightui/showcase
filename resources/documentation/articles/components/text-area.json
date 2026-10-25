@@ -18,10 +18,9 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Text Area enters and edits plain multiline text using each platform's native\nselection, composition, focus, scrolling, autocapitalization, and autocorrection\nbehaviour."
+                    "text": "Text Area enters and edits plain multiline text using each platform's native selection, composition, focus, scrolling, autocapitalization, and autocorrection behaviour."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -31,132 +30,719 @@
                     "language": "blade",
                     "text": "<firstlight:text-area\n    label=\"Clinical notes\"\n    placeholder=\"Add relevant history and observations\"\n    helper=\"Do not include information that is not required.\"\n    :required=\"true\"\n    :min-lines=\"4\"\n    :max-lines=\"10\"\n    autocapitalize=\"sentences\"\n    native:model.debounce.500ms=\"notes\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string\nPurpose: Published PHP value; omission defaults to ''."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Published PHP value; omission defaults to "
+                                },
+                                {
+                                    "text": "''",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible label and accessibility-name fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible label and accessibility-name fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "placeholder",
-                    "text": "Accepted type: string\nPurpose: Short empty-state guidance; never replaces a label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "placeholder",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Short empty-state guidance; never replaces a label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting guidance below the field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting guidance below the field."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Validation feedback that replaces helper text."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Communicates required metadata without performing validation."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Communicates required metadata without performing validation."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents focus and editing."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents focus and editing."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "read-only",
-                    "text": "Accepted type: bool\nPurpose: Keeps native selection, copy, and scrolling while preventing edits."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "read-only",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Keeps native selection, copy, and scrolling while preventing edits."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "min-lines",
-                    "text": "Accepted type: positive int\nPurpose: Minimum visible lines; defaults to 3."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "min-lines",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "positive "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Minimum visible lines; defaults to "
+                                },
+                                {
+                                    "text": "3",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "max-lines",
-                    "text": "Accepted type: positive int\nPurpose: Maximum visible lines before native scrolling; defaults to 8."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "max-lines",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "positive "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Maximum visible lines before native scrolling; defaults to "
+                                },
+                                {
+                                    "text": "8",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "autocapitalize",
-                    "text": "Accepted type: enum string\nPurpose: none, sentences, words, or characters; omission keeps platform policy."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "autocapitalize",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "enum string"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "sentences",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "words",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "characters",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; omission keeps platform policy."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "autocorrect",
-                    "text": "Accepted type: bool\nPurpose: Explicitly enables or disables platform autocorrection."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "autocorrect",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicitly enables or disables platform autocorrection."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible name when no visible label is appropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver or TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver or TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout for the complete field."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "max-lines must be greater than or equal to min-lines. Public Blade examples\nuse kebab-case. The PHP element also accepts minLines, maxLines, and\nreadOnly aliases."
+                    "runs": [
+                        {
+                            "text": "max-lines",
+                            "code": true
+                        },
+                        {
+                            "text": " must be greater than or equal to "
+                        },
+                        {
+                            "text": "min-lines",
+                            "code": true
+                        },
+                        {
+                            "text": ". Public Blade examples use kebab-case. The PHP element also accepts "
+                        },
+                        {
+                            "text": "minLines",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "maxLines",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "readOnly",
+                            "code": true
+                        },
+                        {
+                            "text": " aliases."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-synchronisation": {
             "title": "Events and synchronisation",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the complete current string, including newline characters.\nPlain native:model and .live publish while editing. .blur and .lazy\npublish on focus loss. .debounce.500ms publishes after the quiet period and\nflushes on blur. Durations below 50 milliseconds are rejected."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the complete current string, including newline characters. Plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".live",
+                            "code": true
+                        },
+                        {
+                            "text": " publish while editing. "
+                        },
+                        {
+                            "text": ".blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".lazy",
+                            "code": true
+                        },
+                        {
+                            "text": " publish on focus loss. "
+                        },
+                        {
+                            "text": ".debounce.500ms",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes after the quiet period and flushes on blur. Durations below 50 milliseconds are rejected."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "On iOS, pressing a <firstlight:button> while the editor is focused publishes\nits pending .blur or .debounce change before the press, so the handler reads\nthe current value. Icon Button and List Item presses do not flush the editor\nfirst. On Android, blur/debounce changes are not yet guaranteed to reach PHP\nbefore a button press, so for forms submitted by a separate button use\nnative:model.live=\"notes\" (or plain native:model). Keyboard dismissal alone\nis not an ordering guarantee there."
+                    "runs": [
+                        {
+                            "text": "On iOS, pressing a "
+                        },
+                        {
+                            "text": "<firstlight:button>",
+                            "code": true
+                        },
+                        {
+                            "text": " while the editor is focused publishes its pending "
+                        },
+                        {
+                            "text": ".blur",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": ".debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " change before the press, so the handler reads the current value. Icon Button and List Item presses do not flush the editor first. On Android, blur/debounce changes are not yet guaranteed to reach PHP before a button press, so for forms submitted by a separate button use "
+                        },
+                        {
+                            "text": "native:model.live=\"notes\"",
+                            "code": true
+                        },
+                        {
+                            "text": " (or plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": "). Keyboard dismissal alone is not an ordering guarantee there."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Typing, selection, cursor position, marked text or IME composition, focus,\nkeyboard, and scroll position remain native while focused. PHP acknowledgements\ntherefore do not replace the active buffer. Different server publications wait\nfor safe reconciliation, while unfocused programmatic updates replace the\ndisplayed string without emitting @change."
+                    "runs": [
+                        {
+                            "text": "Typing, selection, cursor position, marked text or IME composition, focus, keyboard, and scroll position remain native while focused. PHP acknowledgements therefore do not replace the active buffer. Different server publications wait for safe reconciliation, while unfocused programmatic updates replace the displayed string without emitting "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Text Area intentionally has no @submit, @press, icons, secure mode,\nsingle-line keyboard or content hints, clear/reveal affordances, loading state,\nprefix, suffix, or styling escape props."
+                    "runs": [
+                        {
+                            "text": "Text Area intentionally has no "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", icons, secure mode, single-line keyboard or content hints, clear/reveal affordances, loading state, prefix, suffix, or styling escape props."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-accessibility": {
             "title": "Validation and accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject invalid types, unordered line bounds, and\nunsupported sync modes before publication. User validation is separate:\nscreens that use ValidatesFields auto-bind the first MessageBag message for\nthe field's native:model or error-for name. An authored error wins.\nrequired is display metadata and does not run Laravel rules. See\nValidate fields."
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject invalid types, unordered line bounds, and unsupported sync modes before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is display metadata and does not run Laravel rules. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "A visible label or explicit a11y-label is required during development.\nError text replaces helper text while preserving the current accessible name\nand value. Disabled and read-only states remain distinct. Native type scaling,\nlight and dark appearance, increased contrast, Reduced Motion, and RTL remain\nplatform-owned."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "A visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is required during development. Error text replaces helper text while preserving the current accessible name and value. Disabled and read-only states remain distinct. Native type scaling, light and dark appearance, increased contrast, Reduced Motion, and RTL remain platform-owned."
+                        }
+                    ]
                 }
             ]
         },
@@ -165,10 +751,34 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a genuine SwiftUI TextEditor in Apple-native field composition.\nAndroid uses Material 3 OutlinedTextField with TextFieldValue, multiline\nline bounds, supporting and error slots, and Compose selection and composition."
+                    "runs": [
+                        {
+                            "text": "iOS uses a genuine SwiftUI "
+                        },
+                        {
+                            "text": "TextEditor",
+                            "code": true
+                        },
+                        {
+                            "text": " in Apple-native field composition. Android uses Material 3 "
+                        },
+                        {
+                            "text": "OutlinedTextField",
+                            "code": true
+                        },
+                        {
+                            "text": " with "
+                        },
+                        {
+                            "text": "TextFieldValue",
+                            "code": true
+                        },
+                        {
+                            "text": ", multiline line bounds, supporting and error slots, and Compose selection and composition."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -193,8 +803,13 @@
                     "src": "documentation/screenshots/text-area/android-dark.png",
                     "text": "Text Area on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        }
+    ]
 }

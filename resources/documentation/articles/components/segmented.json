@@ -25,8 +25,7 @@
                     "type": "text",
                     "text": "Segmented presents a small set of mutually exclusive choices as a native segmented control."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -41,74 +40,317 @@
                     "language": "blade",
                     "text": "<firstlight:segmented\n    :options=\"$priorityOptions\"\n    native:model=\"priority\"\n    label=\"Priority\"\n    helper=\"Choose a response priority.\"\n    a11y-hint=\"Urgent may be unavailable.\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "options",
-                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "options",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Simple strings, a value-to-label map, or rich option arrays."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string, int, or null\nPurpose: Stable selected value. Its type must match the option values."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Stable selected value. Its type must match the option values."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible field label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting text below the control."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text below the control."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Error text and error semantics."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Error text and error semantics."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Marks the field as required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Marks the field as required."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Disables the complete control."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Disables the complete control."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessibility label when a visible label is inappropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessibility label when a visible label is inappropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the selected stable value. native:model normally generates this callback for property synchronisation. A user selection emits immediately; server reconciliation and programmatic updates do not emit."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the selected stable value. "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally generates this callback for property synchronisation. A user selection emits immediately; server reconciliation and programmatic updates do not emit."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "options-and-accepted-values": {
             "title": "Options and accepted values",
@@ -133,7 +375,32 @@
                 },
                 {
                     "type": "text",
-                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                    "runs": [
+                        {
+                            "text": "Rich options accept only "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ", and optional "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " fields:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -142,23 +409,66 @@
                 },
                 {
                     "type": "text",
-                    "text": "All values in one control must be uniquely typed strings or uniquely typed integers. null represents no selection; an empty string remains a distinct string value."
+                    "runs": [
+                        {
+                            "text": "All values in one control must be uniquely typed strings or uniquely typed integers. "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " represents no selection; an empty string remains a distinct string value."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Segmented is server-authoritative. A tap emits immediately, while PHP's next published value determines the visible selection. Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
-                }
-            ],
-            "links": [
-                {
-                    "label": "server-authoritative",
-                    "url": "../concepts/server-authoritative-state.md"
+                    "runs": [
+                        {
+                            "text": "Segmented is "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 0
+                        },
+                        {
+                            "text": ". A tap emits immediately, while PHP's next published value determines the visible selection. Use plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": "; deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " modes are rejected."
+                        }
+                    ]
                 }
             ]
         },
@@ -167,33 +477,111 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "disabled prevents every choice from emitting. A rich option's disabled: true prevents only that option from emitting. An empty option set becomes an inert disabled control. A disabled or already-selected choice does not emit a new change."
+                    "runs": [
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " prevents every choice from emitting. A rich option's "
+                        },
+                        {
+                            "text": "disabled: true",
+                            "code": true
+                        },
+                        {
+                            "text": " prevents only that option from emitting. An empty option set becomes an inert disabled control. A disabled or already-selected choice does not emit a new change."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. The renderers expose the label or explicit accessibility label, optional hint, selected state, disabled state, required indication, helper text, and error text through native platform semantics."
+                    "runs": [
+                        {
+                            "text": "Provide either a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight warns during development when both are blank. The renderers expose the label or explicit accessibility label, optional hint, selected state, disabled state, required indication, helper text, and error text through native platform semantics."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject mixed or duplicate option values and\nunsupported types before publication. User validation is separate: screens\nthat use ValidatesFields auto-bind the first MessageBag message for the\nfield's native:model or error-for name. An authored error wins.\nrequired is display metadata and does not run Laravel rules. See\nValidate fields. A same-typed value absent\nfrom options remains visibly unselected rather than selecting the first\noption."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject mixed or duplicate option values and unsupported types before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is display metadata and does not run Laravel rules. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": ". A same-typed value absent from "
+                        },
+                        {
+                            "text": "options",
+                            "code": true
+                        },
+                        {
+                            "text": " remains visibly unselected rather than selecting the first option."
+                        }
+                    ]
                 }
             ]
         },
@@ -202,23 +590,52 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a native SwiftUI field backed by UISegmentedControl. Android uses Material 3 SingleChoiceSegmentedButtonRow and SegmentedButton. The controls share behaviour and authored API while retaining platform-native styling, layout, and interaction."
+                    "runs": [
+                        {
+                            "text": "iOS uses a native SwiftUI field backed by "
+                        },
+                        {
+                            "text": "UISegmentedControl",
+                            "code": true
+                        },
+                        {
+                            "text": ". Android uses Material 3 "
+                        },
+                        {
+                            "text": "SingleChoiceSegmentedButtonRow",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "SegmentedButton",
+                            "code": true
+                        },
+                        {
+                            "text": ". The controls share behaviour and authored API while retaining platform-native styling, layout, and interaction."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Segmented supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Segmented supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 2
+                        },
+                        {
+                            "text": " and requires both native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -245,8 +662,21 @@
                     "src": "documentation/screenshots/segmented/android-dark.png",
                     "text": "Segmented on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

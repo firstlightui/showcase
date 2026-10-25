@@ -22,10 +22,20 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Code Editor edits plain-text configuration and code — JSON, YAML, .env\nfiles, and plain text — in a monospaced native text view with line numbers,\nlanguage-aware indentation, and a key row above the software keyboard. It has\nno syntax highlighting."
+                    "runs": [
+                        {
+                            "text": "Code Editor edits plain-text configuration and code — JSON, YAML, "
+                        },
+                        {
+                            "text": ".env",
+                            "code": true
+                        },
+                        {
+                            "text": " files, and plain text — in a monospaced native text view with line numbers, language-aware indentation, and a key row above the software keyboard. It has no syntax highlighting."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -44,122 +54,815 @@
                     "language": "blade",
                     "text": "<firstlight:code-editor\n    label=\"Deployment log\"\n    :read-only=\"true\"\n    :follow=\"true\"\n    :wrap=\"false\"\n    :max-lines=\"24\"\n    :value=\"$log\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string\nPurpose: Published PHP value, sent verbatim; omission defaults to ''."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Published PHP value, sent verbatim; omission defaults to "
+                                },
+                                {
+                                    "text": "''",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "language",
-                    "text": "Accepted type: enum string\nPurpose: plain, json, yaml, or env; defaults to plain. Selects indentation rules and key-row symbols. It never validates or reformats content."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "language",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "enum string"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "plain",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "json",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "yaml",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "env",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; defaults to "
+                                },
+                                {
+                                    "text": "plain",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Selects indentation rules and key-row symbols. It never validates or reformats content."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible label and accessibility-name fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible label and accessibility-name fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting guidance below the field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting guidance below the field."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Validation feedback that replaces helper text."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Communicates required metadata without performing validation."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Communicates required metadata without performing validation."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents focus and editing."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents focus and editing."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "read-only",
-                    "text": "Accepted type: bool\nPurpose: Keeps native selection, copy, and scrolling while preventing edits; hides the key row."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "read-only",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Keeps native selection, copy, and scrolling while preventing edits; hides the key row."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "line-numbers",
-                    "text": "Accepted type: bool\nPurpose: Shows the line-number gutter; defaults to true."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "line-numbers",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows the line-number gutter; defaults to "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "wrap",
-                    "text": "Accepted type: bool\nPurpose: Wraps long lines; defaults to true. false scrolls horizontally."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "wrap",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Wraps long lines; defaults to "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": " scrolls horizontally."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "indent",
-                    "text": "Accepted type: int\nPurpose: 2 or 4 spaces per level; defaults to 2."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "indent",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "2",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "4",
+                                    "code": true
+                                },
+                                {
+                                    "text": " spaces per level; defaults to "
+                                },
+                                {
+                                    "text": "2",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "follow",
-                    "text": "Accepted type: bool\nPurpose: Keeps the view pinned to the end across programmatic updates; defaults to false. Requires read-only."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "follow",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Keeps the view pinned to the end across programmatic updates; defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Requires "
+                                },
+                                {
+                                    "text": "read-only",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "min-lines",
-                    "text": "Accepted type: positive int\nPurpose: Minimum visible lines; defaults to 6."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "min-lines",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "positive "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Minimum visible lines; defaults to "
+                                },
+                                {
+                                    "text": "6",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "max-lines",
-                    "text": "Accepted type: positive int\nPurpose: Maximum visible lines before native scrolling; defaults to 20."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "max-lines",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "positive "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Maximum visible lines before native scrolling; defaults to "
+                                },
+                                {
+                                    "text": "20",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible name when no visible label is appropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver or TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver or TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout for the complete field."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "max-lines must be greater than or equal to min-lines."
+                    "runs": [
+                        {
+                            "text": "max-lines",
+                            "code": true
+                        },
+                        {
+                            "text": " must be greater than or equal to "
+                        },
+                        {
+                            "text": "min-lines",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "NativePHP publishes at most 64 KB of props for one element, so the value must\nstay under about 60 KB of UTF-8. Larger content throws a contract exception\ninstead of reaching the device as an empty editor. For live logs, keep only\nthe newest lines. Public Blade examples\nuse kebab-case. The PHP element also accepts lineNumbers, readOnly,\nminLines, and maxLines aliases."
+                    "runs": [
+                        {
+                            "text": "NativePHP publishes at most 64 KB of props for one element, so the value must stay under about 60 KB of UTF-8. Larger content throws a contract exception instead of reaching the device as an empty editor. For live logs, keep only the newest lines. Public Blade examples use kebab-case. The PHP element also accepts "
+                        },
+                        {
+                            "text": "lineNumbers",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "readOnly",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "minLines",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "maxLines",
+                            "code": true
+                        },
+                        {
+                            "text": " aliases."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Code Editor always turns off autocorrect, autocapitalization, and spell\nchecking, and uses the system monospaced font at the platform's text size.\nplaceholder, autocorrect, autocapitalize, keyboard, content-type,\nicons, secure, @submit, and styling attributes are rejected."
+                    "runs": [
+                        {
+                            "text": "Code Editor always turns off autocorrect, autocapitalization, and spell checking, and uses the system monospaced font at the platform's text size. "
+                        },
+                        {
+                            "text": "placeholder",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "autocorrect",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "autocapitalize",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "keyboard",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "content-type",
+                            "code": true
+                        },
+                        {
+                            "text": ", icons, "
+                        },
+                        {
+                            "text": "secure",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": ", and styling attributes are rejected."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "editing": {
             "title": "Editing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Return keeps the current line's leading spaces or tabs. In json, Return after\nan opening { or [ adds one level, and Return between a bracket pair splits\nit onto three lines. Typing } or ] at the start of a line removes one\nlevel. In yaml, Return after a line ending in : adds one level; comments\nare ignored. env and plain only keep the current indentation."
+                    "runs": [
+                        {
+                            "text": "Return keeps the current line's leading spaces or tabs. In "
+                        },
+                        {
+                            "text": "json",
+                            "code": true
+                        },
+                        {
+                            "text": ", Return after an opening "
+                        },
+                        {
+                            "text": "{",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "[",
+                            "code": true
+                        },
+                        {
+                            "text": " adds one level, and Return between a bracket pair splits it onto three lines. Typing "
+                        },
+                        {
+                            "text": "}",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "]",
+                            "code": true
+                        },
+                        {
+                            "text": " at the start of a line removes one level. In "
+                        },
+                        {
+                            "text": "yaml",
+                            "code": true
+                        },
+                        {
+                            "text": ", Return after a line ending in "
+                        },
+                        {
+                            "text": ":",
+                            "code": true
+                        },
+                        {
+                            "text": " adds one level; comments are ignored. "
+                        },
+                        {
+                            "text": "env",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "plain",
+                            "code": true
+                        },
+                        {
+                            "text": " only keep the current indentation."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Indent and Outdent act on the current line or every selected line. Toggle\ncomment, in yaml and env, adds or removes #  on the current or selected\nlines. Indentation always inserts spaces; existing tabs are kept."
+                    "runs": [
+                        {
+                            "text": "Indent and Outdent act on the current line or every selected line. Toggle comment, in "
+                        },
+                        {
+                            "text": "yaml",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "env",
+                            "code": true
+                        },
+                        {
+                            "text": ", adds or removes "
+                        },
+                        {
+                            "text": "# ",
+                            "code": true
+                        },
+                        {
+                            "text": " on the current or selected lines. Indentation always inserts spaces; existing tabs are kept."
+                        }
+                    ]
                 },
                 {
                     "type": "heading",
@@ -167,37 +870,284 @@
                 },
                 {
                     "type": "text",
-                    "text": "While the field is focused and editable, a key row sits above the software\nkeyboard. It is hidden when a hardware keyboard is attached, where Tab and\nShift-Tab indent and outdent."
+                    "text": "While the field is focused and editable, a key row sits above the software keyboard. It is hidden when a hardware keyboard is attached, where Tab and Shift-Tab indent and outdent."
                 },
                 {
                     "type": "definition",
-                    "label": "json",
-                    "text": "Keys after Indent, Outdent, Undo, Redo: { } [ ] \" : ,"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "json",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Keys after Indent, Outdent, Undo, Redo",
+                            "runs": [
+                                {
+                                    "text": "{",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "}",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "[",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "]",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": ":",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": ",",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "yaml",
-                    "text": "Keys after Indent, Outdent, Undo, Redo: : - # \" ' |, Toggle comment"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "yaml",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Keys after Indent, Outdent, Undo, Redo",
+                            "runs": [
+                                {
+                                    "text": ":",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "-",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "#",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "'",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "|",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", Toggle comment"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "env",
-                    "text": "Keys after Indent, Outdent, Undo, Redo: = # \" $ { } _, Toggle comment"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "env",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Keys after Indent, Outdent, Undo, Redo",
+                            "runs": [
+                                {
+                                    "text": "=",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "#",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "$",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "{",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "}",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "_",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", Toggle comment"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "plain",
-                    "text": "Keys after Indent, Outdent, Undo, Redo: ( ) [ ] { } \" '"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "plain",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Keys after Indent, Outdent, Undo, Redo",
+                            "runs": [
+                                {
+                                    "text": "(",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": ")",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "[",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "]",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "{",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "}",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": " "
+                                },
+                                {
+                                    "text": "'",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Each key press is one undoable edit. Key names and accessible names are\npackage chrome; see Localize Firstlight chrome."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize Firstlight chrome",
-                    "url": "../how-to/localize.md"
+                    "runs": [
+                        {
+                            "text": "Each key press is one undoable edit. Key names and accessible names are package chrome; see "
+                        },
+                        {
+                            "text": "Localize Firstlight chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -206,43 +1156,194 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the complete current string. Plain native:model and\n.live publish while editing. .blur and .lazy publish on focus loss.\n.debounce.500ms publishes after the quiet period and flushes on blur.\nDurations below 50 milliseconds are rejected."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the complete current string. Plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".live",
+                            "code": true
+                        },
+                        {
+                            "text": " publish while editing. "
+                        },
+                        {
+                            "text": ".blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".lazy",
+                            "code": true
+                        },
+                        {
+                            "text": " publish on focus loss. "
+                        },
+                        {
+                            "text": ".debounce.500ms",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes after the quiet period and flushes on blur. Durations below 50 milliseconds are rejected."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "While the field is focused, the native buffer, cursor, selection, IME\ncomposition, scroll position, and undo history stay local. PHP\nacknowledgements do not replace them. Unfocused programmatic updates replace\nthe text, clear undo history, and never emit @change."
+                    "runs": [
+                        {
+                            "text": "While the field is focused, the native buffer, cursor, selection, IME composition, scroll position, and undo history stay local. PHP acknowledgements do not replace them. Unfocused programmatic updates replace the text, clear undo history, and never emit "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "heading",
-                    "text": "Scroll position and follow"
+                    "runs": [
+                        {
+                            "text": "Scroll position and "
+                        },
+                        {
+                            "text": "follow",
+                            "code": true
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "A programmatic update never jumps to the top. The first visible line stays in\nplace when lines are appended or removed from the start, and otherwise the\nprevious scroll offset is kept."
+                    "text": "A programmatic update never jumps to the top. The first visible line stays in place when lines are appended or removed from the start, and otherwise the previous scroll offset is kept."
                 },
                 {
                     "type": "text",
-                    "text": "With follow, the view starts at the end and stays there across updates while\nit is within one line of the end, including when PHP trims the start of the\ncontent. Scrolling up stops following; scrolling back to the end resumes it.\nWhile a person holds a selection in a read-only editor, updates wait until the\nselection collapses so copying is never interrupted. Updates are not announced\nto VoiceOver or TalkBack."
+                    "runs": [
+                        {
+                            "text": "With "
+                        },
+                        {
+                            "text": "follow",
+                            "code": true
+                        },
+                        {
+                            "text": ", the view starts at the end and stays there across updates while it is within one line of the end, including when PHP trims the start of the content. Scrolling up stops following; scrolling back to the end resumes it. While a person holds a selection in a read-only editor, updates wait until the selection collapses so copying is never interrupted. Updates are not announced to VoiceOver or TalkBack."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-accessibility": {
             "title": "Validation and accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions reject invalid types, unknown languages, indents other\nthan 2 or 4, unordered line bounds, follow without read-only, and\nunsupported sync modes before publication. Screens that use ValidatesFields\nauto-bind the first MessageBag message for the field's native:model or\nerror-for name; an authored error wins. See\nValidate fields."
+                    "runs": [
+                        {
+                            "text": "Contract exceptions reject invalid types, unknown languages, indents other than "
+                        },
+                        {
+                            "text": "2",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "4",
+                            "code": true
+                        },
+                        {
+                            "text": ", unordered line bounds, "
+                        },
+                        {
+                            "text": "follow",
+                            "code": true
+                        },
+                        {
+                            "text": " without "
+                        },
+                        {
+                            "text": "read-only",
+                            "code": true
+                        },
+                        {
+                            "text": ", and unsupported sync modes before publication. Screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name; an authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "A visible label or explicit a11y-label is required during development.\nLine numbers are hidden from assistive technology, so validation messages\nshould quote the offending key or content rather than only a line number.\nEvery key-row key has an accessible name and meets the 44 pt / 48 dp target.\nCode text stays left-to-right in right-to-left layouts."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "A visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is required during development. Line numbers are hidden from assistive technology, so validation messages should quote the offending key or content rather than only a line number. Every key-row key has an accessible name and meets the 44 pt / 48 dp target. Code text stays left-to-right in right-to-left layouts."
+                        }
+                    ]
                 }
             ]
         },
@@ -251,20 +1352,51 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": ".env content often contains secrets. Code Editor is not a secure field: it\ndoes not mask values, block screenshots, or guarantee that keyboards skip\nlearning what is typed. Decide whether editing secrets on the device is\nacceptable for your application."
+                    "runs": [
+                        {
+                            "text": ".env",
+                            "code": true
+                        },
+                        {
+                            "text": " content often contains secrets. Code Editor is not a secure field: it does not mask values, block screenshots, or guarantee that keyboards skip learning what is typed. Decide whether editing secrets on the device is acceptable for your application."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a TextKit 2 UITextView in Apple-native field composition, with a\nline-number gutter, an input-accessory key row with a Done button, and the\ntext view's own undo manager. Android uses Compose BasicTextField on\nTextFieldState inside Material 3 outlined decoration, with a line-number\ngutter, a Material key row above the keyboard, and the text field's undo\nhistory. Both platforms run the same indentation and scroll-anchor rules,\nchecked against shared test fixtures."
+                    "runs": [
+                        {
+                            "text": "iOS uses a TextKit 2 "
+                        },
+                        {
+                            "text": "UITextView",
+                            "code": true
+                        },
+                        {
+                            "text": " in Apple-native field composition, with a line-number gutter, an input-accessory key row with a Done button, and the text view's own undo manager. Android uses Compose "
+                        },
+                        {
+                            "text": "BasicTextField",
+                            "code": true
+                        },
+                        {
+                            "text": " on "
+                        },
+                        {
+                            "text": "TextFieldState",
+                            "code": true
+                        },
+                        {
+                            "text": " inside Material 3 outlined decoration, with a line-number gutter, a Material key row above the keyboard, and the text field's undo history. Both platforms run the same indentation and scroll-anchor rules, checked against shared test fixtures."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -289,8 +1421,17 @@
                     "src": "documentation/screenshots/code-editor/android-dark.png",
                     "text": "Code Editor on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Localize Firstlight chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        }
+    ]
 }

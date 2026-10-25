@@ -18,33 +18,60 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "This recipe builds the index screen most apps need: a search field above a\nlist of records, with pull-to-refresh, infinite scrolling, a tap that opens\nthe record, and a swipe action that deletes it after native confirmation."
+                    "text": "This recipe builds the index screen most apps need: a search field above a list of records, with pull-to-refresh, infinite scrolling, a tap that opens the record, and a swipe action that deletes it after native confirmation."
                 },
                 {
                     "type": "text",
-                    "text": "This recipe runs unchanged in the\nshowcase app, where\nSearchableListRecipeTest\nexercises it."
+                    "runs": [
+                        {
+                            "text": "This recipe runs unchanged in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "SearchableListRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use it when a screen shows many records of one model and the user needs to\nfind, open, or remove one. Use List without search for\nshort, fixed collections, and a settings layout when rows change preferences\ninstead of opening records."
+                    "runs": [
+                        {
+                            "text": "Use it when a screen shows many records of one model and the user needs to find, open, or remove one. Use "
+                        },
+                        {
+                            "text": "List",
+                            "link": 2
+                        },
+                        {
+                            "text": " without search for short, fixed collections, and a settings layout when rows change preferences instead of opening records."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Every piece is an existing Firstlight tag or NativeComponent helper. There is\nno list-screen tag to learn."
-                }
-            ],
-            "links": [
-                {
-                    "label": "showcase app",
-                    "url": "https://github.com/firstlightui/showcase"
-                },
-                {
-                    "label": "SearchableListRecipeTest",
-                    "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/SearchableListRecipeTest.php"
-                },
-                {
-                    "label": "List",
-                    "url": "../components/list.md"
+                    "runs": [
+                        {
+                            "text": "Every piece is an existing Firstlight tag or "
+                        },
+                        {
+                            "text": "NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " helper. There is no list-screen tag to learn."
+                        }
+                    ]
                 }
             ]
         },
@@ -58,13 +85,22 @@
                 },
                 {
                     "type": "text",
-                    "text": "AppLayout gives the screen a native title bar and back navigation. It is\ndefined in Build a list and detail flow."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Build a list and detail flow",
-                    "url": "build-a-list-detail-flow.md"
+                    "runs": [
+                        {
+                            "text": "AppLayout",
+                            "code": true
+                        },
+                        {
+                            "text": " gives the screen a native title bar and back navigation. It is defined in "
+                        },
+                        {
+                            "text": "Build a list and detail flow",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -73,7 +109,39 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Extend FirstlightUI\\NativeComponent. It already includes\nPaginatesLists, DestroysListItems,\nand AuthorizesActions."
+                    "runs": [
+                        {
+                            "text": "Extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": ". It already includes "
+                        },
+                        {
+                            "text": "PaginatesLists",
+                            "link": 4
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "DestroysListItems",
+                            "link": 5
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "AuthorizesActions",
+                            "link": 6
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -82,21 +150,29 @@
                 },
                 {
                     "type": "text",
-                    "text": "updatedQuery() runs whenever PHP accepts a new query, so the list restarts\nfrom page one for each search. Keys passed to openPost() and\nrequestDeletion() are model ids, never loop positions."
-                }
-            ],
-            "links": [
-                {
-                    "label": "PaginatesLists",
-                    "url": "paginate-lists.md"
-                },
-                {
-                    "label": "DestroysListItems",
-                    "url": "destroy-list-items.md"
-                },
-                {
-                    "label": "AuthorizesActions",
-                    "url": "authorize-actions.md"
+                    "runs": [
+                        {
+                            "text": "updatedQuery()",
+                            "code": true
+                        },
+                        {
+                            "text": " runs whenever PHP accepts a new query, so the list restarts from page one for each search. Keys passed to "
+                        },
+                        {
+                            "text": "openPost()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "requestDeletion()",
+                            "code": true
+                        },
+                        {
+                            "text": " are model ids, never loop positions."
+                        }
+                    ]
                 }
             ]
         },
@@ -105,75 +181,208 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Save this as resources/views/native/posts.blade.php:"
+                    "runs": [
+                        {
+                            "text": "Save this as "
+                        },
+                        {
+                            "text": "resources/views/native/posts.blade.php",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
                     "language": "blade",
                     "text": "<native:column class=\"w-full flex-1\">\n    <firstlight:search-field\n        placeholder=\"Search posts\"\n        a11y-label=\"Search posts\"\n        native:model.debounce.300ms=\"query\"\n        class=\"mx-4 my-2\"\n    />\n\n    @if (count($listItems) === 0)\n        <firstlight:status-label\n            label=\"{{ $query === '' ? 'No posts yet' : 'No matching posts' }}\"\n            tone=\"neutral\"\n            class=\"mx-4\"\n        />\n    @endif\n\n    <firstlight:list separator @refresh=\"reload\" @endReached=\"loadMore\" class=\"flex-1\">\n        @foreach ($listItems as $post)\n            <firstlight:list-item\n                :headline=\"$post->title\"\n                :supporting=\"$post->excerpt\"\n                trailing-icon=\"chevron-right\"\n                trailing-icon-ios=\"chevron.right\"\n                trailing-icon-android=\"chevron_right\"\n                @press=\"openPost({{ $post->id }})\"\n                :trailing-actions=\"[\n                    ['method' => 'requestDeletion('.$post->id.')', 'label' => 'Delete', 'role' => 'destructive'],\n                ]\"\n            />\n        @endforeach\n    </firstlight:list>\n\n    <firstlight:confirmation-dialog\n        :visible=\"$confirmingListDestruction\"\n        title=\"Delete post?\"\n        message=\"This action cannot be undone.\"\n        confirm-label=\"Delete\"\n        cancel-label=\"Keep post\"\n        tone=\"destructive\"\n        @press=\"deletePost\"\n        @dismiss=\"cancelDeletion\"\n    />\n</native:column>"
                 }
-            ],
-            "links": []
+            ]
         },
         "what-each-platform-shows": {
             "title": "What each platform shows",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "Search",
-                    "text": "iOS: UISearchTextField with the system clear button\nAndroid: Material 3 search field with the search IME action"
+                    "term": {
+                        "text": "Search"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "runs": [
+                                {
+                                    "text": "UISearchTextField",
+                                    "code": true
+                                },
+                                {
+                                    "text": " with the system clear button"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Material 3 search field with the search IME action"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Rows",
-                    "text": "iOS: SwiftUI List rows with dividers\nAndroid: LazyColumn Material list items with dividers"
+                    "term": {
+                        "text": "Rows"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "runs": [
+                                {
+                                    "text": "SwiftUI "
+                                },
+                                {
+                                    "text": "List",
+                                    "code": true
+                                },
+                                {
+                                    "text": " rows with dividers"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Android",
+                            "runs": [
+                                {
+                                    "text": "LazyColumn",
+                                    "code": true
+                                },
+                                {
+                                    "text": " Material list items with dividers"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Refresh",
-                    "text": "iOS: System pull-to-refresh\nAndroid: Material pull-to-refresh"
+                    "term": {
+                        "text": "Refresh"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "System pull-to-refresh"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Material pull-to-refresh"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Delete",
-                    "text": "iOS: Trailing swipe action, then a native confirmation dialog\nAndroid: Trailing swipe action, then a native confirmation dialog"
+                    "term": {
+                        "text": "Delete"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Trailing swipe action, then a native confirmation dialog"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Trailing swipe action, then a native confirmation dialog"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Feedback",
-                    "text": "iOS: \"Post deleted\" through Transient Feedback\nAndroid: \"Post deleted\" through Transient Feedback"
+                    "term": {
+                        "text": "Feedback"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "\"Post deleted\" through Transient Feedback"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "\"Post deleted\" through Transient Feedback"
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The same Blade works on both platforms. Swipe actions are also exposed as\nVoiceOver and TalkBack actions, so screen-reader users can delete without a\nswipe gesture."
+                    "text": "The same Blade works on both platforms. Swipe actions are also exposed as VoiceOver and TalkBack actions, so screen-reader users can delete without a swipe gesture."
                 }
-            ],
-            "links": []
+            ]
         },
         "rules-to-keep": {
             "title": "Rules to keep",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Keep @endReached bound even on the last page; extra events are ignored."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Keep "
+                        },
+                        {
+                            "text": "@endReached",
+                            "code": true
+                        },
+                        {
+                            "text": " bound even on the last page; extra events are ignored."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Do not omit the Delete action for rows the Policy denies. Disable the row\nwith :disabled instead, as described in Authorize actions."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Do not omit the Delete action for rows the Policy denies. Disable the row with "
+                        },
+                        {
+                            "text": ":disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " instead, as described in "
+                        },
+                        {
+                            "text": "Authorize actions",
+                            "link": 7
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Full swipes never delete. The swipe only opens the confirmation dialog, and\nPHP authorizes again before deleting."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Full swipes never delete. The swipe only opens the confirmation dialog, and PHP authorizes again before deleting."
                 },
                 {
-                    "type": "text",
-                    "text": "• Use native:model.debounce.300ms for search so each keystroke does not\nquery the database."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Authorize actions",
-                    "url": "authorize-actions.md"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "native:model.debounce.300ms",
+                            "code": true
+                        },
+                        {
+                            "text": " for search so each keystroke does not query the database."
+                        }
+                    ]
                 }
             ]
         },
@@ -181,24 +390,121 @@
             "title": "Adapt the recipe",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• No deletion: remove trailing-actions, the dialog, and the three\ndeletion methods."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "No deletion:",
+                            "strong": true
+                        },
+                        {
+                            "text": " remove "
+                        },
+                        {
+                            "text": "trailing-actions",
+                            "code": true
+                        },
+                        {
+                            "text": ", the dialog, and the three deletion methods."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Cursor pagination: pass $page->cursor to cursorPaginate(), as shown\nin Paginate lists."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Cursor pagination:",
+                            "strong": true
+                        },
+                        {
+                            "text": " pass "
+                        },
+                        {
+                            "text": "$page->cursor",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "cursorPaginate()",
+                            "code": true
+                        },
+                        {
+                            "text": ", as shown in "
+                        },
+                        {
+                            "text": "Paginate lists",
+                            "link": 8
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Search on submit instead of while typing: bind native:model.lazy=\"query\"."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Paginate lists",
-                    "url": "paginate-lists.md#cursor-pagination"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Search on submit instead of while typing:",
+                            "strong": true
+                        },
+                        {
+                            "text": " bind "
+                        },
+                        {
+                            "text": "native:model.lazy=\"query\"",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "SearchableListRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/SearchableListRecipeTest.php"
+        },
+        {
+            "label": "List",
+            "url": "../components/list.md"
+        },
+        {
+            "label": "Build a list and detail flow",
+            "url": "build-a-list-detail-flow.md"
+        },
+        {
+            "label": "PaginatesLists",
+            "url": "paginate-lists.md"
+        },
+        {
+            "label": "DestroysListItems",
+            "url": "destroy-list-items.md"
+        },
+        {
+            "label": "AuthorizesActions",
+            "url": "authorize-actions.md"
+        },
+        {
+            "label": "Authorize actions",
+            "url": "authorize-actions.md"
+        },
+        {
+            "label": "Paginate lists",
+            "url": "paginate-lists.md#cursor-pagination"
+        }
+    ]
 }

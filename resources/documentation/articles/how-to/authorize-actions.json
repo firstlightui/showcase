@@ -14,7 +14,25 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Extend FirstlightUI\\NativeComponent (or use AuthorizesActions) so a screen\ncan evaluate the current Laravel Gate or Policy before publishing or performing\nan action:"
+                    "runs": [
+                        {
+                            "text": "Extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " (or "
+                        },
+                        {
+                            "text": "use AuthorizesActions",
+                            "code": true
+                        },
+                        {
+                            "text": ") so a screen can evaluate the current Laravel Gate or Policy before publishing or performing an action:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -23,10 +41,45 @@
                 },
                 {
                     "type": "text",
-                    "text": "allows() and denies() return booleans. authorize() also returns a\nboolean; unlike Laravel's throwing Gate method, a denial publishes danger\nFeedback with This action is unauthorized. and returns false. Keep the\nguard at the start of every PHP action, even when the published control is\nalready hidden or disabled, because authorization can change after a frame is\npublished."
+                    "runs": [
+                        {
+                            "text": "allows()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "denies()",
+                            "code": true
+                        },
+                        {
+                            "text": " return booleans. "
+                        },
+                        {
+                            "text": "authorize()",
+                            "code": true
+                        },
+                        {
+                            "text": " also returns a boolean; unlike Laravel's throwing Gate method, a denial publishes danger Feedback with "
+                        },
+                        {
+                            "text": "This action is unauthorized.",
+                            "code": true
+                        },
+                        {
+                            "text": " and returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". Keep the guard at the start of every PHP action, even when the published control is already hidden or disabled, because authorization can change after a frame is published."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "choose-hide-or-disable": {
             "title": "Choose hide or disable",
@@ -42,7 +95,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Disable an action when preserving its location helps explain the available\nworkflow:"
+                    "text": "Disable an action when preserving its location helps explain the available workflow:"
                 },
                 {
                     "type": "code",
@@ -51,17 +104,34 @@
                 },
                 {
                     "type": "text",
-                    "text": "Button, Icon Button, and List Item all accept the existing disabled prop.\nFirstlight does not add a can attribute or evaluate authorization in a\nnative renderer."
+                    "runs": [
+                        {
+                            "text": "Button, Icon Button, and List Item all accept the existing "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " prop. Firstlight does not add a "
+                        },
+                        {
+                            "text": "can",
+                            "code": true
+                        },
+                        {
+                            "text": " attribute or evaluate authorization in a native renderer."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "keep-destructive-actions-visible": {
             "title": "Keep destructive actions visible",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Never silently omit a destructive action. Keep the Button, Icon Button, or\nList Item visible and disable it when denied. Supporting copy should explain\nwhy the action is unavailable when the surrounding interface does not make\nthat clear."
+                    "text": "Never silently omit a destructive action. Keep the Button, Icon Button, or List Item visible and disable it when denied. Supporting copy should explain why the action is unavailable when the surrounding interface does not make that clear."
                 },
                 {
                     "type": "code",
@@ -70,7 +140,32 @@
                 },
                 {
                     "type": "text",
-                    "text": "Confirmation Dialog has no disabled or loading prop. Authorize before\nsetting its visible state, and authorize again when confirmation arrives:"
+                    "runs": [
+                        {
+                            "text": "Confirmation Dialog has no "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": " prop. Authorize before setting its "
+                        },
+                        {
+                            "text": "visible",
+                            "code": true
+                        },
+                        {
+                            "text": " state, and authorize again when confirmation arrives:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -84,19 +179,55 @@
                 },
                 {
                     "type": "text",
-                    "text": "The denied request does not open the dialog, and authorize() supplies danger\nFeedback instead of allowing an uncaught AuthorizationException to reach\nNativePHP's error overlay."
+                    "runs": [
+                        {
+                            "text": "The denied request does not open the dialog, and "
+                        },
+                        {
+                            "text": "authorize()",
+                            "code": true
+                        },
+                        {
+                            "text": " supplies danger Feedback instead of allowing an uncaught "
+                        },
+                        {
+                            "text": "AuthorizationException",
+                            "code": true
+                        },
+                        {
+                            "text": " to reach NativePHP's error overlay."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "For deleting rows from an accumulated $listItems collection by stable key,\nuse Destroy list items."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Destroy list items",
-                    "url": "destroy-list-items.md"
+                    "runs": [
+                        {
+                            "text": "For deleting rows from an accumulated "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " collection by stable key, use "
+                        },
+                        {
+                            "text": "Destroy list items",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Destroy list items",
+            "url": "destroy-list-items.md"
+        }
+    ]
 }

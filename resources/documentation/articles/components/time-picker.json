@@ -15,7 +15,25 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Time Picker chooses an optional wall-clock time using the platform's native\ntime control. The model value is always exact 24-hour HH:mm or null, even\nwhen the platform displays a localized 12-hour clock."
+                    "runs": [
+                        {
+                            "text": "Time Picker chooses an optional wall-clock time using the platform's native time control. The model value is always exact 24-hour "
+                        },
+                        {
+                            "text": "HH:mm",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": ", even when the platform displays a localized 12-hour clock."
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -24,51 +42,213 @@
                 },
                 {
                     "type": "text",
-                    "text": "The user edits a temporary native draft. Cancel discards it and Confirm sends\n@change; the closed trigger continues to show the server-accepted value\nuntil PHP republishes the tree."
+                    "runs": [
+                        {
+                            "text": "The user edits a temporary native draft. Cancel discards it and Confirm sends "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": "; the closed trigger continues to show the server-accepted value until PHP republishes the tree."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "values-and-props": {
             "title": "Values and props",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• value / native:model: exact HH:mm or null."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": " / "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ": exact "
+                        },
+                        {
+                            "text": "HH:mm",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "placeholder",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "helper",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": ": field copy."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ": field state."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "locale",
+                            "code": true
+                        },
+                        {
+                            "text": ": BCP-47 tag used only for display. Omission inherits the application translator locale."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "timezone",
+                            "code": true
+                        },
+                        {
+                            "text": ": IANA identifier used only to seed a null draft with the current local minute. Omission inherits "
+                        },
+                        {
+                            "text": "config('app.timezone')",
+                            "code": true
+                        },
+                        {
+                            "text": " when it is a valid IANA identifier."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": ": explicit accessibility copy."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "class",
+                            "code": true
+                        },
+                        {
+                            "text": ": external EDGE layout."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• label, placeholder, helper, and error: field copy."
-                },
-                {
-                    "type": "text",
-                    "text": "• required and disabled: field state."
-                },
-                {
-                    "type": "text",
-                    "text": "• locale: BCP-47 tag used only for display. Omission inherits the\napplication translator locale."
-                },
-                {
-                    "type": "text",
-                    "text": "• timezone: IANA identifier used only to seed a null draft with the current\nlocal minute. Omission inherits config('app.timezone') when it is a valid\nIANA identifier."
-                },
-                {
-                    "type": "text",
-                    "text": "• a11y-label and a11y-hint: explicit accessibility copy."
-                },
-                {
-                    "type": "text",
-                    "text": "• class: external EDGE layout."
-                },
-                {
-                    "type": "text",
-                    "text": "Use plain native:model or native:model.live. Time Picker commits only on\nconfirmation, so blur, lazy, and debounce modes are rejected. It deliberately\ndoes not expose min/max, seconds, steps, ranges, hour-format overrides,\npresentation styles, clear affordances, read-only state, icons, or colours.\nSheet Confirm and Cancel labels are package chrome, not Blade attributes; see\nLocalize chrome."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
+                    "runs": [
+                        {
+                            "text": "Use plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": ". Time Picker commits only on confirmation, so blur, lazy, and debounce modes are rejected. It deliberately does not expose min/max, seconds, steps, ranges, hour-format overrides, presentation styles, clear affordances, read-only state, icons, or colours. Sheet Confirm and Cancel labels are package chrome, not Blade attributes; see "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -77,17 +257,75 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject coerced or non-canonical time strings before\npublication. User validation is separate: screens that use ValidatesFields\nauto-bind the first MessageBag message for the field's native:model or\nerror-for name. An authored error wins. required is display metadata\nand does not run Laravel rules. See\nValidate fields."
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject coerced or non-canonical time strings before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is display metadata and does not run Laravel rules. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Always provide either a visible label or a11y-label. Errors replace helper\ntext visually and are announced by platform semantics. The native presentation\nretains standard VoiceOver or TalkBack traversal and Cancel/Confirm actions."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Always provide either a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Errors replace helper text visually and are announced by platform semantics. The native presentation retains standard VoiceOver or TalkBack traversal and Cancel/Confirm actions."
+                        }
+                    ]
                 }
             ]
         },
@@ -114,8 +352,17 @@
                     "src": "documentation/screenshots/time-picker/android-dark.png",
                     "text": "Time Picker on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        }
+    ]
 }

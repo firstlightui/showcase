@@ -19,144 +19,634 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "FirstlightUI\\Testing\\ScreenAssertions::register() adds the methods below to\nNativePHP's Native\\Mobile\\Testing\\TestableComponent, the object returned by\nNative::test() and Native::visit(). They read the most recently published\nElement Tree. Interactions send the event type and callback id that the\nFirstlight iOS and Android renderers send, then re-render the screen as the\nharness does after tap() or input()."
+                    "runs": [
+                        {
+                            "text": "FirstlightUI\\Testing\\ScreenAssertions::register()",
+                            "code": true
+                        },
+                        {
+                            "text": " adds the methods below to NativePHP's "
+                        },
+                        {
+                            "text": "Native\\Mobile\\Testing\\TestableComponent",
+                            "code": true
+                        },
+                        {
+                            "text": ", the object returned by "
+                        },
+                        {
+                            "text": "Native::test()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": ". They read the most recently published Element Tree. Interactions send the event type and callback id that the Firstlight iOS and Android renderers send, then re-render the screen as the harness does after "
+                        },
+                        {
+                            "text": "tap()",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "input()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "NativePHP's own methods are unchanged and work on Firstlight controls. These\ninclude input(), tap(), toggle(), check(), set(), assertSee(),\nassertSet(), and assertElement(). For example, input('email', ...) types\ninto a Text Field bound with native:model=\"email\"."
+                    "runs": [
+                        {
+                            "text": "NativePHP's own methods are unchanged and work on Firstlight controls. These include "
+                        },
+                        {
+                            "text": "input()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "tap()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "toggle()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "check()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "set()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "assertSee()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "assertSet()",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "assertElement()",
+                            "code": true
+                        },
+                        {
+                            "text": ". For example, "
+                        },
+                        {
+                            "text": "input('email', ...)",
+                            "code": true
+                        },
+                        {
+                            "text": " types into a Text Field bound with "
+                        },
+                        {
+                            "text": "native:model=\"email\"",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "targets": {
             "title": "Targets",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "A field target is either an element ref or the property name in the\nelement's native:model binding. A List row is identified by its exact\nheadline."
+                    "runs": [
+                        {
+                            "text": "A field target is either an element "
+                        },
+                        {
+                            "text": "ref",
+                            "code": true
+                        },
+                        {
+                            "text": " or the property name in the element's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " binding. A List row is identified by its exact "
+                        },
+                        {
+                            "text": "headline",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "fields-and-validation": {
             "title": "Fields and validation",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "field($target)",
-                    "text": "Contract: Returns the wire node for the target, or fails."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "field($target)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "Returns the wire node for the target, or fails."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertFieldError($target, $message = null)",
-                    "text": "Contract: The field's published error is not empty and, when given, equals $message."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertFieldError($target, $message = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "The field's published "
+                                },
+                                {
+                                    "text": "error",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is not empty and, when given, equals "
+                                },
+                                {
+                                    "text": "$message",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertNoFieldError($target)",
-                    "text": "Contract: The field's published error is empty."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertNoFieldError($target)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "The field's published "
+                                },
+                                {
+                                    "text": "error",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is empty."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertHasErrors($keys)",
-                    "text": "Contract: The screen's ValidatesFields MessageBag has each key. ['email' => 'message'] also requires that message."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertHasErrors($keys)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "The screen's "
+                                },
+                                {
+                                    "text": "ValidatesFields",
+                                    "code": true
+                                },
+                                {
+                                    "text": " MessageBag has each key. "
+                                },
+                                {
+                                    "text": "['email' => 'message']",
+                                    "code": true
+                                },
+                                {
+                                    "text": " also requires that message."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertHasNoErrors($keys = null)",
-                    "text": "Contract: The bag is empty, or has none of the given keys."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertHasNoErrors($keys = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "The bag is empty, or has none of the given keys."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "choose($target, $value)",
-                    "text": "Contract: Chooses the option whose stable value equals $value (compared as a string) in a Select, Segmented, Pill Group, or Choice Group. Fails when no option has that value, or the option is disabled or cannot be chosen. A Select option that is already selected cannot be chosen."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "choose($target, $value)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Chooses the option whose stable value equals "
+                                },
+                                {
+                                    "text": "$value",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (compared as a string) in a Select, Segmented, Pill Group, or Choice Group. Fails when no option has that value, or the option is disabled or cannot be chosen. A Select option that is already selected cannot be chosen."
+                                }
+                            ]
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "lists": {
             "title": "Lists",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "listItem($headline)",
-                    "text": "Contract: Returns the first List Item node with that headline, or fails and lists the headlines."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "listItem($headline)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "Returns the first List Item node with that headline, or fails and lists the headlines."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertListItem($headline, $matcher = null)",
-                    "text": "Contract: A row exists. $matcher receives the wire node and must return true."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertListItem($headline, $matcher = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "A row exists. "
+                                },
+                                {
+                                    "text": "$matcher",
+                                    "code": true
+                                },
+                                {
+                                    "text": " receives the wire node and must return "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertMissingListItem($headline)",
-                    "text": "Contract: No row has that headline."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertMissingListItem($headline)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "No row has that headline."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertListItemCount($count)",
-                    "text": "Contract: The tree contains exactly $count List Item rows."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertListItemCount($count)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "The tree contains exactly "
+                                },
+                                {
+                                    "text": "$count",
+                                    "code": true
+                                },
+                                {
+                                    "text": " List Item rows."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "pressListItem($headline, $action = null)",
-                    "text": "Contract: Presses the row, or the leading or trailing swipe action with the label $action. Fails for a disabled row."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "pressListItem($headline, $action = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Presses the row, or the leading or trailing swipe action with the label "
+                                },
+                                {
+                                    "text": "$action",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Fails for a disabled row."
+                                }
+                            ]
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "confirmation-dialog": {
             "title": "Confirmation Dialog",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "assertConfirmationDialog($title = null)",
-                    "text": "Contract: A Confirmation Dialog is visible, optionally with that title."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertConfirmationDialog($title = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "A Confirmation Dialog is visible, optionally with that title."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertNoConfirmationDialog()",
-                    "text": "Contract: No Confirmation Dialog is visible."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertNoConfirmationDialog()",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "No Confirmation Dialog is visible."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "confirmDialog($title = null)",
-                    "text": "Contract: Sends the visible dialog's @press."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "confirmDialog($title = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Sends the visible dialog's "
+                                },
+                                {
+                                    "text": "@press",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "cancelDialog($title = null)",
-                    "text": "Contract: Sends the visible dialog's @dismiss."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "cancelDialog($title = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Sends the visible dialog's "
+                                },
+                                {
+                                    "text": "@dismiss",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "feedback": {
             "title": "Feedback",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Call FirstlightUI\\Facades\\Feedback::fake() before the screen sends Feedback."
+                    "runs": [
+                        {
+                            "text": "Call "
+                        },
+                        {
+                            "text": "FirstlightUI\\Facades\\Feedback::fake()",
+                            "code": true
+                        },
+                        {
+                            "text": " before the screen sends Feedback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertFeedbackSent($message, $tone = null)",
-                    "text": "Contract: Feedback with that message, and optionally that FeedbackTone, was sent."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertFeedbackSent($message, $tone = null)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Feedback with that message, and optionally that "
+                                },
+                                {
+                                    "text": "FeedbackTone",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", was sent."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "assertNoFeedbackSent()",
-                    "text": "Contract: No Feedback was sent."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "assertNoFeedbackSent()",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "No Feedback was sent."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "pest-expectations": {
             "title": "Pest expectations",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "register() also adds two expectations when Pest is loaded:"
+                    "runs": [
+                        {
+                            "text": "register()",
+                            "code": true
+                        },
+                        {
+                            "text": " also adds two expectations when Pest is loaded:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -165,10 +655,20 @@
                 },
                 {
                     "type": "text",
-                    "text": "They pair with NativePHP's Native\\Mobile\\Testing\\PestExpectations."
+                    "runs": [
+                        {
+                            "text": "They pair with NativePHP's "
+                        },
+                        {
+                            "text": "Native\\Mobile\\Testing\\PestExpectations",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "makefirstlight-screen": {
             "title": "make:firstlight-screen",
@@ -180,40 +680,293 @@
                 },
                 {
                     "type": "definition",
-                    "label": "none",
-                    "text": "Generates: App\\NativeComponents\\{name} extending FirstlightUI\\NativeComponent, with render() returning native.{kebab-name}, and a Blade view with a title."
+                    "term": {
+                        "text": "none"
+                    },
+                    "items": [
+                        {
+                            "label": "Generates",
+                            "runs": [
+                                {
+                                    "text": "App\\NativeComponents\\{name}",
+                                    "code": true
+                                },
+                                {
+                                    "text": " extending "
+                                },
+                                {
+                                    "text": "FirstlightUI\\NativeComponent",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", with "
+                                },
+                                {
+                                    "text": "render()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " returning "
+                                },
+                                {
+                                    "text": "native.{kebab-name}",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", and a Blade view with a title."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "--form",
-                    "text": "Generates: A required name property, $rules, save() calling submit(), a Text Field bound with native:model, and a Save Button with :loading=\"$submitting\"."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--form",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Generates",
+                            "runs": [
+                                {
+                                    "text": "A required "
+                                },
+                                {
+                                    "text": "name",
+                                    "code": true
+                                },
+                                {
+                                    "text": " property, "
+                                },
+                                {
+                                    "text": "$rules",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "save()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " calling "
+                                },
+                                {
+                                    "text": "submit()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", a Text Field bound with "
+                                },
+                                {
+                                    "text": "native:model",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", and a Save Button with "
+                                },
+                                {
+                                    "text": ":loading=\"$submitting\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "--list",
-                    "text": "Generates: mount(), reload(), loadMore(), open(), and a listQuery() stub. A List bound to @refresh and @endReached renders $this->listItems."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--list",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Generates",
+                            "runs": [
+                                {
+                                    "text": "mount()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "reload()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "loadMore()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "open()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", and a "
+                                },
+                                {
+                                    "text": "listQuery()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " stub. A List bound to "
+                                },
+                                {
+                                    "text": "@refresh",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "@endReached",
+                                    "code": true
+                                },
+                                {
+                                    "text": " renders "
+                                },
+                                {
+                                    "text": "$this->listItems",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "--destroy",
-                    "text": "Generates: Includes --list. Adds requestDeletion(), cancelDeletion(), and deleteItem(); rows disabled by denies('delete', $item); a Delete swipe action; and a destructive Confirmation Dialog."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--destroy",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Generates",
+                            "runs": [
+                                {
+                                    "text": "Includes "
+                                },
+                                {
+                                    "text": "--list",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Adds "
+                                },
+                                {
+                                    "text": "requestDeletion()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "cancelDeletion()",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", and "
+                                },
+                                {
+                                    "text": "deleteItem()",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; rows disabled by "
+                                },
+                                {
+                                    "text": "denies('delete', $item)",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; a Delete swipe action; and a destructive Confirmation Dialog."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "--test",
-                    "text": "Generates: tests/Feature/NativeComponents/{name}Test.php that uses Native::test() and these assertions."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--test",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Generates",
+                            "runs": [
+                                {
+                                    "text": "tests/Feature/NativeComponents/{name}Test.php",
+                                    "code": true
+                                },
+                                {
+                                    "text": " that uses "
+                                },
+                                {
+                                    "text": "Native::test()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and these assertions."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "--force",
-                    "text": "Generates: Overwrites existing files. Without it the command fails and writes nothing if any target exists."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--force",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Generates",
+                            "text": "Overwrites existing files. Without it the command fails and writes nothing if any target exists."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "The command is registered only when the application runs in the console."
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": []
 }

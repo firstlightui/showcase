@@ -17,51 +17,102 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Accessibility is a headline feature of Firstlight, and it starts with one\ndecision: every control is a real SwiftUI or Jetpack Compose control, not a\ndrawing that imitates one. VoiceOver, TalkBack, Dynamic Type, Android font\nscaling, dark appearance, Increased Contrast, Reduce Motion, and right-to-left\nlayout reach each control the same way they reach the platform's own apps."
+                    "text": "Accessibility is a headline feature of Firstlight, and it starts with one decision: every control is a real SwiftUI or Jetpack Compose control, not a drawing that imitates one. VoiceOver, TalkBack, Dynamic Type, Android font scaling, dark appearance, Increased Contrast, Reduce Motion, and right-to-left layout reach each control the same way they reach the platform's own apps."
                 },
                 {
                     "type": "text",
-                    "text": "Firstlight then adds the parts a native control alone does not decide: whether\nsomething has a name, how many focus stops a row has, how large a target is,\nand what a screen reader hears when a form fails."
+                    "text": "Firstlight then adds the parts a native control alone does not decide: whether something has a name, how many focus stops a row has, how large a target is, and what a screen reader hears when a form fails."
                 },
                 {
                     "type": "definition",
-                    "label": "VoiceOver and TalkBack",
-                    "text": "Get: Required names on icon-only controls, development warnings for unnamed fields, one focus stop per row or field, and every swipe and context-menu action as a screen-reader action"
+                    "term": {
+                        "text": "VoiceOver and TalkBack"
+                    },
+                    "items": [
+                        {
+                            "label": "Get",
+                            "text": "Required names on icon-only controls, development warnings for unnamed fields, one focus stop per row or field, and every swipe and context-menu action as a screen-reader action"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Spoken feedback on forms",
-                    "text": "Get: Validation errors read aloud after a failed submit, with screen-reader focus on the first invalid field"
+                    "term": {
+                        "text": "Spoken feedback on forms"
+                    },
+                    "items": [
+                        {
+                            "label": "Get",
+                            "text": "Validation errors read aloud after a failed submit, with screen-reader focus on the first invalid field"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Larger text",
-                    "text": "Get: Dynamic Type and Android font scaling, with labels that wrap instead of truncating"
+                    "term": {
+                        "text": "Larger text"
+                    },
+                    "items": [
+                        {
+                            "label": "Get",
+                            "text": "Dynamic Type and Android font scaling, with labels that wrap instead of truncating"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Right-to-left languages",
-                    "text": "Get: Mirrored native layout, with code kept left-to-right"
+                    "term": {
+                        "text": "Right-to-left languages"
+                    },
+                    "items": [
+                        {
+                            "label": "Get",
+                            "text": "Mirrored native layout, with code kept left-to-right"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Reduce Motion",
-                    "text": "Get: Platform motion settings, and Feedback that fades instead of moving on iOS"
+                    "term": {
+                        "text": "Reduce Motion"
+                    },
+                    "items": [
+                        {
+                            "label": "Get",
+                            "text": "Platform motion settings, and Feedback that fades instead of moving on iOS"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Contrast and colour",
-                    "text": "Get: Status named in words, and status colours below 4.5:1 corrected to black or white text"
+                    "term": {
+                        "text": "Contrast and colour"
+                    },
+                    "items": [
+                        {
+                            "label": "Get",
+                            "text": "Status named in words, and status colours below 4.5:1 corrected to black or white text"
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Status. Firstlight 1.0.0 is a release candidate. The behaviour on this page\nis covered by contract, XCTest, and Robolectric tests, and validation focus was\nobserved with TalkBack on the Android emulator. Spoken VoiceOver and TalkBack\noutput has not been checked on physical devices. See\nKnown gaps."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Known gaps",
-                    "url": "#known-gaps"
+                    "runs": [
+                        {
+                            "text": "Status.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Firstlight 1.0.0 is a release candidate. The behaviour on this page is covered by contract, XCTest, and Robolectric tests, and validation focus was observed with TalkBack on the Android emulator. Spoken VoiceOver and TalkBack output has not been checked on physical devices. See "
+                        },
+                        {
+                            "text": "Known gaps",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -74,85 +125,258 @@
                 },
                 {
                     "type": "definition",
-                    "label": "Screen reader",
-                    "text": "iOS: VoiceOver roles, values, and states\nAndroid: TalkBack roles, values, and states"
+                    "term": {
+                        "text": "Screen reader"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "VoiceOver roles, values, and states"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "TalkBack roles, values, and states"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Larger text",
-                    "text": "iOS: Dynamic Type, including accessibility sizes\nAndroid: System font scale"
+                    "term": {
+                        "text": "Larger text"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Dynamic Type, including accessibility sizes"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "System font scale"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Appearance",
-                    "text": "iOS: Light, dark, and Increased Contrast\nAndroid: Light, dark, and high-contrast text"
+                    "term": {
+                        "text": "Appearance"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Light, dark, and Increased Contrast"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Light, dark, and high-contrast text"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Motion",
-                    "text": "iOS: Reduce Motion\nAndroid: Remove animations"
+                    "term": {
+                        "text": "Motion"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Reduce Motion"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Remove animations"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Reading direction",
-                    "text": "iOS: Right-to-left layout\nAndroid: Right-to-left layout"
+                    "term": {
+                        "text": "Reading direction"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Right-to-left layout"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Right-to-left layout"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Dialogs and sheets",
-                    "text": "iOS: System focus trapping and action order\nAndroid: System focus trapping and action order"
+                    "term": {
+                        "text": "Dialogs and sheets"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "System focus trapping and action order"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "System focus trapping and action order"
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "what-firstlight-adds": {
             "title": "What Firstlight adds",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Every control has a name. Icon Button, Search Field, and Progress require\na11y-label and fail before publishing without it. Fields, choices, and\npickers warn during development when neither label nor a11y-label is set.\nAn icon name is never accepted as a substitute for a name."
+                    "runs": [
+                        {
+                            "text": "Every control has a name.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Icon Button, Search Field, and Progress require "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " and fail before publishing without it. Fields, choices, and pickers warn during development when neither "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " nor "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is set. An icon name is never accepted as a substitute for a name."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "One thing, one focus stop. A List Item row, a field with its label, helper,\nand error, or a Metric with its value and detail is one accessibility element.\nDecorative icons, avatars, monograms, checkmarks, and tone symbols are hidden,\nso screen-reader users do not hear the same thing twice."
+                    "runs": [
+                        {
+                            "text": "One thing, one focus stop.",
+                            "strong": true
+                        },
+                        {
+                            "text": " A List Item row, a field with its label, helper, and error, or a Metric with its value and detail is one accessibility element. Decorative icons, avatars, monograms, checkmarks, and tone symbols are hidden, so screen-reader users do not hear the same thing twice."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Gestures have alternatives. Swipe actions and context-menu items on List\nItem are also VoiceOver actions and TalkBack custom actions, so nobody has to\nperform a swipe or long press. The Media crop sheet has zoom buttons as well as\npinch. Stepper exposes named increase and decrease actions."
+                    "runs": [
+                        {
+                            "text": "Gestures have alternatives.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Swipe actions and context-menu items on List Item are also VoiceOver actions and TalkBack custom actions, so nobody has to perform a swipe or long press. The Media crop sheet has zoom buttons as well as pinch. Stepper exposes named increase and decrease actions."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Targets are large enough. Actions Firstlight owns, such as icon buttons,\nfield icon actions, the search clear button, Callout and Feedback actions,\nList Item rows, and Code Editor keys, are at least 44 points on iOS and 48 dp on\nAndroid."
+                    "runs": [
+                        {
+                            "text": "Targets are large enough.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Actions Firstlight owns, such as icon buttons, field icon actions, the search clear button, Callout and Feedback actions, List Item rows, and Code Editor keys, are at least 44 points on iOS and 48 dp on Android."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Errors are spoken. When a submit fails validation, VoiceOver and TalkBack\nread a summary of the errors once, for example \"There are 2 errors. The name\nfield is required. The email field is required.\", and screen-reader focus\nmoves to the first invalid field. On iOS the keyboard does not open. On\nAndroid, Text Field, Text Area, and Code Editor take input focus while TalkBack\nis on; other fields announce without moving focus. When a single field fails\non blur, only that message is read and focus stays put. Form-level errors\nappear in a Callout with error-for or error-summary. See\nValidate fields."
+                    "runs": [
+                        {
+                            "text": "Errors are spoken.",
+                            "strong": true
+                        },
+                        {
+                            "text": " When a submit fails validation, VoiceOver and TalkBack read a summary of the errors once, for example \"There are 2 errors. The name field is required. The email field is required.\", and screen-reader focus moves to the first invalid field. On iOS the keyboard does not open. On Android, Text Field, Text Area, and Code Editor take input focus while TalkBack is on; other fields announce without moving focus. When a single field fails on blur, only that message is read and focus stays put. Form-level errors appear in a Callout with "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-summary",
+                            "code": true
+                        },
+                        {
+                            "text": ". See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Status is not colour alone. Callout names its tone in the spoken text, for\nexample \"Warning: Your changes have not been submitted.\" Badge, Status Label,\nCallout, and Feedback check theme colours as they render; a foreground and\nbackground pair below 4.5:1 contrast is corrected to black or white text."
+                    "runs": [
+                        {
+                            "text": "Status is not colour alone.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Callout names its tone in the spoken text, for example \"Warning: Your changes have not been submitted.\" Badge, Status Label, Callout, and Feedback check theme colours as they render; a foreground and background pair below 4.5:1 contrast is corrected to black or white text."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Messages wait for the reader. Transient Feedback announces each new message\nonce. On iOS it stays twice as long while VoiceOver or Switch Control is on and\nfades instead of moving under Reduce Motion. On Android it uses the system's\nrecommended accessibility timeout."
+                    "runs": [
+                        {
+                            "text": "Messages wait for the reader.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Transient Feedback announces each new message once. On iOS it stays twice as long while VoiceOver or Switch Control is on and fades instead of moving under Reduce Motion. On Android it uses the system's recommended accessibility timeout."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Text grows instead of shrinking. Labels, rows, metrics, and messages wrap at\nlarge text sizes rather than truncating or shrinking. On iPhone the Date and\nTime picker sheets size to their content, so they grow with Dynamic Type."
+                    "runs": [
+                        {
+                            "text": "Text grows instead of shrinking.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Labels, rows, metrics, and messages wrap at large text sizes rather than truncating or shrinking. On iPhone the Date and Time picker sheets size to their content, so they grow with Dynamic Type."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Right-to-left layouts mirror. Native layout mirrors automatically. The\nAndroid Stepper row mirrors with its label, and Code Editor keeps code\nleft-to-right inside right-to-left layouts."
+                    "runs": [
+                        {
+                            "text": "Right-to-left layouts mirror.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Native layout mirrors automatically. The Android Stepper row mirrors with its label, and Code Editor keeps code left-to-right inside right-to-left layouts."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Each component's reference page has an Accessibility section with its exact\nbehaviour."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md#screen-reader-announcements"
+                    "text": "Each component's reference page has an Accessibility section with its exact behaviour."
                 }
             ]
         },
@@ -161,50 +385,113 @@
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "Accessible names",
-                    "text": "Automated evidence: Contract tests reject missing required labels; iOS and Android renderer tests check the published label"
+                    "term": {
+                        "text": "Accessible names"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "Contract tests reject missing required labels; iOS and Android renderer tests check the published label"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Larger text",
-                    "text": "Automated evidence: iOS snapshot tests at accessibility Dynamic Type sizes and Android tests at large font scales for most controls"
+                    "term": {
+                        "text": "Larger text"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "iOS snapshot tests at accessibility Dynamic Type sizes and Android tests at large font scales for most controls"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Dark appearance",
-                    "text": "Automated evidence: iOS snapshots in both appearances for most controls; Android tests for List Item, Status Label, Date Picker, and Time Picker"
+                    "term": {
+                        "text": "Dark appearance"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "iOS snapshots in both appearances for most controls; Android tests for List Item, Status Label, Date Picker, and Time Picker"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Target sizes",
-                    "text": "Automated evidence: iOS and Android tests for the controls that own extra actions"
+                    "term": {
+                        "text": "Target sizes"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "iOS and Android tests for the controls that own extra actions"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Gesture alternatives",
-                    "text": "Automated evidence: List Item swipe and context-menu actions on both platforms"
+                    "term": {
+                        "text": "Gesture alternatives"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "List Item swipe and context-menu actions on both platforms"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Announcements",
-                    "text": "Automated evidence: Activity Indicator, Feedback, Code Editor follow mode, and validation errors on both platforms"
+                    "term": {
+                        "text": "Announcements"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "Activity Indicator, Feedback, Code Editor follow mode, and validation errors on both platforms"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Right-to-left",
-                    "text": "Automated evidence: Pill Group on iOS; List Item and Feedback on Android"
+                    "term": {
+                        "text": "Right-to-left"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "text": "Pill Group on iOS; List Item and Feedback on Android"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Your screens",
-                    "text": "Automated evidence: assertAccessible() in every showcase screen test"
+                    "term": {
+                        "text": "Your screens"
+                    },
+                    "items": [
+                        {
+                            "label": "Automated evidence",
+                            "runs": [
+                                {
+                                    "text": "assertAccessible()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " in every showcase screen test"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Documentation screenshots for every component are captured on both platforms in\nlight and dark appearance."
+                    "text": "Documentation screenshots for every component are captured on both platforms in light and dark appearance."
                 }
-            ],
-            "links": []
+            ]
         },
         "known-gaps": {
             "title": "Known gaps",
@@ -214,62 +501,125 @@
                     "text": "These are known gaps, stated plainly:"
                 },
                 {
-                    "type": "text",
-                    "text": "• Spoken VoiceOver and TalkBack passes on physical devices have not been\ncompleted. VoiceOver does not run in the iOS Simulator, so iOS spoken output\nis covered by tests of the accessibility tree, not by listening. TalkBack\nfocus moving to the first invalid field was observed on the Android\nemulator; spoken output was not captured on either platform."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Spoken VoiceOver and TalkBack passes on physical devices have not been completed. VoiceOver does not run in the iOS Simulator, so iOS spoken output is covered by tests of the accessibility tree, not by listening. TalkBack focus moving to the first invalid field was observed on the Android emulator; spoken output was not captured on either platform."
                 },
                 {
-                    "type": "text",
-                    "text": "• The error summary reads messages in rule order, not screen order. Declare\nrules in the order the fields appear."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The error summary reads messages in rule order, not screen order. Declare rules in the order the fields appear."
                 },
                 {
-                    "type": "text",
-                    "text": "• The app recipes were checked on an iOS simulator and an Android emulator,\nnot with VoiceOver or TalkBack."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The app recipes were checked on an iOS simulator and an Android emulator, not with VoiceOver or TalkBack."
                 },
                 {
-                    "type": "text",
-                    "text": "• Right-to-left layout is automated for only the components listed above.\nOther controls rely on native layout, which mirrors automatically."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Right-to-left layout is automated for only the components listed above. Other controls rely on native layout, which mirrors automatically."
                 },
                 {
-                    "type": "text",
-                    "text": "• Text-scaling tests do not yet cover Activity Indicator, Badge, Bottom Sheet,\nDate Picker, and Slider on either platform, nor the iOS dialogs and Time\nPicker or Android Media and Search Field."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Text-scaling tests do not yet cover Activity Indicator, Badge, Bottom Sheet, Date Picker, and Slider on either platform, nor the iOS dialogs and Time Picker or Android Media and Search Field."
                 },
                 {
-                    "type": "text",
-                    "text": "• Android dark-appearance tests cover only the components listed above; the\ndocumentation screenshots cover the rest."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Android dark-appearance tests cover only the components listed above; the documentation screenshots cover the rest."
                 }
-            ],
-            "links": []
+            ]
         },
         "what-remains-your-apps-job": {
             "title": "What remains your app's job",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight makes each control accessible. Your app still decides what the\nscreen says and in what order."
+                    "text": "Firstlight makes each control accessible. Your app still decides what the screen says and in what order."
                 },
                 {
-                    "type": "text",
-                    "text": "• Write labels that name the thing, such as \"Delete post\", not \"Button\"."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Write labels that name the thing, such as \"Delete post\", not \"Button\"."
                 },
                 {
-                    "type": "text",
-                    "text": "• Give fields visible labels. Use a11y-label only when a visible label would\nbe wrong for the design."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Give fields visible labels. Use "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " only when a visible label would be wrong for the design."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Declare validation rules in the order the fields appear, so the error summary\nreads in screen order."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Declare validation rules in the order the fields appear, so the error summary reads in screen order."
                 },
                 {
-                    "type": "text",
-                    "text": "• Name the consequence in confirmation dialogs, such as \"Delete\" rather than\n\"OK\"."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Name the consequence in confirmation dialogs, such as \"Delete\" rather than \"OK\"."
                 },
                 {
-                    "type": "text",
-                    "text": "• Use the theme for colour, and keep each on-* pair at 4.5:1 or better. See\nTheme Firstlight components."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Use the theme for colour, and keep each "
+                        },
+                        {
+                            "text": "on-*",
+                            "code": true
+                        },
+                        {
+                            "text": " pair at 4.5:1 or better. See "
+                        },
+                        {
+                            "text": "Theme Firstlight components",
+                            "link": 2
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Check your own screens in tests. assertAccessible() from NativePHP's test\nharness fails when an interactive element or image has no accessible name:"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Check your own screens in tests. "
+                        },
+                        {
+                            "text": "assertAccessible()",
+                            "code": true
+                        },
+                        {
+                            "text": " from NativePHP's test harness fails when an interactive element or image has no accessible name:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -278,19 +628,38 @@
                 },
                 {
                     "type": "text",
-                    "text": "See Test screens for the Firstlight checks that\nwork alongside it."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Theme Firstlight components",
-                    "url": "../getting-started/theming.md"
-                },
-                {
-                    "label": "Test screens",
-                    "url": "../how-to/test-screens.md"
+                    "runs": [
+                        {
+                            "text": "See "
+                        },
+                        {
+                            "text": "Test screens",
+                            "link": 3
+                        },
+                        {
+                            "text": " for the Firstlight checks that work alongside it."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Known gaps",
+            "url": "#known-gaps"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md#screen-reader-announcements"
+        },
+        {
+            "label": "Theme Firstlight components",
+            "url": "../getting-started/theming.md"
+        },
+        {
+            "label": "Test screens",
+            "url": "../how-to/test-screens.md"
+        }
+    ]
 }

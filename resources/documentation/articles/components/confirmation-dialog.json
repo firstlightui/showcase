@@ -15,7 +15,7 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Confirmation Dialog asks the user to confirm or cancel one consequential\naction using the platform's native presentation and action ordering."
+                    "text": "Confirmation Dialog asks the user to confirm or cancel one consequential action using the platform's native presentation and action ordering."
                 },
                 {
                     "type": "code",
@@ -24,63 +24,227 @@
                 },
                 {
                     "type": "text",
-                    "text": "Both handlers should set $confirmingDeletion to false. The confirmation\nhandler also performs the action; the dismissal handler only cancels the\nrequest."
+                    "runs": [
+                        {
+                            "text": "Both handlers should set "
+                        },
+                        {
+                            "text": "$confirmingDeletion",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". The confirmation handler also performs the action; the dismissal handler only cancels the request."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props-and-events": {
             "title": "Props and events",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• visible: server-controlled presentation request; defaults to false."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "visible",
+                            "code": true
+                        },
+                        {
+                            "text": ": server-controlled presentation request; defaults to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "title",
+                            "code": true
+                        },
+                        {
+                            "text": ": required visible heading and accessible dialog name."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "message",
+                            "code": true
+                        },
+                        {
+                            "text": ": required explanation of the decision or consequence."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "confirm-label",
+                            "code": true
+                        },
+                        {
+                            "text": ": confirmation action text; defaults to the package chrome string "
+                        },
+                        {
+                            "text": "Confirm",
+                            "code": true
+                        },
+                        {
+                            "text": ". See "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "cancel-label",
+                            "code": true
+                        },
+                        {
+                            "text": ": cancellation action text; defaults to the package chrome string "
+                        },
+                        {
+                            "text": "Cancel",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": ": "
+                        },
+                        {
+                            "text": "default",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": "; defaults to "
+                        },
+                        {
+                            "text": "default",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ": required callback for explicit confirmation."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": ": required callback for cancellation, back, or outside dismissal."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "class",
+                            "code": true
+                        },
+                        {
+                            "text": ": external EDGE layout only."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• title: required visible heading and accessible dialog name."
-                },
-                {
-                    "type": "text",
-                    "text": "• message: required explanation of the decision or consequence."
-                },
-                {
-                    "type": "text",
-                    "text": "• confirm-label: confirmation action text; defaults to the package chrome\nstring Confirm. See Localize chrome."
-                },
-                {
-                    "type": "text",
-                    "text": "• cancel-label: cancellation action text; defaults to the package chrome\nstring Cancel."
-                },
-                {
-                    "type": "text",
-                    "text": "• tone: default or destructive; defaults to default."
-                },
-                {
-                    "type": "text",
-                    "text": "• @press: required callback for explicit confirmation."
-                },
-                {
-                    "type": "text",
-                    "text": "• @dismiss: required callback for cancellation, back, or outside dismissal."
-                },
-                {
-                    "type": "text",
-                    "text": "• class: external EDGE layout only."
-                },
-                {
-                    "type": "text",
-                    "text": "The component always presents one confirm action and one cancel action. It\ndoes not support arbitrary action lists, icons, loading or disabled states,\nnative:model, per-platform styling, or an undismissable mode. Use\nAlert Dialog when the user only needs to acknowledge a\nmessage."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
-                },
-                {
-                    "label": "Alert Dialog",
-                    "url": "alert-dialog.md"
+                    "runs": [
+                        {
+                            "text": "The component always presents one confirm action and one cancel action. It does not support arbitrary action lists, icons, loading or disabled states, "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", per-platform styling, or an undismissable mode. Use "
+                        },
+                        {
+                            "text": "Alert Dialog",
+                            "link": 1
+                        },
+                        {
+                            "text": " when the user only needs to acknowledge a message."
+                        }
+                    ]
                 }
             ]
         },
@@ -89,14 +253,56 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "One user outcome produces one callback. Programmatic closure produces none.\nAfter a user dismisses the dialog, copy-only publications do not reopen it; a\nlater server transition from false to true presents a new decision."
+                    "runs": [
+                        {
+                            "text": "One user outcome produces one callback. Programmatic closure produces none. After a user dismisses the dialog, copy-only publications do not reopen it; a later server transition from "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " presents a new decision."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "iOS uses a UIKit action sheet (UIAlertController); Android uses Material 3\nAlertDialog.\nTheir native controls own modal focus, action order, destructive expression,\nDynamic Type or font scaling, dark appearance, contrast, reduced motion, and\nright-to-left behavior. Use specific action labels such as Delete rather\nthan generic text when the consequence can be named."
+                    "runs": [
+                        {
+                            "text": "iOS uses a UIKit action sheet ("
+                        },
+                        {
+                            "text": "UIAlertController",
+                            "code": true
+                        },
+                        {
+                            "text": "); Android uses Material 3 "
+                        },
+                        {
+                            "text": "AlertDialog",
+                            "code": true
+                        },
+                        {
+                            "text": ". Their native controls own modal focus, action order, destructive expression, Dynamic Type or font scaling, dark appearance, contrast, reduced motion, and right-to-left behavior. Use specific action labels such as "
+                        },
+                        {
+                            "text": "Delete",
+                            "code": true
+                        },
+                        {
+                            "text": " rather than generic text when the consequence can be named."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -121,8 +327,17 @@
                     "src": "documentation/screenshots/confirmation-dialog/android-dark.png",
                     "text": "Confirmation Dialog on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "Alert Dialog",
+            "url": "alert-dialog.md"
+        }
+    ]
 }

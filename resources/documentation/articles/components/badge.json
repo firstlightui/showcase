@@ -24,8 +24,7 @@
                     "type": "text",
                     "text": "Badge presents a compact display-only count or short marker. Use Status Label for longer status text and an interactive control when the interface must respond to a press."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-examples": {
             "title": "Complete examples",
@@ -39,44 +38,256 @@
                     "type": "text",
                     "text": "The same authored tags render on iOS and Android."
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "count",
-                    "text": "Accepted type: non-negative int\nPurpose: Numeric marker. Counts above 99 display as 99+; zero is hidden. Exactly one of count or label is required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "count",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-negative "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Numeric marker. Counts above 99 display as "
+                                },
+                                {
+                                    "text": "99+",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; zero is hidden. Exactly one of "
+                                },
+                                {
+                                    "text": "count",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "label",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is required."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: non-empty string\nPurpose: Short visible marker text. Exactly one of count or label is required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Short visible marker text. Exactly one of "
+                                },
+                                {
+                                    "text": "count",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "label",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is required."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "tone",
-                    "text": "Accepted type: neutral, info, success, warning, or danger\nPurpose: Semantic colour intent. Defaults to neutral."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Semantic colour intent. Defaults to "
+                                },
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Accessible name. Required and non-empty for count badges; replaces the visible label for text badges."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Accessible name. Required and non-empty for count badges; replaces the visible label for text badges."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Supplementary VoiceOver or TalkBack context."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supplementary VoiceOver or TalkBack context."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-values": {
             "title": "Events and values",
@@ -87,10 +298,76 @@
                 },
                 {
                     "type": "text",
-                    "text": "Do not use native:model, @change, @press, value, disabled, loading, helper, error, required, icons, variants, or colour escape props. Firstlight rejects those attributes instead of silently adding interactive or field semantics."
+                    "runs": [
+                        {
+                            "text": "Do not use "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "helper",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": ", icons, variants, or colour escape props. Firstlight rejects those attributes instead of silently adding interactive or field semantics."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "count-behaviour": {
             "title": "Count behaviour",
@@ -100,23 +377,84 @@
                     "text": "Firstlight formats the visible count once in PHP so both platforms publish and render the same label:"
                 },
                 {
-                    "type": "text",
-                    "text": "• 0 publishes an empty display label and renders no badge."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "0",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes an empty display label and renders no badge."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "1",
+                            "code": true
+                        },
+                        {
+                            "text": " through "
+                        },
+                        {
+                            "text": "99",
+                            "code": true
+                        },
+                        {
+                            "text": " display the complete decimal count."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "100",
+                            "code": true
+                        },
+                        {
+                            "text": " and above display "
+                        },
+                        {
+                            "text": "99+",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• 1 through 99 display the complete decimal count."
-                },
-                {
-                    "type": "text",
-                    "text": "• 100 and above display 99+."
-                },
-                {
-                    "type": "text",
-                    "text": "A count badge always requires a contextual a11y-label; the formatted visual text alone is not a useful accessible name. A text badge uses its visible label as the accessible name unless a11y-label replaces it."
+                    "runs": [
+                        {
+                            "text": "A count badge always requires a contextual "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "; the formatted visual text alone is not a useful accessible name. A text badge uses its visible label as the accessible name unless "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces it."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
@@ -125,8 +463,7 @@
                     "type": "text",
                     "text": "Badge renders the latest published Element Tree metadata. It keeps no native selection, editing buffer, pending proposal, or animation state. Programmatic updates reconcile by the element's stable node ID and emit nothing."
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
@@ -137,17 +474,43 @@
                 },
                 {
                     "type": "text",
-                    "text": "Warning badges use the shared warning / on-warning theme pair for the active native appearance, independently of brand accent. After Theme::merge(), republish the component tree to refresh custom warning colours; see theming."
+                    "runs": [
+                        {
+                            "text": "Warning badges use the shared "
+                        },
+                        {
+                            "text": "warning",
+                            "code": true
+                        },
+                        {
+                            "text": " / "
+                        },
+                        {
+                            "text": "on-warning",
+                            "code": true
+                        },
+                        {
+                            "text": " theme pair for the active native appearance, independently of brand accent. After "
+                        },
+                        {
+                            "text": "Theme::merge()",
+                            "code": true
+                        },
+                        {
+                            "text": ", republish the component tree to refresh custom warning colours; see "
+                        },
+                        {
+                            "text": "theming",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Semantic theme colours are checked at render time. When a customised foreground and background are below 4.5:1 contrast, Firstlight uses whichever of black or white provides the stronger contrast."
-                }
-            ],
-            "links": [
-                {
-                    "label": "theming",
-                    "url": "../getting-started/theming.md#set-warning-colours"
                 }
             ]
         },
@@ -156,33 +519,72 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Missing both display sources, providing both, a negative or non-integer count, an empty label, or an unsupported tone throws an InvalidArgumentException before publication. Malformed tone data that unexpectedly reaches a native renderer falls back defensively to neutral rather than crashing the host."
+                    "runs": [
+                        {
+                            "text": "Missing both display sources, providing both, a negative or non-integer count, an empty label, or an unsupported tone throws an "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": " before publication. Malformed tone data that unexpectedly reaches a native renderer falls back defensively to "
+                        },
+                        {
+                            "text": "neutral",
+                            "code": true
+                        },
+                        {
+                            "text": " rather than crashing the host."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS composes SwiftUI Text in a native capsule-style marker. Android composes Material 3 Badge. Both inherit NativePHP semantic theme tokens while retaining platform-native typography, scaling, colour-scheme, and layout behaviour."
+                    "runs": [
+                        {
+                            "text": "iOS composes SwiftUI "
+                        },
+                        {
+                            "text": "Text",
+                            "code": true
+                        },
+                        {
+                            "text": " in a native capsule-style marker. Android composes Material 3 "
+                        },
+                        {
+                            "text": "Badge",
+                            "code": true
+                        },
+                        {
+                            "text": ". Both inherit NativePHP semantic theme tokens while retaining platform-native typography, scaling, colour-scheme, and layout behaviour."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Badge supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Badge supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 1
+                        },
+                        {
+                            "text": " and requires both native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -209,8 +611,17 @@
                     "src": "documentation/screenshots/badge/android-dark.png",
                     "text": "Badge on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "theming",
+            "url": "../getting-started/theming.md#set-warning-colours"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

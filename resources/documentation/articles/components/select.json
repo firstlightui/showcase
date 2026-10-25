@@ -25,8 +25,7 @@
                     "type": "text",
                     "text": "Select presents a collapsed, single-choice field and publishes one stable string or integer value."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -41,74 +40,356 @@
                     "language": "blade",
                     "text": "<firstlight:select\n    :options=\"$priorityOptions\"\n    native:model=\"priority\"\n    label=\"Priority\"\n    placeholder=\"Select a priority\"\n    helper=\"Choose one priority.\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "options",
-                    "text": "Accepted type: array\nPurpose: Simple strings, a value-to-label map, or rich option arrays. Labels must contain visible text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "options",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Simple strings, a value-to-label map, or rich option arrays. Labels must contain visible text."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string, int, or null\nPurpose: Stable selection. Every non-null value must exactly match one option by type and value."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Stable selection. Every non-null value must exactly match one option by type and value."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "searchable",
-                    "text": "Accepted type: bool\nPurpose: Forces search for a collection with 12 or fewer options. Collections with 13 or more are always searchable."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "searchable",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Forces search for a collection with 12 or fewer options. Collections with 13 or more are always searchable."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible field label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "placeholder",
-                    "text": "Accepted type: string\nPurpose: Trigger text when the published value is null; it is not the accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "placeholder",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Trigger text when the published value is "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; it is not the accessible name."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting text shown when there is no error."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text shown when there is no error."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Error text and native error semantics; replaces helper text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Error text and native error semantics; replaces helper text."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Communicates required state; PHP still owns validation."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Communicates required state; PHP still owns validation."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Disables the trigger and all options."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Disables the trigger and all options."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible label when a visible label is inappropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible label when a visible label is inappropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "options-and-values": {
             "title": "Options and values",
@@ -133,7 +414,32 @@
                 },
                 {
                     "type": "text",
-                    "text": "Rich options accept only value, label, and optional disabled fields:"
+                    "runs": [
+                        {
+                            "text": "Rich options accept only "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ", and optional "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " fields:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -142,27 +448,74 @@
                 },
                 {
                     "type": "text",
-                    "text": "Values in one collection must be unique and all strings or all integers. Matching is strict: integer 10 does not match string '10'. null means no selection and displays the placeholder. Empty options accept only null and produce an inert trigger."
+                    "runs": [
+                        {
+                            "text": "Values in one collection must be unique and all strings or all integers. Matching is strict: integer "
+                        },
+                        {
+                            "text": "10",
+                            "code": true
+                        },
+                        {
+                            "text": " does not match string "
+                        },
+                        {
+                            "text": "'10'",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " means no selection and displays the placeholder. Empty options accept only "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " and produce an inert trigger."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compact-and-searchable-presentation": {
             "title": "Compact and searchable presentation",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Select chooses its platform presentation from the option count. Up to 12 options use a compact menu or dropdown. Thirteen or more options use a searchable presentation automatically. Set searchable to force search for a smaller collection."
+                    "runs": [
+                        {
+                            "text": "Select chooses its platform presentation from the option count. Up to 12 options use a compact menu or dropdown. Thirteen or more options use a searchable presentation automatically. Set "
+                        },
+                        {
+                            "text": "searchable",
+                            "code": true
+                        },
+                        {
+                            "text": " to force search for a smaller collection."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Search filters labels locally in authored order. Typing, dismissing search, or selecting the accepted value does not publish an event. The iOS searchable sheet Done action is package chrome; see Localize chrome."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
+                    "runs": [
+                        {
+                            "text": "Search filters labels locally in authored order. Typing, dismissing search, or selecting the accepted value does not publish an event. The iOS searchable sheet Done action is package chrome; see "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -171,29 +524,95 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the proposed stable scalar with its authored PHP type. native:model normally generates this callback for property synchronisation."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the proposed stable scalar with its authored PHP type. "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally generates this callback for property synchronisation."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Select is server-authoritative. Choosing an enabled option emits immediately, but the trigger continues to show PHP's accepted value until the next publication. Further choices are ignored while that proposal is in flight. Rejected and programmatic publications do not emit."
+                    "runs": [
+                        {
+                            "text": "Select is "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 1
+                        },
+                        {
+                            "text": ". Choosing an enabled option emits immediately, but the trigger continues to show PHP's accepted value until the next publication. Further choices are ignored while that proposal is in flight. Rejected and programmatic publications do not emit."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "An unchanged PHP response must also release the pending-interaction guard.\nHost the control in FirstlightUI\\NativeComponent for the\nnonstreaming response-revision contract.\nRevisions are not per-event acknowledgements\nand do not prevent coalescing or serialize simultaneous proposals."
+                    "runs": [
+                        {
+                            "text": "An unchanged PHP response must also release the pending-interaction guard. Host the control in "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " for the "
+                        },
+                        {
+                            "text": "nonstreaming response-revision contract",
+                            "link": 2
+                        },
+                        {
+                            "text": ". Revisions are not per-event acknowledgements and do not prevent coalescing or serialize simultaneous proposals."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
-                }
-            ],
-            "links": [
-                {
-                    "label": "server-authoritative",
-                    "url": "../concepts/server-authoritative-state.md"
-                },
-                {
-                    "label": "nonstreaming response-revision contract",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
+                    "runs": [
+                        {
+                            "text": "Use plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": "; deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " modes are rejected."
+                        }
+                    ]
                 }
             ]
         },
@@ -202,33 +621,118 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "disabled prevents the trigger and every option from emitting. A rich option's disabled: true affects only that choice. required communicates state but does not add client-side validation. Publish error from PHP when validation fails; it replaces helper text on both platforms."
+                    "runs": [
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " prevents the trigger and every option from emitting. A rich option's "
+                        },
+                        {
+                            "text": "disabled: true",
+                            "code": true
+                        },
+                        {
+                            "text": " affects only that choice. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " communicates state but does not add client-side validation. Publish "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " from PHP when validation fails; it replaces helper text on both platforms."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Provide either a visible label or an explicit a11y-label. Firstlight warns during development when both are blank. The trigger exposes its accessible name, accepted value or placeholder, hint, required state, disabled state, and error. Option rows expose labels, selection, and disabled state. Native search retains editable-text semantics, labels wrap at accessibility sizes, and controls preserve platform minimum interaction targets."
+                    "runs": [
+                        {
+                            "text": "Provide either a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight warns during development when both are blank. The trigger exposes its accessible name, accepted value or placeholder, hint, required state, disabled state, and error. Option rows expose labels, selection, and disabled state. Native search retains editable-text semantics, labels wrap at accessibility sizes, and controls preserve platform minimum interaction targets."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject malformed options, type mismatches, and\nunsupported presentation props before publication. User validation is\nseparate: screens that use ValidatesFields auto-bind the first MessageBag\nmessage for the field's native:model or error-for name. An authored\nerror wins. required is display metadata and does not run Laravel rules.\nSee Validate fields."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject malformed options, type mismatches, and unsupported presentation props before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is display metadata and does not run Laravel rules. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -237,23 +741,38 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a SwiftUI Menu for compact collections and a native searchable sheet with checkmarked rows for searchable collections. Android uses a Material 3 exposed dropdown for compact collections and a searchable Material dialog with radio rows for searchable collections. Both preserve the same stable-value, disabled-option, threshold, publication, and stale-selection semantics."
+                    "runs": [
+                        {
+                            "text": "iOS uses a SwiftUI "
+                        },
+                        {
+                            "text": "Menu",
+                            "code": true
+                        },
+                        {
+                            "text": " for compact collections and a native searchable sheet with checkmarked rows for searchable collections. Android uses a Material 3 exposed dropdown for compact collections and a searchable Material dialog with radio rows for searchable collections. Both preserve the same stable-value, disabled-option, threshold, publication, and stale-selection semantics."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Select supports the versions listed in the current compatibility reference and requires both native renderers in the host application plus Firstlight's screen response contract above. It does not require an unreleased runtime fix."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Select supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 4
+                        },
+                        {
+                            "text": " and requires both native renderers in the host application plus Firstlight's screen response contract above. It does not require an unreleased runtime fix."
+                        }
+                    ]
                 }
             ]
         },
@@ -280,8 +799,29 @@
                     "src": "documentation/screenshots/select/android-dark.png",
                     "text": "Select on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "nonstreaming response-revision contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

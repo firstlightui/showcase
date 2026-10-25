@@ -15,21 +15,74 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight paginates lists in PHP. List already exposes @refresh and\n@endReached. The helper accumulates Laravel paginator pages into\n$this->listItems so Blade can render ordinary List Item rows."
+                    "runs": [
+                        {
+                            "text": "Firstlight paginates lists in PHP. List already exposes "
+                        },
+                        {
+                            "text": "@refresh",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "@endReached",
+                            "code": true
+                        },
+                        {
+                            "text": ". The helper accumulates Laravel paginator pages into "
+                        },
+                        {
+                            "text": "$this->listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " so Blade can render ordinary List Item rows."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "There is no <firstlight:empty> tag and no second scroll-event API."
+                    "runs": [
+                        {
+                            "text": "There is no "
+                        },
+                        {
+                            "text": "<firstlight:empty>",
+                            "code": true
+                        },
+                        {
+                            "text": " tag and no second scroll-event API."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "declare-the-screen": {
             "title": "Declare the screen",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Extend FirstlightUI\\NativeComponent (or use PaginatesLists):"
+                    "runs": [
+                        {
+                            "text": "Extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " (or "
+                        },
+                        {
+                            "text": "use PaginatesLists",
+                            "code": true
+                        },
+                        {
+                            "text": "):"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -38,14 +91,95 @@
                 },
                 {
                     "type": "text",
-                    "text": "refreshList() replaces $this->listItems with the first page.\nloadMoreList() appends the next page. Both return false when a fetch is\nalready running. loadMoreList() also returns false without querying when\n$this->listHasMore is false."
+                    "runs": [
+                        {
+                            "text": "refreshList()",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces "
+                        },
+                        {
+                            "text": "$this->listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " with the first page. "
+                        },
+                        {
+                            "text": "loadMoreList()",
+                            "code": true
+                        },
+                        {
+                            "text": " appends the next page. Both return "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " when a fetch is already running. "
+                        },
+                        {
+                            "text": "loadMoreList()",
+                            "code": true
+                        },
+                        {
+                            "text": " also returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " without querying when "
+                        },
+                        {
+                            "text": "$this->listHasMore",
+                            "code": true
+                        },
+                        {
+                            "text": " is "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Pass the paginator's page from ListPage. NativePHP has no HTTP ?page=\nquery string for these events."
+                    "runs": [
+                        {
+                            "text": "Pass the paginator's "
+                        },
+                        {
+                            "text": "page",
+                            "code": true
+                        },
+                        {
+                            "text": " from "
+                        },
+                        {
+                            "text": "ListPage",
+                            "code": true
+                        },
+                        {
+                            "text": ". NativePHP has no HTTP "
+                        },
+                        {
+                            "text": "?page=",
+                            "code": true
+                        },
+                        {
+                            "text": " query string for these events."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "render-the-rows": {
             "title": "Render the rows",
@@ -57,21 +191,53 @@
                 },
                 {
                     "type": "text",
-                    "text": "Keep @endReached bound even on the last page. Extra events are ignored."
+                    "runs": [
+                        {
+                            "text": "Keep "
+                        },
+                        {
+                            "text": "@endReached",
+                            "code": true
+                        },
+                        {
+                            "text": " bound even on the last page. Extra events are ignored."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Empty copy is ordinary Blade around List. Compose Status Label, Callout, and\nButton when you need a retry action."
+                    "text": "Empty copy is ordinary Blade around List. Compose Status Label, Callout, and Button when you need a retry action."
                 }
-            ],
-            "links": []
+            ]
         },
         "cursor-pagination": {
             "title": "Cursor pagination",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "ListPage::$cursor is null on refresh and the previous paginator's next\ncursor afterward. Pass it through to cursorPaginate():"
+                    "runs": [
+                        {
+                            "text": "ListPage::$cursor",
+                            "code": true
+                        },
+                        {
+                            "text": " is "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " on refresh and the previous paginator's next cursor afterward. Pass it through to "
+                        },
+                        {
+                            "text": "cursorPaginate()",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -80,23 +246,56 @@
                 },
                 {
                     "type": "text",
-                    "text": "Use the same callable with loadMoreList()."
+                    "runs": [
+                        {
+                            "text": "Use the same callable with "
+                        },
+                        {
+                            "text": "loadMoreList()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Unexpected exceptions from the query are not converted to Feedback. Screens\nthat extend NativePHP's component directly can opt in with\nFirstlightUI\\Concerns\\PaginatesLists."
+                    "runs": [
+                        {
+                            "text": "Unexpected exceptions from the query are not converted to Feedback. Screens that extend NativePHP's component directly can opt in with "
+                        },
+                        {
+                            "text": "FirstlightUI\\Concerns\\PaginatesLists",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "To delete a row after Confirmation Dialog authorization, see\nDestroy list items."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Destroy list items",
-                    "url": "destroy-list-items.md"
+                    "runs": [
+                        {
+                            "text": "To delete a row after Confirmation Dialog authorization, see "
+                        },
+                        {
+                            "text": "Destroy list items",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Destroy list items",
+            "url": "destroy-list-items.md"
+        }
+    ]
 }

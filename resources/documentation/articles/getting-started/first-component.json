@@ -17,8 +17,7 @@
                     "type": "text",
                     "text": "This tutorial adds a native Segmented control for choosing a queue. The same EDGE markup renders as a platform-appropriate control on iOS and Android."
                 }
-            ],
-            "links": []
+            ]
         },
         "define-the-state": {
             "title": "Define the state",
@@ -34,7 +33,53 @@
                 },
                 {
                     "type": "text",
-                    "text": "Normal Blade renders (a global View returned from render(), $this->view(),\nor an inferred view) automatically receive normal chrome and a root response\nrevision. For a hand-built Element root, return $this->response($element)\nfrom render() instead of returning the Element directly. Nested children are\nuntouched and partials are unstamped. Streaming is disabled and cannot be opted\ninto. See the full contract and limits."
+                    "runs": [
+                        {
+                            "text": "Normal Blade renders (a global "
+                        },
+                        {
+                            "text": "View",
+                            "code": true
+                        },
+                        {
+                            "text": " returned from "
+                        },
+                        {
+                            "text": "render()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "$this->view()",
+                            "code": true
+                        },
+                        {
+                            "text": ", or an inferred view) automatically receive normal chrome and a root response revision. For a hand-built Element root, return "
+                        },
+                        {
+                            "text": "$this->response($element)",
+                            "code": true
+                        },
+                        {
+                            "text": " from "
+                        },
+                        {
+                            "text": "render()",
+                            "code": true
+                        },
+                        {
+                            "text": " instead of returning the Element directly. Nested children are untouched and partials are unstamped. Streaming is disabled and cannot be opted into. See the "
+                        },
+                        {
+                            "text": "full contract and limits",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -47,13 +92,18 @@
                 },
                 {
                     "type": "text",
-                    "text": "The array keys are the public values stored in $queue; the labels are display text."
-                }
-            ],
-            "links": [
-                {
-                    "label": "full contract and limits",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
+                    "runs": [
+                        {
+                            "text": "The array keys are the public values stored in "
+                        },
+                        {
+                            "text": "$queue",
+                            "code": true
+                        },
+                        {
+                            "text": "; the labels are display text."
+                        }
+                    ]
                 }
             ]
         },
@@ -62,7 +112,18 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Bind the property with native:model:"
+                    "runs": [
+                        {
+                            "text": "Bind the property with "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -71,17 +132,38 @@
                 },
                 {
                     "type": "text",
-                    "text": "Run the application natively. A selection emits its stable value to PHP, and the published $queue value determines the visible selection."
+                    "runs": [
+                        {
+                            "text": "Run the application natively. A selection emits its stable value to PHP, and the published "
+                        },
+                        {
+                            "text": "$queue",
+                            "code": true
+                        },
+                        {
+                            "text": " value determines the visible selection."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "handle-a-selection-explicitly": {
             "title": "Handle a selection explicitly",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use @change when the selection should call a method instead of directly synchronising a property:"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " when the selection should call a method instead of directly synchronising a property:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -90,19 +172,41 @@
                 },
                 {
                     "type": "text",
-                    "text": "The method receives the selected string value. See the Segmented reference for integer values, disabled choices, accessibility, and validation rules. When the screen should show Laravel messages on Firstlight fields, follow Validate fields."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Segmented reference",
-                    "url": "../components/segmented.md"
-                },
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "The method receives the selected string value. See the "
+                        },
+                        {
+                            "text": "Segmented reference",
+                            "link": 1
+                        },
+                        {
+                            "text": " for integer values, disabled choices, accessibility, and validation rules. When the screen should show Laravel messages on Firstlight fields, follow "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 2
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "full contract and limits",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "Segmented reference",
+            "url": "../components/segmented.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        }
+    ]
 }

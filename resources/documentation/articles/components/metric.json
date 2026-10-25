@@ -17,101 +17,344 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Metric displays a named statistic, such as an event count or response time. Its\nlabel, value and optional detail form one screen-reader element, not three text\nfragments. It does not draw a tile, panel or grid; use Mobile UI for outer layout."
+                    "text": "Metric displays a named statistic, such as an event count or response time. Its label, value and optional detail form one screen-reader element, not three text fragments. It does not draw a tile, panel or grid; use Mobile UI for outer layout."
                 },
                 {
                     "type": "code",
                     "language": "blade",
                     "text": "<native:column class=\"w-full gap-4\">\n    <firstlight:metric label=\"Events\" value=\"5\" detail=\"last 10h ago\" />\n    <firstlight:metric label=\"Users\" value=\"0\" detail=\"affected\" />\n    <firstlight:metric label=\"Response\" value=\"234 ms\" detail=\"last check\" tone=\"success\" />\n</native:column>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Contract: Required nonempty string naming the measurement."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "Required nonempty string naming the measurement."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "value",
-                    "text": "Contract: Required nonempty string, already formatted in PHP. \"0\" is valid."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Required nonempty "
+                                },
+                                {
+                                    "text": "string",
+                                    "strong": true
+                                },
+                                {
+                                    "text": ", already formatted in PHP. "
+                                },
+                                {
+                                    "text": "\"0\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is valid."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "detail",
-                    "text": "Contract: Optional string; omitted or empty means no supporting line."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "detail",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "Optional string; omitted or empty means no supporting line."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "tone",
-                    "text": "Contract: neutral (default), info, success, warning, or danger; colours the value using semantic theme tokens."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (default), "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; colours the value using semantic theme tokens."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Contract: Optional nonempty name replacing the default label: value, detail. Use it for localized full sentences or pronunciation."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "runs": [
+                                {
+                                    "text": "Optional nonempty name replacing the default "
+                                },
+                                {
+                                    "text": "label: value, detail",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Use it for localized full sentences or pronunciation."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Contract: Optional nonempty supplementary description."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "Optional nonempty supplementary description."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Contract: External EDGE layout only. Do not impose a fixed height that clips large text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Contract",
+                            "text": "External EDGE layout only. Do not impose a fixed height that clips large text."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "CamelCase a11yLabel and a11yHint aliases are accepted. Format units, dates,\nnumbers and relative times in the application; Metric does not parse them or run a\ntimer. For bound numeric counts, format explicitly, for example :value=\"(string) $events\"."
+                    "runs": [
+                        {
+                            "text": "CamelCase "
+                        },
+                        {
+                            "text": "a11yLabel",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "a11yHint",
+                            "code": true
+                        },
+                        {
+                            "text": " aliases are accepted. Format units, dates, numbers and relative times in the application; Metric does not parse them or run a timer. For bound numeric counts, format explicitly, for example "
+                        },
+                        {
+                            "text": ":value=\"(string) $events\"",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Programmatic roots can use Metric::make('Events', '5') from\nFirstlightUI\\Elements\\Metric. applyAttributes() accepts the same props."
+                    "runs": [
+                        {
+                            "text": "Programmatic roots can use "
+                        },
+                        {
+                            "text": "Metric::make('Events', '5')",
+                            "code": true
+                        },
+                        {
+                            "text": " from "
+                        },
+                        {
+                            "text": "FirstlightUI\\Elements\\Metric",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "applyAttributes()",
+                            "code": true
+                        },
+                        {
+                            "text": " accepts the same props."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-values-and-state": {
             "title": "Events, values and state",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Metric is static: there is no native:model, @change, @press, selected,\ndisabled, loading or error state. New PHP publications update the text without\nemitting an event. It accepts no children. Put a labelled Button alongside a\nmetric when an action is needed; it does not make a generic container accessible."
+                    "runs": [
+                        {
+                            "text": "Metric is static: there is no "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", selected, disabled, loading or error state. New PHP publications update the text without emitting an event. It accepts no children. Put a labelled Button alongside a metric when an action is needed; it does not make a generic container accessible."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility-and-platforms": {
             "title": "Accessibility and platforms",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "SwiftUI uses native text styles and monospaced digits. Compose uses Material text\nstyles and tabular figures (tnum). Values wrap at large Dynamic Type/font scales;\nthey are not shrunk or ellipsized. Available width and font glyph support determine\nline wrapping. The component is a single static accessibility element, with no\nbutton role or duplicate child announcements. Android appends the hint to its\ncontent description; iOS supplies a separate accessibility hint."
+                    "runs": [
+                        {
+                            "text": "SwiftUI uses native text styles and monospaced digits. Compose uses Material text styles and tabular figures ("
+                        },
+                        {
+                            "text": "tnum",
+                            "code": true
+                        },
+                        {
+                            "text": "). Values wrap at large Dynamic Type/font scales; they are not shrunk or ellipsized. Available width and font glyph support determine line wrapping. The component is a single static accessibility element, with no button role or duplicate child announcements. Android appends the hint to its content description; iOS supplies a separate accessibility hint."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "All five tones inherit the application's theme, including package warning tokens.\nTone is supplementary; always communicate the measurement in text as well."
+                    "text": "All five tones inherit the application's theme, including package warning tokens. Tone is supplementary; always communicate the measurement in text as well."
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-compatibility": {
             "title": "Validation and compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Missing/blank labels or values, non-string content, unsupported tones, empty\nexplicit accessibility text and interaction/field-state attributes throw\nInvalidArgumentException. Metric uses the ordinary Firstlight installation and\nthe supported NativePHP versions."
-                }
-            ],
-            "links": [
-                {
-                    "label": "supported NativePHP versions",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Missing/blank labels or values, non-string content, unsupported tones, empty explicit accessibility text and interaction/field-state attributes throw "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": ". Metric uses the ordinary Firstlight installation and the "
+                        },
+                        {
+                            "text": "supported NativePHP versions",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -120,7 +363,18 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The stable showcase route is /captures/metric. These native captures use\niPhone 17 Pro / iOS 26.5 and an Android 17 (API 37) emulator."
+                    "runs": [
+                        {
+                            "text": "The stable showcase route is "
+                        },
+                        {
+                            "text": "/captures/metric",
+                            "code": true
+                        },
+                        {
+                            "text": ". These native captures use iPhone 17 Pro / iOS 26.5 and an Android 17 (API 37) emulator."
+                        }
+                    ]
                 },
                 {
                     "type": "image",
@@ -144,7 +398,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "The interactive showcase's longer value remains complete at maximum iOS\naccessibility text size and Android font scale 2.0. The iOS capture is scrolled to\nshow the wrapped value; content behind native navigation chrome is outside the\ncurrent viewport, not truncated by Metric."
+                    "text": "The interactive showcase's longer value remains complete at maximum iOS accessibility text size and Android font scale 2.0. The iOS capture is scrolled to show the wrapped value; content behind native navigation chrome is outside the current viewport, not truncated by Metric."
                 },
                 {
                     "type": "image",
@@ -158,10 +412,15 @@
                 },
                 {
                     "type": "text",
-                    "text": "These are simulator/emulator visual checks. Spoken VoiceOver/TalkBack traversal\nand physical-device release qualification remain unverified."
+                    "text": "These are simulator/emulator visual checks. Spoken VoiceOver/TalkBack traversal and physical-device release qualification remain unverified."
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "supported NativePHP versions",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

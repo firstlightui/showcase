@@ -15,25 +15,54 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight deletes list rows in PHP. Pass a stable domain key into the helper,\nconfirm with Confirmation Dialog, authorize again, destroy the model, and let\n$listItems republish without that row."
+                    "runs": [
+                        {
+                            "text": "Firstlight deletes list rows in PHP. Pass a stable domain key into the helper, confirm with Confirmation Dialog, authorize again, destroy the model, and let "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " republish without that row."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "An optional labelled List Item swipe action\ncan invoke the same request helper. There is no automatic swipe deletion or\nrenderer index. See Authorize actions for\nhide-versus-disable rules and Paginate lists for $listItems."
-                }
-            ],
-            "links": [
-                {
-                    "label": "List Item swipe action",
-                    "url": "../components/list-item.md#swipe-actions"
-                },
-                {
-                    "label": "Authorize actions",
-                    "url": "authorize-actions.md"
-                },
-                {
-                    "label": "Paginate lists",
-                    "url": "paginate-lists.md"
+                    "runs": [
+                        {
+                            "text": "An optional labelled "
+                        },
+                        {
+                            "text": "List Item swipe action",
+                            "link": 0
+                        },
+                        {
+                            "text": " can invoke the same request helper. There is no automatic swipe deletion or renderer index. See "
+                        },
+                        {
+                            "text": "Authorize actions",
+                            "link": 1
+                        },
+                        {
+                            "text": " for hide-versus-disable rules and "
+                        },
+                        {
+                            "text": "Paginate lists",
+                            "link": 2
+                        },
+                        {
+                            "text": " for "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -42,7 +71,39 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Extend FirstlightUI\\NativeComponent (or use AuthorizesActions,\nDestroysListItems, and a $listItems array):"
+                    "runs": [
+                        {
+                            "text": "Extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " (or use "
+                        },
+                        {
+                            "text": "AuthorizesActions",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "DestroysListItems",
+                            "code": true
+                        },
+                        {
+                            "text": ", and a "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " array):"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -51,14 +112,56 @@
                 },
                 {
                     "type": "text",
-                    "text": "requestDestructiveListAction() resolves the row by key from $listItems,\ncalls authorize(), and sets $confirmingListDestruction when allowed.\nconfirmDestructiveListAction() closes the dialog, authorizes again, runs the\ndestroy callable, removes the row from $listItems, and optionally sends\nsuccess Feedback."
+                    "runs": [
+                        {
+                            "text": "requestDestructiveListAction()",
+                            "code": true
+                        },
+                        {
+                            "text": " resolves the row by key from "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": ", calls "
+                        },
+                        {
+                            "text": "authorize()",
+                            "code": true
+                        },
+                        {
+                            "text": ", and sets "
+                        },
+                        {
+                            "text": "$confirmingListDestruction",
+                            "code": true
+                        },
+                        {
+                            "text": " when allowed. "
+                        },
+                        {
+                            "text": "confirmDestructiveListAction()",
+                            "code": true
+                        },
+                        {
+                            "text": " closes the dialog, authorizes again, runs the destroy callable, removes the row from "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": ", and optionally sends success Feedback."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Keys must be stable identities such as model ids. Do not pass loop indexes."
                 }
-            ],
-            "links": []
+            ]
         },
         "keep-denied-rows-visible": {
             "title": "Keep denied rows visible",
@@ -70,11 +173,11 @@
                 },
                 {
                     "type": "text",
-                    "text": "Never omit a destructive List Item when the Policy denies it. Disable the row\nand keep supporting copy that explains the unavailable action when the\nsurrounding interface does not already make that clear."
+                    "text": "Never omit a destructive List Item when the Policy denies it. Disable the row and keep supporting copy that explains the unavailable action when the surrounding interface does not already make that clear."
                 },
                 {
                     "type": "text",
-                    "text": "To offer deletion from a swipe, add the following binding to the List Item\nabove. It opens the same confirmation dialog and does not remove the row:"
+                    "text": "To offer deletion from a swipe, add the following binding to the List Item above. It opens the same confirmation dialog and does not remove the row:"
                 },
                 {
                     "type": "code",
@@ -83,17 +186,73 @@
                 },
                 {
                     "type": "text",
-                    "text": "Swipe callbacks use stable keys just like @press. A disabled row exposes no\nswipe actions; authorization still runs in PHP when the action is requested and\nagain when deletion is confirmed."
+                    "runs": [
+                        {
+                            "text": "Swipe callbacks use stable keys just like "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ". A disabled row exposes no swipe actions; authorization still runs in PHP when the action is requested and again when deletion is confirmed."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "custom-keys-or-database-resolve": {
             "title": "Custom keys or database resolve",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Override destructiveListItemKey() when rows do not expose getKey(), id,\nor an id array key. Override resolveDestructiveListItem() to reload the\nmodel from the database instead of trusting the in-memory $listItems copy:"
+                    "runs": [
+                        {
+                            "text": "Override "
+                        },
+                        {
+                            "text": "destructiveListItemKey()",
+                            "code": true
+                        },
+                        {
+                            "text": " when rows do not expose "
+                        },
+                        {
+                            "text": "getKey()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": ", or an "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": " array key. Override "
+                        },
+                        {
+                            "text": "resolveDestructiveListItem()",
+                            "code": true
+                        },
+                        {
+                            "text": " to reload the model from the database instead of trusting the in-memory "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " copy:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -102,10 +261,34 @@
                 },
                 {
                     "type": "text",
-                    "text": "When you resolve from the database, $listItems is still updated after a\nsuccessful destroy so the published List matches the mutation."
+                    "runs": [
+                        {
+                            "text": "When you resolve from the database, "
+                        },
+                        {
+                            "text": "$listItems",
+                            "code": true
+                        },
+                        {
+                            "text": " is still updated after a successful destroy so the published List matches the mutation."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "List Item swipe action",
+            "url": "../components/list-item.md#swipe-actions"
+        },
+        {
+            "label": "Authorize actions",
+            "url": "authorize-actions.md"
+        },
+        {
+            "label": "Paginate lists",
+            "url": "paginate-lists.md"
+        }
+    ]
 }

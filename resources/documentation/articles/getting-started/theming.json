@@ -17,36 +17,67 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight components inherit the semantic theme from nativephp/mobile-ui. There is no separate Firstlight theme file: configure the host application once, and the same tokens reach the native SwiftUI and Jetpack Compose renderers."
+                    "runs": [
+                        {
+                            "text": "Firstlight components inherit the semantic theme from "
+                        },
+                        {
+                            "text": "nativephp/mobile-ui",
+                            "code": true
+                        },
+                        {
+                            "text": ". There is no separate Firstlight theme file: configure the host application once, and the same tokens reach the native SwiftUI and Jetpack Compose renderers."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "The theme changes colour and typography while each platform retains its native geometry, motion, and interaction."
                 }
-            ],
-            "links": []
+            ]
         },
         "publish-the-theme-configuration": {
             "title": "Publish the theme configuration",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Publish config/native-ui.php into the application:"
+                    "runs": [
+                        {
+                            "text": "Publish "
+                        },
+                        {
+                            "text": "config/native-ui.php",
+                            "code": true
+                        },
+                        {
+                            "text": " into the application:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
                     "language": "shell",
                     "text": "php artisan vendor:publish --tag=native-ui-config"
                 }
-            ],
-            "links": []
+            ]
         },
         "set-the-brand-colour-pairs": {
             "title": "Set the brand colour pairs",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Set both the background token and its on-* content token. This example uses the Firstlight showcase palette; replace the values with accessible pairs from your own brand:"
+                    "runs": [
+                        {
+                            "text": "Set both the background token and its "
+                        },
+                        {
+                            "text": "on-*",
+                            "code": true
+                        },
+                        {
+                            "text": " content token. This example uses the Firstlight showcase palette; replace the values with accessible pairs from your own brand:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -55,7 +86,18 @@
                 },
                 {
                     "type": "text",
-                    "text": "The primary pair colours filled actions, selected states, and key accents. Surface, outline, destructive, success, accent, and disabled-state colours use their corresponding semantic tokens from the published configuration."
+                    "runs": [
+                        {
+                            "text": "The "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": " pair colours filled actions, selected states, and key accents. Surface, outline, destructive, success, accent, and disabled-state colours use their corresponding semantic tokens from the published configuration."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -63,17 +105,59 @@
                 },
                 {
                     "type": "text",
-                    "text": "Theme colours accept CSS hex values, Tailwind palette names such as violet-600, and opacity modifiers such as violet-600/15."
+                    "runs": [
+                        {
+                            "text": "Theme colours accept CSS hex values, Tailwind palette names such as "
+                        },
+                        {
+                            "text": "violet-600",
+                            "code": true
+                        },
+                        {
+                            "text": ", and opacity modifiers such as "
+                        },
+                        {
+                            "text": "violet-600/15",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "set-warning-colours": {
             "title": "Set warning colours",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Status Label, Badge, Callout, and Transient Feedback share the warning / on-warning pair on both platforms, independently of the brand accent pair. Add these keys to the same theme blocks:"
+                    "runs": [
+                        {
+                            "text": "Status Label, Badge, Callout, and Transient Feedback share the "
+                        },
+                        {
+                            "text": "warning",
+                            "code": true
+                        },
+                        {
+                            "text": " / "
+                        },
+                        {
+                            "text": "on-warning",
+                            "code": true
+                        },
+                        {
+                            "text": " pair on both platforms, independently of the brand "
+                        },
+                        {
+                            "text": "accent",
+                            "code": true
+                        },
+                        {
+                            "text": " pair. Add these keys to the same theme blocks:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -82,29 +166,67 @@
                 },
                 {
                     "type": "text",
-                    "text": "These are also the fallback pairs when the effective theme has no corresponding warning token. NativePHP can derive dark values from configured light values; explicit dark overrides keep the intended amber presentation. All four surfaces share contrast-safe black/white text correction for inaccessible authored pairs. List Item's leading-icon-tone=\"warning\" and trailing-icon-tone=\"warning\" use the same warning colour in the active appearance."
+                    "runs": [
+                        {
+                            "text": "These are also the fallback pairs when the effective theme has no corresponding warning token. NativePHP can derive dark values from configured light values; explicit dark overrides keep the intended amber presentation. All four surfaces share contrast-safe black/white text correction for inaccessible authored pairs. List Item's "
+                        },
+                        {
+                            "text": "leading-icon-tone=\"warning\"",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "trailing-icon-tone=\"warning\"",
+                            "code": true
+                        },
+                        {
+                            "text": " use the same warning colour in the active appearance."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Firstlight resolves these open-ended theme keys in PHP and publishes them with each component tree, because the native theme token structs do not retain custom keys. After a runtime Theme::merge(), republish the component tree to update warning colours. The light/dark pair already in that tree switches immediately with the native appearance."
+                    "runs": [
+                        {
+                            "text": "Firstlight resolves these open-ended theme keys in PHP and publishes them with each component tree, because the native theme token structs do not retain custom keys. After a runtime "
+                        },
+                        {
+                            "text": "Theme::merge()",
+                            "code": true
+                        },
+                        {
+                            "text": ", republish the component tree to update warning colours. The light/dark pair already in that tree switches immediately with the native appearance."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "use-theme-tokens-in-surrounding-native-ui": {
             "title": "Use theme tokens in surrounding native UI",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight controls consume the tokens automatically. Use the same tokens for surrounding nativephp/mobile-ui elements with theme-aware utility classes:"
+                    "runs": [
+                        {
+                            "text": "Firstlight controls consume the tokens automatically. Use the same tokens for surrounding "
+                        },
+                        {
+                            "text": "nativephp/mobile-ui",
+                            "code": true
+                        },
+                        {
+                            "text": " elements with theme-aware utility classes:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
                     "language": "blade",
                     "text": "<native:column class=\"bg-theme-surface border border-theme-outline rounded-2xl p-4\">\n    <native:text class=\"text-theme-on-surface text-lg font-bold\">\n        Account\n    </native:text>\n\n    <firstlight:text-field\n        label=\"Email\"\n        native:model=\"email\"\n    />\n</native:column>"
                 }
-            ],
-            "links": []
+            ]
         },
         "apply-a-runtime-brand": {
             "title": "Apply a runtime brand",
@@ -120,10 +242,18 @@
                 },
                 {
                     "type": "text",
-                    "text": "Theme::merge() deep-merges the new values, synchronises the effective Laravel configuration, and publishes the updated tokens to the native renderers."
+                    "runs": [
+                        {
+                            "text": "Theme::merge()",
+                            "code": true
+                        },
+                        {
+                            "text": " deep-merges the new values, synchronises the effective Laravel configuration, and publishes the updated tokens to the native renderers."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": []
 }

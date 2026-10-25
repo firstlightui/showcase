@@ -25,15 +25,25 @@
                     "type": "text",
                     "text": "Switch presents one boolean setting as a native on/off control."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Declare a boolean property on the native component, then bind it with native:model:"
+                    "runs": [
+                        {
+                            "text": "Declare a boolean property on the native component, then bind it with "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -45,66 +55,289 @@
                     "language": "blade",
                     "text": "<firstlight:switch\n    native:model=\"notifications\"\n    label=\"Notifications\"\n    helper=\"Receive account updates.\"\n    a11y-hint=\"Controls notification delivery\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value",
-                    "text": "Accepted type: bool\nPurpose: Accepted value. Defaults to false when omitted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Accepted value. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": " when omitted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "native:model",
-                    "text": "Accepted type: a boolean component property\nPurpose: Synchronises the accepted boolean value through NativePHP. native:model.live is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "a boolean component property"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Synchronises the accepted boolean value through NativePHP. "
+                                },
+                                {
+                                    "text": "native:model.live",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible setting label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible setting label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting text below the setting."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text below the setting."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Error text and error semantics; shown instead of helper when non-empty."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Error text and error semantics; shown instead of "
+                                },
+                                {
+                                    "text": "helper",
+                                    "code": true
+                                },
+                                {
+                                    "text": " when non-empty."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents interaction and change events."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents interaction and change events."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessibility label when a visible label is inappropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessibility label when a visible label is inappropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the proposed boolean value. Use it when the server decides whether to accept a change:"
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the proposed boolean value. Use it when the server decides whether to accept a change:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -118,17 +351,49 @@
                 },
                 {
                     "type": "text",
-                    "text": "native:model normally supplies the same callback for property synchronisation."
+                    "runs": [
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally supplies the same callback for property synchronisation."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accepted-values": {
             "title": "Accepted values",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Switch accepts only strict PHP booleans: true and false. Bind a literal Boolean with ::"
+                    "runs": [
+                        {
+                            "text": "Switch accepts only strict PHP booleans: "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". Bind a literal Boolean with "
+                        },
+                        {
+                            "text": ":",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -137,35 +402,114 @@
                 },
                 {
                     "type": "text",
-                    "text": "value=\"false\" is invalid because Blade passes it as a string. null, integers, string booleans, arrays, and objects are also rejected."
+                    "runs": [
+                        {
+                            "text": "value=\"false\"",
+                            "code": true
+                        },
+                        {
+                            "text": " is invalid because Blade passes it as a string. "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": ", integers, string booleans, arrays, and objects are also rejected."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Host the control in FirstlightUI\\NativeComponent so unchanged full responses\nreceive the response revision."
+                    "runs": [
+                        {
+                            "text": "Host the control in "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " so unchanged full responses receive the "
+                        },
+                        {
+                            "text": "response revision",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Switch is server-authoritative. A native interaction immediately emits its proposed Boolean, but the visible on/off state remains the last value published by PHP. A response that accepts the proposal changes the visible state; a response that rejects it leaves the visible state unchanged. Every server publication clears a pending proposal, including one that republishes the same value. Programmatic publications update the accepted state without emitting @change."
+                    "runs": [
+                        {
+                            "text": "Switch is "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 1
+                        },
+                        {
+                            "text": ". A native interaction immediately emits its proposed Boolean, but the visible on/off state remains the last value published by PHP. A response that accepts the proposal changes the visible state; a response that rejects it leaves the visible state unchanged. Every server publication clears a pending proposal, including one that republishes the same value. Programmatic publications update the accepted state without emitting "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use native:model or native:model.live. Deferred blur, lazy, and debounce sync modes are rejected."
-                }
-            ],
-            "links": [
-                {
-                    "label": "response revision",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
-                },
-                {
-                    "label": "server-authoritative",
-                    "url": "../concepts/server-authoritative-state.md"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": ". Deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "lazy",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " sync modes are rejected."
+                        }
+                    ]
                 }
             ]
         },
@@ -174,33 +518,121 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "When disabled is true, Switch stays visible with its accepted on/off state and cannot emit a proposal or @change event."
+                    "runs": [
+                        {
+                            "text": "When "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " is "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": ", Switch stays visible with its accepted on/off state and cannot emit a proposal or "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " event."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Provide a visible label or an explicit a11y-label; Firstlight warns during development when both are blank. The native controls expose the setting name, on/off value, disabled state, optional hint, and error semantics. SwiftUI provides a minimum 44-point target; the Material 3 row provides a minimum 48-dp target and one TalkBack switch focus stop."
+                    "runs": [
+                        {
+                            "text": "Provide a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "; Firstlight warns during development when both are blank. The native controls expose the setting name, on/off value, disabled state, optional hint, and error semantics. SwiftUI provides a minimum 44-point target; the Material 3 row provides a minimum 48-dp target and one TalkBack switch focus stop."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject non-Boolean values, unsupported required or\nplacement, and deferred sync modes before publication. User validation is\nseparate: screens that use ValidatesFields auto-bind the first MessageBag\nmessage for the field's native:model or error-for name. An authored\nerror wins. See Validate fields. An error\ntakes precedence over helper text and is included in accessibility semantics."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject non-Boolean values, unsupported "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "placement",
+                            "code": true
+                        },
+                        {
+                            "text": ", and deferred sync modes before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 2
+                        },
+                        {
+                            "text": ". An error takes precedence over helper text and is included in accessibility semantics."
+                        }
+                    ]
                 }
             ]
         },
@@ -209,23 +641,45 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a genuine SwiftUI Toggle with the native switch style and system motion. Android uses a genuine Material 3 Switch inside a row-owned switch semantic target, preserving Material state layers and TalkBack behaviour. The public EDGE API and server-authoritative state contract are shared; native geometry, presentation, and interaction remain platform-specific."
+                    "runs": [
+                        {
+                            "text": "iOS uses a genuine SwiftUI "
+                        },
+                        {
+                            "text": "Toggle",
+                            "code": true
+                        },
+                        {
+                            "text": " with the native switch style and system motion. Android uses a genuine Material 3 "
+                        },
+                        {
+                            "text": "Switch",
+                            "code": true
+                        },
+                        {
+                            "text": " inside a row-owned switch semantic target, preserving Material state layers and TalkBack behaviour. The public EDGE API and server-authoritative state contract are shared; native geometry, presentation, and interaction remain platform-specific."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Switch supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Switch supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 3
+                        },
+                        {
+                            "text": " and requires both native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -252,8 +706,25 @@
                     "src": "documentation/screenshots/switch/android-dark.png",
                     "text": "Switch on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "response revision",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

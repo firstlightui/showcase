@@ -17,10 +17,9 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Slider selects one numeric value from a finite, evenly spaced range using the\nnative platform slider. PHP owns the accepted value; the platform owns a draft\nonly while the user is interacting."
+                    "text": "Slider selects one numeric value from a finite, evenly spaced range using the native platform slider. PHP owns the accepted value; the platform owns a draft only while the user is interacting."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -32,122 +31,488 @@
                 },
                 {
                     "type": "text",
-                    "text": "Use Blade's : binding for numeric literals so PHP receives actual numbers,\nnot numeric strings. The bound property receives a PHP float, including when the authored range\nand step contain only whole numbers:"
+                    "runs": [
+                        {
+                            "text": "Use Blade's "
+                        },
+                        {
+                            "text": ":",
+                            "code": true
+                        },
+                        {
+                            "text": " binding for numeric literals so PHP receives actual numbers, not numeric strings. The bound property receives a PHP "
+                        },
+                        {
+                            "text": "float",
+                            "code": true
+                        },
+                        {
+                            "text": ", including when the authored range and step contain only whole numbers:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
                     "language": "php",
                     "text": "public float $dose = 5.0;"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: finite `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "min",
-                    "text": "Accepted type: finite `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "min",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "max",
-                    "text": "Accepted type: finite `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "max",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "step",
-                    "text": "Accepted type: finite positive `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "step",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite positive `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible field label and accessibility-name fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label and accessibility-name fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting guidance below the control."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting guidance below the control."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Validation feedback that replaces helper text."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents native editing and publication."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents native editing and publication."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible name when no visible label is appropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-value",
-                    "text": "Accepted type: string\nPurpose: Optional spoken value, such as a number with units; it is never shown visibly."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-value",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional spoken value, such as a number with units; it is never shown visibly."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout for the complete field."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "min must be less than max. The accepted value must be inside the inclusive\nbounds, and both the accepted value and range width must lie on the step grid\noriginating at min. Firstlight rejects numeric strings, booleans, null,\nnon-finite values, values outside native Float range, off-grid values, and\ngrids larger than Material's signed 32-bit interval limit. It never clamps or\ncoerces authored props."
+                    "runs": [
+                        {
+                            "text": "min",
+                            "code": true
+                        },
+                        {
+                            "text": " must be less than "
+                        },
+                        {
+                            "text": "max",
+                            "code": true
+                        },
+                        {
+                            "text": ". The accepted value must be inside the inclusive bounds, and both the accepted value and range width must lie on the "
+                        },
+                        {
+                            "text": "step",
+                            "code": true
+                        },
+                        {
+                            "text": " grid originating at "
+                        },
+                        {
+                            "text": "min",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight rejects numeric strings, booleans, null, non-finite values, values outside native Float range, off-grid values, and grids larger than Material's signed 32-bit interval limit. It never clamps or coerces authored props."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Decimal grid membership uses a 1e-9 epsilon only to tolerate binary\nfloating-point representation noise such as 0.1 + 0.2. It does not relax the\npublic step grid."
+                    "runs": [
+                        {
+                            "text": "Decimal grid membership uses a "
+                        },
+                        {
+                            "text": "1e-9",
+                            "code": true
+                        },
+                        {
+                            "text": " epsilon only to tolerate binary floating-point representation noise such as "
+                        },
+                        {
+                            "text": "0.1 + 0.2",
+                            "code": true
+                        },
+                        {
+                            "text": ". It does not relax the public step grid."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-synchronisation": {
             "title": "Events and synchronisation",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change and native:model deliver one standard PHP float proposal. Slider\nsupports three policies:"
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " deliver one standard PHP float proposal. Slider supports three policies:"
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes changed grid values while the gesture moves."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "native:model.blur",
+                            "code": true
+                        },
+                        {
+                            "text": " keeps the draft native and publishes once when the gesture ends."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "native:model.debounce.300ms",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes after the configured quiet period and flushes the final change when the gesture ends. The minimum delay is 50 ms."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• native:model or native:model.live publishes changed grid values while the gesture moves."
+                    "text": "There is no parallel input, click, press, or submit event. Programmatic PHP publications emit nothing. A publication is authoritative and replaces the native draft, including when PHP rejects a proposal and keeps the prior value."
                 },
                 {
                     "type": "text",
-                    "text": "• native:model.blur keeps the draft native and publishes once when the gesture ends."
-                },
-                {
-                    "type": "text",
-                    "text": "• native:model.debounce.300ms publishes after the configured quiet period and flushes the final change when the gesture ends. The minimum delay is 50 ms."
-                },
-                {
-                    "type": "text",
-                    "text": "There is no parallel input, click, press, or submit event. Programmatic PHP\npublications emit nothing. A publication is authoritative and replaces the\nnative draft, including when PHP rejects a proposal and keeps the prior value."
-                },
-                {
-                    "type": "text",
-                    "text": "Host the control in FirstlightUI\\NativeComponent for the\nnonstreaming response-revision contract.\nIt makes an unchanged full response observable to the renderers. Revisions are\nnot per-event acknowledgements, do not prevent coalescing, and do not serialize\nsimultaneous proposals. Wider release qualification remains pending."
-                }
-            ],
-            "links": [
-                {
-                    "label": "nonstreaming response-revision contract",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
+                    "runs": [
+                        {
+                            "text": "Host the control in "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " for the "
+                        },
+                        {
+                            "text": "nonstreaming response-revision contract",
+                            "link": 0
+                        },
+                        {
+                            "text": ". It makes an unchanged full response observable to the renderers. Revisions are not per-event acknowledgements, do not prevent coalescing, and do not serialize simultaneous proposals. Wider release qualification remains pending."
+                        }
+                    ]
                 }
             ]
         },
@@ -156,25 +521,101 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject invalid numeric grids before publication.\nUser validation is separate: screens that use ValidatesFields auto-bind the\nfirst MessageBag message for the field's native:model or error-for name.\nAn authored error wins. See Validate fields."
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject invalid numeric grids before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "A visible label or explicit a11y-label is required during development.\nError text replaces helper text, without replacing the accessible name or\ncurrent value. a11y-value can add units or domain language; otherwise the\nnative numeric value is announced. Both renderers expose disabled and error\nsemantics and retain native adjustable-slider behavior."
+                    "runs": [
+                        {
+                            "text": "A visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is required during development. Error text replaces helper text, without replacing the accessible name or current value. "
+                        },
+                        {
+                            "text": "a11y-value",
+                            "code": true
+                        },
+                        {
+                            "text": " can add units or domain language; otherwise the native numeric value is announced. Both renderers expose disabled and error semantics and retain native adjustable-slider behavior."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "iOS uses a genuine stepped SwiftUI Slider. Android uses a genuine Material\n3 Slider; the validated interval count is translated to Material's count of\ninterior steps. Both platforms snap native gesture noise back to the authored\ngrid and send the standard Float slider event."
+                    "runs": [
+                        {
+                            "text": "iOS uses a genuine stepped SwiftUI "
+                        },
+                        {
+                            "text": "Slider",
+                            "code": true
+                        },
+                        {
+                            "text": ". Android uses a genuine Material 3 "
+                        },
+                        {
+                            "text": "Slider",
+                            "code": true
+                        },
+                        {
+                            "text": "; the validated interval count is translated to Material's count of interior steps. Both platforms snap native gesture noise back to the authored grid and send the standard Float slider event."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Slider deliberately has no range mode, vertical orientation, marks, ticks,\nvisible value label, formatter, min/max captions, required metadata, size,\nvariant, or colour/style escape props."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "text": "Slider deliberately has no range mode, vertical orientation, marks, ticks, visible value label, formatter, min/max captions, required metadata, size, variant, or colour/style escape props."
                 }
             ]
         },
@@ -201,8 +642,17 @@
                     "src": "documentation/screenshots/slider/android-dark.png",
                     "text": "Slider on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "nonstreaming response-revision contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        }
+    ]
 }

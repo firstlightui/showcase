@@ -12,8 +12,12 @@ use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListBlock;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
+use League\CommonMark\Extension\CommonMark\Node\Inline\HtmlInline;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 use League\CommonMark\Extension\Table\Table;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Node\Block\Paragraph;
@@ -35,6 +39,9 @@ class SyncDocumentation extends Command
     private string $revision;
 
     private array $paths = [];
+
+    /** Links of the article being bundled; inline runs refer to them by index. */
+    private array $links = [];
 
     public function handle(): int
     {
@@ -69,8 +76,10 @@ class SyncDocumentation extends Command
                 'description' => trim($description[1], "\"'"),
                 'group' => $group,
                 'anchors' => [],
-                'chapters' => ['overview' => ['title' => 'Overview', 'blocks' => [], 'links' => []]],
+                'chapters' => ['overview' => ['title' => 'Overview', 'blocks' => []]],
+                'links' => [],
             ];
+            $this->links = [];
             $chapter = 'overview';
             foreach ($parser->parse($body)->children() as $node) {
                 if ($node instanceof Heading && $node->getLevel() === 1) {
@@ -86,7 +95,7 @@ class SyncDocumentation extends Command
                     while (isset($article['chapters'][$chapter])) {
                         $chapter = $base.'-'.$suffix++;
                     }
-                    $article['chapters'][$chapter] = ['title' => $label, 'blocks' => [], 'links' => []];
+                    $article['chapters'][$chapter] = ['title' => $label, 'blocks' => []];
                 } else {
                     $article['chapters'][$chapter]['blocks'] = [
                         ...$article['chapters'][$chapter]['blocks'], ...$this->blocks($node, $id),
@@ -95,16 +104,12 @@ class SyncDocumentation extends Command
                 if ($node instanceof Heading) {
                     $article['anchors'][Str::slug($this->text($node))] = $chapter;
                 }
-                $this->links($node, $article['chapters'][$chapter]['links']);
             }
-            foreach ($article['chapters'] as &$section) {
-                $section['links'] = array_values(array_unique($section['links'], SORT_REGULAR));
-            }
-            unset($section);
+            $article['links'] = $this->links;
             $destination = resource_path('documentation/articles/'.$id.'.json');
             File::ensureDirectoryExists(dirname($destination));
             File::put($destination, json_encode($article, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)."\n");
-            unset($article['chapters'], $article['anchors']);
+            unset($article['chapters'], $article['anchors'], $article['links']);
             $article['search'] = mb_strtolower($article['title'].' '.$article['description'].' '.$body);
             $articles[] = $article;
         }
@@ -147,7 +152,8 @@ class SyncDocumentation extends Command
             return '';
         }
         if ($node instanceof Newline) {
-            return "\n";
+            // Source Markdown is hard-wrapped; only an explicit hard break ends a line.
+            return $node->getType() === Newline::SOFTBREAK ? ' ' : "\n";
         }
         if ($node instanceof StringContainerInterface) {
             return $node->getLiteral();
@@ -156,16 +162,66 @@ class SyncDocumentation extends Command
         return implode('', array_map(fn (Node $child): string => $this->text($child), iterator_to_array($node->children())));
     }
 
-    private function links(Node $node, array &$links): void
+    /**
+     * Plain text plus, when the text carries inline code, emphasis or links,
+     * ordered runs the reader composes into one wrapping native text.
+     */
+    private function inline(Node $node): array
     {
-        if ($node instanceof Link && ! $node instanceof Image) {
-            $url = $node->getUrl();
-            if (parse_url($url, PHP_URL_SCHEME) === null || parse_url($url, PHP_URL_SCHEME) === 'https') {
-                $links[] = ['label' => $this->text($node), 'url' => $url];
+        $runs = [];
+        $this->runs($node, [], $runs);
+        $merged = [];
+        foreach ($runs as $run) {
+            $last = array_key_last($merged);
+            if ($last !== null && array_diff_key($merged[$last], ['text' => 0]) == array_diff_key($run, ['text' => 0])) {
+                $merged[$last]['text'] .= $run['text'];
+            } else {
+                $merged[] = $run;
             }
         }
+        if ($merged !== []) {
+            $merged[0]['text'] = ltrim($merged[0]['text']);
+            $merged[array_key_last($merged)]['text'] = rtrim($merged[array_key_last($merged)]['text']);
+            $merged = array_values(array_filter($merged, fn (array $run): bool => $run['text'] !== ''));
+        }
+
+        // Styled text ships only as runs; plain text stays a single string.
+        return array_filter($merged, fn (array $run): bool => count($run) > 1) === []
+            ? ['text' => implode('', array_column($merged, 'text'))]
+            : ['runs' => $merged];
+    }
+
+    private function runs(Node $node, array $style, array &$runs): void
+    {
         foreach ($node->children() as $child) {
-            $this->links($child, $links);
+            if ($child instanceof Image || $child instanceof HtmlInline) {
+                continue;
+            }
+            if ($child instanceof Code) {
+                $runs[] = ['text' => $child->getLiteral(), ...$style, 'code' => true];
+            } elseif ($child instanceof Newline || $child instanceof StringContainerInterface) {
+                $runs[] = ['text' => $this->text($child), ...$style];
+            } elseif ($child instanceof Link) {
+                $url = $child->getUrl();
+                $scheme = parse_url($url, PHP_URL_SCHEME);
+                $linkStyle = $style;
+                if ($scheme === null || $scheme === 'https') {
+                    $link = ['label' => trim($this->text($child)), 'url' => $url];
+                    $index = array_search($link, $this->links, true);
+                    if ($index === false) {
+                        $index = count($this->links);
+                        $this->links[] = $link;
+                    }
+                    $linkStyle['link'] = $index;
+                }
+                $this->runs($child, $linkStyle, $runs);
+            } elseif ($child instanceof Strong) {
+                $this->runs($child, [...$style, 'strong' => true], $runs);
+            } elseif ($child instanceof Emphasis) {
+                $this->runs($child, [...$style, 'emphasis' => true], $runs);
+            } else {
+                $this->runs($child, $style, $runs);
+            }
         }
     }
 
@@ -200,7 +256,7 @@ class SyncDocumentation extends Command
         return $images;
     }
 
-    private function blocks(Node $node, string $id): array
+    private function blocks(Node $node, string $id, int $depth = 0): array
     {
         if ($node instanceof FencedCode || $node instanceof IndentedCode) {
             return [['type' => 'code', 'language' => $node instanceof FencedCode ? $node->getInfo() : '', 'text' => rtrim($node->getLiteral(), "\n")]];
@@ -209,20 +265,23 @@ class SyncDocumentation extends Command
             $rows = [];
             foreach ($node->children() as $section) {
                 foreach ($section->children() as $row) {
-                    $rows[] = array_map(fn (Node $cell): string => trim($this->text($cell)), iterator_to_array($row->children()));
+                    $rows[] = iterator_to_array($row->children());
                 }
             }
-            $headers = array_shift($rows) ?? [];
+            $headers = array_map(fn (Node $cell): string => trim($this->text($cell)), array_shift($rows) ?? []);
             $blocks = [];
             foreach ($rows as $row) {
-                $lines = [];
-                foreach (array_slice($row, 1, preserve_keys: true) as $index => $value) {
-                    if ($value !== '') {
-                        $lines[] = ($headers[$index] ?? '').': '.$value;
+                $term = isset($row[0]) ? $this->inline($row[0]) : ['text' => ''];
+                $hasTerm = ($term['text'] ?? '') !== '' || isset($term['runs']);
+                $items = [];
+                foreach (array_slice($row, 1, preserve_keys: true) as $index => $cell) {
+                    $value = $this->inline($cell);
+                    if (($value['text'] ?? '') !== '' || isset($value['runs'])) {
+                        $items[] = ['label' => $headers[$index] ?? '', ...$value];
                     }
                 }
-                if (($row[0] ?? '') !== '' && $lines !== []) {
-                    $blocks[] = ['type' => 'definition', 'label' => $row[0], 'text' => implode("\n", $lines)];
+                if ($hasTerm && $items !== []) {
+                    $blocks[] = ['type' => 'definition', 'term' => $term, 'items' => $items];
                 }
             }
 
@@ -235,28 +294,30 @@ class SyncDocumentation extends Command
             foreach ($node->children() as $item) {
                 $first = true;
                 foreach ($item->children() as $child) {
-                    $children = $this->blocks($child, $id);
-                    if ($first && isset($children[0]['text']) && $children[0]['type'] === 'text') {
-                        $children[0]['text'] = ($ordered ? $number++.'. ' : '• ').$children[0]['text'];
+                    if ($first && $child instanceof Paragraph) {
+                        $blocks[] = ['type' => 'item', 'marker' => $ordered ? $number.'.' : '•', 'depth' => $depth, ...$this->inline($child)];
+                        $blocks = [...$blocks, ...$this->images($child, $id)];
+                    } else {
+                        $blocks = [...$blocks, ...$this->blocks($child, $id, $depth + 1)];
                     }
-                    $blocks = [...$blocks, ...$children];
                     $first = false;
                 }
+                $number++;
             }
 
             return $blocks;
         }
         if ($node instanceof Heading || $node instanceof Paragraph) {
-            $text = trim($this->text($node));
+            $inline = $this->inline($node);
 
             return [
-                ...($text === '' ? [] : [['type' => $node instanceof Heading ? 'heading' : 'text', 'text' => $text]]),
+                ...(($inline['text'] ?? '') === '' && ! isset($inline['runs']) ? [] : [['type' => $node instanceof Heading ? 'heading' : 'text', ...$inline]]),
                 ...$this->images($node, $id),
             ];
         }
         $blocks = [];
         foreach ($node->children() as $child) {
-            $blocks = [...$blocks, ...$this->blocks($child, $id)];
+            $blocks = [...$blocks, ...$this->blocks($child, $id, $depth)];
         }
         if ($blocks === [] && $node instanceof StringContainerInterface && trim(strip_tags($node->getLiteral())) !== '') {
             $blocks[] = ['type' => 'text', 'text' => trim(strip_tags($node->getLiteral()))];

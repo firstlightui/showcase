@@ -23,17 +23,25 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Checkbox represents one Boolean form or checklist value. Use it for explicit\nacknowledgements and selections that are normally saved with a form. Use\nSwitch for a setting that takes effect immediately, or Choice\nGroup for selection from a visible collection."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Switch",
-                    "url": "switch.md"
-                },
-                {
-                    "label": "Choice\nGroup",
-                    "url": "choice-group.md"
+                    "runs": [
+                        {
+                            "text": "Checkbox represents one Boolean form or checklist value. Use it for explicit acknowledgements and selections that are normally saved with a form. Use "
+                        },
+                        {
+                            "text": "Switch",
+                            "link": 0
+                        },
+                        {
+                            "text": " for a setting that takes effect immediately, or "
+                        },
+                        {
+                            "text": "Choice Group",
+                            "link": 1
+                        },
+                        {
+                            "text": " for selection from a visible collection."
+                        }
+                    ]
                 }
             ]
         },
@@ -42,7 +50,18 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Declare a Boolean property on the native component, then bind it with\nnative:model:"
+                    "runs": [
+                        {
+                            "text": "Declare a Boolean property on the native component, then bind it with "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -54,75 +73,337 @@
                     "language": "blade",
                     "text": "<firstlight:checkbox\n    native:model=\"acceptedTerms\"\n    label=\"I agree to the terms\"\n    helper=\"Required before continuing.\"\n    required\n    a11y-hint=\"Required before creating your account\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value",
-                    "text": "Accepted type: bool\nPurpose: Accepted value. Defaults to false when omitted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Accepted value. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": " when omitted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "native:model",
-                    "text": "Accepted type: a Boolean component property\nPurpose: Synchronises the accepted value through NativePHP. native:model.live is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "a Boolean component property"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Synchronises the accepted value through NativePHP. "
+                                },
+                                {
+                                    "text": "native:model.live",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible checkbox label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible checkbox label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting text below the label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text below the label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Validation text and error semantics; shown instead of helper when non-empty."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Validation text and error semantics; shown instead of "
+                                },
+                                {
+                                    "text": "helper",
+                                    "code": true
+                                },
+                                {
+                                    "text": " when non-empty."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Marks the field as required visually and for assistive technology."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Marks the field as required visually and for assistive technology."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents proposals and change events while retaining the accepted value."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents proposals and change events while retaining the accepted value."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible name when a visible label is inappropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible name when a visible label is inappropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The camel-case authoring aliases a11yLabel and a11yHint are accepted and\npublish the same native props."
+                    "runs": [
+                        {
+                            "text": "The camel-case authoring aliases "
+                        },
+                        {
+                            "text": "a11yLabel",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "a11yHint",
+                            "code": true
+                        },
+                        {
+                            "text": " are accepted and publish the same native props."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the proposed Boolean value. Use it when PHP decides whether\nto accept a change:"
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the proposed Boolean value. Use it when PHP decides whether to accept a change:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -136,17 +417,49 @@
                 },
                 {
                     "type": "text",
-                    "text": "native:model normally supplies the same callback for property\nsynchronisation."
+                    "runs": [
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally supplies the same callback for property synchronisation."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accepted-values": {
             "title": "Accepted values",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Checkbox accepts only strict PHP booleans: true and false. Bind a literal\nBoolean with ::"
+                    "runs": [
+                        {
+                            "text": "Checkbox accepts only strict PHP booleans: "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". Bind a literal Boolean with "
+                        },
+                        {
+                            "text": ":",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -155,35 +468,114 @@
                 },
                 {
                     "type": "text",
-                    "text": "value=\"false\" is invalid because Blade passes it as a string. null,\nintegers, string booleans, arrays, and objects are also rejected. Checkbox has\nno nullable or indeterminate state."
+                    "runs": [
+                        {
+                            "text": "value=\"false\"",
+                            "code": true
+                        },
+                        {
+                            "text": " is invalid because Blade passes it as a string. "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": ", integers, string booleans, arrays, and objects are also rejected. Checkbox has no nullable or indeterminate state."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Host the control in FirstlightUI\\NativeComponent so unchanged full responses\nreceive the response revision."
+                    "runs": [
+                        {
+                            "text": "Host the control in "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " so unchanged full responses receive the "
+                        },
+                        {
+                            "text": "response revision",
+                            "link": 2
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Checkbox is server-authoritative.\nA tap emits the inverse Boolean as one proposal, but the visible checkmark\nremains at the last value published by PHP. An accepted response changes the\nvisible state; a rejected response republishes the previous state. Either\nresponse clears the pending proposal guard. Programmatic publications update\nthe checkmark without emitting @change."
+                    "runs": [
+                        {
+                            "text": "Checkbox is "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 3
+                        },
+                        {
+                            "text": ". A tap emits the inverse Boolean as one proposal, but the visible checkmark remains at the last value published by PHP. An accepted response changes the visible state; a rejected response republishes the previous state. Either response clears the pending proposal guard. Programmatic publications update the checkmark without emitting "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use native:model or native:model.live. Deferred blur, lazy, and\ndebounce synchronisation modes are rejected."
-                }
-            ],
-            "links": [
-                {
-                    "label": "response revision",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
-                },
-                {
-                    "label": "server-authoritative",
-                    "url": "../concepts/server-authoritative-state.md"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": ". Deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "lazy",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " synchronisation modes are rejected."
+                        }
+                    ]
                 }
             ]
         },
@@ -192,37 +584,129 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "When disabled is true, Checkbox stays visible with its accepted checked or\nunchecked state. It cannot emit a proposal or @change event."
+                    "runs": [
+                        {
+                            "text": "When "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " is "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": ", Checkbox stays visible with its accepted checked or unchecked state. It cannot emit a proposal or "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " event."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Provide a visible label or an explicit a11y-label; Firstlight warns during\ndevelopment when both are blank. Label, value, required state, hint, helper or\nerror feedback, and the native checkbox role form one accessibility target.\nThe visual checkmark is decorative to avoid a second focus stop."
+                    "runs": [
+                        {
+                            "text": "Provide a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "; Firstlight warns during development when both are blank. Label, value, required state, hint, helper or error feedback, and the native checkbox role form one accessibility target. The visual checkmark is decorative to avoid a second focus stop."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "iOS provides a minimum 44-point target and exposes a toggle trait with checked\nstate. Android provides a minimum 48-dp target with Role.Checkbox and one\nTalkBack focus stop. Both platforms support wrapping text and system text\nscaling."
+                    "runs": [
+                        {
+                            "text": "iOS provides a minimum 44-point target and exposes a toggle trait with checked state. Android provides a minimum 48-dp target with "
+                        },
+                        {
+                            "text": "Role.Checkbox",
+                            "code": true
+                        },
+                        {
+                            "text": " and one TalkBack focus stop. Both platforms support wrapping text and system text scaling."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject non-Boolean props and unsupported attributes\nbefore publication. User validation is separate: screens that\nuse ValidatesFields auto-bind the first MessageBag message for the field's\nnative:model or error-for name. An authored error wins. required is\ndisplay metadata and does not run Laravel rules. See\nValidate fields. Error text replaces helper\ntext and is included in accessibility semantics."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject non-Boolean props and unsupported attributes before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " is display metadata and does not run Laravel rules. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 4
+                        },
+                        {
+                            "text": ". Error text replaces helper text and is included in accessibility semantics."
+                        }
+                    ]
                 }
             ]
         },
@@ -231,23 +715,45 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses an idiomatic SwiftUI checkmarked row built from a native Button and\nSF Symbol state affordance. Android uses a genuine Material 3 Checkbox inside\na row-owned checkbox target. The public EDGE API and server-authoritative state\ncontract are shared, while geometry and interaction presentation remain native\nto each platform."
+                    "runs": [
+                        {
+                            "text": "iOS uses an idiomatic SwiftUI checkmarked row built from a native "
+                        },
+                        {
+                            "text": "Button",
+                            "code": true
+                        },
+                        {
+                            "text": " and SF Symbol state affordance. Android uses a genuine Material 3 "
+                        },
+                        {
+                            "text": "Checkbox",
+                            "code": true
+                        },
+                        {
+                            "text": " inside a row-owned checkbox target. The public EDGE API and server-authoritative state contract are shared, while geometry and interaction presentation remain native to each platform."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Checkbox supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility\nreference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Checkbox supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 5
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
                 }
             ]
         },
@@ -274,8 +780,33 @@
                     "src": "documentation/screenshots/checkbox/android-dark.png",
                     "text": "Checkbox on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Switch",
+            "url": "switch.md"
+        },
+        {
+            "label": "Choice Group",
+            "url": "choice-group.md"
+        },
+        {
+            "label": "response revision",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

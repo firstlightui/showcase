@@ -15,17 +15,38 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight submits forms through an ordinary Button press and a PHP screen\nmethod. There is no <firstlight:form> container, client-side validator, or\nform schema."
+                    "runs": [
+                        {
+                            "text": "Firstlight submits forms through an ordinary Button press and a PHP screen method. There is no "
+                        },
+                        {
+                            "text": "<firstlight:form>",
+                            "code": true
+                        },
+                        {
+                            "text": " container, client-side validator, or form schema."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "declare-the-screen": {
             "title": "Declare the screen",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Extend FirstlightUI\\NativeComponent to use the form submission and field\nvalidation helpers. Declare Laravel rules against the public properties bound\nby your fields:"
+                    "runs": [
+                        {
+                            "text": "Extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " to use the form submission and field validation helpers. Declare Laravel rules against the public properties bound by your fields:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -34,17 +55,52 @@
                 },
                 {
                     "type": "text",
-                    "text": "Screens that extend Native\\Mobile\\Edge\\NativeComponent directly can opt in\nwith both FirstlightUI\\Concerns\\ValidatesFields and\nFirstlightUI\\Concerns\\SubmitsForms."
+                    "runs": [
+                        {
+                            "text": "Screens that extend "
+                        },
+                        {
+                            "text": "Native\\Mobile\\Edge\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " directly can opt in with both "
+                        },
+                        {
+                            "text": "FirstlightUI\\Concerns\\ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "FirstlightUI\\Concerns\\SubmitsForms",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "bind-the-fields-and-button": {
             "title": "Bind the fields and Button",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use the existing fields, native:model, and Button:"
+                    "runs": [
+                        {
+                            "text": "Use the existing fields, "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", and Button:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -53,11 +109,100 @@
                 },
                 {
                     "type": "text",
-                    "text": "submit() runs $this->validate() first. A validation failure returns\nfalse, skips the callable and success Feedback, and lets\nValidatesFields publish each first Laravel message through the matching\nfield's native error slot. Screen readers hear a summary and move to the\nfirst invalid field; add <firstlight:callout error-summary /> for a visible\nsummary. See Validate Firstlight fields\nfor rule sources, Form Requests, custom messages, and explicit error binding. The\nValidatesFields reference lists the method\ncontract and participating fields."
+                    "runs": [
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " runs "
+                        },
+                        {
+                            "text": "$this->validate()",
+                            "code": true
+                        },
+                        {
+                            "text": " first. A validation failure returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ", skips the callable and success Feedback, and lets "
+                        },
+                        {
+                            "text": "ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " publish each first Laravel message through the matching field's native "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " slot. Screen readers hear a summary and move to the first invalid field; add "
+                        },
+                        {
+                            "text": "<firstlight:callout error-summary />",
+                            "code": true
+                        },
+                        {
+                            "text": " for a visible summary. See "
+                        },
+                        {
+                            "text": "Validate Firstlight fields",
+                            "link": 0
+                        },
+                        {
+                            "text": " for rule sources, Form Requests, custom messages, and explicit error binding. The "
+                        },
+                        {
+                            "text": "ValidatesFields reference",
+                            "link": 1
+                        },
+                        {
+                            "text": " lists the method contract and participating fields."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "After successful validation, submit() runs the callable and sends\nFeedback::success($successMessage)->send() when the message is non-empty.\nIt then returns true. Pass validate: false only when the action does not\nneed field validation:"
+                    "runs": [
+                        {
+                            "text": "After successful validation, "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " runs the callable and sends "
+                        },
+                        {
+                            "text": "Feedback::success($successMessage)->send()",
+                            "code": true
+                        },
+                        {
+                            "text": " when the message is non-empty. It then returns "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": ". Pass "
+                        },
+                        {
+                            "text": "validate: false",
+                            "code": true
+                        },
+                        {
+                            "text": " only when the action does not need field validation:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -66,7 +211,32 @@
                 },
                 {
                     "type": "text",
-                    "text": "To fail the whole form from inside the action, throw Laravel's\nValidationException. Its messages replace the screen's error bag, submit()\nreturns false, and no success Feedback is sent:"
+                    "runs": [
+                        {
+                            "text": "To fail the whole form from inside the action, throw Laravel's "
+                        },
+                        {
+                            "text": "ValidationException",
+                            "code": true
+                        },
+                        {
+                            "text": ". Its messages replace the screen's error bag, "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ", and no success Feedback is sent:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -80,17 +250,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Other unexpected exceptions from the callable are not converted to Feedback or\nswallowed."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate Firstlight fields",
-                    "url": "validate-fields.md"
-                },
-                {
-                    "label": "ValidatesFields reference",
-                    "url": "../reference/validates-fields.md"
+                    "text": "Other unexpected exceptions from the callable are not converted to Feedback or swallowed."
                 }
             ]
         },
@@ -99,18 +259,134 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "$submitting is true while validation and the callable run. Re-entering\nsubmit() on the same PHP component during that interval returns false\nwithout validating, calling the action, or sending Feedback. submit() always\nclears $submitting in finally, so binding Button loading or disabled to\n$this->submitting does not flash during the default one-request path."
+                    "runs": [
+                        {
+                            "text": "$submitting",
+                            "code": true
+                        },
+                        {
+                            "text": " is "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " while validation and the callable run. Re-entering "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " on the same PHP component during that interval returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " without validating, calling the action, or sending Feedback. "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " always clears "
+                        },
+                        {
+                            "text": "$submitting",
+                            "code": true
+                        },
+                        {
+                            "text": " in "
+                        },
+                        {
+                            "text": "finally",
+                            "code": true
+                        },
+                        {
+                            "text": ", so binding Button "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "$this->submitting",
+                            "code": true
+                        },
+                        {
+                            "text": " does not flash during the default one-request path."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "NativePHP handles a press and then compiles one Element Tree afterward. A\ndevice-visible loading frame requires application code to set $this->submitting = true outside submit(), publish that tree, and clear the flag on a later\nrequest."
+                    "runs": [
+                        {
+                            "text": "NativePHP handles a press and then compiles one Element Tree afterward. A device-visible loading frame requires application code to set "
+                        },
+                        {
+                            "text": "$this->submitting = true",
+                            "code": true
+                        },
+                        {
+                            "text": " outside "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": ", publish that tree, and clear the flag on a later request."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The helper does not publish an intermediate tree, call publishPlaceholder(),\nor add a client-side loading mechanism. publishPlaceholder() belongs to\nlazy screen mounting, not form submission."
+                    "runs": [
+                        {
+                            "text": "The helper does not publish an intermediate tree, call "
+                        },
+                        {
+                            "text": "publishPlaceholder()",
+                            "code": true
+                        },
+                        {
+                            "text": ", or add a client-side loading mechanism. "
+                        },
+                        {
+                            "text": "publishPlaceholder()",
+                            "code": true
+                        },
+                        {
+                            "text": " belongs to lazy screen mounting, not form submission."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Validate Firstlight fields",
+            "url": "validate-fields.md"
+        },
+        {
+            "label": "ValidatesFields reference",
+            "url": "../reference/validates-fields.md"
+        }
+    ]
 }

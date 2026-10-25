@@ -18,25 +18,36 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Bottom Sheet presents authored content in a panel that slides up from the\nbottom of the screen. PHP owns whether the sheet is requested; each platform\nowns sheet chrome and drag to dismiss. The sheet opens at the height of its\ncontent."
+                    "text": "Bottom Sheet presents authored content in a panel that slides up from the bottom of the screen. PHP owns whether the sheet is requested; each platform owns sheet chrome and drag to dismiss. The sheet opens at the height of its content."
                 },
                 {
                     "type": "text",
-                    "text": "Use Modal for a full-screen overlay. Use\nAlert Dialog for a single acknowledgement. Use\nConfirmation Dialog for a confirm/cancel\ndecision."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Modal",
-                    "url": "modal.md"
-                },
-                {
-                    "label": "Alert Dialog",
-                    "url": "alert-dialog.md"
-                },
-                {
-                    "label": "Confirmation Dialog",
-                    "url": "confirmation-dialog.md"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "Modal",
+                            "link": 0
+                        },
+                        {
+                            "text": " for a full-screen overlay. Use "
+                        },
+                        {
+                            "text": "Alert Dialog",
+                            "link": 1
+                        },
+                        {
+                            "text": " for a single acknowledgement. Use "
+                        },
+                        {
+                            "text": "Confirmation Dialog",
+                            "link": 2
+                        },
+                        {
+                            "text": " for a confirm/cancel decision."
+                        }
+                    ]
                 }
             ]
         },
@@ -50,74 +61,253 @@
                 },
                 {
                     "type": "text",
-                    "text": "The dismiss handler should set $showingFilters to false."
+                    "runs": [
+                        {
+                            "text": "The dismiss handler should set "
+                        },
+                        {
+                            "text": "$showingFilters",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The visible title is ordinary text styled as a heading. Mobile UI text has no\nheading role yet, so screen readers announce the surface by its a11y-label."
+                    "runs": [
+                        {
+                            "text": "The visible title is ordinary text styled as a heading. Mobile UI text has no heading role yet, so screen readers announce the surface by its "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "visible",
-                    "text": "Accepted type: bool\nPurpose: Server-controlled presentation request. Defaults to closed."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "visible",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Server-controlled presentation request. Defaults to closed."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Accessible name for the sheet."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Accessible name for the sheet."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: non-empty string\nPurpose: Supplementary screen-reader guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supplementary screen-reader guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@dismiss is required. It runs when the user drags the sheet down, taps\noutside, or uses system back. Set the bound visibility property to false in\nthat handler."
+                    "runs": [
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " is required. It runs when the user drags the sheet down, taps outside, or uses system back. Set the bound visibility property to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " in that handler."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "There is no overlay @press, native:model, dismissible, or detents\nAPI. You don't set the height: the sheet measures its content."
+                    "runs": [
+                        {
+                            "text": "There is no overlay "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "dismissible",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "detents",
+                            "code": true
+                        },
+                        {
+                            "text": " API. You don't set the height: the sheet measures its content."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "height": {
             "title": "Height",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The sheet opens at the height of its content on both platforms. A short sheet\nstays short, and a sheet taller than half the screen opens fully, so a button\nat the bottom is visible without dragging. The height follows the content when\nit changes, including for larger text sizes, up to a full-height sheet.\nContent taller than that scrolls on iOS but is clipped on Android, so keep\nsheet content shorter than the screen."
+                    "text": "The sheet opens at the height of its content on both platforms. A short sheet stays short, and a sheet taller than half the screen opens fully, so a button at the bottom is visible without dragging. The height follows the content when it changes, including for larger text sizes, up to a full-height sheet. Content taller than that scrolls on iOS but is clipped on Android, so keep sheet content shorter than the screen."
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-expression": {
             "title": "Platform expression",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a SwiftUI .sheet with a drag indicator and a height detent\nmeasured from the content. Android uses Material 3 ModalBottomSheet sized to\nits content without the half-height stop. Theme tokens own surface and scrim\ncolour."
+                    "runs": [
+                        {
+                            "text": "iOS uses a SwiftUI "
+                        },
+                        {
+                            "text": ".sheet",
+                            "code": true
+                        },
+                        {
+                            "text": " with a drag indicator and a height detent measured from the content. Android uses Material 3 "
+                        },
+                        {
+                            "text": "ModalBottomSheet",
+                            "code": true
+                        },
+                        {
+                            "text": " sized to its content without the half-height stop. Theme tokens own surface and scrim colour."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -142,8 +332,21 @@
                     "src": "documentation/screenshots/bottom-sheet/android-dark.png",
                     "text": "Bottom Sheet on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Modal",
+            "url": "modal.md"
+        },
+        {
+            "label": "Alert Dialog",
+            "url": "alert-dialog.md"
+        },
+        {
+            "label": "Confirmation Dialog",
+            "url": "confirmation-dialog.md"
+        }
+    ]
 }

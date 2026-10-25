@@ -28,13 +28,18 @@
                 },
                 {
                     "type": "text",
-                    "text": "Use Segmented to choose a value or filter for the content already on screen. Use Tabs to choose which content is on screen."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Segmented",
-                    "url": "segmented.md"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "Segmented",
+                            "link": 0
+                        },
+                        {
+                            "text": " to choose a value or filter for the content already on screen. Use Tabs to choose which content is on screen."
+                        }
+                    ]
                 }
             ]
         },
@@ -60,46 +65,228 @@
                     "language": "blade",
                     "text": "<firstlight:tabs\n    native:model=\"tab\"\n    :tabs=\"['overview' => 'Overview', 'sites' => 'Sites', 'deploys' => 'Deployments', 'manage' => 'Manage']\"\n    label=\"Server sections\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "tabs",
-                    "text": "Accepted type: array\nPurpose: A value-to-label map, or a list of rich tabs."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tabs",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "A value-to-label map, or a list of rich tabs."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string or null\nPurpose: Stable value of the visible section. null selects no tab."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Stable value of the visible section. "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": " selects no tab."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Accessible name of the tab group. Tabs draws no visible group label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Accessible name of the tab group. Tabs draws no visible group label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Disables every tab."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Disables every tab."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Overrides label as the group's accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Overrides "
+                                },
+                                {
+                                    "text": "label",
+                                    "code": true
+                                },
+                                {
+                                    "text": " as the group's accessible name."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance for the group."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance for the group."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -107,48 +294,243 @@
                 },
                 {
                     "type": "definition",
-                    "label": "value",
-                    "text": "Accepted type: non-empty string\nPurpose: Stable tab value. Required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Stable tab value. Required."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: non-blank string\nPurpose: Visible tab label. Required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-blank "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible tab label. Required."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "badge",
-                    "text": "Accepted type: non-negative int or null\nPurpose: Count shown on the tab. 0 and null hide it; counts above 99 show 99+."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "badge",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-negative "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Count shown on the tab. "
+                                },
+                                {
+                                    "text": "0",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": " hide it; counts above 99 show "
+                                },
+                                {
+                                    "text": "99+",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "badge-a11y-label / badgeA11yLabel",
-                    "text": "Accepted type: string\nPurpose: Spoken badge text, such as 2 failed. Defaults to the displayed count."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "badge-a11y-label",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "badgeA11yLabel",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Spoken badge text, such as "
+                                },
+                                {
+                                    "text": "2 failed",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Defaults to the displayed count."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Makes one tab unavailable."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Makes one tab unavailable."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the selected tab's stable value. native:model normally generates this callback. Tapping the selected tab or a disabled tab emits nothing."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the selected tab's stable value. "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally generates this callback. Tapping the selected tab or a disabled tab emits nothing."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Tabs is server-authoritative. A tap emits immediately, but the selection moves only when PHP publishes the new value. To reject a change, bind :value and decide in your handler:"
+                    "runs": [
+                        {
+                            "text": "Tabs is "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 1
+                        },
+                        {
+                            "text": ". A tap emits immediately, but the selection moves only when PHP publishes the new value. To reject a change, bind "
+                        },
+                        {
+                            "text": ":value",
+                            "code": true
+                        },
+                        {
+                            "text": " and decide in your handler:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -162,13 +544,60 @@
                 },
                 {
                     "type": "text",
-                    "text": "Changing $tab from PHP, including in mount(), selects that tab without emitting @change. Use plain native:model or native:model.live; deferred blur and debounce modes are rejected."
-                }
-            ],
-            "links": [
-                {
-                    "label": "server-authoritative",
-                    "url": "../concepts/server-authoritative-state.md"
+                    "runs": [
+                        {
+                            "text": "Changing "
+                        },
+                        {
+                            "text": "$tab",
+                            "code": true
+                        },
+                        {
+                            "text": " from PHP, including in "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": ", selects that tab without emitting "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ". Use plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": "; deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " modes are rejected."
+                        }
+                    ]
                 }
             ]
         },
@@ -191,10 +620,27 @@
                 },
                 {
                     "type": "text",
-                    "text": "The NativePHP router passes route parameters, not query strings, so use /servers/12/deploys rather than /servers/12?tab=deploys."
+                    "runs": [
+                        {
+                            "text": "The NativePHP router passes route parameters, not query strings, so use "
+                        },
+                        {
+                            "text": "/servers/12/deploys",
+                            "code": true
+                        },
+                        {
+                            "text": " rather than "
+                        },
+                        {
+                            "text": "/servers/12?tab=deploys",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "tabs-and-values": {
             "title": "Tabs and values",
@@ -205,75 +651,264 @@
                 },
                 {
                     "type": "text",
-                    "text": "Values are non-empty strings and must be unique. PHP turns numeric-string array keys such as '1' into integers, so integer values are rejected: use words such as 'overview'. A selected value that is not in tabs leaves every tab unselected; Tabs never selects the first tab for you."
+                    "runs": [
+                        {
+                            "text": "Values are non-empty strings and must be unique. PHP turns numeric-string array keys such as "
+                        },
+                        {
+                            "text": "'1'",
+                            "code": true
+                        },
+                        {
+                            "text": " into integers, so integer values are rejected: use words such as "
+                        },
+                        {
+                            "text": "'overview'",
+                            "code": true
+                        },
+                        {
+                            "text": ". A selected value that is not in "
+                        },
+                        {
+                            "text": "tabs",
+                            "code": true
+                        },
+                        {
+                            "text": " leaves every tab unselected; Tabs never selects the first tab for you."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Per-tab icons are not supported yet. A native iOS segment shows a title or an image but not both, so Firstlight defers icons rather than ship them on one platform."
                 }
-            ],
-            "links": []
+            ]
         },
         "disabled-behaviour": {
             "title": "Disabled behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "disabled prevents every tab from emitting. A rich tab's disabled: true prevents only that tab from emitting and dims it."
+                    "runs": [
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " prevents every tab from emitting. A rich tab's "
+                        },
+                        {
+                            "text": "disabled: true",
+                            "code": true
+                        },
+                        {
+                            "text": " prevents only that tab from emitting and dims it."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Provide label or a11y-label; Firstlight warns during development when both are blank. VoiceOver and TalkBack announce each tab with its label and badge text, its tab role, its selected or disabled state, and its position, such as \"Tab 2 of 4\". Selection is shown by the native indicator or segment fill, not by colour alone, and every tab meets the platform minimum target of 44 points on iOS and 48 dp on Android."
+                    "runs": [
+                        {
+                            "text": "Provide "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "; Firstlight warns during development when both are blank. VoiceOver and TalkBack announce each tab with its label and badge text, its tab role, its selected or disabled state, and its position, such as \"Tab 2 of 4\". Selection is shown by the native indicator or segment fill, not by colour alone, and every tab meets the platform minimum target of 44 points on iOS and 48 dp on Android."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Tabs fails before publication when tabs is not an array, has one or more than five entries, has blank labels, duplicate or non-string values, unknown rich fields, a non-integer or negative badge, a non-boolean disabled, or icon fields. It also rejects options, helper, error, required, multiple, icon, variant, and scrollable because they do not belong to tab navigation, and a non-string selected value."
+                    "runs": [
+                        {
+                            "text": "Tabs fails before publication when "
+                        },
+                        {
+                            "text": "tabs",
+                            "code": true
+                        },
+                        {
+                            "text": " is not an array, has one or more than five entries, has blank labels, duplicate or non-string values, unknown rich fields, a non-integer or negative "
+                        },
+                        {
+                            "text": "badge",
+                            "code": true
+                        },
+                        {
+                            "text": ", a non-boolean "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ", or icon fields. It also rejects "
+                        },
+                        {
+                            "text": "options",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "helper",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "multiple",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "variant",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "scrollable",
+                            "code": true
+                        },
+                        {
+                            "text": " because they do not belong to tab navigation, and a non-string selected value."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a native UISegmentedControl. Place Tabs full width directly under the navigation bar: iOS insets the segmented control by the system margin, while the Android tab row spans the width. Segments size to their labels, and a visible count follows the label, such as Deployments (2). VoiceOver receives the group as a tab bar with one selectable tab per segment. Like Segmented, segment titles stop growing at accessibility text sizes and may truncate; VoiceOver still reads each full name."
+                    "runs": [
+                        {
+                            "text": "iOS uses a native "
+                        },
+                        {
+                            "text": "UISegmentedControl",
+                            "code": true
+                        },
+                        {
+                            "text": ". Place Tabs full width directly under the navigation bar: iOS insets the segmented control by the system margin, while the Android tab row spans the width. Segments size to their labels, and a visible count follows the label, such as "
+                        },
+                        {
+                            "text": "Deployments (2)",
+                            "code": true
+                        },
+                        {
+                            "text": ". VoiceOver receives the group as a tab bar with one selectable tab per segment. Like Segmented, segment titles stop growing at accessibility text sizes and may truncate; VoiceOver still reads each full name."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Android uses Material 3 PrimaryTabRow with its moving indicator and a Material 3 Badge after the label. When a label does not fit its equal share of the width on one line, including at large font scales, the row switches to Material's PrimaryScrollableTabRow, as TabLayout does in its automatic mode."
+                    "runs": [
+                        {
+                            "text": "Android uses Material 3 "
+                        },
+                        {
+                            "text": "PrimaryTabRow",
+                            "code": true
+                        },
+                        {
+                            "text": " with its moving indicator and a Material 3 "
+                        },
+                        {
+                            "text": "Badge",
+                            "code": true
+                        },
+                        {
+                            "text": " after the label. When a label does not fit its equal share of the width on one line, including at large font scales, the row switches to Material's "
+                        },
+                        {
+                            "text": "PrimaryScrollableTabRow",
+                            "code": true
+                        },
+                        {
+                            "text": ", as "
+                        },
+                        {
+                            "text": "TabLayout",
+                            "code": true
+                        },
+                        {
+                            "text": " does in its automatic mode."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Tabs does not pin itself under the top bar or animate between sections. Swiping between sections is not supported."
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Tabs supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Tabs supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 2
+                        },
+                        {
+                            "text": " and requires both native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -300,8 +935,21 @@
                     "src": "documentation/screenshots/tabs/android-dark.png",
                     "text": "Tabs on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Segmented",
+            "url": "segmented.md"
+        },
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

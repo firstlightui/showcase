@@ -80,7 +80,7 @@ it('puts Gallery, Recipes, Components and Docs in one native tab bar', function 
     'gallery' => ['/', 'Gallery', 'Gallery'],
     'recipes' => ['/recipes', 'Recipes', 'Recipes'],
     'components' => ['/components', 'Components', 'Components'],
-    'documentation' => ['/docs', 'Documentation', 'Docs'],
+    'documentation' => ['/docs', 'Docs', 'Docs'],
 ]);
 
 it('lists every published component with a tinted icon and no Blade tag overline', function () {

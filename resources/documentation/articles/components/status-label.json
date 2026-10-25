@@ -25,8 +25,7 @@
                     "type": "text",
                     "text": "Status Label presents short display-only metadata or status text as a native capsule. Use an appropriate interactive control when the interface must respond to a press."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -40,64 +39,374 @@
                     "type": "text",
                     "text": "The same authored tag renders on iOS and Android."
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: non-empty string\nPurpose: Visible status text. Required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible status text. Required."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "tone",
-                    "text": "Accepted type: neutral, info, success, warning, or danger\nPurpose: Semantic colour intent. Defaults to neutral."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Semantic colour intent. Defaults to "
+                                },
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon",
-                    "text": "Accepted type: string or null\nPurpose: Optional decorative leading icon; shared fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional decorative leading icon; shared fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-ios",
-                    "text": "Accepted type: IosSymbol, string, or null\nPurpose: iOS override of icon."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-ios",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "IosSymbol",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "iOS override of "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-android",
-                    "text": "Accepted type: AndroidSymbol, string, or null\nPurpose: Android override of icon."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "AndroidSymbol",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Android override of "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Replaces the visible text as the accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Replaces the visible text as the accessible name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Adds supplementary VoiceOver or TalkBack context."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Adds supplementary VoiceOver or TalkBack context."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "icons": {
             "title": "Icons",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Icons use NativePHP's Native\\Mobile\\Icon\\IconResolver. PHP also accepts iconIos and iconAndroid aliases. The fluent API is StatusLabel::make('Warning')->icon('warning', ios: 'exclamationmark.triangle', android: 'warning'); typed symbols implement Native\\Mobile\\Icon\\IosSymbol or AndroidSymbol. Each platform uses its override when supplied, otherwise the shared name; tooling with no platform uses the shared name. Omitting icons keeps the text-only presentation. Android typed variants are retained in the published props; NativePHP's current Material icon-font helper renders the resolved name, not a separate variant font."
+                    "runs": [
+                        {
+                            "text": "Icons use NativePHP's "
+                        },
+                        {
+                            "text": "Native\\Mobile\\Icon\\IconResolver",
+                            "code": true
+                        },
+                        {
+                            "text": ". PHP also accepts "
+                        },
+                        {
+                            "text": "iconIos",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "iconAndroid",
+                            "code": true
+                        },
+                        {
+                            "text": " aliases. The fluent API is "
+                        },
+                        {
+                            "text": "StatusLabel::make('Warning')->icon('warning', ios: 'exclamationmark.triangle', android: 'warning')",
+                            "code": true
+                        },
+                        {
+                            "text": "; typed symbols implement "
+                        },
+                        {
+                            "text": "Native\\Mobile\\Icon\\IosSymbol",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "AndroidSymbol",
+                            "code": true
+                        },
+                        {
+                            "text": ". Each platform uses its override when supplied, otherwise the shared name; tooling with no platform uses the shared name. Omitting icons keeps the text-only presentation. Android typed variants are retained in the published props; NativePHP's current Material icon-font helper renders the resolved name, not a separate variant font."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-values": {
             "title": "Events and values",
@@ -108,10 +417,76 @@
                 },
                 {
                     "type": "text",
-                    "text": "Do not use native:model, @change, @press, value, disabled, loading, error, required, or helper. Firstlight rejects those attributes instead of silently adding interactive or field semantics."
+                    "runs": [
+                        {
+                            "text": "Do not use "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "helper",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight rejects those attributes instead of silently adding interactive or field semantics."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
@@ -120,25 +495,59 @@
                     "type": "text",
                     "text": "The component renders the latest published Element Tree metadata. It keeps no native selection, editing buffer, pending proposal, or animation state. Programmatic updates reconcile by the element's stable node ID and do not emit events."
                 }
-            ],
-            "links": []
+            ]
         },
         "disabled-loading-and-error-behaviour": {
             "title": "Disabled, loading, and error behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Disabled, loading, and validation states do not apply to display-only status text. Choose the semantic tone that describes the current metadata and publish a new label or tone when that status changes."
+                    "runs": [
+                        {
+                            "text": "Disabled, loading, and validation states do not apply to display-only status text. Choose the semantic "
+                        },
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": " that describes the current metadata and publish a new label or tone when that status changes."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The visible label is the accessible name by default. a11y-label replaces that name, and a11y-hint adds context. Both renderers expose static text semantics without a button, selected, disabled, or live-region role."
+                    "runs": [
+                        {
+                            "text": "The visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " is the accessible name by default. "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces that name, and "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": " adds context. Both renderers expose static text semantics without a button, selected, disabled, or live-region role."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -148,45 +557,115 @@
                     "type": "text",
                     "text": "Text follows Dynamic Type on iOS and system font scaling on Android. Long labels and accessibility sizes expand or wrap rather than truncating their meaning. Semantic theme colours are checked at render time; when a customised foreground and background are below 4.5:1 contrast, Firstlight uses whichever of black or white has the stronger ratio."
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-failure-behaviour": {
             "title": "Validation and failure behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "A missing, null, empty, or whitespace-only label throws an InvalidArgumentException. An unsupported tone also throws and lists the accepted values. Malformed tone data that reaches a native renderer unexpectedly falls back defensively to neutral instead of crashing the host."
+                    "runs": [
+                        {
+                            "text": "A missing, "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": ", empty, or whitespace-only "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " throws an "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": ". An unsupported tone also throws and lists the accepted values. Malformed tone data that reaches a native renderer unexpectedly falls back defensively to "
+                        },
+                        {
+                            "text": "neutral",
+                            "code": true
+                        },
+                        {
+                            "text": " instead of crashing the host."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Non-string shared icons and platform overrides other than strings, matching platform symbol types, or null throw with the public prop name."
+                    "runs": [
+                        {
+                            "text": "Non-string shared icons and platform overrides other than strings, matching platform symbol types, or "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " throw with the public prop name."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS composes SwiftUI Text with native text accessibility. A single line keeps its pill shape; for wrapped labels, the corner radius is capped at half the scaled single-line height plus vertical padding so all text remains on the contrasting background. Android composes Material 3 Text in a capsule-shaped Surface with merged TalkBack semantics. Both use NativePHP semantic theme tokens while retaining platform-native typography, scaling, colour-scheme, and layout behaviour."
+                    "runs": [
+                        {
+                            "text": "iOS composes SwiftUI "
+                        },
+                        {
+                            "text": "Text",
+                            "code": true
+                        },
+                        {
+                            "text": " with native text accessibility. A single line keeps its pill shape; for wrapped labels, the corner radius is capped at half the scaled single-line height plus vertical padding so all text remains on the contrasting background. Android composes Material 3 "
+                        },
+                        {
+                            "text": "Text",
+                            "code": true
+                        },
+                        {
+                            "text": " in a capsule-shaped "
+                        },
+                        {
+                            "text": "Surface",
+                            "code": true
+                        },
+                        {
+                            "text": " with merged TalkBack semantics. Both use NativePHP semantic theme tokens while retaining platform-native typography, scaling, colour-scheme, and layout behaviour."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Status Label supports the versions listed in the current compatibility reference and requires both native renderers to be compiled into the host application."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Status Label supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 0
+                        },
+                        {
+                            "text": " and requires both native renderers to be compiled into the host application."
+                        }
+                    ]
                 }
             ]
         },
@@ -195,7 +674,7 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "These native captures use iPhone 17 Pro / iOS 26.5 and an Android 17 (API 37)\nemulator. Draft retains the optional text-only presentation; the other\ntones include decorative platform icons."
+                    "text": "These native captures use iPhone 17 Pro / iOS 26.5 and an Android 17 (API 37) emulator. Draft retains the optional text-only presentation; the other tones include decorative platform icons."
                 },
                 {
                     "type": "image",
@@ -219,7 +698,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Long labels wrap within their fill at maximum iOS accessibility text size and\nAndroid font scale 2.0. The interactive showcase is scrolled to show the complete\nlong label below."
+                    "text": "Long labels wrap within their fill at maximum iOS accessibility text size and Android font scale 2.0. The interactive showcase is scrolled to show the complete long label below."
                 },
                 {
                     "type": "image",
@@ -233,10 +712,15 @@
                 },
                 {
                     "type": "text",
-                    "text": "These are simulator/emulator visual checks, not spoken VoiceOver/TalkBack or\nphysical-device release qualification."
+                    "text": "These are simulator/emulator visual checks, not spoken VoiceOver/TalkBack or physical-device release qualification."
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

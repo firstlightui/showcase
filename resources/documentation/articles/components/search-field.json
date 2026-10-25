@@ -18,10 +18,9 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Search Field enters and submits one query using each platform's native search,\nkeyboard, selection, clear, focus, and accessibility behaviour."
+                    "text": "Search Field enters and submits one query using each platform's native search, keyboard, selection, clear, focus, and accessibility behaviour."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -31,61 +30,285 @@
                     "language": "blade",
                     "text": "<firstlight:search-field\n    placeholder=\"Search referrals\"\n    a11y-label=\"Search referrals\"\n    a11y-hint=\"Enter a patient, provider, or specialty\"\n    autocapitalize=\"words\"\n    :autocorrect=\"false\"\n    native:model.debounce.300ms=\"query\"\n    @submit=\"search\"\n/>"
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: string\nPurpose: Published query; omission defaults to ''."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Published query; omission defaults to "
+                                },
+                                {
+                                    "text": "''",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "placeholder",
-                    "text": "Accepted type: string\nPurpose: Empty-query prompt; never the accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "placeholder",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Empty-query prompt; never the accessible name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents focus, editing, clearing, change, and submit."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents focus, editing, clearing, change, and submit."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "autocapitalize",
-                    "text": "Accepted type: enum string\nPurpose: none, sentences, words, or characters; omission keeps platform policy."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "autocapitalize",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "enum string"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "sentences",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "words",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "characters",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; omission keeps platform policy."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "autocorrect",
-                    "text": "Accepted type: bool\nPurpose: Explicitly enables or disables correction; omission keeps platform policy."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "autocorrect",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicitly enables or disables correction; omission keeps platform policy."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Required accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required accessible name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout for the complete field."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The search icon and clear button are semantic native affordances. They are not\nconfigurable icon slots. Both platforms use the package chrome\nclear_search accessibility label on the clear control. See\nLocalize chrome. Search Field has no visible label,\nhelper, error, required, read-only, secure, keyboard, content-type, size, tone,\nor variant API."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
+                    "runs": [
+                        {
+                            "text": "The search icon and clear button are semantic native affordances. They are not configurable icon slots. Both platforms use the package chrome "
+                        },
+                        {
+                            "text": "clear_search",
+                            "code": true
+                        },
+                        {
+                            "text": " accessibility label on the clear control. See "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": ". Search Field has no visible label, helper, error, required, read-only, secure, keyboard, content-type, size, tone, or variant API."
+                        }
+                    ]
                 }
             ]
         },
@@ -94,50 +317,194 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the current query string. @submit first flushes any pending\nchange and then receives the query. Submitting an empty query still calls the\nhandler."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the current query string. "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": " first flushes any pending change and then receives the query. Submitting an empty query still calls the handler."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Plain native:model and .live publish every edit. .blur and .lazy publish\non focus loss or submit. .debounce.300ms publishes after the quiet period and\nflushes on focus loss or submit; durations below 50 ms fail."
+                    "runs": [
+                        {
+                            "text": "Plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".live",
+                            "code": true
+                        },
+                        {
+                            "text": " publish every edit. "
+                        },
+                        {
+                            "text": ".blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".lazy",
+                            "code": true
+                        },
+                        {
+                            "text": " publish on focus loss or submit. "
+                        },
+                        {
+                            "text": ".debounce.300ms",
+                            "code": true
+                        },
+                        {
+                            "text": " publishes after the quiet period and flushes on focus loss or submit; durations below 50 ms fail."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "On iOS, pressing a <firstlight:button> while the field is focused publishes\nits pending .blur or .debounce change before the press. Icon Button and\nList Item presses do not flush the field first. On Android, blur/debounce\nchanges are not yet guaranteed to reach PHP before a button press, so if a\nseparate button submits the query, use native:model.live=\"query\" (or plain\nnative:model). For keyboard submission, accept the current query argument\nfrom @submit rather than relying on a separate button to flush it."
+                    "runs": [
+                        {
+                            "text": "On iOS, pressing a "
+                        },
+                        {
+                            "text": "<firstlight:button>",
+                            "code": true
+                        },
+                        {
+                            "text": " while the field is focused publishes its pending "
+                        },
+                        {
+                            "text": ".blur",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": ".debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " change before the press. Icon Button and List Item presses do not flush the field first. On Android, blur/debounce changes are not yet guaranteed to reach PHP before a button press, so if a separate button submits the query, use "
+                        },
+                        {
+                            "text": "native:model.live=\"query\"",
+                            "code": true
+                        },
+                        {
+                            "text": " (or plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": "). For keyboard submission, accept the current query argument from "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": " rather than relying on a separate button to flush it."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Native typing, selection, cursor position, and marked-text composition stay in\nthe focused editing buffer. PHP acknowledgements do not reset focus or selection,\nand programmatic values received while unfocused never emit user events."
+                    "text": "Native typing, selection, cursor position, and marked-text composition stay in the focused editing buffer. PHP acknowledgements do not reset focus or selection, and programmatic values received while unfocused never emit user events."
                 },
                 {
                     "type": "text",
-                    "text": "The native clear action appears for a non-empty enabled query. It retains focus\nand immediately publishes '' through @change, including under blur or\ndebounce synchronisation."
+                    "runs": [
+                        {
+                            "text": "The native clear action appears for a non-empty enabled query. It retains focus and immediately publishes "
+                        },
+                        {
+                            "text": "''",
+                            "code": true
+                        },
+                        {
+                            "text": " through "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", including under blur or debounce synchronisation."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-accessibility": {
             "title": "Validation and accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Values, placeholders, labels, and hints are strict strings. a11y-label is\nmandatory and cannot be blank. Unsupported general-field attributes, invalid\ncapitalization or sync modes, and invalid debounce durations fail with\nactionable exceptions."
+                    "runs": [
+                        {
+                            "text": "Values, placeholders, labels, and hints are strict strings. "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is mandatory and cannot be blank. Unsupported general-field attributes, invalid capitalization or sync modes, and invalid debounce durations fail with actionable exceptions."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The field keeps its native editable-text role, value, focus, and disabled state.\nThe semantic search icon is decorative. The clear action has its own localized\naccessible name and meets the 44-point iOS or 48-dp Android target baseline."
+                    "text": "The field keeps its native editable-text role, value, focus, and disabled state. The semantic search icon is decorative. The clear action has its own localized accessible name and meets the 44-point iOS or 48-dp Android target baseline."
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS embeds UISearchTextField, so UIKit owns search chrome, the search and clear\naffordances, cursor, selection, marked text, keyboard, and Dynamic Type. Android\nuses a Material 3 search-field composition with TextFieldValue, the search IME\naction, Material search/clear affordances, Compose semantics, and font scaling."
+                    "runs": [
+                        {
+                            "text": "iOS embeds "
+                        },
+                        {
+                            "text": "UISearchTextField",
+                            "code": true
+                        },
+                        {
+                            "text": ", so UIKit owns search chrome, the search and clear affordances, cursor, selection, marked text, keyboard, and Dynamic Type. Android uses a Material 3 search-field composition with "
+                        },
+                        {
+                            "text": "TextFieldValue",
+                            "code": true
+                        },
+                        {
+                            "text": ", the search IME action, Material search/clear affordances, Compose semantics, and font scaling."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -162,8 +529,13 @@
                     "src": "documentation/screenshots/search-field/android-dark.png",
                     "text": "Search Field on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        }
+    ]
 }

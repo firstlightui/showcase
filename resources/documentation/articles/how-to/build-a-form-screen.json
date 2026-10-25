@@ -19,29 +19,45 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "This recipe builds the create screen most apps need: labelled fields, Laravel\nvalidation through a Form Request, errors shown by each native field, an error\nfor problems that belong to the whole form, a Save button with a loading state,\nand a return to the previous screen with success Feedback."
+                    "text": "This recipe builds the create screen most apps need: labelled fields, Laravel validation through a Form Request, errors shown by each native field, an error for problems that belong to the whole form, a Save button with a loading state, and a return to the previous screen with success Feedback."
                 },
                 {
                     "type": "text",
-                    "text": "This recipe runs unchanged in the\nshowcase app, where\nFormRecipeTest\nexercises it."
+                    "runs": [
+                        {
+                            "text": "This recipe runs unchanged in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "FormRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use it when several values are checked and saved together. Use the\nsettings recipe when each value saves on its own."
-                }
-            ],
-            "links": [
-                {
-                    "label": "showcase app",
-                    "url": "https://github.com/firstlightui/showcase"
-                },
-                {
-                    "label": "FormRecipeTest",
-                    "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/FormRecipeTest.php"
-                },
-                {
-                    "label": "settings recipe",
-                    "url": "build-a-settings-screen.md"
+                    "runs": [
+                        {
+                            "text": "Use it when several values are checked and saved together. Use the "
+                        },
+                        {
+                            "text": "settings recipe",
+                            "link": 2
+                        },
+                        {
+                            "text": " when each value saves on its own."
+                        }
+                    ]
                 }
             ]
         },
@@ -55,10 +71,27 @@
                 },
                 {
                     "type": "text",
-                    "text": "Register it before any /posts/{post} route so create is not read as an id."
+                    "runs": [
+                        {
+                            "text": "Register it before any "
+                        },
+                        {
+                            "text": "/posts/{post}",
+                            "code": true
+                        },
+                        {
+                            "text": " route so "
+                        },
+                        {
+                            "text": "create",
+                            "code": true
+                        },
+                        {
+                            "text": " is not read as an id."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "2-write-the-form-request": {
             "title": "2. Write the Form Request",
@@ -70,10 +103,9 @@
                 },
                 {
                     "type": "text",
-                    "text": "Declare rules in the order the fields appear. The error summary lists messages\nin rule order."
+                    "text": "Declare rules in the order the fields appear. The error summary lists messages in rule order."
                 }
-            ],
-            "links": []
+            ]
         },
         "3-write-the-screen": {
             "title": "3. Write the screen",
@@ -85,17 +117,70 @@
                 },
                 {
                     "type": "text",
-                    "text": "validate: false stops submit() from running $rules first, because the Form\nRequest supplies them inside the action. Any ValidationException thrown inside\nthe action, from the Form Request or from your own check, is shown on the\nscreen and submit() returns false."
+                    "runs": [
+                        {
+                            "text": "validate: false",
+                            "code": true
+                        },
+                        {
+                            "text": " stops "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " from running "
+                        },
+                        {
+                            "text": "$rules",
+                            "code": true
+                        },
+                        {
+                            "text": " first, because the Form Request supplies them inside the action. Any "
+                        },
+                        {
+                            "text": "ValidationException",
+                            "code": true
+                        },
+                        {
+                            "text": " thrown inside the action, from the Form Request or from your own check, is shown on the screen and "
+                        },
+                        {
+                            "text": "submit()",
+                            "code": true
+                        },
+                        {
+                            "text": " returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "4-write-the-view": {
             "title": "4. Write the view",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Save this as resources/views/native/create-post.blade.php:"
+                    "runs": [
+                        {
+                            "text": "Save this as "
+                        },
+                        {
+                            "text": "resources/views/native/create-post.blade.php",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -104,81 +189,287 @@
                 },
                 {
                     "type": "text",
-                    "text": "No :error wiring is needed. After a failed save, each field shows its first\nmessage in its native error slot, and the Callout shows the form message.\nFor long forms, add <firstlight:callout error-summary /> above the fields to\nlist every message in one place."
+                    "runs": [
+                        {
+                            "text": "No "
+                        },
+                        {
+                            "text": ":error",
+                            "code": true
+                        },
+                        {
+                            "text": " wiring is needed. After a failed save, each field shows its first message in its native error slot, and the Callout shows the "
+                        },
+                        {
+                            "text": "form",
+                            "code": true
+                        },
+                        {
+                            "text": " message. For long forms, add "
+                        },
+                        {
+                            "text": "<firstlight:callout error-summary />",
+                            "code": true
+                        },
+                        {
+                            "text": " above the fields to list every message in one place."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "what-each-platform-shows": {
             "title": "What each platform shows",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "Field errors",
-                    "text": "iOS: Error text under the field with error colouring\nAndroid: Material 3 supporting text in the error state"
+                    "term": {
+                        "text": "Field errors"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Error text under the field with error colouring"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Material 3 supporting text in the error state"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Form error",
-                    "text": "iOS: Danger Callout\nAndroid: Danger Callout"
+                    "term": {
+                        "text": "Form error"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Danger Callout"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Danger Callout"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Screen reader",
-                    "text": "iOS: VoiceOver reads the errors and moves to the first invalid field\nAndroid: TalkBack reads the errors and moves to the first invalid field"
+                    "term": {
+                        "text": "Screen reader"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "VoiceOver reads the errors and moves to the first invalid field"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "TalkBack reads the errors and moves to the first invalid field"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "Success",
-                    "text": "iOS: Returns to the previous screen and shows \"Post created\"\nAndroid: Returns to the previous screen and shows \"Post created\""
+                    "term": {
+                        "text": "Success"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Returns to the previous screen and shows \"Post created\""
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Returns to the previous screen and shows \"Post created\""
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "rules-to-keep": {
             "title": "Rules to keep",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Do not wrap save() in try/catch. Firstlight shows validation errors for\nyou."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Do not wrap "
+                        },
+                        {
+                            "text": "save()",
+                            "code": true
+                        },
+                        {
+                            "text": " in "
+                        },
+                        {
+                            "text": "try",
+                            "code": true
+                        },
+                        {
+                            "text": "/"
+                        },
+                        {
+                            "text": "catch",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight shows validation errors for you."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Do not place @nativeError next to Firstlight fields. It skips native error\ncolouring and screen-reader announcements."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Do not place "
+                        },
+                        {
+                            "text": "@nativeError",
+                            "code": true
+                        },
+                        {
+                            "text": " next to Firstlight fields. It skips native error colouring and screen-reader announcements."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Use a key that is not a field name, such as form, for errors that belong to\nthe whole form."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Use a key that is not a field name, such as "
+                        },
+                        {
+                            "text": "form",
+                            "code": true
+                        },
+                        {
+                            "text": ", for errors that belong to the whole form."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• required on a field is display only. The Form Request enforces it."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": " on a field is display only. The Form Request enforces it."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "adapt-the-recipe": {
             "title": "Adapt the recipe",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Edit instead of create: load the model in mount(), copy its values into\nthe properties, and call update() instead of create()."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Edit instead of create:",
+                            "strong": true
+                        },
+                        {
+                            "text": " load the model in "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": ", copy its values into the properties, and call "
+                        },
+                        {
+                            "text": "update()",
+                            "code": true
+                        },
+                        {
+                            "text": " instead of "
+                        },
+                        {
+                            "text": "create()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Validate as the user leaves a field: add\npublic function updatedTitle(): void { $this->validateOnly('title', StorePostRequest::class); }."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Validate as the user leaves a field:",
+                            "strong": true
+                        },
+                        {
+                            "text": " add "
+                        },
+                        {
+                            "text": "public function updatedTitle(): void { $this->validateOnly('title', StorePostRequest::class); }",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Test it: see Test screens."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Test screens",
-                    "url": "test-screens.md"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Test it:",
+                            "strong": true
+                        },
+                        {
+                            "text": " see "
+                        },
+                        {
+                            "text": "Test screens",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "FormRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/FormRecipeTest.php"
+        },
+        {
+            "label": "settings recipe",
+            "url": "build-a-settings-screen.md"
+        },
+        {
+            "label": "Test screens",
+            "url": "test-screens.md"
+        }
+    ]
 }

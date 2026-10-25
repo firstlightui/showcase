@@ -17,31 +17,63 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight is the app-shell layer for NativePHP. After these steps your app,\nand your coding agent, can build lists and detail, search, forms with Laravel\nvalidation, settings, sheets and dialogs, and feedback from genuine SwiftUI and\nJetpack Compose controls."
+                    "text": "Firstlight is the app-shell layer for NativePHP. After these steps your app, and your coding agent, can build lists and detail, search, forms with Laravel validation, settings, sheets and dialogs, and feedback from genuine SwiftUI and Jetpack Compose controls."
                 }
-            ],
-            "links": []
+            ]
         },
         "requirements": {
             "title": "Requirements",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Start with a NativePHP Mobile 4 application that meets the current compatibility requirements."
+                    "runs": [
+                        {
+                            "text": "Start with a NativePHP Mobile 4 application that meets the "
+                        },
+                        {
+                            "text": "current compatibility requirements",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Use NativePHP Mobile ^4.6 and Mobile UI ^0.8. Firstlight screens must\nextend FirstlightUI\\NativeComponent for the\nresponse-revision contract.\nFirstlight 1.0.0 is a release candidate pending physical-device,\nsoak/performance, and wider app qualification."
-                }
-            ],
-            "links": [
-                {
-                    "label": "current compatibility requirements",
-                    "url": "../reference/compatibility.md"
-                },
-                {
-                    "label": "response-revision contract",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
+                    "runs": [
+                        {
+                            "text": "Use NativePHP Mobile "
+                        },
+                        {
+                            "text": "^4.6",
+                            "code": true
+                        },
+                        {
+                            "text": " and Mobile UI "
+                        },
+                        {
+                            "text": "^0.8",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight screens must extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " for the "
+                        },
+                        {
+                            "text": "response-revision contract",
+                            "link": 1
+                        },
+                        {
+                            "text": ". Firstlight 1.0.0 is a release candidate pending physical-device, soak/performance, and wider app qualification."
+                        }
+                    ]
                 }
             ]
         },
@@ -50,7 +82,7 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Install Firstlight as a normal Composer dependency. Until 1.0.0 is stable,\nallow release candidates in the constraint; Laravel's default minimum\nstability otherwise finds no installable version:"
+                    "text": "Install Firstlight as a normal Composer dependency. Until 1.0.0 is stable, allow release candidates in the constraint; Laravel's default minimum stability otherwise finds no installable version:"
                 },
                 {
                     "type": "code",
@@ -59,7 +91,25 @@
                 },
                 {
                     "type": "text",
-                    "text": "Laravel discovers FirstlightUI\\FirstlightServiceProvider from the package metadata. Register the native plugin explicitly so NativePHP adds the renderers declared in nativephp.json to the application:"
+                    "runs": [
+                        {
+                            "text": "Laravel discovers "
+                        },
+                        {
+                            "text": "FirstlightUI\\FirstlightServiceProvider",
+                            "code": true
+                        },
+                        {
+                            "text": " from the package metadata. Register the native plugin explicitly so NativePHP adds the renderers declared in "
+                        },
+                        {
+                            "text": "nativephp.json",
+                            "code": true
+                        },
+                        {
+                            "text": " to the application:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -68,10 +118,20 @@
                 },
                 {
                     "type": "text",
-                    "text": "The command discovers unregistered plugins. If your application disables Laravel package discovery, register FirstlightUI\\FirstlightServiceProvider through the application's normal provider configuration as well."
+                    "runs": [
+                        {
+                            "text": "The command discovers unregistered plugins. If your application disables Laravel package discovery, register "
+                        },
+                        {
+                            "text": "FirstlightUI\\FirstlightServiceProvider",
+                            "code": true
+                        },
+                        {
+                            "text": " through the application's normal provider configuration as well."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "rebuild-the-native-projects": {
             "title": "Rebuild the native projects",
@@ -87,17 +147,27 @@
                 },
                 {
                     "type": "text",
-                    "text": "Build and run the application through your normal NativePHP workflow. Firstlight's <firstlight:...> tags are collected as native elements only in a native render; an ordinary web render leaves them unchanged."
+                    "runs": [
+                        {
+                            "text": "Build and run the application through your normal NativePHP workflow. Firstlight's "
+                        },
+                        {
+                            "text": "<firstlight:...>",
+                            "code": true
+                        },
+                        {
+                            "text": " tags are collected as native elements only in a native render; an ordinary web render leaves them unchanged."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "give-your-coding-agent-the-firstlight-guideline": {
             "title": "Give your coding agent the Firstlight guideline",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight ships a Laravel Boost guideline and two skills. Install Boost so\nyour coding agent builds screens from the Firstlight recipes:"
+                    "text": "Firstlight ships a Laravel Boost guideline and two skills. Install Boost so your coding agent builds screens from the Firstlight recipes:"
                 },
                 {
                     "type": "code",
@@ -106,13 +176,25 @@
                 },
                 {
                     "type": "text",
-                    "text": "If Boost is already installed, run php artisan boost:update --discover\ninstead. See Build with a coding agent for what\nthe agent receives."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Build with a coding agent",
-                    "url": "build-with-a-coding-agent.md"
+                    "runs": [
+                        {
+                            "text": "If Boost is already installed, run "
+                        },
+                        {
+                            "text": "php artisan boost:update --discover",
+                            "code": true
+                        },
+                        {
+                            "text": " instead. See "
+                        },
+                        {
+                            "text": "Build with a coding agent",
+                            "link": 2
+                        },
+                        {
+                            "text": " for what the agent receives."
+                        }
+                    ]
                 }
             ]
         },
@@ -121,31 +203,82 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Build the app shell with the\nlist and detail recipe, then add the\nsearchable list,\nform, and\nsettings screens your app needs. To\nlearn one control at a time instead, add\nyour first Firstlight component."
-                }
-            ],
-            "links": [
-                {
-                    "label": "list and detail recipe",
-                    "url": "../how-to/build-a-list-detail-flow.md"
-                },
-                {
-                    "label": "searchable list",
-                    "url": "../how-to/build-a-searchable-list-screen.md"
-                },
-                {
-                    "label": "form",
-                    "url": "../how-to/build-a-form-screen.md"
-                },
-                {
-                    "label": "settings",
-                    "url": "../how-to/build-a-settings-screen.md"
-                },
-                {
-                    "label": "your first Firstlight component",
-                    "url": "first-component.md"
+                    "runs": [
+                        {
+                            "text": "Build the app shell with the "
+                        },
+                        {
+                            "text": "list and detail recipe",
+                            "link": 3
+                        },
+                        {
+                            "text": ", then add the "
+                        },
+                        {
+                            "text": "searchable list",
+                            "link": 4
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "form",
+                            "link": 5
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "settings",
+                            "link": 6
+                        },
+                        {
+                            "text": " screens your app needs. To learn one control at a time instead, add "
+                        },
+                        {
+                            "text": "your first Firstlight component",
+                            "link": 7
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "current compatibility requirements",
+            "url": "../reference/compatibility.md"
+        },
+        {
+            "label": "response-revision contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "Build with a coding agent",
+            "url": "build-with-a-coding-agent.md"
+        },
+        {
+            "label": "list and detail recipe",
+            "url": "../how-to/build-a-list-detail-flow.md"
+        },
+        {
+            "label": "searchable list",
+            "url": "../how-to/build-a-searchable-list-screen.md"
+        },
+        {
+            "label": "form",
+            "url": "../how-to/build-a-form-screen.md"
+        },
+        {
+            "label": "settings",
+            "url": "../how-to/build-a-settings-screen.md"
+        },
+        {
+            "label": "your first Firstlight component",
+            "url": "first-component.md"
+        }
+    ]
 }

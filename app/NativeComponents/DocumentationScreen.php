@@ -29,7 +29,7 @@ class DocumentationScreen extends ShowcaseScreen
 
     public function navTitle(): string
     {
-        return 'Documentation';
+        return 'Docs';
     }
 
     public function render(): View

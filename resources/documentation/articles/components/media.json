@@ -23,17 +23,52 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Media captures exactly one image or one document into Laravel Storage and\nbinds a MediaValue on your native component. Use it when you need a form\nfield with preview, clear, optional crop, and the same error slot as other\nFirstlight fields."
+                    "runs": [
+                        {
+                            "text": "Media captures exactly one image or one document into Laravel Storage and binds a "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": " on your native component. Use it when you need a form field with preview, clear, optional crop, and the same "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " slot as other Firstlight fields."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use FirstlightUI\\NativeComponent for the full nonstreaming\nresponse-revision contract."
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " for the full nonstreaming "
+                        },
+                        {
+                            "text": "response-revision contract",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -45,12 +80,6 @@
                     "language": "blade",
                     "text": "<firstlight:media\n    mode=\"image\"\n    label=\"Profile photo\"\n    helper=\"Square crop required\"\n    aspect=\"1:1\"\n    disk=\"mobile_public\"\n    directory=\"avatars\"\n    native:model=\"avatar\"\n    @change=\"avatarChosen\"\n    @clear=\"avatarCleared\"\n/>"
                 }
-            ],
-            "links": [
-                {
-                    "label": "response-revision contract",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
-                }
             ]
         },
         "props": {
@@ -58,116 +87,614 @@
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "mode",
-                    "text": "Accepted type: image | document\nPurpose: Required. Image allows camera/library and crop; document uses the system file picker only."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "mode",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "image",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "document",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required. Image allows camera/library and crop; document uses the system file picker only."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "value",
-                    "text": "Accepted type: MediaValue | null\nPurpose: Committed value. Empty is null."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "MediaValue",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Committed value. Empty is "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "native:model",
-                    "text": "Accepted type: a ?MediaValue component property\nPurpose: Synchronises the accepted value. native:model.live is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "a "
+                                },
+                                {
+                                    "text": "?MediaValue",
+                                    "code": true
+                                },
+                                {
+                                    "text": " component property"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Synchronises the accepted value. "
+                                },
+                                {
+                                    "text": "native:model.live",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible field label."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting text below the control."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text below the control."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Validation text; shown instead of helper when non-empty."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Validation text; shown instead of "
+                                },
+                                {
+                                    "text": "helper",
+                                    "code": true
+                                },
+                                {
+                                    "text": " when non-empty."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "required",
-                    "text": "Accepted type: bool\nPurpose: Marks the field as required visually and for assistive technology."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "required",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Marks the field as required visually and for assistive technology."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents pick and clear while retaining the accepted value."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents pick and clear while retaining the accepted value."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disk",
-                    "text": "Accepted type: string\nPurpose: Laravel Storage disk. Defaults to mobile_public."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disk",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Laravel Storage disk. Defaults to "
+                                },
+                                {
+                                    "text": "mobile_public",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "directory",
-                    "text": "Accepted type: string\nPurpose: Directory prefix under the disk. Defaults to media."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "directory",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Directory prefix under the disk. Defaults to "
+                                },
+                                {
+                                    "text": "media",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "aspect",
-                    "text": "Accepted type: ratio string such as 1:1\nPurpose: Image only. Implies required crop to that aspect."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "aspect",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "ratio string such as "
+                                },
+                                {
+                                    "text": "1:1",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Image only. Implies required crop to that aspect."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "crop",
-                    "text": "Accepted type: optional | required\nPurpose: Image only. Freeform crop when aspect is omitted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "crop",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "optional",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "required",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Image only. Freeform crop when "
+                                },
+                                {
+                                    "text": "aspect",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is omitted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible name when needed."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible name when needed."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Document mode rejects crop and aspect. Unsupported attributes such as\nmultiple and video are rejected before publication."
+                    "runs": [
+                        {
+                            "text": "Document mode rejects "
+                        },
+                        {
+                            "text": "crop",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "aspect",
+                            "code": true
+                        },
+                        {
+                            "text": ". Unsupported attributes such as "
+                        },
+                        {
+                            "text": "multiple",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "video",
+                            "code": true
+                        },
+                        {
+                            "text": " are rejected before publication."
+                        }
+                    ]
                 },
                 {
                     "type": "heading",
                     "text": "Crop rules"
                 },
                 {
-                    "type": "text",
-                    "text": "• Neither crop nor aspect → store without a crop sheet."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Neither "
+                        },
+                        {
+                            "text": "crop",
+                            "code": true
+                        },
+                        {
+                            "text": " nor "
+                        },
+                        {
+                            "text": "aspect",
+                            "code": true
+                        },
+                        {
+                            "text": " → store without a crop sheet."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "aspect",
+                            "code": true
+                        },
+                        {
+                            "text": " → required crop locked to that aspect."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "crop=\"optional\"",
+                            "code": true
+                        },
+                        {
+                            "text": " without aspect → freeform crop; Skip is allowed."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "crop=\"required\"",
+                            "code": true
+                        },
+                        {
+                            "text": " without aspect → freeform crop; Confirm is required."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "• aspect → required crop locked to that aspect."
+                    "text": "Confirm stores the region the crop sheet shows: the largest centred rectangle at the locked aspect (or the photo's own aspect when freeform), narrowed by the zoom controls. Skip stores the whole photo. Image mode always stores a JPEG."
                 },
                 {
                     "type": "text",
-                    "text": "• crop=\"optional\" without aspect → freeform crop; Skip is allowed."
-                },
-                {
-                    "type": "text",
-                    "text": "• crop=\"required\" without aspect → freeform crop; Confirm is required."
-                },
-                {
-                    "type": "text",
-                    "text": "Confirm stores the region the crop sheet shows: the largest centred rectangle\nat the locked aspect (or the photo's own aspect when freeform), narrowed by the\nzoom controls. Skip stores the whole photo. Image mode always stores a JPEG."
-                },
-                {
-                    "type": "text",
-                    "text": "Clear, Skip, Confirm, Cancel, Crop, zoom, and source-chooser copy are package\nchrome; see Localize chrome."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Localize chrome",
-                    "url": "../how-to/localize.md"
+                    "runs": [
+                        {
+                            "text": "Clear, Skip, Confirm, Cancel, Crop, zoom, and source-chooser copy are package chrome; see "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -176,14 +703,57 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@change receives the temporary absolute file path after the user confirms a\npick (and crop when required). Commit with MediaStorage::commit before\nassigning MediaValue."
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the temporary absolute file path after the user confirms a pick (and crop when required). Commit with "
+                        },
+                        {
+                            "text": "MediaStorage::commit",
+                            "code": true
+                        },
+                        {
+                            "text": " before assigning "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "@clear fires when the user clears a present value. Delete the previous\nobject with MediaStorage::delete and set the model to null."
+                    "runs": [
+                        {
+                            "text": "@clear",
+                            "code": true
+                        },
+                        {
+                            "text": " fires when the user clears a present value. Delete the previous object with "
+                        },
+                        {
+                            "text": "MediaStorage::delete",
+                            "code": true
+                        },
+                        {
+                            "text": " and set the model to "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "mediavalue": {
             "title": "MediaValue",
@@ -195,23 +765,108 @@
                 },
                 {
                     "type": "text",
-                    "text": "Display with Storage::disk($value->disk)->url($value->path)."
+                    "runs": [
+                        {
+                            "text": "Display with "
+                        },
+                        {
+                            "text": "Storage::disk($value->disk)->url($value->path)",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "validation": {
             "title": "Validation",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Media participates in Validate fields. Public\nMediaValue properties are adapted to Laravel UploadedFile values so stock\nimage, file, mimes, max, and dimensions rules work. null fails\nrequired. Authored error wins over the MessageBag binder."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "runs": [
+                        {
+                            "text": "Media participates in "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 2
+                        },
+                        {
+                            "text": ". Public "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": " properties are adapted to Laravel "
+                        },
+                        {
+                            "text": "UploadedFile",
+                            "code": true
+                        },
+                        {
+                            "text": " values so stock "
+                        },
+                        {
+                            "text": "image",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "file",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "mimes",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "max",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "dimensions",
+                            "code": true
+                        },
+                        {
+                            "text": " rules work. "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " fails "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": ". Authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins over the MessageBag binder."
+                        }
+                    ]
                 }
             ]
         },
@@ -220,27 +875,54 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The field exposes a labelled control with helper or error text. Crop sheets\ninclude Confirm, Cancel, optional Skip, and explicit zoom in/out controls\nmeeting 44-point (iOS) and 48-dp (Android) minima. Zoom is not pinch-only."
+                    "text": "The field exposes a labelled control with helper or error text. Crop sheets include Confirm, Cancel, optional Skip, and explicit zoom in/out controls meeting 44-point (iOS) and 48-dp (Android) minima. Zoom is not pinch-only."
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS offers Photo Library (PhotosPicker) and Camera in a confirmation dialog,\nuses fileImporter for documents, and shows a Firstlight SwiftUI crop sheet.\nAndroid offers Photo Library (the system photo picker) and Camera (the system\ncamera app) in a Material bottom sheet, uses the system document picker, and\nshows a Firstlight Compose crop dialog. Picked files are copied to the app's\ntemporary directory before @change receives the path. Geometry and system\npickers stay platform-native; crop semantics stay shared."
+                    "runs": [
+                        {
+                            "text": "iOS offers Photo Library (PhotosPicker) and Camera in a confirmation dialog, uses "
+                        },
+                        {
+                            "text": "fileImporter",
+                            "code": true
+                        },
+                        {
+                            "text": " for documents, and shows a Firstlight SwiftUI crop sheet. Android offers Photo Library (the system photo picker) and Camera (the system camera app) in a Material bottom sheet, uses the system document picker, and shows a Firstlight Compose crop dialog. Picked files are copied to the app's temporary directory before "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the path. Geometry and system pickers stay platform-native; crop semantics stay shared."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "host-application-setup": {
             "title": "Host application setup",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "On iOS, image mode's Camera option requires a camera usage description, or\niOS terminates the app when the camera opens. Firstlight's plugin manifest\nsupplies a generic one (\"Used to take a photo for a form field.\"). Override it\nin config/nativephp.php with wording specific to your app for App Store\nreview; app entries win over plugin entries:"
+                    "runs": [
+                        {
+                            "text": "On iOS, image mode's Camera option requires a camera usage description, or iOS terminates the app when the camera opens. Firstlight's plugin manifest supplies a generic one (\"Used to take a photo for a form field.\"). Override it in "
+                        },
+                        {
+                            "text": "config/nativephp.php",
+                            "code": true
+                        },
+                        {
+                            "text": " with wording specific to your app for App Store review; app entries win over plugin entries:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -249,23 +931,38 @@
                 },
                 {
                     "type": "text",
-                    "text": "The photo picker and document picker need no permission on either platform.\nAndroid needs no manifest change: the system camera app writes through the\nFileProvider that NativePHP's Android host already declares. If your app adds\nthe CAMERA permission for another feature, grant it before offering Camera."
+                    "runs": [
+                        {
+                            "text": "The photo picker and document picker need no permission on either platform. Android needs no manifest change: the system camera app writes through the FileProvider that NativePHP's Android host already declares. If your app adds the "
+                        },
+                        {
+                            "text": "CAMERA",
+                            "code": true
+                        },
+                        {
+                            "text": " permission for another feature, grant it before offering Camera."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Media supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility\nreference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Media supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 3
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
                 }
             ]
         },
@@ -292,8 +989,25 @@
                     "src": "documentation/screenshots/media/android-dark.png",
                     "text": "Media on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "response-revision contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

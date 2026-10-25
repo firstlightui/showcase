@@ -17,7 +17,7 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Stepper moves a numeric model by one bounded step at a time. PHP remains the\naccepted source of truth: a tap proposes the adjacent value and the native\ncontrol continues showing the accepted value until PHP publishes again."
+                    "text": "Stepper moves a numeric model by one bounded step at a time. PHP remains the accepted source of truth: a tap proposes the adjacent value and the native control continues showing the accepted value until PHP publishes again."
                 },
                 {
                     "type": "code",
@@ -26,82 +26,398 @@
                 },
                 {
                     "type": "text",
-                    "text": "Use Blade's : binding for numbers. Literal HTML attributes such as min=\"0\"\nare strings and are rejected deliberately."
+                    "runs": [
+                        {
+                            "text": "Use Blade's "
+                        },
+                        {
+                            "text": ":",
+                            "code": true
+                        },
+                        {
+                            "text": " binding for numbers. Literal HTML attributes such as "
+                        },
+                        {
+                            "text": "min=\"0\"",
+                            "code": true
+                        },
+                        {
+                            "text": " are strings and are rejected deliberately."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "value / native:model",
-                    "text": "Accepted type: finite `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "min",
-                    "text": "Accepted type: finite `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "min",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "max",
-                    "text": "Accepted type: finite `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "max",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "step",
-                    "text": "Accepted type: finite positive `int\nPurpose: float`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "step",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "finite positive `int"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "float`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "label",
-                    "text": "Accepted type: string\nPurpose: Visible field label and accessible-name fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label and accessible-name fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "helper",
-                    "text": "Accepted type: string\nPurpose: Supporting guidance below the control."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting guidance below the control."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error",
-                    "text": "Accepted type: string\nPurpose: Validation feedback that replaces helper text."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Validation feedback that replaces helper text."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents decrement and increment proposals."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Prevents decrement and increment proposals."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Explicit accessible name when no visible label is appropriate."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessible name when no visible label is appropriate."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Additional VoiceOver and TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout for the complete field."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout for the complete field."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "min must be less than max. The accepted value must be within the inclusive\nbounds, and both it and max must lie on the step grid originating at min.\nNumeric strings, booleans, null, non-finite values, native Float overflow,\noff-grid values, and grids larger than the signed 32-bit interval limit are\nrejected. Values are never clamped or coerced."
+                    "runs": [
+                        {
+                            "text": "min",
+                            "code": true
+                        },
+                        {
+                            "text": " must be less than "
+                        },
+                        {
+                            "text": "max",
+                            "code": true
+                        },
+                        {
+                            "text": ". The accepted value must be within the inclusive bounds, and both it and "
+                        },
+                        {
+                            "text": "max",
+                            "code": true
+                        },
+                        {
+                            "text": " must lie on the "
+                        },
+                        {
+                            "text": "step",
+                            "code": true
+                        },
+                        {
+                            "text": " grid originating at "
+                        },
+                        {
+                            "text": "min",
+                            "code": true
+                        },
+                        {
+                            "text": ". Numeric strings, booleans, null, non-finite values, native Float overflow, off-grid values, and grids larger than the signed 32-bit interval limit are rejected. Values are never clamped or coerced."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "exact-php-number-types": {
             "title": "Exact PHP number types",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Stepper preserves intentional PHP number kinds. If value, min, max, and\nstep are all integers, proposals are integers. If any one is a float, all\nnumeric tree props and proposals are floats, even an integral value such as\n5.0. An omitted step defaults to integer 1 for an otherwise integer model."
+                    "runs": [
+                        {
+                            "text": "Stepper preserves intentional PHP number kinds. If "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "min",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "max",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "step",
+                            "code": true
+                        },
+                        {
+                            "text": " are all integers, proposals are integers. If any one is a float, all numeric tree props and proposals are floats, even an integral value such as "
+                        },
+                        {
+                            "text": "5.0",
+                            "code": true
+                        },
+                        {
+                            "text": ". An omitted step defaults to integer "
+                        },
+                        {
+                            "text": "1",
+                            "code": true
+                        },
+                        {
+                            "text": " for an otherwise integer model."
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -110,31 +426,78 @@
                 },
                 {
                     "type": "text",
-                    "text": "Decimal grid comparisons tolerate only normal binary floating-point noise such\nas 0.1 + 0.2; the public value still has to be on the authored grid."
+                    "runs": [
+                        {
+                            "text": "Decimal grid comparisons tolerate only normal binary floating-point noise such as "
+                        },
+                        {
+                            "text": "0.1 + 0.2",
+                            "code": true
+                        },
+                        {
+                            "text": "; the public value still has to be on the authored grid."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-server-authority": {
             "title": "Events and server authority",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use @change, plain native:model, or native:model.live. A decrement or\nincrement sends one adjacent precomputed value through the standard callback.\nBlur and debounce modes are rejected because a step is already an immediate,\ndiscrete action."
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": ". A decrement or increment sends one adjacent precomputed value through the standard callback. Blur and debounce modes are rejected because a step is already an immediate, discrete action."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "After a proposal, another tap is ignored until the server publishes the node\nagain. This prevents stale rapid taps from calculating against an old accepted\nvalue. The control does not change optimistically and performs no arithmetic on\nthe device."
+                    "text": "After a proposal, another tap is ignored until the server publishes the node again. This prevents stale rapid taps from calculating against an old accepted value. The control does not change optimistically and performs no arithmetic on the device."
                 },
                 {
                     "type": "text",
-                    "text": "Host the control in FirstlightUI\\NativeComponent for the\nnonstreaming response-revision contract.\nIt makes an unchanged full response observable to the renderers. Revisions are\nnot per-event acknowledgements, do not prevent coalescing, and do not serialize\nsimultaneous proposals. Wider release qualification remains pending."
-                }
-            ],
-            "links": [
-                {
-                    "label": "nonstreaming response-revision contract",
-                    "url": "../reference/compatibility.md#runtime-response-contract"
+                    "runs": [
+                        {
+                            "text": "Host the control in "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " for the "
+                        },
+                        {
+                            "text": "nonstreaming response-revision contract",
+                            "link": 0
+                        },
+                        {
+                            "text": ". It makes an unchanged full response observable to the renderers. Revisions are not per-event acknowledgements, do not prevent coalescing, and do not serialize simultaneous proposals. Wider release qualification remains pending."
+                        }
+                    ]
                 }
             ]
         },
@@ -143,21 +506,72 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Contract exceptions still reject invalid numeric grids before publication.\nUser validation is separate: screens that use ValidatesFields auto-bind the\nfirst MessageBag message for the field's native:model or error-for name.\nAn authored error wins. See Validate fields."
+                    "runs": [
+                        {
+                            "text": "Contract exceptions still reject invalid numeric grids before publication. User validation is separate: screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " auto-bind the first MessageBag message for the field's "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error-for",
+                            "code": true
+                        },
+                        {
+                            "text": " name. An authored "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " wins. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Provide a visible label or an explicit a11y-label. VoiceOver and TalkBack\nreceive the accepted value, hint, helper or error, disabled state, and named\ndecrease/increase actions. At a boundary, only the unavailable direction is\ndisabled."
+                    "runs": [
+                        {
+                            "text": "Provide a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". VoiceOver and TalkBack receive the accepted value, hint, helper or error, disabled state, and named decrease/increase actions. At a boundary, only the unavailable direction is disabled."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "iOS uses the genuine SwiftUI Stepper. Android uses Material 3 outlined icon\nbuttons with the label on the same row and the minus/value/plus controls at its\ntrailing end. Stepper deliberately has no custom\nicons, formatter, min/max captions, wraparound, orientation, long-press\nacceleration, required state, size, variant, colour, or style escape props."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md"
+                    "text": "iOS uses the genuine SwiftUI Stepper. Android uses Material 3 outlined icon buttons with the label on the same row and the minus/value/plus controls at its trailing end. Stepper deliberately has no custom icons, formatter, min/max captions, wraparound, orientation, long-press acceleration, required state, size, variant, colour, or style escape props."
                 }
             ]
         },
@@ -184,8 +598,17 @@
                     "src": "documentation/screenshots/stepper/android-dark.png",
                     "text": "Stepper on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "nonstreaming response-revision contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md"
+        }
+    ]
 }

@@ -25,10 +25,9 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "List Item presents one tappable application row with a primary headline,\noptional supporting text, an optional leading identity, and an optional\ntrailing affordance. It renders as a genuine SwiftUI button row on iOS and a\nMaterial 3 List Item on Android."
+                    "text": "List Item presents one tappable application row with a primary headline, optional supporting text, an optional leading identity, and an optional trailing affordance. It renders as a genuine SwiftUI button row on iOS and a Material 3 List Item on Android."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -40,131 +39,734 @@
                 },
                 {
                     "type": "text",
-                    "text": "List Item is self-closing. Its content is semantic rather than a general child\nslot: arbitrary text, controls, and layouts cannot be nested inside the row."
+                    "text": "List Item is self-closing. Its content is semantic rather than a general child slot: arbitrary text, controls, and layouts cannot be nested inside the row."
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "headline",
-                    "text": "Accepted type: non-empty string\nPurpose: Required primary text and default accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "headline",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required primary text and default accessible name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "supporting",
-                    "text": "Accepted type: nullable string\nPurpose: Optional secondary text; null, empty, and whitespace-only strings omit it."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "supporting",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "nullable "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional secondary text; null, empty, and whitespace-only strings omit it."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-icon",
-                    "text": "Accepted type: non-empty string\nPurpose: Optional shared leading icon and cross-platform fallback."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional shared leading icon and cross-platform fallback."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-icon-ios",
-                    "text": "Accepted type: `IosSymbol\nPurpose: string`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-icon-ios",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`IosSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-icon-android",
-                    "text": "Accepted type: `AndroidSymbol\nPurpose: string`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-icon-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`AndroidSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-icon-tone, trailing-icon-tone",
-                    "text": "Accepted type: neutral, info, success, warning, danger\nPurpose: Semantic icon colour from the active theme."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-icon-tone",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "trailing-icon-tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Semantic icon colour from the active theme."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-icon-color, trailing-icon-color",
-                    "text": "Accepted type: hex string\nPurpose: Explicit icon colour overrides tone on both platforms; accepts #RGB, #RRGGBB, #AARRGGBB."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-icon-color",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "trailing-icon-color",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "hex "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Explicit icon colour overrides tone on both platforms; accepts "
+                                },
+                                {
+                                    "text": "#RGB",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "#RRGGBB",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "#AARRGGBB",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-avatar",
-                    "text": "Accepted type: non-empty string\nPurpose: Optional image source representing the row subject."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-avatar",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional image source representing the row subject."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-monogram",
-                    "text": "Accepted type: one or two characters\nPurpose: Optional short identity marker such as WJ."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-monogram",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "one or two characters"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Optional short identity marker such as "
+                                },
+                                {
+                                    "text": "WJ",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "trailing-icon",
-                    "text": "Accepted type: non-empty string\nPurpose: Optional shared decorative affordance icon."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional shared decorative affordance icon."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "trailing-icon-ios",
-                    "text": "Accepted type: `IosSymbol\nPurpose: string`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-icon-ios",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`IosSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "trailing-icon-android",
-                    "text": "Accepted type: `AndroidSymbol\nPurpose: string`"
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-icon-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`AndroidSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "trailing-text",
-                    "text": "Accepted type: nullable string\nPurpose: Optional short metadata; null, empty, and whitespace-only strings omit it."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-text",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "nullable "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional short metadata; null, empty, and whitespace-only strings omit it."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "leading-actions",
-                    "text": "Accepted type: array of action descriptors\nPurpose: Optional actions revealed from the logical leading edge inside List."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "leading-actions",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                },
+                                {
+                                    "text": " of action descriptors"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional actions revealed from the logical leading edge inside List."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "trailing-actions",
-                    "text": "Accepted type: array of action descriptors\nPurpose: Optional actions revealed from the logical trailing edge inside List."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-actions",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                },
+                                {
+                                    "text": " of action descriptors"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional actions revealed from the logical trailing edge inside List."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "context-menu",
-                    "text": "Accepted type: array of menu item descriptors\nPurpose: Optional native context menu opened by long press, with matching screen-reader actions."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "context-menu",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                },
+                                {
+                                    "text": " of menu item descriptors"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional native context menu opened by long press, with matching screen-reader actions."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents row and swipe action presses and exposes native disabled state. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Prevents row and swipe action presses and exposes native disabled state. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Optional replacement for the combined visible accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional replacement for the combined visible accessible name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: non-empty string\nPurpose: Optional supplementary VoiceOver or TalkBack guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional supplementary VoiceOver or TalkBack guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Choose at most one leading source: icon, avatar, or monogram. Choose at most\none trailing affordance: icon or text. Supporting text and both edges may be\nomitted for a headline-only row."
+                    "text": "Choose at most one leading source: icon, avatar, or monogram. Choose at most one trailing affordance: icon or text. Supporting text and both edges may be omitted for a headline-only row."
                 },
                 {
                     "type": "text",
-                    "text": "Blade examples use kebab-case names. The equivalent leadingIcon,\nleadingIconIos, leadingIconAndroid, leadingAvatar, leadingMonogram,\ntrailingIcon, trailingIconIos, trailingIconAndroid, and trailingText\naliases are also accepted for parity with NativePHP authoring."
+                    "runs": [
+                        {
+                            "text": "Blade examples use kebab-case names. The equivalent "
+                        },
+                        {
+                            "text": "leadingIcon",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "leadingIconIos",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "leadingIconAndroid",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "leadingAvatar",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "leadingMonogram",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "trailingIcon",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "trailingIconIos",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "trailingIconAndroid",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "trailingText",
+                            "code": true
+                        },
+                        {
+                            "text": " aliases are also accepted for parity with NativePHP authoring."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "swipe-actions": {
             "title": "Swipe actions",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Put swipe-enabled rows inside firstlight:list, directly or in a\nfirstlight:list-section. The same example works on both platforms:"
+                    "runs": [
+                        {
+                            "text": "Put swipe-enabled rows inside "
+                        },
+                        {
+                            "text": "firstlight:list",
+                            "code": true
+                        },
+                        {
+                            "text": ", directly or in a "
+                        },
+                        {
+                            "text": "firstlight:list-section",
+                            "code": true
+                        },
+                        {
+                            "text": ". The same example works on both platforms:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -173,25 +775,175 @@
                 },
                 {
                     "type": "text",
-                    "text": "Each descriptor requires a non-empty method callback expression and visible\nlabel. Optional fields are icon (shared fallback), ios (IosSymbol|string),\nandroid (AndroidSymbol|string), and role (empty or destructive). Icon\noverrides require a shared icon. Labels also name the accessibility actions.\nEmpty arrays mean no actions on that edge. leadingActions / trailingActions\nattribute aliases and fluent ->leadingActions([...]) / ->trailingActions([...])\nare supported."
+                    "runs": [
+                        {
+                            "text": "Each descriptor requires a non-empty "
+                        },
+                        {
+                            "text": "method",
+                            "code": true
+                        },
+                        {
+                            "text": " callback expression and visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Optional fields are "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": " (shared fallback), "
+                        },
+                        {
+                            "text": "ios",
+                            "code": true
+                        },
+                        {
+                            "text": " ("
+                        },
+                        {
+                            "text": "IosSymbol|string",
+                            "code": true
+                        },
+                        {
+                            "text": "), "
+                        },
+                        {
+                            "text": "android",
+                            "code": true
+                        },
+                        {
+                            "text": " ("
+                        },
+                        {
+                            "text": "AndroidSymbol|string",
+                            "code": true
+                        },
+                        {
+                            "text": "), and "
+                        },
+                        {
+                            "text": "role",
+                            "code": true
+                        },
+                        {
+                            "text": " (empty or "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": "). Icon overrides require a shared "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": ". Labels also name the accessibility actions. Empty arrays mean no actions on that edge. "
+                        },
+                        {
+                            "text": "leadingActions",
+                            "code": true
+                        },
+                        {
+                            "text": " / "
+                        },
+                        {
+                            "text": "trailingActions",
+                            "code": true
+                        },
+                        {
+                            "text": " attribute aliases and fluent "
+                        },
+                        {
+                            "text": "->leadingActions([...])",
+                            "code": true
+                        },
+                        {
+                            "text": " / "
+                        },
+                        {
+                            "text": "->trailingActions([...])",
+                            "code": true
+                        },
+                        {
+                            "text": " are supported."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The first action is nearest its originating edge. Leading and trailing follow\nthe reading direction, including RTL. Swipe to reveal, then tap a button:\nfull swipes never execute actions. The ordinary @press remains independent.\nOn Android, tapping an exposed foreground row closes its drawer; tap the closed\nrow to invoke @press."
+                    "runs": [
+                        {
+                            "text": "The first action is nearest its originating edge. Leading and trailing follow the reading direction, including RTL. Swipe to reveal, then tap a button: "
+                        },
+                        {
+                            "text": "full swipes never execute actions",
+                            "strong": true
+                        },
+                        {
+                            "text": ". The ordinary "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " remains independent. On Android, tapping an exposed foreground row closes its drawer; tap the closed row to invoke "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Swiping never removes a row. Even role=\"destructive\" only selects semantic\ndestructive styling; PHP decides whether to confirm, authorize, and delete.\nConnect a Delete action to the destructive-list helper\nusing a stable domain key rather than a list position. Publishing updated\nactions or disabling the row replaces native action availability without\nemitting an event. Android also closes the drawer when row configuration changes."
+                    "runs": [
+                        {
+                            "text": "Swiping never removes a row. Even "
+                        },
+                        {
+                            "text": "role=\"destructive\"",
+                            "code": true
+                        },
+                        {
+                            "text": " only selects semantic destructive styling; PHP decides whether to confirm, authorize, and delete. Connect a Delete action to the "
+                        },
+                        {
+                            "text": "destructive-list helper",
+                            "link": 0
+                        },
+                        {
+                            "text": " using a stable domain key rather than a list position. Publishing updated actions or disabling the row replaces native action availability without emitting an event. Android also closes the drawer when row configuration changes."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Action colours come from the native theme's primary/destructive token pairs.\nPer-action tint, enabled flags, full-swipe options, and the legacy\non-swipe-delete shortcut are not supported. Omit unavailable actions or disable\nthe entire row, and always authorize sensitive operations in PHP."
-                }
-            ],
-            "links": [
-                {
-                    "label": "destructive-list helper",
-                    "url": "../how-to/destroy-list-items.md"
+                    "runs": [
+                        {
+                            "text": "Action colours come from the native theme's primary/destructive token pairs. Per-action tint, enabled flags, full-swipe options, and the legacy "
+                        },
+                        {
+                            "text": "on-swipe-delete",
+                            "code": true
+                        },
+                        {
+                            "text": " shortcut are not supported. Omit unavailable actions or disable the entire row, and always authorize sensitive operations in PHP."
+                        }
+                    ]
                 }
             ]
         },
@@ -200,7 +952,18 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Give a row a context-menu to offer secondary commands without adding a\nsecond target. The same example works on both platforms, inside or outside List:"
+                    "runs": [
+                        {
+                            "text": "Give a row a "
+                        },
+                        {
+                            "text": "context-menu",
+                            "code": true
+                        },
+                        {
+                            "text": " to offer secondary commands without adding a second target. The same example works on both platforms, inside or outside List:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -209,33 +972,166 @@
                 },
                 {
                     "type": "text",
-                    "text": "Each item requires a non-empty method callback expression and visible\nlabel. Optional fields are icon (shared fallback), ios (IosSymbol|string),\nandroid (AndroidSymbol|string), role (empty or destructive), and\ndisabled (a real boolean, default false). Icon overrides require a shared\nicon. Items appear in the authored order. An empty array means no menu. The\ncontextMenu alias and fluent ->contextMenu([...]) are supported."
+                    "runs": [
+                        {
+                            "text": "Each item requires a non-empty "
+                        },
+                        {
+                            "text": "method",
+                            "code": true
+                        },
+                        {
+                            "text": " callback expression and visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Optional fields are "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": " (shared fallback), "
+                        },
+                        {
+                            "text": "ios",
+                            "code": true
+                        },
+                        {
+                            "text": " ("
+                        },
+                        {
+                            "text": "IosSymbol|string",
+                            "code": true
+                        },
+                        {
+                            "text": "), "
+                        },
+                        {
+                            "text": "android",
+                            "code": true
+                        },
+                        {
+                            "text": " ("
+                        },
+                        {
+                            "text": "AndroidSymbol|string",
+                            "code": true
+                        },
+                        {
+                            "text": "), "
+                        },
+                        {
+                            "text": "role",
+                            "code": true
+                        },
+                        {
+                            "text": " (empty or "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": "), and "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " (a real boolean, default "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "). Icon overrides require a shared "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": ". Items appear in the authored order. An empty array means no menu. The "
+                        },
+                        {
+                            "text": "contextMenu",
+                            "code": true
+                        },
+                        {
+                            "text": " alias and fluent "
+                        },
+                        {
+                            "text": "->contextMenu([...])",
+                            "code": true
+                        },
+                        {
+                            "text": " are supported."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Long-pressing the row opens the menu: a SwiftUI context menu with the row\npreview on iOS, and a Material 3 dropdown menu anchored at the touch point on\nAndroid. Choosing an enabled item closes the menu and invokes its PHP method\nonce. Tapping the row still invokes @press; a long press never does."
+                    "runs": [
+                        {
+                            "text": "Long-pressing the row opens the menu: a SwiftUI context menu with the row preview on iOS, and a Material 3 dropdown menu anchored at the touch point on Android. Choosing an enabled item closes the menu and invokes its PHP method once. Tapping the row still invokes "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": "; a long press never does."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Disabled items stay visible with native disabled styling and cannot be chosen.\nFirstlight registers no callback for them, so publishing disabled => false\nlater is what makes an item actionable. A disabled row has no menu at all."
+                    "runs": [
+                        {
+                            "text": "Disabled items stay visible with native disabled styling and cannot be chosen. Firstlight registers no callback for them, so publishing "
+                        },
+                        {
+                            "text": "disabled => false",
+                            "code": true
+                        },
+                        {
+                            "text": " later is what makes an item actionable. A disabled row has no menu at all."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "role=\"destructive\" only applies native destructive styling (red text and\nicon). Choosing Delete does not remove the row; connect it to the\ndestructive-list helper so PHP confirms,\nauthorizes, and deletes."
+                    "runs": [
+                        {
+                            "text": "role=\"destructive\"",
+                            "code": true
+                        },
+                        {
+                            "text": " only applies native destructive styling (red text and icon). Choosing Delete does not remove the row; connect it to the "
+                        },
+                        {
+                            "text": "destructive-list helper",
+                            "link": 0
+                        },
+                        {
+                            "text": " so PHP confirms, authorizes, and deletes."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Publishing a different menu, or disabling the row, replaces what the next menu\nshows without emitting an event. Android closes an open menu when that happens.\nAn open iOS system menu can stay on screen until dismissed, but its items then\nemit nothing."
+                    "text": "Publishing a different menu, or disabling the row, replaces what the next menu shows without emitting an event. Android closes an open menu when that happens. An open iOS system menu can stay on screen until dismissed, but its items then emit nothing."
                 },
                 {
                     "type": "text",
-                    "text": "Context menus and swipe actions can be combined. Submenus, section titles,\ncheckmark or selected state, keyboard shortcuts, custom previews, and\nper-item colours are not supported."
-                }
-            ],
-            "links": [
-                {
-                    "label": "destructive-list helper",
-                    "url": "../how-to/destroy-list-items.md"
+                    "text": "Context menus and swipe actions can be combined. Submenus, section titles, checkmark or selected state, keyboard shortcuts, custom previews, and per-item colours are not supported."
                 }
             ]
         },
@@ -244,7 +1140,15 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@press is required and invokes the named PHP action once after a native user\npress:"
+                    "runs": [
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " is required and invokes the named PHP action once after a native user press:"
+                        }
+                    ]
                 },
                 {
                     "type": "code",
@@ -253,41 +1157,245 @@
                 },
                 {
                     "type": "text",
-                    "text": "List Item has no value, native:model, selected state, or @change. The\nnative row owns transient press feedback and swipe reveal state. PHP owns the\naction outcome and publishes any subsequent headline, supporting text,\naffordance, accessibility, or disabled state. Programmatic publications never\nemit a press."
+                    "runs": [
+                        {
+                            "text": "List Item has no "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", selected state, or "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ". The native row owns transient press feedback and swipe reveal state. PHP owns the action outcome and publishes any subsequent headline, supporting text, affordance, accessibility, or disabled state. Programmatic publications never emit a press."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "disabled-behaviour": {
             "title": "Disabled behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "A disabled row retains its visible content, uses native disabled appearance,\nexposes disabled accessibility semantics, and emits neither @press nor swipe\naction callbacks. New swipes and screen-reader actions are unavailable. On iOS,\nan already-open system drawer can remain visible until dismissed, but tapping\nits retained buttons emits no callback. Android closes the drawer immediately.\nThe disabled value must be a real boolean; strings and integers are rejected."
+                    "runs": [
+                        {
+                            "text": "A disabled row retains its visible content, uses native disabled appearance, exposes disabled accessibility semantics, and emits neither "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " nor swipe action callbacks. New swipes and screen-reader actions are unavailable. On iOS, an already-open system drawer can remain visible until dismissed, but tapping its retained buttons emits no callback. Android closes the drawer immediately. The "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " value must be a real boolean; strings and integers are rejected."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "leading-identity-and-icons": {
             "title": "Leading identity and icons",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use leading-avatar when an image identifies the row subject, or\nleading-monogram for a one- or two-character textual identity. Use\nleading-icon for a semantic category or destination glyph. All leading\ncontent is decorative inside the row's single accessibility node because the\nheadline carries the subject's accessible meaning."
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "leading-avatar",
+                            "code": true
+                        },
+                        {
+                            "text": " when an image identifies the row subject, or "
+                        },
+                        {
+                            "text": "leading-monogram",
+                            "code": true
+                        },
+                        {
+                            "text": " for a one- or two-character textual identity. Use "
+                        },
+                        {
+                            "text": "leading-icon",
+                            "code": true
+                        },
+                        {
+                            "text": " for a semantic category or destination glyph. All leading content is decorative inside the row's single accessibility node because the headline carries the subject's accessible meaning."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Icon resolution happens in PHP. The shared icon is the deterministic fallback;\nthe iOS or Android override wins on its platform. A typed Android symbol keeps\nits filled or outlined variant in the native wire metadata. Overrides without\ntheir shared fallback are invalid."
+                    "text": "Icon resolution happens in PHP. The shared icon is the deterministic fallback; the iOS or Android override wins on its platform. A typed Android symbol keeps its filled or outlined variant in the native wire metadata. Overrides without their shared fallback are invalid."
                 },
                 {
                     "type": "text",
-                    "text": "Set leading-icon-tone=\"danger\" for an error category, or the corresponding\ntrailing-icon-tone for a status glyph. Both accept the Status Label vocabulary:\nneutral uses on-surface-variant, info uses primary, success uses success,\nwarning uses warning, and danger uses destructive. Warning defaults to\naccessible amber, not brand accent; see Theming.\nWithout a tone, leading icons retain primary and trailing icons retain\non-surface-variant. An explicit *-icon-color wins over tone on iOS and Android.\nCamelCase aliases and fluent leadingIconTone(), trailingIconTone(),\nleadingIconColor(), and trailingIconColor() are supported. These props only\ncolour icons, not avatars, monograms, text, or swipe actions."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Theming",
-                    "url": "../getting-started/theming.md"
+                    "runs": [
+                        {
+                            "text": "Set "
+                        },
+                        {
+                            "text": "leading-icon-tone=\"danger\"",
+                            "code": true
+                        },
+                        {
+                            "text": " for an error category, or the corresponding "
+                        },
+                        {
+                            "text": "trailing-icon-tone",
+                            "code": true
+                        },
+                        {
+                            "text": " for a status glyph. Both accept the Status Label vocabulary: "
+                        },
+                        {
+                            "text": "neutral",
+                            "code": true
+                        },
+                        {
+                            "text": " uses "
+                        },
+                        {
+                            "text": "on-surface-variant",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "info",
+                            "code": true
+                        },
+                        {
+                            "text": " uses "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "success",
+                            "code": true
+                        },
+                        {
+                            "text": " uses "
+                        },
+                        {
+                            "text": "success",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "warning",
+                            "code": true
+                        },
+                        {
+                            "text": " uses "
+                        },
+                        {
+                            "text": "warning",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "danger",
+                            "code": true
+                        },
+                        {
+                            "text": " uses "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": ". Warning defaults to accessible amber, not brand accent; see "
+                        },
+                        {
+                            "text": "Theming",
+                            "link": 1
+                        },
+                        {
+                            "text": ". Without a tone, leading icons retain "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": " and trailing icons retain "
+                        },
+                        {
+                            "text": "on-surface-variant",
+                            "code": true
+                        },
+                        {
+                            "text": ". An explicit "
+                        },
+                        {
+                            "text": "*-icon-color",
+                            "code": true
+                        },
+                        {
+                            "text": " wins over tone on iOS and Android. CamelCase aliases and fluent "
+                        },
+                        {
+                            "text": "leadingIconTone()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "trailingIconTone()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "leadingIconColor()",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "trailingIconColor()",
+                            "code": true
+                        },
+                        {
+                            "text": " are supported. These props only colour icons, not avatars, monograms, text, or swipe actions."
+                        }
+                    ]
                 }
             ]
         },
@@ -296,81 +1404,229 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Use trailing-icon for a decorative directional or state affordance, or\ntrailing-text for short metadata such as Admin. The trailing content is not\na second action. It remains silent to assistive technology inside the row's\nsingle button node."
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "trailing-icon",
+                            "code": true
+                        },
+                        {
+                            "text": " for a decorative directional or state affordance, or "
+                        },
+                        {
+                            "text": "trailing-text",
+                            "code": true
+                        },
+                        {
+                            "text": " for short metadata such as "
+                        },
+                        {
+                            "text": "Admin",
+                            "code": true
+                        },
+                        {
+                            "text": ". The trailing content is not a second action. It remains silent to assistive technology inside the row's single button node."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Independent trailing buttons, switches, checkboxes, radio buttons, overflow\nmenus, and other embedded targets are excluded. Swipe actions and the\nlong-press context menu are separate from these decorative trailing affordances."
+                    "text": "Independent trailing buttons, switches, checkboxes, radio buttons, overflow menus, and other embedded targets are excluded. Swipe actions and the long-press context menu are separate from these decorative trailing affordances."
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "By default, assistive technology combines the headline and supporting text as\nthe row's accessible name. a11y-label replaces that name and a11y-hint adds\ncontext. The complete row is one button node with disabled state and a minimum\ninteraction target of 44 points on iOS or 48 dp on Android."
+                    "runs": [
+                        {
+                            "text": "By default, assistive technology combines the headline and supporting text as the row's accessible name. "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces that name and "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": " adds context. The complete row is one button node with disabled state and a minimum interaction target of 44 points on iOS or 48 dp on Android."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Leading avatars, monograms, icons, and trailing content are decorative and do\nnot add duplicate VoiceOver or TalkBack stops. Dynamic Type, Android font\nscaling, right-to-left layout, native contrast, focus, and press feedback remain\nplatform-owned."
+                    "text": "Leading avatars, monograms, icons, and trailing content are decorative and do not add duplicate VoiceOver or TalkBack stops. Dynamic Type, Android font scaling, right-to-left layout, native contrast, focus, and press feedback remain platform-owned."
                 },
                 {
                     "type": "text",
-                    "text": "Inside List, swipe actions are available through native VoiceOver actions and\nTalkBack custom actions without performing a swipe gesture. Revealed Android\nbuttons also expose their visible labels and button roles."
+                    "text": "Inside List, swipe actions are available through native VoiceOver actions and TalkBack custom actions without performing a swipe gesture. Revealed Android buttons also expose their visible labels and button roles."
                 },
                 {
                     "type": "text",
-                    "text": "Every enabled context menu item is also a VoiceOver action and a TalkBack custom\naction named by its label, so screen-reader users can run it from the Actions\nrotor or TalkBack actions menu without a long press. Disabled items are not\noffered as actions. TalkBack's own long-press action still opens the visible\nmenu. Menu items follow the reading direction, including RTL, and their text\nscales with Dynamic Type and Android font scaling."
+                    "text": "Every enabled context menu item is also a VoiceOver action and a TalkBack custom action named by its label, so screen-reader users can run it from the Actions rotor or TalkBack actions menu without a long press. Disabled items are not offered as actions. TalkBack's own long-press action still opens the visible menu. Menu items follow the reading direction, including RTL, and their text scales with Dynamic Type and Android font scaling."
                 }
-            ],
-            "links": []
+            ]
         },
         "validation-and-excluded-apis": {
             "title": "Validation and excluded APIs",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Firstlight rejects missing or blank headlines, missing @press, blank accessible\nlabels/hints, non-boolean disabled values, invalid icon override types, icon overrides\nwithout shared fallbacks, ambiguous leading or trailing content, and content\nslots. It also rejects overline text, embedded controls, independent trailing\nactions, malformed or unlabelled swipe or context menu descriptors, raw\n@longPress handlers, trailing-menu, navigation directives, model or selection state, loading and validation props,\nnon-icon colours, elevation, typography, and per-platform layout escape hatches."
+                    "runs": [
+                        {
+                            "text": "Firstlight rejects missing or blank headlines, missing "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", blank accessible labels/hints, non-boolean disabled values, invalid icon override types, icon overrides without shared fallbacks, ambiguous leading or trailing content, and content slots. It also rejects overline text, embedded controls, independent trailing actions, malformed or unlabelled swipe or context menu descriptors, raw "
+                        },
+                        {
+                            "text": "@longPress",
+                            "code": true
+                        },
+                        {
+                            "text": " handlers, "
+                        },
+                        {
+                            "text": "trailing-menu",
+                            "code": true
+                        },
+                        {
+                            "text": ", navigation directives, model or selection state, loading and validation props, non-icon colours, elevation, typography, and per-platform layout escape hatches."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Optional supporting and trailing-text values may be null or empty, including\nliteral empty strings. They render no slot and an empty trailing-text does not\nconflict with a trailing icon. Other non-string values remain invalid. Overline\nis not part of Firstlight's row contract."
+                    "runs": [
+                        {
+                            "text": "Optional "
+                        },
+                        {
+                            "text": "supporting",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "trailing-text",
+                            "code": true
+                        },
+                        {
+                            "text": " values may be null or empty, including literal empty strings. They render no slot and an empty "
+                        },
+                        {
+                            "text": "trailing-text",
+                            "code": true
+                        },
+                        {
+                            "text": " does not conflict with a trailing icon. Other non-string values remain invalid. Overline is not part of Firstlight's row contract."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses a SwiftUI Button composition with Apple-native headline and\nsupporting typography, optional circular identity or SF Symbol, optional\ntrailing metadata or symbol, native press and disabled behaviour, and a\n44-point minimum target."
+                    "runs": [
+                        {
+                            "text": "iOS uses a SwiftUI "
+                        },
+                        {
+                            "text": "Button",
+                            "code": true
+                        },
+                        {
+                            "text": " composition with Apple-native headline and supporting typography, optional circular identity or SF Symbol, optional trailing metadata or symbol, native press and disabled behaviour, and a 44-point minimum target."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Android uses Material 3 ListItem inside one enabled-aware clickable surface,\nwith Material typography, content slots, ripple and disabled semantics, and a\n48-dp minimum target."
+                    "runs": [
+                        {
+                            "text": "Android uses Material 3 "
+                        },
+                        {
+                            "text": "ListItem",
+                            "code": true
+                        },
+                        {
+                            "text": " inside one enabled-aware clickable surface, with Material typography, content slots, ripple and disabled semantics, and a 48-dp minimum target."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The context menu is SwiftUI .contextMenu with Button(role: .destructive)\nitems on iOS, and Material 3 DropdownMenu / DropdownMenuItem on Android,\nopened by the row's long-click and anchored where the finger went down. Shared content and action meaning stay the same while\nspacing, typography, motion, and pressed state remain native."
+                    "runs": [
+                        {
+                            "text": "The context menu is SwiftUI "
+                        },
+                        {
+                            "text": ".contextMenu",
+                            "code": true
+                        },
+                        {
+                            "text": " with "
+                        },
+                        {
+                            "text": "Button(role: .destructive)",
+                            "code": true
+                        },
+                        {
+                            "text": " items on iOS, and Material 3 "
+                        },
+                        {
+                            "text": "DropdownMenu",
+                            "code": true
+                        },
+                        {
+                            "text": " / "
+                        },
+                        {
+                            "text": "DropdownMenuItem",
+                            "code": true
+                        },
+                        {
+                            "text": " on Android, opened by the row's long-click and anchored where the finger went down. Shared content and action meaning stay the same while spacing, typography, motion, and pressed state remain native."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "List Item supports the versions listed in the current compatibility\nreference. The host application must compile\nboth Firstlight-owned native renderers declared by the package manifest."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility\nreference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "List Item supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 2
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
                 }
             ]
         },
@@ -421,8 +1677,21 @@
                     "src": "documentation/screenshots/list-item-context-menu/android-dark.png",
                     "text": "List Item context menu on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "destructive-list helper",
+            "url": "../how-to/destroy-list-items.md"
+        },
+        {
+            "label": "Theming",
+            "url": "../getting-started/theming.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

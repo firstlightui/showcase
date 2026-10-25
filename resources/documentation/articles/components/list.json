@@ -19,17 +19,25 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "List presents a finite vertical collection of application rows. Compose rows\nwith List Item and optional grouped sections with\nList Section."
-                }
-            ],
-            "links": [
-                {
-                    "label": "List Item",
-                    "url": "list-item.md"
-                },
-                {
-                    "label": "List Section",
-                    "url": "list-section.md"
+                    "runs": [
+                        {
+                            "text": "List presents a finite vertical collection of application rows. Compose rows with "
+                        },
+                        {
+                            "text": "List Item",
+                            "link": 0
+                        },
+                        {
+                            "text": " and optional grouped sections with "
+                        },
+                        {
+                            "text": "List Section",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -43,57 +51,181 @@
                 },
                 {
                     "type": "text",
-                    "text": "List is a paired container. Only List Item and List Section children are\naccepted."
+                    "text": "List is a paired container. Only List Item and List Section children are accepted."
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "separator",
-                    "text": "Accepted type: bool\nPurpose: Shows native dividers between rows. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "separator",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows native dividers between rows. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "plain",
-                    "text": "Accepted type: bool\nPurpose: When sections are present, keeps flat rows with sticky headers instead of grouped inset cards. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "plain",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "When sections are present, keeps flat rows with sticky headers instead of grouped inset cards. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "shows-indicators",
-                    "text": "Accepted type: bool\nPurpose: Controls native scroll indicator visibility. Defaults to upstream platform behaviour when omitted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "shows-indicators",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Controls native scroll indicator visibility. Defaults to upstream platform behaviour when omitted."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@refresh enables native pull-to-refresh and invokes the named PHP action when\nthe user pulls to refresh."
+                    "runs": [
+                        {
+                            "text": "@refresh",
+                            "code": true
+                        },
+                        {
+                            "text": " enables native pull-to-refresh and invokes the named PHP action when the user pulls to refresh."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "@endReached invokes the named PHP action when the viewport nears the final\nleaf row. It is intended for pagination rather than precise scroll offsets.\nSee Paginate lists to bind Laravel paginators\nto these events. To delete a row through Confirmation Dialog authorization,\nsee Destroy list items."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Paginate lists",
-                    "url": "../how-to/paginate-lists.md"
-                },
-                {
-                    "label": "Destroy list items",
-                    "url": "../how-to/destroy-list-items.md"
+                    "runs": [
+                        {
+                            "text": "@endReached",
+                            "code": true
+                        },
+                        {
+                            "text": " invokes the named PHP action when the viewport nears the final leaf row. It is intended for pagination rather than precise scroll offsets. See "
+                        },
+                        {
+                            "text": "Paginate lists",
+                            "link": 2
+                        },
+                        {
+                            "text": " to bind Laravel paginators to these events. To delete a row through Confirmation Dialog authorization, see "
+                        },
+                        {
+                            "text": "Destroy list items",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -101,26 +233,68 @@
             "title": "Composition rules",
             "blocks": [
                 {
-                    "type": "text",
-                    "text": "• Every row is a firstlight:list-item with its own required @press handler."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Every row is a "
+                        },
+                        {
+                            "text": "firstlight:list-item",
+                            "code": true
+                        },
+                        {
+                            "text": " with its own required "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " handler."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Rows may define leading and trailing swipe actions,\nincluding rows inside sections. Swiping reveals actions; it never deletes a row."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Rows may define "
+                        },
+                        {
+                            "text": "leading and trailing swipe actions",
+                            "link": 4
+                        },
+                        {
+                            "text": ", including rows inside sections. Swiping reveals actions; it never deletes a row."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Group related rows with firstlight:list-section. Sections require at least\none List Item child."
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Group related rows with "
+                        },
+                        {
+                            "text": "firstlight:list-section",
+                            "code": true
+                        },
+                        {
+                            "text": ". Sections require at least one List Item child."
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "text": "• Horizontal lists, virtualized windows, selectable collections, and arbitrary\nchild components are outside the Firstlight List contract."
-                }
-            ],
-            "links": [
-                {
-                    "label": "leading and trailing swipe actions",
-                    "url": "list-item.md#swipe-actions"
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Horizontal lists, virtualized windows, selectable collections, and arbitrary child components are outside the Firstlight List contract."
                 }
             ]
         },
@@ -129,20 +303,43 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "List delegates scrolling, separators, grouped section chrome, pull-to-refresh,\nand end-reached detection to the official Mobile UI list renderer on both\nplatforms while retaining Firstlight List Item rows."
+                    "text": "List delegates scrolling, separators, grouped section chrome, pull-to-refresh, and end-reached detection to the official Mobile UI list renderer on both platforms while retaining Firstlight List Item rows."
                 }
-            ],
-            "links": []
+            ]
         },
         "adapter-note": {
             "title": "Adapter note",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "List is an adapter over Mobile UI list. List Section publishes the upstream\nwire type list_section so the delegated renderer recognizes grouped sections\nwhile the public tag remains <firstlight:list-section>."
+                    "runs": [
+                        {
+                            "text": "List is an adapter over Mobile UI "
+                        },
+                        {
+                            "text": "list",
+                            "code": true
+                        },
+                        {
+                            "text": ". List Section publishes the upstream wire type "
+                        },
+                        {
+                            "text": "list_section",
+                            "code": true
+                        },
+                        {
+                            "text": " so the delegated renderer recognizes grouped sections while the public tag remains "
+                        },
+                        {
+                            "text": "<firstlight:list-section>",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -167,8 +364,29 @@
                     "src": "documentation/screenshots/list/android-dark.png",
                     "text": "List on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "List Item",
+            "url": "list-item.md"
+        },
+        {
+            "label": "List Section",
+            "url": "list-section.md"
+        },
+        {
+            "label": "Paginate lists",
+            "url": "../how-to/paginate-lists.md"
+        },
+        {
+            "label": "Destroy list items",
+            "url": "../how-to/destroy-list-items.md"
+        },
+        {
+            "label": "leading and trailing swipe actions",
+            "url": "list-item.md#swipe-actions"
+        }
+    ]
 }

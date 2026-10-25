@@ -22,14 +22,35 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Button performs one immediate, labelled action. Firstlight includes it because a coherent UI library is expected to provide its foundational action control under the same <firstlight:...> namespace and semantic conventions as the rest of the catalogue."
+                    "runs": [
+                        {
+                            "text": "Button performs one immediate, labelled action. Firstlight includes it because a coherent UI library is expected to provide its foundational action control under the same "
+                        },
+                        {
+                            "text": "<firstlight:...>",
+                            "code": true
+                        },
+                        {
+                            "text": " namespace and semantic conventions as the rest of the catalogue."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The current component deliberately wraps the adequate nativephp/mobile-ui Button. It keeps a stable Firstlight API while reusing the official SwiftUI and Material 3 renderers instead of maintaining duplicate native code."
+                    "runs": [
+                        {
+                            "text": "The current component deliberately wraps the adequate "
+                        },
+                        {
+                            "text": "nativephp/mobile-ui",
+                            "code": true
+                        },
+                        {
+                            "text": " Button. It keeps a stable Firstlight API while reusing the official SwiftUI and Material 3 renderers instead of maintaining duplicate native code."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -41,100 +62,533 @@
                 },
                 {
                     "type": "text",
-                    "text": "The same authored tag works on iOS and Android. A self-closing form with a label prop is also accepted, but the text slot is preferred for ordinary Blade markup."
+                    "runs": [
+                        {
+                            "text": "The same authored tag works on iOS and Android. A self-closing form with a "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " prop is also accepted, but the text slot is preferred for ordinary Blade markup."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "Text slot / label",
-                    "text": "Accepted type: non-empty string\nPurpose: Visible button text. Required."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "Text slot / "
+                            },
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible button text. Required."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "variant",
-                    "text": "Accepted type: primary, secondary, destructive, success, or ghost\nPurpose: Semantic action intent. Defaults to primary."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "variant",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "secondary",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "destructive",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "ghost",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Semantic action intent. Defaults to "
+                                },
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "size",
-                    "text": "Accepted type: sm, md, or lg\nPurpose: Native control size. Defaults to md."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "size",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "sm",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Native control size. Defaults to "
+                                },
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "disabled",
-                    "text": "Accepted type: bool\nPurpose: Prevents interaction and exposes native disabled state. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Prevents interaction and exposes native disabled state. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "loading",
-                    "text": "Accepted type: bool\nPurpose: Shows native progress presentation and prevents interaction. Defaults to false."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "loading",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows native progress presentation and prevents interaction. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon",
-                    "text": "Accepted type: string\nPurpose: Optional leading cross-platform icon name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional leading cross-platform icon name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-ios, icon-android",
-                    "text": "Accepted type: IosSymbol, AndroidSymbol, or string\nPurpose: Optional per-platform override for the leading icon."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-ios",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "icon-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "IosSymbol",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "AndroidSymbol",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional per-platform override for the leading icon."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-trailing",
-                    "text": "Accepted type: string\nPurpose: Optional trailing cross-platform icon name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-trailing",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional trailing cross-platform icon name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "icon-trailing-ios, icon-trailing-android",
-                    "text": "Accepted type: IosSymbol, AndroidSymbol, or string\nPurpose: Optional per-platform override for the trailing icon."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-trailing-ios",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "icon-trailing-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "IosSymbol",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "AndroidSymbol",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional per-platform override for the trailing icon."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Replaces the visible text as the accessible name."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Replaces the visible text as the accessible name."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Adds supplementary VoiceOver or TalkBack context."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Adds supplementary VoiceOver or TalkBack context."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Button always has visible text. Use Icon Button for an icon-only action."
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-values": {
             "title": "Events and values",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@press invokes the named PHP action once for a native user press. Button has no bound value, options, native:model, or @change event."
+                    "runs": [
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " invokes the named PHP action once for a native user press. Button has no bound value, options, "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " event."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "state-timing": {
             "title": "State timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "A press emits immediately. The native button keeps only transient platform press feedback; PHP owns the action result and publishes any subsequent loading, disabled, label, or layout state. Programmatic publications do not emit a press."
+                    "runs": [
+                        {
+                            "text": "A press emits immediately. The native button keeps only transient platform press feedback; PHP owns the action result and publishes any subsequent "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ", label, or layout state. Programmatic publications do not emit a press."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "disabled-loading-and-failure-behaviour": {
             "title": "Disabled, loading, and failure behaviour",
@@ -145,57 +599,169 @@
                 },
                 {
                     "type": "text",
-                    "text": "A missing, null, empty, or whitespace-only label throws an InvalidArgumentException. disabled and loading require real booleans. Unsupported variants or sizes also throw. Attached menus, custom typography, Liquid Glass classes, navigation directives, field props or bindings, long press, double tap, press-down, and press-up callbacks are outside this component's contract and fail rather than silently widening the API."
+                    "runs": [
+                        {
+                            "text": "A missing, "
+                        },
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": ", empty, or whitespace-only label throws an "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": " require real booleans. Unsupported variants or sizes also throw. Attached menus, custom typography, Liquid Glass classes, navigation directives, field props or bindings, long press, double tap, press-down, and press-up callbacks are outside this component's contract and fail rather than silently widening the API."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "accessibility": {
             "title": "Accessibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The visible text is the accessible name by default. a11y-label replaces it, and a11y-hint adds context. The native renderers expose the button role, disabled state, press interaction, Dynamic Type or system font scaling, platform focus behaviour, and platform target sizing. Android also announces loading as a state description."
+                    "runs": [
+                        {
+                            "text": "The visible text is the accessible name by default. "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces it, and "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": " adds context. The native renderers expose the button role, disabled state, press interaction, Dynamic Type or system font scaling, platform focus behaviour, and platform target sizing. Android also announces loading as a state description."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS uses the official Mobile UI SwiftUI Button renderer with native button styles, control sizes, progress presentation, icon layout, VoiceOver metadata, and semantic theme tokens. Android uses the official Mobile UI Material 3 Button, FilledTonalButton, or TextButton renderer with native state layers, progress presentation, icon layout, TalkBack metadata, and semantic theme tokens."
+                    "runs": [
+                        {
+                            "text": "iOS uses the official Mobile UI SwiftUI "
+                        },
+                        {
+                            "text": "Button",
+                            "code": true
+                        },
+                        {
+                            "text": " renderer with native button styles, control sizes, progress presentation, icon layout, VoiceOver metadata, and semantic theme tokens. Android uses the official Mobile UI Material 3 "
+                        },
+                        {
+                            "text": "Button",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "FilledTonalButton",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "TextButton",
+                            "code": true
+                        },
+                        {
+                            "text": " renderer with native state layers, progress presentation, icon layout, TalkBack metadata, and semantic theme tokens."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The shared variants express the same intent without forcing pixel parity. destructive is currently a semantic visual variant; Firstlight does not expose an Apple-only action-role prop."
+                    "runs": [
+                        {
+                            "text": "The shared variants express the same intent without forcing pixel parity. "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": " is currently a semantic visual variant; Firstlight does not expose an Apple-only action-role prop."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "why-an-adapter": {
             "title": "Why an adapter?",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The official Mobile UI primitive already satisfies this contract. Firstlight therefore wraps it for catalogue and namespace consistency instead of rebuilding it. The public type remains firstlight.button, so Firstlight can move to package-owned renderers later without changing consumer markup if a durable cross-platform requirement genuinely outgrows Mobile UI. Generally useful renderer improvements should be contributed upstream where practical."
+                    "runs": [
+                        {
+                            "text": "The official Mobile UI primitive already satisfies this contract. Firstlight therefore wraps it for catalogue and namespace consistency instead of rebuilding it. The public type remains "
+                        },
+                        {
+                            "text": "firstlight.button",
+                            "code": true
+                        },
+                        {
+                            "text": ", so Firstlight can move to package-owned renderers later without changing consumer markup if a durable cross-platform requirement genuinely outgrows Mobile UI. Generally useful renderer improvements should be contributed upstream where practical."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Button supports the versions listed in the current compatibility reference. The host application must compile the installed nativephp/mobile-ui iOS and Android renderers that the Firstlight adapter declares."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Button supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 0
+                        },
+                        {
+                            "text": ". The host application must compile the installed "
+                        },
+                        {
+                            "text": "nativephp/mobile-ui",
+                            "code": true
+                        },
+                        {
+                            "text": " iOS and Android renderers that the Firstlight adapter declares."
+                        }
+                    ]
                 }
             ]
         },
@@ -222,8 +788,13 @@
                     "src": "documentation/screenshots/button/android-dark.png",
                     "text": "Button on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }

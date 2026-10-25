@@ -7,7 +7,7 @@
             :autocorrect="false"
             placeholder="Find a guide, API or code example"
         />
-        <native:text class="text-sm text-theme-on-surface">{{ $count }} articles · {{ $version }} · Available offline</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">{{ $count }} articles · Firstlight {{ $version }} · Works offline</native:text>
     </native:column>
 
     @if ($groups->isEmpty())

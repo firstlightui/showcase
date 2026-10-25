@@ -17,8 +17,7 @@
                     "type": "text",
                     "text": "Firstlight selection controls treat PHP's published value as authoritative. Native interaction is immediate, but it does not create an independent source of truth."
                 }
-            ],
-            "links": []
+            ]
         },
         "interaction-and-acceptance": {
             "title": "Interaction and acceptance",
@@ -31,8 +30,7 @@
                     "type": "text",
                     "text": "The renderer reconciles from every resulting Element Tree publication. An accepted value becomes selected. A rejected value returns to, or remains at, the last published selection. Reconciliation itself never emits another change event."
                 }
-            ],
-            "links": []
+            ]
         },
         "repeated-attempts-and-programmatic-changes": {
             "title": "Repeated attempts and programmatic changes",
@@ -43,24 +41,74 @@
                 },
                 {
                     "type": "text",
-                    "text": "A programmatic PHP update changes the published selection without masquerading as a user interaction. It therefore updates the native control without firing @change back to PHP."
+                    "runs": [
+                        {
+                            "text": "A programmatic PHP update changes the published selection without masquerading as a user interaction. It therefore updates the native control without firing "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " back to PHP."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "no-selection": {
             "title": "No selection",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "null means no selection. It is distinct from an authored empty-string value. A same-typed value that is not present in the current options also renders with no selected segment; Firstlight never silently selects the first option."
+                    "runs": [
+                        {
+                            "text": "null",
+                            "code": true
+                        },
+                        {
+                            "text": " means no selection. It is distinct from an authored empty-string value. A same-typed value that is not present in the current options also renders with no selected segment; Firstlight never silently selects the first option."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "This timing is why Segmented accepts plain native:model and native:model.live, but rejects deferred blur and debounce sync modes."
+                    "runs": [
+                        {
+                            "text": "This timing is why Segmented accepts plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": ", but rejects deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " sync modes."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": []
 }

@@ -17,25 +17,36 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Modal presents authored content in a full-screen native overlay. PHP owns\nwhether the overlay is requested; each platform owns cover or dialog chrome\nand motion."
+                    "text": "Modal presents authored content in a full-screen native overlay. PHP owns whether the overlay is requested; each platform owns cover or dialog chrome and motion."
                 },
                 {
                     "type": "text",
-                    "text": "Use Alert Dialog for a single acknowledgement. Use\nConfirmation Dialog for a confirm/cancel decision.\nUse Bottom Sheet for a panel that slides up from the\nbottom."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Alert Dialog",
-                    "url": "alert-dialog.md"
-                },
-                {
-                    "label": "Confirmation Dialog",
-                    "url": "confirmation-dialog.md"
-                },
-                {
-                    "label": "Bottom Sheet",
-                    "url": "bottom-sheet.md"
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "Alert Dialog",
+                            "link": 0
+                        },
+                        {
+                            "text": " for a single acknowledgement. Use "
+                        },
+                        {
+                            "text": "Confirmation Dialog",
+                            "link": 1
+                        },
+                        {
+                            "text": " for a confirm/cancel decision. Use "
+                        },
+                        {
+                            "text": "Bottom Sheet",
+                            "link": 2
+                        },
+                        {
+                            "text": " for a panel that slides up from the bottom."
+                        }
+                    ]
                 }
             ]
         },
@@ -49,69 +60,274 @@
                 },
                 {
                     "type": "text",
-                    "text": "The dismiss handler should set $showingAccount to false."
+                    "runs": [
+                        {
+                            "text": "The dismiss handler should set "
+                        },
+                        {
+                            "text": "$showingAccount",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The visible title is ordinary text styled as a heading. Mobile UI text has no\nheading role yet, so screen readers announce the surface by its a11y-label."
+                    "runs": [
+                        {
+                            "text": "The visible title is ordinary text styled as a heading. Mobile UI text has no heading role yet, so screen readers announce the surface by its "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "visible",
-                    "text": "Accepted type: bool\nPurpose: Server-controlled presentation request. Defaults to closed."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "visible",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Server-controlled presentation request. Defaults to closed."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "dismissible",
-                    "text": "Accepted type: bool\nPurpose: When true, native close, back, and outside dismissal are enabled. Defaults to the upstream native default of true. The dismissable alias is accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "dismissible",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "When true, native close, back, and outside dismissal are enabled. Defaults to the upstream native default of "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". The "
+                                },
+                                {
+                                    "text": "dismissable",
+                                    "code": true
+                                },
+                                {
+                                    "text": " alias is accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Accessible name for the presented surface."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Accessible name for the presented surface."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: non-empty string\nPurpose: Supplementary screen-reader guidance."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supplementary screen-reader guidance."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events": {
             "title": "Events",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@dismiss is required. It runs when the user closes the overlay. Set the\nbound visibility property to false in that handler. Dismiss handlers must\nbe safe to run more than once because the delegated iOS cover can also notify\nPHP when a programmatic close is published."
+                    "runs": [
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " is required. It runs when the user closes the overlay. Set the bound visibility property to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " in that handler. Dismiss handlers must be safe to run more than once because the delegated iOS cover can also notify PHP when a programmatic close is published."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "There is no overlay @press, native:model, or detent API. Actions belong\non child controls."
+                    "runs": [
+                        {
+                            "text": "There is no overlay "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", or detent API. Actions belong on child controls."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-expression": {
             "title": "Platform expression",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Modal is an adapter over Mobile UI modal. iOS uses SwiftUI\n.fullScreenCover; Android uses a Material full-screen dialog. Theme tokens\nown surface colour. Close controls, when shown, use the native Close name."
+                    "runs": [
+                        {
+                            "text": "Modal is an adapter over Mobile UI "
+                        },
+                        {
+                            "text": "modal",
+                            "code": true
+                        },
+                        {
+                            "text": ". iOS uses SwiftUI "
+                        },
+                        {
+                            "text": ".fullScreenCover",
+                            "code": true
+                        },
+                        {
+                            "text": "; Android uses a Material full-screen dialog. Theme tokens own surface colour. Close controls, when shown, use the native Close name."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "screenshots": {
             "title": "Screenshots",
@@ -136,8 +352,21 @@
                     "src": "documentation/screenshots/modal/android-dark.png",
                     "text": "Modal on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Alert Dialog",
+            "url": "alert-dialog.md"
+        },
+        {
+            "label": "Confirmation Dialog",
+            "url": "confirmation-dialog.md"
+        },
+        {
+            "label": "Bottom Sheet",
+            "url": "bottom-sheet.md"
+        }
+    ]
 }

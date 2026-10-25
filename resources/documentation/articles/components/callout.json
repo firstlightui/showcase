@@ -24,8 +24,7 @@
                     "type": "text",
                     "text": "Callout keeps an important semantic message visible in the page layout. It may include one labelled action, but it does not dismiss itself, expire, or enter a feedback queue."
                 }
-            ],
-            "links": []
+            ]
         },
         "complete-example": {
             "title": "Complete example",
@@ -39,89 +38,445 @@
                     "type": "text",
                     "text": "The same tag renders as an idiomatic rounded SwiftUI message surface on iOS and a Material 3 surface on Android."
                 }
-            ],
-            "links": []
+            ]
         },
         "props": {
             "title": "Props",
             "blocks": [
                 {
                     "type": "definition",
-                    "label": "message",
-                    "text": "Accepted type: non-empty string\nPurpose: Required visible message."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "message",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required visible message."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "tone",
-                    "text": "Accepted type: neutral, info, success, warning, or danger\nPurpose: Semantic intent. Defaults to info."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Semantic intent. Defaults to "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "action-label",
-                    "text": "Accepted type: non-empty string\nPurpose: Optional visible action label. Requires @press. The actionLabel alias is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "action-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Optional visible action label. Requires "
+                                },
+                                {
+                                    "text": "@press",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". The "
+                                },
+                                {
+                                    "text": "actionLabel",
+                                    "code": true
+                                },
+                                {
+                                    "text": " alias is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-label",
-                    "text": "Accepted type: string\nPurpose: Replaces the generated accessible message."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Replaces the generated accessible message."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "a11y-hint",
-                    "text": "Accepted type: string\nPurpose: Adds supplementary context to the accessible message."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Adds supplementary context to the accessible message."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "class",
-                    "text": "Accepted type: string\nPurpose: External EDGE layout utilities."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error-for",
-                    "text": "Accepted type: non-empty string\nPurpose: Shows the first ValidatesFields message for this key instead of message. The errorFor alias is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error-for",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows the first "
+                                },
+                                {
+                                    "text": "ValidatesFields",
+                                    "code": true
+                                },
+                                {
+                                    "text": " message for this key instead of "
+                                },
+                                {
+                                    "text": "message",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". The "
+                                },
+                                {
+                                    "text": "errorFor",
+                                    "code": true
+                                },
+                                {
+                                    "text": " alias is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "definition",
-                    "label": "error-summary",
-                    "text": "Accepted type: bool\nPurpose: Shows every key's first message instead of message. The errorSummary alias is also accepted."
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error-summary",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows every key's first message instead of "
+                                },
+                                {
+                                    "text": "message",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". The "
+                                },
+                                {
+                                    "text": "errorSummary",
+                                    "code": true
+                                },
+                                {
+                                    "text": " alias is also accepted."
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Callout owns its semantic symbol. There are no icon, icon-ios, or icon-android props because changing that affordance could contradict the tone."
+                    "runs": [
+                        {
+                            "text": "Callout owns its semantic symbol. There are no "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "icon-ios",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "icon-android",
+                            "code": true
+                        },
+                        {
+                            "text": " props because changing that affordance could contradict the tone."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "events-and-state-timing": {
             "title": "Events and state timing",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "@press is the one optional standard action event. It must be paired with action-label and fires once for each completed native button activation."
+                    "runs": [
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " is the one optional standard action event. It must be paired with "
+                        },
+                        {
+                            "text": "action-label",
+                            "code": true
+                        },
+                        {
+                            "text": " and fires once for each completed native button activation."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Callout has no value or model. PHP controls whether it is present and may publish new message, tone, action, or accessibility metadata. Native reconciliation updates the existing stable node without emitting an event."
                 }
-            ],
-            "links": []
+            ]
         },
         "persistence-and-dismissal": {
             "title": "Persistence and dismissal",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Callout remains in its authored position until the next Element Tree omits it. It has no timeout, close button, swipe gesture, dismissible prop, or dismissal event. Use Transient Feedback for brief queued outcomes, Alert Dialog when the user must acknowledge one message, and Confirmation Dialog when work must pause for a confirm/cancel decision."
+                    "runs": [
+                        {
+                            "text": "Callout remains in its authored position until the next Element Tree omits it. It has no timeout, close button, swipe gesture, "
+                        },
+                        {
+                            "text": "dismissible",
+                            "code": true
+                        },
+                        {
+                            "text": " prop, or dismissal event. Use Transient Feedback for brief queued outcomes, Alert Dialog when the user must acknowledge one message, and Confirmation Dialog when work must pause for a confirm/cancel decision."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "disabled-loading-and-error-behaviour": {
             "title": "Disabled, loading, and error behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Disabled and loading states do not apply. Render or omit the action according to application state, and publish the semantic tone that describes the message. Although danger can communicate an error outcome, Callout is not a field-validation control and does not accept error, helper, or required."
+                    "runs": [
+                        {
+                            "text": "Disabled and loading states do not apply. Render or omit the action according to application state, and publish the semantic tone that describes the message. Although "
+                        },
+                        {
+                            "text": "danger",
+                            "code": true
+                        },
+                        {
+                            "text": " can communicate an error outcome, Callout is not a field-validation control and does not accept "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "helper",
+                            "code": true
+                        },
+                        {
+                            "text": ", or "
+                        },
+                        {
+                            "text": "required",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -134,13 +489,32 @@
                 },
                 {
                     "type": "text",
-                    "text": "A bound Callout defaults to danger, rejects message, and renders nothing while its key (or, for a summary, the whole bag) has no message. See Validate fields."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md#show-form-level-errors"
+                    "runs": [
+                        {
+                            "text": "A bound Callout defaults to "
+                        },
+                        {
+                            "text": "danger",
+                            "code": true
+                        },
+                        {
+                            "text": ", rejects "
+                        },
+                        {
+                            "text": "message",
+                            "code": true
+                        },
+                        {
+                            "text": ", and renders nothing while its key (or, for a summary, the whole bag) has no message. See "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -149,17 +523,47 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Tone is conveyed by a distinct native symbol and by the generated accessible name, such as Warning: Your changes have not been submitted. The icon is decorative to VoiceOver and TalkBack. a11y-label replaces the generated name, while a11y-hint adds context."
+                    "runs": [
+                        {
+                            "text": "Tone is conveyed by a distinct native symbol and by the generated accessible name, such as "
+                        },
+                        {
+                            "text": "Warning: Your changes have not been submitted.",
+                            "code": true
+                        },
+                        {
+                            "text": " The icon is decorative to VoiceOver and TalkBack. "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces the generated name, while "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": " adds context."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "The optional action is a separate native button whose visible text is its accessible name. Its target is at least 44 points on iOS and 48 dp on Android. Message text wraps and surfaces grow for Dynamic Type, Android font scaling, and long localisation. Callout is not a live region; persistent content does not automatically interrupt the screen reader. An error-bound Callout may carry the one-time validation announcement after a failed submit, described in Validate fields."
-                }
-            ],
-            "links": [
-                {
-                    "label": "Validate fields",
-                    "url": "../how-to/validate-fields.md#screen-reader-announcements"
+                    "runs": [
+                        {
+                            "text": "The optional action is a separate native button whose visible text is its accessible name. Its target is at least 44 points on iOS and 48 dp on Android. Message text wraps and surfaces grow for Dynamic Type, Android font scaling, and long localisation. Callout is not a live region; persistent content does not automatically interrupt the screen reader. An error-bound Callout may carry the one-time validation announcement after a failed submit, described in "
+                        },
+                        {
+                            "text": "Validate fields",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -168,41 +572,140 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "A missing, empty, whitespace-only, or non-string message throws an InvalidArgumentException. Unsupported or non-string tones fail and list the accepted values. action-label without @press, @press without action-label, and blank action labels fail before publication."
+                    "runs": [
+                        {
+                            "text": "A missing, empty, whitespace-only, or non-string "
+                        },
+                        {
+                            "text": "message",
+                            "code": true
+                        },
+                        {
+                            "text": " throws an "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": ". Unsupported or non-string tones fail and list the accepted values. "
+                        },
+                        {
+                            "text": "action-label",
+                            "code": true
+                        },
+                        {
+                            "text": " without "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " without "
+                        },
+                        {
+                            "text": "action-label",
+                            "code": true
+                        },
+                        {
+                            "text": ", and blank action labels fail before publication."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Firstlight also rejects model, change, dismissal, title, icon, disabled, loading, validation, navigation, long-press, and visual escape attributes instead of silently inventing behavior. If malformed data reaches a native renderer, it falls back to info and suppresses an incomplete action without crashing."
+                    "runs": [
+                        {
+                            "text": "Firstlight also rejects model, change, dismissal, title, icon, disabled, loading, validation, navigation, long-press, and visual escape attributes instead of silently inventing behavior. If malformed data reaches a native renderer, it falls back to "
+                        },
+                        {
+                            "text": "info",
+                            "code": true
+                        },
+                        {
+                            "text": " and suppresses an incomplete action without crashing."
+                        }
+                    ]
                 }
-            ],
-            "links": []
+            ]
         },
         "platform-behaviour": {
             "title": "Platform behaviour",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "iOS composes SwiftUI Image, Text, and Button with platform typography, a continuous rounded rectangle, VoiceOver containment, and native Dynamic Type. Android composes a Material 3 Surface, icon, text, and TextButton with Material typography and TalkBack semantics."
+                    "runs": [
+                        {
+                            "text": "iOS composes SwiftUI "
+                        },
+                        {
+                            "text": "Image",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Text",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "Button",
+                            "code": true
+                        },
+                        {
+                            "text": " with platform typography, a continuous rounded rectangle, VoiceOver containment, and native Dynamic Type. Android composes a Material 3 "
+                        },
+                        {
+                            "text": "Surface",
+                            "code": true
+                        },
+                        {
+                            "text": ", icon, text, and "
+                        },
+                        {
+                            "text": "TextButton",
+                            "code": true
+                        },
+                        {
+                            "text": " with Material typography and TalkBack semantics."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "text": "Both inherit NativePHP semantic theme tokens and preserve native dark mode, increased contrast, focus, activation feedback, and right-to-left layout rather than forcing pixel parity."
                 }
-            ],
-            "links": []
+            ]
         },
         "compatibility": {
             "title": "Compatibility",
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Callout supports the versions listed in the current compatibility reference. The host application must compile both Firstlight-owned native renderers declared by the package manifest."
-                }
-            ],
-            "links": [
-                {
-                    "label": "compatibility reference",
-                    "url": "../reference/compatibility.md"
+                    "runs": [
+                        {
+                            "text": "Callout supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 2
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
                 }
             ]
         },
@@ -211,7 +714,25 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "These development screenshots were captured from the dedicated /captures/callout showcase route on an iPhone 16 Pro Simulator running iOS 18.6 and the Pixel_9_Pro Android emulator."
+                    "runs": [
+                        {
+                            "text": "These development screenshots were captured from the dedicated "
+                        },
+                        {
+                            "text": "/captures/callout",
+                            "code": true
+                        },
+                        {
+                            "text": " showcase route on an iPhone 16 Pro Simulator running iOS 18.6 and the "
+                        },
+                        {
+                            "text": "Pixel_9_Pro",
+                            "code": true
+                        },
+                        {
+                            "text": " Android emulator."
+                        }
+                    ]
                 },
                 {
                     "type": "image",
@@ -233,8 +754,21 @@
                     "src": "documentation/screenshots/callout/android-dark.png",
                     "text": "Callout on Android in dark mode"
                 }
-            ],
-            "links": []
+            ]
         }
-    }
+    },
+    "links": [
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md#show-form-level-errors"
+        },
+        {
+            "label": "Validate fields",
+            "url": "../how-to/validate-fields.md#screen-reader-announcements"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
 }
