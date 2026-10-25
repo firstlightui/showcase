@@ -3,11 +3,13 @@
 use App\Models\Contact;
 use FirstlightUI\Testing\ScreenAssertions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Native\Mobile\Platform;
 use Native\Mobile\Testing\Native;
 
 uses(RefreshDatabase::class);
 
 beforeEach(fn () => ScreenAssertions::register());
+
 
 it('builds only the rows in the first window', function () {
     Native::visit('/contacts')
@@ -39,3 +41,24 @@ it('opens the detail screen for the pressed row', function () {
         ->pressListItem('Contact 2042')
         ->assertNavigatedTo('/contacts/'.Contact::where('name', 'Contact 2042')->value('id'));
 });
+
+it('sizes placeholders to each platform\'s List Item row height', function (?string $platform, int $height) {
+    $find = function (array $node) use (&$find): ?array {
+        if (array_key_exists('estimated_row_height', $node['props'] ?? [])) {
+            return $node;
+        }
+        foreach ($node['children'] ?? [] as $child) {
+            if ($found = $find($child)) {
+                return $found;
+            }
+        }
+
+        return null;
+    };
+
+    expect($find(Native::visit('/contacts', platform: $platform)->tree())['props']['estimated_row_height'])->toEqual($height);
+})->with([
+    'iOS rows are 64 pt' => [Platform::IOS, 64],
+    'Android rows are 72 dp' => [Platform::ANDROID, 72],
+    'unknown platform falls back to Android' => [null, 72],
+]);

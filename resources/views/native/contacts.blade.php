@@ -5,5 +5,5 @@
     :to="$virtualWindowTo"
     item="native.rows.contact"
     on-window-change="setVirtualWindow"
-    estimated-row-height="72"
+    :estimated-row-height="\Native\Mobile\Platform::isIos() ? 64 : 72"
 />
