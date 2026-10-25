@@ -53,7 +53,7 @@
             <native:text class="text-sm font-semibold text-theme-on-surface">Swipe actions</native:text>
             <native:text class="text-sm text-theme-on-surface-variant">Swipe either way, then tap an action. Long swipes never execute. Delete records only: the row stays visible. Toggle disabled while a drawer is open to check reconciliation.</native:text>
             <firstlight:button label="Toggle swipe rows" @press="toggleSwipeRows" />
-            <firstlight:list plain separator class="w-full h-80">
+            <firstlight:list plain separator class="w-full h-80 bg-theme-background">
                 <firstlight:list-item
                     headline="Message"
                     supporting="Archive, flag, or request deletion"

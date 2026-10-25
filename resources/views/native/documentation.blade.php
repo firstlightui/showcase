@@ -15,7 +15,7 @@
             <firstlight:callout message="No articles match your search. Try a component name or a shorter phrase." tone="neutral" action-label="Clear search" @press="clearSearch" />
         </native:column>
     @else
-        <firstlight:list class="w-full flex-1">
+        <firstlight:list class="w-full flex-1 bg-theme-background">
             @foreach ($groups as $group => $articles)
                 <firstlight:list-section :header="$group">
                     @foreach ($articles as $article)
