@@ -1,4 +1,4 @@
-<native:list class="w-full flex-1">
+<native:list class="w-full flex-1 bg-theme-background">
     <native:list-section header="Dawn Patrol · Bondi surf school">
         <native:column class="w-full px-4 py-4 gap-4 bg-theme-surface rounded-2xl">
             <native:row class="w-full gap-4 items-start">

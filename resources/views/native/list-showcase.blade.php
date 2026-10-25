@@ -1,5 +1,5 @@
 <native:column class="w-full flex-1 bg-theme-background">
-    <firstlight:list ref="sampleList" :separator="$separators" :plain="$plain" class="w-full flex-1" @refresh="reloadItems" on-end-reached="loadMore">
+    <firstlight:list ref="sampleList" :separator="$separators" :plain="$plain" class="w-full flex-1 bg-theme-background" @refresh="reloadItems" on-end-reached="loadMore">
         @if (! $empty)
         <firstlight:list-item
             headline="Account"

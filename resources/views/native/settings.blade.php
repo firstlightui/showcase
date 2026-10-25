@@ -1,4 +1,4 @@
-<native:list class="w-full flex-1" separator>
+<native:list class="w-full flex-1 bg-theme-background" separator>
     <native:list-section header="Notifications" footer="Sample preferences saved on this device. These controls do not register push notifications.">
         <native:column class="w-full px-4 py-3 bg-theme-surface">
             <firstlight:switch label="Push notifications" native:model="notifications" />

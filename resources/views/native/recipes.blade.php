@@ -1,4 +1,4 @@
-<firstlight:list class="w-full flex-1">
+<firstlight:list class="w-full flex-1 bg-theme-background">
     <firstlight:list-section header="Lists" footer="Thirty sample posts and 5,000 contacts live in this app's SQLite database.">
         <firstlight:list-item
             headline="Posts"
