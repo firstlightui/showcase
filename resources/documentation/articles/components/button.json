@@ -718,7 +718,7 @@
                             "code": true
                         },
                         {
-                            "text": " renderer with native state layers, progress presentation, icon layout, TalkBack metadata, and semantic theme tokens."
+                            "text": " renderer, wrapped by Firstlight so TalkBack reaches one named Button node, with native state layers, progress presentation, icon layout, TalkBack metadata, and semantic theme tokens."
                         }
                     ]
                 },
