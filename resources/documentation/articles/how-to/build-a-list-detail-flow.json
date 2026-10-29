@@ -318,7 +318,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<native:scroll-view class=\"w-full flex-1\">\n    <native:column class=\"w-full p-4 gap-3\">\n        <native:text class=\"text-sm text-theme-on-surface-variant\">{{ $post->created_at->diffForHumans() }}</native:text>\n        <native:text class=\"text-base text-theme-on-surface\">{{ $post->body }}</native:text>\n    </native:column>\n</native:scroll-view>"
+                    "text": "<native:scroll-view class=\"w-full flex-1 bg-theme-background\">\n    <native:column class=\"w-full p-4 gap-3\">\n        <native:text class=\"text-sm text-theme-on-surface-variant\">{{ $post->created_at->diffForHumans() }}</native:text>\n        <native:text class=\"text-base text-theme-on-surface\">{{ $post->body }}</native:text>\n    </native:column>\n</native:scroll-view>"
                 }
             ]
         },

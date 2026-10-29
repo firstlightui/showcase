@@ -25,14 +25,14 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "NativePHP EDGE has no built-in "
+                            "text": "Firstlight extends NativePHP Mobile's "
                         },
                         {
-                            "text": "validate()",
+                            "text": "ValidatesInput",
                             "code": true
                         },
                         {
-                            "text": ". Firstlight adds a Livewire-shaped Laravel Validator layer. A screen that opts in can call "
+                            "text": " with Form Request sources, Media conversion, error summaries, and accessibility announcements. Call "
                         },
                         {
                             "text": "$this->validate()",
@@ -46,7 +46,7 @@
                             "code": true
                         },
                         {
-                            "text": ", and participating fields show the first "
+                            "text": "; participating fields show the first "
                         },
                         {
                             "text": "MessageBag",
@@ -60,7 +60,14 @@
                             "code": true
                         },
                         {
-                            "text": " slot."
+                            "text": " slot. Firstlight and Mobile UI controls share the upstream "
+                        },
+                        {
+                            "text": "FieldErrors",
+                            "code": true
+                        },
+                        {
+                            "text": " bag on the same screen."
                         }
                     ]
                 },

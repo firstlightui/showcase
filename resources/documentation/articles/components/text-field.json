@@ -164,6 +164,64 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "helper-tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Meaning of helper text. Defaults to "
+                                },
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; "
+                                },
+                                {
+                                    "text": "error",
+                                    "code": true
+                                },
+                                {
+                                    "text": " always takes precedence."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "error",
                                 "code": true
                             }
@@ -956,6 +1014,42 @@
                     "type": "text",
                     "runs": [
                         {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "helper=\"Checksum OK\" helper-tone=\"success\"",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "helper=\"Check this\" helper-tone=\"warning\"",
+                            "code": true
+                        },
+                        {
+                            "text": ", or neutral "
+                        },
+                        {
+                            "text": "helper=\"From label\"",
+                            "code": true
+                        },
+                        {
+                            "text": ". The app supplies meaningful text: colour alone does not announce success or warning. Helpers remain guidance, not validation errors or automatic live announcements. An "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces the helper and retains native error semantics regardless of helper tone. Native semantic colours are adjusted to retain readable contrast against the field surface."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
                             "text": "@change",
                             "code": true
                         },
@@ -1025,14 +1119,21 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "On iOS, pressing a "
+                            "text": "On iOS and Android, pressing a "
                         },
                         {
                             "text": "<firstlight:button>",
                             "code": true
                         },
                         {
-                            "text": " while the field is focused publishes its pending "
+                            "text": " or "
+                        },
+                        {
+                            "text": "<firstlight:icon-button>",
+                            "code": true
+                        },
+                        {
+                            "text": " while the field is focused queues its pending "
                         },
                         {
                             "text": ".blur",
@@ -1046,21 +1147,7 @@
                             "code": true
                         },
                         {
-                            "text": " change before the press, so the handler reads the current value. Icon Button and List Item presses do not flush the field first. On Android, blur/debounce changes are not yet guaranteed to reach PHP before a button press, so for forms submitted by a separate button use "
-                        },
-                        {
-                            "text": "native:model.live=\"email\"",
-                            "code": true
-                        },
-                        {
-                            "text": " (or plain "
-                        },
-                        {
-                            "text": "native:model",
-                            "code": true
-                        },
-                        {
-                            "text": "). A button press is not the field's "
+                            "text": " change before the press. This orders event posting; it does not wait for PHP to process the change. List Item presses do not flush the field first. Android uses Mobile's synchronous focused-input flush hook rather than waiting for blur. A button press is not the field's "
                         },
                         {
                             "text": "@submit",
@@ -1075,6 +1162,42 @@
                         },
                         {
                             "text": " handler receives the current string directly."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS, "
+                        },
+                        {
+                            "text": "number",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "decimal",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "phone",
+                            "code": true
+                        },
+                        {
+                            "text": " keyboards have a package-localized Done accessory because those system keyboards have no return key. Done flushes the pending change, emits "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": ", and dismisses the keyboard, including when a mask is active. It does not press a separate submit button."
                         }
                     ]
                 }

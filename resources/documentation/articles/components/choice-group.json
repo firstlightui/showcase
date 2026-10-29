@@ -213,6 +213,39 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "variant",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "list",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "tiles",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Full-width rows (default) or an adaptive grid of native selectable tiles."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "label",
                                 "code": true
                             }
@@ -443,7 +476,7 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Rich options accept only "
+                            "text": "Rich options accept "
                         },
                         {
                             "text": "value",
@@ -457,14 +490,28 @@
                             "code": true
                         },
                         {
-                            "text": ", and optional "
+                            "text": ", optional "
                         },
                         {
                             "text": "disabled",
                             "code": true
                         },
                         {
-                            "text": " fields:"
+                            "text": ", and optional string "
+                        },
+                        {
+                            "text": "prefix",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "supporting",
+                            "code": true
+                        },
+                        {
+                            "text": " content. These are display text, never selection values:"
                         }
                     ]
                 },
@@ -476,6 +523,30 @@
                 {
                     "type": "text",
                     "text": "All option labels must contain visible text. Values in one group must be unique and must all be strings or all be integers."
+                },
+                {
+                    "type": "text",
+                    "text": "For a favourites grid, format numbers and fees in the app and keep the bound values as stable identifiers:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:choice-group\n    variant=\"tiles\"\n    :options=\"[\n        ['value' => 'consult', 'prefix' => '110', 'label' => 'Initial consultation', 'supporting' => '$90.00'],\n        ['value' => 'review', 'prefix' => '116', 'label' => 'Follow-up', 'supporting' => '$45.00'],\n    ]\"\n    native:model=\"favourites\"\n    label=\"Favourites\"\n    multiple\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Declare "
+                        },
+                        {
+                            "text": "public array $favourites = [];",
+                            "code": true
+                        },
+                        {
+                            "text": ". Both variants expose prefix, label, and supporting text as one option target. Tiles reflow for larger text rather than forcing a fixed column count. They use the same disabled, validation, and server-authoritative selection contract as list rows."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -751,6 +822,10 @@
                 {
                     "type": "text",
                     "text": "iOS uses native SwiftUI option rows with trailing checkmarks. Android renders one Material 3 radio-row set for single choice and one homogeneous checkbox-row set for multiple choice. Both inherit NativePHP semantic theme tokens and preserve native focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
+                },
+                {
+                    "type": "text",
+                    "text": "The tile variant composes SwiftUI checkmarked buttons in an adaptive grid on iOS and Material 3 outlined cards with radio or checkbox indicators on Android. Tile geometry remains platform-native; the selection contract is identical."
                 }
             ]
         },

@@ -22,9 +22,9 @@
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
-        "nativephp/mobile": "^4.6.1",
+        "nativephp/mobile": "^4.7.0",
         "nativephp/mobile-browser": "^1.2",
-        "nativephp/mobile-ui": "^0.8"
+        "nativephp/mobile-ui": "^0.9.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

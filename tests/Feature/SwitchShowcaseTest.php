@@ -21,7 +21,7 @@ function firstlightSwitchNodesByLabel(array $tree): array
 /** @return array<string, bool|string> */
 function firstlightSwitchPrimitiveProps(array $node): array
 {
-    return array_diff_key($node['props'], array_flip(['on_change']));
+    return array_diff_key($node['props'], array_flip(['on_change', 'ref']));
 }
 
 it('publishes the complete Switch catalogue through the native wire tree', function () {

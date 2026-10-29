@@ -9,6 +9,7 @@
         "props": "props",
         "events": "events",
         "height": "height",
+        "pinned-footer": "pinned-footer",
         "platform-expression": "platform-expression",
         "screenshots": "screenshots"
     },
@@ -132,6 +133,43 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "pinned-footer",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Keeps the final direct child outside the scrolling body. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; requires at least two direct children."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "a11y-label",
                                 "code": true
                             }
@@ -237,6 +275,10 @@
                 },
                 {
                     "type": "text",
+                    "text": "When a Firstlight screen navigates away, its farewell response closes the sheet without changing that visibility property. This also covers sheets in nested children."
+                },
+                {
+                    "type": "text",
                     "runs": [
                         {
                             "text": "There is no overlay "
@@ -278,7 +320,43 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "The sheet opens at the height of its content on both platforms. A short sheet stays short, and a sheet taller than half the screen opens fully, so a button at the bottom is visible without dragging. The height follows the content when it changes, including for larger text sizes, up to a full-height sheet. Content taller than that scrolls on iOS but is clipped on Android, so keep sheet content shorter than the screen."
+                    "text": "The sheet opens at the height of its content on both platforms. A short sheet stays short, and a sheet taller than half the screen opens fully, so a button at the bottom is visible without dragging. The height follows the content when it changes, including for larger text sizes, up to a full-height sheet. Content taller than that scrolls on both platforms."
+                }
+            ]
+        },
+        "pinned-footer": {
+            "title": "Pinned footer",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "With "
+                        },
+                        {
+                            "text": "pinned-footer",
+                            "code": true
+                        },
+                        {
+                            "text": ", the final "
+                        },
+                        {
+                            "text": "direct child",
+                            "strong": true
+                        },
+                        {
+                            "text": " is the footer; every earlier child is scrolling content. Group multiple footer controls in an existing Mobile UI column. Do not wrap the body and footer in a single outer child."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:bottom-sheet\n    :visible=\"$showingBill\"\n    pinned-footer\n    a11y-label=\"Review bill\"\n    @dismiss=\"closeBill\"\n>\n    <native:column class=\"w-full p-4 gap-3\">\n        @foreach ($items as $item)\n            <native:text class=\"text-theme-on-surface\">{{ $item['label'] }}</native:text>\n        @endforeach\n    </native:column>\n    <native:column class=\"w-full p-4 gap-3 bg-theme-surface\">\n        <native:text class=\"text-theme-on-surface\">Total: {{ $formattedTotal }}</native:text>\n        <firstlight:button label=\"Save\" @press=\"saveBill\" />\n    </native:column>\n</firstlight:bottom-sheet>"
+                },
+                {
+                    "type": "text",
+                    "text": "The app supplies the items, formatted total and handlers. Keep the footer compact; body content must have space to scroll. PHP owns Save and whether the sheet closes. Native dismissal and its callback remain unchanged."
                 }
             ]
         },
@@ -306,6 +384,10 @@
                             "text": " sized to its content without the half-height stop. Theme tokens own surface and scrim colour."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "text": "iOS places the footer in a bottom safe-area inset. Android keeps it below the bounded scrolling body. Both retain their native sheet chrome and insets. On Android, an authored vertical scroll view or list keeps ownership of body scrolling, including when nested in a layout column. The sheet supplies the scrolling viewport only when the body has no vertical scrolling container."
                 }
             ]
         },

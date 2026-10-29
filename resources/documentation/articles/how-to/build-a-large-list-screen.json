@@ -367,12 +367,6 @@
                             "text": " when you need those."
                         }
                     ]
-                },
-                {
-                    "type": "item",
-                    "marker": "•",
-                    "depth": 0,
-                    "text": "Returning from the detail screen rebuilds the list at the top. NativePHP navigation does not restore scroll position, for a virtual list or a List."
                 }
             ]
         },

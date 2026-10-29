@@ -381,14 +381,21 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "On iOS, pressing a "
+                            "text": "On iOS and Android, pressing a "
                         },
                         {
                             "text": "<firstlight:button>",
                             "code": true
                         },
                         {
-                            "text": " while the field is focused publishes its pending "
+                            "text": " or "
+                        },
+                        {
+                            "text": "<firstlight:icon-button>",
+                            "code": true
+                        },
+                        {
+                            "text": " while the field is focused queues its pending "
                         },
                         {
                             "text": ".blur",
@@ -402,21 +409,7 @@
                             "code": true
                         },
                         {
-                            "text": " change before the press. Icon Button and List Item presses do not flush the field first. On Android, blur/debounce changes are not yet guaranteed to reach PHP before a button press, so if a separate button submits the query, use "
-                        },
-                        {
-                            "text": "native:model.live=\"query\"",
-                            "code": true
-                        },
-                        {
-                            "text": " (or plain "
-                        },
-                        {
-                            "text": "native:model",
-                            "code": true
-                        },
-                        {
-                            "text": "). For keyboard submission, accept the current query argument from "
+                            "text": " change before the press. This orders event posting; it does not wait for PHP to process the change. List Item presses do not flush the field first. Android uses Mobile's synchronous focused-input flush hook. For keyboard submission, accept the current query argument from "
                         },
                         {
                             "text": "@submit",

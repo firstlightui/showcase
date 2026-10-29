@@ -149,6 +149,39 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "variant",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "field",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "chip",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Full field (default) or compact native trigger; chooser and selection semantics are unchanged."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "label",
                                 "code": true
                             }
@@ -487,6 +520,48 @@
         "compact-and-searchable-presentation": {
             "title": "Compact and searchable presentation",
             "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Set "
+                        },
+                        {
+                            "text": "variant=\"chip\"",
+                            "code": true
+                        },
+                        {
+                            "text": " for an intrinsic-width picker trigger with the label and accepted value inline, for example a hospital or provider selector. The default is "
+                        },
+                        {
+                            "text": "variant=\"field\"",
+                            "code": true
+                        },
+                        {
+                            "text": ". iOS uses a native bordered capsule trigger; Android uses a Material 3 AssistChip. This changes the closed trigger only: menus, search threshold, stable values, required/error/disabled metadata and state timing remain unchanged. Chips retain 44-point iOS / 48-dp Android targets rather than shrinking the touch area to the text."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:select\n    variant=\"chip\"\n    :options=\"['north' => 'North', 'south' => 'South']\"\n    native:model=\"hospital\"\n    label=\"Hospital\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Declare "
+                        },
+                        {
+                            "text": "public ?string $hospital = 'north';",
+                            "code": true
+                        },
+                        {
+                            "text": " on the screen."
+                        }
+                    ]
+                },
                 {
                     "type": "text",
                     "runs": [

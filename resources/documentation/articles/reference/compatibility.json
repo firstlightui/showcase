@@ -40,7 +40,7 @@
                             "label": "Current requirement",
                             "runs": [
                                 {
-                                    "text": "^4.6",
+                                    "text": "^4.7.0",
                                     "code": true
                                 }
                             ]
@@ -57,7 +57,7 @@
                             "label": "Current requirement",
                             "runs": [
                                 {
-                                    "text": "^0.8",
+                                    "text": "^0.9.0",
                                     "code": true
                                 }
                             ]
@@ -72,7 +72,7 @@
                     "items": [
                         {
                             "label": "Current requirement",
-                            "text": "iOS 18.0 or later"
+                            "text": "iOS 18.2 or later"
                         }
                     ]
                 },
@@ -96,7 +96,7 @@
                     "items": [
                         {
                             "label": "Current requirement",
-                            "text": "iOS 18 or later"
+                            "text": "iOS 18.2 or later"
                         }
                     ]
                 },
@@ -135,6 +135,35 @@
                         },
                         {
                             "text": " so bundled PHP binaries, native project files, and plugin copies match the resolved release."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Mobile 4.7 supplies the validation and Android focused-input flush seams Firstlight uses; Mobile UI 0.9 requires Mobile 4.7. "
+                        },
+                        {
+                            "text": "ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " extends upstream "
+                        },
+                        {
+                            "text": "ValidatesInput",
+                            "code": true
+                        },
+                        {
+                            "text": ", and native and Firstlight fields share the current "
+                        },
+                        {
+                            "text": "FieldErrors",
+                            "code": true
+                        },
+                        {
+                            "text": " bag. Existing Firstlight screen code does not need a trait swap."
                         }
                     ]
                 }
@@ -331,6 +360,10 @@
                     ]
                 },
                 {
+                    "type": "text",
+                    "text": "On navigation, the farewell response also closes Firstlight Bottom Sheets and Modals, including nested overlays, without changing the screen's bound visibility properties. Mobile's cleanup handles its own overlay types; Firstlight extends it to its namespaced types."
+                },
+                {
                     "type": "heading",
                     "text": "Upstream context and qualification"
                 },
@@ -362,6 +395,10 @@
                             "text": " remains upstream; the response revision makes Firstlight independent of it."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "text": "Mobile 4.7 additionally skips matching frame fingerprints in PHP. Firstlight keeps the response revision so repeated rejected values still publish distinct responses; the upstream optimisation is not a per-event acknowledgement."
                 },
                 {
                     "type": "text",

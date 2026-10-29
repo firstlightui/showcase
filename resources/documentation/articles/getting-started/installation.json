@@ -46,18 +46,18 @@
                             "text": "Use NativePHP Mobile "
                         },
                         {
-                            "text": "^4.6",
+                            "text": "^4.7.0",
                             "code": true
                         },
                         {
                             "text": " and Mobile UI "
                         },
                         {
-                            "text": "^0.8",
+                            "text": "^0.9.0",
                             "code": true
                         },
                         {
-                            "text": ". Firstlight screens must extend "
+                            "text": ", with iOS 18.2+ or Android API 29+. Firstlight screens must extend "
                         },
                         {
                             "text": "FirstlightUI\\NativeComponent",

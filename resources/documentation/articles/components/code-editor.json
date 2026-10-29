@@ -1203,6 +1203,10 @@
                 },
                 {
                     "type": "text",
+                    "text": "On Android, a separate Button or Icon Button flushes the focused editor's pending change through Mobile's synchronous focus policy before posting its press. This orders event posting; it does not wait for PHP to process the change. A pending debounce does not publish that same edit again."
+                },
+                {
+                    "type": "text",
                     "runs": [
                         {
                             "text": "While the field is focused, the native buffer, cursor, selection, IME composition, scroll position, and undo history stay local. PHP acknowledgements do not replace them. Unfocused programmatic updates replace the text, clear undo history, and never emit "

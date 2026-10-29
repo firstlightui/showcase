@@ -794,21 +794,28 @@
                             "code": true
                         },
                         {
-                            "text": " surfaces. In the supported Mobile 4.6 implementation, Blade preserves their authored accessibility labels, but the generic native renderers do not consume those labels/hints or explicitly map a button role and disabled/selected state. Android's clickable supplies implicit Compose grouping; iOS uses a tap gesture without explicit accessibility grouping. Adding "
+                            "text": " surfaces. Mobile 4.7 consumes authored "
                         },
                         {
                             "text": "a11y-label",
                             "code": true
                         },
                         {
-                            "text": " to a "
+                            "text": " and "
                         },
                         {
-                            "text": "native:column",
+                            "text": "a11y-hint",
                             "code": true
                         },
                         {
-                            "text": " does not turn it into one accessible measurement either. Do not assume a visual tap target is accessible."
+                            "text": " on Pressable, Column, Row, and Stack containers, grouping a labelled container as one accessible element. A non-menu Pressable with "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " receives a button role and native accessible activation. Menu Pressables retain their menu renderer's semantics."
                         }
                     ]
                 },
@@ -837,7 +844,7 @@
                             "link": 10
                         },
                         {
-                            "text": " for a static grouped statistic. There is no supported arbitrary-content accessible action wrapper in Firstlight; custom interactive banners need an upstream core accessibility fix. Panels, dividers and tile grids remain Mobile UI layout, not catalogue controls."
+                            "text": " for a static grouped statistic. For custom content, use upstream Pressable and verify its accessible name, activation, target size, and any application-specific disabled or selected state on both platforms. Firstlight does not add a competing action wrapper. Panels, dividers and tile grids remain Mobile UI layout, not catalogue controls."
                         }
                     ]
                 }
