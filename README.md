@@ -4,6 +4,11 @@ The official NativePHP showcase and dogfooding app for [`firstlightui/nativephp`
 
 [firstlightui.dev](https://firstlightui.dev) · [team@firstlightui.dev](mailto:team@firstlightui.dev)
 
+## Try the showcase
+
+- **iOS:** [Join the showcase beta on TestFlight](https://testflight.apple.com/join/4CCrA7JB).
+- **Android:** Coming soon.
+
 ## Setup
 
 The app consumes the adjacent `../nativephp` checkout through Composer's path repository. From this directory:
