@@ -14,6 +14,34 @@
         </native:column>
 
         <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Scrolling filter row</native:text>
+            <native:text class="text-sm text-theme-on-surface">Unselected filters show only their icon; the selected filter reveals its label in the success tone once PHP accepts it. Scroll to reach Archived.</native:text>
+            <firstlight:pill-group
+                :options="$mailFilterOptions"
+                native:model="mailFilter"
+                a11y-label="Mail filter"
+                scrollable
+                collapse-labels
+                tone="success"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $mailFilter ?? '(empty)' }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Scrolling row with labels</native:text>
+            <firstlight:pill-group
+                :options="$invoiceStatusOptions"
+                native:model="invoiceStatuses"
+                label="Invoice status"
+                helper="Choose any that apply."
+                scrollable
+                multiple
+                tone="danger"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ implode(', ', $invoiceStatuses) ?: '(empty)' }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Multiple selection</native:text>
             <firstlight:pill-group
                 :options="$queueOptions"
