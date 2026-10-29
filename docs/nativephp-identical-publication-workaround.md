@@ -4,8 +4,8 @@
 
 The temporary Android binary workaround is retired. Do not patch `libphp.a`,
 change runtime object hashes, or modify vendor/runtime code. Firstlight uses a
-PHP screen response contract on official NativePHP Mobile `^4.6` and Mobile UI
-`^0.8` binaries instead. The old document URL is retained for existing links.
+PHP screen response contract on official NativePHP Mobile `^4.7.0` and Mobile UI
+`^0.9.0` binaries instead. The old document URL is retained for existing links.
 
 ## Supported screen contract
 

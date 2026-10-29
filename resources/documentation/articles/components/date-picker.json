@@ -226,6 +226,79 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "variant",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "field",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "chip",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Full field (default) or compact native picker trigger."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "display-text",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "App-authored chip caption such as Today. Requires "
+                                },
+                                {
+                                    "text": "variant=\"chip\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and a non-null accepted date; never replaces the bound or spoken date."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "error",
                                 "code": true
                             }
@@ -497,6 +570,28 @@
         "events-and-synchronisation": {
             "title": "Events and synchronisation",
             "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "For a compact date-of-service trigger, use "
+                        },
+                        {
+                            "text": "variant=\"chip\" label=\"DOS\"",
+                            "code": true
+                        },
+                        {
+                            "text": ". Optionally publish "
+                        },
+                        {
+                            "text": "display-text=\"Today\"",
+                            "code": true
+                        },
+                        {
+                            "text": " only when the app has determined that the accepted date is today in its business timezone. Recompute or omit that caption when the date changes. Without it, the chip shows the localized accepted date. VoiceOver and TalkBack always retain the full localized date. iOS uses a native bordered capsule button; Android uses a Material 3 AssistChip. Both open the existing native calendar and confirmation flow."
+                        }
+                    ]
+                },
                 {
                     "type": "text",
                     "runs": [

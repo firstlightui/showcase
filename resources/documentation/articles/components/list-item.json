@@ -7,6 +7,8 @@
         "list-item": "overview",
         "complete-example": "complete-example",
         "props": "props",
+        "status-and-pending-state": "status-and-pending-state",
+        "read-only-summaries-and-comparisons": "read-only-summaries-and-comparisons",
         "swipe-actions": "swipe-actions",
         "context-menu": "context-menu",
         "events-and-state-timing": "events-and-state-timing",
@@ -363,6 +365,46 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "leading-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Text identity such as "
+                                },
+                                {
+                                    "text": "4B-12",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", without the monogram length limit."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "trailing-icon",
                                 "code": true
                             }
@@ -455,6 +497,176 @@
                         {
                             "label": "Purpose",
                             "text": "Optional short metadata; null, empty, and whitespace-only strings omit it."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-status",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Display-only Status Label inside the row's single target."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "trailing-status-tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "info",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Status meaning; defaults to "
+                                },
+                                {
+                                    "text": "neutral",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and requires "
+                                },
+                                {
+                                    "text": "trailing-status",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "state",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "normal",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "provisional",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "pending-removal",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Normal (default), subdued provisional text, or struck-through headline/supporting text. Does not disable actions."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "state-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required spoken meaning for a nonnormal state."
                         }
                     ]
                 },
@@ -668,7 +880,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Choose at most one leading source: icon, avatar, or monogram. Choose at most one trailing affordance: icon or text. Supporting text and both edges may be omitted for a headline-only row."
+                    "text": "Choose at most one leading source: icon, avatar, monogram, or label. Choose at most one trailing affordance: icon, text, or status. Supporting text and both edges may be omitted for a headline-only row."
                 },
                 {
                     "type": "text",
@@ -740,6 +952,125 @@
                             "text": " aliases are also accepted for parity with NativePHP authoring."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The new attributes also accept matching camelCase aliases and fluent setters: "
+                        },
+                        {
+                            "text": "leadingLabel()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "trailingStatus()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "trailingStatusTone()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "state()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "stateLabel()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "status-and-pending-state": {
+            "title": "Status and pending state",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list-item\n    headline=\"Alex Morgan\"\n    supporting=\"Discharge\"\n    leading-label=\"4B-12\"\n    trailing-status=\"Waiting to sync\"\n    trailing-status-tone=\"warning\"\n    state=\"pending-removal\"\n    state-label=\"Discharge waiting to sync\"\n    @press=\"openPatient(42)\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "provisional",
+                            "code": true
+                        },
+                        {
+                            "text": " subdues text with a readable secondary foreground rather than making the row disabled. "
+                        },
+                        {
+                            "text": "pending-removal",
+                            "code": true
+                        },
+                        {
+                            "text": " strikes through the headline and supporting text but keeps the row until PHP publishes its removal. Neither state starts a job, retries sync, or changes action availability. Use "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": " separately when actions must be unavailable."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The leading label and trailing status join the default spoken row name. An explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": " replaces that name; "
+                        },
+                        {
+                            "text": "state-label",
+                            "code": true
+                        },
+                        {
+                            "text": " is still announced as state. The status is not a nested action or separate accessibility stop. At accessibility text sizes it moves below the headline/supporting text so the headline remains readable."
+                        }
+                    ]
+                }
+            ]
+        },
+        "read-only-summaries-and-comparisons": {
+            "title": "Read-only summaries and comparisons",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Use Mobile UI text/columns for read-only key-value content, not a List Item with a fake press handler. For a comparison, PHP decides match, mismatch or unknown; Status Label communicates the result with words as well as a mark:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:column class=\"w-full gap-2\">\n    <native:text class=\"text-theme-on-surface\">Patient: {{ $patientName }}</native:text>\n    <native:text class=\"text-theme-on-surface\">Date of birth: {{ $formattedDob }}</native:text>\n    <native:text class=\"text-theme-on-surface\">Label identifier: {{ $labelIdentifier }}</native:text>\n    <native:text class=\"text-theme-on-surface\">On file: {{ $fileIdentifier }}</native:text>\n    @if ($comparison === 'match')\n        <firstlight:status-label label=\"Matches\" tone=\"success\" icon=\"check\" icon-ios=\"checkmark\" />\n    @elseif ($comparison === 'mismatch')\n        <firstlight:status-label label=\"Does not match\" tone=\"warning\" />\n    @else\n        <firstlight:status-label label=\"Not compared\" tone=\"neutral\" />\n    @endif\n</native:column>"
+                },
+                {
+                    "type": "text",
+                    "text": "The app supplies the display values and comparison result. This is ordinary native composition, not a new catalogue layout or validation engine."
                 }
             ]
         },

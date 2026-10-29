@@ -21,7 +21,7 @@ function firstlightCheckboxNodesByLabel(array $tree): array
 /** @return array<string, bool|string> */
 function firstlightCheckboxPrimitiveProps(array $node): array
 {
-    return array_diff_key($node['props'], array_flip(['on_change']));
+    return array_diff_key($node['props'], array_flip(['on_change', 'ref']));
 }
 
 it('publishes the complete Checkbox catalogue through the native wire tree', function () {

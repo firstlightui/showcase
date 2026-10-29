@@ -591,14 +591,21 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "On iOS, pressing a "
+                            "text": "On iOS and Android, pressing a "
                         },
                         {
                             "text": "<firstlight:button>",
                             "code": true
                         },
                         {
-                            "text": " while the editor is focused publishes its pending "
+                            "text": " or "
+                        },
+                        {
+                            "text": "<firstlight:icon-button>",
+                            "code": true
+                        },
+                        {
+                            "text": " while the editor is focused queues its pending "
                         },
                         {
                             "text": ".blur",
@@ -612,21 +619,7 @@
                             "code": true
                         },
                         {
-                            "text": " change before the press, so the handler reads the current value. Icon Button and List Item presses do not flush the editor first. On Android, blur/debounce changes are not yet guaranteed to reach PHP before a button press, so for forms submitted by a separate button use "
-                        },
-                        {
-                            "text": "native:model.live=\"notes\"",
-                            "code": true
-                        },
-                        {
-                            "text": " (or plain "
-                        },
-                        {
-                            "text": "native:model",
-                            "code": true
-                        },
-                        {
-                            "text": "). Keyboard dismissal alone is not an ordering guarantee there."
+                            "text": " change before the press. This orders event posting; it does not wait for PHP to process the change. List Item presses do not flush the editor first. Android uses Mobile's synchronous focused-input flush hook rather than relying on keyboard dismissal to order the events."
                         }
                     ]
                 },

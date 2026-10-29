@@ -234,7 +234,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<native:scroll-view class=\"w-full flex-1\">\n    <native:column class=\"w-full p-4 gap-4\">\n        <firstlight:media\n            mode=\"image\"\n            label=\"Cover photo\"\n            helper=\"Cropped to 16:9. Saved when you tap Save cover.\"\n            aspect=\"16:9\"\n            directory=\"covers\"\n            native:model=\"cover\"\n            @change=\"coverChosen\"\n            @clear=\"coverCleared\"\n        />\n\n        <firstlight:button variant=\"primary\" :loading=\"$submitting\" @press=\"save\">\n            Save cover\n        </firstlight:button>\n    </native:column>\n</native:scroll-view>"
+                    "text": "<native:scroll-view class=\"w-full flex-1 bg-theme-background\">\n    <native:column class=\"w-full p-4 gap-4\">\n        <firstlight:media\n            mode=\"image\"\n            label=\"Cover photo\"\n            helper=\"Cropped to 16:9. Saved when you tap Save cover.\"\n            aspect=\"16:9\"\n            directory=\"covers\"\n            native:model=\"cover\"\n            @change=\"coverChosen\"\n            @clear=\"coverCleared\"\n        />\n\n        <firstlight:button variant=\"primary\" :loading=\"$submitting\" @press=\"save\">\n            Save cover\n        </firstlight:button>\n    </native:column>\n</native:scroll-view>"
                 },
                 {
                     "type": "text",

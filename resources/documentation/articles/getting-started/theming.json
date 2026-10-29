@@ -225,6 +225,54 @@
                     "type": "code",
                     "language": "blade",
                     "text": "<native:column class=\"bg-theme-surface border border-theme-outline rounded-2xl p-4\">\n    <native:text class=\"text-theme-on-surface text-lg font-bold\">\n        Account\n    </native:text>\n\n    <firstlight:text-field\n        label=\"Email\"\n        native:model=\"email\"\n    />\n</native:column>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Give each screen's root element, and every "
+                        },
+                        {
+                            "text": "firstlight:list",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "native:list",
+                            "code": true
+                        },
+                        {
+                            "text": ", the screen's background class, usually "
+                        },
+                        {
+                            "text": "bg-theme-background",
+                            "code": true
+                        },
+                        {
+                            "text": ". On iOS a root "
+                        },
+                        {
+                            "text": "native:column",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "native:scroll-view",
+                            "code": true
+                        },
+                        {
+                            "text": " or list without one paints the system background, which is pure black in dark mode, so that screen would not match screens that use the theme background:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list class=\"w-full flex-1 bg-theme-background\">\n    ...\n</firstlight:list>"
                 }
             ]
         },

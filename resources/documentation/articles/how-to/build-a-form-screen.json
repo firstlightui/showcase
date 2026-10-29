@@ -185,7 +185,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<native:scroll-view class=\"w-full flex-1\">\n    <native:column class=\"w-full p-4 gap-4\">\n        <firstlight:callout error-for=\"form\" />\n\n        <firstlight:text-field\n            label=\"Title\"\n            autocapitalize=\"sentences\"\n            submit-label=\"next\"\n            native:model=\"title\"\n            required\n        />\n\n        <firstlight:text-area\n            label=\"Body\"\n            native:model=\"body\"\n            required\n        />\n\n        <firstlight:button variant=\"primary\" :loading=\"$submitting\" @press=\"save\">\n            Save post\n        </firstlight:button>\n    </native:column>\n</native:scroll-view>"
+                    "text": "<native:scroll-view class=\"w-full flex-1 bg-theme-background\">\n    <native:column class=\"w-full p-4 gap-4\">\n        <firstlight:callout error-for=\"form\" />\n\n        <firstlight:text-field\n            label=\"Title\"\n            autocapitalize=\"sentences\"\n            submit-label=\"next\"\n            native:model=\"title\"\n            required\n        />\n\n        <firstlight:text-area\n            label=\"Body\"\n            native:model=\"body\"\n            required\n        />\n\n        <firstlight:button variant=\"primary\" :loading=\"$submitting\" @press=\"save\">\n            Save post\n        </firstlight:button>\n    </native:column>\n</native:scroll-view>"
                 },
                 {
                     "type": "text",

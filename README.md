@@ -41,7 +41,7 @@ Artwork was generated with the built-in image generation tool. The final
 ### Response-revision contract
 
 The supported screen base is `FirstlightUI\NativeComponent`; `ShowcaseScreen`
-extends it. On Mobile `^4.6` / Mobile UI `^0.8`, it adds a process-wide
+extends it. On Mobile `^4.7.0` / Mobile UI `^0.9.0`, it adds a process-wide
 increasing revision to each complete nonstreaming response's final chrome root.
 Blade paths are automatic; programmatic Element roots must return
 `$this->response($element)`. Nested children are untouched, partials are

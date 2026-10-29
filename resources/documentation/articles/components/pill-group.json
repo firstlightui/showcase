@@ -6,6 +6,7 @@
     "anchors": {
         "pill-group": "overview",
         "complete-examples": "complete-examples",
+        "scrolling-filter-row": "complete-examples",
         "props": "props",
         "options-and-values": "options-and-values",
         "events-and-state-timing": "events-and-state-timing",
@@ -22,7 +23,7 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Pill Group presents compact, individually shaped options for selecting zero or one value, or zero or more values."
+                    "text": "Pill Group presents compact, individually shaped options for selecting zero or one value, or zero or more values. It can also be a scrolling filter row in which each option has an icon and only the selected pill shows its label."
                 }
             ]
         },
@@ -42,6 +43,49 @@
                     "type": "code",
                     "language": "blade",
                     "text": "<firstlight:pill-group\n    :options=\"$queueOptions\"\n    native:model=\"queue\"\n    label=\"Queue\"\n    helper=\"Choose the queue to include.\"\n/>"
+                },
+                {
+                    "type": "heading",
+                    "text": "Scrolling filter row"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Give each option an icon, then add "
+                        },
+                        {
+                            "text": "scrollable",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "collapse-labels",
+                            "code": true
+                        },
+                        {
+                            "text": ". Unselected pills show only their icon; the selected pill shows its icon and label in the colour set by "
+                        },
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public ?string $filter = 'all';\n\npublic array $filterOptions = [\n    ['value' => 'all', 'label' => 'All', 'icon' => 'inbox'],\n    ['value' => 'unread', 'label' => 'Unread', 'icon' => 'mail'],\n    ['value' => 'starred', 'label' => 'Starred', 'icon' => 'star', 'icon-ios' => 'star.fill'],\n    ['value' => 'attachments', 'label' => 'Attachments', 'icon' => 'attach_file', 'icon-ios' => 'paperclip'],\n];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:pill-group\n    :options=\"$filterOptions\"\n    native:model=\"filter\"\n    a11y-label=\"Filter\"\n    scrollable\n    collapse-labels\n    tone=\"success\"\n/>"
                 },
                 {
                     "type": "text",
@@ -203,6 +247,134 @@
                                 },
                                 {
                                     "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "scrollable",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Shows the pills in one horizontally scrolling row instead of wrapping."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "collapse-labels",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows only the icon of unselected pills and the icon and label of selected pills. Every option needs an "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tone",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Selected pill colour: "
+                                },
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (default), "
+                                },
+                                {
+                                    "text": "accent",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "success",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "warning",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "danger",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Unselected pills always look the same."
                                 }
                             ]
                         }
@@ -443,7 +615,7 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Rich options accept only "
+                            "text": "Rich options accept "
                         },
                         {
                             "text": "value",
@@ -464,6 +636,27 @@
                             "code": true
                         },
                         {
+                            "text": ", "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "icon-ios",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "icon-android",
+                            "code": true
+                        },
+                        {
                             "text": " fields:"
                         }
                     ]
@@ -471,7 +664,54 @@
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "[\n    ['value' => 'mine', 'label' => 'Mine'],\n    ['value' => 'all', 'label' => 'All', 'disabled' => true],\n]"
+                    "text": "[\n    ['value' => 'mine', 'label' => 'Mine', 'icon' => 'person'],\n    ['value' => 'all', 'label' => 'All', 'icon' => 'groups', 'icon-ios' => 'person.3', 'disabled' => true],\n]"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": " is the shared fallback; "
+                        },
+                        {
+                            "text": "icon-ios",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "icon-android",
+                            "code": true
+                        },
+                        {
+                            "text": " override it per platform and also accept NativePHP "
+                        },
+                        {
+                            "text": "IosSymbol",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "AndroidSymbol",
+                            "code": true
+                        },
+                        {
+                            "text": " values. Option icons are decorative: VoiceOver and TalkBack announce the option label instead. Icons are set per option; "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": " on the group itself is rejected."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -650,9 +890,27 @@
                             "code": true
                         },
                         {
-                            "text": ". Firstlight warns during development when both are blank. Each pill exposes its label, selected state, and disabled state through native platform semantics. Selection also has a visible checkmark, so it does not depend on colour alone. Pills wrap at larger text sizes and retain at least a 44-point iOS or 48-dp Android interaction target."
+                            "text": ". Firstlight warns during development when both are blank. Each pill exposes its label, selected state, and disabled state through native platform semantics. Selection also has a visible checkmark, or with "
+                        },
+                        {
+                            "text": "collapse-labels",
+                            "code": true
+                        },
+                        {
+                            "text": " a revealed label, so it does not depend on colour alone. Icon-only pills are announced by their option label. Pills wrap at larger text sizes, or scroll when "
+                        },
+                        {
+                            "text": "scrollable",
+                            "code": true
+                        },
+                        {
+                            "text": ", and retain at least a 44-point iOS or 48-dp Android interaction target. The label reveal animation is removed when Reduce Motion or system animations are turned off."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "text": "Collapsed labels hide meaning until a pill is selected, so use them for short sets with recognisable icons."
                 }
             ]
         },
@@ -663,7 +921,21 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Contract exceptions still reject malformed options, mixed selections, and unsupported presentation props before publication. User validation is separate: screens that "
+                            "text": "Contract exceptions still reject malformed options, mixed selections, an unsupported "
+                        },
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": ", blank or invalid option icons, "
+                        },
+                        {
+                            "text": "collapse-labels",
+                            "code": true
+                        },
+                        {
+                            "text": " without an icon on every option, and unsupported presentation props before publication. User validation is separate: screens that "
                         },
                         {
                             "text": "use ValidatesFields",
@@ -725,7 +997,14 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "iOS uses native SwiftUI capsule buttons in a wrapping layout. Android uses Material 3 "
+                            "text": "iOS uses native SwiftUI capsule buttons in a wrapping layout or a horizontal "
+                        },
+                        {
+                            "text": "ScrollView",
+                            "code": true
+                        },
+                        {
+                            "text": ". Android uses Material 3 "
                         },
                         {
                             "text": "FilterChip",
@@ -739,7 +1018,7 @@
                             "code": true
                         },
                         {
-                            "text": ". Both inherit NativePHP semantic theme tokens and preserve native press, focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
+                            "text": " or a horizontally scrolling row. Both inherit NativePHP semantic theme tokens and preserve native press, focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
                         }
                     ]
                 }

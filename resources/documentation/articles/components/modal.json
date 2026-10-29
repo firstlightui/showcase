@@ -280,6 +280,10 @@
                 },
                 {
                     "type": "text",
+                    "text": "When a Firstlight screen navigates away, its farewell response closes the modal, including nested modals, without changing the bound visibility property."
+                },
+                {
+                    "type": "text",
                     "runs": [
                         {
                             "text": "There is no overlay "

@@ -24,14 +24,21 @@
                             "code": true
                         },
                         {
-                            "text": " is a Livewire-shaped Laravel Validator layer for NativePHP EDGE screens. "
+                            "text": " extends NativePHP Mobile's "
+                        },
+                        {
+                            "text": "ValidatesInput",
+                            "code": true
+                        },
+                        {
+                            "text": " with Form Request sources, Media conversion, error summaries, and accessibility announcements. "
                         },
                         {
                             "text": "FirstlightUI\\NativeComponent",
                             "code": true
                         },
                         {
-                            "text": " includes the trait. See "
+                            "text": " includes the trait. Validation and bag management use upstream's implementation; existing Firstlight screen code does not need a trait swap. See "
                         },
                         {
                             "text": "Validate fields",
@@ -440,21 +447,49 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "The view also receives "
+                            "text": "The view receives upstream's "
+                        },
+                        {
+                            "text": "$errors",
+                            "code": true
+                        },
+                        {
+                            "text": " ("
+                        },
+                        {
+                            "text": "ViewErrorBag",
+                            "code": true
+                        },
+                        {
+                            "text": ") and Firstlight's "
                         },
                         {
                             "text": "$errorBag",
                             "code": true
                         },
                         {
-                            "text": " for explicit "
+                            "text": " ("
                         },
                         {
-                            "text": ":error=\"$errorBag->first('email')\"",
+                            "text": "MessageBag",
                             "code": true
                         },
                         {
-                            "text": " bindings."
+                            "text": ") for explicit bindings. Both expose the same messages. Native and Firstlight fields read the shared "
+                        },
+                        {
+                            "text": "FieldErrors",
+                            "code": true
+                        },
+                        {
+                            "text": " render scope, so mixed-control screens work together. A screen using only upstream "
+                        },
+                        {
+                            "text": "ValidatesInput",
+                            "code": true
+                        },
+                        {
+                            "text": " also binds Firstlight field errors, but does not add Firstlight's Form Request, Media, or announcement extensions."
                         }
                     ]
                 }

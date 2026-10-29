@@ -878,7 +878,29 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Automatic feedback starts with a four-second minimum. Longer text may increase message time up to ten seconds, and an action adds two seconds. Platform accessibility policy may extend that duration. Automatic feedback has no visible dismiss control."
+                    "text": "Automatic feedback starts with a four-second minimum. Longer text may increase message time up to ten seconds, and an action adds two seconds. Platform accessibility policy may extend that duration."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Automatic feedback with an action, such as Undo, also presents a native dismiss control next to the action, so the person can clear it before it times out instead of waiting for it to stop covering the bottom of the screen. Its timeout still applies. Pressing the dismiss control dispatches only "
+                        },
+                        {
+                            "text": "FeedbackDismissed",
+                            "code": true
+                        },
+                        {
+                            "text": " with "
+                        },
+                        {
+                            "text": "FeedbackDismissReason::Manual",
+                            "code": true
+                        },
+                        {
+                            "text": ". Automatic feedback without an action has no visible dismiss control."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -888,14 +910,7 @@
                             "code": true
                         },
                         {
-                            "text": " disables automatic timeout. A held item presents an explicit native dismiss control with the accessible label "
-                        },
-                        {
-                            "text": "Dismiss feedback",
-                            "code": true
-                        },
-                        {
-                            "text": "; its optional application action remains available. Either user action advances the queue. "
+                            "text": " disables automatic timeout. A held item always presents the dismiss control; its optional application action remains available. Either user action advances the queue. "
                         },
                         {
                             "text": "Feedback::dismiss()",
@@ -908,7 +923,25 @@
                 },
                 {
                     "type": "text",
-                    "text": "There is no public duration, position, animation, swipe, close-label, or stacking option."
+                    "runs": [
+                        {
+                            "text": "The dismiss control shows the package chrome label "
+                        },
+                        {
+                            "text": "Dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " with an × symbol on iOS and an × icon on Android, and both platforms expose the accessible label "
+                        },
+                        {
+                            "text": "Dismiss feedback",
+                            "code": true
+                        },
+                        {
+                            "text": ". There is no swipe-to-dismiss gesture. There is no public duration, position, animation, close-label, or stacking option."
+                        }
+                    ]
                 }
             ]
         },
@@ -938,7 +971,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Actions meet the platform baseline of at least 44 points on iOS and 48 dp on Android. Long text wraps, controls reflow under constrained width or large text, and both platforms preserve dark mode, contrast, and right-to-left layout. Automatic timing pauses while an action owns accessibility focus."
+                    "text": "Actions and the dismiss control meet the platform baseline of at least 44 points on iOS and 48 dp on Android. Long text wraps, controls reflow under constrained width or large text, and both platforms preserve dark mode, contrast, and right-to-left layout. Automatic timing pauses while an action or the dismiss control owns accessibility focus."
                 },
                 {
                     "type": "text",
@@ -1042,7 +1075,7 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Both platforms own one visible item and the same FIFO/event contract. Native expression differs by platform; Firstlight guarantees behavioural parity rather than identical geometry. Held items expose a dismiss control whose visible and accessibility labels are package chrome; see "
+                            "text": "Both platforms own one visible item and the same FIFO/event contract. Native expression differs by platform; Firstlight guarantees behavioural parity rather than identical geometry. Held and actionable items expose a dismiss control whose visible and accessibility labels are package chrome; see "
                         },
                         {
                             "text": "Localize chrome",
@@ -1069,7 +1102,7 @@
                             "link": 4
                         },
                         {
-                            "text": ": PHP 8.4, NativePHP Mobile 4.6, NativePHP Mobile UI 0.8, iOS 18 or later, and Android API 29 or later. Both Firstlight native hosts must be compiled into the application."
+                            "text": ": PHP 8.4, NativePHP Mobile 4.7, NativePHP Mobile UI 0.9, iOS 18.2 or later, and Android API 29 or later. Both Firstlight native hosts must be compiled into the application."
                         }
                     ]
                 }
