@@ -24,6 +24,7 @@ it('publishes the complete Select catalogue through the native wire tree', funct
     expect($tree['type'])->toBe('native_root_tabs')
         ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Select')
         ->and(array_keys($nodes))->toBe([
+            'Chip priority',
             'Priority',
             'Triage level',
             'Large queue',
@@ -32,6 +33,7 @@ it('publishes the complete Select catalogue through the native wire tree', funct
             'Disabled priority',
             'Server-approved queue',
         ])
+        ->and($nodes['Chip priority']['props'])->toMatchArray(['variant' => 'chip', 'selected_values' => []])
         ->and($nodes['Priority']['props'])->toMatchArray([
             'selected_values' => [],
             'value_type' => 'string',
@@ -80,5 +82,6 @@ it('updates string and integer bindings while preserving a rejected publication'
     $nodes = firstlightSelectsByLabel($screen->tree());
     expect($nodes['Required priority']['props']['selected_values'])->toBe(['urgent'])
         ->and($nodes['Required priority']['props']['error'])->toBe('Choose a priority.')
-        ->and($nodes['Triage level']['props']['selected_values'])->toBe(['30']);
+        ->and($nodes['Triage level']['props']['selected_values'])->toBe(['30'])
+        ->and($nodes['Chip priority']['props']['selected_values'])->toBe(['urgent']);
 });

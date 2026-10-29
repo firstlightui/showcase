@@ -2,6 +2,11 @@
     <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: edit/clear email then reset. Search updates PHP after 500 ms quiet. Password updates on blur; reveal only changes native visibility, diagnostics show length only. Patient ID permits copy, not edits. Recipient trailing action simulates entry without a camera.</native:text>
         <native:column class="w-full gap-2">
+            <firstlight:text-field label="Checked identifier" value="1234" helper="Checksum OK" helper-tone="success" read-only />
+            <firstlight:text-field label="Review identifier" value="1234" helper="Check this" helper-tone="warning" read-only />
+            <firstlight:text-field label="Label identifier" value="1234" helper="From label" read-only />
+        </native:column>
+        <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Native email input</native:text>
             <firstlight:text-field
                 native:model="email"

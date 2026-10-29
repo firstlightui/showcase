@@ -30,6 +30,7 @@ it('publishes the complete Choice Group catalogue through the native tree', func
             'Locked priority',
             'Priority with error',
             'Disabled priority',
+            'Favourites',
             'Next step',
         ])
         ->and($nodes['Priority']['props']['selected_values'])->toBe(['routine'])
@@ -39,7 +40,12 @@ it('publishes the complete Choice Group catalogue through the native tree', func
         ->and($nodes['Triage level']['props']['value_type'])->toBe('integer')
         ->and($nodes['Triage level']['props']['option_enabled'])->toBe(['1', '0', '1'])
         ->and($nodes['Priority with error']['props']['error'])->toBe('Priority is required.')
-        ->and($nodes['Disabled priority']['props']['disabled'])->toBeTrue();
+        ->and($nodes['Disabled priority']['props']['disabled'])->toBeTrue()
+        ->and($nodes['Favourites']['props'])->toMatchArray([
+            'variant' => 'tiles', 'multiple' => true, 'selected_values' => ['consult'],
+            'option_prefixes' => ['110', '116', '119'], 'option_supporting' => ['$90.00', '$45.00', '$65.00'],
+            'option_enabled' => ['1', '1', '0'],
+        ]);
 
     $screen->assertAccessible();
 });
@@ -60,9 +66,13 @@ it('dispatches complete single and multiple proposals through PRESS callbacks', 
     $screen->press("__syncProperty('notifications', [\"push\"])")
         ->assertSet('notifications', ['push']);
 
+    $screen->press("__syncProperty('favourites', [\"consult\",\"review\"])")
+        ->assertSet('favourites', ['consult', 'review']);
+
     $nodes = firstlightChoiceGroupNodesByLabel($screen->tree());
     expect($nodes['Priority with error']['props']['selected_values'])->toBe(['urgent'])
-        ->and($nodes['Next step']['props']['selected_values'])->toBe(['escalate']);
+        ->and($nodes['Next step']['props']['selected_values'])->toBe(['escalate'])
+        ->and($nodes['Favourites']['props']['selected_values'])->toBe(['consult', 'review']);
     $screen->tap('Reset choices')->assertSee('PHP accepted state: email, push');
 });
 

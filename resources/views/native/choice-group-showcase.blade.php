@@ -70,6 +70,22 @@
             />
         </native:column>
 
+        <native:column class="w-full gap-2">
+            <firstlight:choice-group
+                ref="favourites"
+                variant="tiles"
+                :options="[
+                    ['value' => 'consult', 'prefix' => '110', 'label' => 'Initial consultation', 'supporting' => '$90.00'],
+                    ['value' => 'review', 'prefix' => '116', 'label' => 'Follow-up', 'supporting' => '$45.00'],
+                    ['value' => 'unavailable', 'prefix' => '119', 'label' => 'Unavailable', 'supporting' => '$65.00', 'disabled' => true],
+                ]"
+                native:model="favourites"
+                label="Favourites"
+                multiple
+            />
+            <native:text class="text-sm text-theme-on-surface">Accepted favourites: {{ implode(', ', $favourites) }}</native:text>
+        </native:column>
+
         <native:column class="w-full gap-2 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Long labels</native:text>
             <firstlight:choice-group
