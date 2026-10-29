@@ -19,7 +19,7 @@ it('publishes every List Item content and state fixture through the native wire 
     $nodes = listItemShowcaseNodes($screen->tree());
 
     expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight List Item')
-        ->and($nodes)->toHaveCount(10)
+        ->and($nodes)->toHaveCount(13)
         ->and(array_column(array_column($nodes, 'props'), 'headline'))->toBe([
             'Account',
             'Billing',
@@ -31,6 +31,9 @@ it('publishes every List Item content and state fixture through the native wire 
             'Disabled message',
             'Message from Alex',
             'Managed account',
+            'Alex Morgan',
+            'Sam Lee',
+            'Taylor Green',
         ])
         ->and($nodes[0]['props'])->not->toHaveKeys(['supporting', 'leading_type', 'trailing_type'])
         ->and($nodes[1]['props'])->toMatchArray([
@@ -53,7 +56,17 @@ it('publishes every List Item content and state fixture through the native wire 
             'a11y_hint' => 'Records a Notifications press; does not navigate',
         ])
         ->and($nodes[7]['props']['disabled'])->toBeTrue()
-        ->and($nodes[9]['props']['disabled'])->toBeTrue();
+        ->and($nodes[9]['props']['disabled'])->toBeTrue()
+        ->and($nodes[10]['props'])->toMatchArray([
+            'leading_type' => 'label', 'leading_value' => '4B-12',
+            'trailing_type' => 'status', 'trailing_value' => 'Billed today', 'trailing_status_tone' => 'success',
+        ])
+        ->and($nodes[11]['props'])->toMatchArray([
+            'state' => 'provisional', 'state_label' => 'Provisional admission waiting to sync',
+        ])
+        ->and($nodes[12]['props'])->toMatchArray([
+            'state' => 'pending-removal', 'state_label' => 'Discharge waiting to sync',
+        ]);
 
     foreach ($nodes as $node) {
         expect($node['on_press'] ?? null)->toBeInt();
@@ -90,7 +103,7 @@ it('dispatches independent swipe callbacks with stable keys without removing row
     $screen->press("recordSwipe('Flag',73)")
         ->assertSet('swipeCount', 3)->assertSet('lastSwipe', 'Flag #73')
         ->assertSet('pressCount', 0);
-    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(10);
+    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(13);
 
     $screen->tap('Toggle swipe rows');
     $nodes = listItemShowcaseNodes($screen->tree());
@@ -112,7 +125,7 @@ it('dispatches context menu callbacks and republishes item and row availability'
         ->assertSet('menuCount', 2)->assertSet('lastMenu', 'Delete #42')
         ->assertSet('pressCount', 0)
         ->assertSee('Last menu action: Delete #42');
-    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(10);
+    expect(listItemShowcaseNodes($screen->tree()))->toHaveCount(13);
 
     $screen->tap('Toggle Forward');
     expect($menu()[1]['disabled'])->toBeFalse()->and($menu()[1]['cb'])->toBeGreaterThan(0);

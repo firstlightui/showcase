@@ -126,6 +126,21 @@
             />
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Identity, status and pending states</native:text>
+            <firstlight:list-item headline="Alex Morgan" supporting="Admission" leading-label="4B-12" trailing-status="Billed today" trailing-status-tone="success" @press="recordProfile" />
+            <firstlight:list-item headline="Sam Lee" supporting="Admission" leading-label="4B-13" trailing-status="Waiting to sync" trailing-status-tone="warning" state="provisional" state-label="Provisional admission waiting to sync" @press="recordProfile" />
+            <firstlight:list-item headline="Taylor Green" supporting="Discharge" leading-label="4B-14" trailing-status="Waiting to sync" trailing-status-tone="warning" state="pending-removal" state-label="Discharge waiting to sync" @press="recordProfile" />
+        </native:column>
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Read-only summary and comparison</native:text>
+            <native:text class="text-theme-on-surface">Patient: Alex Morgan</native:text>
+            <native:text class="text-theme-on-surface">Date of birth: 12 May 1980</native:text>
+            <native:text class="text-theme-on-surface">Label identifier: 1234</native:text>
+            <native:text class="text-theme-on-surface">On file: 1234</native:text>
+            <firstlight:status-label label="Matches" tone="success" icon="check" icon-ios="checkmark" />
+        </native:column>
+
         <native:column class="w-full gap-2 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Interaction</native:text>
             <native:text class="text-sm text-theme-on-surface">Recorded presses: {{ $pressCount }}</native:text>

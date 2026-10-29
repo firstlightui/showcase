@@ -15,6 +15,8 @@ class ChoiceGroupShowcase extends ShowcaseScreen
     /** @var list<string> */
     public array $notifications = ['email', 'push'];
 
+    public array $favourites = ['consult'];
+
     public ?string $rejectedPriority = 'routine';
 
     public int $rejectedAttempts = 0;

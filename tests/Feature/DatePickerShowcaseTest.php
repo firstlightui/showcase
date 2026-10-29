@@ -24,6 +24,7 @@ it('publishes the complete Date Picker catalogue through the native wire tree', 
     expect($tree['type'])->toBe('native_root_tabs')
         ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Date Picker')
         ->and(array_keys($nodes))->toBe([
+            'DOS',
             'Appointment date',
             'Review date',
             'Discharge date',
@@ -31,6 +32,9 @@ it('publishes the complete Date Picker catalogue through the native wire tree', 
             'Disabled date',
             'Server-approved date',
             'Programmatic date',
+        ])
+        ->and($nodes['DOS']['props'])->toMatchArray([
+            'variant' => 'chip', 'display_text' => '4 Aug 2026', 'value' => '2026-08-04',
         ])
         ->and($nodes['Appointment date']['props'])->toMatchArray([
             'has_value' => false,

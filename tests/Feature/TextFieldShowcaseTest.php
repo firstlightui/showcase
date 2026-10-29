@@ -26,6 +26,9 @@ it('publishes the complete Text Field catalogue through the native wire tree', f
     expect($tree['type'])->toBe('native_root_tabs')
         ->and($tree['props']['nav_title'] ?? null)->toBe('Firstlight Text Field')
         ->and(array_keys($nodes))->toBe([
+            'Checked identifier',
+            'Review identifier',
+            'Label identifier',
             'Email',
             'Card number',
             'Postal code',
@@ -34,7 +37,10 @@ it('publishes the complete Text Field catalogue through the native wire tree', f
             'Patient ID',
             'Email with error',
             'Recipient',
-        ]);
+        ])
+        ->and($nodes['Checked identifier']['props'])->toMatchArray(['helper' => 'Checksum OK', 'helper_tone' => 'success'])
+        ->and($nodes['Review identifier']['props'])->toMatchArray(['helper' => 'Check this', 'helper_tone' => 'warning'])
+        ->and($nodes['Label identifier']['props'])->toMatchArray(['helper' => 'From label']);
 
     $screen->assertAccessible();
 });

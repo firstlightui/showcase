@@ -10,6 +10,8 @@ class BottomSheetShowcase extends ShowcaseScreen
 
     public bool $programmaticVisible = false;
 
+    public bool $billVisible = false;
+
     public int $dismissalCount = 0;
 
     public string $lastOutcome = 'No presentation yet';
@@ -17,6 +19,16 @@ class BottomSheetShowcase extends ShowcaseScreen
     public function showDefault(): void
     {
         $this->defaultVisible = true;
+    }
+
+    public function showBill(): void
+    {
+        $this->billVisible = true;
+    }
+
+    public function closeBill(): void
+    {
+        $this->billVisible = false;
     }
 
     public function dismissDefault(): void
