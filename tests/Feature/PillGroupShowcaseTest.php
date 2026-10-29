@@ -8,7 +8,7 @@ function firstlightPillGroupNodesByLabel(array $tree): array
     $nodes = [];
 
     if (($tree['type'] ?? null) === 'firstlight.pill-group') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
 
     foreach ($tree['children'] ?? [] as $child) {
@@ -25,6 +25,8 @@ it('publishes the complete Pill Group catalogue through the native tree', functi
     expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Pill Group')
         ->and(array_keys($nodes))->toBe([
             'Queue',
+            'Mail filter',
+            'Invoice status',
             'Queues',
             'Priority',
             'Locked queue',
@@ -38,7 +40,15 @@ it('publishes the complete Pill Group catalogue through the native tree', functi
         ->and($nodes['Priority']['props']['value_type'])->toBe('integer')
         ->and($nodes['Priority']['props']['option_enabled'])->toBe(['1', '0', '1'])
         ->and($nodes['Queue with error']['props']['error'])->toBe('Choose at least one queue.')
-        ->and($nodes['Disabled queue']['props']['disabled'])->toBeTrue();
+        ->and($nodes['Disabled queue']['props']['disabled'])->toBeTrue()
+        ->and($nodes['Mail filter']['props']['scrollable'])->toBeTrue()
+        ->and($nodes['Mail filter']['props']['collapse_labels'])->toBeTrue()
+        ->and($nodes['Mail filter']['props']['tone'])->toBe('success')
+        ->and($nodes['Mail filter']['props']['option_icons'])->toHaveCount(6)
+        ->and($nodes['Invoice status']['props']['collapse_labels'])->toBeFalse()
+        ->and($nodes['Invoice status']['props']['tone'])->toBe('danger')
+        ->and($nodes['Invoice status']['props']['selected_values'])->toBe(['overdue'])
+        ->and($nodes['Queue']['props']['tone'])->toBe('primary');
 
     $screen->assertAccessible();
 });
@@ -58,6 +68,10 @@ it('dispatches complete single and multiple proposals through PRESS callbacks', 
 
     $screen->press("__syncProperty('queues', [\"urgent\"])")
         ->assertSet('queues', ['urgent']);
+
+    $screen->press("__syncProperty('mailFilter', \"starred\")")
+        ->assertSet('mailFilter', 'starred')
+        ->assertSee('PHP accepted state: starred');
 
     $nodes = firstlightPillGroupNodesByLabel($screen->tree());
     expect($nodes['Queue with error']['props']['selected_values'])->toBe(['all'])
