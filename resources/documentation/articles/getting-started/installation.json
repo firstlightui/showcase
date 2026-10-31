@@ -71,7 +71,7 @@
                             "link": 1
                         },
                         {
-                            "text": ". Firstlight 1.0.0 is a release candidate pending physical-device, soak/performance, and wider app qualification."
+                            "text": "."
                         }
                     ]
                 }
@@ -82,12 +82,12 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Install Firstlight as a normal Composer dependency. Until 1.0.0 is stable, allow release candidates in the constraint; Laravel's default minimum stability otherwise finds no installable version:"
+                    "text": "Install Firstlight as a normal Composer dependency:"
                 },
                 {
                     "type": "code",
                     "language": "bash",
-                    "text": "composer require \"firstlightui/nativephp:^1.0@RC\""
+                    "text": "composer require firstlightui/nativephp"
                 },
                 {
                     "type": "text",

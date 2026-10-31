@@ -103,7 +103,7 @@
                             "strong": true
                         },
                         {
-                            "text": " Firstlight 1.0.0 is a release candidate. The behaviour on this page is covered by contract, XCTest, and Robolectric tests, and validation focus was observed with TalkBack on the Android emulator. Spoken VoiceOver and TalkBack output has not been checked on physical devices. See "
+                            "text": " The behaviour on this page is covered by contract, XCTest, and Robolectric tests, and validation focus was observed with TalkBack on the Android emulator. VoiceOver was checked on a physical iPhone; spoken TalkBack output has not been recorded on a physical Android device. See "
                         },
                         {
                             "text": "Known gaps",
@@ -504,7 +504,7 @@
                     "type": "item",
                     "marker": "•",
                     "depth": 0,
-                    "text": "Spoken VoiceOver and TalkBack passes on physical devices have not been completed. VoiceOver does not run in the iOS Simulator, so iOS spoken output is covered by tests of the accessibility tree, not by listening. TalkBack focus moving to the first invalid field was observed on the Android emulator; spoken output was not captured on either platform."
+                    "text": "A spoken TalkBack pass on a physical Android device has not been recorded. TalkBack focus moving to the first invalid field was observed on the Android emulator. VoiceOver was checked on a physical iPhone."
                 },
                 {
                     "type": "item",
