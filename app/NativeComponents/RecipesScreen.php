@@ -45,6 +45,11 @@ class RecipesScreen extends ShowcaseScreen
         $this->navigate('/settings');
     }
 
+    public function openVault(): void
+    {
+        $this->navigate('/vault');
+    }
+
     public function showsBackButton(): bool
     {
         return false;

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Support\ShowcaseFeedbackLog;
+use FirstlightUI\AppGuard\AppGuardServiceProvider;
 use FirstlightUI\Events\FeedbackActionPressed;
 use FirstlightUI\Events\FeedbackDismissed;
 use FirstlightUI\FirstlightServiceProvider;
@@ -50,6 +51,7 @@ class NativeServiceProvider extends ServiceProvider
             NativeUIServiceProvider::class,
             BrowserServiceProvider::class,
             FirstlightServiceProvider::class,
+            AppGuardServiceProvider::class,
         ];
     }
 }

@@ -82,4 +82,19 @@
             @press="openPostCover"
         />
     </firstlight:list-section>
+    <firstlight:list-section header="Security" footer="Locks after a minute in the background. Unlocking needs the paid biometrics plugin.">
+        <firstlight:list-item
+            headline="App lock"
+            supporting="Hide content in the app switcher and unlock with Face ID or a fingerprint"
+            leading-icon="lock"
+            leading-icon-ios="lock.fill"
+            leading-icon-android="lock"
+            leading-icon-tone="danger"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens the app lock recipe"
+            @press="openVault"
+        />
+    </firstlight:list-section>
 </firstlight:list>

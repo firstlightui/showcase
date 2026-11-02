@@ -72,6 +72,8 @@ use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SelectShowcase;
 use App\NativeComponents\SettingsScreen;
+use App\NativeComponents\LockScreen;
+use App\NativeComponents\VaultScreen;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\SliderShowcase;
 use App\NativeComponents\StatusLabelShowcase;
@@ -411,4 +413,12 @@ Route::native('/settings', SettingsScreen::class)
 
 Route::native('/settings/privacy', PrivacyScreen::class)
     ->name('recipes.privacy')
+    ->layout(AppLayout::class);
+
+Route::native('/vault', VaultScreen::class)
+    ->name('recipes.vault')
+    ->layout(AppLayout::class);
+
+Route::native('/lock', LockScreen::class)
+    ->name('recipes.lock')
     ->layout(AppLayout::class);
