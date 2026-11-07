@@ -128,9 +128,37 @@ it('asks again when the app returns to an idle lock screen, but not mid-prompt',
     expect(appLockPromptIds($lock))->toHaveCount(2);
 });
 
-it('cannot be dismissed with back', function () {
+it('returns to recipes without unlocking when back is pressed', function () {
     Native::test(LockScreen::class, data: ['return' => '/vault'])
         ->assertNavBarHidden()
         ->pressBack()
-        ->assertNoNavigation();
+        ->assertReplacedWith('/recipes');
+
+    expect(app(AppLock::class)->isLocked())->toBeTrue();
+});
+
+it('can leave the example when device authentication is unavailable', function () {
+    Native::fakeBridge()
+        ->respondTo('AppGuard.SetShieldTimeout', [])
+        ->respondTo('AppGuard.ReleaseShield', [])
+        ->respondTo('Biometric.Prompt', ['status' => 'error', 'code' => 'UNAVAILABLE']);
+
+    Native::test(LockScreen::class, data: ['return' => '/vault'])
+        ->assertSet('failed', true)
+        ->tap('Back to Recipes')
+        ->assertReplacedWith('/recipes');
+
+    expect(app(AppLock::class)->isLocked())->toBeTrue();
+});
+
+it('ignores a successful biometric callback after leaving the example', function () {
+    $lock = Native::test(LockScreen::class, data: ['return' => '/vault']);
+    $prompt = appLockPromptIds($lock)[0];
+
+    $lock->tap('Back to Recipes')
+        ->assertReplacedWith('/recipes');
+
+    $lock->instance()->biometricCompleted(success: true, id: $prompt);
+
+    expect(app(AppLock::class)->isLocked())->toBeTrue();
 });
