@@ -9,6 +9,7 @@ use FirstlightUI\Events\FeedbackDismissed;
 use FirstlightUI\FirstlightServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Native\Mobile\Providers\BiometricsServiceProvider;
 use Native\Mobile\Providers\BrowserServiceProvider;
 use Native\Mobile\UI\NativeUIServiceProvider;
 
@@ -49,6 +50,7 @@ class NativeServiceProvider extends ServiceProvider
     {
         return [
             NativeUIServiceProvider::class,
+            BiometricsServiceProvider::class,
             BrowserServiceProvider::class,
             FirstlightServiceProvider::class,
             AppGuardServiceProvider::class,

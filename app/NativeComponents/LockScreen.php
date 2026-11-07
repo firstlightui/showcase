@@ -65,10 +65,19 @@ class LockScreen extends NativeComponent
         }
     }
 
-    /**
-     * Nothing behind the lock may show, so back does nothing.
-     */
-    public function onBackPressed(): void {}
+    public function onBackPressed(): void
+    {
+        $this->cancel();
+    }
+
+    public function cancel(): void
+    {
+        $this->promptId = null;
+        $this->prompting = false;
+        app(AppLock::class)->resumeShield();
+        AppGuard::releaseShield();
+        $this->replace('/recipes');
+    }
 
     public function navigationOptions(): ?NavBarOptions
     {
