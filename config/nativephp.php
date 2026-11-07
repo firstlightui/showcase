@@ -26,7 +26,8 @@ return [
     |
     */
 
-    'version_code' => (int) env('NATIVEPHP_APP_VERSION_CODE', 10),
+    // NativePHP may seed a fresh build environment with code 1; Play has already used 1–9.
+    'version_code' => max(10, (int) env('NATIVEPHP_APP_VERSION_CODE', 10)),
 
     /*
     |--------------------------------------------------------------------------
