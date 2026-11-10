@@ -46,6 +46,7 @@ use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\CodeEditorShowcase;
 use App\NativeComponents\ConfirmationDialogShowcase;
 use App\NativeComponents\CreatePostScreen;
+use App\NativeComponents\CustomIconsShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\DocumentationArticleScreen;
 use App\NativeComponents\DocumentationScreen;
@@ -232,6 +233,10 @@ Route::native('/components/icon-button', IconButtonShowcase::class)
 
 Route::native('/captures/icon-button', IconButtonCapture::class)
     ->name('captures.icon-button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/components/custom-icons', CustomIconsShowcase::class)
+    ->name('custom-icons')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/components/list-item', ListItemShowcase::class)
