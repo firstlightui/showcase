@@ -7,7 +7,7 @@ The official NativePHP showcase and dogfooding app for [`firstlightui/nativephp`
 ## Try the showcase
 
 - **iOS:** [Join the showcase beta on TestFlight](https://testflight.apple.com/join/4CCrA7JB).
-- **Android:** Coming soon.
+- **Android:** [Download the showcase on Google Play](https://play.google.com/store/apps/details?id=dev.firstlightui.showcase).
 
 ## Setup
 
