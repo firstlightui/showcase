@@ -74,6 +74,7 @@ it('publishes simple and stable string values with distinct model callbacks', fu
         'option_values' => ['Mine', 'All'],
         'option_labels' => ['Mine', 'All'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and($simple['props']['on_change'])->toBeInt()
         ->and(firstlightPropsWithoutCallbacks($stable))->toBe([
             'label' => 'Stable queue',
@@ -87,6 +88,7 @@ it('publishes simple and stable string values with distinct model callbacks', fu
             'option_values' => ['mine', 'all'],
             'option_labels' => ['Mine', 'All'],
             'option_enabled' => ['1', '1'],
+            'size' => 'md',
         ])->and($stable['props']['on_change'])->toBeInt()
         ->and($stable['props']['on_change'])->not->toBe($simple['props']['on_change']);
 });
@@ -108,6 +110,7 @@ it('serializes integer values with per-option availability and callback IDs', fu
         'option_values' => ['10', '20'],
         'option_labels' => ['Routine', 'Urgent'],
         'option_enabled' => ['1', '0'],
+        'size' => 'md',
     ])->and($priority['props'])->not->toHaveKey('on_change')
         ->and($callbacks)->toHaveCount(2)
         ->and($callbacks[0])->toBeString()->toMatch('/^\d+$/')
@@ -133,6 +136,7 @@ it('publishes null and empty options without an implicit selection', function ()
         'option_values' => ['mine', 'all'],
         'option_labels' => ['Mine', 'All'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and($unselected['props']['on_change'])->toBeInt()
         ->and($empty['props'])->toBe([
             'label' => 'No available options',
@@ -146,6 +150,7 @@ it('publishes null and empty options without an implicit selection', function ()
             'option_values' => [],
             'option_labels' => [],
             'option_enabled' => [],
+            'size' => 'md',
         ])->and($empty['props'])->not->toHaveKeys(['on_change', 'option_callbacks']);
 });
 
@@ -164,6 +169,7 @@ it('publishes disabled, validation, helper, and accessibility metadata', functio
         'option_values' => ['locked', 'archived'],
         'option_labels' => ['Locked', 'Archived'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and(firstlightPropsWithoutCallbacks($nodes['Queue with error']))->toBe([
         'label' => 'Queue with error',
         'helper' => '',
@@ -176,6 +182,7 @@ it('publishes disabled, validation, helper, and accessibility metadata', functio
         'option_values' => ['mine', 'all'],
         'option_labels' => ['Mine', 'All'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and(firstlightPropsWithoutCallbacks($nodes['Required queue']))->toBe([
         'label' => 'Required queue',
         'helper' => 'This selection is required.',
@@ -188,6 +195,7 @@ it('publishes disabled, validation, helper, and accessibility metadata', functio
         'option_values' => ['mine', 'all'],
         'option_labels' => ['Mine', 'All'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and(firstlightPropsWithoutCallbacks($nodes['Workflow status']))->toBe([
         'a11y_hint' => 'Choose the workflow status',
         'label' => 'Workflow status',
@@ -201,6 +209,7 @@ it('publishes disabled, validation, helper, and accessibility metadata', functio
         'option_values' => ['clinical-review', 'assignment'],
         'option_labels' => ['Awaiting clinical review', 'Ready for assignment'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ]);
 });
 
@@ -221,6 +230,7 @@ it('dispatches the bound queue selection and server reset through published call
         'option_values' => ['mine', 'all'],
         'option_labels' => ['Mine', 'All'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and($nodes['Queue']['props']['on_change'])->toBeInt()
         ->and($nodes['Stable queue']['props']['on_change'])->toBe($nodes['Queue']['props']['on_change']);
 
@@ -261,6 +271,7 @@ it('publishes an unchanged authoritative value when the server rejects a selecti
         'option_values' => ['mine', 'all'],
         'option_labels' => ['Mine', 'All'],
         'option_enabled' => ['1', '1'],
+        'size' => 'md',
     ])->and($nodes['Rejected queue']['props']['on_change'])->toBeInt();
 
     $screen->select('rejectQueue', 'all')

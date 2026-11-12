@@ -8,6 +8,7 @@
         "complete-examples": "complete-examples",
         "scrolling-filter-row": "complete-examples",
         "props": "props",
+        "sizes": "sizes",
         "options-and-values": "options-and-values",
         "events-and-state-timing": "events-and-state-timing",
         "disabled-and-required-behaviour": "disabled-and-required-behaviour",
@@ -385,6 +386,61 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "size",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (default) or "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                },
+                                {
+                                    "text": " pills are as tall as a Button with "
+                                },
+                                {
+                                    "text": "size=\"lg\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "label",
                                 "code": true
                             }
@@ -590,6 +646,148 @@
                 }
             ]
         },
+        "sizes": {
+            "title": "Sizes",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "md",
+                            "code": true
+                        },
+                        {
+                            "text": " is the default. Use "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": " when the pills sit with "
+                        },
+                        {
+                            "text": "size=\"lg\"",
+                            "code": true
+                        },
+                        {
+                            "text": " Buttons:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:pill-group :options=\"$queueOptions\" native:model=\"queue\" label=\"Queue\" size=\"lg\" />"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "md",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Pills at least 44 pt tall, subheadline-sized labels."
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Chips at least 48 dp tall, Material label text."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "lg",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Button lg's height: 54 pt at the default text size, body-sized labels."
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Button lg's height: 48 dp at the default text size, Material title-sized labels."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Both sizes grow with Dynamic Type and Android font scaling; "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": " grows the same way a "
+                        },
+                        {
+                            "text": "size=\"lg\"",
+                            "code": true
+                        },
+                        {
+                            "text": " Button does. "
+                        },
+                        {
+                            "text": "size",
+                            "code": true
+                        },
+                        {
+                            "text": " works with "
+                        },
+                        {
+                            "text": "scrollable",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "collapse-labels",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "multiple",
+                            "code": true
+                        },
+                        {
+                            "text": ", and changes no selection or accessibility behaviour. Other values, including "
+                        },
+                        {
+                            "text": "sm",
+                            "code": true
+                        },
+                        {
+                            "text": ", are rejected."
+                        }
+                    ]
+                }
+            ]
+        },
         "options-and-values": {
             "title": "Options and values",
             "blocks": [
@@ -657,7 +855,21 @@
                             "code": true
                         },
                         {
-                            "text": " fields:"
+                            "text": " fields. Icons may be "
+                        },
+                        {
+                            "text": "custom icons",
+                            "link": 0
+                        },
+                        {
+                            "text": " such as "
+                        },
+                        {
+                            "text": "custom:plant-2",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
                         }
                     ]
                 },
@@ -781,7 +993,7 @@
                         },
                         {
                             "text": "server-authoritative",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": ". A tap emits immediately, but selected visuals wait for PHP's next publication. Further taps are ignored while that proposal is in flight so a rapid second tap cannot be calculated from stale state. Programmatic updates and reconciliation do not emit."
@@ -928,6 +1140,13 @@
                             "code": true
                         },
                         {
+                            "text": " or "
+                        },
+                        {
+                            "text": "size",
+                            "code": true
+                        },
+                        {
                             "text": ", blank or invalid option icons, "
                         },
                         {
@@ -974,7 +1193,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": ". A same-typed selected value absent from "
@@ -1035,7 +1254,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": " and requires both native renderers to be compiled into the host application."
@@ -1071,6 +1290,10 @@
         }
     },
     "links": [
+        {
+            "label": "custom icons",
+            "url": "../how-to/use-custom-icons.md"
+        },
         {
             "label": "server-authoritative",
             "url": "../concepts/server-authoritative-state.md"

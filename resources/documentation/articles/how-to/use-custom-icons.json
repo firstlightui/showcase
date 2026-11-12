@@ -1,0 +1,495 @@
+{
+    "id": "how-to/use-custom-icons",
+    "title": "Use custom icons",
+    "description": "Install SVGs from Lucide, Heroicons, Font Awesome and other sets with firstlight:icon, and draw them as native icons in Firstlight controls.",
+    "group": "Guides",
+    "anchors": {
+        "use-custom-icons": "overview",
+        "install-icons": "install-icons",
+        "install-font-awesome-pro-icons": "install-font-awesome-pro-icons",
+        "use-an-icon": "use-an-icon",
+        "build-the-app": "build-the-app",
+        "check-that-the-icon-renders": "check-that-the-icon-renders"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "SF Symbols and Material Icons cover most actions, but not your brand mark, a domain object or an icon from your design system. NativePHP Mobile builds SVG files in "
+                        },
+                        {
+                            "text": "resources/icons",
+                            "code": true
+                        },
+                        {
+                            "text": " into native icons: a template image in the iOS asset catalogue and a VectorDrawable on Android. You refer to each one as "
+                        },
+                        {
+                            "text": "custom:<name>",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Firstlight draws custom icons wherever it accepts an authored icon: Button, Icon Button, List Item (leading and trailing icons, swipe actions and context menus), Pill Group options, Status Label and Text Field. They take the control's colour, like system icons."
+                }
+            ]
+        },
+        "install-icons": {
+            "title": "Install icons",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Install icons from any "
+                        },
+                        {
+                            "text": "Iconify",
+                            "link": 0
+                        },
+                        {
+                            "text": " set with "
+                        },
+                        {
+                            "text": "set:name",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan firstlight:icon lucide:git-commit-vertical heroicons:rocket-launch-solid tabler:plant-2"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Each icon is written to "
+                        },
+                        {
+                            "text": "resources/icons/<name>.svg",
+                            "code": true
+                        },
+                        {
+                            "text": ", so these become "
+                        },
+                        {
+                            "text": "custom:git-commit-vertical",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "custom:rocket-launch-solid",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "custom:plant-2",
+                            "code": true
+                        },
+                        {
+                            "text": ". Useful sets include "
+                        },
+                        {
+                            "text": "lucide",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "heroicons",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "tabler",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "ph",
+                            "code": true
+                        },
+                        {
+                            "text": " (Phosphor), "
+                        },
+                        {
+                            "text": "material-symbols",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "mdi",
+                            "code": true
+                        },
+                        {
+                            "text": ", and Font Awesome Free as "
+                        },
+                        {
+                            "text": "fa7-solid",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "fa7-regular",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "fa7-brands",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "You can also install an SVG file or URL:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan firstlight:icon ~/Downloads/logo.svg --as=brand\nphp artisan firstlight:icon https://example.com/icons/route.svg"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--as=<name>",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Effect",
+                            "text": "Installs a single icon under this name."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "--force",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Effect",
+                            "text": "Replaces icons that are already installed."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The command checks each SVG with NativePHP's own converter before writing it, so an icon the native build would reject is never installed. The error names the element and attribute to fix, such as a "
+                        },
+                        {
+                            "text": "transform",
+                            "code": true
+                        },
+                        {
+                            "text": " or a gradient. An icon that already exists is skipped without being downloaded. If any icon fails, the others are still installed and the command exits with status 1."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Names must be lowercase kebab-case. When the source name isn't, such as "
+                        },
+                        {
+                            "text": "Rocket Launch.svg",
+                            "code": true
+                        },
+                        {
+                            "text": ", pass "
+                        },
+                        {
+                            "text": "--as",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The first line of each file records where it came from, such as "
+                        },
+                        {
+                            "text": "<!-- lucide:git-commit-vertical from Iconify. Set and licence: https://icon-sets.iconify.design/lucide/ -->",
+                            "code": true
+                        },
+                        {
+                            "text": ". Check the licence of every set you use, and credit it the way the licence asks."
+                        }
+                    ]
+                }
+            ]
+        },
+        "install-font-awesome-pro-icons": {
+            "title": "Install Font Awesome Pro icons",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Create an API token with your Font Awesome account at "
+                        },
+                        {
+                            "text": "fontawesome.com/account/general",
+                            "link": 1
+                        },
+                        {
+                            "text": " and put it in "
+                        },
+                        {
+                            "text": ".env",
+                            "code": true
+                        },
+                        {
+                            "text": " as "
+                        },
+                        {
+                            "text": "FA_API_TOKEN",
+                            "code": true
+                        },
+                        {
+                            "text": ", the variable the Font Awesome CLI uses. Never commit the token."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "env",
+                    "text": "FA_API_TOKEN=your-api-token"
+                },
+                {
+                    "type": "text",
+                    "text": "Then name the style and icon, or the family, style and icon:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan firstlight:icon fontawesome:light/rocket-launch fontawesome:duotone/solid/kiwi-bird fontawesome:sharp/regular/house"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The family defaults to "
+                        },
+                        {
+                            "text": "classic",
+                            "code": true
+                        },
+                        {
+                            "text": ". Icons come from the latest Font Awesome 7 release. Font Awesome's API only returns the styles your plan includes. Duotone icons keep their two layers as one colour at two opacities."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The "
+                        },
+                        {
+                            "text": "Font Awesome Pro licence",
+                            "link": 2
+                        },
+                        {
+                            "text": " lets you embed Pro icons in your app, but not give others permission to reuse them. Keep Pro SVGs out of public or openly licensed repositories."
+                        }
+                    ]
+                }
+            ]
+        },
+        "use-an-icon": {
+            "title": "Use an icon",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Pass "
+                        },
+                        {
+                            "text": "custom:<name>",
+                            "code": true
+                        },
+                        {
+                            "text": " to any icon attribute:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:icon-button icon=\"custom:rocket-launch-solid\" a11y-label=\"Launch\" @press=\"launch\" />\n\n<firstlight:list-item\n    headline=\"Greenhouse\"\n    leading-icon=\"custom:plant-2\"\n    trailing-icon=\"chevron-right\"\n    trailing-icon-ios=\"chevron.right\"\n    trailing-icon-android=\"chevron_right\"\n    @press=\"openGreenhouse\"\n/>\n\n<firstlight:text-field label=\"Branch\" native:model=\"branch\" leading-icon=\"custom:git-commit-vertical\" />"
+                },
+                {
+                    "type": "text",
+                    "text": "Platform overrides accept custom icons too, so you can use your icon on one platform and a system icon on the other:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:list-item headline=\"Pets\" leading-icon=\"pets\" leading-icon-ios=\"custom:paw-print-fill\" @press=\"openPets\" />"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "In PHP, "
+                        },
+                        {
+                            "text": "Native\\Mobile\\Icon\\Icon::custom('plant-2')",
+                            "code": true
+                        },
+                        {
+                            "text": " returns "
+                        },
+                        {
+                            "text": "'custom:plant-2'",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "build-the-app": {
+            "title": "Build the app",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Icons are compiled into the native project, so adding or changing an SVG needs a native build. Run "
+                        },
+                        {
+                            "text": "php artisan native:run",
+                            "code": true
+                        },
+                        {
+                            "text": " to see it; hot reload does not pick up icon changes."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "A build without the icon, such as Jump or a build made before you installed it, draws the system icon with the same name instead. "
+                        },
+                        {
+                            "text": "custom:bell",
+                            "code": true
+                        },
+                        {
+                            "text": " shows the system bell, so naming an icon after the system icon it replaces gives a sensible fallback."
+                        }
+                    ]
+                }
+            ]
+        },
+        "check-that-the-icon-renders": {
+            "title": "Check that the icon renders",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Open the screen on iOS and Android in light and dark appearance. The icon should take the control's colour and sit at the same size as the system icons beside it. The "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 3
+                        },
+                        {
+                            "text": " has a Custom Icons screen with every supported control."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Custom icons are decorative, like system icons: VoiceOver and TalkBack read the control's label, not the icon. Give icon-only controls an "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Iconify",
+            "url": "https://icon-sets.iconify.design/"
+        },
+        {
+            "label": "fontawesome.com/account/general",
+            "url": "https://fontawesome.com/account/general"
+        },
+        {
+            "label": "Font Awesome Pro licence",
+            "url": "https://fontawesome.com/license"
+        },
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        }
+    ]
+}

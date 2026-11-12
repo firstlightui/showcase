@@ -142,7 +142,21 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Mobile 4.7 supplies the validation and Android focused-input flush seams Firstlight uses; Mobile UI 0.9 requires Mobile 4.7. "
+                            "text": "Mobile 4.7 supplies the validation and Android focused-input flush seams Firstlight uses, and compiles Media's "
+                        },
+                        {
+                            "text": "@clear",
+                            "code": true
+                        },
+                        {
+                            "text": " from the manifest's "
+                        },
+                        {
+                            "text": "element_events",
+                            "code": true
+                        },
+                        {
+                            "text": "; Mobile UI 0.9 requires Mobile 4.7. "
                         },
                         {
                             "text": "ValidatesFields",

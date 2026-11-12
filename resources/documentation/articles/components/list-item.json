@@ -131,7 +131,25 @@
                         },
                         {
                             "label": "Purpose",
-                            "text": "Optional shared leading icon and cross-platform fallback."
+                            "runs": [
+                                {
+                                    "text": "Optional shared leading icon and cross-platform fallback. Accepts a "
+                                },
+                                {
+                                    "text": "custom icon",
+                                    "link": 0
+                                },
+                                {
+                                    "text": " as "
+                                },
+                                {
+                                    "text": "custom:<name>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -425,7 +443,25 @@
                         },
                         {
                             "label": "Purpose",
-                            "text": "Optional shared decorative affordance icon."
+                            "runs": [
+                                {
+                                    "text": "Optional shared decorative affordance icon. Accepts a "
+                                },
+                                {
+                                    "text": "custom icon",
+                                    "link": 0
+                                },
+                                {
+                                    "text": " as "
+                                },
+                                {
+                                    "text": "custom:<name>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -1254,7 +1290,7 @@
                         },
                         {
                             "text": "destructive-list helper",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": " using a stable domain key rather than a list position. Publishing updated actions or disabling the row replaces native action availability without emitting an event. Android also closes the drawer when row configuration changes."
@@ -1449,7 +1485,7 @@
                         },
                         {
                             "text": "destructive-list helper",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": " so PHP confirms, authorizes, and deletes."
@@ -1672,7 +1708,7 @@
                         },
                         {
                             "text": "Theming",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": ". Without a tone, leading icons retain "
@@ -1952,7 +1988,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
@@ -2012,6 +2048,10 @@
         }
     },
     "links": [
+        {
+            "label": "custom icon",
+            "url": "../how-to/use-custom-icons.md"
+        },
         {
             "label": "destructive-list helper",
             "url": "../how-to/destroy-list-items.md"

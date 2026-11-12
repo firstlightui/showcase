@@ -688,7 +688,25 @@
                         },
                         {
                             "label": "Purpose",
-                            "text": "Shared decorative leading icon fallback."
+                            "runs": [
+                                {
+                                    "text": "Shared decorative leading icon fallback. Accepts a "
+                                },
+                                {
+                                    "text": "custom icon",
+                                    "link": 1
+                                },
+                                {
+                                    "text": " as "
+                                },
+                                {
+                                    "text": "custom:<name>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -756,7 +774,25 @@
                         },
                         {
                             "label": "Purpose",
-                            "text": "Shared decorative or authored-action icon fallback."
+                            "runs": [
+                                {
+                                    "text": "Shared decorative or authored-action icon fallback. Accepts a "
+                                },
+                                {
+                                    "text": "custom icon",
+                                    "link": 1
+                                },
+                                {
+                                    "text": " as "
+                                },
+                                {
+                                    "text": "custom:<name>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -874,7 +910,7 @@
                                 },
                                 {
                                     "text": "Localize chrome",
-                                    "link": 1
+                                    "link": 2
                                 },
                                 {
                                     "text": "."
@@ -918,7 +954,7 @@
                                 },
                                 {
                                     "text": "Localize chrome",
-                                    "link": 1
+                                    "link": 2
                                 },
                                 {
                                     "text": "."
@@ -1530,7 +1566,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": "."
@@ -1661,6 +1697,10 @@
         {
             "label": "Input masks",
             "url": "#input-masks"
+        },
+        {
+            "label": "custom icon",
+            "url": "../how-to/use-custom-icons.md"
         },
         {
             "label": "Localize chrome",

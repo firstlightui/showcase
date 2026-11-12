@@ -85,7 +85,25 @@
                         },
                         {
                             "label": "Purpose",
-                            "text": "Required shared icon name and cross-platform fallback."
+                            "runs": [
+                                {
+                                    "text": "Required shared icon name and cross-platform fallback. Accepts a "
+                                },
+                                {
+                                    "text": "custom icon",
+                                    "link": 0
+                                },
+                                {
+                                    "text": " as "
+                                },
+                                {
+                                    "text": "custom:<name>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -621,7 +639,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": " and requires both Firstlight native renderers to be compiled into the host application."
@@ -657,6 +675,10 @@
         }
     },
     "links": [
+        {
+            "label": "custom icon",
+            "url": "../how-to/use-custom-icons.md"
+        },
         {
             "label": "compatibility reference",
             "url": "../reference/compatibility.md"

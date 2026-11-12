@@ -7,6 +7,7 @@
         "segmented": "overview",
         "complete-example": "complete-example",
         "props": "props",
+        "sizes": "sizes",
         "events": "events",
         "options-and-accepted-values": "options-and-accepted-values",
         "state-timing": "state-timing",
@@ -253,6 +254,61 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "size",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "md",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (default) or "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". "
+                                },
+                                {
+                                    "text": "lg",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is as tall as a Button with "
+                                },
+                                {
+                                    "text": "size=\"lg\"",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "a11y-label",
                                 "code": true
                             }
@@ -323,6 +379,120 @@
                         {
                             "label": "Purpose",
                             "text": "External EDGE layout utilities."
+                        }
+                    ]
+                }
+            ]
+        },
+        "sizes": {
+            "title": "Sizes",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "md",
+                            "code": true
+                        },
+                        {
+                            "text": " is the default. Use "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": " when the control sits with "
+                        },
+                        {
+                            "text": "size=\"lg\"",
+                            "code": true
+                        },
+                        {
+                            "text": " Buttons, so the row of controls shares one height:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:segmented :options=\"$viewOptions\" native:model=\"view\" a11y-label=\"View\" size=\"lg\" />\n<firstlight:button label=\"Admit patient\" icon=\"add\" size=\"lg\" />"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "md",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "At least 44 pt, footnote-sized titles."
+                        },
+                        {
+                            "label": "Android",
+                            "text": "At least 48 dp, Material label titles."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "lg",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Button lg's height: 54 pt at the default text size, subheadline-sized titles."
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Button lg's height: 48 dp at the default text size, Material title-sized labels."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Both sizes grow with Dynamic Type and Android font scaling; "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": " grows with the text the same way a "
+                        },
+                        {
+                            "text": "size=\"lg\"",
+                            "code": true
+                        },
+                        {
+                            "text": " Button does. "
+                        },
+                        {
+                            "text": "size",
+                            "code": true
+                        },
+                        {
+                            "text": " changes only height and type size, not selection, state, or accessibility behaviour. Other values, including "
+                        },
+                        {
+                            "text": "sm",
+                            "code": true
+                        },
+                        {
+                            "text": ", are rejected because they would fall below the platform interaction target."
                         }
                     ]
                 }
@@ -530,7 +700,21 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Contract exceptions still reject mixed or duplicate option values and unsupported types before publication. User validation is separate: screens that "
+                            "text": "Contract exceptions still reject mixed or duplicate option values, unsupported types, and sizes other than "
+                        },
+                        {
+                            "text": "md",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "lg",
+                            "code": true
+                        },
+                        {
+                            "text": " before publication. User validation is separate: screens that "
                         },
                         {
                             "text": "use ValidatesFields",
