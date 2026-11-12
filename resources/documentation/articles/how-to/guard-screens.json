@@ -1,0 +1,428 @@
+{
+    "id": "how-to/guard-screens",
+    "title": "Guard screens",
+    "description": "Keep signed-out or locked users off protected screens with route middleware, re-check when a screen is shown again, and test both.",
+    "group": "Guides",
+    "anchors": {
+        "guard-screens": "overview",
+        "1-write-the-middleware": "1-write-the-middleware",
+        "2-register-the-routes": "2-register-the-routes",
+        "3-re-check-when-a-screen-is-shown-again": "3-re-check-when-a-screen-is-shown-again",
+        "4-test-the-guard": "4-test-the-guard",
+        "what-middleware-sees": "what-middleware-sees",
+        "rules-to-keep": "rules-to-keep"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Put the check that decides who may open a screen in route middleware, not in each screen's "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": ". NativePHP runs a native route's middleware before the screen mounts, on every navigation: cold start, "
+                        },
+                        {
+                            "text": "navigate()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "replace()",
+                            "code": true
+                        },
+                        {
+                            "text": ", deep links, and the stack restored after a hot reload. A refused screen never mounts, so it runs no queries or API calls and publishes no frame."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "This guide adds a sign-in guard to an app with a tab layout and a stack layout. The same pattern works for an app lock, a selected account, or an onboarding step: anything the app can read from its session or device state."
+                }
+            ]
+        },
+        "1-write-the-middleware": {
+            "title": "1. Write the middleware",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Save this as "
+                        },
+                        {
+                            "text": "app/Http/Middleware/EnsureSignedIn.php",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Http\\Middleware;\n\nuse Closure;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Auth;\nuse Symfony\\Component\\HttpFoundation\\Response;\n\nclass EnsureSignedIn\n{\n    public function handle(Request $request, Closure $next): Response\n    {\n        if (Auth::check()) {\n            return $next($request);\n        }\n\n        return redirect()->route('login');\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Replace "
+                        },
+                        {
+                            "text": "Auth::check()",
+                            "code": true
+                        },
+                        {
+                            "text": " with whatever your app treats as signed in, such as a device token in secure storage. Return a redirect to refuse the screen. A redirect to a native route replaces the refused screen with that one; a redirect to any other URL leaves the native screens for the web view."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Return the redirect yourself rather than relying on Laravel's "
+                        },
+                        {
+                            "text": "auth",
+                            "code": true
+                        },
+                        {
+                            "text": " middleware. With NativePHP Mobile 4.7.0, "
+                        },
+                        {
+                            "text": "auth",
+                            "code": true
+                        },
+                        {
+                            "text": " refusing a guest during in-app navigation sends the user to the app's "
+                        },
+                        {
+                            "text": "start_url",
+                            "code": true
+                        },
+                        {
+                            "text": " instead of the "
+                        },
+                        {
+                            "text": "login",
+                            "code": true
+                        },
+                        {
+                            "text": " route."
+                        }
+                    ]
+                }
+            ]
+        },
+        "2-register-the-routes": {
+            "title": "2. Register the routes",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\Http\\Middleware\\EnsureSignedIn;\nuse App\\NativeComponents\\HomeScreen;\nuse App\\NativeComponents\\Layouts\\StackLayout;\nuse App\\NativeComponents\\Layouts\\TabsLayout;\nuse App\\NativeComponents\\LoginScreen;\nuse App\\NativeComponents\\MessageScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/login', LoginScreen::class)->name('login');\n\nRoute::middleware(EnsureSignedIn::class)->group(function () {\n    Route::nativeGroup(TabsLayout::class, function () {\n        Route::native('/', HomeScreen::class)->name('home');\n    });\n\n    Route::native('/messages/{message}', MessageScreen::class)\n        ->name('messages.show')\n        ->layout(StackLayout::class);\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Route::nativeGroup()",
+                            "code": true
+                        },
+                        {
+                            "text": " gives every route inside it the same layout, and "
+                        },
+                        {
+                            "text": "->layout()",
+                            "code": true
+                        },
+                        {
+                            "text": " sets one route's layout. Middleware and layouts are independent, so a guarded group can hold screens with different chrome. See "
+                        },
+                        {
+                            "text": "Build a list and detail flow",
+                            "link": 0
+                        },
+                        {
+                            "text": " for a layout that shows a large title on the first screen and a back button on pushed screens."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Leave the login screen outside the guard. A guard that redirects to the screen it guards is refused instead of looping."
+                }
+            ]
+        },
+        "3-re-check-when-a-screen-is-shown-again": {
+            "title": "3. Re-check when a screen is shown again",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Middleware runs when a screen is pushed or replaced. It does not run when the screen above it closes and the screen underneath is shown again. If the user can sign out or lock the app from a pushed screen, check again in "
+                        },
+                        {
+                            "text": "onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": ". A shared base class keeps that in one place:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Support\\Facades\\Auth;\n\nabstract class AppScreen extends NativeComponent\n{\n    public function onResume(): void\n    {\n        if (Auth::guest()) {\n            $this->replace('/login');\n        }\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Screens that override "
+                        },
+                        {
+                            "text": "onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": " call "
+                        },
+                        {
+                            "text": "parent::onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": " first. To lock the app when it returns from the background, follow "
+                        },
+                        {
+                            "text": "Build an app lock screen",
+                            "link": 1
+                        },
+                        {
+                            "text": "; its protected screens use the same "
+                        },
+                        {
+                            "text": "onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": " check."
+                        }
+                    ]
+                }
+            ]
+        },
+        "4-test-the-guard": {
+            "title": "4. Test the guard",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": " resolves a screen by URI and runs its middleware, as in-app navigation does:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\Models\\User;\nuse Illuminate\\Support\\Facades\\Auth;\nuse Native\\Mobile\\Testing\\Native;\n\nit('sends a guest to the login screen', function () {\n    Native::visit('/')->assertReplacedWith('/login');\n    Native::visit('/messages/4')->assertReplacedWith('/login');\n});\n\nit('lets a signed-in user in', function () {\n    $this->actingAs(User::factory()->create());\n\n    Native::visit('/')->assertSee('Inbox');\n});\n\nit('checks again when the screen is shown again', function () {\n    $this->actingAs(User::factory()->create());\n    $screen = Native::visit('/');\n\n    Auth::logout();\n\n    $screen->call('onResume')->assertReplacedWith('/login');\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Native::test(HomeScreen::class)",
+                            "code": true
+                        },
+                        {
+                            "text": " mounts the class directly and does not run route middleware, so a suite that only uses "
+                        },
+                        {
+                            "text": "Native::test()",
+                            "code": true
+                        },
+                        {
+                            "text": " cannot catch a guard regression."
+                        }
+                    ]
+                }
+            ]
+        },
+        "what-middleware-sees": {
+            "title": "What middleware sees",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The request middleware receives during in-app navigation is built by NativePHP for the target URI. It carries the live session, the launch request's user, cookies and server values, and the bound route, so "
+                        },
+                        {
+                            "text": "auth()->user()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "can:",
+                            "code": true
+                        },
+                        {
+                            "text": " and route model binding work. Its method is always "
+                        },
+                        {
+                            "text": "GET",
+                            "code": true
+                        },
+                        {
+                            "text": ", and it has no body, query string, uploaded files, device headers, or client IP. Session start, CSRF and cookie middleware already ran for the launch request and are skipped."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Middleware that should run once per launch, such as a rate limiter or a visit counter, can opt out in a service provider's "
+                        },
+                        {
+                            "text": "boot()",
+                            "code": true
+                        },
+                        {
+                            "text": " method:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use Native\\Mobile\\Edge\\ScreenGuard;\n\nScreenGuard::skip([RecordVisit::class]);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "If middleware throws instead of answering, the screen is refused, the exception is reported, and the user goes to the app's "
+                        },
+                        {
+                            "text": "start_url",
+                            "code": true
+                        },
+                        {
+                            "text": ". Use "
+                        },
+                        {
+                            "text": "ScreenGuard::onFailure()",
+                            "code": true
+                        },
+                        {
+                            "text": " to send them somewhere else."
+                        }
+                    ]
+                }
+            ]
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Guard with middleware on the route, not with a check in "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": ". A screen reached through a route without the middleware is not protected."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Re-check in "
+                        },
+                        {
+                            "text": "onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": " when the condition can change while a screen is covered by another."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Keep every guard's redirect target outside that guard."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Test guarded screens with "
+                        },
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": ", not only "
+                        },
+                        {
+                            "text": "Native::test()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Build a list and detail flow",
+            "url": "build-a-list-detail-flow.md"
+        },
+        {
+            "label": "Build an app lock screen",
+            "url": "build-an-app-lock-screen.md"
+        }
+    ]
+}
