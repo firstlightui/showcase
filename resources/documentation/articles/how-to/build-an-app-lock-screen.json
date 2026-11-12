@@ -7,12 +7,11 @@
         "build-an-app-lock-screen": "overview",
         "before-you-start": "before-you-start",
         "how-the-pieces-fit": "how-the-pieces-fit",
-        "1-register-the-lock-state-and-routes": "1-register-the-lock-state-and-routes",
-        "2-write-the-lock-state": "2-write-the-lock-state",
-        "3-write-the-base-for-protected-screens": "3-write-the-base-for-protected-screens",
-        "4-write-the-lock-screen": "4-write-the-lock-screen",
-        "5-protect-a-screen": "5-protect-a-screen",
-        "6-test-it": "6-test-it",
+        "1-register-the-routes": "1-register-the-routes",
+        "2-choose-the-timeout-and-shield-image": "2-choose-the-timeout-and-shield-image",
+        "3-write-the-lock-screen": "3-write-the-lock-screen",
+        "4-protect-a-screen": "4-protect-a-screen",
+        "5-test-it": "5-test-it",
         "what-each-platform-shows": "what-each-platform-shows",
         "rules-to-keep": "rules-to-keep"
     },
@@ -28,7 +27,7 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "This recipe runs unchanged in the "
+                            "text": "This recipe runs in the "
                         },
                         {
                             "text": "showcase app",
@@ -67,14 +66,7 @@
                             "code": true
                         },
                         {
-                            "text": ", free and MIT licensed, provides the app-switcher cover, the shield shown on return, and the "
-                        },
-                        {
-                            "text": "Foregrounded",
-                            "code": true
-                        },
-                        {
-                            "text": " event."
+                            "text": " 1.0, free and MIT licensed, provides the lock state, the route middleware, the app-switcher cover, and the shield shown on return."
                         }
                     ]
                 },
@@ -96,7 +88,7 @@
                 {
                     "type": "code",
                     "language": "bash",
-                    "text": "composer require firstlightui/app-guard nativephp/mobile-biometrics\nphp artisan native:plugin:register firstlightui/app-guard\nphp artisan native:plugin:register nativephp/mobile-biometrics"
+                    "text": "composer require firstlightui/app-guard:^1.0 nativephp/mobile-biometrics\nphp artisan native:plugin:register firstlightui/app-guard\nphp artisan native:plugin:register nativephp/mobile-biometrics"
                 },
                 {
                     "type": "text",
@@ -148,7 +140,7 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Three pieces share the work:"
+                    "text": "App Guard owns the lock; your app owns the lock screen:"
                 },
                 {
                     "type": "item",
@@ -156,11 +148,11 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "AppLock",
+                            "text": "FirstlightUI\\AppGuard\\AppLock",
                             "code": true
                         },
                         {
-                            "text": " holds whether the app is unlocked. The flag lives in memory, so every cold start begins locked. It turns on the app-switcher cover and the shield once per PHP process, because native state does not survive the process. An app-wide listener hands it every return from the background, so the app locks whichever screen is showing."
+                            "text": " holds whether the app is unlocked. The flag lives in memory, so every cold start begins locked. It turns on the app-switcher cover and the shield once per PHP process, because native state does not survive the process."
                         }
                     ]
                 },
@@ -170,11 +162,45 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "LockedScreen",
+                            "text": "The "
+                        },
+                        {
+                            "text": "app-lock",
                             "code": true
                         },
                         {
-                            "text": " is the base class for every screen with protected content. It sends a locked app to the lock screen when the screen opens, when it is shown again after the screen above it closes, and when the app returns behind the shield."
+                            "text": " route middleware keeps a protected screen from mounting while the app is locked and sends it to the "
+                        },
+                        {
+                            "text": "lock",
+                            "code": true
+                        },
+                        {
+                            "text": " route instead. NativePHP runs it before every navigation, including deep links. See "
+                        },
+                        {
+                            "text": "Guard screens",
+                            "link": 4
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "The "
+                        },
+                        {
+                            "text": "RequiresUnlock",
+                            "code": true
+                        },
+                        {
+                            "text": " trait covers the moments middleware does not run: the app returning behind the shield while a protected screen shows, and a protected screen being shown again after the one above it closes."
                         }
                     ]
                 },
@@ -188,164 +214,62 @@
                             "code": true
                         },
                         {
-                            "text": " asks for Face ID, Touch ID, or a fingerprint, and replaces itself with the screen the user was on once they pass."
+                            "text": " asks for Face ID, Touch ID, or a fingerprint, and replaces itself with the screen the user was sent away from once they pass."
                         }
                     ]
                 },
                 {
                     "type": "text",
+                    "text": "The shield is what keeps the content hidden on return. After the timeout in the background, App Guard covers the app with an opaque view before its first frame: your splash screen by default. A protected screen replaces itself with the lock screen, which releases the shield when it opens; the shield's 200 ms fade covers the lock screen's first render. On any other screen App Guard releases the shield itself, and protected screens lower in the stack lock when they are shown again."
+                }
+            ]
+        },
+        "1-register-the-routes": {
+            "title": "1. Register the routes",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\LockScreen;\nuse App\\NativeComponents\\VaultScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::middleware('app-lock')->group(function () {\n    Route::native('/vault', VaultScreen::class)->name('vault');\n    Route::native('/lock', LockScreen::class)->name('lock');\n});"
+                },
+                {
+                    "type": "text",
                     "runs": [
                         {
-                            "text": "The shield is what keeps the content hidden on return. After "
+                            "text": "The middleware always lets the "
                         },
                         {
-                            "text": "TIMEOUT",
+                            "text": "lock",
                             "code": true
                         },
                         {
-                            "text": " seconds in the background, App Guard covers the app with an opaque view before its first frame and sends "
-                        },
-                        {
-                            "text": "Foregrounded",
-                            "code": true
-                        },
-                        {
-                            "text": " with "
-                        },
-                        {
-                            "text": "shielded: true",
-                            "code": true
-                        },
-                        {
-                            "text": ". A protected screen replaces itself with the lock screen, which releases the shield when it opens; the shield's 200 ms fade covers the lock screen's first render. On any other screen, such as settings, "
-                        },
-                        {
-                            "text": "AppLock",
-                            "code": true
-                        },
-                        {
-                            "text": " releases the shield itself, and protected screens lower in the stack lock when they are shown again."
+                            "text": " route through, so it can sit in the same group. Put every screen with protected content behind it."
                         }
                     ]
                 }
             ]
         },
-        "1-register-the-lock-state-and-routes": {
-            "title": "1. Register the lock state and routes",
+        "2-choose-the-timeout-and-shield-image": {
+            "title": "2. Choose the timeout and shield image",
             "blocks": [
                 {
                     "type": "text",
-                    "runs": [
-                        {
-                            "text": "AppLock",
-                            "code": true
-                        },
-                        {
-                            "text": " must be a singleton, so its flag survives from one screen to the next, and it listens for every return from the background. In "
-                        },
-                        {
-                            "text": "AppServiceProvider",
-                            "code": true
-                        },
-                        {
-                            "text": ":"
-                        }
-                    ]
+                    "text": "The defaults lock after 60 seconds in the background, turn on the app-switcher cover, and show your splash screen on the shield. To change them, publish the config:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan vendor:publish --tag=app-guard-config"
                 },
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "use App\\Security\\AppLock;\nuse FirstlightUI\\AppGuard\\Events\\Foregrounded;\nuse Illuminate\\Support\\Facades\\Event;\n\npublic function register(): void\n{\n    $this->app->singleton(AppLock::class);\n}\n\npublic function boot(): void\n{\n    Event::listen(fn (Foregrounded $event) => app(AppLock::class)->foregrounded($event->shielded));\n}"
-                },
-                {
-                    "type": "text",
-                    "text": "Then register the routes:"
-                },
-                {
-                    "type": "code",
-                    "language": "php",
-                    "text": "use App\\NativeComponents\\LockScreen;\nuse App\\NativeComponents\\VaultScreen;\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::native('/vault', VaultScreen::class)->name('vault');\nRoute::native('/lock', LockScreen::class)->name('lock');"
+                    "text": "// config/app-guard.php\n'lock' => [\n    'timeout' => 300,\n    // ...\n],\n'shield' => [\n    'image' => 'lock-cover.png', // under public/\n    'image_dark' => null,\n    'fit' => 'center',           // or 'fill'\n],"
                 }
             ]
         },
-        "2-write-the-lock-state": {
-            "title": "2. Write the lock state",
-            "blocks": [
-                {
-                    "type": "text",
-                    "runs": [
-                        {
-                            "text": "TIMEOUT",
-                            "code": true
-                        },
-                        {
-                            "text": " is how long the app may stay in the background before a return needs the lock screen. Store it in your settings instead if users choose it."
-                        }
-                    ]
-                },
-                {
-                    "type": "code",
-                    "language": "php",
-                    "text": "<?php\n\nnamespace App\\Security;\n\nuse App\\NativeComponents\\LockedScreen;\nuse FirstlightUI\\AppGuard\\Facades\\AppGuard;\nuse Native\\Mobile\\Edge\\NativeComponent;\n\n/**\n * Whether the app is locked. The flag lives in memory, so every cold start begins locked.\n */\nclass AppLock\n{\n    /** Seconds in the background before a return needs the lock screen. */\n    public const TIMEOUT = 60;\n\n    private bool $booted = false;\n\n    private bool $unlocked = false;\n\n    /**\n     * Native state does not survive process death, so apply it once per PHP process.\n     */\n    public function boot(): void\n    {\n        if ($this->booted) {\n            return;\n        }\n\n        $this->booted = true;\n        AppGuard::setPrivacyCover(true);\n        $this->resumeShield();\n    }\n\n    /**\n     * Runs for every return from the background. A shielded return locks the app. Protected screens\n     * swap themselves for the lock screen; on any other screen the shield is released here.\n     */\n    public function foregrounded(bool $shielded): void\n    {\n        if (! $shielded) {\n            return;\n        }\n\n        $this->lock();\n\n        if (! NativeComponent::active() instanceof LockedScreen) {\n            AppGuard::releaseShield();\n        }\n    }\n\n    public function isLocked(): bool\n    {\n        return ! $this->unlocked;\n    }\n\n    public function lock(): void\n    {\n        $this->unlocked = false;\n    }\n\n    public function unlock(): void\n    {\n        $this->unlocked = true;\n    }\n\n    /**\n     * Android's passcode screen stops the app, which would otherwise count as a trip to the background.\n     */\n    public function suspendShield(): void\n    {\n        AppGuard::shieldAfter(null);\n    }\n\n    public function resumeShield(): void\n    {\n        AppGuard::shieldAfter(self::TIMEOUT);\n    }\n}"
-                },
-                {
-                    "type": "text",
-                    "runs": [
-                        {
-                            "text": "Save this as "
-                        },
-                        {
-                            "text": "app/Security/AppLock.php",
-                            "code": true
-                        },
-                        {
-                            "text": "."
-                        }
-                    ]
-                }
-            ]
-        },
-        "3-write-the-base-for-protected-screens": {
-            "title": "3. Write the base for protected screens",
-            "blocks": [
-                {
-                    "type": "text",
-                    "runs": [
-                        {
-                            "text": "Every screen that shows protected content extends "
-                        },
-                        {
-                            "text": "LockedScreen",
-                            "code": true
-                        },
-                        {
-                            "text": ". It owns "
-                        },
-                        {
-                            "text": "mount()",
-                            "code": true
-                        },
-                        {
-                            "text": ", so the lock check cannot be skipped, and gives screens "
-                        },
-                        {
-                            "text": "opened()",
-                            "code": true
-                        },
-                        {
-                            "text": " instead. A deep link to a protected screen therefore opens the lock screen first."
-                        }
-                    ]
-                },
-                {
-                    "type": "code",
-                    "language": "php",
-                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Security\\AppLock;\nuse FirstlightUI\\AppGuard\\Events\\Foregrounded;\nuse FirstlightUI\\NativeComponent;\nuse Native\\Mobile\\Attributes\\On;\n\n/**\n * Base for every screen that shows protected content.\n */\nabstract class LockedScreen extends NativeComponent\n{\n    final public function mount(): void\n    {\n        $lock = app(AppLock::class);\n        $lock->boot();\n\n        if ($lock->isLocked()) {\n            $this->showLockScreen();\n\n            return;\n        }\n\n        $this->opened();\n    }\n\n    /**\n     * Runs when the screen opens unlocked. Screens use this instead of mount().\n     */\n    protected function opened(): void {}\n\n    /**\n     * The app may have locked while another screen was on top.\n     */\n    public function onResume(): void\n    {\n        if (app(AppLock::class)->isLocked()) {\n            $this->showLockScreen();\n        }\n    }\n\n    #[On(Foregrounded::class)]\n    public function appForegrounded(int $secondsAway, bool $shielded): void\n    {\n        if (! $shielded) {\n            return;\n        }\n\n        app(AppLock::class)->lock();\n        $this->showLockScreen();\n    }\n\n    private function showLockScreen(): void\n    {\n        $this->replace('/lock', ['return' => $this->nativeRouter?->currentUri()]);\n    }\n}"
-                }
-            ]
-        },
-        "4-write-the-lock-screen": {
-            "title": "4. Write the lock screen",
+        "3-write-the-lock-screen": {
+            "title": "3. Write the lock screen",
             "blocks": [
                 {
                     "type": "text",
@@ -354,7 +278,26 @@
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Security\\AppLock;\nuse FirstlightUI\\AppGuard\\Events\\Foregrounded;\nuse FirstlightUI\\AppGuard\\Facades\\AppGuard;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Support\\Str;\nuse Illuminate\\View\\View;\nuse Native\\Mobile\\Attributes\\On;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\NavBarOptions;\nuse Native\\Mobile\\Events\\Biometric\\Completed;\nuse Native\\Mobile\\Facades\\Biometrics;\n\nclass LockScreen extends NativeComponent\n{\n    protected bool $hidesNavBar = true;\n\n    public bool $prompting = false;\n\n    public bool $failed = false;\n\n    private ?string $promptId = null;\n\n    public function mount(): void\n    {\n        // The shield fades out over 200 ms, covering this first render.\n        AppGuard::releaseShield();\n\n        $this->unlock();\n    }\n\n    public function unlock(): void\n    {\n        $this->failed = false;\n        $this->promptId = (string) Str::uuid();\n        app(AppLock::class)->suspendShield();\n\n        $this->prompting = Biometrics::prompt()->id($this->promptId)->prompt();\n\n        if (! $this->prompting) {\n            $this->finishPrompt(success: false);\n        }\n    }\n\n    #[On(Completed::class)]\n    public function biometricCompleted(bool $success, ?string $id = null): void\n    {\n        if ($id === null || $id !== $this->promptId) {\n            return;\n        }\n\n        $this->finishPrompt($success);\n    }\n\n    /**\n     * AppLock releases the shield on this screen; asking again is this screen's job.\n     */\n    #[On(Foregrounded::class)]\n    public function appForegrounded(int $secondsAway, bool $shielded): void\n    {\n        if (! $this->prompting) {\n            $this->unlock();\n        }\n    }\n\n    /**\n     * Nothing behind the lock may show, so back does nothing.\n     */\n    public function onBackPressed(): void {}\n\n    public function navigationOptions(): ?NavBarOptions\n    {\n        return NavBarOptions::make()->back(false);\n    }\n\n    public function render(): View\n    {\n        return view('native.lock');\n    }\n\n    private function finishPrompt(bool $success): void\n    {\n        $this->promptId = null;\n        $this->prompting = false;\n        app(AppLock::class)->resumeShield();\n\n        if (! $success) {\n            $this->failed = true;\n\n            return;\n        }\n\n        app(AppLock::class)->unlock();\n        $this->replace($this->data('return') ?: '/');\n    }\n}"
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\AppGuard\\AppLock;\nuse FirstlightUI\\AppGuard\\Events\\Foregrounded;\nuse FirstlightUI\\AppGuard\\Facades\\AppGuard;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Support\\Str;\nuse Illuminate\\View\\View;\nuse Native\\Mobile\\Attributes\\On;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\NavBarOptions;\nuse Native\\Mobile\\Events\\Biometric\\Completed;\nuse Native\\Mobile\\Facades\\Biometrics;\n\nclass LockScreen extends NativeComponent\n{\n    protected bool $hidesNavBar = true;\n\n    public bool $prompting = false;\n\n    public bool $failed = false;\n\n    private ?string $promptId = null;\n\n    public function mount(): void\n    {\n        // The shield fades out over 200 ms, covering this first render.\n        AppGuard::releaseShield();\n\n        $this->unlock();\n    }\n\n    public function unlock(): void\n    {\n        $this->failed = false;\n        $this->promptId = (string) Str::uuid();\n        app(AppLock::class)->suspendShield();\n\n        $this->prompting = Biometrics::prompt()->id($this->promptId)->prompt();\n\n        if (! $this->prompting) {\n            $this->finishPrompt(success: false);\n        }\n    }\n\n    #[On(Completed::class)]\n    public function biometricCompleted(bool $success, ?string $id = null): void\n    {\n        if ($id === null || $id !== $this->promptId) {\n            return;\n        }\n\n        $this->finishPrompt($success);\n    }\n\n    /**\n     * App Guard releases the shield over this screen; asking again is this screen's job.\n     */\n    #[On(Foregrounded::class)]\n    public function appForegrounded(int $secondsAway, bool $shielded): void\n    {\n        if (! $this->prompting) {\n            $this->unlock();\n        }\n    }\n\n    /**\n     * Nothing behind the lock may show, so back does nothing.\n     */\n    public function onBackPressed(): void {}\n\n    public function navigationOptions(): ?NavBarOptions\n    {\n        return NavBarOptions::make()->back(false);\n    }\n\n    public function render(): View\n    {\n        return view('native.lock');\n    }\n\n    private function finishPrompt(bool $success): void\n    {\n        $this->promptId = null;\n        $this->prompting = false;\n        app(AppLock::class)->resumeShield();\n\n        if (! $success) {\n            $this->failed = true;\n\n            return;\n        }\n\n        app(AppLock::class)->unlock();\n        $this->replace(app(AppLock::class)->pullIntended('/'));\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "pullIntended()",
+                            "code": true
+                        },
+                        {
+                            "text": " returns the screen the middleware or "
+                        },
+                        {
+                            "text": "RequiresUnlock",
+                            "code": true
+                        },
+                        {
+                            "text": " sent away, and forgets it once read."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -378,35 +321,42 @@
                 }
             ]
         },
-        "5-protect-a-screen": {
-            "title": "5. Protect a screen",
+        "4-protect-a-screen": {
+            "title": "4. Protect a screen",
             "blocks": [
                 {
                     "type": "text",
                     "runs": [
                         {
-                            "text": "A protected screen extends "
+                            "text": "A protected screen uses "
                         },
                         {
-                            "text": "LockedScreen",
+                            "text": "RequiresUnlock",
                             "code": true
                         },
                         {
-                            "text": " and loads its data in "
+                            "text": ". The middleware has already let it through by the time "
                         },
                         {
-                            "text": "opened()",
+                            "text": "mount()",
                             "code": true
                         },
                         {
-                            "text": ", so nothing protected is loaded while the app is locked."
+                            "text": " runs, so it can load its data there. Put resume work in "
+                        },
+                        {
+                            "text": "resumed()",
+                            "code": true
+                        },
+                        {
+                            "text": ", which runs only while unlocked."
                         }
                     ]
                 },
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse Illuminate\\View\\View;\n\nclass VaultScreen extends LockedScreen\n{\n    public string $balance = '';\n\n    protected function opened(): void\n    {\n        $this->balance = '$12,480.00';\n    }\n\n    public function navTitle(): string\n    {\n        return 'Vault';\n    }\n\n    public function render(): View\n    {\n        return view('native.vault');\n    }\n}"
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\AppGuard\\Concerns\\RequiresUnlock;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\View\\View;\n\nclass VaultScreen extends NativeComponent\n{\n    use RequiresUnlock;\n\n    public string $balance = '';\n\n    public function mount(): void\n    {\n        $this->balance = '$12,480.00';\n    }\n\n    public function navTitle(): string\n    {\n        return 'Vault';\n    }\n\n    public function render(): View\n    {\n        return view('native.vault');\n    }\n}"
                 },
                 {
                     "type": "code",
@@ -415,18 +365,25 @@
                 }
             ]
         },
-        "6-test-it": {
-            "title": "6. Test it",
+        "5-test-it": {
+            "title": "5. Test it",
             "blocks": [
                 {
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Fake the bridge functions the screens call, then emit the native events. See "
+                            "text": "Fake the bridge functions App Guard and the lock screen call, then emit the native events. Use "
+                        },
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": " so the middleware runs. See "
                         },
                         {
                             "text": "Test screens",
-                            "link": 4
+                            "link": 5
                         },
                         {
                             "text": " for the harness."
@@ -436,7 +393,7 @@
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "Native::fakeBridge()\n    ->respondTo('AppGuard.SetPrivacyCover', [])\n    ->respondTo('AppGuard.SetShieldTimeout', [])\n    ->respondTo('AppGuard.ReleaseShield', [])\n    ->respondTo('Biometric.Prompt', []);\n\n$vault = Native::visit('/vault')->assertReplacedWith('/lock');\n$lock = $vault->follow()->assertScreen(LockScreen::class);\n\n$id = $lock->bridge()->callsTo('Biometric.Prompt')[0]['params']['id'];\n\n$lock->emitNative(Completed::class, ['success' => true, 'id' => $id])\n    ->assertReplacedWith('/vault');"
+                    "text": "Native::fakeBridge()\n    ->respondTo('AppGuard.SetPrivacyCover', [])\n    ->respondTo('AppGuard.SetShieldTimeout', [])\n    ->respondTo('AppGuard.SetShieldImage', [])\n    ->respondTo('AppGuard.ReleaseShield', [])\n    ->respondTo('Biometric.Prompt', []);\n\n$vault = Native::visit('/vault')->assertReplacedWith('/lock');\n$lock = $vault->follow()->assertScreen(LockScreen::class);\n\n$id = $lock->bridge()->callsTo('Biometric.Prompt')[0]['params']['id'];\n\n$lock->emitNative(Completed::class, ['success' => true, 'id' => $id])\n    ->assertReplacedWith('/vault');"
                 }
             ]
         },
@@ -470,24 +427,16 @@
                 {
                     "type": "definition",
                     "term": {
-                        "runs": [
-                            {
-                                "text": "Return after "
-                            },
-                            {
-                                "text": "TIMEOUT",
-                                "code": true
-                            }
-                        ]
+                        "text": "Return after the timeout"
                     },
                     "items": [
                         {
                             "label": "iOS",
-                            "text": "An opaque shield over every window before the first frame"
+                            "text": "The shield image, splash screen or app icon over every window before the first frame"
                         },
                         {
                             "label": "Android",
-                            "text": "An opaque shield over the window before the first frame"
+                            "text": "The same, over the window before the first frame"
                         }
                     ]
                 },
@@ -540,21 +489,21 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "Extend "
+                            "text": "Put every screen with protected content behind "
                         },
                         {
-                            "text": "LockedScreen",
+                            "text": "app-lock",
                             "code": true
                         },
                         {
-                            "text": " from every screen with protected content. A screen that does not extend it stays visible after a shielded return, because "
+                            "text": " and give it "
                         },
                         {
-                            "text": "AppLock",
+                            "text": "RequiresUnlock",
                             "code": true
                         },
                         {
-                            "text": " releases the shield over it."
+                            "text": ". A screen without the trait stays visible after a shielded return, because App Guard releases the shield over it."
                         }
                     ]
                 },
@@ -562,42 +511,7 @@
                     "type": "item",
                     "marker": "•",
                     "depth": 0,
-                    "runs": [
-                        {
-                            "text": "Load protected data in "
-                        },
-                        {
-                            "text": "opened()",
-                            "code": true
-                        },
-                        {
-                            "text": ", never in "
-                        },
-                        {
-                            "text": "mount()",
-                            "code": true
-                        },
-                        {
-                            "text": " or a property default."
-                        }
-                    ]
-                },
-                {
-                    "type": "item",
-                    "marker": "•",
-                    "depth": 0,
-                    "runs": [
-                        {
-                            "text": "Keep the app-wide "
-                        },
-                        {
-                            "text": "Foregrounded",
-                            "code": true
-                        },
-                        {
-                            "text": " listener. Without it, a shielded return to a screen that is not protected leaves the shield covering the app."
-                        }
-                    ]
+                    "text": "Suspend the shield around your own prompt and resume it afterwards, as the lock screen does. Android's credential screen otherwise counts as a trip to the background."
                 },
                 {
                     "type": "item",
@@ -620,7 +534,7 @@
                     "type": "item",
                     "marker": "•",
                     "depth": 0,
-                    "text": "Keep the unlocked flag in memory. Persisting it would let a cold start skip the lock."
+                    "text": "Never persist the unlocked state. App Guard keeps it in memory so a cold start cannot skip the lock."
                 }
             ]
         }
@@ -641,6 +555,10 @@
         {
             "label": "nativephp/mobile-biometrics",
             "url": "https://nativephp.com/plugins/nativephp/mobile-biometrics"
+        },
+        {
+            "label": "Guard screens",
+            "url": "guard-screens.md"
         },
         {
             "label": "Test screens",

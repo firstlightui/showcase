@@ -1,7 +1,7 @@
 <?php
 
 use App\NativeComponents\LockScreen;
-use App\Security\AppLock;
+use FirstlightUI\AppGuard\AppLock;
 use FirstlightUI\AppGuard\Events\Foregrounded;
 use FirstlightUI\Testing\ScreenAssertions;
 use Native\Mobile\Events\Biometric\Completed;
@@ -15,6 +15,7 @@ beforeEach(function () {
         ->respondTo('AppGuard.SetPrivacyCover', [])
         ->respondTo('AppGuard.SetShieldTimeout', [])
         ->respondTo('AppGuard.ReleaseShield', [])
+        ->respondTo('AppGuard.SetShieldImage', [])
         ->respondTo('Biometric.Prompt', []);
 });
 
@@ -73,17 +74,17 @@ it('leaves the shield to a protected screen', function () {
 });
 
 it('suspends the shield while the system prompt is open and restores it after', function () {
-    $lock = Native::test(LockScreen::class, data: ['return' => '/vault']);
+    $lock = Native::test(LockScreen::class);
 
     $lock->emitNative(Completed::class, ['success' => false, 'id' => appLockPromptIds($lock)[0]]);
 
     $lock->assertNativeCallOrder(['AppGuard.ReleaseShield', 'AppGuard.SetShieldTimeout', 'Biometric.Prompt', 'AppGuard.SetShieldTimeout']);
     expect(array_column($lock->bridge()->callsTo('AppGuard.SetShieldTimeout'), 'params'))
-        ->toBe([['seconds' => null], ['seconds' => AppLock::TIMEOUT]]);
+        ->toBe([['seconds' => null], ['seconds' => 60]]);
 });
 
 it('stays locked after a failed or foreign result and asks again with a new prompt', function () {
-    $lock = Native::test(LockScreen::class, data: ['return' => '/vault']);
+    $lock = Native::test(LockScreen::class);
     $first = appLockPromptIds($lock)[0];
 
     $lock->emitNative(Completed::class, ['success' => true, 'id' => 'another-prompt'])
@@ -109,14 +110,15 @@ it('shows the failure when the prompt cannot start', function () {
         ->respondTo('AppGuard.ReleaseShield', [])
         ->respondTo('Biometric.Prompt', ['status' => 'error', 'code' => 'UNAVAILABLE', 'message' => 'No biometrics']);
 
-    Native::test(LockScreen::class, data: ['return' => '/vault'])
+    Native::test(LockScreen::class)
         ->assertSet('prompting', false)
         ->assertSet('failed', true)
         ->assertElement('firstlight.callout');
 });
 
 it('asks again when the app returns to an idle lock screen, but not mid-prompt', function () {
-    $lock = Native::test(LockScreen::class, data: ['return' => '/vault']);
+    // Opened by URI, as the app does: the app-lock middleware boots App Guard, whose listener releases the shield.
+    $lock = Native::visit('/lock');
 
     $lock->emitNative(Foregrounded::class, ['secondsAway' => 1, 'shielded' => false]);
     expect(appLockPromptIds($lock))->toHaveCount(1);
@@ -129,7 +131,7 @@ it('asks again when the app returns to an idle lock screen, but not mid-prompt',
 });
 
 it('returns to recipes without unlocking when back is pressed', function () {
-    Native::test(LockScreen::class, data: ['return' => '/vault'])
+    Native::test(LockScreen::class)
         ->assertNavBarHidden()
         ->pressBack()
         ->assertReplacedWith('/recipes');
@@ -143,7 +145,7 @@ it('can leave the example when device authentication is unavailable', function (
         ->respondTo('AppGuard.ReleaseShield', [])
         ->respondTo('Biometric.Prompt', ['status' => 'error', 'code' => 'UNAVAILABLE']);
 
-    Native::test(LockScreen::class, data: ['return' => '/vault'])
+    Native::test(LockScreen::class)
         ->assertSet('failed', true)
         ->tap('Back to Recipes')
         ->assertReplacedWith('/recipes');
@@ -152,7 +154,7 @@ it('can leave the example when device authentication is unavailable', function (
 });
 
 it('ignores a successful biometric callback after leaving the example', function () {
-    $lock = Native::test(LockScreen::class, data: ['return' => '/vault']);
+    $lock = Native::test(LockScreen::class);
     $prompt = appLockPromptIds($lock)[0];
 
     $lock->tap('Back to Recipes')

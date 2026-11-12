@@ -420,10 +420,13 @@ Route::native('/settings/privacy', PrivacyScreen::class)
     ->name('recipes.privacy')
     ->layout(AppLayout::class);
 
-Route::native('/vault', VaultScreen::class)
-    ->name('recipes.vault')
-    ->layout(AppLayout::class);
+// App Guard's app-lock middleware keeps the vault closed while the app is locked and always lets /lock through.
+Route::middleware('app-lock')->group(function () {
+    Route::native('/vault', VaultScreen::class)
+        ->name('vault')
+        ->layout(AppLayout::class);
 
-Route::native('/lock', LockScreen::class)
-    ->name('recipes.lock')
-    ->layout(AppLayout::class);
+    Route::native('/lock', LockScreen::class)
+        ->name('lock')
+        ->layout(AppLayout::class);
+});

@@ -19,7 +19,7 @@
     },
     "require": {
         "php": "^8.4",
-        "firstlightui/app-guard": "^0.1",
+        "firstlightui/app-guard": "^1.0",
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",

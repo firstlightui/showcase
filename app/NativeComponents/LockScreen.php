@@ -2,7 +2,7 @@
 
 namespace App\NativeComponents;
 
-use App\Security\AppLock;
+use FirstlightUI\AppGuard\AppLock;
 use FirstlightUI\AppGuard\Events\Foregrounded;
 use FirstlightUI\AppGuard\Facades\AppGuard;
 use FirstlightUI\NativeComponent;
@@ -55,7 +55,7 @@ class LockScreen extends NativeComponent
     }
 
     /**
-     * AppLock releases the shield on this screen; asking again is this screen's job.
+     * App Guard releases the shield over this screen; asking again is this screen's job.
      */
     #[On(Foregrounded::class)]
     public function appForegrounded(int $secondsAway, bool $shielded): void
@@ -102,6 +102,6 @@ class LockScreen extends NativeComponent
         }
 
         app(AppLock::class)->unlock();
-        $this->replace($this->data('return') ?: '/');
+        $this->replace(app(AppLock::class)->pullIntended('/'));
     }
 }
