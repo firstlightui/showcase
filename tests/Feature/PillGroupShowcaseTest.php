@@ -25,11 +25,16 @@ it('publishes the complete Pill Group catalogue through the native tree', functi
     expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Pill Group')
         ->and(array_keys($nodes))->toBe([
             'Queue',
+            'Large queue',
             'Mail filter',
             'Invoice status',
             'Queues',
             'Priority',
             'Locked queue',
+            'Locked queues',
+            'Required queues',
+            'Archived queue',
+            'No available queues',
             'Queue with error',
             'Disabled queue',
             'Workflow status',
@@ -91,4 +96,95 @@ it('publishes the unchanged authoritative selection after rejection', function (
 
     expect(firstlightPillGroupNodesByLabel($screen->tree())['Locked queue']['props']['selected_values'])
         ->toBe(['mine']);
+});
+
+it('publishes the large size beside a large Button and clears it from PHP', function () {
+    $screen = Native::visit('/components/pill-group');
+    $nodes = firstlightPillGroupNodesByLabel($screen->tree());
+
+    expect($nodes['Large queue']['props'])->toMatchArray([
+        'size' => 'lg',
+        'selected_values' => ['mine'],
+        'multiple' => false,
+    ])->and($nodes['Queue']['props']['size'])->toBe('md');
+
+    $screen->assertElement('firstlight.button', fn (array $node): bool => ($node['props']['label'] ?? null) === 'Clear large queue'
+        && ($node['props']['size'] ?? null) === 'lg'
+    );
+
+    $screen->press("__syncProperty('largeQueue', \"urgent\")")->assertSet('largeQueue', 'urgent')
+        ->press('clearLargeQueue')->assertSet('largeQueue', null)
+        ->assertSee('PHP accepted state: large (empty)');
+
+    expect(firstlightPillGroupNodesByLabel($screen->tree())['Large queue']['props']['selected_values'])->toBe([]);
+});
+
+it('names the scrolling filter row only by a11y-label', function () {
+    $filter = firstlightPillGroupNodesByLabel(Native::visit('/components/pill-group')->tree())['Mail filter'];
+
+    expect($filter['props']['label'])->toBe('')
+        ->and($filter['props']['a11y_label'])->toBe('Mail filter');
+});
+
+it('publishes the unchanged authoritative list after a multiple-mode rejection', function () {
+    $screen = Native::visit('/components/pill-group');
+    $locked = firstlightPillGroupNodesByLabel($screen->tree())['Locked queues'];
+
+    expect($locked['props'])->toMatchArray([
+        'multiple' => true,
+        'selected_values' => ['mine'],
+        'option_values' => ['mine', 'all', 'urgent'],
+    ]);
+
+    $screen->press('rejectQueues(["mine","all"])')
+        ->assertSet('lockedQueues', ['mine'])
+        ->assertSet('rejectedMultipleAttempts', 1)
+        ->press('rejectQueues([])')
+        ->assertSet('lockedQueues', ['mine'])
+        ->assertSet('rejectedMultipleAttempts', 2)
+        ->assertSee('Rejected multiple attempts: 2');
+
+    expect(firstlightPillGroupNodesByLabel($screen->tree())['Locked queues']['props']['selected_values'])
+        ->toBe(['mine']);
+});
+
+it('lets the final required pill clear and then binds the PHP validation error', function () {
+    $screen = Native::visit('/components/pill-group');
+    $required = firstlightPillGroupNodesByLabel($screen->tree())['Required queues'];
+
+    expect($required['props'])->toMatchArray([
+        'multiple' => true,
+        'required' => true,
+        'selected_values' => ['mine'],
+        'error' => '',
+    ]);
+
+    $screen->press("__syncProperty('requiredQueues', [])")
+        ->assertSet('requiredQueues', [])
+        ->assertSee('PHP accepted state: required (empty)');
+
+    expect(firstlightPillGroupNodesByLabel($screen->tree())['Required queues']['props'])->toMatchArray([
+        'selected_values' => [],
+        'error' => 'Choose at least one queue.',
+    ]);
+
+    $screen->press("__syncProperty('requiredQueues', [\"all\"])")->assertSet('requiredQueues', ['all']);
+
+    expect(firstlightPillGroupNodesByLabel($screen->tree())['Required queues']['props']['error'])->toBe('');
+});
+
+it('leaves an absent value unselected and makes an empty option set inert', function () {
+    $nodes = firstlightPillGroupNodesByLabel(Native::visit('/components/pill-group')->tree());
+
+    expect($nodes['Archived queue']['props'])->toMatchArray([
+        'value_type' => 'string',
+        'selected_values' => ['archived'],
+        'option_values' => ['mine', 'all', 'urgent'],
+        'disabled' => false,
+    ])->and($nodes['No available queues']['props'])->toMatchArray([
+        'disabled' => true,
+        'selected_values' => [],
+        'option_values' => [],
+        'option_callbacks' => [],
+    ]);
 });

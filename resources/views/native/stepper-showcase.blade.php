@@ -1,6 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-8">
-        <native:text class="text-sm text-theme-on-surface">On-device checks: step whole and quarter values. Minimum can increase and maximum can decrease; bounds block the opposite action. Disabled stays fixed. Rejected proposals increment the count without changing 4; publish changes to 8.</native:text>
+        <native:text class="text-sm text-theme-on-surface">On-device checks: step whole and quarter values. Minimum can increase and maximum can decrease; bounds block the opposite action. Disabled stays fixed. Rejected proposals increment the count without changing 4; publish changes to 8. Tap Quantity rapidly: each accepted proposal adds one to Quantity changes, and the value moves by exactly one step per accepted change.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Exact numeric models</native:text>
             <firstlight:stepper
@@ -18,7 +18,7 @@
                 label="Fractional dose"
                 helper="Preserves an exact PHP float proposal."
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $quantity }}; fractional: {{ $fractionalDose }}</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $quantity }}; fractional: {{ $fractionalDose }}; Quantity changes: {{ $quantityChanges }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
@@ -59,6 +59,19 @@
                 helper="Quantity changes are unavailable."
                 disabled
             />
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Named only by a11y-label</native:text>
+            <native:text class="text-sm text-theme-on-surface">This stepper has no visible label. VoiceOver and TalkBack read its a11y-label, Guest count, with the value and decrease/increase actions.</native:text>
+            <firstlight:stepper
+                ref="guestCount"
+                native:model="guestCount"
+                :min="1"
+                :max="6"
+                a11y-label="Guest count"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: guests {{ $guestCount }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2 pb-6">

@@ -31,6 +31,7 @@ it('publishes the complete Modal catalogue through the native wire tree', functi
         ->and($nodes['defaultModal']['props'])->toMatchArray([
             'visible' => false,
             'a11y_label' => 'Account details',
+            'a11y_hint' => 'Use the native close control to return',
         ])
         ->and($nodes['lockedModal']['props'])->toMatchArray([
             'visible' => false,
@@ -71,5 +72,23 @@ it('dispatches overlay dismissal and programmatic closure', function () {
     $screen->tap('showProgrammatic')->dismissSheet('programmaticModal')
         ->assertSet('programmaticVisible', false)
         ->assertSet('dismissalCount', 2)
+        ->assertSet('lastOutcome', 'Programmatic example dismissed');
+});
+
+it('ignores a dismiss notification that follows a programmatic close', function () {
+    $screen = Native::visit('/components/modal');
+
+    $screen->tap('showProgrammatic')
+        ->tap('closeProgrammatic')
+        ->assertSet('programmaticVisible', false)
+        ->dismissSheet('programmaticModal')
+        ->assertSet('dismissalCount', 0)
+        ->assertSet('lastOutcome', 'Programmatic closure published no user outcome')
+        ->assertSee('Programmatic closure published no user outcome · 0 dismissed');
+
+    $screen->tap('showProgrammatic')
+        ->dismissSheet('programmaticModal')
+        ->dismissSheet('programmaticModal')
+        ->assertSet('dismissalCount', 1)
         ->assertSet('lastOutcome', 'Programmatic example dismissed');
 });

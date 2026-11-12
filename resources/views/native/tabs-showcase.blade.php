@@ -8,8 +8,8 @@
         />
 
         <native:column class="w-full px-4 gap-3">
-            <native:text class="text-sm text-theme-on-surface">On-device checks: switch sections and confirm only the selected pane renders below. Manage is unavailable. Show Deployments selects it from PHP without a change event. Add or clear failures to update the badge, and check VoiceOver or TalkBack reads "Deployments, 2 failed", the tab role, selected state, and position. The guarded group ignores Manage while attempts increase. Null starts unselected; empty and disabled groups stay inert. Five long labels scroll on Android and size to content on iOS.</native:text>
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: tab {{ $tab }}; failed deployments {{ $failedDeployments }}; guarded {{ $guardedTab }}; guarded attempts {{ $guardedAttempts }}; initially empty {{ $unselected ?? '(none)' }}; long {{ $longTab }}</native:text>
+            <native:text class="text-sm text-theme-on-surface">On-device checks: switch sections and confirm only the selected pane renders below. Manage is unavailable. Show Deployments selects it from PHP without a change event. Open Deployments by link pushes /components/tabs/deploys, which opens on the Deployments pane. Add or clear failures to update the badge, and check VoiceOver or TalkBack reads "Deployments, 2 failed", the tab role, selected state, and position. Tab changes rise by one per accepted tap on Server sections, not for the selected tab, a disabled tab, or Show Deployments. The guarded group ignores Manage while attempts increase. Live sections uses native:model.live and is announced as Live server sections, not its label. Null starts unselected; empty and disabled groups stay inert. Five long labels scroll on Android and size to content on iOS.</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: tab {{ $tab }}; failed deployments {{ $failedDeployments }}; guarded {{ $guardedTab }}; guarded attempts {{ $guardedAttempts }}; tab changes {{ $tabChanges }}; live {{ $liveTab }}; initially empty {{ $unselected ?? '(none)' }}; long {{ $longTab }}</native:text>
 
             @if ($tab === 'overview')
                 <native:text class="text-base font-semibold text-theme-on-surface">Overview pane</native:text>
@@ -20,6 +20,7 @@
             @endif
 
             <native:button label="Show Deployments" variant="primary" @press="showDeployments" />
+            <native:button label="Open Deployments by link" @press="openDeploymentsByLink" />
             <native:button label="Fail another deployment" @press="failAnotherDeployment" />
             <native:button label="Clear failures" @press="clearFailures" />
         </native:column>
@@ -32,6 +33,16 @@
                 :tabs="$simpleTabs"
                 label="Guarded sections"
                 a11y-hint="The server ignores Manage in this example"
+            />
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="px-4 text-sm font-semibold text-theme-on-surface">a11y-label overrides label, with native:model.live</native:text>
+            <firstlight:tabs
+                native:model.live="liveTab"
+                :tabs="$simpleTabs"
+                label="Live sections"
+                a11y-label="Live server sections"
             />
         </native:column>
 

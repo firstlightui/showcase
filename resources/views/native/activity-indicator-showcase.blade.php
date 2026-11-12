@@ -48,6 +48,25 @@
             @endif
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Mounted updates</native:text>
+            <native:text class="text-sm text-theme-on-surface">This indicator stays mounted while PHP changes its size and label. The screen reader announces it once on appearance; later size or label changes must not repeat the announcement.</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: size {{ $mountedSize }} · label "{{ $mountedLabel }}" · updates {{ $mountedUpdates }}</native:text>
+
+            <native:row class="w-full items-center gap-3">
+                <firstlight:activity-indicator
+                    :size="$mountedSize"
+                    :a11y-label="$mountedLabel"
+                />
+                <native:text class="text-sm text-theme-on-surface">{{ $mountedLabel }}</native:text>
+            </native:row>
+
+            <firstlight:button
+                label="Change size and label"
+                @press="updateMountedIndicator"
+            />
+        </native:column>
+
         <native:column class="w-full gap-2 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Activity Indicator or Progress?</native:text>
             <native:text class="text-sm text-theme-on-surface">Use Activity Indicator for circular indeterminate work. Use Progress when completion is measurable or a linear treatment communicates the task.</native:text>

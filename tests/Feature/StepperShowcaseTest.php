@@ -7,7 +7,7 @@ function firstlightSteppersByLabel(array $tree): array
 {
     $nodes = [];
     if (($tree['type'] ?? null) === 'firstlight.stepper') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightSteppersByLabel($child)];
@@ -30,6 +30,7 @@ it('publishes the complete Stepper catalogue through the native wire tree', func
             'Maximum quantity',
             'Quantity with error',
             'Disabled quantity',
+            'Guest count',
             'Server-approved quantity',
             'Programmatic quantity',
         ])
@@ -94,4 +95,36 @@ it('dispatches integer float rejection and programmatic publication callbacks', 
         ->and($nodes['Maximum quantity']['props']['value'])->toBe(9)
         ->and($nodes['Maximum quantity']['props']['can_increment'])->toBeTrue()
         ->and($nodes['Quantity with error']['props']['value'])->toBe(5);
+});
+
+it('publishes a Stepper named only by a11y-label and round-trips its step', function () {
+    $screen = Native::visit('/components/stepper');
+
+    expect(firstlightSteppersByLabel($screen->tree())['Guest count']['props'])->toMatchArray([
+        'label' => '',
+        'a11y_label' => 'Guest count',
+        'value' => 2,
+        'decrement_value' => 1,
+        'increment_value' => 3,
+    ]);
+
+    $screen->fireEvent('guestCount', 1, [], ['on_increment'])
+        ->assertSet('guestCount', 3)
+        ->assertSee('PHP accepted state: guests 3');
+});
+
+it('counts accepted Quantity proposals but not programmatic publications', function () {
+    $screen = Native::visit('/components/stepper')
+        ->assertSee('Quantity changes: 0')
+        ->press('__syncProperty("quantity",6)')
+        ->assertSet('quantityChanges', 1);
+
+    expect(firstlightSteppersByLabel($screen->tree())['Quantity']['props']['increment_value'])->toBe(7);
+
+    $screen->press('__syncProperty("quantity",7)')
+        ->assertSet('quantity', 7)
+        ->assertSet('quantityChanges', 2)
+        ->tap('Publish higher quantity')
+        ->assertSet('quantityChanges', 2)
+        ->assertSee('Quantity changes: 2');
 });

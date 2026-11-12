@@ -27,6 +27,8 @@ it('publishes the complete Search Field catalogue through the native wire tree',
             'Search referrals',
             'Search clinicians',
             'Search specialties',
+            'Search wards',
+            'Search approved wards',
             'Search archived referrals',
         ])
         ->and($nodes['Search referrals']['props'])->toMatchArray([
@@ -77,4 +79,24 @@ it('updates the live binding and programmatic reset', function () {
     expect($nodes['Search referrals']['props']['value'])->toBe('Referral')
         ->and($nodes['Search clinicians']['props']['value'])->toBe('Smith')
         ->and($nodes['Search specialties']['props']['value'])->toBe('Respiratory');
+});
+
+it('publishes lazy synchronisation and keeps a rejected query at the approved value', function () {
+    $screen = Native::visit('/components/search-field');
+    $nodes = firstlightSearchFieldsByA11yLabel($screen->tree());
+
+    expect($nodes['Search wards']['props'])->toMatchArray(['value' => '', 'sync_mode' => 'blur'])
+        ->and($nodes['Search approved wards']['props'])->toMatchArray(['value' => 'Ward 4', 'sync_mode' => 'live']);
+
+    $screen->select('lazyQuery', 'Ward 7')
+        ->assertSee('PHP accepted state: Ward 7 (lazy)')
+        ->submit('lazySearch', 'Ward 7')
+        ->assertSee('Last submitted: Ward 7; submissions: 1')
+        ->select('rejectQuery', 'Ward 9')
+        ->assertSet('approvedQuery', 'Ward 4')
+        ->select('rejectQuery', '')
+        ->assertSet('rejectedQueries', 2)
+        ->assertSee('PHP accepted state: Ward 4; Rejected queries: 2');
+
+    expect(firstlightSearchFieldsByA11yLabel($screen->tree())['Search approved wards']['props']['value'])->toBe('Ward 4');
 });

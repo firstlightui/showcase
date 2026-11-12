@@ -37,11 +37,19 @@
             <firstlight:progress class="w-full" a11y-label="Synchronising the complete historical document archive for offline access" />
         </native:column>
 
-        <native:column class="w-full gap-3 pb-6">
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Programmatic updates · {{ (int) ($uploadProgress * 100) }}%</native:text>
             <firstlight:progress class="w-full" :value="$uploadProgress" a11y-label="Interactive upload progress" />
             <firstlight:button label="Advance progress" @press="advanceProgress" />
             <firstlight:button label="Reset progress" variant="ghost" @press="resetProgress" />
+        </native:column>
+
+        <native:column class="w-full gap-3 pb-6">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Mode switch on one indicator</native:text>
+            <native:text class="text-sm text-theme-on-surface">The same indicator starts indeterminate (null value). Next import step switches it to determinate 0%, then 50% and 100%; the step after 100% returns it to indeterminate.</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $importProgress === null ? 'indeterminate (null)' : 'determinate '.(int) ($importProgress * 100).'%' }}</native:text>
+            <firstlight:progress class="w-full" :value="$importProgress" a11y-label="Importing patient records" />
+            <firstlight:button label="Next import step" variant="secondary" @press="advanceImport" />
         </native:column>
     </native:column>
 </native:scroll-view>

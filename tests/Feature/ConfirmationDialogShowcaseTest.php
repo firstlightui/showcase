@@ -28,8 +28,10 @@ it('publishes the complete Confirmation Dialog catalogue through the native wire
         ->and(array_keys($nodes))->toBe([
             'defaultDialog',
             'destructiveDialog',
+            'packageLabelsDialog',
             'longCopyDialog',
             'programmaticDialog',
+            'copyUpdateDialog',
         ])
         ->and($nodes['defaultDialog']['props'])->toMatchArray([
             'visible' => false,
@@ -117,4 +119,63 @@ it('keeps the confirmation usable when timed dispatch is unavailable', function 
         ->assertSet('programmaticVisible', true)
         ->assertSet('lastOutcome', 'Timed close unavailable; confirm or cancel normally')
         ->dismissSheet('programmaticDialog')->assertSet('dismissalCount', 1);
+});
+
+it('publishes the package chrome Confirm and Cancel when labels are omitted', function () {
+    $screen = Native::visit('/components/confirmation-dialog');
+    $node = confirmationDialogNodesByRef($screen->tree())['packageLabelsDialog'];
+
+    expect($node['props'])->toMatchArray([
+        'visible' => false,
+        'title' => 'Send the referral?',
+        'confirm_label' => 'Confirm',
+        'cancel_label' => 'Cancel',
+        'tone' => 'default',
+    ]);
+
+    $screen->tap('showPackageLabels')
+        ->assertSet('packageLabelsVisible', true)
+        ->tap('packageLabelsDialog')
+        ->assertSet('packageLabelsVisible', false)
+        ->assertSet('confirmationCount', 1)
+        ->assertSet('lastOutcome', 'Package Confirm chosen')
+        ->tap('showPackageLabels')
+        ->dismissSheet('packageLabelsDialog')
+        ->assertSet('dismissalCount', 1)
+        ->assertSet('lastOutcome', 'Package Cancel chosen');
+});
+
+it('republishes copy while open and after a decision without reopening', function () {
+    $bridge = Native::fakeBridge()->respondTo('AsyncTask.Dispatch', ['success' => true]);
+    $screen = Native::visit('/components/confirmation-dialog');
+
+    $screen->tap('showCopyUpdate')->assertSet('copyVisible', true)->assertSet('copyRevision', 1);
+    $id = $bridge->callsTo('AsyncTask.Dispatch')[0]['params']['id'];
+
+    $screen->emitNative(AsyncTaskFinished::class, ['id' => $id])
+        ->assertSet('copyVisible', true)
+        ->assertSet('copyRevision', 2)
+        ->assertSet('confirmationCount', 0)
+        ->assertSet('dismissalCount', 0);
+
+    $node = confirmationDialogNodesByRef($screen->tree())['copyUpdateDialog'];
+    expect($node['props']['visible'])->toBeTrue()
+        ->and($node['props']['message'])->toContain('revision 2');
+
+    $screen->tap('copyUpdateDialog')
+        ->assertSet('copyVisible', false)
+        ->assertSet('confirmationCount', 1)
+        ->assertSet('lastOutcome', 'Copy update confirmed')
+        ->tap('republishCopy')
+        ->assertSet('copyRevision', 3)
+        ->assertSet('copyVisible', false)
+        ->assertSee('PHP state: copy dialog closed · copy revision 3');
+
+    $node = confirmationDialogNodesByRef($screen->tree())['copyUpdateDialog'];
+    expect($node['props']['visible'])->toBeFalse()
+        ->and($node['props']['message'])->toContain('revision 3');
+
+    foreach ($bridge->callsTo('AsyncTask.Dispatch') as $call) {
+        AsyncTaskTransport::forgetPayload($call['params']['id']);
+    }
 });

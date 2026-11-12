@@ -24,6 +24,47 @@ class ListItemShowcase extends ShowcaseScreen
 
     public bool $menuRowDisabled = false;
 
+    public bool $referralAccepted = false;
+
+    public bool $sectionNotesShown = true;
+
+    public int $sectionRevision = 1;
+
+    public function toggleReferral(): void
+    {
+        $this->referralAccepted = ! $this->referralAccepted;
+    }
+
+    public function recordReferral(): void
+    {
+        $this->record('Referral');
+    }
+
+    public function recordClinician(): void
+    {
+        $this->record('Clinician');
+    }
+
+    public function recordTone(string $headline): void
+    {
+        $this->record($headline);
+    }
+
+    public function recordSection(string $headline): void
+    {
+        $this->record($headline);
+    }
+
+    public function renameSection(): void
+    {
+        $this->sectionRevision++;
+    }
+
+    public function toggleSectionNotes(): void
+    {
+        $this->sectionNotesShown = ! $this->sectionNotesShown;
+    }
+
     public function recordMenu(string $action, int $id): void
     {
         $this->menuCount++;

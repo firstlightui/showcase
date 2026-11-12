@@ -12,6 +12,10 @@ class BottomSheetShowcase extends ShowcaseScreen
 
     public bool $billVisible = false;
 
+    public bool $heightVisible = false;
+
+    public int $heightRows = 3;
+
     public int $dismissalCount = 0;
 
     public string $lastOutcome = 'No presentation yet';
@@ -54,6 +58,29 @@ class BottomSheetShowcase extends ShowcaseScreen
         $this->programmaticVisible = false;
         $this->dismissalCount++;
         $this->lastOutcome = 'Programmatic example dismissed';
+    }
+
+    public function showHeight(int $rows): void
+    {
+        $this->heightRows = $rows;
+        $this->heightVisible = true;
+    }
+
+    public function addHeightRows(): void
+    {
+        $this->heightRows += 8;
+    }
+
+    public function resetHeightRows(): void
+    {
+        $this->heightRows = 3;
+    }
+
+    public function dismissHeight(): void
+    {
+        $this->heightVisible = false;
+        $this->dismissalCount++;
+        $this->lastOutcome = 'Height sheet dismissed';
     }
 
     public function navTitle(): string

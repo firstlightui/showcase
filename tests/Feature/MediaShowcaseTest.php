@@ -70,3 +70,66 @@ it('validates actual selected media and resets the published errors', function (
     expect(mediaShowcaseFieldsByRef($screen->tree())['avatar']['props']['error'])->toBe('');
     expect(Storage::disk('mobile_public')->allFiles())->toBe([]);
 });
+
+it('publishes a MediaValue from PHP and clears it to null without a pick', function () {
+    Storage::fake('mobile_public');
+    $screen = Native::visit('/components/media')->tap('Publish sample from PHP');
+
+    $sample = $screen->get('sample');
+    Storage::disk('mobile_public')->assertExists($sample->path);
+    expect([$sample->disk, $sample->mime, $sample->width, $sample->height])->toBe(['mobile_public', 'image/png', 48, 48]);
+
+    $fields = mediaShowcaseFieldsByRef($screen->tree());
+    expect($fields['sample']['props'])->toMatchArray([
+        'has_value' => true,
+        'path' => $sample->path,
+        'mime' => 'image/png',
+        'width' => 48,
+        'height' => 48,
+    ])->and($fields['rejectedScan']['props'])->toMatchArray(['has_value' => true, 'path' => $sample->path]);
+    $screen->assertSee('Sample: mobile_public · image/png');
+
+    $screen->tap('Clear sample from PHP')->assertSet('sample', null);
+    Storage::disk('mobile_public')->assertMissing($sample->path);
+    expect(mediaShowcaseFieldsByRef($screen->tree())['sample']['props'])->toMatchArray(['has_value' => false, 'path' => '']);
+});
+
+it('keeps the previous value when PHP rejects a picked file', function () {
+    Storage::fake('mobile_public');
+    $pick = UploadedFile::fake()->image('replacement.png', 20, 20);
+    $screen = Native::visit('/components/media')->tap('Publish sample from PHP');
+    $approved = $screen->get('sample')->path;
+
+    $screen->select('rejectedScan', $pick->getPathname())
+        ->assertSet('rejectedScans', 1)
+        ->assertSee('Rejected changes: 1');
+
+    expect($screen->get('sample')->path)->toBe($approved)
+        ->and(mediaShowcaseFieldsByRef($screen->tree())['rejectedScan']['props']['path'])->toBe($approved)
+        ->and(Storage::disk('mobile_public')->allFiles())->toBe([$approved]);
+
+    $screen->tap('Clear demo media');
+});
+
+it('commits a live-bound document to the non-default local disk', function () {
+    Storage::fake('local');
+    Storage::fake('mobile_public');
+    $pdf = UploadedFile::fake()->createWithContent('scan.pdf', "%PDF-1.4\nArchive scan");
+    $screen = Native::visit('/components/media');
+
+    expect(mediaShowcaseFieldsByRef($screen->tree())['archiveScan']['props'])->toMatchArray([
+        'mode' => 'document',
+        'disk' => 'local',
+        'directory' => 'showcase-archive',
+    ]);
+
+    $screen->select('archiveScan', $pdf->getPathname());
+    $scan = $screen->get('archiveScan');
+    expect($scan->disk)->toBe('local');
+    Storage::disk('local')->assertExists($scan->path);
+    expect(Storage::disk('mobile_public')->allFiles())->toBe([]);
+    $screen->assertSee('Archive scan: local · application/pdf');
+
+    $screen->tap('Clear demo media')->assertSet('archiveScan', null);
+    Storage::disk('local')->assertMissing($scan->path);
+});

@@ -57,6 +57,12 @@ class ModalShowcase extends ShowcaseScreen
 
     public function dismissProgrammatic(): void
     {
+        // The delegated iOS cover can also report a programmatic close; a
+        // dismissal that arrives after PHP already closed it is not a user outcome.
+        if (! $this->programmaticVisible) {
+            return;
+        }
+
         $this->programmaticVisible = false;
         $this->dismissalCount++;
         $this->lastOutcome = 'Programmatic example dismissed';

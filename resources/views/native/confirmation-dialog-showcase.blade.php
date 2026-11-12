@@ -13,6 +13,12 @@
         </native:column>
 
         <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Package chrome labels</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">This dialog omits confirm-label and cancel-label, so its actions show the package chrome strings Confirm and Cancel in the app locale.</native:text>
+            <native:button ref="showPackageLabels" label="Open package labels" variant="secondary" @press="showPackageLabels" />
+        </native:column>
+
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Long copy and large text</native:text>
             <native:button ref="showLongCopy" label="Replace care plan" variant="secondary" @press="showLongCopy" />
         </native:column>
@@ -21,6 +27,14 @@
             <native:text class="text-sm font-semibold text-theme-on-surface">Programmatic reconciliation</native:text>
             <native:button ref="showProgrammatic" label="Open timed close example" variant="secondary" @press="showTimedProgrammatic" />
             <native:text class="text-sm text-theme-on-surface-variant">{{ $lastOutcome }} · {{ $confirmationCount }} confirmed · {{ $dismissalCount }} cancelled</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Copy-only republication</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">Open the dialog and wait: after about 3 seconds PHP republishes only its message and the dialog stays open with both counts unchanged. After choosing, Republish copy while closed changes the message again; the dialog must not reopen.</native:text>
+            <native:button ref="showCopyUpdate" label="Open copy update example" variant="secondary" @press="showCopyUpdate" />
+            <native:button ref="republishCopy" label="Republish copy while closed" variant="secondary" @press="republishCopy" />
+            <native:text class="text-sm text-theme-on-surface-variant">PHP state: copy dialog {{ $copyVisible ? 'open' : 'closed' }} · copy revision {{ $copyRevision }}</native:text>
         </native:column>
 
         <firstlight:confirmation-dialog
@@ -47,6 +61,15 @@
         />
 
         <firstlight:confirmation-dialog
+            ref="packageLabelsDialog"
+            :visible="$packageLabelsVisible"
+            title="Send the referral?"
+            message="The specialist will receive the referral and attached notes."
+            @press="confirmPackageLabels"
+            @dismiss="dismissPackageLabels"
+        />
+
+        <firstlight:confirmation-dialog
             ref="longCopyDialog"
             :visible="$longCopyVisible"
             title="Replace the current multidisciplinary care plan with this newly reviewed version?"
@@ -67,6 +90,17 @@
             cancel-label="Cancel example"
             @press="confirmProgrammatic"
             @dismiss="dismissProgrammatic"
+        />
+
+        <firstlight:confirmation-dialog
+            ref="copyUpdateDialog"
+            :visible="$copyVisible"
+            title="Copy update"
+            :message="$this->copyMessage()"
+            confirm-label="Confirm example"
+            cancel-label="Cancel example"
+            @press="confirmCopyUpdate"
+            @dismiss="dismissCopyUpdate"
         />
     </native:column>
 </native:scroll-view>

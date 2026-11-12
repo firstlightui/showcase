@@ -1,7 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 pb-8 gap-5">
         <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
-        <native:text class="text-sm text-theme-on-surface-variant">Native close increments dismissed once. In the programmatic example, tap Close from PHP: dismissed stays unchanged. Reopen and use native close: dismissed increases. Required notice stays open until Acknowledge.</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">Native close increments dismissed once. Screen readers also hear the account overlay's a11y-hint. In the programmatic example, tap Close from PHP: dismissed stays unchanged, even if iOS reports the cover closing, because the dismiss handler ignores an overlay PHP already closed. Reopen and use native close: dismissed increases. Required notice stays open until Acknowledge.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Default overlay</native:text>
             <native:button ref="showDefault" label="Open account details" variant="primary" @press="showDefault" />
@@ -22,6 +22,7 @@
             ref="defaultModal"
             :visible="$defaultVisible"
             a11y-label="Account details"
+            a11y-hint="Use the native close control to return"
             @dismiss="dismissDefault"
         >
             <native:column class="w-full p-4 gap-3">

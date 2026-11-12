@@ -8,7 +8,7 @@ function firstlightChoiceGroupNodesByLabel(array $tree): array
     $nodes = [];
 
     if (($tree['type'] ?? null) === 'firstlight.choice-group') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
 
     foreach ($tree['children'] ?? [] as $child) {
@@ -28,6 +28,11 @@ it('publishes the complete Choice Group catalogue through the native tree', func
             'Notifications',
             'Triage level',
             'Locked priority',
+            'Locked notifications',
+            'Validated priority',
+            'Unlabelled priority',
+            'Deferred priority',
+            'No available priorities',
             'Priority with error',
             'Disabled priority',
             'Favourites',
@@ -87,4 +92,75 @@ it('publishes an unchanged authoritative choice after rejection', function () {
 
     expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Locked priority']['props']['selected_values'])
         ->toBe(['routine']);
+});
+
+it('clears the single choice to null from PHP', function () {
+    $screen = Native::visit('/components/choice-group');
+
+    $screen->tap('Clear priority')
+        ->assertSet('priority', null)
+        ->assertSee('PHP accepted state: (empty)');
+
+    $priority = firstlightChoiceGroupNodesByLabel($screen->tree())['Priority'];
+
+    expect($priority['props']['selected_values'])->toBe([])
+        ->and($priority['props']['option_callbacks'])->each->not->toBe('0');
+});
+
+it('publishes the unchanged authoritative list after a multiple-mode rejection', function () {
+    $screen = Native::visit('/components/choice-group');
+
+    expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Locked notifications']['props'])->toMatchArray([
+        'multiple' => true,
+        'selected_values' => ['email'],
+    ]);
+
+    $screen->press('rejectNotifications(["email","sms"])')
+        ->assertSet('lockedNotifications', ['email'])
+        ->assertSet('rejectedMultipleAttempts', 1)
+        ->press('rejectNotifications([])')
+        ->assertSet('lockedNotifications', ['email'])
+        ->assertSet('rejectedMultipleAttempts', 2)
+        ->assertSee('Rejected multiple attempts: 2');
+
+    expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Locked notifications']['props']['selected_values'])
+        ->toBe(['email']);
+});
+
+it('auto-binds a live validateOnly failure and clears it on a valid choice', function () {
+    $screen = Native::visit('/components/choice-group');
+
+    expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Validated priority']['props']['error'])->toBe('');
+
+    $screen->press("__syncProperty('validatedPriority', \"critical\")")->assertSet('validatedPriority', 'critical');
+
+    expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Validated priority']['props'])->toMatchArray([
+        'selected_values' => ['critical'],
+        'error' => 'Critical needs a senior clinician; choose Routine or Urgent.',
+    ]);
+
+    $screen->press("__syncProperty('validatedPriority', \"urgent\")")->assertSet('validatedPriority', 'urgent');
+
+    expect(firstlightChoiceGroupNodesByLabel($screen->tree())['Validated priority']['props']['error'])->toBe('');
+});
+
+it('publishes an accessibility-only name, an absent value and an inert empty group', function () {
+    $nodes = firstlightChoiceGroupNodesByLabel(Native::visit('/components/choice-group')->tree());
+
+    expect($nodes['Unlabelled priority']['props'])->toMatchArray([
+        'label' => '',
+        'a11y_label' => 'Unlabelled priority',
+        'selected_values' => ['routine'],
+    ])->and($nodes['Deferred priority']['props'])->toMatchArray([
+        'value_type' => 'string',
+        'selected_values' => ['deferred'],
+        'option_values' => ['routine', 'urgent', 'critical'],
+        'disabled' => false,
+    ])->and($nodes['Deferred priority']['props']['option_callbacks'])->each->not->toBe('0')
+        ->and($nodes['No available priorities']['props'])->toMatchArray([
+            'disabled' => true,
+            'selected_values' => [],
+            'option_values' => [],
+            'option_callbacks' => [],
+        ]);
 });

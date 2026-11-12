@@ -14,6 +14,10 @@ class TextAreaShowcase extends ShowcaseScreen
 
     public string $summary = 'Review medications and arrange follow-up.';
 
+    public string $lazyPlan = '';
+
+    public string $incident = '';
+
     public string $approved = 'Approved clinical wording.';
 
     public int $rejectedAttempts = 0;

@@ -50,6 +50,34 @@
         </native:column>
 
         <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Icon tones and colours</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">Tones colour icons from the theme (danger, warning, success, info, neutral). An explicit hex colour wins over tone. Text, monograms and swipe actions keep their colours.</native:text>
+            <firstlight:list-item headline="Upload failed" supporting="Leading danger tone" leading-icon="error" leading-icon-tone="danger" @press="recordTone('Upload failed')" />
+            <firstlight:list-item headline="Sync delayed" supporting="Leading warning tone" leading-icon="warning" leading-icon-tone="warning" @press="recordTone('Sync delayed')" />
+            <firstlight:list-item headline="Referral sent" supporting="Trailing success tone" leading-icon="mail" leading-icon-tone="neutral" trailing-icon="check_circle" trailing-icon-tone="success" @press="recordTone('Referral sent')" />
+            <firstlight:list-item headline="Custom colours" supporting="Colour overrides tone on both icons" leading-icon="flag" leading-icon-tone="info" leading-icon-color="#7C3AED" trailing-icon="info" trailing-icon-tone="danger" trailing-icon-color="#0F766E" @press="recordTone('Custom colours')" />
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Accessibility label and programmatic copy</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">The clinician row is announced by its a11y-label instead of the combined headline and supporting text. Toggle referral makes PHP republish the referral row's headline and supporting text; no press is emitted.</native:text>
+            <firstlight:list-item
+                headline="Dr A. Chen"
+                supporting="Cardiology · Rm 4"
+                leading-monogram="AC"
+                a11y-label="Doctor Alice Chen, cardiology, room 4"
+                @press="recordClinician"
+            />
+            <firstlight:list-item
+                :headline="$referralAccepted ? 'Referral accepted' : 'Referral pending'"
+                :supporting="$referralAccepted ? 'Cardiology booked for 14 March' : 'Waiting for the cardiology clinic'"
+                leading-icon="mail"
+                @press="recordReferral"
+            />
+            <firstlight:button label="Toggle referral" variant="secondary" @press="toggleReferral" />
+        </native:column>
+
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Swipe actions</native:text>
             <native:text class="text-sm text-theme-on-surface-variant">Swipe either way, then tap an action. Long swipes never execute. Delete records only: the row stays visible. Toggle disabled while a drawer is open to check reconciliation.</native:text>
             <firstlight:button label="Toggle swipe rows" @press="toggleSwipeRows" />
@@ -64,6 +92,19 @@
                     :trailing-actions="[
                         ['method' => 'recordSwipe(\'Delete\',42)', 'label' => 'Delete', 'icon' => 'delete', 'ios' => 'trash', 'role' => 'destructive'],
                         ['method' => 'recordSwipe(\'Flag\',42)', 'label' => 'Flag', 'icon' => 'flag'],
+                    ]"
+                    @press="recordMessage"
+                />
+                <firstlight:list-item
+                    headline="Message with menu"
+                    supporting="Swipe for Archive, or long-press for Reply and Pin"
+                    :disabled="$swipeRowsDisabled"
+                    :trailing-actions="[
+                        ['method' => 'recordSwipe(\'Archive\',55)', 'label' => 'Archive', 'icon' => 'archive', 'ios' => 'archivebox'],
+                    ]"
+                    :context-menu="[
+                        ['method' => 'recordMenu(\'Reply\',55)', 'label' => 'Reply', 'icon' => 'reply', 'ios' => 'arrowshape.turn.up.left'],
+                        ['method' => 'recordMenu(\'Pin\',55)', 'label' => 'Pin', 'icon' => 'push_pin', 'ios' => 'pin'],
                     ]"
                     @press="recordMessage"
                 />
@@ -112,6 +153,31 @@
             />
             <native:text class="text-sm text-theme-on-surface">Recorded menu actions: {{ $menuCount }}</native:text>
             <native:text class="text-sm text-theme-on-surface">Last menu action: {{ $lastMenu }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">List sections</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">Sections with a footer only, with no header or footer, and with a header and footer that PHP renames or removes. Rows only record presses.</native:text>
+            <firstlight:list separator class="w-full h-96 bg-theme-background">
+                <firstlight:list-section footer="Footer-only section: no header is authored.">
+                    <firstlight:list-item headline="Footer-only row" @press="recordSection('Footer-only row')" />
+                </firstlight:list-section>
+                <firstlight:list-section>
+                    <firstlight:list-item headline="Bare section row" supporting="No header or footer" @press="recordSection('Bare section row')" />
+                </firstlight:list-section>
+                @if ($sectionNotesShown)
+                    <firstlight:list-section :header="'Ward round '.$sectionRevision" :footer="'Revision '.$sectionRevision.' published by PHP'">
+                        <firstlight:list-item headline="Ward round row" @press="recordSection('Ward round row')" />
+                    </firstlight:list-section>
+                @else
+                    <firstlight:list-section>
+                        <firstlight:list-item headline="Ward round row" @press="recordSection('Ward round row')" />
+                    </firstlight:list-section>
+                @endif
+            </firstlight:list>
+            <firstlight:button label="Rename section" variant="secondary" @press="renameSection" />
+            <firstlight:button :label="$sectionNotesShown ? 'Remove header and footer' : 'Restore header and footer'" variant="secondary" @press="toggleSectionNotes" />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: section revision {{ $sectionRevision }} · header and footer {{ $sectionNotesShown ? 'shown' : 'removed' }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-3">

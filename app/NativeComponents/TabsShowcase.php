@@ -20,6 +20,10 @@ class TabsShowcase extends ShowcaseScreen
 
     public int $failedDeployments = 2;
 
+    public int $tabChanges = 0;
+
+    public string $liveTab = 'overview';
+
     /** @var array<string, string> */
     public array $simpleTabs = [
         'overview' => 'Overview',
@@ -56,6 +60,19 @@ class TabsShowcase extends ShowcaseScreen
         ];
     }
 
+    /** An optional {tab} route segment opens a section directly; unknown values fall back to Overview. */
+    public function mount(): void
+    {
+        if (! in_array($this->tab, ['overview', 'sites', 'deploys', 'manage'], true)) {
+            $this->tab = 'overview';
+        }
+    }
+
+    public function openDeploymentsByLink(): void
+    {
+        $this->navigate('/components/tabs/deploys');
+    }
+
     public function showDeployments(): void
     {
         $this->tab = 'deploys';
@@ -69,6 +86,12 @@ class TabsShowcase extends ShowcaseScreen
     public function clearFailures(): void
     {
         $this->failedDeployments = 0;
+    }
+
+    /** Counts user selections on Server sections; Show Deployments does not run this hook. */
+    public function updatedTab(): void
+    {
+        $this->tabChanges++;
     }
 
     public function selectGuardedTab(string $tab): void

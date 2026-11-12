@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
+use Native\Mobile\Attributes\Poll;
 
 class CodeEditorShowcase extends ShowcaseScreen
 {
@@ -22,6 +23,33 @@ class CodeEditorShowcase extends ShowcaseScreen
     public string $log = '';
 
     public int $logLines = 0;
+
+    public string $scratch = '';
+
+    public string $releaseNotes = '';
+
+    public string $focusedDraft = "{\n  \"status\": \"draft\"\n}";
+
+    public ?int $focusedReplaceAt = null;
+
+    public int $focusedReplacements = 0;
+
+    public function scheduleFocusedReplacement(): void
+    {
+        $this->focusedReplaceAt = time() + 3;
+    }
+
+    #[Poll(1000)]
+    public function applyFocusedReplacement(): void
+    {
+        if ($this->focusedReplaceAt === null || time() < $this->focusedReplaceAt) {
+            return;
+        }
+
+        $this->focusedReplaceAt = null;
+        $this->focusedReplacements++;
+        $this->focusedDraft = "{\n  \"status\": \"published\",\n  \"revision\": {$this->focusedReplacements}\n}";
+    }
 
     public function payloadError(): string
     {

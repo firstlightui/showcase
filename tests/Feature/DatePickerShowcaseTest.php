@@ -7,7 +7,7 @@ function firstlightDatePickersByLabel(array $tree): array
 {
     $nodes = [];
     if (($tree['type'] ?? null) === 'firstlight.date-picker') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightDatePickersByLabel($child)];
@@ -30,6 +30,9 @@ it('publishes the complete Date Picker catalogue through the native wire tree', 
             'Discharge date',
             'Berlin clinic date',
             'Disabled date',
+            'Inherited locale date',
+            'Follow-up date',
+            'Open picker',
             'Server-approved date',
             'Programmatic date',
         ])
@@ -94,4 +97,52 @@ it('updates bound dates rejects one proposal and applies programmatic publicatio
         ->and($nodes['Discharge date']['props']['error'])->toBe('Choose a discharge date.')
         ->and($nodes['Berlin clinic date']['props']['value'])->toBe('2026-12-25')
         ->and($nodes['Programmatic date']['props']['has_value'])->toBeFalse();
+});
+
+it('inherits the application locale and timezone and names a label-less field by a11y-label', function () {
+    $screen = Native::visit('/components/date-picker');
+    $nodes = firstlightDatePickersByLabel($screen->tree());
+
+    expect($nodes['Inherited locale date']['props'])->toMatchArray([
+        'value' => '2026-09-03',
+        'locale' => app()->getLocale(),
+        'timezone' => config('app.timezone'),
+    ])->and($nodes['Follow-up date']['props'])->toMatchArray([
+        'label' => '',
+        'a11y_label' => 'Follow-up date',
+        'a11y_hint' => 'Choose when to review the patient again',
+        'has_value' => false,
+    ]);
+
+    $screen->select('followUpDate', '2026-09-17')
+        ->assertSee('follow-up: 2026-09-17');
+});
+
+it('publishes scheduled value bounds and disabled changes for an open picker', function () {
+    $screen = Native::visit('/components/date-picker');
+    expect(firstlightDatePickersByLabel($screen->tree())['Open picker']['props'])->toMatchArray([
+        'value' => '2026-09-10', 'min' => '2026-09-01', 'max' => '2026-09-30', 'disabled' => false,
+    ]);
+
+    $screen->tap('Change value')
+        ->assertSee('pending: value')
+        ->firePoll('applyOpenChange')
+        ->assertSet('openDate', '2026-09-10')
+        ->set('pendingOpenChangeAt', time() - 1)
+        ->firePoll('applyOpenChange')
+        ->assertSee('last change: value');
+    expect(firstlightDatePickersByLabel($screen->tree())['Open picker']['props']['value'])->toBe('2026-09-20');
+
+    $screen->tap('Change bounds')->set('pendingOpenChangeAt', time() - 1)->firePoll('applyOpenChange');
+    expect(firstlightDatePickersByLabel($screen->tree())['Open picker']['props'])->toMatchArray([
+        'min' => '2026-08-15', 'max' => '2026-10-15',
+    ]);
+
+    $screen->tap('Disable')->set('pendingOpenChangeAt', time() - 1)->firePoll('applyOpenChange');
+    expect(firstlightDatePickersByLabel($screen->tree())['Open picker']['props']['disabled'])->toBeTrue();
+
+    $screen->tap('Reset open picker')->assertSee('last change: (none)');
+    expect(firstlightDatePickersByLabel($screen->tree())['Open picker']['props'])->toMatchArray([
+        'value' => '2026-09-10', 'min' => '2026-09-01', 'max' => '2026-09-30', 'disabled' => false,
+    ]);
 });

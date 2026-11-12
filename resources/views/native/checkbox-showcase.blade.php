@@ -1,7 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-8">
         <native:text class="text-sm text-theme-on-surface">On-device checks: toggle enabled checkboxes and compare PHP state. Disabled values stay fixed. Rejected agreement stays false while attempts increase. Programmatic buttons set true then false. The error is a static presentation example; use Validation to test real rules.</native:text>
-        <native:text class="text-sm text-theme-on-surface">PHP accepted state: unchecked {{ $unchecked ? 'true' : 'false' }}; required {{ $checkedRequired ? 'true' : 'false' }}; helper {{ $helper ? 'true' : 'false' }}; error {{ $error ? 'true' : 'false' }}; long label {{ $longLabel ? 'true' : 'false' }}; programmatic {{ $programmatic ? 'true' : 'false' }}; rejected {{ $rejected ? 'true' : 'false' }}; rejected attempts {{ $rejectedAttempts }}</native:text>
+        <native:text class="text-sm text-theme-on-surface">PHP accepted state: unchecked {{ $unchecked ? 'true' : 'false' }}; required {{ $checkedRequired ? 'true' : 'false' }}; helper {{ $helper ? 'true' : 'false' }}; error {{ $error ? 'true' : 'false' }}; long label {{ $longLabel ? 'true' : 'false' }}; programmatic {{ $programmatic ? 'true' : 'false' }}; rejected {{ $rejected ? 'true' : 'false' }}; rejected attempts {{ $rejectedAttempts }}; unlabelled {{ $unlabelledConsent ? 'true' : 'false' }}</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Checked state</native:text>
             <firstlight:checkbox ref="unchecked" native:model="unchecked" label="Unchecked" />
@@ -51,6 +51,16 @@
                 <native:button ref="acceptProgrammaticAgreement" label="Accept programmatic agreement" variant="primary" @press="acceptProgrammaticAgreement" />
                 <native:button ref="resetProgrammaticAgreement" label="Reset programmatic agreement" variant="secondary" @press="resetProgrammaticAgreement" />
             </native:row>
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Named only by a11y-label</native:text>
+            <native:text class="text-sm text-theme-on-surface">This checkbox has no visible label. VoiceOver and TalkBack read its a11y-label, Share records with the referring clinician.</native:text>
+            <firstlight:checkbox
+                ref="unlabelledConsent"
+                native:model="unlabelledConsent"
+                a11y-label="Share records with the referring clinician"
+            />
         </native:column>
 
         <native:column class="w-full gap-3 pb-6">

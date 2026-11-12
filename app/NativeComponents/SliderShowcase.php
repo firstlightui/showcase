@@ -20,6 +20,8 @@ class SliderShowcase extends ShowcaseScreen
 
     public float $programmaticDose = 2.0;
 
+    public float $alertVolume = 3.0;
+
     public function rejectDose(float $value): void
     {
         $this->rejectedAttempts++;

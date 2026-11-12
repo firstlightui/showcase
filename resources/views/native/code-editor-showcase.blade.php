@@ -83,6 +83,48 @@
             </native:row>
         </native:column>
 
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Plain text and lazy model</native:text>
+            <firstlight:code-editor
+                ref="scratch"
+                native:model.lazy="scratch"
+                language="plain"
+                label="Plain scratchpad"
+                helper="Plain text keeps indentation only. Publishes when focus leaves the editor."
+                :min-lines="3"
+                :max-lines="6"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $scratch ?: '(empty)' }} (lazy)</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Accessibility label only</native:text>
+            <native:text class="text-sm text-theme-on-surface">No visible label: VoiceOver and TalkBack name this editor Release notes.</native:text>
+            <firstlight:code-editor
+                native:model="releaseNotes"
+                a11y-label="Release notes"
+                a11y-hint="Plain text, one change per line"
+                :min-lines="3"
+                :max-lines="6"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $releaseNotes ?: '(empty)' }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Publication while focused</native:text>
+            <native:text class="text-sm text-theme-on-surface">Tap Schedule replacement, then focus Focused draft and keep typing. About 3 s later PHP publishes a new revision: your text, cursor, and undo history stay in place while focused, and the published text appears after you leave the editor.</native:text>
+            <firstlight:code-editor
+                ref="focusedDraft"
+                :value="$focusedDraft"
+                language="json"
+                label="Focused draft"
+                :min-lines="4"
+                :max-lines="6"
+            />
+            <native:text class="text-sm text-theme-on-surface">Replacement {{ $focusedReplaceAt === null ? 'idle' : 'scheduled' }}; PHP replacements: {{ $focusedReplacements }}</native:text>
+            <native:button label="Schedule replacement" variant="secondary" @press="scheduleFocusedReplacement" />
+        </native:column>
+
         <native:column class="w-full gap-2 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Live log (follow)</native:text>
             <firstlight:code-editor

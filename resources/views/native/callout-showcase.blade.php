@@ -24,6 +24,22 @@
             <native:text class="text-sm text-theme-on-surface-variant">{{ $lastAction }} · {{ $actionCount }} presses</native:text>
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Programmatic updates</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP republishes the same callout with a new message and tone: info, then success, then danger. Remove callout omits it from the next tree; there is no close button or dismissal event.</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">PHP accepted state: sync {{ $syncStatus }} · callout {{ $syncNoticeShown ? 'shown' : 'removed' }}</native:text>
+            @if ($syncNoticeShown)
+                <firstlight:callout
+                    :message="$this->syncNotice()['message']"
+                    :tone="$this->syncNotice()['tone']"
+                />
+            @endif
+            <firstlight:button label="Next sync status" variant="secondary" @press="advanceSyncStatus" />
+            @if ($syncNoticeShown)
+                <firstlight:button label="Remove callout" variant="secondary" @press="removeSyncNotice" />
+            @endif
+        </native:column>
+
         <native:column class="w-full gap-3 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Long copy and text scaling</native:text>
             <firstlight:callout

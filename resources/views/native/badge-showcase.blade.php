@@ -19,6 +19,36 @@
             <firstlight:badge label="Alert" tone="danger" />
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Programmatic updates</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP replaces the count, label and tone of the same badges. Add 49 reaches 99+ on the third press; Clear hides the count badge. No callback is produced.</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: unread {{ $unreadCount }} · status {{ $prescriptionReady ? 'Ready' : 'Wait' }}</native:text>
+            <firstlight:badge
+                :count="$unreadCount"
+                tone="danger"
+                a11y-label="{{ $unreadCount }} unread messages"
+            />
+            <firstlight:badge
+                :label="$prescriptionReady ? 'Ready' : 'Wait'"
+                :tone="$prescriptionReady ? 'success' : 'warning'"
+            />
+            <firstlight:button label="Add 49 unread" variant="secondary" @press="addUnread" />
+            <firstlight:button label="Clear unread" variant="secondary" @press="clearUnread" />
+            <firstlight:button label="Toggle status label" variant="secondary" @press="togglePrescription" />
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Warning colours after Theme::merge()</native:text>
+            <native:text class="text-sm text-theme-on-surface">Apply merges a darker warning pair into the app theme and republishes this screen, so the warning badge refreshes. The merge is app-wide until you restore the default pair.</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: warning colours {{ $customWarning ? 'custom' : 'default' }}</native:text>
+            <firstlight:badge label="Pending" tone="warning" />
+            @if ($customWarning)
+                <firstlight:button label="Restore default warning colours" variant="secondary" @press="restoreWarning" />
+            @else
+                <firstlight:button label="Apply custom warning colours" variant="secondary" @press="applyCustomWarning" />
+            @endif
+        </native:column>
+
         <native:column class="w-full gap-3 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Accessibility override</native:text>
             <firstlight:badge

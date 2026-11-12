@@ -21,6 +21,19 @@
             />
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Programmatic replacement</native:text>
+            <native:text class="text-sm text-theme-on-surface">PHP republishes the label, tone and icon of the same status label: drafted (text only), submitted, paid, then rejected. No callback is produced.</native:text>
+            <firstlight:status-label
+                :label="$this->claimStatus()['label']"
+                :tone="$this->claimStatus()['tone']"
+                :icon="$this->claimStatus()['icon']"
+                :icon-ios="$this->claimStatus()['ios']"
+            />
+            <firstlight:button label="Next claim status" variant="secondary" @press="advanceClaim" />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $this->claimStatus()['label'] }} · tone {{ $this->claimStatus()['tone'] }}</native:text>
+        </native:column>
+
         <native:column class="w-full gap-3 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Accessibility override</native:text>
             <firstlight:status-label

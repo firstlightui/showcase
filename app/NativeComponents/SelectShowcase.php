@@ -20,6 +20,21 @@ class SelectShowcase extends ShowcaseScreen
 
     public int $rejectedAttempts = 0;
 
+    public ?string $ward = null;
+
+    public int $acceptedWardChanges = 0;
+
+    public ?string $clinic = null;
+
+    public ?string $site = 'north';
+
+    /** @var array<string, string> */
+    public array $wardOptions = [
+        'ward-1' => 'Ward 1',
+        'ward-2' => 'Ward 2',
+        'ward-3' => 'Ward 3',
+    ];
+
     /** @var array<string, string> */
     public array $priorityOptions = [
         'routine' => 'Routine',
@@ -55,6 +70,22 @@ class SelectShowcase extends ShowcaseScreen
     public function rejectQueue(string $value): void
     {
         $this->rejectedAttempts++;
+    }
+
+    public function acceptWard(string $value): void
+    {
+        $this->ward = $value;
+        $this->acceptedWardChanges++;
+    }
+
+    public function setWardFromPhp(): void
+    {
+        $this->ward = 'ward-3';
+    }
+
+    public function clearWardFromPhp(): void
+    {
+        $this->ward = null;
     }
 
     public function navTitle(): string

@@ -1,6 +1,7 @@
 <?php
 
 use Native\Mobile\Testing\Native;
+use Native\Mobile\Testing\TestableComponent;
 
 /** @return list<array<string, mixed>> */
 function listShowcaseNodes(array $tree): array
@@ -36,6 +37,7 @@ it('publishes grouped list fixtures through the native wire tree', function () {
         ->and($lists[0]['props']['separator'] ?? null)->toBeTrue()
         ->and($lists[0]['props']['on_refresh'] ?? null)->toBeInt()
         ->and($lists[0]['props']['on_end_reached'] ?? null)->toBeInt()
+        ->and($lists[0]['props']['shows_indicators'] ?? null)->toBeTrue()
         ->and($items)->toHaveCount(11)
         ->and(array_column(array_column(array_slice($items, 0, 3), 'props'), 'headline'))->toBe([
             'Account',
@@ -124,4 +126,23 @@ it('lets the tester switch list presentation and restore an empty preview', func
     $screen->assertSee('Empty list')->tap('Reset sample data');
     expect(listShowcaseItemNodes($screen->tree()))->toHaveCount(11);
     $screen->dismissSheet('testOptions')->assertSet('testOptionsVisible', false);
+});
+
+it('binds the documented @endReached spelling and round-trips it to the next page', function () {
+    expect(file_get_contents(resource_path('views/native/list-showcase.blade.php')))
+        ->toContain('@endReached="loadMore"')
+        ->not->toContain('on-end-reached=');
+
+    $screen = Native::visit('/components/list')
+        ->fireEvent('sampleList', TestableComponent::EVENT_PRESS, refKeys: ['on_end_reached']);
+    expect(array_column($screen->get('listItems'), 'id'))->toBe(range(1001, 1016));
+});
+
+it('toggles shows-indicators on the list from PHP', function () {
+    $screen = Native::visit('/components/list')->tap('Test options')
+        ->select('showsIndicators', false);
+    expect(listShowcaseNodes($screen->tree())[0]['props']['shows_indicators'])->toBeFalse();
+
+    $screen->select('showsIndicators', true);
+    expect(listShowcaseNodes($screen->tree())[0]['props']['shows_indicators'])->toBeTrue();
 });

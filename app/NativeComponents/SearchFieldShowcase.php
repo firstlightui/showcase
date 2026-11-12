@@ -16,6 +16,17 @@ class SearchFieldShowcase extends ShowcaseScreen
 
     public int $submitCount = 0;
 
+    public string $lazyQuery = '';
+
+    public string $approvedQuery = 'Ward 4';
+
+    public int $rejectedQueries = 0;
+
+    public function rejectQuery(string $query): void
+    {
+        $this->rejectedQueries++;
+    }
+
     public function submitQuery(string $query = ''): void
     {
         $this->lastSubmitted = $query;

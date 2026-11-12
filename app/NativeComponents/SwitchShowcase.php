@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use Illuminate\View\View;
+
 class SwitchShowcase extends ShowcaseScreen
 {
     public bool $notificationsOff = false;
@@ -25,6 +26,10 @@ class SwitchShowcase extends ShowcaseScreen
 
     public bool $programmatic = false;
 
+    public bool $unlabelledReminders = false;
+
+    public bool $shareRecords = true;
+
     public function rejectSwitch(bool $value): void
     {
         $this->rejectedAttempts++;
@@ -38,6 +43,15 @@ class SwitchShowcase extends ShowcaseScreen
     public function resetProgrammaticSwitch(): void
     {
         $this->programmatic = false;
+    }
+
+    public function updatedShareRecords(): void
+    {
+        $this->validateOnly(
+            'shareRecords',
+            ['shareRecords' => 'accepted'],
+            ['shareRecords.accepted' => 'Record sharing must stay on for this referral.'],
+        );
     }
 
     public function navTitle(): string

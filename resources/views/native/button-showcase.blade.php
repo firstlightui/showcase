@@ -29,6 +29,34 @@
             <firstlight:button label="Saving changes" loading a11y-hint="Saving is in progress" />
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">PHP-owned transition</native:text>
+            <native:text class="text-sm text-theme-on-surface">Send reminder publishes loading at once; PHP publishes the result about 2 seconds later. Lock sending publishes disabled on the same button. Neither loading nor disabled may emit a press.</native:text>
+            <firstlight:button
+                label="Send reminder"
+                icon="mail"
+                :loading="$sending"
+                :disabled="$sendingLocked"
+                @press="sendReminder"
+            />
+            <firstlight:button
+                :label="$sendingLocked ? 'Unlock sending' : 'Lock sending'"
+                variant="secondary"
+                @press="toggleSendingLock"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $sendOutcome }} · {{ $sentCount }} sent · {{ $sending ? 'loading' : 'idle' }} · {{ $sendingLocked ? 'disabled' : 'enabled' }}</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Accessibility label</native:text>
+            <native:text class="text-sm text-theme-on-surface">The visible text is Pay; screen readers hear Pay invoice 1042, 45 dollars instead.</native:text>
+            <firstlight:button
+                label="Pay"
+                a11y-label="Pay invoice 1042, 45 dollars"
+                @press="recordPress"
+            />
+        </native:column>
+
         <native:column class="w-full gap-3 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Interaction</native:text>
             <firstlight:button variant="primary" @press="recordPress">Record press</firstlight:button>

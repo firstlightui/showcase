@@ -26,6 +26,22 @@ class SegmentedShowcase extends ShowcaseScreen
 
     public string $longSelection = 'clinical-review';
 
+    public int $queueChanges = 0;
+
+    public string $view = 'list';
+
+    public string $unlabelledQueue = 'mine';
+
+    public string $absentQueue = 'archived';
+
+    public string $validatedQueue = 'mine';
+
+    /** @var array<string, string> */
+    public array $viewOptions = [
+        'list' => 'List',
+        'board' => 'Board',
+    ];
+
     /** @var list<string> */
     public array $simpleOptions = ['Mine', 'All'];
 
@@ -62,9 +78,29 @@ class SegmentedShowcase extends ShowcaseScreen
         $this->priority = 10;
     }
 
+    public function resetView(): void
+    {
+        $this->view = 'list';
+    }
+
     public function rejectQueue(string $queue): void
     {
         $this->rejectedQueueAttempts++;
+    }
+
+    /** Counts user selections on the accepting Queue controls; programmatic resets do not run this hook. */
+    public function updatedQueue(): void
+    {
+        $this->queueChanges++;
+    }
+
+    public function updatedValidatedQueue(): void
+    {
+        $this->validateOnly(
+            'validatedQueue',
+            ['validatedQueue' => 'in:mine'],
+            ['validatedQueue.in' => 'You can only work the Mine queue today.'],
+        );
     }
 
     public function navTitle(): string

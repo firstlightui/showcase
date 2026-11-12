@@ -21,6 +21,21 @@ class PillGroupShowcase extends ShowcaseScreen
 
     public ?int $priority = 10;
 
+    /** @var list<string> */
+    public array $lockedQueues = ['mine'];
+
+    public int $rejectedMultipleAttempts = 0;
+
+    /** @var list<string> */
+    public array $requiredQueues = ['mine'];
+
+    public ?string $absentQueue = 'archived';
+
+    public ?string $largeQueue = 'mine';
+
+    /** @var list<string> */
+    public array $emptyOptions = [];
+
     public ?string $mailFilter = 'all';
 
     /** @var list<string> */
@@ -69,6 +84,26 @@ class PillGroupShowcase extends ShowcaseScreen
     public function rejectQueue(?string $queue): void
     {
         $this->rejectedAttempts++;
+    }
+
+    /** @param list<string> $queues */
+    public function rejectQueues(array $queues): void
+    {
+        $this->rejectedMultipleAttempts++;
+    }
+
+    public function updatedRequiredQueues(): void
+    {
+        $this->validateOnly(
+            'requiredQueues',
+            ['requiredQueues' => 'required'],
+            ['requiredQueues.required' => 'Choose at least one queue.'],
+        );
+    }
+
+    public function clearLargeQueue(): void
+    {
+        $this->largeQueue = null;
     }
 
     public function resetSelections(): void

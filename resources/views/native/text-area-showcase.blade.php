@@ -1,6 +1,6 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-8">
-        <native:text class="text-sm text-theme-on-surface">On-device checks: enter multiple lines; live notes update PHP while typing, handover on blur, summary after 500 ms quiet. Read-only permits copy, disabled cannot edit. Rejected edits keep approved wording and count attempts. Replace/reset must update the editor and PHP.</native:text>
+        <native:text class="text-sm text-theme-on-surface">On-device checks: enter multiple lines; live notes update PHP while typing, handover on blur, summary after 500 ms quiet, lazy care plan on leaving focus. The label-less editor is announced as Incident description. Read-only permits copy, disabled cannot edit. Rejected edits keep approved wording and count attempts. Replace/reset must update the editor and PHP.</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Live multiline notes</native:text>
             <firstlight:text-area
@@ -40,6 +40,29 @@
                 autocapitalize="sentences"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $summary }} (debounced)</native:text>
+            <firstlight:text-area
+                ref="lazyPlan"
+                native:model.lazy="lazyPlan"
+                label="Lazy care plan"
+                helper="Lazy model: publishes when focus leaves the editor."
+                :min-lines="3"
+                :max-lines="5"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $lazyPlan ?: '(empty)' }} (lazy)</native:text>
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Accessibility label only</native:text>
+            <native:text class="text-sm text-theme-on-surface">No visible label: VoiceOver and TalkBack name this editor Incident description.</native:text>
+            <firstlight:text-area
+                native:model="incident"
+                a11y-label="Incident description"
+                a11y-hint="Describe what happened and when"
+                placeholder="What happened?"
+                :min-lines="3"
+                :max-lines="5"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $incident ?: '(empty)' }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">

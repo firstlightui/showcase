@@ -26,6 +26,8 @@ class CheckboxShowcase extends ShowcaseScreen
 
     public bool $programmatic = false;
 
+    public bool $unlabelledConsent = false;
+
     public function rejectCheckbox(bool $value): void
     {
         $this->rejectedAttempts++;

@@ -4,11 +4,15 @@ namespace App\NativeComponents;
 
 use FirstlightUI\Media\MediaStorage;
 use FirstlightUI\Media\MediaValue;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class MediaShowcase extends ShowcaseScreen
 {
+    /** A 48 × 48 solid PNG that PHP publishes without a native pick. */
+    private const SAMPLE_PNG = 'iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAOklEQVR42u3OQQ0AAAgEoGtkNOsaxxbOBxsBSPW8EiEhISEhISEhISEhISEhISEhISEhISEhISGhOwszfybEAoDoTgAAAABJRU5ErkJggg==';
+
     public ?MediaValue $avatar = null;
 
     public ?MediaValue $optionalCrop = null;
@@ -18,6 +22,12 @@ class MediaShowcase extends ShowcaseScreen
     public ?MediaValue $uncropped = null;
 
     public ?MediaValue $requiredCrop = null;
+
+    public ?MediaValue $sample = null;
+
+    public ?MediaValue $archiveScan = null;
+
+    public int $rejectedScans = 0;
 
     public string $lastOutcome = 'No validation yet';
 
@@ -81,6 +91,58 @@ class MediaShowcase extends ShowcaseScreen
         $this->requiredCrop = null;
     }
 
+    public function publishSample(): void
+    {
+        $bytes = base64_decode(self::SAMPLE_PNG);
+        $path = 'showcase/sample-'.Str::uuid().'.png';
+        Storage::disk('mobile_public')->put($path, $bytes);
+        $previous = $this->sample;
+        $this->sample = new MediaValue('mobile_public', $path, 'image/png', strlen($bytes), 48, 48);
+        MediaStorage::delete($previous);
+        $this->lastOutcome = 'Published sample from PHP';
+    }
+
+    public function clearSampleFromPhp(): void
+    {
+        MediaStorage::delete($this->sample);
+        $this->sample = null;
+        $this->lastOutcome = 'Cleared sample from PHP';
+    }
+
+    public function sampleChosen(string $tempPath): void
+    {
+        $this->replaceMedia('sample', $tempPath);
+    }
+
+    public function sampleCleared(): void
+    {
+        MediaStorage::delete($this->sample);
+        $this->sample = null;
+    }
+
+    public function rejectScan(string $tempPath = ''): void
+    {
+        $this->rejectedScans++;
+        $this->lastOutcome = 'Rejected a change to the approved copy';
+    }
+
+    public function archiveScanChosen(string $tempPath): void
+    {
+        $previous = $this->archiveScan;
+        $extension = pathinfo($tempPath, PATHINFO_EXTENSION);
+        $this->archiveScan = MediaStorage::commit(
+            $tempPath, 'local', 'showcase-archive', filename: Str::uuid().($extension === '' ? '' : '.'.$extension),
+        );
+        MediaStorage::delete($previous);
+        $this->lastOutcome = 'Committed archiveScan to the local disk';
+    }
+
+    public function archiveScanCleared(): void
+    {
+        MediaStorage::delete($this->archiveScan);
+        $this->archiveScan = null;
+    }
+
     public function validateMedia(): void
     {
         $this->lastOutcome = 'Validation requested';
@@ -90,7 +152,7 @@ class MediaShowcase extends ShowcaseScreen
 
     public function clearDemoMedia(): void
     {
-        foreach (['avatar', 'optionalCrop', 'document', 'uncropped', 'requiredCrop'] as $field) {
+        foreach (['avatar', 'optionalCrop', 'document', 'uncropped', 'requiredCrop', 'sample', 'archiveScan'] as $field) {
             MediaStorage::delete($this->{$field});
             $this->{$field} = null;
         }

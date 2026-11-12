@@ -22,6 +22,16 @@ class StepperShowcase extends ShowcaseScreen
 
     public int $programmaticQuantity = 2;
 
+    public int $quantityChanges = 0;
+
+    public int $guestCount = 2;
+
+    /** Counts accepted Quantity proposals; programmatic publications do not run this hook. */
+    public function updatedQuantity(): void
+    {
+        $this->quantityChanges++;
+    }
+
     public function rejectQuantity(int $value): void
     {
         $this->rejectedAttempts++;

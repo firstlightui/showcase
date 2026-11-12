@@ -7,7 +7,7 @@ function firstlightTimePickersByLabel(array $tree): array
 {
     $nodes = [];
     if (($tree['type'] ?? null) === 'firstlight.time-picker') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightTimePickersByLabel($child)];
@@ -28,7 +28,10 @@ it('publishes the complete Time Picker catalogue through the native wire tree', 
             'Review time',
             'Arrival time',
             'Berlin clinic time',
+            'New York clinic time',
             'Disabled time',
+            'Medication time',
+            'Open time picker',
             'Server-approved time',
             'Programmatic time',
         ])
@@ -88,4 +91,50 @@ it('updates bound times rejects one proposal and applies programmatic publicatio
         ->and($nodes['Arrival time']['props']['error'])->toBe('Choose an arrival time.')
         ->and($nodes['Berlin clinic time']['props']['value'])->toBe('19:45')
         ->and($nodes['Programmatic time']['props']['has_value'])->toBeFalse();
+});
+
+it('publishes a 12-hour locale beside 24-hour German and a field named only by a11y-label', function () {
+    $screen = Native::visit('/components/time-picker');
+    $nodes = firstlightTimePickersByLabel($screen->tree());
+
+    expect($nodes['New York clinic time']['props'])->toMatchArray([
+        'value' => '18:30',
+        'locale' => 'en-US',
+        'timezone' => 'America/New_York',
+    ])->and($nodes['Berlin clinic time']['props']['locale'])->toBe('de-DE')
+        ->and($nodes['Medication time']['props'])->toMatchArray([
+            'label' => '',
+            'a11y_label' => 'Medication time',
+            'a11y_hint' => 'Choose when the next dose is due',
+            'has_value' => false,
+        ]);
+
+    $screen->select('newYorkTime', '07:05')
+        ->assertSee('PHP accepted state: 07:05 (12-hour display)')
+        ->select('medicationTime', '22:00')
+        ->assertSet('medicationTime', '22:00');
+});
+
+it('publishes scheduled value and disabled changes for an open picker', function () {
+    $screen = Native::visit('/components/time-picker');
+    expect(firstlightTimePickersByLabel($screen->tree())['Open time picker']['props'])->toMatchArray([
+        'value' => '08:00', 'disabled' => false,
+    ]);
+
+    $screen->tap('Change time')
+        ->assertSee('pending: value')
+        ->firePoll('applyOpenChange')
+        ->assertSet('openTime', '08:00')
+        ->set('pendingOpenChangeAt', time() - 1)
+        ->firePoll('applyOpenChange')
+        ->assertSee('last change: value');
+    expect(firstlightTimePickersByLabel($screen->tree())['Open time picker']['props']['value'])->toBe('12:45');
+
+    $screen->tap('Disable')->set('pendingOpenChangeAt', time() - 1)->firePoll('applyOpenChange');
+    expect(firstlightTimePickersByLabel($screen->tree())['Open time picker']['props']['disabled'])->toBeTrue();
+
+    $screen->tap('Reset open picker')->assertSee('last change: (none)');
+    expect(firstlightTimePickersByLabel($screen->tree())['Open time picker']['props'])->toMatchArray([
+        'value' => '08:00', 'disabled' => false,
+    ]);
 });

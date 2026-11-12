@@ -42,6 +42,27 @@
             </native:row>
         </native:column>
 
+        <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">PHP-owned transition</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">Sync inbox publishes loading at once; PHP publishes the result about 2 seconds later. The lock button publishes disabled on the same icon button. Neither state may emit a press.</native:text>
+            <native:row class="w-full gap-3">
+                <firstlight:icon-button
+                    icon="inbox"
+                    a11y-label="Sync inbox"
+                    :loading="$syncing"
+                    :disabled="$syncLocked"
+                    @press="syncInbox"
+                />
+                <firstlight:icon-button
+                    icon="lock"
+                    variant="secondary"
+                    :a11y-label="$syncLocked ? 'Unlock syncing' : 'Lock syncing'"
+                    @press="toggleSyncLock"
+                />
+            </native:row>
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $syncOutcome }} · {{ $syncCount }} synced · {{ $syncing ? 'loading' : 'idle' }} · {{ $syncLocked ? 'disabled' : 'enabled' }}</native:text>
+        </native:column>
+
         <native:column class="w-full gap-3 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Interaction</native:text>
             <firstlight:icon-button icon="plus" variant="primary" a11y-label="Record press" @press="recordPress" />

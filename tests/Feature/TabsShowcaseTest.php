@@ -27,6 +27,7 @@ it('publishes every documented Tabs state through the native wire tree', functio
         ->and(array_keys($nodes))->toBe([
             'Server sections',
             'Guarded sections',
+            'Live server sections',
             'No initial section',
             'No available sections',
             'Disabled sections',
@@ -79,4 +80,47 @@ it('keeps the accepted tab when the server rejects a change', function () {
     expect(firstlightTabsNodesByLabel($screen->tree())['Guarded sections']['props']['selected_value'])->toBe('overview');
 
     $screen->select('selectGuardedTab', 'sites')->assertSet('guardedTab', 'sites')->assertSet('guardedAttempts', 2);
+});
+
+it('lets a11y-label override label and syncs native:model.live', function () {
+    $screen = Native::visit('/components/tabs');
+    $live = firstlightTabsNodesByLabel($screen->tree())['Live server sections'];
+
+    expect($live['props'])->toMatchArray([
+        'a11y_label' => 'Live server sections',
+        'selected_value' => 'overview',
+        'tab_values' => ['overview', 'sites', 'deploys', 'manage'],
+    ])->and($live['props']['on_change'])->toBeInt()
+        ->and(array_keys(firstlightTabsNodesByLabel($screen->tree())))->not->toContain('Live sections');
+
+    $screen->select('liveTab', 'sites')->assertSet('liveTab', 'sites')->assertSee('live sites');
+
+    expect(firstlightTabsNodesByLabel($screen->tree())['Live server sections']['props']['selected_value'])->toBe('sites');
+});
+
+it('counts accepted tab selections but not programmatic selection', function () {
+    Native::visit('/components/tabs')
+        ->assertSee('tab changes 0')
+        ->select('tab', 'sites')
+        ->select('tab', 'overview')
+        ->assertSet('tabChanges', 2)
+        ->press('showDeployments')
+        ->assertSet('tab', 'deploys')
+        ->assertSet('tabChanges', 2)
+        ->assertSee('tab changes 2');
+});
+
+it('opens a section from the optional route segment and ignores unknown values', function () {
+    $nodes = fn ($screen) => firstlightTabsNodesByLabel($screen->tree());
+
+    $deploys = Native::visit('/components/tabs/deploys');
+    expect($nodes($deploys)['Server sections']['props']['selected_value'])->toBe('deploys');
+    $deploys->assertSee('Deployments pane')->assertDontSee('Overview pane');
+
+    $unknown = Native::visit('/components/tabs/billing');
+    expect($nodes($unknown)['Server sections']['props']['selected_value'])->toBe('overview');
+
+    Native::visit('/components/tabs')
+        ->press('openDeploymentsByLink')
+        ->assertNavigatedTo('/components/tabs/deploys');
 });

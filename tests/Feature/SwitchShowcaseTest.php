@@ -8,7 +8,7 @@ function firstlightSwitchNodesByLabel(array $tree): array
     $nodes = [];
 
     if (($tree['type'] ?? null) === 'firstlight.switch') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
 
     foreach ($tree['children'] ?? [] as $child) {
@@ -38,6 +38,8 @@ it('publishes the complete Switch catalogue through the native wire tree', funct
             'Validation error',
             'Rejected setting',
             'Programmatic setting',
+            'Appointment reminders',
+            'Share records',
             'A considerably longer setting label that wraps naturally',
         ])
         ->and(firstlightSwitchPrimitiveProps($nodes['Notifications off']))->toBe([
@@ -142,4 +144,38 @@ it('dispatches accepted, rejected, disabled, and programmatic Switch changes thr
         ->assertSet('programmatic', true)
         ->call('resetProgrammaticSwitch')
         ->assertSet('programmatic', false);
+});
+
+it('publishes a Switch named only by a11y-label with an a11y-hint', function () {
+    $screen = Native::visit('/components/switch');
+    $node = firstlightSwitchNodesByLabel($screen->tree())['Appointment reminders'];
+
+    expect(firstlightSwitchPrimitiveProps($node))->toBe([
+        'a11y_label' => 'Appointment reminders',
+        'a11y_hint' => 'Sends a reminder the day before each appointment',
+        'value' => false,
+        'label' => '',
+        'helper' => '',
+        'error' => '',
+        'disabled' => false,
+    ]);
+
+    $screen->toggle('unlabelledReminders', true)->assertSet('unlabelledReminders', true);
+});
+
+it('auto-binds a failed accepted rule to the Switch and clears it when valid', function () {
+    $screen = Native::visit('/components/switch');
+
+    expect(firstlightSwitchNodesByLabel($screen->tree())['Share records']['props']['error'])->toBe('');
+
+    $screen->toggle('shareRecords', false)->assertSet('shareRecords', false);
+
+    expect(firstlightSwitchNodesByLabel($screen->tree())['Share records']['props'])->toMatchArray([
+        'value' => false,
+        'error' => 'Record sharing must stay on for this referral.',
+    ]);
+
+    $screen->toggle('shareRecords', true)->assertSet('shareRecords', true);
+
+    expect(firstlightSwitchNodesByLabel($screen->tree())['Share records']['props']['error'])->toBe('');
 });

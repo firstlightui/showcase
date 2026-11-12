@@ -1,7 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 gap-5 pb-8">
-        <native:text class="text-sm text-theme-on-surface">On-device checks: change each enabled selection, reset Queue to Mine, and check both Queue controls agree. Rejected queue stays Mine while attempts increase. Null begins unselected; empty and disabled groups stay inert. Check long labels at large text sizes. The error is a static presentation example.</native:text>
-        <native:text class="text-sm text-theme-on-surface">PHP accepted state: queue {{ $queue }}; priority {{ $priority }}; simple {{ $simple }}; initially empty {{ $unselected ?? '(none)' }}; error {{ $errorSelection }}; required {{ $requiredSelection }}; long label {{ $longSelection }}; rejected attempts {{ $rejectedQueueAttempts }}</native:text>
+        <native:text class="text-sm text-theme-on-surface">On-device checks: change each enabled selection, reset Queue to Mine, and check both Queue controls agree. Queue changes rise by one per accepted tap and not for a tap on the selected segment or for Reset. Rejected queue stays Mine while attempts increase. Null begins unselected; empty and disabled groups stay inert. Check long labels at large text sizes. The error under Disabled and error states is a static presentation example; Validated queue shows a real Laravel message.</native:text>
+        <native:text class="text-sm text-theme-on-surface">PHP accepted state: queue {{ $queue }}; queue changes {{ $queueChanges }}; priority {{ $priority }}; simple {{ $simple }}; initially empty {{ $unselected ?? '(none)' }}; error {{ $errorSelection }}; required {{ $requiredSelection }}; long label {{ $longSelection }}; rejected attempts {{ $rejectedQueueAttempts }}; view {{ $view }}; unlabelled {{ $unlabelledQueue }}; absent {{ $absentQueue }}; validated {{ $validatedQueue }}</native:text>
         <native:column class="w-full gap-2">
             <native:text class="text-sm font-semibold text-theme-on-surface">Stable integer values</native:text>
             <firstlight:segmented
@@ -95,6 +95,48 @@
                 label="Required queue"
                 helper="This selection is required."
                 required
+            />
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Large size beside a large Button</native:text>
+            <native:text class="text-sm text-theme-on-surface">size="lg" matches Button size="lg"; the two controls below share one height. This control has no visible label: VoiceOver and TalkBack read its a11y-label, View.</native:text>
+            <firstlight:segmented
+                :options="$viewOptions"
+                native:model="view"
+                a11y-label="View"
+                size="lg"
+            />
+            <firstlight:button label="Reset view to List" variant="secondary" size="lg" @press="resetView" />
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Named only by a11y-label</native:text>
+            <native:text class="text-sm text-theme-on-surface">Default size with no visible label; the accessible name is Unlabelled queue.</native:text>
+            <firstlight:segmented
+                :options="$queueOptions"
+                native:model="unlabelledQueue"
+                a11y-label="Unlabelled queue"
+            />
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Selected value absent from options</native:text>
+            <firstlight:segmented
+                :options="$queueOptions"
+                native:model="absentQueue"
+                label="Archived queue"
+                helper="PHP holds archived, which is not an option, so no segment is selected."
+            />
+        </native:column>
+
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Laravel validation with native:model.live</native:text>
+            <native:text class="text-sm text-theme-on-surface">Choose All: PHP accepts it, validateOnly fails, and the message binds to this control without an error attribute. Choose Mine to clear it.</native:text>
+            <firstlight:segmented
+                :options="$queueOptions"
+                native:model.live="validatedQueue"
+                label="Validated queue"
             />
         </native:column>
 

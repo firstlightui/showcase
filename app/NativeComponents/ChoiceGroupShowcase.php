@@ -23,6 +23,20 @@ class ChoiceGroupShowcase extends ShowcaseScreen
 
     public int $triageLevel = 10;
 
+    /** @var list<string> */
+    public array $lockedNotifications = ['email'];
+
+    public int $rejectedMultipleAttempts = 0;
+
+    public ?string $unlabelledPriority = 'routine';
+
+    public ?string $absentPriority = 'deferred';
+
+    public ?string $validatedPriority = 'routine';
+
+    /** @var list<string> */
+    public array $emptyOptions = [];
+
     /** @var array<string, string> */
     public array $priorityOptions = [
         'routine' => 'Routine',
@@ -54,6 +68,26 @@ class ChoiceGroupShowcase extends ShowcaseScreen
     public function rejectPriority(string $priority): void
     {
         $this->rejectedAttempts++;
+    }
+
+    /** @param list<string> $notifications */
+    public function rejectNotifications(array $notifications): void
+    {
+        $this->rejectedMultipleAttempts++;
+    }
+
+    public function clearPriority(): void
+    {
+        $this->priority = null;
+    }
+
+    public function updatedValidatedPriority(): void
+    {
+        $this->validateOnly(
+            'validatedPriority',
+            ['validatedPriority' => 'in:routine,urgent'],
+            ['validatedPriority.in' => 'Critical needs a senior clinician; choose Routine or Urgent.'],
+        );
     }
 
     public function resetChoices(): void

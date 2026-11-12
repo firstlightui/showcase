@@ -7,7 +7,7 @@ function firstlightSlidersByLabel(array $tree): array
 {
     $nodes = [];
     if (($tree['type'] ?? null) === 'firstlight.slider') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightSlidersByLabel($child)];
@@ -29,6 +29,7 @@ it('publishes the complete Slider catalogue through the native wire tree', funct
             'Debounced ratio',
             'Dose with error',
             'Disabled dose',
+            'Alert volume',
             'Server-approved dose',
             'Programmatic dose',
         ])
@@ -92,4 +93,21 @@ it('updates synchronization fixtures rejects one proposal and applies programmat
     $nodes = firstlightSlidersByLabel($screen->tree());
     expect($nodes['Live dose']['props']['a11y_value'])->toBe('7 milligrams')
         ->and($nodes['Dose with error']['props']['value'])->toBe(6.0);
+});
+
+it('publishes a Slider named only by a11y-label and round-trips its change', function () {
+    $screen = Native::visit('/components/slider');
+
+    expect(firstlightSlidersByLabel($screen->tree())['Alert volume']['props'])->toMatchArray([
+        'label' => '',
+        'a11y_label' => 'Alert volume',
+        'value' => 3.0,
+        'min' => 0.0,
+        'max' => 5.0,
+        'sync_mode' => 'live',
+    ]);
+
+    $screen->slide('alertVolume', 4.0)
+        ->assertSet('alertVolume', 4.0)
+        ->assertSee('PHP accepted state: alert volume 4');
 });

@@ -7,7 +7,7 @@ function firstlightTextAreasByLabel(array $tree): array
 {
     $nodes = [];
     if (($tree['type'] ?? null) === 'firstlight.text-area') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightTextAreasByLabel($child)];
@@ -27,6 +27,8 @@ it('publishes the complete Text Area catalogue through the native wire tree', fu
             'Clinical notes',
             'Handover note',
             'Debounced summary',
+            'Lazy care plan',
+            'Incident description',
             'Note with error',
             'Read-only note',
             'Disabled note',
@@ -87,4 +89,22 @@ it('updates bound text rejects one proposal and applies programmatic publication
     expect($nodes['Note with error']['props']['value'])->toBe('Complete note')
         ->and($nodes['Handover note']['props']['value'])->toBe('Next shift')
         ->and($nodes['Debounced summary']['props']['value'])->toBe('Updated summary');
+});
+
+it('publishes a lazy model and an editor named only by a11y-label', function () {
+    $screen = Native::visit('/components/text-area');
+    $nodes = firstlightTextAreasByLabel($screen->tree());
+
+    expect($nodes['Lazy care plan']['props'])->toMatchArray(['value' => '', 'sync_mode' => 'blur'])
+        ->and($nodes['Incident description']['props'])->toMatchArray([
+            'label' => '',
+            'a11y_label' => 'Incident description',
+            'a11y_hint' => 'Describe what happened and when',
+            'sync_mode' => 'live',
+        ]);
+
+    $screen->select('lazyPlan', "Repeat bloods\nReview Friday")
+        ->assertSet('lazyPlan', "Repeat bloods\nReview Friday")
+        ->select('incident', 'Fall at 03:10')
+        ->assertSee('PHP accepted state: Fall at 03:10');
 });

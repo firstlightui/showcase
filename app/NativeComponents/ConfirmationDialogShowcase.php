@@ -17,6 +17,14 @@ class ConfirmationDialogShowcase extends ShowcaseScreen
 
     public int $programmaticGeneration = 0;
 
+    public bool $packageLabelsVisible = false;
+
+    public bool $copyVisible = false;
+
+    public int $copyGeneration = 0;
+
+    public int $copyRevision = 1;
+
     public int $confirmationCount = 0;
 
     public int $dismissalCount = 0;
@@ -114,6 +122,66 @@ class ConfirmationDialogShowcase extends ShowcaseScreen
     {
         $this->programmaticVisible = false;
         $this->recordDismissal('Programmatic example cancelled');
+    }
+
+    public function showPackageLabels(): void
+    {
+        $this->packageLabelsVisible = true;
+    }
+
+    public function confirmPackageLabels(): void
+    {
+        $this->packageLabelsVisible = false;
+        $this->recordConfirmation('Package Confirm chosen');
+    }
+
+    public function dismissPackageLabels(): void
+    {
+        $this->packageLabelsVisible = false;
+        $this->recordDismissal('Package Cancel chosen');
+    }
+
+    public function showCopyUpdate(): void
+    {
+        $this->copyGeneration++;
+        $this->copyVisible = true;
+        $generation = $this->copyGeneration;
+
+        AsyncTask::dispatch(static function (): void {
+            sleep(3);
+        })->finished(function () use ($generation): void {
+            if ($this->copyVisible && $this->copyGeneration === $generation) {
+                $this->republishCopy();
+            }
+        })->failed(function () use ($generation): void {
+            if ($this->copyVisible && $this->copyGeneration === $generation) {
+                $this->lastOutcome = 'Timed copy update unavailable; confirm or cancel normally';
+            }
+        });
+    }
+
+    public function republishCopy(): void
+    {
+        $this->copyRevision++;
+    }
+
+    public function confirmCopyUpdate(): void
+    {
+        $this->copyVisible = false;
+        $this->recordConfirmation('Copy update confirmed');
+    }
+
+    public function dismissCopyUpdate(): void
+    {
+        $this->copyVisible = false;
+        $this->recordDismissal('Copy update cancelled');
+    }
+
+    public function copyMessage(): string
+    {
+        return $this->copyRevision === 1
+            ? 'Wait without choosing. PHP will republish this message in about 3 seconds while the dialog stays open.'
+            : "PHP republished this message (revision {$this->copyRevision}). The dialog stayed open; choose once.";
     }
 
     public function navTitle(): string

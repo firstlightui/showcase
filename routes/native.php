@@ -319,7 +319,7 @@ Route::native('/captures/segmented', SegmentedCapture::class)
     ->name('captures.segmented')
     ->layout(ShowcaseLayout::class);
 
-Route::native('/components/tabs', TabsShowcase::class)
+Route::native('/components/tabs/{tab?}', TabsShowcase::class)
     ->name('tabs')
     ->layout(ShowcaseLayout::class);
 

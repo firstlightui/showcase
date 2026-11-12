@@ -8,7 +8,7 @@ function firstlightCodeEditorsByLabel(array $tree): array
 {
     $nodes = [];
     if (($tree['type'] ?? null) === 'firstlight.code-editor') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
     foreach ($tree['children'] ?? [] as $child) {
         $nodes = [...$nodes, ...firstlightCodeEditorsByLabel($child)];
@@ -31,6 +31,9 @@ it('publishes every documented Code Editor state through the native wire tree', 
             'Read-only environment',
             'Disabled editor',
             'Programmatic JSON',
+            'Plain scratchpad',
+            'Release notes',
+            'Focused draft',
             'Deployment log',
         ])
         ->and($nodes['Webhook payload']['props'])->toMatchArray([
@@ -86,4 +89,41 @@ it('grows the live log and trims its head at the cap', function () {
         ->and(end($lines))->toBe('[01525] deploy: step 1525 completed');
 
     $screen->tap('Clear log')->assertSet('logLines', 0);
+});
+
+it('publishes a lazy plain editor and an editor named only by a11y-label', function () {
+    $screen = Native::visit('/components/code-editor');
+    $nodes = firstlightCodeEditorsByLabel($screen->tree());
+
+    expect($nodes['Plain scratchpad']['props'])->toMatchArray(['language' => 'plain', 'sync_mode' => 'blur', 'value' => ''])
+        ->and($nodes['Release notes']['props'])->toMatchArray([
+            'label' => '',
+            'a11y_label' => 'Release notes',
+            'a11y_hint' => 'Plain text, one change per line',
+            'language' => 'plain',
+        ]);
+
+    $screen->select('scratch', "todo:\n  check logs")
+        ->assertSet('scratch', "todo:\n  check logs")
+        ->select('releaseNotes', 'Fixed sync')
+        ->assertSee('PHP accepted state: Fixed sync');
+});
+
+it('publishes a scheduled replacement from a poll only once it is due', function () {
+    $screen = Native::visit('/components/code-editor')
+        ->tap('Schedule replacement')
+        ->assertSee('Replacement scheduled; PHP replacements: 0')
+        ->firePoll('applyFocusedReplacement')
+        ->assertSet('focusedReplacements', 0);
+
+    expect(firstlightCodeEditorsByLabel($screen->tree())['Focused draft']['props']['value'])
+        ->toBe("{\n  \"status\": \"draft\"\n}");
+
+    $screen->set('focusedReplaceAt', time() - 1)
+        ->firePoll('applyFocusedReplacement')
+        ->assertSet('focusedReplacements', 1)
+        ->assertSee('Replacement idle; PHP replacements: 1');
+
+    expect(firstlightCodeEditorsByLabel($screen->tree())['Focused draft']['props']['value'])
+        ->toBe("{\n  \"status\": \"published\",\n  \"revision\": 1\n}");
 });

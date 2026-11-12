@@ -56,6 +56,19 @@
             />
         </native:column>
 
+        <native:column class="w-full gap-2">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Named only by a11y-label</native:text>
+            <native:text class="text-sm text-theme-on-surface">This slider has no visible label. VoiceOver and TalkBack read its a11y-label, Alert volume, and the current value.</native:text>
+            <firstlight:slider
+                ref="alertVolume"
+                native:model="alertVolume"
+                :min="0"
+                :max="5"
+                a11y-label="Alert volume"
+            />
+            <native:text class="text-sm text-theme-on-surface">PHP accepted state: alert volume {{ $alertVolume }}</native:text>
+        </native:column>
+
         <native:column class="w-full gap-2 pb-6">
             <native:text class="text-sm font-semibold text-theme-on-surface">Reconciliation</native:text>
             <firstlight:slider

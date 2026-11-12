@@ -8,7 +8,7 @@ function firstlightSegmentedNodesByLabel(array $tree): array
     $nodes = [];
 
     if (($tree['type'] ?? null) === 'firstlight.segmented') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
 
     foreach ($tree['children'] ?? [] as $child) {
@@ -50,6 +50,10 @@ it('publishes the complete Segmented catalogue through the native wire tree', fu
             'Disabled group',
             'Queue with error',
             'Required queue',
+            'View',
+            'Unlabelled queue',
+            'Archived queue',
+            'Validated queue',
             'Workflow status',
         ]);
 
@@ -281,4 +285,89 @@ it('publishes an unchanged authoritative value when the server rejects a selecti
     $publishedNodes = firstlightSegmentedNodesByLabel($screen->tree());
 
     expect($publishedNodes['Rejected queue']['props']['selected_value'])->toBe('mine');
+});
+
+it('publishes the large size beside a large Button under an accessibility-only name', function () {
+    $screen = Native::visit('/components/segmented');
+    $nodes = firstlightSegmentedNodesByLabel($screen->tree());
+
+    expect(firstlightPropsWithoutCallbacks($nodes['View']))->toBe([
+        'a11y_label' => 'View',
+        'label' => '',
+        'helper' => '',
+        'error' => '',
+        'required' => false,
+        'disabled' => false,
+        'value_type' => 'string',
+        'has_selection' => true,
+        'selected_value' => 'list',
+        'option_values' => ['list', 'board'],
+        'option_labels' => ['List', 'Board'],
+        'option_enabled' => ['1', '1'],
+        'size' => 'lg',
+    ])->and(firstlightPropsWithoutCallbacks($nodes['Unlabelled queue']))->toMatchArray([
+        'a11y_label' => 'Unlabelled queue',
+        'label' => '',
+        'selected_value' => 'mine',
+        'size' => 'md',
+    ]);
+
+    $screen->assertElement('firstlight.button', fn (array $node): bool => ($node['props']['label'] ?? null) === 'Reset view to List'
+        && ($node['props']['size'] ?? null) === 'lg'
+    );
+
+    $screen->select('view', 'board')->assertSet('view', 'board')
+        ->press('resetView')->assertSet('view', 'list');
+
+    expect(firstlightSegmentedNodesByLabel($screen->tree())['View']['props']['selected_value'])->toBe('list');
+});
+
+it('leaves a same-typed value absent from options unselected', function () {
+    $screen = Native::visit('/components/segmented');
+    $absent = firstlightSegmentedNodesByLabel($screen->tree())['Archived queue'];
+
+    expect(firstlightPropsWithoutCallbacks($absent))->toBe([
+        'label' => 'Archived queue',
+        'helper' => 'PHP holds archived, which is not an option, so no segment is selected.',
+        'error' => '',
+        'required' => false,
+        'disabled' => false,
+        'value_type' => 'string',
+        'has_selection' => true,
+        'selected_value' => 'archived',
+        'option_values' => ['mine', 'all'],
+        'option_labels' => ['Mine', 'All'],
+        'option_enabled' => ['1', '1'],
+        'size' => 'md',
+    ])->and($absent['props']['option_values'])->not->toContain('archived');
+
+    $screen->select('absentQueue', 'mine')->assertSet('absentQueue', 'mine');
+});
+
+it('auto-binds a live validateOnly failure and clears it on a valid selection', function () {
+    $screen = Native::visit('/components/segmented');
+
+    expect(firstlightSegmentedNodesByLabel($screen->tree())['Validated queue']['props']['error'])->toBe('');
+
+    $screen->select('validatedQueue', 'all')->assertSet('validatedQueue', 'all');
+
+    expect(firstlightSegmentedNodesByLabel($screen->tree())['Validated queue']['props'])->toMatchArray([
+        'selected_value' => 'all',
+        'error' => 'You can only work the Mine queue today.',
+    ]);
+
+    $screen->select('validatedQueue', 'mine')->assertSet('validatedQueue', 'mine');
+
+    expect(firstlightSegmentedNodesByLabel($screen->tree())['Validated queue']['props']['error'])->toBe('');
+});
+
+it('counts accepted Queue selections but not programmatic resets', function () {
+    Native::visit('/components/segmented')
+        ->assertSee('queue changes 0')
+        ->select('queue', 'all')
+        ->select('queue', 'mine')
+        ->assertSet('queueChanges', 2)
+        ->press('resetSelections')
+        ->assertSet('queueChanges', 2)
+        ->assertSee('queue changes 2');
 });

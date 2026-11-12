@@ -8,7 +8,7 @@ function firstlightCheckboxNodesByLabel(array $tree): array
     $nodes = [];
 
     if (($tree['type'] ?? null) === 'firstlight.checkbox') {
-        $nodes[$tree['props']['label']] = $tree;
+        $nodes[$tree['props']['label'] ?: $tree['props']['a11y_label']] = $tree;
     }
 
     foreach ($tree['children'] ?? [] as $child) {
@@ -38,6 +38,7 @@ it('publishes the complete Checkbox catalogue through the native wire tree', fun
             'Validation error',
             'Rejected agreement',
             'Programmatic agreement',
+            'Share records with the referring clinician',
             'A considerably longer agreement label that wraps naturally across multiple lines',
         ])
         ->and(firstlightCheckboxPrimitiveProps($nodes['Unchecked']))->toBe([
@@ -93,4 +94,23 @@ it('dispatches accepted rejected disabled and programmatic Checkbox changes', fu
         ->assertSet('programmatic', true)
         ->call('resetProgrammaticAgreement')
         ->assertSet('programmatic', false);
+});
+
+it('publishes a Checkbox named only by a11y-label and round-trips its change', function () {
+    $screen = Native::visit('/components/checkbox');
+    $node = firstlightCheckboxNodesByLabel($screen->tree())['Share records with the referring clinician'];
+
+    expect(firstlightCheckboxPrimitiveProps($node))->toBe([
+        'a11y_label' => 'Share records with the referring clinician',
+        'value' => false,
+        'label' => '',
+        'helper' => '',
+        'error' => '',
+        'required' => false,
+        'disabled' => false,
+    ]);
+
+    $screen->toggle('unlabelledConsent', true)
+        ->assertSet('unlabelledConsent', true)
+        ->assertSee('unlabelled true');
 });

@@ -19,6 +19,8 @@ class ListShowcase extends ShowcaseScreen
 
     public bool $separators = true;
 
+    public bool $showsIndicators = true;
+
     public bool $empty = false;
 
     public bool $deletionAllowed = true;

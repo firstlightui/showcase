@@ -1,5 +1,5 @@
 <native:column class="w-full flex-1 bg-theme-background">
-    <firstlight:list ref="sampleList" :separator="$separators" :plain="$plain" class="w-full flex-1 bg-theme-background" @refresh="reloadItems" on-end-reached="loadMore">
+    <firstlight:list ref="sampleList" :separator="$separators" :plain="$plain" :shows-indicators="$showsIndicators" class="w-full flex-1 bg-theme-background" @refresh="reloadItems" @endReached="loadMore">
         @if (! $empty)
         <firstlight:list-item
             headline="Account"
@@ -58,9 +58,10 @@
     <firstlight:bottom-sheet ref="testOptions" :visible="$testOptionsVisible" a11y-label="List test options" @dismiss="closeTestOptions">
         <native:scroll-view class="w-full flex-1">
             <native:column class="w-full p-4 gap-3 pb-8">
-                <native:text class="text-sm text-theme-on-surface">On-device checks: the preference rows only record presses. Pull to refresh; scroll sample rows to load 8 → 16 → 24. Delete a sample row, cancel then confirm; refresh must not restore it. Deny deletion to disable sample rows. Try plain, separators and empty states. Reset restores disposable sample data.</native:text>
+                <native:text class="text-sm text-theme-on-surface">On-device checks: the preference rows only record presses. Pull to refresh; scroll sample rows to load 8 → 16 → 24. Delete a sample row, cancel then confirm; refresh must not restore it. Deny deletion to disable sample rows. Try plain, separators, scroll indicators and empty states. Reset restores disposable sample data.</native:text>
                 <native:toggle native:model="plain" label="Plain list" />
                 <native:toggle native:model="separators" label="Separators" />
+                <native:toggle native:model="showsIndicators" label="Scroll indicators" />
                 <native:toggle native:model="empty" label="Empty list" />
                 <native:toggle native:model="deletionAllowed" label="Allow sample deletion" />
                 <native:text class="text-sm text-theme-on-surface">Recorded presses: {{ $pressCount }} · Last row: {{ $lastPressed }} · Refresh count: {{ $refreshCount }} · {{ count($deletedIds) }} deleted</native:text>
