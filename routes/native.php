@@ -53,6 +53,7 @@ use App\NativeComponents\DocumentationScreen;
 use App\NativeComponents\EditPostScreen;
 use App\NativeComponents\GalleryInboxScreen;
 use App\NativeComponents\GalleryScreen;
+use App\NativeComponents\HapticsShowcase;
 use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\AppLayout;
 use App\NativeComponents\Layouts\ShowcaseLayout;
@@ -240,6 +241,10 @@ Route::native('/captures/icon-button', IconButtonCapture::class)
 
 Route::native('/components/custom-icons', CustomIconsShowcase::class)
     ->name('custom-icons')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/components/haptics', HapticsShowcase::class)
+    ->name('haptics')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/components/list-item', ListItemShowcase::class)
