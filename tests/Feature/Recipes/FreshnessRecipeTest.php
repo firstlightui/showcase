@@ -56,5 +56,5 @@ it('shows offline notices when the phone is offline', function () {
     expect(serverStatusCallout($screen))->toBe(['warning', 'Showing data from 2:05 PM', '']);
 
     $screen->call('forget');
-    expect(serverStatusCallout($screen))->toBe(['info', "You're offline. This will load when you're back online.", '']);
+    expect(serverStatusCallout($screen))->toBe(['neutral', "You're offline. This will load when you're back online.", '']);
 });
