@@ -164,6 +164,7 @@ it('opens each documented recipe from the Recipes tab', function (string $label)
         'Server status' => '/servers',
         'Offline changes' => '/offline-changes',
         'App lock' => '/vault',
+        'App shortcuts' => '/shortcuts',
     };
 
     Native::visit('/recipes')
@@ -171,13 +172,13 @@ it('opens each documented recipe from the Recipes tab', function (string $label)
         ->assertNavigatedTo($path);
 
     Native::visit($path)->assertAccessible();
-})->with(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Server status', 'Offline changes', 'App lock']);
+})->with(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Server status', 'Offline changes', 'App lock', 'App shortcuts']);
 
 it('presents the recipes as app entry points with icons and descriptions', function () {
     $screen = Native::visit('/recipes')->assertAccessible();
     $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
 
-    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Change it on another device', 'Server status', 'Offline changes', 'App lock']);
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Change it on another device', 'Server status', 'Offline changes', 'App lock', 'App shortcuts']);
 
     foreach ($items as $item) {
         expect($item['props']['leading_type'] ?? null)->toBe('icon')

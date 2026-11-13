@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "daae9a6da622395186db967b9db320f6",
+    "content-hash": "d8eedafe506a83c6da853b3cde90ae23",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -797,6 +797,73 @@
             },
             "time": "2026-11-12T21:52:42+00:00",
             "published-time": "2026-11-12T21:55:45+00:00"
+        },
+        {
+            "name": "firstlightui/app-shortcuts",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firstlightui/app-shortcuts.git",
+                "reference": "5aca0c261b77ead74c9378722e5c5fabc924ab12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/5aca0c261b77ead74c9378722e5c5fabc924ab12",
+                "reference": "5aca0c261b77ead74c9378722e5c5fabc924ab12",
+                "shasum": ""
+            },
+            "require": {
+                "nativephp/mobile": "^4.7",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.13",
+                "laravel/pint": "^1.27",
+                "orchestra/testbench": "^11.0",
+                "pestphp/pest": "^5.0"
+            },
+            "default-branch": true,
+            "type": "nativephp-plugin",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FirstlightUI\\AppShortcuts\\AppShortcutsServiceProvider"
+                    ]
+                },
+                "nativephp": {
+                    "manifest": "nativephp.json"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FirstlightUI\\AppShortcuts\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "FirstlightUI\\AppShortcuts\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "pest"
+                ],
+                "lint": [
+                    "pint --test"
+                ],
+                "analyse": [
+                    "phpstan analyse --no-progress --memory-limit=1G"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Open a screen of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
+            "support": {
+                "source": "https://github.com/firstlightui/app-shortcuts/tree/main",
+                "issues": "https://github.com/firstlightui/app-shortcuts/issues"
+            },
+            "time": "2026-11-13T22:29:11+00:00"
         },
         {
             "name": "firstlightui/nativephp",
@@ -11030,6 +11097,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "firstlightui/app-shortcuts": 20,
         "firstlightui/nativephp": 20
     },
     "prefer-stable": true,

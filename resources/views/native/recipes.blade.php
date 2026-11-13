@@ -150,4 +150,19 @@
             @press="openVault"
         />
     </firstlight:list-section>
+    <firstlight:list-section header="System" footer="Shortcuts appear after a native build. The vault shortcut shows the lock screen first when the app is locked.">
+        <firstlight:list-item
+            headline="App shortcuts"
+            supporting="Open screens from Siri, Spotlight and the app icon"
+            leading-icon="shortcut"
+            leading-icon-ios="arrow.up.forward.app"
+            leading-icon-android="shortcut"
+            leading-icon-tone="info"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens the app shortcuts recipe"
+            @press="openShortcuts"
+        />
+    </firstlight:list-section>
 </firstlight:list>

@@ -20,6 +20,7 @@
     "require": {
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
+        "firstlightui/app-shortcuts": "dev-main",
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
@@ -107,6 +108,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
+        {
+            "name": "app-shortcuts",
+            "type": "vcs",
+            "url": "https://github.com/firstlightui/app-shortcuts"
+        },
         {
             "name": "nativephp-plugins",
             "type": "composer",

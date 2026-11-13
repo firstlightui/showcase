@@ -2,6 +2,7 @@
 
 use App\NativeComponents\ActivityIndicatorShowcase;
 use App\NativeComponents\AlertDialogShowcase;
+use App\NativeComponents\AppShortcutsScreen;
 use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\BottomSheetShowcase;
 use App\NativeComponents\ButtonShowcase;
@@ -45,6 +46,8 @@ use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\CodeEditorShowcase;
 use App\NativeComponents\ConfirmationDialogShowcase;
+use App\NativeComponents\ContactScreen;
+use App\NativeComponents\ContactsScreen;
 use App\NativeComponents\CreatePostScreen;
 use App\NativeComponents\CustomIconsShowcase;
 use App\NativeComponents\DatePickerShowcase;
@@ -59,26 +62,23 @@ use App\NativeComponents\Layouts\AppLayout;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
+use App\NativeComponents\LockScreen;
 use App\NativeComponents\MediaShowcase;
 use App\NativeComponents\MetricShowcase;
 use App\NativeComponents\ModalShowcase;
+use App\NativeComponents\OfflineChangesScreen;
 use App\NativeComponents\PillGroupShowcase;
-use App\NativeComponents\PostScreen;
 use App\NativeComponents\PostCoverScreen;
+use App\NativeComponents\PostScreen;
 use App\NativeComponents\PostsScreen;
-use App\NativeComponents\ContactScreen;
-use App\NativeComponents\ContactsScreen;
 use App\NativeComponents\PrivacyScreen;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\RecipesScreen;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SelectShowcase;
-use App\NativeComponents\OfflineChangesScreen;
 use App\NativeComponents\ServerStatusScreen;
 use App\NativeComponents\SettingsScreen;
-use App\NativeComponents\LockScreen;
-use App\NativeComponents\VaultScreen;
 use App\NativeComponents\ShowcaseHome;
 use App\NativeComponents\SliderShowcase;
 use App\NativeComponents\StatusLabelShowcase;
@@ -91,6 +91,7 @@ use App\NativeComponents\TimePickerShowcase;
 use App\NativeComponents\TransientFeedbackDestination;
 use App\NativeComponents\TransientFeedbackShowcase;
 use App\NativeComponents\ValidationShowcase;
+use App\NativeComponents\VaultScreen;
 use Illuminate\Support\Facades\Route;
 
 // Tab roots. Gallery owns '/', so it must stay the first tab (see ShowcaseLayout).
@@ -438,6 +439,11 @@ Route::native('/settings', SettingsScreen::class)
 
 Route::native('/settings/privacy', PrivacyScreen::class)
     ->name('recipes.privacy')
+    ->layout(AppLayout::class);
+
+// The shortcuts in config/app-shortcuts.php, and one added at runtime.
+Route::native('/shortcuts', AppShortcutsScreen::class)
+    ->name('recipes.shortcuts')
     ->layout(AppLayout::class);
 
 // App Guard's app-lock middleware keeps the vault closed while the app is locked and always lets /lock through.

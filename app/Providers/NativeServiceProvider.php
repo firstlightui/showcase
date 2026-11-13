@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Support\DemoOutbox;
 use App\Support\ShowcaseFeedbackLog;
 use FirstlightUI\AppGuard\AppGuardServiceProvider;
+use FirstlightUI\AppShortcuts\AppShortcutsServiceProvider;
 use FirstlightUI\Events\FeedbackActionPressed;
 use FirstlightUI\Events\FeedbackDismissed;
 use FirstlightUI\Facades\Connectivity;
@@ -61,6 +62,7 @@ class NativeServiceProvider extends ServiceProvider
             NetworkServiceProvider::class,
             FirstlightServiceProvider::class,
             AppGuardServiceProvider::class,
+            AppShortcutsServiceProvider::class,
         ];
     }
 }
