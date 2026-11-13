@@ -73,6 +73,7 @@ use App\NativeComponents\RecipesScreen;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SelectShowcase;
+use App\NativeComponents\OfflineChangesScreen;
 use App\NativeComponents\ServerStatusScreen;
 use App\NativeComponents\SettingsScreen;
 use App\NativeComponents\LockScreen;
@@ -404,6 +405,10 @@ Route::native('/posts/{post}/edit', EditPostScreen::class)
 
 Route::native('/servers', ServerStatusScreen::class)
     ->name('recipes.servers')
+    ->layout(AppLayout::class);
+
+Route::native('/offline-changes', OfflineChangesScreen::class)
+    ->name('recipes.offline-changes')
     ->layout(AppLayout::class);
 
 Route::native('/posts/{post}/cover', PostCoverScreen::class)

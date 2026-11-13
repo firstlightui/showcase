@@ -6,6 +6,7 @@
     "anchors": {
         "show-data-freshness": "overview",
         "track-a-dataset": "track-a-dataset",
+        "refresh-when-the-user-is-back": "refresh-when-the-user-is-back",
         "show-the-notice": "show-the-notice",
         "use-your-own-failure-message": "use-your-own-failure-message",
         "how-firstlight-knows-the-device-is-offline": "how-firstlight-knows-the-device-is-offline",
@@ -280,6 +281,43 @@
                 }
             ]
         },
+        "refresh-when-the-user-is-back": {
+            "title": "Refresh when the user is back",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Override "
+                        },
+                        {
+                            "text": "revalidate()",
+                            "code": true
+                        },
+                        {
+                            "text": " to refresh stale data when the device comes back online or the app returns from the background:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "protected function revalidate(): void\n{\n    if ($this->freshness('servers')->isStale()) {\n        $this->reload();\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Show connectivity",
+                            "link": 0
+                        },
+                        {
+                            "text": " explains when Firstlight calls it."
+                        }
+                    ]
+                }
+            ]
+        },
         "show-the-notice": {
             "title": "Show the notice",
             "blocks": [
@@ -452,7 +490,7 @@
                         },
                         {
                             "text": "Localize chrome",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": ". Times use the app's locale and the phone's timezone, so "
@@ -549,6 +587,10 @@
         }
     },
     "links": [
+        {
+            "label": "Show connectivity",
+            "url": "show-connectivity.md"
+        },
         {
             "label": "Localize chrome",
             "url": "localize.md"

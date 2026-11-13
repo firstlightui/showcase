@@ -62,6 +62,11 @@ class RecipesScreen extends ShowcaseScreen
         $this->navigate('/servers');
     }
 
+    public function openOfflineChanges(): void
+    {
+        $this->navigate('/offline-changes');
+    }
+
     public function openNewPost(): void
     {
         $this->navigate('/posts/create');

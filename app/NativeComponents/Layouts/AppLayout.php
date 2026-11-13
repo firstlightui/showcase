@@ -2,6 +2,7 @@
 
 namespace App\NativeComponents\Layouts;
 
+use FirstlightUI\Facades\Connectivity;
 use FirstlightUI\NativeComponent as FirstlightScreen;
 use Native\Mobile\Edge\Layouts\Builders\NavBar;
 use Native\Mobile\Edge\Layouts\NativeLayout;
@@ -20,6 +21,7 @@ class AppLayout extends NativeLayout
 
         return NavBar::make()
             ->title($screen->navTitle())
+            ->subtitle(Connectivity::statusLine())
             ->displayMode($isRoot ? 'large' : 'inline')
             ->back(! $isRoot);
     }

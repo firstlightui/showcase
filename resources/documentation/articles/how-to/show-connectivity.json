@@ -1,0 +1,547 @@
+{
+    "id": "how-to/show-connectivity",
+    "title": "Show connectivity and refresh on reconnect",
+    "description": "Show Offline and sync status in the nav bar subtitle, display your app's write queue, and refresh stale data when the device comes back online or the app returns.",
+    "group": "Guides",
+    "anchors": {
+        "show-connectivity-and-refresh-on-reconnect": "overview",
+        "install-the-network-plugin": "install-the-network-plugin",
+        "put-the-line-in-the-nav-bar": "put-the-line-in-the-nav-bar",
+        "refresh-when-the-user-is-back": "refresh-when-the-user-is-back",
+        "show-your-write-queue": "show-your-write-queue",
+        "change-the-wording": "change-the-wording",
+        "test-it": "test-it"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Firstlight tells users when the device is offline with one line in the nav bar subtitle, and refreshes stale screens when the device comes back online:"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Online, nothing waiting"
+                    },
+                    "items": [
+                        {
+                            "label": "Subtitle",
+                            "text": "none"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Offline"
+                    },
+                    "items": [
+                        {
+                            "label": "Subtitle",
+                            "runs": [
+                                {
+                                    "text": "Offline",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Offline with writes your app queued"
+                    },
+                    "items": [
+                        {
+                            "label": "Subtitle",
+                            "runs": [
+                                {
+                                    "text": "Offline · 3 waiting to sync",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Back online, your queue is sending"
+                    },
+                    "items": [
+                        {
+                            "label": "Subtitle",
+                            "runs": [
+                                {
+                                    "text": "Syncing 3 changes…",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Some writes failed"
+                    },
+                    "items": [
+                        {
+                            "label": "Subtitle",
+                            "runs": [
+                                {
+                                    "text": "1 failed to sync",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight never fetches and doesn't queue writes. It reads the OS, shows the counts your queue reports, and calls your screen's "
+                        },
+                        {
+                            "text": "revalidate()",
+                            "code": true
+                        },
+                        {
+                            "text": " hook."
+                        }
+                    ]
+                }
+            ]
+        },
+        "install-the-network-plugin": {
+            "title": "Install the Network plugin",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight reads "
+                        },
+                        {
+                            "text": "Network::status()",
+                            "code": true
+                        },
+                        {
+                            "text": ", so install NativePHP's Network plugin:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer require nativephp/mobile-network"
+                },
+                {
+                    "type": "text",
+                    "text": "Without it Firstlight can't tell, treats the device as online, and shows nothing. In debug builds it logs one warning saying so."
+                }
+            ]
+        },
+        "put-the-line-in-the-nav-bar": {
+            "title": "Put the line in the nav bar",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Mobile UI owns the bar. Set its subtitle from your layout:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\Facades\\Connectivity;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\NavBar;\nuse Native\\Mobile\\Edge\\NativeComponent;\n\npublic function navBar(NativeComponent $screen): ?NavBar\n{\n    return NavBar::make()\n        ->title($screen->navTitle())\n        ->subtitle(Connectivity::statusLine());\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "statusLine()",
+                            "code": true
+                        },
+                        {
+                            "text": " returns null when there's nothing to say, which leaves no subtitle. On iOS, NativePHP Mobile 4.7 doesn't draw the subtitle on a tab root yet; "
+                        },
+                        {
+                            "text": "mobile-air#673",
+                            "link": 0
+                        },
+                        {
+                            "text": " fixes it."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Anywhere else, "
+                        },
+                        {
+                            "text": "Connectivity::isOffline()",
+                            "code": true
+                        },
+                        {
+                            "text": " is true only when the OS says the device is offline."
+                        }
+                    ]
+                }
+            ]
+        },
+        "refresh-when-the-user-is-back": {
+            "title": "Refresh when the user is back",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "With "
+                        },
+                        {
+                            "text": "TracksFreshness",
+                            "code": true
+                        },
+                        {
+                            "text": ", override "
+                        },
+                        {
+                            "text": "revalidate()",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight calls it on the screen on display when the device comes back online, and when the app returns from the background after longer than the screen's shortest "
+                        },
+                        {
+                            "text": "freshFor",
+                            "code": true
+                        },
+                        {
+                            "text": " window:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "protected function revalidate(): void\n{\n    if ($this->freshness('servers')->isStale()) {\n        $this->reload();\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The screen "
+                        },
+                        {
+                            "text": "Show data freshness",
+                            "link": 1
+                        },
+                        {
+                            "text": " builds needs only this method. Data loaded a few seconds ago is still fresh, so returning from the camera, which counts as leaving the app on Android, costs nothing."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight hears the app return from NativePHP's "
+                        },
+                        {
+                            "text": "AppForegrounded",
+                            "code": true
+                        },
+                        {
+                            "text": " event, or from App Guard's "
+                        },
+                        {
+                            "text": "Foregrounded",
+                            "code": true
+                        },
+                        {
+                            "text": " on NativePHP Mobile versions without it. Without either, it still notices a reconnect when a screen opens or is shown again after Back."
+                        }
+                    ]
+                }
+            ]
+        },
+        "show-your-write-queue": {
+            "title": "Show your write queue",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "If your app queues writes while offline, implement "
+                        },
+                        {
+                            "text": "PendingChanges",
+                            "code": true
+                        },
+                        {
+                            "text": " on the queue and register it in a service provider:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\Connectivity\\PendingChanges;\n\nclass Outbox implements PendingChanges\n{\n    public function waitingCount(): int { /* not yet sent, including sending */ }\n\n    public function failedCount(): int { /* refused by the server */ }\n\n    public function isSyncing(): bool { /* a drain is running */ }\n\n    public function sync(): void\n    {\n        // Start one drain, such as an AsyncTask, and return.\n    }\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "// AppServiceProvider::boot()\nConnectivity::pendingUsing(Outbox::class);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "When the device comes back online, Firstlight calls "
+                        },
+                        {
+                            "text": "sync()",
+                            "code": true
+                        },
+                        {
+                            "text": " once, then "
+                        },
+                        {
+                            "text": "revalidate()",
+                            "code": true
+                        },
+                        {
+                            "text": ". When your drain finishes, report it:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "Connectivity::syncFinished($synced, $failed);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "That shows "
+                        },
+                        {
+                            "text": "Synced 3 changes.",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "1 change failed to sync.",
+                            "code": true
+                        },
+                        {
+                            "text": " with a "
+                        },
+                        {
+                            "text": "Review",
+                            "code": true
+                        },
+                        {
+                            "text": " action. Open your own pending screen from it:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\Connectivity\\ConnectivityManager;\nuse FirstlightUI\\Events\\FeedbackActionPressed;\nuse Native\\Mobile\\Attributes\\On;\n\n#[On(FeedbackActionPressed::class)]\npublic function feedbackAction(string $id, string $actionKey): void\n{\n    if ($actionKey === ConnectivityManager::REVIEW_ACTION) {\n        $this->navigate('/pending');\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "For rows changed while offline, use a Status Label with Firstlight's strings:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:status-label :label=\"__('firstlight::chrome.sync_waiting_label')\" tone=\"neutral\" />\n<firstlight:status-label :label=\"__('firstlight::chrome.sync_failed_label')\" tone=\"danger\" />"
+                }
+            ]
+        },
+        "change-the-wording": {
+            "title": "Change the wording",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Override "
+                        },
+                        {
+                            "text": "connectivity_offline",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "connectivity_offline_waiting",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "connectivity_syncing",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "connectivity_failed",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "sync_succeeded",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "sync_failed",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "sync_review",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "sync_waiting_label",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "sync_failed_label",
+                            "code": true
+                        },
+                        {
+                            "text": " in "
+                        },
+                        {
+                            "text": "lang/vendor/firstlight/{locale}/chrome.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", as described in "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 2
+                        },
+                        {
+                            "text": ". Counted strings use Laravel plural forms, such as "
+                        },
+                        {
+                            "text": "Synced :count change.|Synced :count changes.",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "test-it": {
+            "title": "Test it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Connectivity::fake()",
+                            "code": true
+                        },
+                        {
+                            "text": " starts online and drives the transitions:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\ServersScreen;\nuse FirstlightUI\\Facades\\Connectivity;\nuse Illuminate\\Support\\Facades\\Http;\nuse Native\\Mobile\\Testing\\Native;\n\nit('loads the servers when the device comes back online', function () {\n    $online = false;\n    Http::fake(function () use (&$online) {\n        return $online\n            ? Http::response(['data' => [['id' => 1, 'name' => 'web-1']]])\n            : Http::failedConnection();\n    });\n\n    $connectivity = Connectivity::fake()->goOffline();\n    $screen = Native::test(ServersScreen::class)->assertSet('servers', []);\n\n    $online = true;\n    $connectivity->goOnline();\n\n    $screen->assertSet('servers', [['id' => 1, 'name' => 'web-1']]);\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "goOffline()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "goOnline()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "goUnknown()",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "foreground($secondsAway)",
+                            "code": true
+                        },
+                        {
+                            "text": " mirror what the device sends. The fake keeps your "
+                        },
+                        {
+                            "text": "pendingUsing()",
+                            "code": true
+                        },
+                        {
+                            "text": " queue."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "mobile-air#673",
+            "url": "https://github.com/NativePHP/mobile-air/pull/673"
+        },
+        {
+            "label": "Show data freshness",
+            "url": "show-data-freshness.md"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "localize.md"
+        }
+    ]
+}

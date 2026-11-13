@@ -107,7 +107,7 @@
             @press="changePostElsewhere"
         />
     </firstlight:list-section>
-    <firstlight:list-section header="Data freshness" footer="Shows how old the cached list is. Turn on airplane mode, or make refreshes fail, to see the other notices.">
+    <firstlight:list-section header="Offline and data freshness" footer="Turn on airplane mode to see the offline notices and the Offline line under the screen title.">
         <firstlight:list-item
             headline="Server status"
             supporting="Says how old cached data is, offline, and when a refresh fails"
@@ -120,6 +120,19 @@
             trailing-icon-android="chevron_right"
             a11y-hint="Opens a cached server list"
             @press="openServerStatus"
+        />
+        <firstlight:list-item
+            headline="Offline changes"
+            supporting="Queues changes while offline and syncs them when you're back"
+            leading-icon="cloud-off"
+            leading-icon-ios="icloud.slash"
+            leading-icon-android="cloud_off"
+            leading-icon-tone="warning"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens a task list that works offline"
+            @press="openOfflineChanges"
         />
     </firstlight:list-section>
     <firstlight:list-section header="Security" footer="Locks after a minute in the background. Unlocking needs the paid biometrics plugin.">

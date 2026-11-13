@@ -4,15 +4,16 @@ namespace App\NativeComponents;
 
 use Carbon\CarbonImmutable;
 use FirstlightUI\Concerns\TracksFreshness;
+use FirstlightUI\Facades\Connectivity;
 use FirstlightUI\NativeComponent;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
-use Native\Mobile\Network;
 
 /**
  * A server list cached on the phone, with TracksFreshness saying how old it
  * is. The fetch is pretend: it fails while the phone is offline or while
- * "Fail refreshes" is on, the way a real API call would.
+ * "Fail refreshes" is on, the way a real API call would. Firstlight calls
+ * revalidate() when the phone comes back online.
  */
 class ServerStatusScreen extends NativeComponent
 {
@@ -42,7 +43,7 @@ class ServerStatusScreen extends NativeComponent
     {
         $this->freshness('servers')->refreshing();
 
-        if ($this->failRefreshes || app(Network::class)->status()?->connected === false) {
+        if ($this->failRefreshes || Connectivity::isOffline()) {
             $this->freshness('servers')->failed(retry: 'reload');
 
             return;
@@ -56,6 +57,14 @@ class ServerStatusScreen extends NativeComponent
             ['name' => 'db-1', 'healthy' => true, 'load' => random_int(20, 70)],
         ]);
         $this->freshness('servers')->refreshed($fetchedAt);
+    }
+
+    /** Firstlight calls this when the phone is back online, or the app returns after the data went stale. */
+    protected function revalidate(): void
+    {
+        if ($this->freshness('servers')->isStale()) {
+            $this->reload();
+        }
     }
 
     /** Pretends the last fetch was this many minutes earlier, so the age notices show without waiting. */

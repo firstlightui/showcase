@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Support\DemoOutbox;
 use App\Support\ShowcaseFeedbackLog;
 use FirstlightUI\AppGuard\AppGuardServiceProvider;
 use FirstlightUI\Events\FeedbackActionPressed;
 use FirstlightUI\Events\FeedbackDismissed;
+use FirstlightUI\Facades\Connectivity;
 use FirstlightUI\FirstlightServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +31,9 @@ class NativeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // The Offline changes recipe's queue, shown in the nav bar subtitle.
+        Connectivity::pendingUsing(DemoOutbox::class);
+
         Event::listen(function (FeedbackActionPressed $event): void {
             app(ShowcaseFeedbackLog::class)->recordAction($event);
         });

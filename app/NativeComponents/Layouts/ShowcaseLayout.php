@@ -5,6 +5,7 @@ namespace App\NativeComponents\Layouts;
 use App\NativeComponents\DocumentationArticleScreen;
 use App\NativeComponents\ShowcaseScreen;
 use App\Support\DocumentationLibrary;
+use FirstlightUI\Facades\Connectivity;
 use Illuminate\Support\Str;
 use Native\Mobile\Edge\Layouts\Builders\NavAction;
 use Native\Mobile\Edge\Layouts\Builders\NavBar;
@@ -74,6 +75,7 @@ class ShowcaseLayout extends NativeLayout
         }
 
         return $bar
+            ->subtitle(Connectivity::statusLine())
             ->displayMode($screen->showsBackButton() ? 'inline' : 'large')
             ->back($screen->showsBackButton());
     }
