@@ -1,0 +1,374 @@
+{
+    "id": "how-to/keep-drafts",
+    "title": "Keep drafts across navigation",
+    "description": "Keep a screen's unsaved changes when the user goes back, and offer them when the screen reopens.",
+    "group": "Guides",
+    "anchors": {
+        "keep-drafts-across-navigation": "overview",
+        "declare-what-to-keep": "declare-what-to-keep",
+        "when-the-record-changed": "when-the-record-changed",
+        "keep-each-users-drafts-apart": "keep-each-users-drafts-apart",
+        "change-the-wording": "change-the-wording",
+        "test-it": "test-it"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS, Back and the edge swipe close a screen before PHP hears about it, so an edit screen can't ask \"Discard changes?\". Firstlight keeps the unsaved changes instead. When the screen opens again, they come back with a "
+                        },
+                        {
+                            "text": "Restored your unsaved changes.",
+                            "code": true
+                        },
+                        {
+                            "text": " message and a "
+                        },
+                        {
+                            "text": "Discard",
+                            "code": true
+                        },
+                        {
+                            "text": " action. Android works the same way."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Drafts are kept in memory while the app runs. They are never written to disk, and they are lost when the app is closed."
+                }
+            ]
+        },
+        "declare-what-to-keep": {
+            "title": "Declare what to keep",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "KeepsDrafts",
+                            "code": true
+                        },
+                        {
+                            "text": " and return a "
+                        },
+                        {
+                            "text": "Draft",
+                            "code": true
+                        },
+                        {
+                            "text": " from "
+                        },
+                        {
+                            "text": "draft()",
+                            "code": true
+                        },
+                        {
+                            "text": ". Firstlight calls it whenever the screen closes. Return null when nothing is unsaved. This screen edits a post:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\Concerns\\KeepsDrafts;\nuse FirstlightUI\\Drafts\\Draft;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\View\\View;\n\nclass EditPostScreen extends NativeComponent\n{\n    use KeepsDrafts;\n\n    public Post $post;\n\n    public string $title = '';\n\n    public string $body = '';\n\n    /** @var array<string, string> */\n    protected array $rules = [\n        'title' => 'required|min:3',\n        'body' => 'required',\n    ];\n\n    public function mount(): void\n    {\n        $this->title = $this->post->title;\n        $this->body = $this->post->body;\n\n        $this->restoreDraft(\"post:{$this->post->id}\", basedOn: $this->post->updated_at?->toISOString());\n    }\n\n    protected function draft(): ?Draft\n    {\n        if ($this->title === $this->post->title && $this->body === $this->post->body) {\n            return null;\n        }\n\n        return new Draft(\n            \"post:{$this->post->id}\",\n            ['title' => $this->title, 'body' => $this->body],\n            basedOn: $this->post->updated_at?->toISOString(),\n        );\n    }\n\n    public function save(): void\n    {\n        $saved = $this->submit(\n            action: fn () => $this->post->update([\n                'title' => $this->title,\n                'excerpt' => str($this->body)->limit(60)->toString(),\n                'body' => $this->body,\n            ]),\n            successMessage: 'Post saved',\n        );\n\n        if ($saved) {\n            $this->back();\n        }\n    }\n\n    public function navTitle(): string\n    {\n        return 'Edit post';\n    }\n\n    public function render(): View\n    {\n        return view('native.edit-post');\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Register it with "
+                        },
+                        {
+                            "text": "Route::native('/posts/{post}/edit', EditPostScreen::class)",
+                            "code": true
+                        },
+                        {
+                            "text": ". Its view is an ordinary form: a Text Field bound to "
+                        },
+                        {
+                            "text": "title",
+                            "code": true
+                        },
+                        {
+                            "text": ", a Text Area bound to "
+                        },
+                        {
+                            "text": "body",
+                            "code": true
+                        },
+                        {
+                            "text": ", and a Save button that calls "
+                        },
+                        {
+                            "text": "save",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "The key names the record, such as "
+                        },
+                        {
+                            "text": "post:5",
+                            "code": true
+                        },
+                        {
+                            "text": ". Drafts are already kept apart per screen class."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The values are public property names and their unsaved values. Firstlight assigns them back to those properties. Keep them to strings, numbers, Booleans and arrays."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "basedOn",
+                            "code": true
+                        },
+                        {
+                            "text": " is the version you edited from, such as "
+                        },
+                        {
+                            "text": "updated_at",
+                            "code": true
+                        },
+                        {
+                            "text": " or a content hash. It can be left out when the record has no version."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "After a save, the properties match the record, so "
+                        },
+                        {
+                            "text": "draft()",
+                            "code": true
+                        },
+                        {
+                            "text": " returns null and nothing is kept."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Call "
+                        },
+                        {
+                            "text": "restoreDraft()",
+                            "code": true
+                        },
+                        {
+                            "text": " once the data has loaded. If you load asynchronously, call it in the callback that fills the fields, not in "
+                        },
+                        {
+                            "text": "mount()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "when-the-record-changed": {
+            "title": "When the record changed",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "When the record's version changed since the draft was kept, Firstlight doesn't overwrite the new data. It shows a warning that stays until the user acts: "
+                        },
+                        {
+                            "text": "This changed since you last edited it. Your unsaved changes weren't restored.",
+                            "code": true
+                        },
+                        {
+                            "text": " with a "
+                        },
+                        {
+                            "text": "Restore anyway",
+                            "code": true
+                        },
+                        {
+                            "text": " action."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Restore anyway",
+                            "code": true
+                        },
+                        {
+                            "text": " puts the draft into the fields."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Swiping the warning away forgets the draft."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Leaving without either keeps the draft, so it's offered again next time. New edits made in the meantime are kept instead."
+                }
+            ]
+        },
+        "keep-each-users-drafts-apart": {
+            "title": "Keep each user's drafts apart",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "On a shared device, scope drafts to the signed-in account in a service provider, and forget them all when someone signs out:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\Facades\\Drafts;\n\nDrafts::scopeUsing(fn () => auth()->id());\n\n// In your logout action\nDrafts::flush();"
+                },
+                {
+                    "type": "text",
+                    "text": "While the resolver returns null, such as while signed out, nothing is kept or restored."
+                }
+            ]
+        },
+        "change-the-wording": {
+            "title": "Change the wording",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The four strings are Firstlight chrome. Override "
+                        },
+                        {
+                            "text": "draft_restored",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "draft_changed",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "restore_anyway",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "discard",
+                            "code": true
+                        },
+                        {
+                            "text": " in "
+                        },
+                        {
+                            "text": "lang/vendor/firstlight/{locale}/chrome.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", as described in "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "test-it": {
+            "title": "Test it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Leave the screen the way the router does, then open it again:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\EditPostScreen;\nuse FirstlightUI\\Facades\\Drafts;\nuse Native\\Mobile\\Testing\\Native;\n\nit('keeps an unsaved edit when the user goes back', function () {\n    $screen = Native::visit('/posts/1/edit')\n        ->set('body', 'An unsaved edit.')\n        ->pressBack()\n        ->assertWentBack();\n    $screen->instance()->unmount();\n\n    expect(Drafts::has(EditPostScreen::class, 'post:1'))->toBeTrue();\n\n    Native::visit('/posts/1/edit')->assertSet('body', 'An unsaved edit.');\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Drafts::has()",
+                            "code": true
+                        },
+                        {
+                            "text": " reports whether a draft is waiting for a closed screen. The "
+                        },
+                        {
+                            "text": "Showcase",
+                            "link": 1
+                        },
+                        {
+                            "text": " runs this screen as the Edit post recipe."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Localize chrome",
+            "url": "localize.md"
+        },
+        {
+            "label": "Showcase",
+            "url": "https://github.com/firstlightui/showcase"
+        }
+    ]
+}
