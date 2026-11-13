@@ -345,6 +345,43 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Silences the haptic this control plays by default. Any other value throws. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 2
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "class",
                                 "code": true
                             }
@@ -505,7 +542,7 @@
                         },
                         {
                             "text": "response revision",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": "."
@@ -520,7 +557,7 @@
                         },
                         {
                             "text": "server-authoritative",
-                            "link": 3
+                            "link": 4
                         },
                         {
                             "text": ". A tap emits the inverse Boolean as one proposal, but the visible checkmark remains at the last value published by PHP. An accepted response changes the visible state; a rejected response republishes the previous state. Either response clears the pending proposal guard. Programmatic publications update the checkmark without emitting "
@@ -701,7 +738,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 4
+                            "link": 5
                         },
                         {
                             "text": ". Error text replaces helper text and is included in accessibility semantics."
@@ -734,6 +771,42 @@
                             "text": " inside a row-owned checkbox target. The public EDGE API and server-authoritative state contract are shared, while geometry and interaction presentation remain native to each platform."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On Android, Checkbox plays "
+                        },
+                        {
+                            "text": "toggle-on",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "toggle-off",
+                            "code": true
+                        },
+                        {
+                            "text": " as the user proposes a change; iOS plays none, as its own checkmarked rows do. "
+                        },
+                        {
+                            "text": "haptic=\"none\"",
+                            "code": true
+                        },
+                        {
+                            "text": " silences it. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 2
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -748,7 +821,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 5
+                            "link": 6
                         },
                         {
                             "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
@@ -791,6 +864,10 @@
         {
             "label": "Choice Group",
             "url": "choice-group.md"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
         },
         {
             "label": "response revision",

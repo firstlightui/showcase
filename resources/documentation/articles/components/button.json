@@ -471,6 +471,60 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "a "
+                                },
+                                {
+                                    "text": "FirstlightUI\\Haptics\\Haptic",
+                                    "code": true
+                                },
+                                {
+                                    "text": " case or its name, such as "
+                                },
+                                {
+                                    "text": "keypress",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Haptic the device plays as the tap lands, before PHP runs. Silent by default; "
+                                },
+                                {
+                                    "text": "none",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is accepted. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 1
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "a11y-label",
                                 "code": true
                             }
@@ -603,6 +657,42 @@
                         },
                         {
                             "text": ", label, or layout state. Programmatic publications do not emit a press."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Button plays no haptic unless it sets "
+                        },
+                        {
+                            "text": "haptic",
+                            "code": true
+                        },
+                        {
+                            "text": ". A "
+                        },
+                        {
+                            "text": "haptic",
+                            "code": true
+                        },
+                        {
+                            "text": " plays on the device without waiting for PHP: on touch down on Android, and as the tap fires on iOS. Use it where the press itself should be felt, such as "
+                        },
+                        {
+                            "text": "keypress",
+                            "code": true
+                        },
+                        {
+                            "text": " on a PIN keypad. Outcomes such as success or error belong to the action's result, through Feedback or "
+                        },
+                        {
+                            "text": "Haptics",
+                            "code": true
+                        },
+                        {
+                            "text": " in PHP."
                         }
                     ]
                 }
@@ -788,7 +878,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": ". The host application must compile the installed "
@@ -834,6 +924,10 @@
         {
             "label": "custom icon",
             "url": "../how-to/use-custom-icons.md"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
         },
         {
             "label": "compatibility reference",

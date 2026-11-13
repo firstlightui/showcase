@@ -399,6 +399,60 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "a "
+                                },
+                                {
+                                    "text": "FirstlightUI\\Haptics\\Haptic",
+                                    "code": true
+                                },
+                                {
+                                    "text": " case or its name, such as "
+                                },
+                                {
+                                    "text": "keypress",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Haptic the device plays as the tap lands, before PHP runs. Silent by default; "
+                                },
+                                {
+                                    "text": "none",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is accepted. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 1
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "class",
                                 "code": true
                             }
@@ -504,6 +558,28 @@
                         },
                         {
                             "text": ". Disabled and loading buttons do not emit. Programmatic publications never emit a press."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Icon Button plays no haptic unless it sets "
+                        },
+                        {
+                            "text": "haptic",
+                            "code": true
+                        },
+                        {
+                            "text": ", which plays on the device as the tap lands, without waiting for PHP: on touch down on Android, and as the tap fires on iOS. A keypad's delete key uses "
+                        },
+                        {
+                            "text": "haptic=\"keypress\"",
+                            "code": true
+                        },
+                        {
+                            "text": "."
                         }
                     ]
                 }
@@ -639,7 +715,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": " and requires both Firstlight native renderers to be compiled into the host application."
@@ -678,6 +754,10 @@
         {
             "label": "custom icon",
             "url": "../how-to/use-custom-icons.md"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
         },
         {
             "label": "compatibility reference",

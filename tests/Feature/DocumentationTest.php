@@ -19,7 +19,7 @@ it('bundles the entire reference for the installed Firstlight revision', functio
     $package = collect($packages)->firstWhere('name', 'firstlightui/nativephp');
 
     expect($library->manifest()['revision'])->toBe($package['dist']['reference'])
-        ->and($library->articles())->toHaveCount(63)
+        ->and($library->articles())->toHaveCount(64)
         ->and(array_unique(array_column($library->articles(), 'group')))->toHaveCount(6);
 
     foreach ($library->articles() as $summary) {
@@ -78,7 +78,7 @@ it('follows bundled article links and preserves section anchors', function () {
     Native::visit('/docs/components/button?heading=props')->assertSet('chapter', 'props')->assertSee('variant');
     Native::visit('/docs/reference/compatibility?heading=supported-response-revision-contract')
         ->assertSet('chapter', 'runtime-response-contract')->assertSee('response');
-    Native::visit('/docs/components/button?heading=compatibility')->press('openLink(1)')->assertNavigatedTo('/docs/reference/compatibility');
+    Native::visit('/docs/components/button?heading=compatibility')->press('openLink(2)')->assertNavigatedTo('/docs/reference/compatibility');
 });
 
 it('renders every bundled article section through the native wire tree', function () {

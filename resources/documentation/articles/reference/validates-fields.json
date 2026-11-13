@@ -704,6 +704,42 @@
                             "text": ". Frames republished before the next interaction carry the same alert, and the platforms act on it once. iOS moves VoiceOver focus and posts an announcement. Android acts while TalkBack is on: Text Field, Text Area, and Code Editor take input focus, and every field announces."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "A "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": " that adds messages also plays the "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " haptic, once for the interaction. Model sync and live revalidation while typing play none. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 2
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -730,84 +766,84 @@
                     "runs": [
                         {
                             "text": "Text Field",
-                            "link": 2
-                        },
-                        {
-                            "text": ", "
-                        },
-                        {
-                            "text": "Text Area",
                             "link": 3
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Checkbox",
+                            "text": "Text Area",
                             "link": 4
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Switch",
+                            "text": "Checkbox",
                             "link": 5
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Select",
+                            "text": "Switch",
                             "link": 6
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Segmented",
+                            "text": "Select",
                             "link": 7
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Choice Group",
+                            "text": "Segmented",
                             "link": 8
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Pill Group",
+                            "text": "Choice Group",
                             "link": 9
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Date Picker",
+                            "text": "Pill Group",
                             "link": 10
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Time Picker",
+                            "text": "Date Picker",
                             "link": 11
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Slider",
+                            "text": "Time Picker",
                             "link": 12
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Slider",
+                            "link": 13
                         },
                         {
                             "text": ", and "
                         },
                         {
                             "text": "Stepper",
-                            "link": 13
+                            "link": 14
                         },
                         {
                             "text": "."
@@ -921,6 +957,10 @@
         {
             "label": "Callout",
             "url": "../components/callout.md"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
         },
         {
             "label": "Text Field",

@@ -339,6 +339,43 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Silences the haptic this control plays by default. Any other value throws. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 0
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "class",
                                 "code": true
                             }
@@ -507,7 +544,7 @@
                         },
                         {
                             "text": "nonstreaming response-revision contract",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": ". It makes an unchanged full response observable to the renderers. Revisions are not per-event acknowledgements, do not prevent coalescing, and do not serialize simultaneous proposals. Wider release qualification remains pending."
@@ -555,7 +592,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": "."
@@ -615,6 +652,42 @@
                 },
                 {
                     "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS the SwiftUI "
+                        },
+                        {
+                            "text": "Slider",
+                            "code": true
+                        },
+                        {
+                            "text": " plays the system's own haptics. On Android, the thumb plays "
+                        },
+                        {
+                            "text": "tick",
+                            "code": true
+                        },
+                        {
+                            "text": " each time it snaps to another step. "
+                        },
+                        {
+                            "text": "haptic=\"none\"",
+                            "code": true
+                        },
+                        {
+                            "text": " silences the Android haptic. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
                     "text": "Slider deliberately has no range mode, vertical orientation, marks, ticks, visible value label, formatter, min/max captions, required metadata, size, variant, or colour/style escape props."
                 }
             ]
@@ -646,6 +719,10 @@
         }
     },
     "links": [
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
+        },
         {
             "label": "nonstreaming response-revision contract",
             "url": "../reference/compatibility.md#runtime-response-contract"

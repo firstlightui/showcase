@@ -277,6 +277,35 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "->withoutHaptic()",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Return",
+                            "runs": [
+                                {
+                                    "text": "new "
+                                },
+                                {
+                                    "text": "PendingFeedback",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Contract",
+                            "text": "Sends the item without its tone's haptic."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "->send()",
                                 "code": true
                             }
@@ -550,6 +579,84 @@
                 {
                     "type": "text",
                     "text": "Tone controls native colour and a decorative semantic symbol. It does not change queue, timing, or event behaviour."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "When a tap, change or submit sends the item, "
+                        },
+                        {
+                            "text": "success()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "warning()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "danger()",
+                            "code": true
+                        },
+                        {
+                            "text": " also play the "
+                        },
+                        {
+                            "text": "success",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "warning",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": " haptic. One interaction plays only its strongest outcome, so a danger item and a success item sent together play "
+                        },
+                        {
+                            "text": "error",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "message()",
+                            "code": true
+                        },
+                        {
+                            "text": " plays none, and nor does an item sent outside a user interaction, such as from a background event. Use "
+                        },
+                        {
+                            "text": "->withoutHaptic()",
+                            "code": true
+                        },
+                        {
+                            "text": " to keep one item silent. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -1079,7 +1186,7 @@
                         },
                         {
                             "text": "Localize chrome",
-                            "link": 3
+                            "link": 4
                         },
                         {
                             "text": "."
@@ -1099,7 +1206,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 4
+                            "link": 5
                         },
                         {
                             "text": ": PHP 8.4, NativePHP Mobile 4.7, NativePHP Mobile UI 0.9, iOS 18.2 or later, and Android API 29 or later. Both Firstlight native hosts must be compiled into the application."
@@ -1183,6 +1290,10 @@
         {
             "label": "Confirmation Dialog",
             "url": "confirmation-dialog.md"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
         },
         {
             "label": "Localize chrome",

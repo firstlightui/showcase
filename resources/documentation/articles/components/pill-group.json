@@ -623,6 +623,43 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Silences the haptic this control plays by default. Any other value throws. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 0
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "class",
                                 "code": true
                             }
@@ -859,7 +896,7 @@
                         },
                         {
                             "text": "custom icons",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": " such as "
@@ -993,7 +1030,7 @@
                         },
                         {
                             "text": "server-authoritative",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": ". A tap emits immediately, but selected visuals wait for PHP's next publication. Further taps are ignored while that proposal is in flight so a rapid second tap cannot be calculated from stale state. Programmatic updates and reconciliation do not emit."
@@ -1193,7 +1230,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": ". A same-typed selected value absent from "
@@ -1240,6 +1277,42 @@
                             "text": " or a horizontally scrolling row. Both inherit NativePHP semantic theme tokens and preserve native press, focus, selection, disabled, and accessibility behaviour without exposing platform-widget props."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On Android, each pill plays "
+                        },
+                        {
+                            "text": "toggle-on",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "toggle-off",
+                            "code": true
+                        },
+                        {
+                            "text": " as the user selects or clears it; iOS plays none. "
+                        },
+                        {
+                            "text": "haptic=\"none\"",
+                            "code": true
+                        },
+                        {
+                            "text": " silences it. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -1254,7 +1327,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 3
+                            "link": 4
                         },
                         {
                             "text": " and requires both native renderers to be compiled into the host application."
@@ -1290,6 +1363,10 @@
         }
     },
     "links": [
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
+        },
         {
             "label": "custom icons",
             "url": "../how-to/use-custom-icons.md"

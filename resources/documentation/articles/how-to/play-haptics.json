@@ -1,0 +1,416 @@
+{
+    "id": "how-to/play-haptics",
+    "title": "Play haptics",
+    "description": "Use the haptics Firstlight controls and Feedback already play, give keypads and buttons a touch haptic, play outcomes from PHP, and turn haptics off.",
+    "group": "Guides",
+    "anchors": {
+        "play-haptics": "overview",
+        "give-a-keypad-or-button-a-touch-haptic": "give-a-keypad-or-button-a-touch-haptic",
+        "play-an-outcome-from-php": "play-an-outcome-from-php",
+        "keep-something-silent": "keep-something-silent",
+        "test-haptics": "test-haptics"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight plays each platform's own haptic patterns. On iOS that means UIKit's feedback generators and SwiftUI's sensory feedback. On Android it means "
+                        },
+                        {
+                            "text": "HapticFeedbackConstants",
+                            "code": true
+                        },
+                        {
+                            "text": ". Both follow the user's system setting: System Haptics on iOS and Touch feedback on Android. Firstlight never runs the vibration motor the way "
+                        },
+                        {
+                            "text": "Device::vibrate()",
+                            "code": true
+                        },
+                        {
+                            "text": " does."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Most screens need no code. Firstlight already plays:"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "A Feedback with tone "
+                            },
+                            {
+                                "text": "success",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "warning",
+                                "code": true
+                            },
+                            {
+                                "text": " or "
+                            },
+                            {
+                                "text": "danger",
+                                "code": true
+                            },
+                            {
+                                "text": ", sent while PHP handles a tap, change or submit"
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Haptic",
+                            "text": "Success, Warning or Error"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "A press or submit that leaves validation errors"
+                    },
+                    "items": [
+                        {
+                            "label": "Haptic",
+                            "text": "Error"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Switch, Checkbox and Pill Group changes on Android"
+                    },
+                    "items": [
+                        {
+                            "label": "Haptic",
+                            "text": "Toggle on or off"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Segmented, Tabs and Stepper changes on Android"
+                    },
+                    "items": [
+                        {
+                            "label": "Haptic",
+                            "text": "Selection"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Each step of a stepped Slider on Android"
+                    },
+                    "items": [
+                        {
+                            "label": "Haptic",
+                            "text": "Tick"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "On iOS, Switch, Slider, pickers and menus play the system's own haptics, so Firstlight adds nothing to them."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Ordinary buttons stay silent, as they do on both platforms. Feedback that no tap caused, such as a sync result or a reconnect notice, stays silent too. When one interaction ends in several outcomes, such as a success Feedback and then a failed "
+                        },
+                        {
+                            "text": "validate()",
+                            "code": true
+                        },
+                        {
+                            "text": ", only the strongest plays: error over warning over success."
+                        }
+                    ]
+                }
+            ]
+        },
+        "give-a-keypad-or-button-a-touch-haptic": {
+            "title": "Give a keypad or button a touch haptic",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Set "
+                        },
+                        {
+                            "text": "haptic",
+                            "code": true
+                        },
+                        {
+                            "text": " on a Button or Icon Button. The device plays it as the tap lands, without waiting for PHP:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:button variant=\"secondary\" size=\"lg\" haptic=\"keypress\" a11y-label=\"Digit 1\" @press=\"pressDigit('1')\">\n    1\n</firstlight:button>\n\n<firstlight:icon-button icon=\"backspace\" haptic=\"keypress\" a11y-label=\"Delete last digit\" @press=\"backspace\" />"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "keypress",
+                            "code": true
+                        },
+                        {
+                            "text": " for digit keys and "
+                        },
+                        {
+                            "text": "press",
+                            "code": true
+                        },
+                        {
+                            "text": " for the few buttons that should feel like a physical key. On Android the haptic plays on touch down. On iOS it plays as the tap fires."
+                        }
+                    ]
+                }
+            ]
+        },
+        "play-an-outcome-from-php": {
+            "title": "Play an outcome from PHP",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "When an action finishes without a Feedback, such as a submit that navigates away, play the outcome yourself:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\Facades\\Haptics;\n\npublic function finish(): void\n{\n    $this->submission->complete();\n\n    Haptics::success();\n    $this->navigate('/patients');\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Haptics::warning()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "error()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "selection()",
+                            "code": true
+                        },
+                        {
+                            "text": " work the same way. "
+                        },
+                        {
+                            "text": "Haptics::play()",
+                            "code": true
+                        },
+                        {
+                            "text": " takes any meaning from the "
+                        },
+                        {
+                            "text": "FirstlightUI\\Haptics\\Haptic",
+                            "code": true
+                        },
+                        {
+                            "text": " enum or its name, such as "
+                        },
+                        {
+                            "text": "Haptics::play('increase')",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "Haptics::impact('medium', 0.7)",
+                            "code": true
+                        },
+                        {
+                            "text": " plays a physical impact: "
+                        },
+                        {
+                            "text": "light",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "medium",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "heavy",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "soft",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "rigid",
+                            "code": true
+                        },
+                        {
+                            "text": ", at an intensity from 0 to 1."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "A call from PHP plays when PHP gets there, a moment after the tap. Use "
+                        },
+                        {
+                            "text": "haptic",
+                            "code": true
+                        },
+                        {
+                            "text": " on the control for anything that should feel instant."
+                        }
+                    ]
+                }
+            ]
+        },
+        "keep-something-silent": {
+            "title": "Keep something silent",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Send a Feedback without its haptic: "
+                        },
+                        {
+                            "text": "Feedback::danger('Not saved')->withoutHaptic()->send()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Silence a control's default: "
+                        },
+                        {
+                            "text": "<firstlight:switch haptic=\"none\" ... />",
+                            "code": true
+                        },
+                        {
+                            "text": ". Controls other than Button and Icon Button accept only "
+                        },
+                        {
+                            "text": "none",
+                            "code": true
+                        },
+                        {
+                            "text": ". On iOS this does not silence the system's own Switch and Slider haptics."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Turn every Firstlight haptic off for an in-app setting: "
+                        },
+                        {
+                            "text": "Haptics::setEnabled(false)",
+                            "code": true
+                        },
+                        {
+                            "text": ". The device remembers the choice, and controls obey it without a round trip."
+                        }
+                    ]
+                }
+            ]
+        },
+        "test-haptics": {
+            "title": "Test haptics",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Haptics::fake()",
+                            "code": true
+                        },
+                        {
+                            "text": " records what would have played, after the same rules:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\Facades\\Haptics;\nuse FirstlightUI\\Haptics\\Haptic;\n\nit('buzzes once when saving fails', function () {\n    $haptics = Haptics::fake();\n\n    Native::test(EditPost::class)->tap('save');\n\n    $haptics->assertPlayed(Haptic::Error, times: 1);\n    $haptics->assertNotPlayed(Haptic::Success);\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Native touch haptics, such as a keypad's "
+                        },
+                        {
+                            "text": "keypress",
+                            "code": true
+                        },
+                        {
+                            "text": ", play on the device and are not recorded by the fake. Simulators and emulators play no haptics, so check how they feel on a phone."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": []
+}

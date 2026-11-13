@@ -267,6 +267,43 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Silences the haptic this control plays by default. Any other value throws. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 1
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "class",
                                 "code": true
                             }
@@ -518,7 +555,7 @@
                         },
                         {
                             "text": "server-authoritative",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": ". A tap emits immediately, but the selection moves only when PHP publishes the new value. To reject a change, bind "
@@ -889,6 +926,42 @@
                 {
                     "type": "text",
                     "text": "Tabs does not pin itself under the top bar or animate between sections. Swiping between sections is not supported."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS, "
+                        },
+                        {
+                            "text": "UISegmentedControl",
+                            "code": true
+                        },
+                        {
+                            "text": " plays its own selection haptic. On Android, Tabs plays "
+                        },
+                        {
+                            "text": "selection",
+                            "code": true
+                        },
+                        {
+                            "text": " when the user picks another tab. "
+                        },
+                        {
+                            "text": "haptic=\"none\"",
+                            "code": true
+                        },
+                        {
+                            "text": " silences the Android haptic. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -903,7 +976,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": " and requires both native renderers to be compiled into the host application."
@@ -942,6 +1015,10 @@
         {
             "label": "Segmented",
             "url": "segmented.md"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
         },
         {
             "label": "server-authoritative",

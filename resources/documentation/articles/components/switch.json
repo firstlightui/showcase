@@ -301,6 +301,43 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "none",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Silences the haptic this control plays by default. Any other value throws. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 0
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "class",
                                 "code": true
                             }
@@ -439,7 +476,7 @@
                         },
                         {
                             "text": "response revision",
-                            "link": 0
+                            "link": 1
                         },
                         {
                             "text": "."
@@ -454,7 +491,7 @@
                         },
                         {
                             "text": "server-authoritative",
-                            "link": 1
+                            "link": 2
                         },
                         {
                             "text": ". A native interaction immediately emits its proposed Boolean, but the visible on/off state remains the last value published by PHP. A response that accepts the proposal changes the visible state; a response that rejects it leaves the visible state unchanged. Every server publication clears a pending proposal, including one that republishes the same value. Programmatic publications update the accepted state without emitting "
@@ -627,7 +664,7 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 2
+                            "link": 3
                         },
                         {
                             "text": ". An error takes precedence over helper text and is included in accessibility semantics."
@@ -660,6 +697,49 @@
                             "text": " inside a row-owned switch semantic target, preserving Material state layers and TalkBack behaviour. The public EDGE API and server-authoritative state contract are shared; native geometry, presentation, and interaction remain platform-specific."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS the native "
+                        },
+                        {
+                            "text": "Toggle",
+                            "code": true
+                        },
+                        {
+                            "text": " plays the system switch haptic. On Android, Switch plays "
+                        },
+                        {
+                            "text": "toggle-on",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "toggle-off",
+                            "code": true
+                        },
+                        {
+                            "text": " as the user proposes a change, before PHP accepts it. Both follow the device's haptics setting; "
+                        },
+                        {
+                            "text": "haptic=\"none\"",
+                            "code": true
+                        },
+                        {
+                            "text": " silences the Android haptic. See "
+                        },
+                        {
+                            "text": "Play haptics",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
                 }
             ]
         },
@@ -674,7 +754,7 @@
                         },
                         {
                             "text": "compatibility reference",
-                            "link": 3
+                            "link": 4
                         },
                         {
                             "text": " and requires both native renderers to be compiled into the host application."
@@ -710,6 +790,10 @@
         }
     },
     "links": [
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
+        },
         {
             "label": "response revision",
             "url": "../reference/compatibility.md#runtime-response-contract"
