@@ -26,6 +26,7 @@
         "nativephp/mobile": "^4.7.0",
         "nativephp/mobile-biometrics": "^1.0.3",
         "nativephp/mobile-browser": "^1.2",
+        "nativephp/mobile-network": "^1.1",
         "nativephp/mobile-ui": "^0.9.0"
     },
     "require-dev": {

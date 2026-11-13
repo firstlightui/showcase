@@ -57,6 +57,11 @@ class RecipesScreen extends ShowcaseScreen
         Feedback::success("Changed \"{$post->title}\" as if on another device")->send();
     }
 
+    public function openServerStatus(): void
+    {
+        $this->navigate('/servers');
+    }
+
     public function openNewPost(): void
     {
         $this->navigate('/posts/create');

@@ -107,6 +107,21 @@
             @press="changePostElsewhere"
         />
     </firstlight:list-section>
+    <firstlight:list-section header="Data freshness" footer="Shows how old the cached list is. Turn on airplane mode, or make refreshes fail, to see the other notices.">
+        <firstlight:list-item
+            headline="Server status"
+            supporting="Says how old cached data is, offline, and when a refresh fails"
+            leading-icon="cloud-sync"
+            leading-icon-ios="clock.arrow.circlepath"
+            leading-icon-android="cloud_sync"
+            leading-icon-tone="info"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens a cached server list"
+            @press="openServerStatus"
+        />
+    </firstlight:list-section>
     <firstlight:list-section header="Security" footer="Locks after a minute in the background. Unlocking needs the paid biometrics plugin.">
         <firstlight:list-item
             headline="App lock"

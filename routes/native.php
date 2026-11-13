@@ -73,6 +73,7 @@ use App\NativeComponents\RecipesScreen;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SelectShowcase;
+use App\NativeComponents\ServerStatusScreen;
 use App\NativeComponents\SettingsScreen;
 use App\NativeComponents\LockScreen;
 use App\NativeComponents\VaultScreen;
@@ -399,6 +400,10 @@ Route::native('/posts/create', CreatePostScreen::class)
 
 Route::native('/posts/{post}/edit', EditPostScreen::class)
     ->name('recipes.post.edit')
+    ->layout(AppLayout::class);
+
+Route::native('/servers', ServerStatusScreen::class)
+    ->name('recipes.servers')
     ->layout(AppLayout::class);
 
 Route::native('/posts/{post}/cover', PostCoverScreen::class)

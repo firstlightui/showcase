@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Native\Mobile\Providers\BiometricsServiceProvider;
 use Native\Mobile\Providers\BrowserServiceProvider;
+use Native\Mobile\Providers\NetworkServiceProvider;
 use Native\Mobile\UI\NativeUIServiceProvider;
 
 class NativeServiceProvider extends ServiceProvider
@@ -52,6 +53,7 @@ class NativeServiceProvider extends ServiceProvider
             NativeUIServiceProvider::class,
             BiometricsServiceProvider::class,
             BrowserServiceProvider::class,
+            NetworkServiceProvider::class,
             FirstlightServiceProvider::class,
             AppGuardServiceProvider::class,
         ];
