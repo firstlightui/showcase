@@ -804,12 +804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/app-shortcuts.git",
-                "reference": "5aca0c261b77ead74c9378722e5c5fabc924ab12"
+                "reference": "68e79d314007afdb04183231f0961d767182f8f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/5aca0c261b77ead74c9378722e5c5fabc924ab12",
-                "reference": "5aca0c261b77ead74c9378722e5c5fabc924ab12",
+                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/68e79d314007afdb04183231f0961d767182f8f6",
+                "reference": "68e79d314007afdb04183231f0961d767182f8f6",
                 "shasum": ""
             },
             "require": {
@@ -858,12 +858,12 @@
             "license": [
                 "MIT"
             ],
-            "description": "Open a screen of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
+            "description": "Open a screen or run a PHP action of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
             "support": {
                 "source": "https://github.com/firstlightui/app-shortcuts/tree/main",
                 "issues": "https://github.com/firstlightui/app-shortcuts/issues"
             },
-            "time": "2026-11-13T22:29:11+00:00"
+            "time": "2026-11-13T23:52:45+00:00"
         },
         {
             "name": "firstlightui/nativephp",

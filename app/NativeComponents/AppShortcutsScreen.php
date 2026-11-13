@@ -2,16 +2,24 @@
 
 namespace App\NativeComponents;
 
+use App\Actions\AddQuickPost;
 use App\Models\Post;
+use Carbon\CarbonImmutable;
+use FirstlightUI\AppShortcuts\ActionInvocation;
+use FirstlightUI\AppShortcuts\Events\ActionRan;
 use FirstlightUI\AppShortcuts\Facades\AppShortcuts;
 use FirstlightUI\AppShortcuts\Shortcut;
 use FirstlightUI\Facades\Feedback;
 use FirstlightUI\NativeComponent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Native\Mobile\Attributes\On;
 
 /**
  * firstlightui/app-shortcuts: the shortcuts built into this app from config/app-shortcuts.php,
- * and one the app adds to the icon's long-press menu while it runs.
+ * the quick-post action that runs PHP instead of opening a screen, and one shortcut the app adds to
+ * the icon's long-press menu while it runs.
  */
 class AppShortcutsScreen extends NativeComponent
 {
@@ -20,10 +28,51 @@ class AppShortcutsScreen extends NativeComponent
     public function open(string $id): void
     {
         foreach (AppShortcuts::configured() as $shortcut) {
-            if ($shortcut->id === $id) {
+            if ($shortcut->id === $id && $shortcut->path !== null) {
                 $this->navigate($shortcut->path);
             }
         }
+    }
+
+    /** Runs an action's class here, with an invocation like the one a shortcut queues. */
+    public function runAction(string $id): void
+    {
+        foreach (AppShortcuts::configured() as $shortcut) {
+            if ($shortcut->id === $id && $shortcut->action !== null) {
+                app($shortcut->action)(new ActionInvocation((string) Str::uuid(), $id, CarbonImmutable::now()));
+                Feedback::success($shortcut->reply ?? "Ran {$shortcut->title}")->send();
+            }
+        }
+    }
+
+    /** Redraws the quick-post count when the action runs while this screen is open. */
+    #[On(ActionRan::class)]
+    public function actionRan(string $shortcutId): void
+    {
+        if ($shortcutId === 'quick-post') {
+            Feedback::success('A shortcut added a quick post')->send();
+        }
+    }
+
+    public function openNewestQuickPost(): void
+    {
+        $post = $this->quickPosts()->first();
+
+        if ($post === null) {
+            Feedback::warning('No quick posts yet. Run the shortcut from Siri, Spotlight or the app icon')->send();
+
+            return;
+        }
+
+        $this->navigate(route('recipes.post', ['post' => $post], false));
+    }
+
+    /**
+     * @return Builder<Post>
+     */
+    private function quickPosts(): Builder
+    {
+        return Post::query()->where('title', 'like', AddQuickPost::TITLE_PREFIX.' %')->latest()->orderByDesc('id');
     }
 
     public function addNewestPost(): void
@@ -63,9 +112,11 @@ class AppShortcutsScreen extends NativeComponent
      *
      * @return list<array{id: string, title: string, places: string}>
      */
-    public function shortcutRows(): array
+    public function shortcutRows(bool $actions = false): array
     {
-        return array_map(function (Shortcut $shortcut): array {
+        $shortcuts = array_filter(AppShortcuts::configured(), fn (Shortcut $s) => ($s->action !== null) === $actions);
+
+        return array_values(array_map(function (Shortcut $shortcut): array {
             $places = [];
 
             if ($shortcut->phrases !== []) {
@@ -83,7 +134,7 @@ class AppShortcutsScreen extends NativeComponent
             }
 
             return ['id' => $shortcut->id, 'title' => $shortcut->title, 'places' => implode(' · ', $places)];
-        }, AppShortcuts::configured());
+        }, $shortcuts));
     }
 
     public function navTitle(): string
@@ -93,6 +144,12 @@ class AppShortcutsScreen extends NativeComponent
 
     public function render(): View
     {
-        return view('native.app-shortcuts', ['shortcuts' => $this->shortcutRows()]);
+        $quickPosts = $this->quickPosts()->count();
+
+        return view('native.app-shortcuts', [
+            'shortcuts' => $this->shortcutRows(),
+            'actions' => $this->shortcutRows(actions: true),
+            'quickPosts' => $quickPosts === 1 ? '1 quick post so far' : "{$quickPosts} quick posts so far",
+        ]);
     }
 }
