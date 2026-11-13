@@ -1,0 +1,557 @@
+{
+    "id": "how-to/show-data-freshness",
+    "title": "Show data freshness",
+    "description": "Tell users how old a screen's data is, that they're seeing cached data while offline, and that a refresh failed, with a Try again action.",
+    "group": "Guides",
+    "anchors": {
+        "show-data-freshness": "overview",
+        "track-a-dataset": "track-a-dataset",
+        "show-the-notice": "show-the-notice",
+        "use-your-own-failure-message": "use-your-own-failure-message",
+        "how-firstlight-knows-the-device-is-offline": "how-firstlight-knows-the-device-is-offline",
+        "change-the-wording": "change-the-wording",
+        "test-it": "test-it"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A screen that shows cached data should say how old it is. Firstlight tracks the age of each dataset on a screen and shows one Callout above it:"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "The data is older than its window"
+                    },
+                    "items": [
+                        {
+                            "label": "Callout",
+                            "runs": [
+                                {
+                                    "text": "Updated 12 minutes ago",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "Updated at 2:05 PM",
+                                    "code": true
+                                },
+                                {
+                                    "text": " after an hour"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "The device is offline"
+                    },
+                    "items": [
+                        {
+                            "label": "Callout",
+                            "runs": [
+                                {
+                                    "text": "Showing data from 2:05 PM",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Offline with nothing cached"
+                    },
+                    "items": [
+                        {
+                            "label": "Callout",
+                            "runs": [
+                                {
+                                    "text": "You're offline. This will load when you're back online.",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "A refresh failed"
+                    },
+                    "items": [
+                        {
+                            "label": "Callout",
+                            "runs": [
+                                {
+                                    "text": "Couldn't refresh. Showing data from 2:05 PM.",
+                                    "code": true
+                                },
+                                {
+                                    "text": " with "
+                                },
+                                {
+                                    "text": "Try again",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "The first load failed"
+                    },
+                    "items": [
+                        {
+                            "label": "Callout",
+                            "runs": [
+                                {
+                                    "text": "Couldn't load this.",
+                                    "code": true
+                                },
+                                {
+                                    "text": " with "
+                                },
+                                {
+                                    "text": "Try again",
+                                    "code": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Firstlight never fetches or caches anything. Your screen loads its data as it does now, and tells Firstlight what it's showing and how the refresh went."
+                }
+            ]
+        },
+        "track-a-dataset": {
+            "title": "Track a dataset",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Use "
+                        },
+                        {
+                            "text": "TracksFreshness",
+                            "code": true
+                        },
+                        {
+                            "text": ". Call "
+                        },
+                        {
+                            "text": "freshness()",
+                            "code": true
+                        },
+                        {
+                            "text": " with a key and a window in seconds the first time, then report each load. This screen lists servers from an API and keeps the last response in the cache:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse Carbon\\CarbonImmutable;\nuse FirstlightUI\\Concerns\\TracksFreshness;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Http\\Client\\ConnectionException;\nuse Illuminate\\Http\\Client\\RequestException;\nuse Illuminate\\Support\\Facades\\Cache;\nuse Illuminate\\Support\\Facades\\Http;\nuse Illuminate\\View\\View;\n\nclass ServersScreen extends NativeComponent\n{\n    use TracksFreshness;\n\n    /** @var list<array{id: int, name: string}> */\n    public array $servers = [];\n\n    public function mount(): void\n    {\n        $cached = Cache::get('servers');\n        $this->servers = $cached['items'] ?? [];\n\n        $this->freshness('servers', freshFor: 60)\n            ->showing($cached ? CarbonImmutable::parse($cached['fetched_at']) : null);\n\n        if ($this->freshness('servers')->isStale()) {\n            $this->reload();\n        }\n    }\n\n    public function reload(): void\n    {\n        $this->freshness('servers')->refreshing();\n\n        try {\n            $items = Http::acceptJson()->get('https://api.example.com/servers')->throw()->json('data');\n        } catch (ConnectionException|RequestException) {\n            $this->freshness('servers')->failed(retry: 'reload');\n\n            return;\n        }\n\n        $fetchedAt = CarbonImmutable::now();\n        Cache::forever('servers', ['items' => $items, 'fetched_at' => $fetchedAt->toIso8601String()]);\n\n        $this->servers = $items;\n        $this->freshness('servers')->refreshed($fetchedAt);\n    }\n\n    public function render(): View\n    {\n        return view('native.servers');\n    }\n}"
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "showing($fetchedAt)",
+                            "code": true
+                        },
+                        {
+                            "text": " reports what the screen shows: the time the data was fetched, or null when nothing is cached."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "refreshing()",
+                            "code": true
+                        },
+                        {
+                            "text": " marks a refresh in progress. A failure notice stays up until the refresh lands."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "refreshed($fetchedAt)",
+                            "code": true
+                        },
+                        {
+                            "text": " reports a successful refresh. It defaults to now."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "failed()",
+                            "code": true
+                        },
+                        {
+                            "text": " reports a failed refresh or load. "
+                        },
+                        {
+                            "text": "retry",
+                            "code": true
+                        },
+                        {
+                            "text": " names the public method that "
+                        },
+                        {
+                            "text": "Try again",
+                            "code": true
+                        },
+                        {
+                            "text": " calls; leave it out for no action."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "isStale()",
+                            "code": true
+                        },
+                        {
+                            "text": " is true when nothing is cached or the data is older than "
+                        },
+                        {
+                            "text": "freshFor",
+                            "code": true
+                        },
+                        {
+                            "text": ". Use it to decide whether to refresh."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "A screen with several datasets tracks each under its own key, such as "
+                        },
+                        {
+                            "text": "servers",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "alerts",
+                            "code": true
+                        },
+                        {
+                            "text": ", with its own window."
+                        }
+                    ]
+                }
+            ]
+        },
+        "show-the-notice": {
+            "title": "Show the notice",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Include the partial where the Callout belongs, usually above the data:"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:column class=\"gap-3 p-4\">\n    @include('firstlight::native.freshness', ['notice' => $this->freshnessNotice('servers')])\n\n    @foreach ($servers as $server)\n        <native:text :text=\"$server['name']\" />\n    @endforeach\n</native:column>"
+                },
+                {
+                    "type": "text",
+                    "text": "It renders nothing while the data is fresh. While online with nothing cached and no failure, it also renders nothing, so your own loading or empty state shows."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The notice is worked out each time the screen renders. It doesn't count up on its own: "
+                        },
+                        {
+                            "text": "Updated 12 minutes ago",
+                            "code": true
+                        },
+                        {
+                            "text": " changes the next time the screen republishes."
+                        }
+                    ]
+                }
+            ]
+        },
+        "use-your-own-failure-message": {
+            "title": "Use your own failure message",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Pass a reason when the API tells you why, such as a rate limit:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "$this->freshness('servers')->failed('Too many requests. Try again in a minute.');"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "With cached data the Callout reads "
+                        },
+                        {
+                            "text": "Too many requests. Try again in a minute. Showing data from 2:05 PM.",
+                            "code": true
+                        },
+                        {
+                            "text": ". With nothing cached it shows the reason alone."
+                        }
+                    ]
+                }
+            ]
+        },
+        "how-firstlight-knows-the-device-is-offline": {
+            "title": "How Firstlight knows the device is offline",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight asks NativePHP's "
+                        },
+                        {
+                            "text": "Network::status()",
+                            "code": true
+                        },
+                        {
+                            "text": ". Install "
+                        },
+                        {
+                            "text": "nativephp/mobile-network",
+                            "code": true
+                        },
+                        {
+                            "text": " to get the offline notices:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer require nativephp/mobile-network"
+                },
+                {
+                    "type": "text",
+                    "text": "Without the plugin, or when the status can't be read, Firstlight treats the device as online and shows only age and failure notices."
+                }
+            ]
+        },
+        "change-the-wording": {
+            "title": "Change the wording",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The strings are Firstlight chrome. Override "
+                        },
+                        {
+                            "text": "freshness_updated",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "freshness_updated_at",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "freshness_showing",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "freshness_offline_empty",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "freshness_refresh_failed",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "freshness_failed_showing",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "freshness_load_failed",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "try_again",
+                            "code": true
+                        },
+                        {
+                            "text": " in "
+                        },
+                        {
+                            "text": "lang/vendor/firstlight/{locale}/chrome.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", as described in "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 0
+                        },
+                        {
+                            "text": ". Times use the app's locale and the phone's timezone, so "
+                        },
+                        {
+                            "text": "Showing data from 2:05 PM",
+                            "code": true
+                        },
+                        {
+                            "text": " matches the phone's clock."
+                        }
+                    ]
+                }
+            ]
+        },
+        "test-it": {
+            "title": "Test it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Freeze time, fake the network, and check the Callout:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\ServersScreen;\nuse Carbon\\CarbonImmutable;\nuse Illuminate\\Support\\Facades\\Cache;\nuse Illuminate\\Support\\Facades\\Http;\nuse Native\\Mobile\\Testing\\Native;\n\nit('shows cached servers with their time while offline', function () {\n    CarbonImmutable::setTestNow('2026-11-13 14:20');\n    Cache::forever('servers', ['items' => [['id' => 1, 'name' => 'web-1']], 'fetched_at' => '2026-11-13T14:05:00Z']);\n    Http::fake(['*' => Http::failedConnection()]);\n    Native::fakeBridge()->respondTo('Network.Status', ['connected' => false, 'type' => 'unknown']);\n\n    Native::test(ServersScreen::class)->assertElement('firstlight.callout', fn (array $callout) => $callout['props']['tone'] === 'warning'\n        && $callout['props']['message'] === 'Showing data from 2:05 PM');\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Callout messages aren't visible text to "
+                        },
+                        {
+                            "text": "assertSee()",
+                            "code": true
+                        },
+                        {
+                            "text": ", so match the "
+                        },
+                        {
+                            "text": "firstlight.callout",
+                            "code": true
+                        },
+                        {
+                            "text": " element and its "
+                        },
+                        {
+                            "text": "message",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "tone",
+                            "code": true
+                        },
+                        {
+                            "text": " props."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "With "
+                        },
+                        {
+                            "text": "nativephp/mobile-network",
+                            "code": true
+                        },
+                        {
+                            "text": " installed, "
+                        },
+                        {
+                            "text": "Native::fakeBridge()->withOffline()",
+                            "code": true
+                        },
+                        {
+                            "text": " does the same as the "
+                        },
+                        {
+                            "text": "respondTo()",
+                            "code": true
+                        },
+                        {
+                            "text": " call."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Localize chrome",
+            "url": "localize.md"
+        }
+    ]
+}
