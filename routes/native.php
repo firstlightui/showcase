@@ -50,6 +50,7 @@ use App\NativeComponents\CustomIconsShowcase;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\DocumentationArticleScreen;
 use App\NativeComponents\DocumentationScreen;
+use App\NativeComponents\EditPostScreen;
 use App\NativeComponents\GalleryInboxScreen;
 use App\NativeComponents\GalleryScreen;
 use App\NativeComponents\IconButtonShowcase;
@@ -394,6 +395,10 @@ Route::native('/posts', PostsScreen::class)
 
 Route::native('/posts/create', CreatePostScreen::class)
     ->name('recipes.posts.create')
+    ->layout(AppLayout::class);
+
+Route::native('/posts/{post}/edit', EditPostScreen::class)
+    ->name('recipes.post.edit')
     ->layout(AppLayout::class);
 
 Route::native('/posts/{post}/cover', PostCoverScreen::class)

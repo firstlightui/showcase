@@ -159,6 +159,7 @@ it('opens each documented recipe from the Recipes tab', function (string $label)
         'Settings' => '/settings',
         'Contacts' => '/contacts',
         'Cover photo' => '/posts/'.$newest.'/cover',
+        'Edit post' => '/posts/'.$newest.'/edit',
         'App lock' => '/vault',
     };
 
@@ -167,13 +168,13 @@ it('opens each documented recipe from the Recipes tab', function (string $label)
         ->assertNavigatedTo($path);
 
     Native::visit($path)->assertAccessible();
-})->with(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'App lock']);
+})->with(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'App lock']);
 
 it('presents the recipes as app entry points with icons and descriptions', function () {
     $screen = Native::visit('/recipes')->assertAccessible();
     $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
 
-    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'App lock']);
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Change it on another device', 'App lock']);
 
     foreach ($items as $item) {
         expect($item['props']['leading_type'] ?? null)->toBe('icon')

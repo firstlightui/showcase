@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use App\Models\Post;
+use FirstlightUI\Facades\Feedback;
 use Illuminate\View\View;
 
 /**
@@ -33,6 +34,27 @@ class RecipesScreen extends ShowcaseScreen
         $id = Post::query()->latest()->orderByDesc('id')->value('id');
 
         $this->navigate($id === null ? '/posts' : '/posts/'.$id.'/cover');
+    }
+
+    public function openEditPost(): void
+    {
+        $id = Post::query()->latest()->orderByDesc('id')->value('id');
+
+        $this->navigate($id === null ? '/posts' : '/posts/'.$id.'/edit');
+    }
+
+    /** Stands in for an edit made on another device, so a kept draft is now of an older version. */
+    public function changePostElsewhere(): void
+    {
+        $post = Post::query()->latest()->orderByDesc('id')->first();
+
+        if ($post === null) {
+            return;
+        }
+
+        $post->update(['body' => 'Changed on another device at '.now()->format('H:i:s').'.']);
+
+        Feedback::success("Changed \"{$post->title}\" as if on another device")->send();
     }
 
     public function openNewPost(): void

@@ -82,6 +82,31 @@
             @press="openPostCover"
         />
     </firstlight:list-section>
+    <firstlight:list-section header="Drafts" footer="Edit the post, go back without saving, then open it again. Change it on another device first to see a draft of an older version.">
+        <firstlight:list-item
+            headline="Edit post"
+            supporting="Unsaved edits survive Back and the edge swipe"
+            leading-icon="edit-note"
+            leading-icon-ios="pencil.and.list.clipboard"
+            leading-icon-android="edit_note"
+            leading-icon-tone="info"
+            trailing-icon="chevron-right"
+            trailing-icon-ios="chevron.right"
+            trailing-icon-android="chevron_right"
+            a11y-hint="Opens the newest post for editing"
+            @press="openEditPost"
+        />
+        <firstlight:list-item
+            headline="Change it on another device"
+            supporting="Updates the newest post so a kept draft is out of date"
+            leading-icon="sync"
+            leading-icon-ios="arrow.triangle.2.circlepath"
+            leading-icon-android="sync"
+            leading-icon-tone="warning"
+            a11y-hint="Changes the newest post's body"
+            @press="changePostElsewhere"
+        />
+    </firstlight:list-section>
     <firstlight:list-section header="Security" footer="Locks after a minute in the background. Unlocking needs the paid biometrics plugin.">
         <firstlight:list-item
             headline="App lock"
