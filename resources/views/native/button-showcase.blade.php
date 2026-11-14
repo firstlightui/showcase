@@ -24,6 +24,18 @@
         </native:column>
 
         <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Liquid Glass</native:text>
+            <native:text class="text-sm text-theme-on-surface">On iOS 26 and later these buttons float over the photo in glass: regular keeps a system label colour, prominent is filled with the variant's colour. Earlier iOS and Android show the usual variants.</native:text>
+            <native:stack class="w-full h-[240] rounded-2xl">
+                <native:image src="images/glass-backdrop.jpg" fit="cover" class="w-full h-[240] rounded-2xl" />
+                <native:column class="w-full h-[240] p-4 gap-3 justify-end">
+                    <firstlight:button glass="regular" variant="secondary" @press="recordPress">Regular glass</firstlight:button>
+                    <firstlight:button glass="prominent" @press="recordPress">Prominent glass</firstlight:button>
+                </native:column>
+            </native:stack>
+        </native:column>
+
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">States</native:text>
             <firstlight:button label="Unavailable" disabled />
             <firstlight:button label="Saving changes" loading a11y-hint="Saving is in progress" />

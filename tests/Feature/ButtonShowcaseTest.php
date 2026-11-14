@@ -32,6 +32,8 @@ it('publishes the complete Button gallery through the native wire tree', functio
             'Large',
             'Add item',
             'Continue',
+            'Regular glass',
+            'Prominent glass',
             'Unavailable',
             'Saving changes',
             'Send reminder',
@@ -53,8 +55,10 @@ it('publishes the complete Button gallery through the native wire tree', functio
         ])
         ->and($nodes[8]['props']['leading_icon'])->toBe('plus')
         ->and($nodes[9]['props']['trailing_icon'])->toBe('chevron-right')
-        ->and($nodes[10]['props']['disabled'])->toBeTrue()
-        ->and($nodes[11]['props']['loading'])->toBeTrue();
+        ->and($nodes[10]['props']['glass_style'])->toBe('regular')
+        ->and($nodes[11]['props']['glass_style'])->toBe('prominent')
+        ->and($nodes[12]['props']['disabled'])->toBeTrue()
+        ->and($nodes[13]['props']['loading'])->toBeTrue();
 
     $screen->assertAccessible();
 });
@@ -70,8 +74,8 @@ it('dispatches an ordinary press and publishes the accepted PHP result', functio
 it('does not register callbacks for disabled and loading examples', function () {
     $nodes = buttonShowcaseNodes(Native::visit('/components/button')->tree());
 
-    expect($nodes[10]['props'])->not->toHaveKey('on_press')
-        ->and($nodes[11]['props'])->not->toHaveKey('on_press');
+    expect($nodes[12]['props'])->not->toHaveKey('on_press')
+        ->and($nodes[13]['props'])->not->toHaveKey('on_press');
 });
 
 /** @return array<string, mixed> */

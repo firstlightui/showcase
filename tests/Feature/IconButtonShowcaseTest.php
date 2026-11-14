@@ -21,7 +21,7 @@ it('publishes the complete Icon Button gallery through the native wire tree', fu
     $nodes = iconButtonShowcaseNodes($screen->tree());
 
     expect($screen->tree()['props']['nav_title'] ?? null)->toBe('Firstlight Icon Button')
-        ->and($nodes)->toHaveCount(14)
+        ->and($nodes)->toHaveCount(16)
         ->and(array_column(array_slice(array_column($nodes, 'props'), 0, 5), 'variant'))->toBe([
             'primary',
             'secondary',
@@ -36,8 +36,10 @@ it('publishes the complete Icon Button gallery through the native wire tree', fu
         ])
         ->and($nodes[8]['props']['icon'])->toBeString()
         ->and($nodes[8]['props']['a11y_label'])->toBe('Share item')
-        ->and($nodes[9]['props']['disabled'])->toBeTrue()
-        ->and($nodes[10]['props']['loading'])->toBeTrue();
+        ->and($nodes[9]['props']['glass_style'])->toBe('regular')
+        ->and($nodes[10]['props']['glass_style'])->toBe('prominent')
+        ->and($nodes[11]['props']['disabled'])->toBeTrue()
+        ->and($nodes[12]['props']['loading'])->toBeTrue();
 
     foreach ($nodes as $node) {
         expect($node['on_press'] ?? null)->toBeInt();

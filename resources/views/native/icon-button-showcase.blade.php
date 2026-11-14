@@ -35,6 +35,18 @@
         </native:column>
 
         <native:column class="w-full gap-3">
+            <native:text class="text-sm font-semibold text-theme-on-surface">Liquid Glass</native:text>
+            <native:text class="text-sm text-theme-on-surface-variant">On iOS 26 and later these icon buttons float over the photo in glass. Earlier iOS and Android show the usual variants.</native:text>
+            <native:stack class="w-full h-[200] rounded-2xl">
+                <native:image src="images/glass-backdrop.jpg" fit="cover" class="w-full h-[200] rounded-2xl" />
+                <native:row class="w-full h-[200] p-4 gap-3 justify-end items-start">
+                    <firstlight:icon-button icon="share" icon-ios="square.and.arrow.up" glass="regular" a11y-label="Share photo" @press="recordPress('Share photo')" />
+                    <firstlight:icon-button icon="heart" glass="prominent" a11y-label="Like photo" @press="recordPress('Like photo')" />
+                </native:row>
+            </native:stack>
+        </native:column>
+
+        <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">States</native:text>
             <native:row class="w-full gap-3">
                 <firstlight:icon-button icon="lock" a11y-label="Unavailable action" disabled @press="recordPress" />
