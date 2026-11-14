@@ -93,28 +93,14 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Return the redirect yourself rather than relying on Laravel's "
+                            "text": "Laravel's "
                         },
                         {
                             "text": "auth",
                             "code": true
                         },
                         {
-                            "text": " middleware. With NativePHP Mobile 4.7.0, "
-                        },
-                        {
-                            "text": "auth",
-                            "code": true
-                        },
-                        {
-                            "text": " refusing a guest during in-app navigation sends the user to the app's "
-                        },
-                        {
-                            "text": "start_url",
-                            "code": true
-                        },
-                        {
-                            "text": " instead of the "
+                            "text": " middleware also works: from NativePHP Mobile 4.8, a guest it refuses goes to your "
                         },
                         {
                             "text": "login",

@@ -46,7 +46,7 @@
                             "text": "Use NativePHP Mobile "
                         },
                         {
-                            "text": "^4.7.0",
+                            "text": "^4.8.0",
                             "code": true
                         },
                         {

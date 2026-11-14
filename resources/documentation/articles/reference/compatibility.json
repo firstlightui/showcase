@@ -40,7 +40,7 @@
                             "label": "Current requirement",
                             "runs": [
                                 {
-                                    "text": "^4.7.0",
+                                    "text": "^4.8.0",
                                     "code": true
                                 }
                             ]
@@ -178,6 +178,28 @@
                         },
                         {
                             "text": " bag. Existing Firstlight screen code does not need a trait swap."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Mobile 4.8 supplies the "
+                        },
+                        {
+                            "text": "AppForegrounded",
+                            "code": true
+                        },
+                        {
+                            "text": " event Connectivity listens for, and closes every open Bottom Sheet and Modal in a screen's last frame when it navigates away, including Firstlight's, which opt in through "
+                        },
+                        {
+                            "text": "closesOnNavigation()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
                         }
                     ]
                 }

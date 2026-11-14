@@ -42,6 +42,7 @@ dataset('component demos', [
     ['Date Picker', '/components/date-picker'],
     ['Time Picker', '/components/time-picker'],
     ['Icon Button', '/components/icon-button'],
+    ['Toolbar', '/components/toolbar'],
     ['List Item', '/components/list-item'],
     ['Collection List', '/components/list'],
     ['Pill Group', '/components/pill-group'],
@@ -92,7 +93,7 @@ it('lists every published component with a tinted icon and no Blade tag overline
     $catalogue = (new ShowcaseHome)->components;
 
     expect(showcaseHeadlines($screen->tree()))->toEqualCanonicalizing(array_column($catalogue, 'label'))
-        ->and($items)->toHaveCount(34);
+        ->and($items)->toHaveCount(35);
 
     foreach ($items as $item) {
         expect($item['props'])->not->toHaveKey('overline')
@@ -134,7 +135,7 @@ it('explains an empty catalogue search and clears it', function () {
         ]);
 
     $screen->press('clearSearch')->assertSet('query', '');
-    expect(showcaseHeadlines($screen->tree()))->toHaveCount(34);
+    expect(showcaseHeadlines($screen->tree()))->toHaveCount(35);
 });
 
 it('pushes each component demo inside the Components tab', function (string $label, string $path) {
@@ -190,7 +191,7 @@ it('keeps capture fixtures free of tabs and back navigation', function () {
     // The Media fixture seeds sample photos on the device's mobile_public disk.
     Storage::fake('mobile_public');
 
-    foreach (['/captures/activity-indicator', '/captures/button', '/captures/callout', '/captures/transient-feedback', '/captures/badge', '/captures/checkbox', '/captures/media', '/captures/choice-group', '/captures/alert-dialog', '/captures/confirmation-dialog', '/captures/modal', '/captures/bottom-sheet', '/captures/date-picker', '/captures/time-picker', '/captures/tabs', '/captures/icon-button', '/captures/list-item', '/captures/list', '/captures/search-field', '/captures/select', '/captures/slider', '/captures/stepper', '/captures/text-area', '/captures/code-editor', '/captures/validate-fields'] as $path) {
+    foreach (['/captures/activity-indicator', '/captures/button', '/captures/callout', '/captures/transient-feedback', '/captures/badge', '/captures/checkbox', '/captures/media', '/captures/choice-group', '/captures/alert-dialog', '/captures/confirmation-dialog', '/captures/modal', '/captures/bottom-sheet', '/captures/date-picker', '/captures/time-picker', '/captures/tabs', '/captures/icon-button', '/captures/toolbar', '/captures/toolbar-item', '/captures/list-item', '/captures/list', '/captures/search-field', '/captures/select', '/captures/slider', '/captures/stepper', '/captures/text-area', '/captures/code-editor', '/captures/validate-fields'] as $path) {
         $tree = Native::visit($path)->tree();
 
         expect($tree['type'])->toBe('native_root_stack')

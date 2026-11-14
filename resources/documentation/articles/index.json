@@ -952,8 +952,36 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "Switch",
+                            "text": "Toolbar",
                             "link": 60
+                        },
+                        {
+                            "text": " — Give a screen a bottom row of icon actions with one separate primary action, drawn by each platform's own toolbar."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Toolbar Item",
+                            "link": 61
+                        },
+                        {
+                            "text": " — Configure one toolbar action, menu or primary action with badges, disabled state and accessibility."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Switch",
+                            "link": 62
                         },
                         {
                             "text": " — Configure native boolean settings, server-authoritative state, and accessibility."
@@ -972,7 +1000,7 @@
                     "runs": [
                         {
                             "text": "ValidatesFields",
-                            "link": 61
+                            "link": 63
                         },
                         {
                             "text": " — Look up the public "
@@ -993,7 +1021,7 @@
                     "runs": [
                         {
                             "text": "Screen assertions",
-                            "link": 62
+                            "link": 64
                         },
                         {
                             "text": " — Look up the Firstlight "
@@ -1021,7 +1049,7 @@
                     "runs": [
                         {
                             "text": "Compatibility",
-                            "link": 63
+                            "link": 65
                         },
                         {
                             "text": " — Check the currently supported PHP, NativePHP, iOS, Android, and Swift versions."
@@ -1271,6 +1299,14 @@
         {
             "label": "Code Editor",
             "url": "components/code-editor.md"
+        },
+        {
+            "label": "Toolbar",
+            "url": "components/toolbar.md"
+        },
+        {
+            "label": "Toolbar Item",
+            "url": "components/toolbar-item.md"
         },
         {
             "label": "Switch",

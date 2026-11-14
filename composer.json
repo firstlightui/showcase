@@ -24,7 +24,7 @@
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
-        "nativephp/mobile": "^4.7.0",
+        "nativephp/mobile": "^4.8.0",
         "nativephp/mobile-biometrics": "^1.0.3",
         "nativephp/mobile-browser": "^1.2",
         "nativephp/mobile-network": "^1.1",

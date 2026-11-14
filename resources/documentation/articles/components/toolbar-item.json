@@ -1,0 +1,902 @@
+{
+    "id": "components/toolbar-item",
+    "title": "Toolbar Item",
+    "description": "One icon action, menu or primary action inside a Toolbar, with badges, disabled state, haptics and accessibility.",
+    "group": "Components",
+    "anchors": {
+        "toolbar-item": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "menus": "menus",
+        "badges": "badges",
+        "accessibility": "accessibility",
+        "validation-and-excluded-apis": "validation-and-excluded-apis",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar Item is one icon action in a "
+                        },
+                        {
+                            "text": "Toolbar",
+                            "link": 0
+                        },
+                        {
+                            "text": ". It runs an action, opens a menu, or, with "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": ", is the toolbar's separate primary action."
+                        }
+                    ]
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:toolbar>\n    <firstlight:toolbar-item\n        icon=\"tray\"\n        icon-android=\"inbox\"\n        a11y-label=\"Inbox\"\n        :badge=\"$unread\"\n        haptic=\"keypress\"\n        @press=\"openInbox\"\n    />\n    <firstlight:toolbar-item\n        icon=\"ellipsis.circle\"\n        icon-android=\"more_horiz\"\n        a11y-label=\"More\"\n        :menu=\"[\n            ['method' => 'duplicate', 'label' => 'Duplicate', 'icon' => 'plus.square.on.square'],\n            ['method' => 'archive', 'label' => 'Archive', 'disabled' => ! $canArchive],\n            ['method' => 'confirmDelete', 'label' => 'Delete', 'icon' => 'trash', 'role' => 'destructive'],\n        ]\"\n    />\n    <firstlight:toolbar-item primary icon=\"square.and.pencil\" icon-android=\"edit_square\" a11y-label=\"New message\" :disabled=\"! $canCompose\" @press=\"compose\" />\n</firstlight:toolbar>"
+                },
+                {
+                    "type": "text",
+                    "text": "Toolbar Item is self-closing and has no visible text. It renders only inside a Toolbar."
+                }
+            ]
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Required shared icon name and cross-platform fallback. Accepts a "
+                                },
+                                {
+                                    "text": "custom icon",
+                                    "link": 1
+                                },
+                                {
+                                    "text": " as "
+                                },
+                                {
+                                    "text": "custom:<name>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-ios",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`IosSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon-android",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "`AndroidSymbol"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "string`"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required action name, read by VoiceOver and TalkBack and used as the item's title in an iOS overflow."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "primary",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Makes this the toolbar's separate primary action. At most one per Toolbar. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Prevents interaction and exposes native disabled state. Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "badge",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "int",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "A count or short text shown on the icon. "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "0",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "''",
+                                    "code": true
+                                },
+                                {
+                                    "text": " show no badge; counts above 99 show "
+                                },
+                                {
+                                    "text": "99+",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; negative counts are rejected."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "menu",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Entries the item opens instead of running "
+                                },
+                                {
+                                    "text": "@press",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". See "
+                                },
+                                {
+                                    "text": "Menus",
+                                    "link": 2
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "haptic",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "a "
+                                },
+                                {
+                                    "text": "FirstlightUI\\Haptics\\Haptic",
+                                    "code": true
+                                },
+                                {
+                                    "text": " case or its name, such as "
+                                },
+                                {
+                                    "text": "keypress",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Haptic played when the item's action runs: a tap on an "
+                                },
+                                {
+                                    "text": "@press",
+                                    "code": true
+                                },
+                                {
+                                    "text": " item, or choosing one of its menu entries. Silent by default. See "
+                                },
+                                {
+                                    "text": "Play haptics",
+                                    "link": 3
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Blade documentation uses kebab-case names. "
+                        },
+                        {
+                            "text": "iconIos",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "iconAndroid",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "a11yLabel",
+                            "code": true
+                        },
+                        {
+                            "text": " are accepted as aliases."
+                        }
+                    ]
+                }
+            ]
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "An item takes exactly one of "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "menu",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " runs the named PHP method once for a native tap:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function compose(): void\n{\n    // Open the composer and publish the result.\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Disabled items, and disabled menu entries, never call PHP. Programmatic publications never emit a press."
+                }
+            ]
+        },
+        "menus": {
+            "title": "Menus",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "menu",
+                            "code": true
+                        },
+                        {
+                            "text": " is a list of entries. Each entry takes:"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "method",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Required",
+                            "text": "yes"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "PHP method run when the entry is chosen."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Required",
+                            "text": "yes"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible entry text."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Required",
+                            "text": "no"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shared icon; "
+                                },
+                                {
+                                    "text": "ios",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "android",
+                                    "code": true
+                                },
+                                {
+                                    "text": " override it per platform and require "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "role",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Required",
+                            "text": "no"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "destructive",
+                                    "code": true
+                                },
+                                {
+                                    "text": " shows the entry in the platform's destructive style. PHP still owns any confirmation."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Required",
+                            "text": "no"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Shows the entry but prevents choosing it."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Tapping the item opens the menu: a native menu from the bar button on iOS and a Material dropdown menu on Android. An item whose entries are all disabled is itself disabled."
+                }
+            ]
+        },
+        "badges": {
+            "title": "Badges",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "On iOS 26 and later the badge is the system badge on the bar button; earlier iOS does not draw it. Android draws a Material badge on the icon, and TalkBack reads its text after the action name. Keep badge text short, such as a count, because it cannot be given separate spoken wording."
+                }
+            ]
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Every item requires "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "; icon names are never read. On iOS the item is a system bar button: VoiceOver reads the label as its name and a disabled item as dimmed. On Android it is a Material icon button or floating action button with the label as its name and native disabled state. Menus use the platform's own menu semantics. Native touch targets are at least 44 points on iOS and 48 dp on Android."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar Item has no "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": " or spoken badge wording: iOS bar buttons take neither, so neither platform offers them. Put what the action does in its label."
+                        }
+                    ]
+                }
+            ]
+        },
+        "validation-and-excluded-apis": {
+            "title": "Validation and excluded APIs",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight rejects a missing or blank icon or "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ", an item with neither "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " nor "
+                        },
+                        {
+                            "text": "menu",
+                            "code": true
+                        },
+                        {
+                            "text": " or with both, non-boolean "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ", negative badges, and menu entries with unknown keys, a blank "
+                        },
+                        {
+                            "text": "method",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": ", a "
+                        },
+                        {
+                            "text": "role",
+                            "code": true
+                        },
+                        {
+                            "text": " other than "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": ", a non-boolean "
+                        },
+                        {
+                            "text": "disabled",
+                            "code": true
+                        },
+                        {
+                            "text": ", or a platform icon without a shared "
+                        },
+                        {
+                            "text": "icon",
+                            "code": true
+                        },
+                        {
+                            "text": ". Visible labels, "
+                        },
+                        {
+                            "text": "a11y-hint",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "badge-a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ", variants, sizes, "
+                        },
+                        {
+                            "text": "loading",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "url",
+                            "code": true
+                        },
+                        {
+                            "text": ", context menus, bindings, and gesture directives other than "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " are not supported."
+                        }
+                    ]
+                }
+            ]
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar Item supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 4
+                        },
+                        {
+                            "text": " and requires both Firstlight native renderers to be compiled into the host application."
+                        }
+                    ]
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar-item/ios-light.png",
+                    "text": "Toolbar Item on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar-item/ios-dark.png",
+                    "text": "Toolbar Item on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar-item/android-light.png",
+                    "text": "Toolbar Item on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar-item/android-dark.png",
+                    "text": "Toolbar Item on Android in dark mode"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Toolbar",
+            "url": "toolbar.md"
+        },
+        {
+            "label": "custom icon",
+            "url": "../how-to/use-custom-icons.md"
+        },
+        {
+            "label": "Menus",
+            "url": "#menus"
+        },
+        {
+            "label": "Play haptics",
+            "url": "../how-to/play-haptics.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
+}

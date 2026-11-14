@@ -1,0 +1,361 @@
+{
+    "id": "components/toolbar",
+    "title": "Toolbar",
+    "description": "A screen's bottom row of icon actions, drawn as the system bottom toolbar on iOS and a Material 3 floating toolbar on Android.",
+    "group": "Components",
+    "anchors": {
+        "toolbar": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "children": "children",
+        "layout-requirement": "layout-requirement",
+        "tab-bars": "tab-bars",
+        "platform-behaviour": "platform-behaviour",
+        "events-and-state": "events-and-state",
+        "accessibility": "accessibility",
+        "validation-and-excluded-apis": "validation-and-excluded-apis",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Toolbar gives a screen a row of icon actions at the bottom, such as Notes' checklist, attach and markup actions, with one separate primary action, such as New note. iOS shows them in the system bottom toolbar and Android in a Material 3 floating toolbar."
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:toolbar>\n    <firstlight:toolbar-item icon=\"checklist\" a11y-label=\"Checklist\" @press=\"addChecklist\" />\n    <firstlight:toolbar-item\n        icon=\"paperclip\"\n        icon-android=\"attach_file\"\n        a11y-label=\"Attach\"\n        :menu=\"[\n            ['method' => 'attachPhoto', 'label' => 'Photo', 'icon' => 'photo'],\n            ['method' => 'attachFile', 'label' => 'File', 'icon' => 'doc'],\n        ]\"\n    />\n    <firstlight:toolbar-item icon=\"pencil.tip.crop.circle\" icon-android=\"draw\" a11y-label=\"Markup\" @press=\"markup\" />\n    <firstlight:toolbar-item primary icon=\"square.and.pencil\" icon-android=\"edit_square\" a11y-label=\"New note\" @press=\"compose\" />\n</firstlight:toolbar>"
+                },
+                {
+                    "type": "text",
+                    "text": "Author one Toolbar per screen, as a direct child of the screen's root rather than inside a list or scroll view, so it is always rendered. It takes no space in the layout, so content does not move around it."
+                }
+            ]
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar takes no props. Each action is a "
+                        },
+                        {
+                            "text": "Toolbar Item",
+                            "link": 0
+                        },
+                        {
+                            "text": " child."
+                        }
+                    ]
+                }
+            ]
+        },
+        "children": {
+            "title": "Children",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Child type"
+                    },
+                    "items": [
+                        {
+                            "label": "Detail",
+                            "runs": [
+                                {
+                                    "text": "Only "
+                                },
+                                {
+                                    "text": "<firstlight:toolbar-item>",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Actions"
+                    },
+                    "items": [
+                        {
+                            "label": "Detail",
+                            "runs": [
+                                {
+                                    "text": "One to five items without "
+                                },
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Primary action"
+                    },
+                    "items": [
+                        {
+                            "label": "Detail",
+                            "runs": [
+                                {
+                                    "text": "At most one item with "
+                                },
+                                {
+                                    "text": "primary",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", shown apart from the others at the trailing end."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "A Toolbar may hold only a primary item, or only regular items."
+                }
+            ]
+        },
+        "layout-requirement": {
+            "title": "Layout requirement",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar needs a screen shown through a native-chrome layout, which is the default "
+                        },
+                        {
+                            "text": "NativeLayout",
+                            "code": true
+                        },
+                        {
+                            "text": " in NativePHP Mobile 4.8. On iOS the items join the navigation stack's bottom toolbar, and a screen without a navigation stack has no bottom toolbar to join."
+                        }
+                    ]
+                }
+            ]
+        },
+        "tab-bars": {
+            "title": "Tab bars",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On a screen pushed inside a tab layout, iOS hides the tab bar and the toolbar takes its place. On a tab's root screen iOS keeps the tab bar, which covers the bottom toolbar, so set "
+                        },
+                        {
+                            "text": "$hidesTabBar",
+                            "code": true
+                        },
+                        {
+                            "text": " on a tab root that has a Toolbar:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "class NotesScreen extends NativeComponent\n{\n    protected bool $hidesTabBar = true;\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "On Android the toolbar floats above the tab bar when one is shown and above the system navigation bar when the screen hides it."
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "iOS:",
+                            "strong": true
+                        },
+                        {
+                            "text": " the items join the screen's bottom toolbar. On iOS 26 and later the regular items share one Liquid Glass group and the primary action has its own glass at the trailing edge. Earlier iOS shows the classic bottom toolbar with the primary action at the trailing edge. iOS places the bar and sizes and spaces the items."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Android:",
+                            "strong": true
+                        },
+                        {
+                            "text": " Firstlight floats a Material 3 floating toolbar at the bottom centre of the screen, above the system navigation bar, with the primary action as its floating action button. On a screen with a bottom tab bar it floats above the tabs. It slides away while content scrolls towards its end and returns when content scrolls back. The toolbar follows Material's floating toolbar measurements and colours, drawn from stable Material 3 components."
+                        }
+                    ]
+                }
+            ]
+        },
+        "events-and-state": {
+            "title": "Events and state",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar has no events. Each item's "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": ", or its menu entry's "
+                        },
+                        {
+                            "text": "method",
+                            "code": true
+                        },
+                        {
+                            "text": ", runs once for a native tap. A republished Toolbar updates its items in place."
+                        }
+                    ]
+                }
+            ]
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Each item requires an "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ", which VoiceOver and TalkBack read as the action name; items have no visible text. The Toolbar itself has no label: iOS announces its system bar as a toolbar, and Android groups the floating toolbar's actions so TalkBack moves through them together. Badge, disabled and menu semantics are described on "
+                        },
+                        {
+                            "text": "Toolbar Item",
+                            "link": 0
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "validation-and-excluded-apis": {
+            "title": "Validation and excluded APIs",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight rejects a Toolbar with no items, more than five regular items, more than one primary item, or a child other than Toolbar Item. Toolbar rejects labels, icons, values, disabled and loading state, variants, "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "haptic",
+                            "code": true
+                        },
+                        {
+                            "text": ", accessibility labels, and press or other gesture directives."
+                        }
+                    ]
+                }
+            ]
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Toolbar supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 1
+                        },
+                        {
+                            "text": " and requires both Firstlight native renderers to be compiled into the host application."
+                        }
+                    ]
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar/ios-light.png",
+                    "text": "Toolbar on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar/ios-dark.png",
+                    "text": "Toolbar on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar/android-light.png",
+                    "text": "Toolbar on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/toolbar/android-dark.png",
+                    "text": "Toolbar on Android in dark mode"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Toolbar Item",
+            "url": "toolbar-item.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
+}

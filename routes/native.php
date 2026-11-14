@@ -40,6 +40,8 @@ use App\NativeComponents\Captures\TabsCapture;
 use App\NativeComponents\Captures\TextAreaCapture;
 use App\NativeComponents\Captures\TextFieldCapture;
 use App\NativeComponents\Captures\TimePickerCapture;
+use App\NativeComponents\Captures\ToolbarCapture;
+use App\NativeComponents\Captures\ToolbarItemCapture;
 use App\NativeComponents\Captures\TransientFeedbackCapture;
 use App\NativeComponents\Captures\ValidateFieldsCapture;
 use App\NativeComponents\CheckboxShowcase;
@@ -88,6 +90,7 @@ use App\NativeComponents\TabsShowcase;
 use App\NativeComponents\TextAreaShowcase;
 use App\NativeComponents\TextFieldShowcase;
 use App\NativeComponents\TimePickerShowcase;
+use App\NativeComponents\ToolbarShowcase;
 use App\NativeComponents\TransientFeedbackDestination;
 use App\NativeComponents\TransientFeedbackShowcase;
 use App\NativeComponents\ValidationShowcase;
@@ -238,6 +241,18 @@ Route::native('/components/icon-button', IconButtonShowcase::class)
 
 Route::native('/captures/icon-button', IconButtonCapture::class)
     ->name('captures.icon-button')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/components/toolbar', ToolbarShowcase::class)
+    ->name('toolbar')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/toolbar', ToolbarCapture::class)
+    ->name('captures.toolbar')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/toolbar-item', ToolbarItemCapture::class)
+    ->name('captures.toolbar-item')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/components/custom-icons', CustomIconsShowcase::class)
