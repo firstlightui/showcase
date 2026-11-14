@@ -39,8 +39,10 @@ class AppShortcutsScreen extends NativeComponent
     {
         foreach (AppShortcuts::configured() as $shortcut) {
             if ($shortcut->id === $id && $shortcut->action !== null) {
-                app($shortcut->action)(new ActionInvocation((string) Str::uuid(), $id, CarbonImmutable::now()));
-                Feedback::success($shortcut->reply ?? "Ran {$shortcut->title}")->send();
+                // Called directly rather than through AppShortcuts::run(), whose ActionRan event would
+                // also trigger this screen's listener for runs from outside the app.
+                $reply = app($shortcut->action)(new ActionInvocation((string) Str::uuid(), $id, CarbonImmutable::now()));
+                Feedback::success(is_string($reply) ? $reply : "Ran {$shortcut->title}")->send();
             }
         }
     }

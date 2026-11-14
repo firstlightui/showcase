@@ -53,7 +53,7 @@ it('says how to add a quick post before there is one, and runs the action when t
         ->tap('Open the newest quick post')
         ->assertFeedbackSent('No quick posts yet. Run the shortcut from Siri, Spotlight or the app icon')
         ->tap('Add a quick post')
-        ->assertFeedbackSent('Added a quick post')
+        ->assertFeedbackSent('Added your first quick post.')
         ->assertSee('1 quick post so far');
 });
 

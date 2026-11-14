@@ -15,7 +15,7 @@
         @endforeach
     </firstlight:list-section>
 
-    <firstlight:list-section header="Actions that run PHP" footer="These run a PHP class instead of opening a screen. On iOS, Siri and Spotlight answer without opening the app, and a closed app runs the action when it next opens. On Android, the app icon's menu runs it in the background when the app is running. Tap one to run it here.">
+    <firstlight:list-section header="Actions that run PHP" footer="These run a PHP class instead of opening a screen. Siri, Spotlight and Android's app icon menu run it in the background, even with the app closed, and say what PHP returns. Tap one to run it here.">
         @foreach ($actions as $action)
             <firstlight:list-item
                 :headline="$action['title']"
