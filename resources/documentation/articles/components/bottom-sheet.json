@@ -352,11 +352,11 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<firstlight:bottom-sheet\n    :visible=\"$showingBill\"\n    pinned-footer\n    a11y-label=\"Review bill\"\n    @dismiss=\"closeBill\"\n>\n    <native:column class=\"w-full p-4 gap-3\">\n        @foreach ($items as $item)\n            <native:text class=\"text-theme-on-surface\">{{ $item['label'] }}</native:text>\n        @endforeach\n    </native:column>\n    <native:column class=\"w-full p-4 gap-3 bg-theme-surface\">\n        <native:text class=\"text-theme-on-surface\">Total: {{ $formattedTotal }}</native:text>\n        <firstlight:button label=\"Save\" @press=\"saveBill\" />\n    </native:column>\n</firstlight:bottom-sheet>"
+                    "text": "<firstlight:bottom-sheet\n    :visible=\"$showingBill\"\n    pinned-footer\n    a11y-label=\"Review bill\"\n    @dismiss=\"closeBill\"\n>\n    <native:column class=\"w-full p-4 gap-3\">\n        @foreach ($items as $item)\n            <native:text class=\"text-theme-on-surface\">{{ $item['label'] }}</native:text>\n        @endforeach\n    </native:column>\n    <native:column class=\"w-full p-4 gap-3\">\n        <native:text class=\"text-theme-on-surface\">Total: {{ $formattedTotal }}</native:text>\n        <firstlight:button label=\"Save\" @press=\"saveBill\" />\n    </native:column>\n</firstlight:bottom-sheet>"
                 },
                 {
                     "type": "text",
-                    "text": "The app supplies the items, formatted total and handlers. Keep the footer compact; body content must have space to scroll. PHP owns Save and whether the sheet closes. Native dismissal and its callback remain unchanged."
+                    "text": "The app supplies the items, formatted total and handlers. The footer needs no background: on iOS 26 and later the system blurs body content that scrolls under it, as under Apple's toolbars, and earlier iOS and Android give it the sheet's surface. Keep the footer compact; body content must have space to scroll. PHP owns Save and whether the sheet closes. Native dismissal and its callback remain unchanged."
                 }
             ]
         },

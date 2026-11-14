@@ -41,7 +41,7 @@
                     <native:text class="text-theme-on-surface">Bill item {{ $item }}: $45.00</native:text>
                 @endforeach
             </native:column>
-            <native:column class="w-full p-4 gap-3 bg-theme-surface">
+            <native:column class="w-full p-4 gap-3">
                 <native:text class="text-lg font-semibold text-theme-on-surface">Total: $1,350.00</native:text>
                 <firstlight:button label="Save bill" @press="closeBill" />
             </native:column>
