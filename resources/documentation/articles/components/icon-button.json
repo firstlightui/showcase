@@ -399,6 +399,57 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "glass",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "regular",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "prominent",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "On iOS 26 and later, draws the button in Liquid Glass: "
+                                },
+                                {
+                                    "text": "regular",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is clear glass with a system icon colour that stays legible over light or dark content, and "
+                                },
+                                {
+                                    "text": "prominent",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is glass filled with the variant's colour. For actions that float over content, such as over a photo or map. Earlier iOS and Android keep the variant's usual look."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "haptic",
                                 "code": true
                             }
@@ -637,6 +688,35 @@
                             "text": " scale the visible glyph and native container without shrinking the accessible interaction target."
                         }
                     ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS 26 and later, "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " switches to the system "
+                        },
+                        {
+                            "text": ".glass",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": ".glassProminent",
+                            "code": true
+                        },
+                        {
+                            "text": " style, and Icon Buttons in a Bottom Sheet footer take glass without it. Reduce Transparency and Increase Contrast apply automatically."
+                        }
+                    ]
                 }
             ]
         },
@@ -698,7 +778,28 @@
                             "code": true
                         },
                         {
-                            "text": ", non-boolean state props, invalid variants and sizes, unsupported platform icon values, visible labels or slots, trailing icons, menus, navigation directives, extra gesture callbacks, bindings, field props, and per-control colour or typography escape hatches."
+                            "text": ", non-boolean state props, invalid variants and sizes, unsupported platform icon values, visible labels or slots, trailing icons, menus, the Mobile UI "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " class (use the "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " prop) and unknown "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " styles, navigation directives, extra gesture callbacks, bindings, field props, and per-control colour or typography escape hatches."
                         }
                     ]
                 }

@@ -764,7 +764,7 @@
                             "code": true
                         },
                         {
-                            "text": " restricted to calendar dates, with explicit Cancel and Confirm actions. On iPhone it opens in a sheet sized to the calendar and actions, which grows with Dynamic Type; on iPad it opens in a popover anchored to the field. Android presents the Material 3 "
+                            "text": " restricted to calendar dates, with explicit Cancel and Confirm actions, which are Liquid Glass buttons on iOS 26 and later. On iPhone it opens in a sheet sized to the calendar and actions, which grows with Dynamic Type; on iPad it opens in a popover anchored to the field. Android presents the Material 3 "
                         },
                         {
                             "text": "DatePickerDialog",

@@ -101,6 +101,28 @@
                 },
                 {
                     "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS 26 and later, Firstlight's floating surfaces are Liquid Glass, as Apple's own are. Bottom Sheet and Transient Feedback take their colour from the content behind them rather than from "
+                        },
+                        {
+                            "text": "surface",
+                            "code": true
+                        },
+                        {
+                            "text": ", and Segmented and Tabs show the system's selected segment rather than a "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": " fill. Prominent glass buttons are still filled with their variant's colour, and a warning Feedback is tinted with the warning colour. Earlier iOS and Android use the theme colours as before."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
                     "text": "Dark values are optional because NativePHP can derive them from the light theme. Define explicit dark overrides when brand perception or contrast needs a tuned pair. Keep text and icons at a contrast ratio of at least 4.5:1 against their background token."
                 },
                 {

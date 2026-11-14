@@ -1167,7 +1167,7 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "iOS presents a bottom SwiftUI material notice with semantic SF Symbols, native buttons, safe-area spacing, Dynamic Type, and a reduced-motion-aware transition. Android presents a bottom Material 3 "
+                            "text": "iOS presents a bottom SwiftUI notice with semantic SF Symbols, native buttons, safe-area spacing, Dynamic Type, and a reduced-motion-aware transition. On iOS 26 and later the notice and its buttons are Liquid Glass, tinted for a warning; before iOS 26 the notice is a material card. Android presents a bottom Material 3 "
                         },
                         {
                             "text": "Snackbar",

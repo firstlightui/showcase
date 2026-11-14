@@ -246,7 +246,7 @@
                             "link": 0
                         },
                         {
-                            "text": "."
+                            "text": ". On iOS 26 and later the sheet's Confirm and Cancel are Liquid Glass buttons."
                         }
                     ]
                 }

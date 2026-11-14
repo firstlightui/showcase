@@ -842,6 +842,21 @@
                     "type": "text",
                     "runs": [
                         {
+                            "text": "On iOS 26 and later the selected segment is the system's Liquid Glass thumb, which turns into a glass lens while it is dragged. Before iOS 26 it is filled with the theme's primary colour, with "
+                        },
+                        {
+                            "text": "on-primary",
+                            "code": true
+                        },
+                        {
+                            "text": " text or black or white when that contrast is too low."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
                             "text": "On iOS, "
                         },
                         {

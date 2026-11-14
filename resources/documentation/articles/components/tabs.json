@@ -876,7 +876,7 @@
                             "code": true
                         },
                         {
-                            "text": ". Place Tabs full width directly under the navigation bar: iOS insets the segmented control by the system margin, while the Android tab row spans the width. Segments size to their labels, and a visible count follows the label, such as "
+                            "text": ", with the system's Liquid Glass thumb on iOS 26 and later and the theme's primary colour before. Place Tabs full width directly under the navigation bar: iOS insets the segmented control by the system margin, while the Android tab row spans the width. Segments size to their labels, and a visible count follows the label, such as "
                         },
                         {
                             "text": "Deployments (2)",

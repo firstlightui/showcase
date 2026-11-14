@@ -471,6 +471,57 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "glass",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "regular",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "prominent",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "On iOS 26 and later, draws the button in Liquid Glass: "
+                                },
+                                {
+                                    "text": "regular",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is clear glass with a system label colour that stays legible over light or dark content, and "
+                                },
+                                {
+                                    "text": "prominent",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is glass filled with the variant's colour. For actions that float over content, such as over a photo or map. Earlier iOS and Android keep the variant's usual look."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "haptic",
                                 "code": true
                             }
@@ -737,7 +788,28 @@
                             "code": true
                         },
                         {
-                            "text": " require real booleans. Unsupported variants or sizes also throw. Attached menus, custom typography, Liquid Glass classes, navigation directives, field props or bindings, long press, double tap, press-down, and press-up callbacks are outside this component's contract and fail rather than silently widening the API."
+                            "text": " require real booleans. Unsupported variants or sizes also throw. Attached menus, custom typography, the Mobile UI "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " class (use the "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " prop), unknown "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": " styles, navigation directives, field props or bindings, long press, double tap, press-down, and press-up callbacks are outside this component's contract and fail rather than silently widening the API."
                         }
                     ]
                 }
@@ -827,6 +899,42 @@
                         },
                         {
                             "text": " renderer, wrapped by Firstlight so TalkBack reaches one named Button node, with native state layers, progress presentation, icon layout, TalkBack metadata, and semantic theme tokens."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On iOS 26 and later, buttons in a Bottom Sheet footer take Liquid Glass without "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": ": "
+                        },
+                        {
+                            "text": "secondary",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "ghost",
+                            "code": true
+                        },
+                        {
+                            "text": " as regular glass, the others as prominent glass. Elsewhere a button is only glass when it sets "
+                        },
+                        {
+                            "text": "glass",
+                            "code": true
+                        },
+                        {
+                            "text": ", because Apple keeps Liquid Glass for controls that float over content."
                         }
                     ]
                 },
