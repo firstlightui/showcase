@@ -1,7 +1,7 @@
 <native:scroll-view class="w-full flex-1 bg-theme-background">
     <native:column class="w-full p-4 pb-8 gap-5">
         <native:text class="text-sm font-semibold text-theme-on-surface">On-device checks</native:text>
-        <native:text class="text-sm text-theme-on-surface-variant">Drag down or tap outside: dismissed increases once. In the programmatic example, tap Close from PHP: dismissed stays unchanged. Reopen and dismiss natively: dismissed increases.</native:text>
+        <native:text class="text-sm text-theme-on-surface-variant">Drag down, tap outside or, on iOS, tap the titled sheet's close button: dismissed increases once. In the programmatic example, tap Close from PHP: dismissed stays unchanged. Reopen and dismiss natively: dismissed increases.</native:text>
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Default sheet</native:text>
             <native:button ref="showDefault" label="Open filters" variant="primary" @press="showDefault" />
@@ -26,12 +26,12 @@
         <firstlight:bottom-sheet
             ref="defaultSheet"
             :visible="$defaultVisible"
+            title="Filters"
             a11y-label="Filters"
             @dismiss="dismissDefault"
         >
             <native:column class="w-full p-4 gap-3">
-                <native:text class="text-lg font-semibold text-theme-on-surface">Filters</native:text>
-                <native:text class="text-sm text-theme-on-surface">Drag down or tap outside to dismiss this sheet.</native:text>
+                <native:text class="text-sm text-theme-on-surface">Drag down or tap outside to dismiss this sheet. On iOS, the close button dismisses it too.</native:text>
             </native:column>
         </firstlight:bottom-sheet>
 

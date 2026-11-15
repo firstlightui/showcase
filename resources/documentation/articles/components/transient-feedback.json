@@ -1209,7 +1209,7 @@
                             "link": 5
                         },
                         {
-                            "text": ": PHP 8.4, NativePHP Mobile 4.8, NativePHP Mobile UI 0.9, iOS 18.2 or later, and Android API 29 or later. Both Firstlight native hosts must be compiled into the application."
+                            "text": ": PHP 8.4, NativePHP Mobile 4.8, NativePHP Mobile UI 0.10, iOS 18.2 or later, and Android API 29 or later. Both Firstlight native hosts must be compiled into the application."
                         }
                     ]
                 }

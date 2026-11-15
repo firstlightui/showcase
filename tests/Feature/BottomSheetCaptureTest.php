@@ -28,6 +28,8 @@ it('publishes the stable Bottom Sheet documentation capture fixture', function (
         ->and($sheet['type'] ?? null)->toBe('firstlight.bottom-sheet')
         ->and($sheet['props'])->toMatchArray([
             'visible' => true,
+            'title' => 'Filters',
+            'close_label' => 'Close',
             'a11y_label' => 'Filters',
         ])
         ->and($sheet['props']['on_dismiss'] ?? null)->toBeInt()

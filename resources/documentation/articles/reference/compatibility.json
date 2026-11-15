@@ -57,7 +57,7 @@
                             "label": "Current requirement",
                             "runs": [
                                 {
-                                    "text": "^0.9.0",
+                                    "text": "^0.10.0",
                                     "code": true
                                 }
                             ]
@@ -156,7 +156,7 @@
                             "code": true
                         },
                         {
-                            "text": "; Mobile UI 0.9 requires Mobile 4.7. "
+                            "text": ". Mobile UI 0.10 requires Mobile 4.8. "
                         },
                         {
                             "text": "ValidatesFields",

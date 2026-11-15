@@ -6,6 +6,7 @@
     "anchors": {
         "bottom-sheet": "overview",
         "complete-example": "complete-example",
+        "title": "title",
         "props": "props",
         "events": "events",
         "height": "height",
@@ -58,7 +59,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<firstlight:bottom-sheet\n    :visible=\"$showingFilters\"\n    a11y-label=\"Filters\"\n    @dismiss=\"closeFilters\"\n>\n    <native:text class=\"text-lg font-semibold text-theme-on-surface\">Filters</native:text>\n</firstlight:bottom-sheet>"
+                    "text": "<firstlight:bottom-sheet\n    :visible=\"$showingFilters\"\n    title=\"Filters\"\n    a11y-label=\"Filters\"\n    @dismiss=\"closeFilters\"\n>\n    <native:column class=\"w-full p-4 gap-3\">\n        <firstlight:switch label=\"Unread only\" native:model=\"unreadOnly\" />\n    </native:column>\n</firstlight:bottom-sheet>"
                 },
                 {
                     "type": "text",
@@ -81,19 +82,85 @@
                             "text": "."
                         }
                     ]
+                }
+            ]
+        },
+        "title": {
+            "title": "Title",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "title",
+                            "code": true
+                        },
+                        {
+                            "text": " gives the sheet the heading each platform draws for its own sheets, so don't author a title row of your own:"
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "iOS",
+                            "strong": true
+                        },
+                        {
+                            "text": " puts the content under an inline navigation bar with the title in the middle and the system close button on the leading edge, as Apple's sheets do. With Liquid Glass the close button is the system's glass button; before iOS 26 it is the filled circle sheets used then. Tapping it runs "
+                        },
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": ", like a swipe down."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Android",
+                            "strong": true
+                        },
+                        {
+                            "text": " shows the title as Material 3 "
+                        },
+                        {
+                            "text": "titleLarge",
+                            "code": true
+                        },
+                        {
+                            "text": " heading text under the drag handle. Material's modal bottom sheet has no close button: it closes on a swipe down, a tap outside or back."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
                     "runs": [
                         {
-                            "text": "The visible title is ordinary text styled as a heading. Mobile UI text has no heading role yet, so screen readers announce the surface by its "
+                            "text": "Screen readers announce the title as a heading on both platforms. VoiceOver reads the close button as Firstlight's translated \"Close\"; set "
                         },
                         {
-                            "text": "a11y-label",
+                            "text": "close-label",
                             "code": true
                         },
                         {
-                            "text": "."
+                            "text": " to use your own wording. A sheet without "
+                        },
+                        {
+                            "text": "title",
+                            "code": true
+                        },
+                        {
+                            "text": " has no bar or heading."
                         }
                     ]
                 }
@@ -125,6 +192,75 @@
                         {
                             "label": "Purpose",
                             "text": "Server-controlled presentation request. Defaults to closed."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "title",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "The sheet's heading: an inline navigation bar with a close button on iOS, heading text under the drag handle on Android. Defaults to untitled."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "close-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "What VoiceOver reads for the iOS close button. Defaults to Firstlight's translated \"Close\"; needs "
+                                },
+                                {
+                                    "text": "title",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
                         }
                     ]
                 },
@@ -262,7 +398,7 @@
                             "code": true
                         },
                         {
-                            "text": " is required. It runs when the user drags the sheet down, taps outside, or uses system back. Set the bound visibility property to "
+                            "text": " is required. It runs when the user drags the sheet down, taps outside, uses system back, or taps a titled sheet's close button on iOS. Set the bound visibility property to "
                         },
                         {
                             "text": "false",

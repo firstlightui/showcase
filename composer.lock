@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a1f99efaffc4530d6c1dbbb3fab32ff",
+    "content-hash": "7c149f874e014cf9ed51ebc5bfd9c851",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -871,7 +871,7 @@
             "dist": {
                 "type": "path",
                 "url": "../nativephp",
-                "reference": "318d2d348ac4329937d48a5acfd18b9c1e2a7ec0"
+                "reference": "c73f8eaaaef349f5504df821395e0c0425d7e7d9"
             },
             "require": {
                 "illuminate/console": "^10.0|^11.0|^12.0|^13.0",
@@ -880,7 +880,7 @@
                 "illuminate/translation": "^10.0|^11.0|^12.0|^13.0",
                 "illuminate/validation": "^10.0|^11.0|^12.0|^13.0",
                 "nativephp/mobile": "^4.8",
-                "nativephp/mobile-ui": "^0.9",
+                "nativephp/mobile-ui": "^0.10",
                 "php": "^8.4",
                 "ramsey/uuid": "^4.7"
             },
@@ -2864,20 +2864,20 @@
         },
         {
             "name": "nativephp/mobile-ui",
-            "version": "0.9.0",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/NativePHP/mobile-ui",
-                "reference": "9cee87cbc676a6500247bec99be5d19f633a04e9"
+                "url": "https://github.com/NativePHP/mobile-ui.git",
+                "reference": "5e78dad3e3597c258b3ca2f82a4068fd45fd3383"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/mobile-ui/zipball/9cee87cbc676a6500247bec99be5d19f633a04e9",
-                "reference": "9cee87cbc676a6500247bec99be5d19f633a04e9",
+                "url": "https://api.github.com/repos/NativePHP/mobile-ui/zipball/5e78dad3e3597c258b3ca2f82a4068fd45fd3383",
+                "reference": "5e78dad3e3597c258b3ca2f82a4068fd45fd3383",
                 "shasum": ""
             },
             "require": {
-                "nativephp/mobile": "^4.7",
+                "nativephp/mobile": "^4.8",
                 "php": "^8.3"
             },
             "require-dev": {
@@ -2901,17 +2901,7 @@
                     "Native\\Mobile\\UI\\": "src/"
                 }
             },
-            "scripts": {
-                "test": [
-                    "pest"
-                ],
-                "lint": [
-                    "pint"
-                ],
-                "lint:test": [
-                    "pint --test"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2922,13 +2912,18 @@
                 }
             ],
             "description": "Native SwiftUI and Jetpack Composer components for NativePHP",
+            "support": {
+                "issues": "https://github.com/NativePHP/mobile-ui/issues",
+                "source": "https://github.com/NativePHP/mobile-ui/tree/0.10.0"
+            },
             "funding": [
                 {
-                    "type": "other",
-                    "url": "https://nativephp.com/sponsor"
+                    "url": "https://nativephp.com/sponsor",
+                    "type": "other"
                 }
             ],
-            "time": "2026-10-29T17:44:09+00:00"
+            "time": "2026-11-14T16:47:08+00:00",
+            "published-time": "2026-11-14T17:11:37+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -3996,16 +3991,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.9.4",
+            "version": "4.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "75d73f48d02797c2c285a7e9f348fadc0102ffe2"
+                "reference": "f9aa3efc8015fcbc013d84d699583b268ccb593a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/75d73f48d02797c2c285a7e9f348fadc0102ffe2",
-                "reference": "75d73f48d02797c2c285a7e9f348fadc0102ffe2",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/f9aa3efc8015fcbc013d84d699583b268ccb593a",
+                "reference": "f9aa3efc8015fcbc013d84d699583b268ccb593a",
                 "shasum": ""
             },
             "require": {
@@ -4017,23 +4012,22 @@
                 "rhumsaa/uuid": "self.version"
             },
             "require-dev": {
-                "captainhook/captainhook": "^5.25",
-                "captainhook/plugin-composer": "^5.3",
-                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-                "ergebnis/composer-normalize": "^2.47",
-                "mockery/mockery": "^1.6",
-                "paragonie/random-lib": "^2",
-                "php-mock/php-mock": "^2.6",
-                "php-mock/php-mock-mockery": "^1.5",
+                "captainhook/captainhook": "^5.29.3",
+                "captainhook/plugin-composer": "^5.3.3",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.2.1",
+                "mockery/mockery": "^1.6.15",
+                "paragonie/random-lib": "^2.0.3",
+                "php-mock/php-mock": "^2.7.0",
+                "php-mock/php-mock-mockery": "^1.5.0",
                 "php-parallel-lint/php-parallel-lint": "^1.4.0",
                 "phpbench/phpbench": "^1.2.14",
-                "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^2.1",
-                "phpstan/phpstan-mockery": "^2.0",
-                "phpstan/phpstan-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.6",
-                "slevomat/coding-standard": "^8.18",
-                "squizlabs/php_codesniffer": "^3.13"
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.3.5",
+                "phpstan/phpstan-mockery": "^2.0.0",
+                "phpstan/phpstan-phpunit": "^2.1.2",
+                "phpunit/phpunit": "^9.6.39",
+                "slevomat/coding-standard": "^8.31.3",
+                "squizlabs/php_codesniffer": "^4.0.4"
             },
             "suggest": {
                 "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
@@ -4068,10 +4062,10 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.9.4"
+                "source": "https://github.com/ramsey/uuid/tree/4.10.0"
             },
-            "time": "2026-09-16T11:39:30+00:00",
-            "published-time": "2026-09-16T11:41:15+00:00"
+            "time": "2026-11-14T23:23:20+00:00",
+            "published-time": "2026-11-14T23:35:39+00:00"
         },
         {
             "name": "react/cache",
