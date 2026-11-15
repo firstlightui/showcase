@@ -236,7 +236,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "{{-- resources/views/native/rows/contact.blade.php --}}\n@php($contact = $contactWindow[$index])\n\n<firstlight:list-item\n    :headline=\"$contact->name\"\n    :supporting=\"$contact->email\"\n    trailing-icon=\"chevron-right\"\n    trailing-icon-ios=\"chevron.right\"\n    trailing-icon-android=\"chevron_right\"\n    @press=\"openContact({{ $contact->id }})\"\n/>"
+                    "text": "{{-- resources/views/native/rows/contact.blade.php --}}\n@php($contact = $contactWindow[$index])\n\n<firstlight:list-item\n    :headline=\"$contact->name\"\n    :supporting=\"$contact->email\"\n    navigates\n    @press=\"openContact({{ $contact->id }})\"\n/>"
                 },
                 {
                     "type": "text",

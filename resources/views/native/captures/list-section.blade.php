@@ -4,18 +4,14 @@
             headline="Profile"
             supporting="Name, photo and contact details"
             leading-icon="person"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             @press="capturePress"
         />
         <firstlight:list-item
             headline="Security"
             supporting="Password and two-factor sign-in"
             leading-icon="lock"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             @press="capturePress"
         />
     </firstlight:list-section>

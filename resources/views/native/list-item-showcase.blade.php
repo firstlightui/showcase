@@ -19,9 +19,7 @@
                 headline="Profile"
                 supporting="Personal details and security"
                 leading-monogram="AJ"
-                trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
-                trailing-icon-android="chevron_right"
+                navigates
                 @press="recordProfile"
             />
             <firstlight:list-item

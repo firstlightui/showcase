@@ -1,7 +1,7 @@
 {
     "id": "how-to/build-a-searchable-list-screen",
     "title": "Build a searchable list screen",
-    "description": "Recipe for a complete screen with native search, a paginated List, pull-to-refresh, row navigation, and confirmed swipe deletion.",
+    "description": "Recipe for a complete screen with nav-bar search, a paginated List, pull-to-refresh, row navigation, and confirmed swipe deletion.",
     "group": "Guides",
     "anchors": {
         "build-a-searchable-list-screen": "overview",
@@ -18,7 +18,36 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "This recipe builds the index screen most apps need: a search field above a list of records, with pull-to-refresh, infinite scrolling, a tap that opens the record, and a swipe action that deletes it after native confirmation."
+                    "text": "This recipe builds the index screen most apps need: a list of records searched from the navigation bar, with pull-to-refresh, infinite scrolling, a tap that opens the record, and a swipe action that deletes it after native confirmation."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Search lives in the bar because both platforms put a screen's main search there: Apple's "
+                        },
+                        {
+                            "text": "Search fields",
+                            "link": 0
+                        },
+                        {
+                            "text": " guidance and Material 3 "
+                        },
+                        {
+                            "text": "Search",
+                            "link": 1
+                        },
+                        {
+                            "text": ". Keep "
+                        },
+                        {
+                            "text": "Search Field",
+                            "link": 2
+                        },
+                        {
+                            "text": " for filters inside content, such as a field in a form or a sheet."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -28,14 +57,14 @@
                         },
                         {
                             "text": "showcase app",
-                            "link": 0
+                            "link": 3
                         },
                         {
                             "text": ", where "
                         },
                         {
                             "text": "SearchableListRecipeTest",
-                            "link": 1,
+                            "link": 4,
                             "code": true
                         },
                         {
@@ -51,7 +80,7 @@
                         },
                         {
                             "text": "List",
-                            "link": 2
+                            "link": 5
                         },
                         {
                             "text": " without search for short, fixed collections, and a settings layout when rows change preferences instead of opening records."
@@ -95,7 +124,7 @@
                         },
                         {
                             "text": "Build a list and detail flow",
-                            "link": 3
+                            "link": 6
                         },
                         {
                             "text": "."
@@ -122,21 +151,21 @@
                         },
                         {
                             "text": "PaginatesLists",
-                            "link": 4
+                            "link": 7
                         },
                         {
                             "text": ", "
                         },
                         {
                             "text": "DestroysListItems",
-                            "link": 5
+                            "link": 8
                         },
                         {
                             "text": ", and "
                         },
                         {
                             "text": "AuthorizesActions",
-                            "link": 6
+                            "link": 9
                         },
                         {
                             "text": "."
@@ -146,17 +175,24 @@
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\NativeComponent;\nuse FirstlightUI\\Pagination\\ListPage;\nuse Illuminate\\View\\View;\n\nclass PostsScreen extends NativeComponent\n{\n    public string $query = '';\n\n    public function mount(): void\n    {\n        $this->reload();\n    }\n\n    public function updatedQuery(): void\n    {\n        $this->reload();\n    }\n\n    public function reload(): void\n    {\n        $this->refreshList(fn (ListPage $page) => $this->posts($page));\n    }\n\n    public function loadMore(): void\n    {\n        $this->loadMoreList(fn (ListPage $page) => $this->posts($page));\n    }\n\n    public function openPost(int $id): void\n    {\n        $this->navigate('/posts/'.$id);\n    }\n\n    public function requestDeletion(int $id): void\n    {\n        $this->requestDestructiveListAction($id, 'delete');\n    }\n\n    public function cancelDeletion(): void\n    {\n        $this->cancelDestructiveListAction();\n    }\n\n    public function deletePost(): void\n    {\n        $this->confirmDestructiveListAction(\n            destroy: fn (Post $post) => $post->delete(),\n            ability: 'delete',\n            successMessage: 'Post deleted',\n        );\n    }\n\n    public function navTitle(): string\n    {\n        return 'Posts';\n    }\n\n    public function render(): View\n    {\n        return view('native.posts');\n    }\n\n    private function posts(ListPage $page)\n    {\n        return Post::query()\n            ->when($this->query !== '', fn ($query) => $query->where('title', 'like', '%'.$this->query.'%'))\n            ->latest()\n            ->paginate(perPage: 20, page: $page->page);\n    }\n}"
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\NativeComponent;\nuse FirstlightUI\\Pagination\\ListPage;\nuse Illuminate\\View\\View;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\NavBarOptions;\n\nclass PostsScreen extends NativeComponent\n{\n    public string $query = '';\n\n    public function mount(): void\n    {\n        $this->reload();\n    }\n\n    public function navigationOptions(): ?NavBarOptions\n    {\n        return NavBarOptions::make()->searchBar(placeholder: 'Search posts', onQuery: 'search');\n    }\n\n    public function search(string $query): void\n    {\n        $this->query = $query;\n        $this->reload();\n    }\n\n    public function reload(): void\n    {\n        $this->refreshList(fn (ListPage $page) => $this->posts($page));\n    }\n\n    public function loadMore(): void\n    {\n        $this->loadMoreList(fn (ListPage $page) => $this->posts($page));\n    }\n\n    public function openPost(int $id): void\n    {\n        $this->navigate('/posts/'.$id);\n    }\n\n    public function requestDeletion(int $id): void\n    {\n        $this->requestDestructiveListAction($id, 'delete');\n    }\n\n    public function cancelDeletion(): void\n    {\n        $this->cancelDestructiveListAction();\n    }\n\n    public function deletePost(): void\n    {\n        $this->confirmDestructiveListAction(\n            destroy: fn (Post $post) => $post->delete(),\n            ability: 'delete',\n            successMessage: 'Post deleted',\n        );\n    }\n\n    public function navTitle(): string\n    {\n        return 'Posts';\n    }\n\n    public function render(): View\n    {\n        return view('native.posts');\n    }\n\n    private function posts(ListPage $page)\n    {\n        return Post::query()\n            ->when($this->query !== '', fn ($query) => $query->where('title', 'like', '%'.$this->query.'%'))\n            ->latest()\n            ->paginate(perPage: 20, page: $page->page);\n    }\n}"
                 },
                 {
                     "type": "text",
                     "runs": [
                         {
-                            "text": "updatedQuery()",
+                            "text": "navigationOptions()",
                             "code": true
                         },
                         {
-                            "text": " runs whenever PHP accepts a new query, so the list restarts from page one for each search. Keys passed to "
+                            "text": " adds a search bar to the layout's nav bar for this screen only. The bar calls "
+                        },
+                        {
+                            "text": "search()",
+                            "code": true
+                        },
+                        {
+                            "text": " with the query 300 ms after typing stops, and the list restarts from page one for each search. Keys passed to "
                         },
                         {
                             "text": "openPost()",
@@ -197,7 +233,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<native:column class=\"w-full flex-1 bg-theme-background\">\n    <firstlight:search-field\n        placeholder=\"Search posts\"\n        a11y-label=\"Search posts\"\n        native:model.debounce.300ms=\"query\"\n        class=\"mx-4 my-2\"\n    />\n\n    @if (count($listItems) === 0)\n        <firstlight:status-label\n            label=\"{{ $query === '' ? 'No posts yet' : 'No matching posts' }}\"\n            tone=\"neutral\"\n            class=\"mx-4\"\n        />\n    @endif\n\n    <firstlight:list separator @refresh=\"reload\" @endReached=\"loadMore\" class=\"flex-1 bg-theme-background\">\n        @foreach ($listItems as $post)\n            <firstlight:list-item\n                :headline=\"$post->title\"\n                :supporting=\"$post->excerpt\"\n                trailing-icon=\"chevron-right\"\n                trailing-icon-ios=\"chevron.right\"\n                trailing-icon-android=\"chevron_right\"\n                @press=\"openPost({{ $post->id }})\"\n                :trailing-actions=\"[\n                    ['method' => 'requestDeletion('.$post->id.')', 'label' => 'Delete', 'role' => 'destructive'],\n                ]\"\n            />\n        @endforeach\n    </firstlight:list>\n\n    <firstlight:confirmation-dialog\n        :visible=\"$confirmingListDestruction\"\n        title=\"Delete post?\"\n        message=\"This action cannot be undone.\"\n        confirm-label=\"Delete\"\n        cancel-label=\"Keep post\"\n        tone=\"destructive\"\n        @press=\"deletePost\"\n        @dismiss=\"cancelDeletion\"\n    />\n</native:column>"
+                    "text": "<native:column class=\"w-full flex-1 bg-theme-background\">\n    @if (count($listItems) === 0)\n        <native:column class=\"w-full flex-1 items-center justify-center gap-2 p-8\">\n            <native:text class=\"text-lg font-semibold text-center text-theme-on-surface\">{{ $query === '' ? 'No posts yet' : 'No matching posts' }}</native:text>\n            <native:text class=\"text-sm text-center text-theme-on-surface-variant\">{{ $query === '' ? 'Posts you write appear here.' : 'Check the spelling or try a different search.' }}</native:text>\n        </native:column>\n    @else\n    <firstlight:list separator @refresh=\"reload\" @endReached=\"loadMore\" class=\"flex-1 bg-theme-background\">\n        @foreach ($listItems as $post)\n            <firstlight:list-item\n                :headline=\"$post->title\"\n                :supporting=\"$post->excerpt\"\n                navigates\n                @press=\"openPost({{ $post->id }})\"\n                :trailing-actions=\"[\n                    ['method' => 'requestDeletion('.$post->id.')', 'label' => 'Delete', 'role' => 'destructive'],\n                ]\"\n            />\n        @endforeach\n    </firstlight:list>\n    @endif\n\n    <firstlight:confirmation-dialog\n        :visible=\"$confirmingListDestruction\"\n        title=\"Delete post?\"\n        message=\"This action cannot be undone.\"\n        confirm-label=\"Delete\"\n        cancel-label=\"Keep post\"\n        tone=\"destructive\"\n        @press=\"deletePost\"\n        @dismiss=\"cancelDeletion\"\n    />\n</native:column>"
                 }
             ]
         },
@@ -214,17 +250,17 @@
                             "label": "iOS",
                             "runs": [
                                 {
-                                    "text": "UISearchTextField",
+                                    "text": ".searchable",
                                     "code": true
                                 },
                                 {
-                                    "text": " with the system clear button"
+                                    "text": " in the navigation bar, Liquid Glass on iOS 26 and later"
                                 }
                             ]
                         },
                         {
                             "label": "Android",
-                            "text": "Material 3 search field with the search IME action"
+                            "text": "Filled Material 3 search bar in the top app bar"
                         }
                     ]
                 },
@@ -232,6 +268,30 @@
                     "type": "definition",
                     "term": {
                         "text": "Rows"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "runs": [
+                                {
+                                    "text": "Disclosure chevron from "
+                                },
+                                {
+                                    "text": "navigates",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Android",
+                            "text": "No chevron, as Material lists show none"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "List"
                     },
                     "items": [
                         {
@@ -354,7 +414,7 @@
                         },
                         {
                             "text": "Authorize actions",
-                            "link": 7
+                            "link": 10
                         },
                         {
                             "text": "."
@@ -373,14 +433,21 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "Use "
+                            "text": "Keep the search debounce (300 ms by default; "
                         },
                         {
-                            "text": "native:model.debounce.300ms",
+                            "text": "debounceMs",
                             "code": true
                         },
                         {
-                            "text": " for search so each keystroke does not query the database."
+                            "text": " on "
+                        },
+                        {
+                            "text": "searchBar()",
+                            "code": true
+                        },
+                        {
+                            "text": ") so each keystroke does not query the database."
                         }
                     ]
                 }
@@ -438,7 +505,7 @@
                         },
                         {
                             "text": "Paginate lists",
-                            "link": 8
+                            "link": 11
                         },
                         {
                             "text": "."
@@ -451,14 +518,28 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "Search on submit instead of while typing:",
+                            "text": "In-content filter instead of screen search:",
                             "strong": true
                         },
                         {
-                            "text": " bind "
+                            "text": " put a "
                         },
                         {
-                            "text": "native:model.lazy=\"query\"",
+                            "text": "Search Field",
+                            "link": 2
+                        },
+                        {
+                            "text": " bound with "
+                        },
+                        {
+                            "text": "native:model.debounce.300ms=\"query\"",
+                            "code": true
+                        },
+                        {
+                            "text": " above the list and reload from "
+                        },
+                        {
+                            "text": "updatedQuery()",
                             "code": true
                         },
                         {
@@ -470,6 +551,18 @@
         }
     },
     "links": [
+        {
+            "label": "Search fields",
+            "url": "https://developer.apple.com/design/human-interface-guidelines/search-fields"
+        },
+        {
+            "label": "Search",
+            "url": "https://m3.material.io/components/search/overview"
+        },
+        {
+            "label": "Search Field",
+            "url": "../components/search-field.md"
+        },
         {
             "label": "showcase app",
             "url": "https://github.com/firstlightui/showcase"

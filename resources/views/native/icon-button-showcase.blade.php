@@ -5,7 +5,7 @@
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Semantic variants</native:text>
             <native:row class="w-full gap-3 flex-wrap">
-                <firstlight:icon-button icon="plus" a11y-label="Primary add" @press="recordPress('Primary add')" />
+                <firstlight:icon-button icon="plus" variant="primary" a11y-label="Primary add" @press="recordPress('Primary add')" />
                 <firstlight:icon-button icon="info" variant="secondary" a11y-label="Secondary information" @press="recordPress('Secondary information')" />
                 <firstlight:icon-button icon="trash" variant="destructive" a11y-label="Delete draft" @press="recordPress('Delete draft')" />
                 <firstlight:icon-button icon="check" variant="success" a11y-label="Confirm selection" @press="recordPress('Confirm selection')" />

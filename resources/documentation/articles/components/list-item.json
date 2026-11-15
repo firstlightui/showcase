@@ -37,7 +37,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<firstlight:list-item\n    headline=\"Account\"\n    supporting=\"Manage your profile and security\"\n    leading-icon=\"person\"\n    leading-icon-ios=\"person.crop.circle\"\n    leading-icon-android=\"account_circle\"\n    trailing-icon=\"chevron-right\"\n    trailing-icon-ios=\"chevron.right\"\n    trailing-icon-android=\"chevron_right\"\n    a11y-hint=\"Opens account settings\"\n    :disabled=\"! $canManageAccount\"\n    @press=\"openAccount\"\n/>"
+                    "text": "<firstlight:list-item\n    headline=\"Account\"\n    supporting=\"Manage your profile and security\"\n    leading-icon=\"person\"\n    leading-icon-ios=\"person.crop.circle\"\n    leading-icon-android=\"account_circle\"\n    navigates\n    a11y-hint=\"Opens account settings\"\n    :disabled=\"! $canManageAccount\"\n    @press=\"openAccount\"\n/>"
                 },
                 {
                     "type": "text",
@@ -642,6 +642,50 @@
                     "term": {
                         "runs": [
                             {
+                                "text": "navigates",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Marks a row that opens another screen. iOS draws its disclosure chevron after any trailing text or status; Android draws nothing, as Material rows show no chevron. Cannot be combined with "
+                                },
+                                {
+                                    "text": "trailing-icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
                                 "text": "state",
                                 "code": true
                             }
@@ -916,7 +960,25 @@
                 },
                 {
                     "type": "text",
-                    "text": "Choose at most one leading source: icon, avatar, monogram, or label. Choose at most one trailing affordance: icon, text, or status. Supporting text and both edges may be omitted for a headline-only row."
+                    "runs": [
+                        {
+                            "text": "Choose at most one leading source: icon, avatar, monogram, or label. Choose at most one trailing affordance: icon, text, or status. Use "
+                        },
+                        {
+                            "text": "navigates",
+                            "code": true
+                        },
+                        {
+                            "text": " rather than a "
+                        },
+                        {
+                            "text": "chevron-right",
+                            "code": true
+                        },
+                        {
+                            "text": " trailing icon for rows that push a screen, so each platform shows its own convention. Supporting text and both edges may be omitted for a headline-only row."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
@@ -1011,6 +1073,13 @@
                         },
                         {
                             "text": "trailingStatusTone()",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "navigates()",
                             "code": true
                         },
                         {

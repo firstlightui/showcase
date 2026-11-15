@@ -6,6 +6,7 @@ use App\Models\Post;
 use FirstlightUI\NativeComponent;
 use FirstlightUI\Pagination\ListPage;
 use Illuminate\View\View;
+use Native\Mobile\Edge\Layouts\Builders\NavBarOptions;
 
 class PostsScreen extends NativeComponent
 {
@@ -16,8 +17,14 @@ class PostsScreen extends NativeComponent
         $this->reload();
     }
 
-    public function updatedQuery(): void
+    public function navigationOptions(): ?NavBarOptions
     {
+        return NavBarOptions::make()->searchBar(placeholder: 'Search posts', onQuery: 'search');
+    }
+
+    public function search(string $query): void
+    {
+        $this->query = $query;
         $this->reload();
     }
 

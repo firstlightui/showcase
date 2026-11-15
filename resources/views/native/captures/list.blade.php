@@ -5,9 +5,7 @@
         leading-icon="person"
         leading-icon-ios="person.crop.circle"
         leading-icon-android="account_circle"
-        trailing-icon="chevron-right"
-        trailing-icon-ios="chevron.right"
-        trailing-icon-android="chevron_right"
+        navigates
         @press="capturePress"
     />
 
@@ -16,18 +14,14 @@
             headline="Notifications"
             supporting="Mentions and status updates"
             leading-icon="notifications"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             @press="capturePress"
         />
         <firstlight:list-item
             headline="Privacy"
             supporting="Data export and retention"
             leading-icon="lock"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             @press="capturePress"
         />
     </firstlight:list-section>

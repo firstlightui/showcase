@@ -175,7 +175,14 @@
                                     "code": true
                                 },
                                 {
-                                    "text": "; omission keeps platform policy."
+                                    "text": "; omission means "
+                                },
+                                {
+                                    "text": "none",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", as in the system search bars."
                                 }
                             ]
                         }
@@ -486,7 +493,7 @@
                             "code": true
                         },
                         {
-                            "text": ", so UIKit owns search chrome, the search and clear affordances, cursor, selection, marked text, keyboard, and Dynamic Type. Android uses a Material 3 search-field composition with "
+                            "text": ", so UIKit owns search chrome, the search and clear affordances, cursor, selection, marked text, keyboard, and Dynamic Type. Android draws a Material 3 search bar, a filled pill with no outline, with "
                         },
                         {
                             "text": "TextFieldValue",

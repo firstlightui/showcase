@@ -2,7 +2,7 @@
     <native:column class="w-full p-5 gap-5">
         <native:text class="text-lg font-semibold text-theme-on-surface">Compact actions</native:text>
         <native:row class="w-full gap-3 flex-wrap">
-            <firstlight:icon-button icon="plus" a11y-label="Primary add" @press="capturePress" />
+            <firstlight:icon-button icon="plus" variant="primary" a11y-label="Primary add" @press="capturePress" />
             <firstlight:icon-button icon="info" variant="secondary" a11y-label="Secondary information" @press="capturePress" />
             <firstlight:icon-button icon="trash" variant="destructive" a11y-label="Delete draft" @press="capturePress" />
             <firstlight:icon-button icon="check" variant="success" a11y-label="Confirm selection" @press="capturePress" />

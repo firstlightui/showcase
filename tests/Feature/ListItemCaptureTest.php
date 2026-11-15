@@ -28,7 +28,7 @@ it('publishes the stable List Item documentation capture fixture', function () {
         ])
         ->and($nodes[0]['props'])->toMatchArray([
             'leading_type' => 'icon',
-            'trailing_type' => 'icon',
+            'navigates' => true,
             'a11y_hint' => 'Opens account settings',
         ])
         ->and($nodes[1]['props'])->toMatchArray([

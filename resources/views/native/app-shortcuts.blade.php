@@ -8,9 +8,7 @@
                 leading-icon-ios="arrow.up.forward.app"
                 leading-icon-android="shortcut"
                 leading-icon-tone="info"
-                trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
-                trailing-icon-android="chevron_right"
+                navigates
                 a11y-hint="Opens the screen this shortcut opens"
                 @press="open('{{ $shortcut['id'] }}')"
             />
@@ -37,9 +35,7 @@
             leading-icon-ios="doc.text"
             leading-icon-android="article"
             leading-icon-tone="info"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the newest post a shortcut added"
             @press="openNewestQuickPost"
         />

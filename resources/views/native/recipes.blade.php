@@ -7,9 +7,7 @@
             leading-icon-ios="magnifyingglass"
             leading-icon-android="search"
             leading-icon-tone="info"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the searchable list recipe"
             @press="openPosts"
         />
@@ -20,9 +18,7 @@
             leading-icon-ios="doc.text.fill"
             leading-icon-android="article"
             leading-icon-tone="success"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the list and detail recipe"
             @press="openPostDetail"
         />
@@ -33,9 +29,7 @@
             leading-icon-ios="person.2.fill"
             leading-icon-android="contacts"
             leading-icon-tone="info"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the large list recipe"
             @press="openContacts"
         />
@@ -49,9 +43,7 @@
             leading-icon-ios="square.and.pencil"
             leading-icon-android="edit"
             leading-icon-tone="warning"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the form screen recipe"
             @press="openNewPost"
         />
@@ -62,9 +54,7 @@
             leading-icon-ios="gearshape.fill"
             leading-icon-android="settings"
             leading-icon-tone="neutral"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the settings screen recipe"
             @press="openSettings"
         />
@@ -75,9 +65,7 @@
             leading-icon-ios="photo.fill"
             leading-icon-android="photo"
             leading-icon-tone="success"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the photo upload recipe"
             @press="openPostCover"
         />
@@ -90,9 +78,7 @@
             leading-icon-ios="pencil.and.list.clipboard"
             leading-icon-android="edit_note"
             leading-icon-tone="info"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the newest post for editing"
             @press="openEditPost"
         />
@@ -115,9 +101,7 @@
             leading-icon-ios="clock.arrow.circlepath"
             leading-icon-android="cloud_sync"
             leading-icon-tone="info"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens a cached server list"
             @press="openServerStatus"
         />
@@ -128,9 +112,7 @@
             leading-icon-ios="icloud.slash"
             leading-icon-android="cloud_off"
             leading-icon-tone="warning"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens a task list that works offline"
             @press="openOfflineChanges"
         />
@@ -143,9 +125,7 @@
             leading-icon-ios="lock.fill"
             leading-icon-android="lock"
             leading-icon-tone="danger"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the app lock recipe"
             @press="openVault"
         />
@@ -158,9 +138,7 @@
             leading-icon-ios="arrow.up.forward.app"
             leading-icon-android="shortcut"
             leading-icon-tone="info"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens the app shortcuts recipe"
             @press="openShortcuts"
         />

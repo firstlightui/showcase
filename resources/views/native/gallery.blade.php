@@ -94,9 +94,7 @@
                 leading-icon-ios="tray.full.fill"
                 leading-icon-android="inbox"
                 leading-icon-tone="info"
-                trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
-                trailing-icon-android="chevron_right"
+                navigates
                 @press="openInbox"
             />
         </native:column>

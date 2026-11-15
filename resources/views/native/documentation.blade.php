@@ -22,9 +22,7 @@
                         <firstlight:list-item
                             :headline="$article['title']"
                             :supporting="$article['description']"
-                            trailing-icon="chevron-right"
-                            trailing-icon-ios="chevron.right"
-                            trailing-icon-android="chevron_right"
+                            navigates
                             a11y-hint="Read the bundled documentation"
                             @press="openArticle('{{ $article['id'] }}')"
                         />

@@ -368,7 +368,7 @@
                 {
                     "type": "code",
                     "language": "blade",
-                    "text": "<firstlight:icon-button icon=\"custom:rocket-launch-solid\" a11y-label=\"Launch\" @press=\"launch\" />\n\n<firstlight:list-item\n    headline=\"Greenhouse\"\n    leading-icon=\"custom:plant-2\"\n    trailing-icon=\"chevron-right\"\n    trailing-icon-ios=\"chevron.right\"\n    trailing-icon-android=\"chevron_right\"\n    @press=\"openGreenhouse\"\n/>\n\n<firstlight:text-field label=\"Branch\" native:model=\"branch\" leading-icon=\"custom:git-commit-vertical\" />"
+                    "text": "<firstlight:icon-button icon=\"custom:rocket-launch-solid\" a11y-label=\"Launch\" @press=\"launch\" />\n\n<firstlight:list-item\n    headline=\"Greenhouse\"\n    leading-icon=\"custom:plant-2\"\n    navigates\n    @press=\"openGreenhouse\"\n/>\n\n<firstlight:text-field label=\"Branch\" native:model=\"branch\" leading-icon=\"custom:git-commit-vertical\" />"
                 },
                 {
                     "type": "text",

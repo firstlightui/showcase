@@ -18,9 +18,7 @@
         <native:column class="w-full bg-theme-surface">
             <firstlight:list-item
                 headline="Privacy"
-                trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
-                trailing-icon-android="chevron_right"
+                navigates
                 @press="openPrivacy"
             />
         </native:column>

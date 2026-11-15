@@ -5,9 +5,7 @@
             headline="Account"
             supporting="Manage your profile and security"
             leading-icon="person"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             @press="recordAccount"
         />
 
@@ -16,18 +14,14 @@
                 headline="Notifications"
                 supporting="Mentions and status updates"
                 leading-icon="notifications"
-                trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
-                trailing-icon-android="chevron_right"
+                navigates
                 @press="recordNotifications"
             />
             <firstlight:list-item
                 headline="Privacy"
                 supporting="Data export and retention"
                 leading-icon="lock"
-                trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
-                trailing-icon-android="chevron_right"
+                navigates
                 @press="recordPrivacy"
             />
         </firstlight:list-section>

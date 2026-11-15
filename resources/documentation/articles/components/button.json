@@ -856,14 +856,28 @@
                             "code": true
                         },
                         {
-                            "text": " renderer for every variant except "
+                            "text": " renderer for "
                         },
                         {
-                            "text": "ghost",
+                            "text": "primary",
                             "code": true
                         },
                         {
-                            "text": ", with native button styles, control sizes, progress presentation, icon layout, VoiceOver metadata, and semantic theme tokens. On iOS, "
+                            "text": ", "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "success",
+                            "code": true
+                        },
+                        {
+                            "text": " and glass buttons, with native button styles, control sizes, progress presentation, icon layout, VoiceOver metadata, and semantic theme tokens. On iOS, "
                         },
                         {
                             "text": "ghost",
@@ -877,7 +891,35 @@
                             "code": true
                         },
                         {
-                            "text": ", with at least a 44-point touch target. Mobile UI's plain ghost button only responds to taps on its text. Android uses the official Mobile UI Material 3 "
+                            "text": ", with at least a 44-point touch target. Mobile UI's plain ghost button only responds to taps on its text. "
+                        },
+                        {
+                            "text": "secondary",
+                            "code": true
+                        },
+                        {
+                            "text": " without glass also uses a Firstlight renderer: SwiftUI's "
+                        },
+                        {
+                            "text": ".bordered",
+                            "code": true
+                        },
+                        {
+                            "text": " style, a light tint of the secondary colour with the label in that colour. Apple uses this lower emphasis for secondary actions, where Mobile UI draws a second filled button. On Android, "
+                        },
+                        {
+                            "text": "secondary",
+                            "code": true
+                        },
+                        {
+                            "text": " is Material 3's "
+                        },
+                        {
+                            "text": "FilledTonalButton",
+                            "code": true
+                        },
+                        {
+                            "text": ", the same emphasis. Android uses the official Mobile UI Material 3 "
                         },
                         {
                             "text": "Button",

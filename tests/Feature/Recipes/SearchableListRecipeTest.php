@@ -21,13 +21,14 @@ it('loads the first page and appends the next on end reached', function () {
         ->assertListItem('Sample post 30');
 });
 
-it('restarts the list from page one for each search', function () {
+it('searches from the nav bar and restarts the list from page one for each query', function () {
     Native::visit('/posts')
-        ->set('query', 'post 3')
+        ->assertSee('Search posts')
+        ->call('search', 'post 3')
         ->assertListItem('Sample post 3')
         ->assertListItem('Sample post 30')
         ->assertMissingListItem('Sample post 1')
-        ->set('query', 'nothing matches')
+        ->call('search', 'nothing matches')
         ->assertListItemCount(0)
         ->assertSee('No matching posts');
 });

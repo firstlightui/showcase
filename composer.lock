@@ -871,7 +871,7 @@
             "dist": {
                 "type": "path",
                 "url": "../nativephp",
-                "reference": "eb920cbb9d40670910bc53266643c421a421d6af"
+                "reference": "318d2d348ac4329937d48a5acfd18b9c1e2a7ec0"
             },
             "require": {
                 "illuminate/console": "^10.0|^11.0|^12.0|^13.0",

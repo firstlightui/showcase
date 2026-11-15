@@ -6,9 +6,7 @@
             leading-icon="person"
             leading-icon-ios="person.crop.circle"
             leading-icon-android="account_circle"
-            trailing-icon="chevron-right"
-            trailing-icon-ios="chevron.right"
-            trailing-icon-android="chevron_right"
+            navigates
             a11y-hint="Opens account settings"
             @press="capturePress"
         />

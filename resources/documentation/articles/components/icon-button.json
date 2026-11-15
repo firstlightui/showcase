@@ -259,11 +259,18 @@
                                     "text": "Semantic action intent. Defaults to "
                                 },
                                 {
+                                    "text": "ghost",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", the plain icon button both platforms use by default; use "
+                                },
+                                {
                                     "text": "primary",
                                     "code": true
                                 },
                                 {
-                                    "text": "."
+                                    "text": " only for the screen's main action."
                                 }
                             ]
                         }
