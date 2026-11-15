@@ -3,7 +3,13 @@
     "name": "firstlightui/showcase",
     "type": "project",
     "description": "The official showcase app for Firstlight UI NativePHP controls.",
-    "keywords": ["android", "ios", "nativephp", "showcase", "ui"],
+    "keywords": [
+        "android",
+        "ios",
+        "nativephp",
+        "showcase",
+        "ui"
+    ],
     "license": "MIT",
     "homepage": "https://firstlightui.dev",
     "authors": [
@@ -20,11 +26,11 @@
     "require": {
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
-        "firstlightui/app-shortcuts": "dev-next",
+        "firstlightui/app-shortcuts": "dev-test/android-headless-api",
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
-        "nativephp/mobile": "^4.7.0",
+        "nativephp/mobile": "dev-test/headless-runtime-4.7 as 4.7.0",
         "nativephp/mobile-biometrics": "^1.0.3",
         "nativephp/mobile-browser": "^1.2",
         "nativephp/mobile-network": "^1.1",
@@ -108,6 +114,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
+        {
+            "name": "mobile-air-headless",
+            "type": "vcs",
+            "url": "https://github.com/wojt-janowski/mobile-air"
+        },
         {
             "name": "app-shortcuts",
             "type": "vcs",

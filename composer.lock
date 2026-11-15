@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d071cbcc4346413f37800abcc100335",
+    "content-hash": "930a0a967111c915692bc7c526ab7ae2",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -800,16 +800,16 @@
         },
         {
             "name": "firstlightui/app-shortcuts",
-            "version": "dev-next",
+            "version": "dev-test/android-headless-api",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/app-shortcuts.git",
-                "reference": "19c3e795d26bddc8c3ccad48730b59b001798977"
+                "reference": "a28410c400f7c06ac795de958837431143c308ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/19c3e795d26bddc8c3ccad48730b59b001798977",
-                "reference": "19c3e795d26bddc8c3ccad48730b59b001798977",
+                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/a28410c400f7c06ac795de958837431143c308ab",
+                "reference": "a28410c400f7c06ac795de958837431143c308ab",
                 "shasum": ""
             },
             "require": {
@@ -858,7 +858,11 @@
                 "MIT"
             ],
             "description": "Open a screen or run a PHP action of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
-            "time": "2026-11-14T02:14:23+00:00"
+            "support": {
+                "source": "https://github.com/firstlightui/app-shortcuts/tree/test/android-headless-api",
+                "issues": "https://github.com/firstlightui/app-shortcuts/issues"
+            },
+            "time": "2026-11-15T02:09:09+00:00"
         },
         {
             "name": "firstlightui/nativephp",
@@ -2593,16 +2597,16 @@
         },
         {
             "name": "nativephp/mobile",
-            "version": "4.7.0",
+            "version": "dev-test/headless-runtime-4.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/NativePHP/mobile-air.git",
-                "reference": "0d7e2e6509b1a0514726e67016fecade5e9137b2"
+                "url": "https://github.com/wojt-janowski/mobile-air.git",
+                "reference": "8d83ada066e155e0db9ba6beca1b08b7e2a811fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/mobile-air/zipball/0d7e2e6509b1a0514726e67016fecade5e9137b2",
-                "reference": "0d7e2e6509b1a0514726e67016fecade5e9137b2",
+                "url": "https://api.github.com/repos/wojt-janowski/mobile-air/zipball/8d83ada066e155e0db9ba6beca1b08b7e2a811fc",
+                "reference": "8d83ada066e155e0db9ba6beca1b08b7e2a811fc",
                 "shasum": ""
             },
             "require": {
@@ -2651,14 +2655,40 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
                 "psr-4": {
                     "Native\\Mobile\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "qa": [
+                    "@composer format",
+                    "@composer analyse",
+                    "@composer test"
+                ],
+                "post-autoload-dump": [
+                    "@php ./vendor/bin/testbench package:discover --ansi"
+                ],
+                "analyse": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test-coverage": [
+                    "vendor/bin/pest --coverage"
+                ],
+                "format": [
+                    "vendor/bin/pint"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2683,11 +2713,9 @@
                 "nativephp"
             ],
             "support": {
-                "issues": "https://github.com/NativePHP/mobile-air/issues",
-                "source": "https://github.com/NativePHP/mobile-air/tree/4.7.0"
+                "source": "https://github.com/wojt-janowski/mobile-air/tree/test/headless-runtime-4.7"
             },
-            "time": "2026-10-29T17:31:02+00:00",
-            "published-time": "2026-10-29T17:32:01+00:00"
+            "time": "2026-11-15T02:10:18+00:00"
         },
         {
             "name": "nativephp/mobile-biometrics",
@@ -11089,11 +11117,19 @@
             "published-time": "2026-10-05T23:14:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "nativephp/mobile",
+            "version": "dev-test/headless-runtime-4.7",
+            "alias": "4.7.0",
+            "alias_normalized": "4.7.0.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "firstlightui/app-shortcuts": 20,
-        "firstlightui/nativephp": 20
+        "firstlightui/nativephp": 20,
+        "nativephp/mobile": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
