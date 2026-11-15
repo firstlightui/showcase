@@ -123,6 +123,47 @@
                 },
                 {
                     "type": "text",
+                    "runs": [
+                        {
+                            "text": "Keep "
+                        },
+                        {
+                            "text": "destructive",
+                            "code": true
+                        },
+                        {
+                            "text": " visibly different from "
+                        },
+                        {
+                            "text": "primary",
+                            "code": true
+                        },
+                        {
+                            "text": ". Destructive buttons and field errors use it, so with a red brand, errors that match the brand colour read as decoration rather than a problem. The showcase pairs its Dawn 700 primary "
+                        },
+                        {
+                            "text": "#AE1515",
+                            "code": true
+                        },
+                        {
+                            "text": " with Material Red 700 "
+                        },
+                        {
+                            "text": "#D32F2F",
+                            "code": true
+                        },
+                        {
+                            "text": " in light mode, which is brighter and still meets 4.5:1 on white and on filled-field greys:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "'light' => ['destructive' => '#D32F2F', 'on-destructive' => '#FFFFFF'],"
+                },
+                {
+                    "type": "text",
                     "text": "Dark values are optional because NativePHP can derive them from the light theme. Define explicit dark overrides when brand perception or contrast needs a tuned pair. Keep text and icons at a contrast ratio of at least 4.5:1 against their background token."
                 },
                 {

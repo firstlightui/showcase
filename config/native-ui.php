@@ -72,8 +72,10 @@ return [
             'outline' => '#CBD5E1',
             'outline-variant' => '#E2E8F0',
 
-            // Destructive actions — maps to `variant="destructive"` on components.
-            'destructive' => '#B91C1C',
+            // Destructive actions and field errors — maps to `variant="destructive"`.
+            // Material Red 700: brighter than Dawn 700 primary, so errors never read
+            // as the brand colour, and AA on white, background and surface-variant.
+            'destructive' => '#D32F2F',
             'on-destructive' => '#FFFFFF',
 
             // Success / "safe to proceed" — confirmations, verified badges.
