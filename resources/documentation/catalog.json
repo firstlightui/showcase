@@ -1,7 +1,7 @@
 {
-    "version": "v1.1.0-beta10-8-gcbb98a4",
-    "revision": "cbb98a454f8e2595a81db0df9847d2be77736a3a",
-    "source": "https://github.com/firstlightui/nativephp/tree/cbb98a454f8e2595a81db0df9847d2be77736a3a/docs",
+    "version": "v1.1.0-beta11",
+    "revision": "f1db255c8f6ea6c59a0f28d009ee509b59ab685d",
+    "source": "https://github.com/firstlightui/nativephp/tree/f1db255c8f6ea6c59a0f28d009ee509b59ab685d/docs",
     "license": "MIT",
     "articles": [
         {
