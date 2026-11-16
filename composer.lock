@@ -804,12 +804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/app-shortcuts.git",
-                "reference": "8754708cc64ae6e709d491bb3b7247937cdeaf75"
+                "reference": "8bf1adb935839c35da028c98dcdc3a618c6d6791"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/8754708cc64ae6e709d491bb3b7247937cdeaf75",
-                "reference": "8754708cc64ae6e709d491bb3b7247937cdeaf75",
+                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/8bf1adb935839c35da028c98dcdc3a618c6d6791",
+                "reference": "8bf1adb935839c35da028c98dcdc3a618c6d6791",
                 "shasum": ""
             },
             "require": {
@@ -862,7 +862,7 @@
                 "source": "https://github.com/firstlightui/app-shortcuts/tree/test/android-headless-api",
                 "issues": "https://github.com/firstlightui/app-shortcuts/issues"
             },
-            "time": "2026-11-16T02:04:22+00:00"
+            "time": "2026-11-16T02:25:09+00:00"
         },
         {
             "name": "firstlightui/nativephp",
