@@ -15,7 +15,7 @@
                 autocapitalize="sentences"
                 :autocorrect="true"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $notes }}</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $notes }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
@@ -29,7 +29,7 @@
                 :min-lines="3"
                 :max-lines="6"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $handover ?: '(empty)' }} (blur)</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $handover ?: '(empty)' }} (blur)</native:text>
             <firstlight:text-area
                 ref="summary"
                 native:model.debounce.500ms="summary"
@@ -39,7 +39,7 @@
                 :max-lines="5"
                 autocapitalize="sentences"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $summary }} (debounced)</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $summary }} (debounced)</native:text>
             <firstlight:text-area
                 ref="lazyPlan"
                 native:model.lazy="lazyPlan"
@@ -48,7 +48,7 @@
                 :min-lines="3"
                 :max-lines="5"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $lazyPlan ?: '(empty)' }} (lazy)</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $lazyPlan ?: '(empty)' }} (lazy)</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
@@ -62,7 +62,7 @@
                 :min-lines="3"
                 :max-lines="5"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $incident ?: '(empty)' }}</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $incident ?: '(empty)' }}</native:text>
         </native:column>
 
         <native:column class="w-full gap-2">
@@ -75,7 +75,7 @@
                 :min-lines="3"
                 :max-lines="5"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $errorNotes }}</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $errorNotes }}</native:text>
             <firstlight:text-area
                 value="This note is available for selection and copy."
                 label="Read-only note"
@@ -98,15 +98,15 @@
                 helper="Edits are deliberately rejected by PHP."
                 @change="rejectNotes"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $approved }}; Rejected attempts: {{ $rejectedAttempts }}</native:text>
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $approved }}; Rejected attempts: {{ $rejectedAttempts }}</native:text>
             <firstlight:text-area
                 ref="programmaticNotes"
                 native:model="programmatic"
                 label="Programmatic note"
                 a11y-hint="Use the buttons below to replace the published value"
             />
-            <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $programmatic }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:text class="text-sm text-theme-on-surface whitespace-pre-line">PHP accepted state: {{ $programmatic }}</native:text>
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Replace note" variant="secondary" @press="replaceProgrammaticNotes" />
                 <native:button label="Reset note" variant="ghost" @press="resetProgrammaticNotes" />
             </native:row>

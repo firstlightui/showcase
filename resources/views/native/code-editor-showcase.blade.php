@@ -77,7 +77,7 @@
                 :max-lines="8"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $programmatic }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Replace JSON" variant="secondary" @press="replaceProgrammatic" />
                 <native:button label="Reset JSON" variant="ghost" @press="resetProgrammatic" />
             </native:row>
@@ -139,7 +139,7 @@
                 :max-lines="16"
             />
             <native:text class="text-sm text-theme-on-surface">Lines written: {{ $logLines }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Append 25 lines" variant="secondary" @press="appendLogLines" />
                 <native:button label="Fill 1,500 lines" variant="secondary" @press="fillLog" />
                 <native:button label="Clear log" variant="ghost" @press="clearLog" />

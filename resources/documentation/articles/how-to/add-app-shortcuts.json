@@ -1,0 +1,829 @@
+{
+    "id": "how-to/add-app-shortcuts",
+    "title": "Add Siri and app icon shortcuts",
+    "description": "Recipe for shortcuts that open a screen or run PHP from Siri, Spotlight, the Shortcuts app, and the app icon's long-press menu, even when the app is closed.",
+    "group": "Guides",
+    "anchors": {
+        "add-siri-and-app-icon-shortcuts": "overview",
+        "before-you-start": "before-you-start",
+        "where-shortcuts-appear": "where-shortcuts-appear",
+        "1-declare-shortcuts-that-open-screens": "1-declare-shortcuts-that-open-screens",
+        "2-run-php-with-an-action": "2-run-php-with-an-action",
+        "3-refresh-the-screen-an-action-changed": "3-refresh-the-screen-an-action-changed",
+        "4-add-shortcuts-while-the-app-runs": "4-add-shortcuts-while-the-app-runs",
+        "5-test-it": "5-test-it",
+        "rules-to-keep": "rules-to-keep"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe lets people reach the app from outside it. One shortcut opens the new post form. Another adds a post without opening the app at all, and Siri or Android says what PHP replied."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "This recipe runs in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "AppShortcutsRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it."
+                        }
+                    ]
+                }
+            ]
+        },
+        "before-you-start": {
+            "title": "Before you start",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The recipe uses "
+                        },
+                        {
+                            "text": "firstlightui/app-shortcuts",
+                            "link": 2,
+                            "code": true
+                        },
+                        {
+                            "text": ", free and MIT licensed. It is an alpha: it has been checked on the iOS simulator and the Android emulator, not yet on physical devices or with Siri voice."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer require \"firstlightui/app-shortcuts:^1.0@alpha\"\nphp artisan native:plugin:register firstlightui/app-shortcuts\nphp artisan vendor:publish --tag=app-shortcuts-config"
+                },
+                {
+                    "type": "text",
+                    "text": "It needs iOS 18 or later and Android 8 (API 26) or later."
+                }
+            ]
+        },
+        "where-shortcuts-appear": {
+            "title": "Where shortcuts appear",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Spotlight and the Shortcuts app"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Every shortcut, also for the Action button"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "None"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Siri"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Up to 10 shortcuts with phrases, with no setup by the user"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "None. Gemini has no voice entry point for apps yet"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "App icon long-press menu"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Up to 4 shortcuts"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Up to 4 shortcuts, which people can pin to the home screen"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Added while the app runs"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "The long-press menu only"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "The long-press menu only"
+                        }
+                    ]
+                }
+            ]
+        },
+        "1-declare-shortcuts-that-open-screens": {
+            "title": "1. Declare shortcuts that open screens",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Each shortcut has a stable id and opens a named route:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "// config/app-shortcuts.php\nreturn [\n    'shortcuts' => [\n        'new-post' => [\n            'title' => 'New post',\n            'route' => 'recipes.posts.create',\n            'icon' => 'square.and.pencil',\n            'phrases' => ['New post in ${applicationName}', 'Write a post in ${applicationName}'],\n        ],\n        'haptics' => [\n            'title' => 'Try haptics',\n            'short_title' => 'Haptics',\n            'route' => 'haptics',\n            'icon' => 'hand.tap',\n            'requires_unlock' => false,\n        ],\n    ],\n];"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "The array key"
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "The id: lowercase letters and digits joined by hyphens. Keep it stable, because people's own automations in the Shortcuts app refer to it."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "title",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Shown in Spotlight, the Shortcuts app, and the long-press menu."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "short_title",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "runs": [
+                                {
+                                    "text": "Optional. Shown where space is short. Defaults to "
+                                },
+                                {
+                                    "text": "title",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "route",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "parameters",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "The named route to open, and optional route parameters."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "icon",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Optional SF Symbol for iOS. Android uses the app icon."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "phrases",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "runs": [
+                                {
+                                    "text": "Optional Siri phrases, each containing "
+                                },
+                                {
+                                    "text": "${applicationName}",
+                                    "code": true
+                                },
+                                {
+                                    "text": " once."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "launcher",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "runs": [
+                                {
+                                    "text": "Optional, default "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Shows the shortcut in the long-press menu."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "requires_unlock",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "runs": [
+                                {
+                                    "text": "Optional, default "
+                                },
+                                {
+                                    "text": "true",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". iOS asks the person to unlock the device first."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Shortcuts are compiled into the app, so a change takes effect on the next "
+                        },
+                        {
+                            "text": "php artisan native:run",
+                            "code": true
+                        },
+                        {
+                            "text": " or build. A shortcut that breaks a platform rule, such as an unknown route or a fifth launcher shortcut, fails the build with a message, rather than silently not appearing."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "A shortcut opens its screen through NativePHP's deep-link path, so route middleware runs first. A shortcut to a screen behind App Guard's "
+                        },
+                        {
+                            "text": "app-lock",
+                            "code": true
+                        },
+                        {
+                            "text": " shows the lock screen first. See "
+                        },
+                        {
+                            "text": "Build an app lock screen",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "2-run-php-with-an-action": {
+            "title": "2. Run PHP with an action",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "An action runs an invokable class instead of opening a screen. Give the shortcut an "
+                        },
+                        {
+                            "text": "action",
+                            "code": true
+                        },
+                        {
+                            "text": " in place of a "
+                        },
+                        {
+                            "text": "route",
+                            "code": true
+                        },
+                        {
+                            "text": ", and a "
+                        },
+                        {
+                            "text": "reply",
+                            "code": true
+                        },
+                        {
+                            "text": " for when PHP can't answer straight away:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "// config/app-shortcuts.php\n'quick-post' => [\n    'title' => 'Add a quick post',\n    'short_title' => 'Quick post',\n    'action' => App\\Actions\\AddQuickPost::class,\n    'reply' => 'Added a quick post',\n    'icon' => 'text.badge.plus',\n    'phrases' => ['Add a quick post in ${applicationName}'],\n],"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\Actions;\n\nuse App\\Models\\Post;\nuse FirstlightUI\\AppShortcuts\\ActionInvocation;\n\nclass AddQuickPost\n{\n    public const string TITLE_PREFIX = 'Quick post from';\n\n    public function __invoke(ActionInvocation $invocation): string\n    {\n        $post = new Post([\n            'title' => self::TITLE_PREFIX.' '.$invocation->invokedAt->format('j M, H:i'),\n            'excerpt' => 'Added by an app shortcut',\n            'body' => 'Added by the \"Add a quick post\" shortcut, without opening a screen.',\n        ]);\n\n        $post->created_at = $invocation->invokedAt;\n        $post->save();\n\n        $count = Post::query()->where('title', 'like', self::TITLE_PREFIX.' %')->count();\n\n        return $count === 1 ? 'Added your first quick post.' : \"Added a quick post. That's {$count} so far.\";\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The class is resolved from the container, so its constructor can ask for dependencies. "
+                        },
+                        {
+                            "text": "ActionInvocation",
+                            "code": true
+                        },
+                        {
+                            "text": " carries a unique "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": ", the "
+                        },
+                        {
+                            "text": "shortcutId",
+                            "code": true
+                        },
+                        {
+                            "text": ", and "
+                        },
+                        {
+                            "text": "invokedAt",
+                            "code": true
+                        },
+                        {
+                            "text": ", when the person used the shortcut. The string the class returns is the reply; return nothing to use the configured "
+                        },
+                        {
+                            "text": "reply",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Where the action was used decides how it runs:"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Siri, Spotlight, the Shortcuts app, the Action button"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "The class runs straight away and Siri says its reply. The app stays out of sight. When it was closed, iOS starts it in the background and PHP boots there in about two seconds."
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Not available"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "The long-press menu"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "The app opens and the class runs on the screen it shows"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "The class runs in the background, whether or not the app was running, and the reply shows as a toast"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On Android 13 and later, a toast from an app with no window on screen shows only if the app may post notifications. The plugin declares "
+                        },
+                        {
+                            "text": "POST_NOTIFICATIONS",
+                            "code": true
+                        },
+                        {
+                            "text": " and asks for it the first time anyone runs an action. While notifications are off, the long-press menu shows a spinner until the reply is ready, so the toast still shows."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "The action is queued instead, and runs when the first screen of the next launch mounts, when PHP can't start in the background:"
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "On iOS, before the app has been opened once after installing it or after an over-the-air update, and while "
+                        },
+                        {
+                            "text": "NATIVEPHP_APP_VERSION",
+                            "code": true
+                        },
+                        {
+                            "text": " is unset or "
+                        },
+                        {
+                            "text": "DEBUG",
+                            "code": true
+                        },
+                        {
+                            "text": ", because such a build unpacks its Laravel bundle at every launch."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "In an app using NativePHP's classic runtime mode."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "When PHP fails to boot, or the app takes more than about 10 seconds to boot it."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "So "
+                        },
+                        {
+                            "text": "invokedAt",
+                            "code": true
+                        },
+                        {
+                            "text": " can be minutes or days old. Record it, as "
+                        },
+                        {
+                            "text": "AddQuickPost",
+                            "code": true
+                        },
+                        {
+                            "text": " does, rather than the time the class runs. Skip actions that only make sense straight away, such as starting a timer, when it is old."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Each invocation runs at most once. A class that throws is reported through Laravel's exception handler and not retried."
+                }
+            ]
+        },
+        "3-refresh-the-screen-an-action-changed": {
+            "title": "3. Refresh the screen an action changed",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "After each class that returns, an "
+                        },
+                        {
+                            "text": "ActionRan",
+                            "code": true
+                        },
+                        {
+                            "text": " event reaches the open screen's "
+                        },
+                        {
+                            "text": "#[On]",
+                            "code": true
+                        },
+                        {
+                            "text": " listeners. A screen showing what the action changed can refresh:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\AppShortcuts\\Events\\ActionRan;\nuse FirstlightUI\\Facades\\Feedback;\nuse Native\\Mobile\\Attributes\\On;\n\n#[On(ActionRan::class)]\npublic function actionRan(string $shortcutId): void\n{\n    if ($shortcutId === 'quick-post') {\n        Feedback::success('A shortcut added a quick post')->send();\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The screen renders again after the listener runs, so a count it reads in "
+                        },
+                        {
+                            "text": "render()",
+                            "code": true
+                        },
+                        {
+                            "text": " is current."
+                        }
+                    ]
+                }
+            ]
+        },
+        "4-add-shortcuts-while-the-app-runs": {
+            "title": "4. Add shortcuts while the app runs",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "AppShortcuts::push()",
+                            "code": true
+                        },
+                        {
+                            "text": " adds or replaces an entry in the long-press menu, newest first. It opens a route; actions can't be pushed."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\AppShortcuts\\Facades\\AppShortcuts;\n\nAppShortcuts::push('newest-post', $post->title, 'recipes.post', ['post' => $post], 'doc.text', 'Newest post');\nAppShortcuts::remove('newest-post');\nAppShortcuts::clear(); // for example on sign-out"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Each method returns "
+                        },
+                        {
+                            "text": "true",
+                            "code": true
+                        },
+                        {
+                            "text": " when the native side applied the change. It returns "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": " without a native build, when the plugin is not registered, or when the native side reported an error. iOS can't add Siri phrases at runtime. A shortcut someone pinned on Android stays on the home screen after "
+                        },
+                        {
+                            "text": "remove()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "5-test-it": {
+            "title": "5. Test it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Fake the queue a shortcut would leave, then run it as the first screen of a launch would. See "
+                        },
+                        {
+                            "text": "Test screens",
+                            "link": 4
+                        },
+                        {
+                            "text": " for the harness."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use Carbon\\CarbonImmutable;\nuse FirstlightUI\\AppShortcuts\\Facades\\AppShortcuts;\nuse Native\\Mobile\\Testing\\Native;\n\n$bridge = Native::fakeBridge()->respondTo('AppShortcuts.TakeQueued', ['invocations' => [\n    ['id' => 'inv-1', 'shortcut' => 'quick-post', 'at' => CarbonImmutable::parse('2026-11-13 22:05:00 UTC')->getTimestampMs()],\n]]);\n\n$screen = Native::visit('/shortcuts')->assertSee('0 quick posts so far');\n\nexpect(AppShortcuts::runQueuedActions())->toBe(1);\n\n$screen->assertFeedbackSent('A shortcut added a quick post')\n    ->assertSee('1 quick post so far');"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "push()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "remove()",
+                            "code": true
+                        },
+                        {
+                            "text": " call the "
+                        },
+                        {
+                            "text": "AppShortcuts.Push",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "AppShortcuts.Remove",
+                            "code": true
+                        },
+                        {
+                            "text": " bridge functions, which "
+                        },
+                        {
+                            "text": "Native::fakeBridge()",
+                            "code": true
+                        },
+                        {
+                            "text": " can answer and record."
+                        }
+                    ]
+                }
+            ]
+        },
+        "rules-to-keep": {
+            "title": "Rules to keep",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Keep titles generic. They show on a locked device, in search, and in the long-press menu, so never put a person's name or other private details in one."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Leave "
+                        },
+                        {
+                            "text": "requires_unlock",
+                            "code": true
+                        },
+                        {
+                            "text": " on for any screen behind a sign-in."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Never rename a shipped shortcut's id: automations people built on it stop working."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Record "
+                        },
+                        {
+                            "text": "invokedAt",
+                            "code": true
+                        },
+                        {
+                            "text": " rather than the time the class runs, because a queued action can run much later."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Don't promise voice shortcuts on Android in your app's copy."
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "AppShortcutsRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/AppShortcutsRecipeTest.php"
+        },
+        {
+            "label": "firstlightui/app-shortcuts",
+            "url": "https://github.com/firstlightui/app-shortcuts"
+        },
+        {
+            "label": "Build an app lock screen",
+            "url": "build-an-app-lock-screen.md"
+        },
+        {
+            "label": "Test screens",
+            "url": "test-screens.md"
+        }
+    ]
+}

@@ -20,7 +20,7 @@
         <native:column class="w-full gap-3">
             <native:text class="text-sm font-semibold text-theme-on-surface">Icons</native:text>
             <firstlight:button icon="plus" @press="recordPress">Add item</firstlight:button>
-            <firstlight:button icon-trailing="chevron-right" @press="recordPress">Continue</firstlight:button>
+            <firstlight:button icon-trailing="chevron-right" icon-trailing-ios="chevron.forward" icon-trailing-android="chevron_right" @press="recordPress">Continue</firstlight:button>
         </native:column>
 
         <native:column class="w-full gap-3">

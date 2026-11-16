@@ -78,8 +78,9 @@ it('publishes every List Item content and state fixture through the native wire 
             'state' => 'pending-removal', 'state_label' => 'Discharge waiting to sync',
         ]);
 
+    // Firstlight drops the press from disabled rows, so a tap cannot reach PHP.
     foreach ($nodes as $node) {
-        expect($node['on_press'] ?? null)->toBeInt();
+        expect($node['on_press'] ?? null)->{($node['props']['disabled'] ?? false) ? 'toBeNull' : 'toBeInt'}();
     }
 
     $screen->assertAccessible();

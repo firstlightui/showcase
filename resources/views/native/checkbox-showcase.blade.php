@@ -47,7 +47,7 @@
                 label="Programmatic agreement"
                 helper="Use the buttons below to publish accepted state."
             />
-            <native:row class="gap-3">
+            <native:row class="gap-3 flex-wrap">
                 <native:button ref="acceptProgrammaticAgreement" label="Accept programmatic agreement" variant="primary" @press="acceptProgrammaticAgreement" />
                 <native:button ref="resetProgrammaticAgreement" label="Reset programmatic agreement" variant="secondary" @press="resetProgrammaticAgreement" />
             </native:row>

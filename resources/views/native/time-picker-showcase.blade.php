@@ -81,7 +81,7 @@
                 :disabled="$openDisabled"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $openTime ?? '(empty)' }}; disabled: {{ $openDisabled ? 'yes' : 'no' }}; pending: {{ $pendingOpenChange ?? 'none' }}; last change: {{ $lastOpenChange }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Change time" variant="secondary" @press="scheduleOpenChange('value')" />
                 <native:button label="Disable" variant="secondary" @press="scheduleOpenChange('disabled')" />
                 <native:button label="Reset open picker" variant="ghost" @press="resetOpenChange" />
@@ -106,7 +106,7 @@
                 a11y-hint="Use the buttons below to replace or clear the published value"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $programmaticTime ?? '(empty)' }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Publish later time" variant="secondary" @press="publishLaterTime" />
                 <native:button label="Clear time" variant="ghost" @press="clearProgrammaticTime" />
             </native:row>

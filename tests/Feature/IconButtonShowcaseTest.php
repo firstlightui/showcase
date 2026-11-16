@@ -41,8 +41,10 @@ it('publishes the complete Icon Button gallery through the native wire tree', fu
         ->and($nodes[11]['props']['disabled'])->toBeTrue()
         ->and($nodes[12]['props']['loading'])->toBeTrue();
 
+    // Firstlight drops the press from disabled and loading icons, so a tap cannot reach PHP.
     foreach ($nodes as $node) {
-        expect($node['on_press'] ?? null)->toBeInt();
+        $inert = ($node['props']['disabled'] ?? false) || ($node['props']['loading'] ?? false);
+        expect($node['on_press'] ?? null)->{$inert ? 'toBeNull' : 'toBeInt'}();
     }
 
     $screen->assertAccessible();

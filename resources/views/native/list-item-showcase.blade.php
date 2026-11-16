@@ -40,7 +40,7 @@
                 leading-icon-ios="bell.fill"
                 leading-icon-android="notifications"
                 trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
+                trailing-icon-ios="chevron.forward"
                 trailing-icon-android="chevron_right"
                 a11y-hint="Records a Notifications press; does not navigate"
                 @press="recordNotifications"

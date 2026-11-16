@@ -41,7 +41,7 @@
         @endif
 
         <native:text class="text-sm text-theme-on-surface">PHP accepted state: name {{ $name ?: '(empty)' }}; email {{ $email ?: '(empty)' }}; agreed {{ $accepted ? 'true' : 'false' }}; accepted submissions {{ $saveCount }}</native:text>
-        <native:row class="gap-3 pb-6">
+        <native:row class="gap-3 pb-6 flex-wrap">
             <firstlight:button ref="save" label="Continue" @press="save" />
             <firstlight:button ref="resetForm" label="Reset" variant="secondary" @press="resetForm" />
         </native:row>

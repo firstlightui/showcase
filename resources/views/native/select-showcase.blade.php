@@ -89,7 +89,7 @@
                 @change="acceptWard"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $ward ?? '(empty)' }}; Accepted changes: {{ $acceptedWardChanges }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Set ward from PHP" variant="secondary" @press="setWardFromPhp" />
                 <native:button label="Clear ward from PHP" variant="ghost" @press="clearWardFromPhp" />
             </native:row>

@@ -60,6 +60,7 @@
             <native:row class="w-full gap-3">
                 <firstlight:icon-button
                     icon="inbox"
+                    icon-ios="tray.and.arrow.down"
                     a11y-label="Sync inbox"
                     :loading="$syncing"
                     :disabled="$syncLocked"

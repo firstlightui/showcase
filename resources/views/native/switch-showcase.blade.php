@@ -45,7 +45,7 @@
                 label="Programmatic setting"
                 helper="Use the buttons below to change this setting on the server."
             />
-            <native:row class="gap-3">
+            <native:row class="gap-3 flex-wrap">
                 <native:button ref="enableProgrammaticSwitch" label="Enable programmatic setting" variant="primary" @press="enableProgrammaticSwitch" />
                 <native:button ref="resetProgrammaticSwitch" label="Reset programmatic setting" variant="secondary" @press="resetProgrammaticSwitch" />
             </native:row>

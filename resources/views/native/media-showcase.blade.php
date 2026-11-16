@@ -95,7 +95,7 @@
                 @change="sampleChosen"
                 @clear="sampleCleared"
             />
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <firstlight:button label="Publish sample from PHP" variant="secondary" @press="publishSample" />
                 <firstlight:button label="Clear sample from PHP" variant="ghost" @press="clearSampleFromPhp" />
             </native:row>

@@ -90,7 +90,7 @@
                 :disabled="$openDisabled"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $openDate ?? '(empty)' }}; bounds {{ $openMin }} to {{ $openMax }}; disabled: {{ $openDisabled ? 'yes' : 'no' }}; pending: {{ $pendingOpenChange ?? 'none' }}; last change: {{ $lastOpenChange }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Change value" variant="secondary" @press="scheduleOpenChange('value')" />
                 <native:button label="Change bounds" variant="secondary" @press="scheduleOpenChange('bounds')" />
                 <native:button label="Disable" variant="secondary" @press="scheduleOpenChange('disabled')" />
@@ -116,7 +116,7 @@
                 a11y-hint="Use the buttons below to replace or clear the published value"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $programmaticDate ?? '(empty)' }}</native:text>
-            <native:row class="w-full gap-2">
+            <native:row class="w-full gap-2 flex-wrap">
                 <native:button label="Publish later date" variant="secondary" @press="publishLaterDate" />
                 <native:button label="Clear date" variant="ghost" @press="clearProgrammaticDate" />
             </native:row>

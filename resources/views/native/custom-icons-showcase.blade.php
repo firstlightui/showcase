@@ -30,7 +30,7 @@
                 supporting="System icons for comparison"
                 leading-icon="settings"
                 trailing-icon="chevron-right"
-                trailing-icon-ios="chevron.right"
+                trailing-icon-ios="chevron.forward"
                 trailing-icon-android="chevron_right"
                 @press="recordPress('Settings')"
             />
