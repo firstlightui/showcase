@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed90543743eba576556b2c3382d4fcc9",
+    "content-hash": "53517d8f1c2384677fb1576d282909e6",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -838,31 +838,17 @@
                     "FirstlightUI\\AppShortcuts\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "FirstlightUI\\AppShortcuts\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "pest"
-                ],
-                "lint": [
-                    "pint --test"
-                ],
-                "analyse": [
-                    "phpstan analyse --no-progress --memory-limit=1G"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Open a screen or run a PHP action of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
             "support": {
-                "source": "https://github.com/firstlightui/app-shortcuts/tree/v1.0.0-alpha1",
-                "issues": "https://github.com/firstlightui/app-shortcuts/issues"
+                "issues": "https://github.com/firstlightui/app-shortcuts/issues",
+                "source": "https://github.com/firstlightui/app-shortcuts/tree/v1.0.0-alpha1"
             },
-            "time": "2026-11-16T03:32:18+00:00"
+            "time": "2026-11-16T03:32:18+00:00",
+            "published-time": "2026-11-16T03:50:43+00:00"
         },
         {
             "name": "firstlightui/nativephp",

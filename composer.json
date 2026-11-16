@@ -109,11 +109,6 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "name": "app-shortcuts",
-            "type": "vcs",
-            "url": "https://github.com/firstlightui/app-shortcuts"
-        },
-        {
             "name": "nativephp-plugins",
             "type": "composer",
             "url": "https://plugins.nativephp.com"
