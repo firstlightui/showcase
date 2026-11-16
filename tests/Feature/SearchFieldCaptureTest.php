@@ -27,7 +27,6 @@ it('publishes the stable Search Field documentation capture fixture', function (
         ->and($nodes[0]['props'])->toMatchArray([
             'value' => 'Referral',
             'placeholder' => 'Search referrals',
-            'autocapitalize' => 'words',
             'autocorrect_policy' => 'disabled',
         ])
         ->and($nodes[1]['props']['value'])->toBe('')

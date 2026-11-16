@@ -6,7 +6,6 @@
                 native:model="query"
                 placeholder="Search referrals"
                 a11y-label="Search referrals"
-                autocapitalize="words"
                 :autocorrect="false"
             />
         </native:column>

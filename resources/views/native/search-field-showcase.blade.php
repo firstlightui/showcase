@@ -10,7 +10,6 @@
                 placeholder="Search referrals"
                 a11y-label="Search referrals"
                 a11y-hint="Enter a patient, provider, or specialty"
-                autocapitalize="words"
                 :autocorrect="false"
                 @submit="submitQuery"
             />
@@ -25,7 +24,6 @@
                 native:model.debounce.500ms="debouncedQuery"
                 placeholder="Search clinicians"
                 a11y-label="Search clinicians"
-                autocapitalize="words"
                 @submit="submitQuery"
             />
             <native:text class="text-sm text-theme-on-surface">PHP accepted state: {{ $debouncedQuery ?: '(empty)' }} (debounced)</native:text>

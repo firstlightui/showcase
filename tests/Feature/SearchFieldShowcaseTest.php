@@ -34,9 +34,10 @@ it('publishes the complete Search Field catalogue through the native wire tree',
         ->and($nodes['Search referrals']['props'])->toMatchArray([
             'value' => 'Referral',
             'sync_mode' => 'live',
-            'autocapitalize' => 'words',
             'autocorrect_policy' => 'disabled',
         ])
+        // Like the system search bars, the field doesn't capitalise unless asked to.
+        ->and($nodes['Search referrals']['props'])->not->toHaveKey('autocapitalize')
         ->and($nodes['Search clinicians']['props'])->toMatchArray([
             'value' => '',
             'sync_mode' => 'debounce',
