@@ -20,7 +20,7 @@
     "require": {
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
-        "firstlightui/app-shortcuts": "dev-main",
+        "firstlightui/app-shortcuts": "^1.0@alpha",
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",

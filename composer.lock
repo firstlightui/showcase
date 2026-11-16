@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c149f874e014cf9ed51ebc5bfd9c851",
+    "content-hash": "ed90543743eba576556b2c3382d4fcc9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -800,16 +800,16 @@
         },
         {
             "name": "firstlightui/app-shortcuts",
-            "version": "dev-main",
+            "version": "v1.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/app-shortcuts.git",
-                "reference": "68e79d314007afdb04183231f0961d767182f8f6"
+                "reference": "6dcb6927e3f24a2e3ce445cfb9d8e8cce3676c3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/68e79d314007afdb04183231f0961d767182f8f6",
-                "reference": "68e79d314007afdb04183231f0961d767182f8f6",
+                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/6dcb6927e3f24a2e3ce445cfb9d8e8cce3676c3b",
+                "reference": "6dcb6927e3f24a2e3ce445cfb9d8e8cce3676c3b",
                 "shasum": ""
             },
             "require": {
@@ -822,7 +822,6 @@
                 "orchestra/testbench": "^11.0",
                 "pestphp/pest": "^5.0"
             },
-            "default-branch": true,
             "type": "nativephp-plugin",
             "extra": {
                 "laravel": {
@@ -860,10 +859,10 @@
             ],
             "description": "Open a screen or run a PHP action of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
             "support": {
-                "source": "https://github.com/firstlightui/app-shortcuts/tree/main",
+                "source": "https://github.com/firstlightui/app-shortcuts/tree/v1.0.0-alpha1",
                 "issues": "https://github.com/firstlightui/app-shortcuts/issues"
             },
-            "time": "2026-11-13T23:52:45+00:00"
+            "time": "2026-11-16T03:32:18+00:00"
         },
         {
             "name": "firstlightui/nativephp",
@@ -11093,7 +11092,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "firstlightui/app-shortcuts": 20,
+        "firstlightui/app-shortcuts": 15,
         "firstlightui/nativephp": 20
     },
     "prefer-stable": true,
