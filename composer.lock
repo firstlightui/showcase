@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53517d8f1c2384677fb1576d282909e6",
+    "content-hash": "769085e7958b35a74c5defc723dc767d",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -800,16 +800,16 @@
         },
         {
             "name": "firstlightui/app-shortcuts",
-            "version": "v1.0.0-alpha1",
+            "version": "dev-test/headless-api",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/app-shortcuts.git",
-                "reference": "6dcb6927e3f24a2e3ce445cfb9d8e8cce3676c3b"
+                "reference": "c56adb729280e7d163cd9ba20bb05bb357dff5c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/6dcb6927e3f24a2e3ce445cfb9d8e8cce3676c3b",
-                "reference": "6dcb6927e3f24a2e3ce445cfb9d8e8cce3676c3b",
+                "url": "https://api.github.com/repos/firstlightui/app-shortcuts/zipball/c56adb729280e7d163cd9ba20bb05bb357dff5c4",
+                "reference": "c56adb729280e7d163cd9ba20bb05bb357dff5c4",
                 "shasum": ""
             },
             "require": {
@@ -838,17 +838,31 @@
                     "FirstlightUI\\AppShortcuts\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "FirstlightUI\\AppShortcuts\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "pest"
+                ],
+                "lint": [
+                    "pint --test"
+                ],
+                "analyse": [
+                    "phpstan analyse --no-progress --memory-limit=1G"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "description": "Open a screen or run a PHP action of your NativePHP app from Siri, Spotlight, the Shortcuts app and the app icon on iOS, and from launcher shortcuts on Android.",
             "support": {
-                "issues": "https://github.com/firstlightui/app-shortcuts/issues",
-                "source": "https://github.com/firstlightui/app-shortcuts/tree/v1.0.0-alpha1"
+                "source": "https://github.com/firstlightui/app-shortcuts/tree/test/headless-api",
+                "issues": "https://github.com/firstlightui/app-shortcuts/issues"
             },
-            "time": "2026-11-16T03:32:18+00:00",
-            "published-time": "2026-11-16T03:50:43+00:00"
+            "time": "2026-11-16T04:59:44+00:00"
         },
         {
             "name": "firstlightui/nativephp",
@@ -2585,16 +2599,16 @@
         },
         {
             "name": "nativephp/mobile",
-            "version": "4.8.0",
+            "version": "dev-test/headless-runtime-4.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/NativePHP/mobile-air.git",
-                "reference": "5bcd75346ad3246fdaf5a3557c66779116c9c1de"
+                "url": "https://github.com/wojt-janowski/mobile-air.git",
+                "reference": "de03f255fbc290750d76c410bd02d5f993ae43fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/mobile-air/zipball/5bcd75346ad3246fdaf5a3557c66779116c9c1de",
-                "reference": "5bcd75346ad3246fdaf5a3557c66779116c9c1de",
+                "url": "https://api.github.com/repos/wojt-janowski/mobile-air/zipball/de03f255fbc290750d76c410bd02d5f993ae43fc",
+                "reference": "de03f255fbc290750d76c410bd02d5f993ae43fc",
                 "shasum": ""
             },
             "require": {
@@ -2643,14 +2657,40 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
                 "psr-4": {
                     "Native\\Mobile\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "qa": [
+                    "@composer format",
+                    "@composer analyse",
+                    "@composer test"
+                ],
+                "post-autoload-dump": [
+                    "@php ./vendor/bin/testbench package:discover --ansi"
+                ],
+                "analyse": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test-coverage": [
+                    "vendor/bin/pest --coverage"
+                ],
+                "format": [
+                    "vendor/bin/pint"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2675,11 +2715,9 @@
                 "nativephp"
             ],
             "support": {
-                "issues": "https://github.com/NativePHP/mobile-air/issues",
-                "source": "https://github.com/NativePHP/mobile-air/tree/4.8.0"
+                "source": "https://github.com/wojt-janowski/mobile-air/tree/test/headless-runtime-4.8"
             },
-            "time": "2026-11-14T16:39:37+00:00",
-            "published-time": "2026-11-14T16:42:12+00:00"
+            "time": "2026-11-16T04:59:08+00:00"
         },
         {
             "name": "nativephp/mobile-biometrics",
@@ -11075,11 +11113,19 @@
             "published-time": "2026-10-05T23:14:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "nativephp/mobile",
+            "version": "dev-test/headless-runtime-4.8",
+            "alias": "4.8.0",
+            "alias_normalized": "4.8.0.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "firstlightui/app-shortcuts": 15,
-        "firstlightui/nativephp": 20
+        "firstlightui/app-shortcuts": 20,
+        "firstlightui/nativephp": 20,
+        "nativephp/mobile": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

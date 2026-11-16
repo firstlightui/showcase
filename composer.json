@@ -20,11 +20,11 @@
     "require": {
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
-        "firstlightui/app-shortcuts": "^1.0@alpha",
+        "firstlightui/app-shortcuts": "dev-test/headless-api",
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
-        "nativephp/mobile": "^4.8.0",
+        "nativephp/mobile": "dev-test/headless-runtime-4.8 as 4.8.0",
         "nativephp/mobile-biometrics": "^1.0.3",
         "nativephp/mobile-browser": "^1.2",
         "nativephp/mobile-network": "^1.1",
@@ -108,6 +108,16 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
+        {
+            "name": "mobile-air-headless",
+            "type": "vcs",
+            "url": "https://github.com/wojt-janowski/mobile-air"
+        },
+        {
+            "name": "app-shortcuts",
+            "type": "vcs",
+            "url": "https://github.com/firstlightui/app-shortcuts"
+        },
         {
             "name": "nativephp-plugins",
             "type": "composer",
