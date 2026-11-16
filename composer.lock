@@ -2603,12 +2603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wojt-janowski/mobile-air.git",
-                "reference": "de03f255fbc290750d76c410bd02d5f993ae43fc"
+                "reference": "96af2c7b9d8325b9d42fcdcff891e435b4674ec3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wojt-janowski/mobile-air/zipball/de03f255fbc290750d76c410bd02d5f993ae43fc",
-                "reference": "de03f255fbc290750d76c410bd02d5f993ae43fc",
+                "url": "https://api.github.com/repos/wojt-janowski/mobile-air/zipball/96af2c7b9d8325b9d42fcdcff891e435b4674ec3",
+                "reference": "96af2c7b9d8325b9d42fcdcff891e435b4674ec3",
                 "shasum": ""
             },
             "require": {
@@ -2717,7 +2717,7 @@
             "support": {
                 "source": "https://github.com/wojt-janowski/mobile-air/tree/test/headless-runtime-4.8"
             },
-            "time": "2026-11-16T04:59:08+00:00"
+            "time": "2026-11-16T05:49:15+00:00"
         },
         {
             "name": "nativephp/mobile-biometrics",
