@@ -411,7 +411,60 @@
                 },
                 {
                     "type": "text",
-                    "text": "When a Firstlight screen navigates away, its farewell response closes the sheet without changing that visibility property. This also covers sheets in nested children."
+                    "runs": [
+                        {
+                            "text": "When a Firstlight screen opens another screen while the sheet is open, including from a deep link or an app shortcut, Firstlight closes the sheet and runs its "
+                        },
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " handler, so the handler sets the visibility property to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ". Going back then shows the screen without the sheet, as Android does with dialogs and bottom sheets. This also covers sheets in nested children."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "To show the sheet again when the user comes back, set the property in "
+                        },
+                        {
+                            "text": "onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public bool $reopenOnReturn = false;\n\npublic function onResume(): void\n{\n    // Set $reopenOnReturn before navigating away to bring it back here.\n    if ($this->reopenOnReturn) {\n        $this->filtersVisible = true;\n        $this->reopenOnReturn = false;\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Don't navigate from the "
+                        },
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " handler: the screen is already on its way to the new one."
+                        }
+                    ]
                 },
                 {
                     "type": "text",
