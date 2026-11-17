@@ -27,7 +27,9 @@ it('renders grouped native sections with Firstlight controls inside', function (
         ->and(array_map(fn ($c) => $c['type'], $sections[0]['children']))->toBe(['column', 'column'])
         ->and(array_map(fn ($c) => $c['children'][0]['type'], $sections[0]['children']))
         ->toBe(['firstlight.switch', 'firstlight.switch'])
-        ->and($sections[1]['children'][0]['children'][0]['type'])->toBe('firstlight.select')
+        // Digest is a settings row: its label, then a chip Select on the trailing edge.
+        ->and(array_map(fn ($c) => $c['type'], $sections[1]['children'][0]['children']))->toBe(['text', 'firstlight.select'])
+        ->and($sections[1]['children'][0]['children'][1]['props']['variant'] ?? null)->toBe('chip')
         ->and($sections[2]['children'][0]['children'][0]['type'])->toBe('firstlight.list-item');
 });
 

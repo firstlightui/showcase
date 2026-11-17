@@ -36,6 +36,10 @@
                     ]
                 },
                 {
+                    "type": "text",
+                    "text": "On Android, a screen narrower than 392 dp, such as a small phone at its largest display size, gets Material's keyboard time entry instead of the clock dial, in a dialog that fits the screen."
+                },
+                {
                     "type": "code",
                     "language": "blade",
                     "text": "<firstlight:time-picker\n    native:model=\"appointmentTime\"\n    label=\"Appointment time\"\n    placeholder=\"Choose a time\"\n    helper=\"Clinic local time\"\n    locale=\"en-AU\"\n    timezone=\"Australia/Sydney\"\n/>"

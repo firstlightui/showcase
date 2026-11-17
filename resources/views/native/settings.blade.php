@@ -9,9 +9,10 @@
     </native:list-section>
 
     <native:list-section header="Email" footer="Sample preference only. The showcase does not send email.">
-        <native:column class="w-full px-4 py-3 bg-theme-surface">
-            <firstlight:select label="Digest" :options="$digestOptions" native:model="digest" />
-        </native:column>
+        <native:row class="w-full px-4 py-3 gap-3 items-center bg-theme-surface">
+            <native:text class="flex-1 text-base text-theme-on-surface">Digest</native:text>
+            <firstlight:select variant="chip" a11y-label="Digest" :options="$digestOptions" native:model="digest" />
+        </native:row>
     </native:list-section>
 
     <native:list-section header="Account">
