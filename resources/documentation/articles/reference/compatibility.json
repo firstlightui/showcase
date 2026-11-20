@@ -5,6 +5,7 @@
     "group": "Reference",
     "anchors": {
         "compatibility": "overview",
+        "xcode": "overview",
         "runtime-response-contract": "runtime-response-contract",
         "supported-response-revision-contract": "runtime-response-contract",
         "upstream-context-and-qualification": "runtime-response-contract"
@@ -13,6 +14,21 @@
         "overview": {
             "title": "Overview",
             "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "This documentation covers Firstlight "
+                        },
+                        {
+                            "text": "1.1.1",
+                            "strong": true
+                        },
+                        {
+                            "text": ", the current stable release."
+                        }
+                    ]
+                },
                 {
                     "type": "definition",
                     "term": {
@@ -103,6 +119,18 @@
                 {
                     "type": "definition",
                     "term": {
+                        "text": "Xcode for iOS app builds"
+                    },
+                    "items": [
+                        {
+                            "label": "Current requirement",
+                            "text": "Xcode 16.4 or later, through Xcode 27.3"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
                         "text": "Swift tools"
                     },
                     "items": [
@@ -115,6 +143,18 @@
                 {
                     "type": "text",
                     "text": "These are the package's current declared floors. Firstlight does not promise support for earlier versions. Both the iOS and Android renderers are required for a public component; the same documented EDGE example works on both platforms."
+                },
+                {
+                    "type": "heading",
+                    "text": "Xcode"
+                },
+                {
+                    "type": "text",
+                    "text": "Firstlight's iOS sources are checked against every Xcode from 16.4 to 27.3: 16.4, 26.0 to 26.6, and 27.0 to 27.3. Firstlight 1.1.0 itself needs Xcode 27: its Toolbar does not compile with Xcode 26, and its Code Editor does not compile with Xcode 16. Use 1.1.1 or later with an older Xcode."
+                },
+                {
+                    "type": "text",
+                    "text": "The iOS SDK an app is built with decides which iOS 26 features it contains. Built with Xcode 26 or later, Liquid Glass surfaces and the Toolbar's glass group appear on iOS 26 and later devices, the same as with Xcode 27. Built with Xcode 16, the app has the pre-iOS 26 design on every device. The Swift package's own tests need Xcode 26 or later for Swift tools 6.2."
                 },
                 {
                     "type": "text",
@@ -397,7 +437,61 @@
                 },
                 {
                     "type": "text",
-                    "text": "On navigation, the farewell response also closes Firstlight Bottom Sheets and Modals, including nested overlays, without changing the screen's bound visibility properties. Mobile's cleanup handles its own overlay types; Firstlight extends it to its namespaced types."
+                    "runs": [
+                        {
+                            "text": "When opening another screen, Firstlight also runs each open Bottom Sheet and Modal's required "
+                        },
+                        {
+                            "text": "@dismiss",
+                            "code": true
+                        },
+                        {
+                            "text": " handler, including nested overlays. The handler must reset the bound visibility property to "
+                        },
+                        {
+                            "text": "false",
+                            "code": true
+                        },
+                        {
+                            "text": ", so Back returns without the overlay. Reopen deliberately in "
+                        },
+                        {
+                            "text": "onResume()",
+                            "code": true
+                        },
+                        {
+                            "text": " as shown in the "
+                        },
+                        {
+                            "text": "Bottom Sheet",
+                            "link": 0
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "Modal",
+                            "link": 1
+                        },
+                        {
+                            "text": " references. The farewell response closes their native presentation as well as Mobile's own overlay types."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "An overlay inside an unchanged "
+                        },
+                        {
+                            "text": "#[Memo]",
+                            "code": true
+                        },
+                        {
+                            "text": " child is not recorded again when its subtree is skipped. On a deep-link or app-shortcut navigation, its dismiss handler may therefore not run. Keep navigation-sensitive overlays outside memoized children."
+                        }
+                    ]
                 },
                 {
                     "type": "heading",
@@ -418,14 +512,14 @@
                         },
                         {
                             "text": "#280",
-                            "link": 0
+                            "link": 2
                         },
                         {
                             "text": "), only helps after a publication reaches Kotlin. The cross-platform bug "
                         },
                         {
                             "text": "#365",
-                            "link": 1
+                            "link": 3
                         },
                         {
                             "text": " remains upstream; the response revision makes Firstlight independent of it."
@@ -448,6 +542,14 @@
         }
     },
     "links": [
+        {
+            "label": "Bottom Sheet",
+            "url": "../components/bottom-sheet.md#events"
+        },
+        {
+            "label": "Modal",
+            "url": "../components/modal.md#events"
+        },
         {
             "label": "#280",
             "url": "https://github.com/NativePHP/mobile-air/pull/280"

@@ -57,7 +57,7 @@
                             "code": true
                         },
                         {
-                            "text": ", with iOS 18.2+ or Android API 29+. Firstlight screens must extend "
+                            "text": ", with iOS 18.2+ or Android API 29+. Build iOS apps with Xcode 16.4 to 27.3. Firstlight screens must extend "
                         },
                         {
                             "text": "FirstlightUI\\NativeComponent",
@@ -82,12 +82,12 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Install Firstlight as a normal Composer dependency:"
+                    "text": "Install Firstlight 1.1.1, the current stable release, as a normal Composer dependency:"
                 },
                 {
                     "type": "code",
                     "language": "bash",
-                    "text": "composer require firstlightui/nativephp"
+                    "text": "composer require \"firstlightui/nativephp:^1.1.1\""
                 },
                 {
                     "type": "text",

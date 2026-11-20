@@ -304,6 +304,28 @@
                     "type": "text",
                     "runs": [
                         {
+                            "text": "Keep navigation-sensitive modals outside unchanged "
+                        },
+                        {
+                            "text": "#[Memo]",
+                            "code": true
+                        },
+                        {
+                            "text": " children: their subtrees can be skipped, so a deep link or app shortcut may not run the modal's dismiss handler. See the "
+                        },
+                        {
+                            "text": "runtime response contract",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
                             "text": "To show the modal again when the user comes back, set the property in "
                         },
                         {
@@ -424,6 +446,10 @@
         {
             "label": "Bottom Sheet",
             "url": "bottom-sheet.md"
+        },
+        {
+            "label": "runtime response contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
         }
     ]
 }

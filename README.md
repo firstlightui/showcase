@@ -11,7 +11,7 @@ The official NativePHP showcase and dogfooding app for [`firstlightui/nativephp`
 
 ## Setup
 
-The app requires Firstlight `^1.1.0` and locks the stable `v1.1.0` release from Composer. No adjacent package checkout is needed. From this directory:
+The app requires Firstlight `^1.1.1` and locks the stable `v1.1.1` release from Composer. No adjacent package checkout is needed. From this directory:
 
 ```bash
 composer run setup

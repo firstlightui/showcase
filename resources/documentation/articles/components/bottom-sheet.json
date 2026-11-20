@@ -435,6 +435,28 @@
                     "type": "text",
                     "runs": [
                         {
+                            "text": "Keep navigation-sensitive sheets outside unchanged "
+                        },
+                        {
+                            "text": "#[Memo]",
+                            "code": true
+                        },
+                        {
+                            "text": " children: their subtrees can be skipped, so a deep link or app shortcut may not run the sheet's dismiss handler. See the "
+                        },
+                        {
+                            "text": "runtime response contract",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
                             "text": "To show the sheet again when the user comes back, set the property in "
                         },
                         {
@@ -618,6 +640,10 @@
         {
             "label": "Confirmation Dialog",
             "url": "confirmation-dialog.md"
+        },
+        {
+            "label": "runtime response contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
         }
     ]
 }
