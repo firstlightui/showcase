@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53517d8f1c2384677fb1576d282909e6",
+    "content-hash": "506121a27b341c4b0504ce0fc5f76a5b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -852,11 +852,17 @@
         },
         {
             "name": "firstlightui/nativephp",
-            "version": "dev-main",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firstlightui/nativephp.git",
+                "reference": "ef8c64a68a3ef1a6205277c3db06f4d3e8c8bfef"
+            },
             "dist": {
-                "type": "path",
-                "url": "../nativephp",
-                "reference": "c902bbc73c862338da516b4d938a45fa526cb4a3"
+                "type": "zip",
+                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/ef8c64a68a3ef1a6205277c3db06f4d3e8c8bfef",
+                "reference": "ef8c64a68a3ef1a6205277c3db06f4d3e8c8bfef",
+                "shasum": ""
             },
             "require": {
                 "illuminate/console": "^10.0|^11.0|^12.0|^13.0",
@@ -893,17 +899,7 @@
                     "FirstlightUI\\": "src/"
                 }
             },
-            "scripts": {
-                "test": [
-                    "pest"
-                ],
-                "docs:build": [
-                    "bin/build-docs-artifacts"
-                ],
-                "docs:check": [
-                    "bin/check-docs --development"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -926,10 +922,8 @@
                 "issues": "https://github.com/firstlightui/nativephp/issues",
                 "source": "https://github.com/firstlightui/nativephp"
             },
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
+            "time": "2026-11-19T20:52:28+00:00",
+            "published-time": "2026-11-19T20:52:35+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -11078,8 +11072,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "firstlightui/app-shortcuts": 15,
-        "firstlightui/nativephp": 20
+        "firstlightui/app-shortcuts": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

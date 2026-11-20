@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'version' => env('NATIVEPHP_APP_VERSION', 'DEBUG'),
+    'version' => env('NATIVEPHP_APP_VERSION', '1.1.0'),
 
     /*
     |--------------------------------------------------------------------------

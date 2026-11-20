@@ -21,7 +21,7 @@
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
         "firstlightui/app-shortcuts": "^1.0@alpha",
-        "firstlightui/nativephp": "dev-main",
+        "firstlightui/nativephp": "^1.1.0",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
         "nativephp/mobile": "^4.8.0",
@@ -112,16 +112,6 @@
             "name": "nativephp-plugins",
             "type": "composer",
             "url": "https://plugins.nativephp.com"
-        },
-        {
-            "type": "path",
-            "url": "../nativephp",
-            "options": {
-                "symlink": false,
-                "versions": {
-                    "firstlightui/nativephp": "dev-main"
-                }
-            }
         }
     ]
 }

@@ -11,13 +11,15 @@ The official NativePHP showcase and dogfooding app for [`firstlightui/nativephp`
 
 ## Setup
 
-The app consumes the adjacent `../nativephp` checkout through Composer's path repository. From this directory:
+The app requires Firstlight `^1.1.0` and locks the stable `v1.1.0` release from Composer. No adjacent package checkout is needed. From this directory:
 
 ```bash
 composer run setup
 ```
 
 After changing NativePHP versions, run `composer update` and `php artisan native:install --force`.
+
+The app release version is `1.1.0`. Existing environments must set `NATIVEPHP_APP_VERSION=1.1.0`; each device build also needs a fresh `NATIVEPHP_APP_VERSION_CODE` so iOS extracts the updated PHP bundle. Store build numbers are managed separately from this release version.
 
 ## App artwork
 
@@ -41,7 +43,7 @@ Artwork was generated with the built-in image generation tool. The final
 ### Response-revision contract
 
 The supported screen base is `FirstlightUI\NativeComponent`; `ShowcaseScreen`
-extends it. On Mobile `^4.7.0` / Mobile UI `^0.9.0`, it adds a process-wide
+extends it. On Mobile `^4.8.0` / Mobile UI `^0.10.0`, it adds a process-wide
 increasing revision to each complete nonstreaming response's final chrome root.
 Blade paths are automatic; programmatic Element roots must return
 `$this->response($element)`. Nested children are untouched, partials are
