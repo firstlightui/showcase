@@ -12,7 +12,7 @@
         />
 
         @if ($generationId)
-            <firstlight:button variant="secondary" @press="stop">Stop</firstlight:button>
+            <firstlight:button variant="secondary" @press="cancel">Stop</firstlight:button>
         @else
             <firstlight:button :disabled="! $available || $question === ''" @press="ask">Ask</firstlight:button>
         @endif

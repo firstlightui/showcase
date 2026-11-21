@@ -55,7 +55,7 @@ class AskScreen extends NativeComponent
         }
     }
 
-    public function stop(): void
+    public function cancel(): void
     {
         if ($this->generationId !== null) {
             LocalAI::cancel($this->generationId);

@@ -3,6 +3,7 @@
 use App\Models\Post;
 use App\NativeComponents\ShowcaseHome;
 use Illuminate\Support\Facades\Storage;
+use Native\Mobile\Edge\NativeComponent;
 use Native\Mobile\Testing\Native;
 
 /** @return list<array<string, mixed>> */
@@ -186,6 +187,18 @@ it('opens each plugin recipe from the Plugins tab', function (string $label, str
     ['Scan documents', '/scan'],
     ['Ask on-device AI', '/ask'],
 ]);
+
+it('leaves stop() to the framework so Back can leave every screen', function () {
+    // NativePHP's stop() ends a screen's loop when it navigates away; an override kept Ask open on Back.
+    $files = glob(app_path('NativeComponents/{,*/}*.php'), GLOB_BRACE);
+    foreach ($files as $file) {
+        $class = 'App\\NativeComponents\\'.str_replace(['/', '.php'], ['\\', ''], substr($file, strlen(app_path('NativeComponents/'))));
+
+        if (is_subclass_of($class, NativeComponent::class)) {
+            expect((new ReflectionMethod($class, 'stop'))->class)->toBe(NativeComponent::class, $class);
+        }
+    }
+});
 
 it('presents the plugins as app entry points with icons and descriptions', function () {
     $screen = Native::visit('/plugins')->assertAccessible();
