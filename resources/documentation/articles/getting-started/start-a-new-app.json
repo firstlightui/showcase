@@ -1,0 +1,664 @@
+{
+    "id": "getting-started/start-a-new-app",
+    "title": "Start a new app",
+    "description": "Describe your app to a coding agent, confirm the plan it proposes, and get a themed NativePHP app with Firstlight screens, the plugins it needs, and Pest tests.",
+    "group": "Getting started",
+    "anchors": {
+        "start-a-new-app": "overview",
+        "create-the-laravel-app": "create-the-laravel-app",
+        "describe-the-app": "describe-the-app",
+        "change-the-proposal-by-reply": "change-the-proposal-by-reply",
+        "check-the-essentials": "check-the-essentials",
+        "confirm-the-plan": "confirm-the-plan",
+        "build-it": "build-it",
+        "run-it-on-a-device": "run-it-on-a-device",
+        "without-an-agent": "without-an-agent",
+        "what-is-left-for-you": "what-is-left-for-you"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Describe the app you are building, and Firstlight's "
+                        },
+                        {
+                            "text": "firstlight-init",
+                            "code": true
+                        },
+                        {
+                            "text": " skill proposes a layout, screens built from the recipes, and the NativePHP plugins that fit. It then collects the app's name, ID, colours, icon and locale. When you confirm the plan, "
+                        },
+                        {
+                            "text": "php artisan firstlight:starter",
+                            "code": true
+                        },
+                        {
+                            "text": " builds it: a NativePHP app with native-chrome navigation, a list, detail, form and settings screen for each record, your brand colour, and a Pest test for every screen."
+                        }
+                    ]
+                }
+            ]
+        },
+        "create-the-laravel-app": {
+            "title": "Create the Laravel app",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Start from a new Laravel app, then add Firstlight, Pest and "
+                        },
+                        {
+                            "text": "Laravel Boost",
+                            "link": 0
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer create-project laravel/laravel my-app\ncd my-app\ncomposer require firstlightui/nativephp\nphp artisan vendor:publish --tag=nativephp-plugins-provider\nphp artisan native:plugin:register nativephp/mobile-ui\nphp artisan native:plugin:register firstlightui/nativephp\ncomposer remove phpunit/phpunit --dev\ncomposer require pestphp/pest pestphp/pest-plugin-laravel --dev -W\nvendor/bin/pest --init\ncomposer require laravel/boost --dev\nphp artisan boost:install"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Firstlight brings NativePHP Mobile and Mobile UI with it. The generated tests are Pest tests, so the app needs Pest. Boost installs the "
+                        },
+                        {
+                            "text": "firstlight-init",
+                            "code": true
+                        },
+                        {
+                            "text": " skill into your coding agent; see "
+                        },
+                        {
+                            "text": "Build with a coding agent",
+                            "link": 1
+                        },
+                        {
+                            "text": " for what else it installs."
+                        }
+                    ]
+                }
+            ]
+        },
+        "describe-the-app": {
+            "title": "Describe the app",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Ask your agent to start the app, and say what it does, who uses it and what it keeps. For example:"
+                },
+                {
+                    "type": "text",
+                    "text": "Start a Firstlight app: a private journal for my own dated entries. Nobody else should read them if they pick up my phone."
+                },
+                {
+                    "type": "text",
+                    "text": "The skill restates what it understood: the records, whether the data is private, whether the app must work without signal, and what it needs from the device. Correct anything it got wrong."
+                }
+            ]
+        },
+        "change-the-proposal-by-reply": {
+            "title": "Change the proposal by reply",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "The skill sends one proposal with three parts:"
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Layout:",
+                            "strong": true
+                        },
+                        {
+                            "text": " tabs for two to five equal areas, or one stack when a single list is the app."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Screens:",
+                            "strong": true
+                        },
+                        {
+                            "text": " one line for each screen, naming the recipe it is built from."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Plugins:",
+                            "strong": true
+                        },
+                        {
+                            "text": " "
+                        },
+                        {
+                            "text": "Included",
+                            "emphasis": true
+                        },
+                        {
+                            "text": " free plugins, "
+                        },
+                        {
+                            "text": "Offered",
+                            "emphasis": true
+                        },
+                        {
+                            "text": " paid plugins, and "
+                        },
+                        {
+                            "text": "Not needed",
+                            "emphasis": true
+                        },
+                        {
+                            "text": " plugins that Firstlight already covers, such as a camera plugin for photo fields."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Reply with changes, such as \"drop settings\" or \"yes to biometrics\". Paid plugins are installed only when you say yes to one by name. NativePHP serves a paid plugin only to an account that has bought it, so buy it first, or the app is built without it and "
+                        },
+                        {
+                            "text": "STARTER.md",
+                            "code": true
+                        },
+                        {
+                            "text": " gives you the steps to add it. Each community plugin comes with a notice that neither Firstlight nor NativePHP maintains or warrants it."
+                        }
+                    ]
+                }
+            ]
+        },
+        "check-the-essentials": {
+            "title": "Check the essentials",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Next the skill shows one table of proposed values, and you change any row by reply:"
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The app name, and the app ID, which NativePHP uses as both the iOS bundle ID and the Android application ID. The stores fix the ID at the first upload."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The deep link scheme and appearance."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The brand colour and the text colour on it, checked for 4.5:1 contrast."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The icon: a square PNG of at least 1024 × 1024, or a placeholder in the brand colour."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The locale, fallback locale and timezone."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The minimum OS: iOS 18.2 and Android API 29, raised by any plugin that needs more."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "One sentence for each permission the app asks for, worded for this app."
+                }
+            ]
+        },
+        "confirm-the-plan": {
+            "title": "Confirm the plan",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The skill writes the plan to "
+                        },
+                        {
+                            "text": "firstlight-starter.json",
+                            "code": true
+                        },
+                        {
+                            "text": " in the app and shows it to you. Nothing is built until you confirm it. For the journal, the plan looks like this:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "json",
+                    "text": "{\n    \"description\": \"Private journal with an app lock: my own dated entries, and nobody else should read them if they pick up my phone.\",\n    \"app\": {\"name\": \"Daybook\", \"id\": \"com.example.daybook\", \"deeplink_scheme\": \"daybook\", \"appearance\": \"system\"},\n    \"theme\": {\"light\": {\"primary\": \"#6D28D9\", \"on-primary\": \"#FFFFFF\"}, \"dark\": null},\n    \"icon\": null,\n    \"locale\": {\"locale\": \"en\", \"fallback\": \"en\", \"timezone\": \"Europe/London\"},\n    \"android_min_sdk\": 29,\n    \"layout\": {\"type\": \"stack\"},\n    \"records\": [{\"model\": \"Entry\", \"deletable\": true, \"delete_rule\": \"Only the person who wrote the entry.\"}],\n    \"screens\": [\n        {\"recipe\": \"how-to/build-a-searchable-list-screen\", \"record\": \"Entry\"},\n        {\"recipe\": \"how-to/build-a-list-detail-flow\", \"record\": \"Entry\"},\n        {\"recipe\": \"how-to/build-a-form-screen\", \"record\": \"Entry\"},\n        {\"recipe\": \"how-to/keep-drafts\", \"record\": \"Entry\"},\n        {\"recipe\": \"how-to/build-an-app-lock-screen\"},\n        {\"recipe\": \"how-to/guard-screens\"},\n        {\"recipe\": \"how-to/build-a-settings-screen\"}\n    ],\n    \"plugins\": [\n        {\"package\": \"firstlightui/app-guard\", \"accepted\": true},\n        {\"package\": \"nativephp/mobile-biometrics\", \"accepted\": false}\n    ],\n    \"permissions\": {}\n}"
+                }
+            ]
+        },
+        "build-it": {
+            "title": "Build it",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "After you confirm, the skill runs:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan firstlight:starter\nphp artisan migrate --seed\nvendor/bin/pest"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "firstlight:starter",
+                            "code": true
+                        },
+                        {
+                            "text": " checks the whole plan first and lists every problem, such as an app ID that iOS or Android would reject, a colour pair under 4.5:1, or a tab that opens no screen in the plan. Fix the plan and run it again."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "It then installs and registers the accepted plugins and writes:"
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "The app name, ID, colours, locale, timezone and minimum SDK in "
+                        },
+                        {
+                            "text": ".env",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": ".env.example",
+                            "code": true
+                        },
+                        {
+                            "text": ", the brand colour in "
+                        },
+                        {
+                            "text": "config/native-ui.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", and the permission text in "
+                        },
+                        {
+                            "text": "config/nativephp.php",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "A placeholder icon and splash in "
+                        },
+                        {
+                            "text": "public/",
+                            "code": true
+                        },
+                        {
+                            "text": ", unless you gave an icon."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "app/NativeComponents/Layouts/AppLayout.php",
+                            "code": true
+                        },
+                        {
+                            "text": " with native chrome, and the tab bar in the brand colour when the layout has tabs."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "For each record, its model, migration, factory, Policy and seeder with example records."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Each screen with a template: the searchable list, detail, form, edit with kept drafts, and settings, each with its view, its route in "
+                        },
+                        {
+                            "text": "routes/mobile.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", and its Pest test."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "STARTER.md",
+                            "code": true
+                        },
+                        {
+                            "text": ", which lists each screen and its recipe, the installed plugins, the screens with no template yet, and what is left for you."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The skill then builds each screen listed under \"Build next\" in "
+                        },
+                        {
+                            "text": "STARTER.md",
+                            "code": true
+                        },
+                        {
+                            "text": " from its recipe, such as the journal's app lock screen, and wires up the plugins those screens use."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "firstlight:starter",
+                            "code": true
+                        },
+                        {
+                            "text": " is safe to run again after you change the plan: it keeps files you have edited and lists them, unless you pass "
+                        },
+                        {
+                            "text": "--force",
+                            "code": true
+                        },
+                        {
+                            "text": ". Pass "
+                        },
+                        {
+                            "text": "--skip-plugins",
+                            "code": true
+                        },
+                        {
+                            "text": " when you have installed the plugins yourself."
+                        }
+                    ]
+                }
+            ]
+        },
+        "run-it-on-a-device": {
+            "title": "Run it on a device",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Build and run the app on an iOS simulator and an Android emulator:"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan native:install both --no-interaction\nphp artisan native:run ios\nphp artisan native:run android"
+                },
+                {
+                    "type": "text",
+                    "text": "The seeders fill your local database, not the database on the device, so a fresh install opens on the list's empty state. Add a record with the list's New button. Check the large title, back navigation, tabs, field errors and deletion on both platforms."
+                }
+            ]
+        },
+        "without-an-agent": {
+            "title": "Without an agent",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "You can write the plan yourself. Copy "
+                        },
+                        {
+                            "text": "vendor/firstlightui/nativephp/resources/starter/firstlight-starter.example.json",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "firstlight-starter.json",
+                            "code": true
+                        },
+                        {
+                            "text": ", change it, and run "
+                        },
+                        {
+                            "text": "php artisan firstlight:starter",
+                            "code": true
+                        },
+                        {
+                            "text": ". Plugins must be entries in "
+                        },
+                        {
+                            "text": "vendor/firstlightui/nativephp/resources/starter/plugins.json",
+                            "code": true
+                        },
+                        {
+                            "text": ", which says what each one does on iOS and Android and whether it is free or paid."
+                        }
+                    ]
+                }
+            ]
+        },
+        "what-is-left-for-you": {
+            "title": "What is left for you",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "STARTER.md",
+                            "code": true
+                        },
+                        {
+                            "text": " lists what the starter can't do for you:"
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Replace the placeholder icon with the real one."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Write who may delete each record in its Policy. Until you do, the Policy allows everyone."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Set up signing and builds, with "
+                        },
+                        {
+                            "text": "Bifrost",
+                            "link": 2
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "php artisan native:credentials",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Create the App Store Connect app record and the Play Console listing."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Buy and add any paid plugin you accepted that couldn't be installed."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Build the back end, sign-in and APIs the app talks to."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Set "
+                        },
+                        {
+                            "text": "NATIVEPHP_APP_VERSION",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "NATIVEPHP_APP_VERSION_CODE",
+                            "code": true
+                        },
+                        {
+                            "text": " when you release."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The generated screens are written in English. To translate the app, see "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 3
+                        },
+                        {
+                            "text": " for Firstlight's own labels, and translate your screens' text with Laravel's "
+                        },
+                        {
+                            "text": "localization",
+                            "link": 4
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "From here, ask your agent for each new screen by what it does, such as \"add a screen to tag entries\". The "
+                        },
+                        {
+                            "text": "building-firstlight-screens",
+                            "code": true
+                        },
+                        {
+                            "text": " skill picks its recipe."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Laravel Boost",
+            "url": "https://laravel.com/docs/boost"
+        },
+        {
+            "label": "Build with a coding agent",
+            "url": "build-with-a-coding-agent.md"
+        },
+        {
+            "label": "Bifrost",
+            "url": "https://bifrost.nativephp.com"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "localization",
+            "url": "https://laravel.com/docs/localization"
+        }
+    ]
+}

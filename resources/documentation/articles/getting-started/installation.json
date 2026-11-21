@@ -205,39 +205,46 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Build the app shell with the "
+                            "text": "To have your coding agent build the whole starter app from a description of it, follow "
+                        },
+                        {
+                            "text": "Start a new app",
+                            "link": 3
+                        },
+                        {
+                            "text": ". To build it yourself, start by building the app shell from the "
                         },
                         {
                             "text": "list and detail recipe",
-                            "link": 3
+                            "link": 4
                         },
                         {
                             "text": ", then add the "
                         },
                         {
                             "text": "searchable list",
-                            "link": 4
+                            "link": 5
                         },
                         {
                             "text": ", "
                         },
                         {
                             "text": "form",
-                            "link": 5
+                            "link": 6
                         },
                         {
                             "text": ", and "
                         },
                         {
                             "text": "settings",
-                            "link": 6
+                            "link": 7
                         },
                         {
                             "text": " screens your app needs. To learn one control at a time instead, add "
                         },
                         {
                             "text": "your first Firstlight component",
-                            "link": 7
+                            "link": 8
                         },
                         {
                             "text": "."
@@ -259,6 +266,10 @@
         {
             "label": "Build with a coding agent",
             "url": "build-with-a-coding-agent.md"
+        },
+        {
+            "label": "Start a new app",
+            "url": "start-a-new-app.md"
         },
         {
             "label": "list and detail recipe",

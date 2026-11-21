@@ -917,12 +917,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/nativephp.git",
-                "reference": "5dd052f7645bb23ed13dcf18b7114757554f31f2"
+                "reference": "4a977258887dfaa523c5999b05f83d711f62c2c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/5dd052f7645bb23ed13dcf18b7114757554f31f2",
-                "reference": "5dd052f7645bb23ed13dcf18b7114757554f31f2",
+                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/4a977258887dfaa523c5999b05f83d711f62c2c0",
+                "reference": "4a977258887dfaa523c5999b05f83d711f62c2c0",
                 "shasum": ""
             },
             "require": {
@@ -984,8 +984,8 @@
                 "issues": "https://github.com/firstlightui/nativephp/issues",
                 "source": "https://github.com/firstlightui/nativephp"
             },
-            "time": "2026-11-21T08:45:57+00:00",
-            "published-time": "2026-11-21T08:47:37+00:00"
+            "time": "2026-11-21T10:29:57+00:00",
+            "published-time": "2026-11-21T10:30:02+00:00"
         },
         {
             "name": "fruitcake/php-cors",

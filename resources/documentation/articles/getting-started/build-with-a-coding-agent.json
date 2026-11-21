@@ -155,11 +155,11 @@
                     "items": [
                         {
                             "label": "When the agent reads it",
-                            "text": "When asked to set up or scaffold a Firstlight app"
+                            "text": "When asked to start, set up, or scaffold a Firstlight app"
                         },
                         {
                             "label": "What it contains",
-                            "text": "An interview, an install check, the theme, the native-chrome layout, and the chosen recipe screens with tests"
+                            "text": "An interview about the app, a proposed layout, recipe screens and plugins, the app's name, ID, colours, icon and locale, and the confirmed screens with tests"
                         }
                     ]
                 },
@@ -362,11 +362,22 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "With Boost installed, describe the app rather than the controls. For example:"
+                    "runs": [
+                        {
+                            "text": "With Boost installed, describe the app rather than the controls. "
+                        },
+                        {
+                            "text": "Start a new app",
+                            "link": 4
+                        },
+                        {
+                            "text": " walks through the whole process. For example:"
+                        }
+                    ]
                 },
                 {
                     "type": "text",
-                    "text": "Set up this app with Firstlight. The main record is a job. I want a searchable list of jobs, a form to create one, and a settings screen."
+                    "text": "Start a Firstlight app for field technicians. They see the day's jobs, add photos and notes, and keep working without signal."
                 },
                 {
                     "type": "text",
@@ -379,14 +390,70 @@
                             "code": true
                         },
                         {
-                            "text": " skill asks about the record, the recipes, brand colours, tabs, deletion rules, and locale one question at a time, and makes no change you have not agreed to. It then scaffolds each chosen "
+                            "text": " skill asks what the app does, then proposes tabs or a single stack, a screen for each part of the app built from a "
                         },
                         {
                             "text": "recipe",
-                            "link": 4
+                            "link": 5
                         },
                         {
-                            "text": " with a Pest test and runs the test suite."
+                            "text": ", and the NativePHP plugins that fit. It then proposes the app name, app ID, brand colour, icon, splash, locale, and minimum OS, and you change any of them in your reply. It writes the plan to "
+                        },
+                        {
+                            "text": "firstlight-starter.json",
+                            "code": true
+                        },
+                        {
+                            "text": " and builds nothing until you confirm it. Then it runs:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan firstlight:starter"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The command installs the plugins you accepted, sets the app's name, ID, colours, locale, timezone and permission text, and writes the native-chrome layout and each screen with its Pest test. It lists what is left for you in "
+                        },
+                        {
+                            "text": "STARTER.md",
+                            "code": true
+                        },
+                        {
+                            "text": ", such as signing, store listings, and any screen it has no template for yet, which the agent then builds from its recipe. Running it again keeps files you have changed unless you pass "
+                        },
+                        {
+                            "text": "--force",
+                            "code": true
+                        },
+                        {
+                            "text": ". You can also write the plan yourself, starting from "
+                        },
+                        {
+                            "text": "vendor/firstlightui/nativephp/resources/starter/firstlight-starter.example.json",
+                            "code": true
+                        },
+                        {
+                            "text": ", and run the command without an agent."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The skill picks plugins from a list shipped with Firstlight at "
+                        },
+                        {
+                            "text": "vendor/firstlightui/nativephp/resources/starter/plugins.json",
+                            "code": true
+                        },
+                        {
+                            "text": ", which says what each plugin does on iOS and Android and which Firstlight features make a plugin unnecessary. Free plugins are included when the app needs them. Paid plugins are only offered, marked as paid, and installed only when you say yes; NativePHP serves them only to an account that has bought them, so buy one before you accept it, or the skill builds the app without it and leaves you the steps to add it. Community plugins come with a notice that neither Firstlight nor NativePHP maintains or warrants them."
                         }
                     ]
                 },
@@ -423,7 +490,7 @@
                         },
                         {
                             "text": "Accessibility",
-                            "link": 5
+                            "link": 6
                         },
                         {
                             "text": " for what Firstlight covers and what your app still owns."
@@ -449,6 +516,10 @@
         {
             "label": "llms-full.txt",
             "url": "https://firstlightui.dev/llms-full.txt"
+        },
+        {
+            "label": "Start a new app",
+            "url": "start-a-new-app.md"
         },
         {
             "label": "recipe",
