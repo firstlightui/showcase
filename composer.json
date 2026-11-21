@@ -22,6 +22,8 @@
         "firstlightui/app-guard": "^1.0",
         "firstlightui/app-shortcuts": "^1.0@alpha",
         "firstlightui/custom-tabs": "dev-main",
+        "firstlightui/local-ai": "^1.0",
+        "firstlightui/local-ocr": "^1.0",
         "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",

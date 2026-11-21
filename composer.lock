@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b8d259449c6e9c5cc7ebf32c3962404",
+    "content-hash": "5f3991276a818370c254f74a836c56fd",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -910,6 +910,135 @@
             ],
             "description": "Let people choose and reorder the tabs of your NativePHP Mobile app, within the tabs, locks and limits you declare.",
             "time": "2026-11-21T09:11:30+00:00"
+        },
+        {
+            "name": "firstlightui/local-ai",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firstlightui/local-ai.git",
+                "reference": "4f177f8e6565096e9315568999fbf9eeb2081d2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firstlightui/local-ai/zipball/4f177f8e6565096e9315568999fbf9eeb2081d2e",
+                "reference": "4f177f8e6565096e9315568999fbf9eeb2081d2e",
+                "shasum": ""
+            },
+            "require": {
+                "nativephp/mobile": "^4.6.1",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "laravel/framework": "^12.0|^13.0",
+                "pestphp/pest": "^3.0|^4.0"
+            },
+            "type": "nativephp-plugin",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LocalAI": "FirstlightUI\\LocalAI\\Facades\\LocalAI"
+                    },
+                    "providers": [
+                        "FirstlightUI\\LocalAI\\LocalAIServiceProvider"
+                    ]
+                },
+                "nativephp": {
+                    "manifest": "nativephp.json"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FirstlightUI\\LocalAI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "On-device text generation for NativePHP Mobile using the operating system's built-in models: Apple Foundation Models on iOS and Gemini Nano (ML Kit GenAI) on Android.",
+            "homepage": "https://github.com/firstlightui/local-ai",
+            "keywords": [
+                "ai",
+                "foundation-models",
+                "gemini-nano",
+                "llm",
+                "nativephp",
+                "nativephp-plugin",
+                "on-device"
+            ],
+            "support": {
+                "email": "team@firstlightui.dev",
+                "issues": "https://github.com/firstlightui/local-ai/issues",
+                "source": "https://github.com/firstlightui/local-ai"
+            },
+            "time": "2026-11-20T04:28:41+00:00",
+            "published-time": "2026-11-20T04:28:47+00:00"
+        },
+        {
+            "name": "firstlightui/local-ocr",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firstlightui/local-ocr.git",
+                "reference": "aec63493e88b48d41feef9997d26302b2d4a1f5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firstlightui/local-ocr/zipball/aec63493e88b48d41feef9997d26302b2d4a1f5e",
+                "reference": "aec63493e88b48d41feef9997d26302b2d4a1f5e",
+                "shasum": ""
+            },
+            "require": {
+                "nativephp/mobile": "^4.6.1",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^3.0|^4.0|^5.0"
+            },
+            "type": "nativephp-plugin",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FirstlightUI\\LocalOcr\\LocalOcrServiceProvider"
+                    ]
+                },
+                "nativephp": {
+                    "manifest": "nativephp.json"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FirstlightUI\\LocalOcr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Firstlight UI",
+                    "email": "team@firstlightui.dev"
+                }
+            ],
+            "description": "On-device multi-page document capture and OCR for NativePHP Mobile, using VisionKit and Apple Vision on iOS and ML Kit on Android.",
+            "homepage": "https://firstlightui.dev",
+            "keywords": [
+                "OCR",
+                "android",
+                "document-scanner",
+                "ios",
+                "nativephp"
+            ],
+            "support": {
+                "email": "team@firstlightui.dev",
+                "issues": "https://github.com/firstlightui/local-ocr/issues",
+                "source": "https://github.com/firstlightui/local-ocr"
+            },
+            "time": "2026-11-20T04:28:53+00:00",
+            "published-time": "2026-11-20T04:28:59+00:00"
         },
         {
             "name": "firstlightui/nativephp",

@@ -89,6 +89,7 @@ class ShowcaseLayout extends NativeLayout
         return TabBar::make()
             ->add(Tab::link('Gallery', '/', icon: 'star', ios: 'sparkles', android: 'auto_awesome'))
             ->add(Tab::link('Recipes', '/recipes', icon: 'apps', ios: 'square.stack.3d.up', android: 'layers'))
+            ->add(Tab::link('Plugins', '/plugins', icon: 'extension', ios: 'puzzlepiece.extension', android: 'extension'))
             ->add(Tab::link('Components', '/components', icon: 'widgets', ios: 'square.grid.2x2', android: 'widgets'))
             ->add(Tab::link('Docs', '/docs', icon: 'menu_book', ios: 'book.closed', android: 'menu_book'));
     }

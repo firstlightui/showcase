@@ -76,7 +76,7 @@ class LockScreen extends NativeComponent
         $this->prompting = false;
         app(AppLock::class)->resumeShield();
         AppGuard::releaseShield();
-        $this->replace('/recipes');
+        $this->replace('/plugins');
     }
 
     public function navigationOptions(): ?NavBarOptions

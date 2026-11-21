@@ -26,8 +26,8 @@ function customTabsBar(string $uri): array
     return array_map(fn ($tab) => $tab['props']['label'], customTabsNodes(Native::visit($uri)->tree(), 'bottom_nav_item'));
 }
 
-it('opens from Recipes into a bar with Home first and More last', function () {
-    Native::visit('/recipes')->call('openCustomTabs')->assertNavigatedTo('/tabs/home');
+it('opens from Plugins into a bar with Home first and More last', function () {
+    Native::visit('/plugins')->call('openCustomTabs')->assertNavigatedTo('/tabs/home');
 
     Native::visit('/tabs/home')->assertScreen(CustomTabsDemoScreen::class);
     expect(customTabsBar('/tabs/home'))->toBe(['Home', 'Inbox', 'Calendar', 'Reports', 'More']);

@@ -7,5 +7,5 @@
     @endif
 
     <firstlight:button :loading="$prompting" @press="unlock">Unlock</firstlight:button>
-    <firstlight:button variant="secondary" @press="cancel">Back to Recipes</firstlight:button>
+    <firstlight:button variant="secondary" @press="cancel">Back to Plugins</firstlight:button>
 </native:column>

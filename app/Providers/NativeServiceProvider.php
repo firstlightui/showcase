@@ -10,6 +10,8 @@ use FirstlightUI\Events\FeedbackActionPressed;
 use FirstlightUI\Events\FeedbackDismissed;
 use FirstlightUI\Facades\Connectivity;
 use FirstlightUI\FirstlightServiceProvider;
+use FirstlightUI\LocalAI\LocalAIServiceProvider;
+use FirstlightUI\LocalOcr\LocalOcrServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Native\Mobile\Providers\BiometricsServiceProvider;
@@ -63,6 +65,8 @@ class NativeServiceProvider extends ServiceProvider
             FirstlightServiceProvider::class,
             AppGuardServiceProvider::class,
             AppShortcutsServiceProvider::class,
+            LocalOcrServiceProvider::class,
+            LocalAIServiceProvider::class,
         ];
     }
 }

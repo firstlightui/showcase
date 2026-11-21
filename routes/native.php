@@ -3,6 +3,7 @@
 use App\NativeComponents\ActivityIndicatorShowcase;
 use App\NativeComponents\AlertDialogShowcase;
 use App\NativeComponents\AppShortcutsScreen;
+use App\NativeComponents\AskScreen;
 use App\NativeComponents\BadgeShowcase;
 use App\NativeComponents\BottomSheetShowcase;
 use App\NativeComponents\ButtonShowcase;
@@ -72,12 +73,14 @@ use App\NativeComponents\MetricShowcase;
 use App\NativeComponents\ModalShowcase;
 use App\NativeComponents\OfflineChangesScreen;
 use App\NativeComponents\PillGroupShowcase;
+use App\NativeComponents\PluginsScreen;
 use App\NativeComponents\PostCoverScreen;
 use App\NativeComponents\PostScreen;
 use App\NativeComponents\PostsScreen;
 use App\NativeComponents\PrivacyScreen;
 use App\NativeComponents\ProgressShowcase;
 use App\NativeComponents\RecipesScreen;
+use App\NativeComponents\ScanScreen;
 use App\NativeComponents\SearchFieldShowcase;
 use App\NativeComponents\SegmentedShowcase;
 use App\NativeComponents\SelectShowcase;
@@ -110,6 +113,10 @@ Route::native('/gallery/inbox', GalleryInboxScreen::class)
 
 Route::native('/recipes', RecipesScreen::class)
     ->name('recipes')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/plugins', PluginsScreen::class)
+    ->name('plugins')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/components', ShowcaseHome::class)
@@ -456,6 +463,16 @@ Route::native('/settings', SettingsScreen::class)
 
 Route::native('/settings/privacy', PrivacyScreen::class)
     ->name('recipes.privacy')
+    ->layout(AppLayout::class);
+
+// Local OCR: scan a document and read its text on the device.
+Route::native('/scan', ScanScreen::class)
+    ->name('recipes.scan')
+    ->layout(AppLayout::class);
+
+// Local AI: stream an answer from the phone's own language model.
+Route::native('/ask', AskScreen::class)
+    ->name('recipes.ask')
     ->layout(AppLayout::class);
 
 // The shortcuts in config/app-shortcuts.php, and one added at runtime.

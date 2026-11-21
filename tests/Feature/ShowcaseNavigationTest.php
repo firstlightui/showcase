@@ -62,11 +62,12 @@ dataset('component demos', [
     ['Validation', '/components/validation'],
 ]);
 
-it('puts Gallery, Recipes, Components and Docs in one native tab bar', function (string $path, string $title, string $activeTab) {
+it('puts Gallery, Recipes, Plugins, Components and Docs in one native tab bar', function (string $path, string $title, string $activeTab) {
     $screen = Native::visit($path)
         ->assertHasTabBar()
         ->assertHasTab('Gallery')
         ->assertHasTab('Recipes')
+        ->assertHasTab('Plugins')
         ->assertHasTab('Components')
         ->assertHasTab('Docs')
         ->assertTabActive($activeTab)
@@ -76,13 +77,14 @@ it('puts Gallery, Recipes, Components and Docs in one native tab bar', function 
     $tabs = showcaseNodesOfType($screen->tree(), 'bottom_nav_item');
     $root = showcaseNodesOfType($screen->tree(), 'native_root_tabs')[0];
 
-    expect(array_column(array_column($tabs, 'props'), 'url'))->toBe(['/', '/recipes', '/components', '/docs'])
+    expect(array_column(array_column($tabs, 'props'), 'url'))->toBe(['/', '/recipes', '/plugins', '/components', '/docs'])
         ->and($root['props']['nav_back'])->toBeFalse()
         // System-drawn bars: no colours, so both platforms follow the device appearance.
         ->and($root['props'])->not->toHaveKeys(['background_color', 'active_color', 'text_color', 'dark', 'nav_background_color']);
 })->with([
     'gallery' => ['/', 'Gallery', 'Gallery'],
     'recipes' => ['/recipes', 'Recipes', 'Recipes'],
+    'plugins' => ['/plugins', 'Plugins', 'Plugins'],
     'components' => ['/components', 'Components', 'Components'],
     'documentation' => ['/docs', 'Docs', 'Docs'],
 ]);
@@ -164,9 +166,6 @@ it('opens each documented recipe from the Recipes tab', function (string $label)
         'Edit post' => '/posts/'.$newest.'/edit',
         'Server status' => '/servers',
         'Offline changes' => '/offline-changes',
-        'App lock' => '/vault',
-        'App shortcuts' => '/shortcuts',
-        'Customise tabs' => '/tabs/home',
     };
 
     Native::visit('/recipes')
@@ -174,13 +173,37 @@ it('opens each documented recipe from the Recipes tab', function (string $label)
         ->assertNavigatedTo($path);
 
     Native::visit($path)->assertAccessible();
-})->with(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Server status', 'Offline changes', 'App lock', 'App shortcuts', 'Customise tabs']);
+})->with(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Server status', 'Offline changes']);
+
+it('opens each plugin recipe from the Plugins tab', function (string $label, string $path) {
+    Native::visit('/plugins')
+        ->tap($label)
+        ->assertNavigatedTo($path);
+})->with([
+    ['App lock', '/vault'],
+    ['App shortcuts', '/shortcuts'],
+    ['Customise tabs', '/tabs/home'],
+    ['Scan documents', '/scan'],
+    ['Ask on-device AI', '/ask'],
+]);
+
+it('presents the plugins as app entry points with icons and descriptions', function () {
+    $screen = Native::visit('/plugins')->assertAccessible();
+    $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
+
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['App lock', 'App shortcuts', 'Customise tabs', 'Scan documents', 'Ask on-device AI']);
+
+    foreach ($items as $item) {
+        expect($item['props']['leading_type'] ?? null)->toBe('icon')
+            ->and($item['props']['supporting'] ?? '')->not->toBe('');
+    }
+});
 
 it('presents the recipes as app entry points with icons and descriptions', function () {
     $screen = Native::visit('/recipes')->assertAccessible();
     $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
 
-    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Change it on another device', 'Server status', 'Offline changes', 'App lock', 'App shortcuts', 'Customise tabs']);
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['Posts', 'Post detail', 'Contacts', 'New post', 'Settings', 'Cover photo', 'Edit post', 'Change it on another device', 'Server status', 'Offline changes']);
 
     foreach ($items as $item) {
         expect($item['props']['leading_type'] ?? null)->toBe('icon')

@@ -117,41 +117,4 @@
             @press="openOfflineChanges"
         />
     </firstlight:list-section>
-    <firstlight:list-section header="Security" footer="Locks after a minute in the background. Unlocking needs the paid biometrics plugin.">
-        <firstlight:list-item
-            headline="App lock"
-            supporting="Hide content in the app switcher and unlock with Face ID or a fingerprint"
-            leading-icon="lock"
-            leading-icon-ios="lock.fill"
-            leading-icon-android="lock"
-            leading-icon-tone="danger"
-            navigates
-            a11y-hint="Opens the app lock recipe"
-            @press="openVault"
-        />
-    </firstlight:list-section>
-    <firstlight:list-section header="System" footer="Shortcuts appear after a native build. The vault shortcut shows the lock screen first when the app is locked.">
-        <firstlight:list-item
-            headline="App shortcuts"
-            supporting="Open screens from Siri, Spotlight and the app icon"
-            leading-icon="shortcut"
-            leading-icon-ios="arrow.up.forward.app"
-            leading-icon-android="shortcut"
-            leading-icon-tone="info"
-            navigates
-            a11y-hint="Opens the app shortcuts recipe"
-            @press="openShortcuts"
-        />
-        <firstlight:list-item
-            headline="Customise tabs"
-            supporting="Let people reorder the tab bar and move tabs to More"
-            leading-icon="tab"
-            leading-icon-ios="square.grid.3x1.below.line.grid.1x2"
-            leading-icon-android="tab"
-            leading-icon-tone="info"
-            navigates
-            a11y-hint="Opens the customisable tab bar recipe"
-            @press="openCustomTabs"
-        />
-    </firstlight:list-section>
 </firstlight:list>

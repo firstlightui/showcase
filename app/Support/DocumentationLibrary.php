@@ -125,6 +125,11 @@ class DocumentationLibrary
             'how-to/build-a-large-list-screen' => '/contacts',
             'how-to/validate-fields', 'how-to/submit-forms', 'reference/validates-fields' => '/components/validation',
             'how-to/paginate-lists', 'how-to/destroy-list-items' => '/components/list',
+            'how-to/build-an-app-lock-screen' => '/vault',
+            'how-to/add-app-shortcuts' => '/shortcuts',
+            'how-to/let-people-customise-tabs' => '/tabs/home',
+            'how-to/scan-documents' => '/scan',
+            'how-to/generate-text-on-device' => '/ask',
             default => null,
         };
     }

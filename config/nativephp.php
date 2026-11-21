@@ -133,7 +133,7 @@ return [
     */
 
     'permissions' => [
-        'NSCameraUsageDescription' => 'The showcase uses the camera to test the Media field.',
+        'NSCameraUsageDescription' => 'The showcase uses the camera to test the Media field and to scan documents, which are read on this device.',
         // 'NSMicrophoneUsageDescription' => 'Used to record audio with your videos.',
         // 'NSPhotoLibraryUsageDescription' => 'Used to select photos for your post.',
     ],

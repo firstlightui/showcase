@@ -77,21 +77,6 @@ class RecipesScreen extends ShowcaseScreen
         $this->navigate('/settings');
     }
 
-    public function openVault(): void
-    {
-        $this->navigate('/vault');
-    }
-
-    public function openShortcuts(): void
-    {
-        $this->navigate('/shortcuts');
-    }
-
-    public function openCustomTabs(): void
-    {
-        $this->navigate('/tabs/home');
-    }
-
     public function showsBackButton(): bool
     {
         return false;
