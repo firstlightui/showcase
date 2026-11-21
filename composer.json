@@ -21,7 +21,8 @@
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
         "firstlightui/app-shortcuts": "^1.0@alpha",
-        "firstlightui/nativephp": "^1.1.1",
+        "firstlightui/custom-tabs": "dev-main",
+        "firstlightui/nativephp": "dev-main",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
         "nativephp/mobile": "^4.8.0",
@@ -108,6 +109,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
+        {
+            "name": "custom-tabs",
+            "type": "vcs",
+            "url": "https://github.com/firstlightui/custom-tabs"
+        },
         {
             "name": "nativephp-plugins",
             "type": "composer",

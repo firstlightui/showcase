@@ -211,7 +211,14 @@
                             "code": true
                         },
                         {
-                            "text": " attribute on top bars or bottom navs to draw your own."
+                            "text": " attribute on top bars or bottom navs to draw your own. The one exception is an optional Android tab bar presentation that matches what the iOS system tab bar already does; see "
+                        },
+                        {
+                            "text": "Support landscape and iPad",
+                            "link": 2
+                        },
+                        {
+                            "text": "."
                         }
                     ]
                 },
@@ -722,42 +729,42 @@
                         },
                         {
                             "text": "Validate fields",
-                            "link": 2
-                        },
-                        {
-                            "text": ", "
-                        },
-                        {
-                            "text": "Submit forms",
                             "link": 3
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Authorize actions",
+                            "text": "Submit forms",
                             "link": 4
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Paginate lists",
+                            "text": "Authorize actions",
                             "link": 5
                         },
                         {
                             "text": ", "
                         },
                         {
-                            "text": "Destroy list items",
+                            "text": "Paginate lists",
                             "link": 6
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "Destroy list items",
+                            "link": 7
                         },
                         {
                             "text": ", and "
                         },
                         {
                             "text": "Localize chrome",
-                            "link": 7
+                            "link": 8
                         },
                         {
                             "text": "."
@@ -827,21 +834,21 @@
                         },
                         {
                             "text": "Button",
-                            "link": 8
+                            "link": 9
                         },
                         {
                             "text": " for labelled actions and "
                         },
                         {
                             "text": "List Item",
-                            "link": 9
+                            "link": 10
                         },
                         {
                             "text": " for application rows when their content contracts fit. Use "
                         },
                         {
                             "text": "Metric",
-                            "link": 10
+                            "link": 11
                         },
                         {
                             "text": " for a static grouped statistic. For custom content, use upstream Pressable and verify its accessible name, activation, target size, and any application-specific disabled or selected state on both platforms. Firstlight does not add a competing action wrapper. Panels, dividers and tile grids remain Mobile UI layout, not catalogue controls."
@@ -908,7 +915,7 @@
                         },
                         {
                             "text": "compatibility requirements",
-                            "link": 11
+                            "link": 12
                         },
                         {
                             "text": " before releasing an application, particularly where server-authoritative controls depend on unchanged-tree publication acknowledgements from NativePHP Mobile."
@@ -926,6 +933,10 @@
         {
             "label": "Build with a coding agent",
             "url": "../getting-started/build-with-a-coding-agent.md"
+        },
+        {
+            "label": "Support landscape and iPad",
+            "url": "../how-to/support-landscape-and-ipad.md"
         },
         {
             "label": "Validate fields",

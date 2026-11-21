@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31ce62306a1bfa8ab497c7bc8f5a8908",
+    "content-hash": "1b8d259449c6e9c5cc7ebf32c3962404",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -851,17 +851,78 @@
             "published-time": "2026-11-16T03:50:43+00:00"
         },
         {
-            "name": "firstlightui/nativephp",
-            "version": "v1.1.1",
+            "name": "firstlightui/custom-tabs",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/firstlightui/nativephp.git",
-                "reference": "138c43b86cc960e6d50d951e0605086df15dd39f"
+                "url": "git@github.com:firstlightui/custom-tabs.git",
+                "reference": "8a9e609a1603c172c1b73f2fdb34380cfe3754fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/138c43b86cc960e6d50d951e0605086df15dd39f",
-                "reference": "138c43b86cc960e6d50d951e0605086df15dd39f",
+                "url": "https://api.github.com/repos/firstlightui/custom-tabs/zipball/8a9e609a1603c172c1b73f2fdb34380cfe3754fb",
+                "reference": "8a9e609a1603c172c1b73f2fdb34380cfe3754fb",
+                "shasum": ""
+            },
+            "require": {
+                "firstlightui/nativephp": "dev-main",
+                "nativephp/mobile": "^4.8",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.13",
+                "laravel/pint": "^1.27",
+                "orchestra/testbench": "^11.0",
+                "pestphp/pest": "^5.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FirstlightUI\\CustomTabs\\CustomTabsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FirstlightUI\\CustomTabs\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "FirstlightUI\\CustomTabs\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "pest"
+                ],
+                "lint": [
+                    "pint --test"
+                ],
+                "analyse": [
+                    "phpstan analyse --no-progress --memory-limit=1G"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Let people choose and reorder the tabs of your NativePHP Mobile app, within the tabs, locks and limits you declare.",
+            "time": "2026-11-21T09:11:30+00:00"
+        },
+        {
+            "name": "firstlightui/nativephp",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firstlightui/nativephp.git",
+                "reference": "5dd052f7645bb23ed13dcf18b7114757554f31f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/5dd052f7645bb23ed13dcf18b7114757554f31f2",
+                "reference": "5dd052f7645bb23ed13dcf18b7114757554f31f2",
                 "shasum": ""
             },
             "require": {
@@ -883,6 +944,7 @@
                 "pestphp/pest": "^5.0",
                 "pestphp/pest-plugin-evals": "^5.0"
             },
+            "default-branch": true,
             "type": "nativephp-ui-plugin",
             "extra": {
                 "laravel": {
@@ -922,8 +984,8 @@
                 "issues": "https://github.com/firstlightui/nativephp/issues",
                 "source": "https://github.com/firstlightui/nativephp"
             },
-            "time": "2026-11-20T01:43:11+00:00",
-            "published-time": "2026-11-20T01:45:44+00:00"
+            "time": "2026-11-21T08:45:57+00:00",
+            "published-time": "2026-11-21T08:47:37+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -11072,7 +11134,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "firstlightui/app-shortcuts": 15
+        "firstlightui/app-shortcuts": 15,
+        "firstlightui/custom-tabs": 20,
+        "firstlightui/nativephp": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

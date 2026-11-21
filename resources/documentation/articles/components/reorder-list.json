@@ -1,0 +1,645 @@
+{
+    "id": "components/reorder-list",
+    "title": "Reorder List",
+    "description": "Public API, values, moves, state timing, accessibility, and platform behaviour for Firstlight Reorder List.",
+    "group": "Components",
+    "anchors": {
+        "reorder-list": "overview",
+        "complete-examples": "complete-examples",
+        "props": "props",
+        "items-and-values": "items-and-values",
+        "events-and-state-timing": "events-and-state-timing",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Reorder List lets people put a short list of items in their own order, optionally across named sections such as \"Tab bar\" and \"More\". Every move works by dragging and, equally, through VoiceOver and TalkBack actions."
+                }
+            ]
+        },
+        "complete-examples": {
+            "title": "Complete examples",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "A single list binds a list of item values:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public array $favourites = ['inbox', 'calendar', 'reports'];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:reorder-list\n    :items=\"[\n        ['value' => 'inbox', 'label' => 'Inbox', 'icon' => 'inbox'],\n        ['value' => 'calendar', 'label' => 'Calendar', 'icon' => 'calendar'],\n        ['value' => 'reports', 'label' => 'Reports', 'supporting' => 'Weekly'],\n    ]\"\n    native:model=\"favourites\"\n    label=\"Favourites\"\n/>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "With "
+                        },
+                        {
+                            "text": "sections",
+                            "code": true
+                        },
+                        {
+                            "text": ", the value maps every section key to a list:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public array $arrangement = [\n    'bar' => ['home', 'inbox', 'reports'],\n    'more' => ['files'],\n];"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:reorder-list\n    :items=\"$tabItems\"\n    :sections=\"['bar' => 'Tab bar', 'more' => 'More']\"\n    native:model=\"arrangement\"\n    label=\"Tabs\"\n    helper=\"Up to 5 tabs. Home stays first.\"\n/>"
+                }
+            ]
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "items",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Rich items: "
+                                },
+                                {
+                                    "text": "value",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "label",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", and optional "
+                                },
+                                {
+                                    "text": "supporting",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (with "
+                                },
+                                {
+                                    "text": "icon-ios",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "icon-android",
+                                    "code": true
+                                },
+                                {
+                                    "text": " overrides) and "
+                                },
+                                {
+                                    "text": "locked",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "sections",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Optional ordered map of at least two section keys to visible headers."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "array",
+                                    "code": true
+                                },
+                                {
+                                    "text": " or "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "The order. A list without sections; a map of section key to list with sections. "
+                                },
+                                {
+                                    "text": "null",
+                                    "code": true
+                                },
+                                {
+                                    "text": " means the authored order of "
+                                },
+                                {
+                                    "text": "items",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", all in the first section."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Visible field label."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "helper",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Supporting text shown when there is no error."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "error",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Error text; replaces helper text."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Disables every move."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Explicit accessibility label when a visible label is inappropriate."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout utilities."
+                        }
+                    ]
+                }
+            ]
+        },
+        "items-and-values": {
+            "title": "Items and values",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Item values must be unique and all strings or all integers. Labels must contain visible text. A list holds at most 20 items, because each possible move is published ahead of time."
+                },
+                {
+                    "type": "text",
+                    "text": "The bound value must contain every item value exactly once. Section keys in the value must be the declared keys; a missing section is an empty list."
+                },
+                {
+                    "type": "text",
+                    "text": "A locked item shows a lock instead of a drag handle and offers no move actions. Other items may still be dropped around it; PHP decides whether to accept the result."
+                },
+                {
+                    "type": "text",
+                    "text": "There is no add, delete or selection behaviour. To let people hide items, give the list a second section, such as \"Hidden\", and move them there."
+                }
+            ]
+        },
+        "events-and-state-timing": {
+            "title": "Events and state timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the complete proposed value in the bound shape. "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " normally generates this callback."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Dragging is continuous, so the dropped order shows at once as a draft rather than snapping back. PHP stays "
+                        },
+                        {
+                            "text": "server-authoritative",
+                            "link": 0
+                        },
+                        {
+                            "text": ": its next publication replaces the draft, whether it accepted the move, rewrote it (for example to enforce a section limit) or rejected it. Moves are ignored while a proposal is in flight. Programmatic publications never emit."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "An unchanged PHP response must also release the pending-move guard. Host the control in "
+                        },
+                        {
+                            "text": "FirstlightUI\\NativeComponent",
+                            "code": true
+                        },
+                        {
+                            "text": " for the "
+                        },
+                        {
+                            "text": "nonstreaming response-revision contract",
+                            "link": 1
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Use plain "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "native:model.live",
+                            "code": true
+                        },
+                        {
+                            "text": "; deferred "
+                        },
+                        {
+                            "text": "blur",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "debounce",
+                            "code": true
+                        },
+                        {
+                            "text": " modes are rejected."
+                        }
+                    ]
+                }
+            ]
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Provide either a visible "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " or an explicit "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": ". Each row is one accessibility target that reads its label, its section and position (\"Inbox, Tab bar, 2 of 3\"), and \"Locked\" when locked. Unlocked rows offer Move up, Move down and Move to each other section (to its end). After a move, the new position is announced. Section headers are headings. Rows meet 44-point iOS and 48-dp Android targets and wrap long labels."
+                        }
+                    ]
+                }
+            ]
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Contract exceptions reject malformed items, blank labels, duplicate or mixed values, more than 20 items, fewer than two sections, a value that misses, repeats or adds item values, a value in the wrong shape, unknown section keys and deferred sync modes, before publication. Screens that "
+                        },
+                        {
+                            "text": "use ValidatesFields",
+                            "code": true
+                        },
+                        {
+                            "text": " show the first MessageBag message for the field, as other fields do."
+                        }
+                    ]
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "iOS uses a SwiftUI "
+                        },
+                        {
+                            "text": "List",
+                            "code": true
+                        },
+                        {
+                            "text": " in the inset-grouped style, held in edit mode so rows show the system reorder handles. Rows can be dragged across section headers."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Android draws Material 3 grouped rows with a drag handle. Dragging the handle moves the row at once; a long press anywhere on the row also lifts it. The row lifts with elevation, and a haptic tick marks each place it passes."
+                }
+            ]
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Reorder List supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 2
+                        },
+                        {
+                            "text": " and requires both native renderers in the host application plus Firstlight's screen response contract above."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "server-authoritative",
+            "url": "../concepts/server-authoritative-state.md"
+        },
+        {
+            "label": "nonstreaming response-revision contract",
+            "url": "../reference/compatibility.md#runtime-response-contract"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
+}

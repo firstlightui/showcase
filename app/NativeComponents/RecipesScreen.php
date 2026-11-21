@@ -87,6 +87,11 @@ class RecipesScreen extends ShowcaseScreen
         $this->navigate('/shortcuts');
     }
 
+    public function openCustomTabs(): void
+    {
+        $this->navigate('/tabs/home');
+    }
+
     public function showsBackButton(): bool
     {
         return false;

@@ -1,0 +1,264 @@
+{
+    "id": "how-to/support-landscape-and-ipad",
+    "title": "Support landscape and iPad",
+    "description": "Turn on landscape and iPad in NativePHP's config, and use Firstlight's Android tab bar so tabs get out of the way of the keyboard and short landscape screens.",
+    "group": "Guides",
+    "anchors": {
+        "support-landscape-and-ipad": "overview",
+        "turn-on-landscape": "turn-on-landscape",
+        "turn-on-ipad": "turn-on-ipad",
+        "use-firstlights-tab-bar-on-android": "use-firstlights-tab-bar-on-android",
+        "what-changes-in-landscape": "what-changes-in-landscape"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "NativePHP apps are portrait-only on phones until you say otherwise. Firstlight controls lay out in every orientation and on iPad, so turning these on is a config change plus one line for the Android tab bar."
+                }
+            ]
+        },
+        "turn-on-landscape": {
+            "title": "Turn on landscape",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Orientation comes from "
+                        },
+                        {
+                            "text": "config/nativephp.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", which every build applies to "
+                        },
+                        {
+                            "text": "Info.plist",
+                            "code": true
+                        },
+                        {
+                            "text": " on iOS and "
+                        },
+                        {
+                            "text": "AndroidManifest.xml",
+                            "code": true
+                        },
+                        {
+                            "text": " on Android. NativePHP's default allows portrait only:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "'orientation' => [\n    'iphone' => [\n        'portrait' => true,\n        'upside_down' => false,\n        'landscape_left' => true,\n        'landscape_right' => true,\n    ],\n    'android' => [\n        'portrait' => true,\n        'upside_down' => true,\n        'landscape_left' => true,\n        'landscape_right' => true,\n    ],\n],"
+                },
+                {
+                    "type": "text",
+                    "text": "The change takes effect in the next build."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "On Android, turn on all four. Any other mix that includes landscape becomes "
+                        },
+                        {
+                            "text": "fullSensor",
+                            "code": true
+                        },
+                        {
+                            "text": ", which follows the sensor and ignores the user's rotation lock."
+                        }
+                    ]
+                }
+            ]
+        },
+        "turn-on-ipad": {
+            "title": "Turn on iPad",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Set "
+                        },
+                        {
+                            "text": "'ipad' => true",
+                            "code": true
+                        },
+                        {
+                            "text": " in the same file. iPad apps support all four orientations, as Apple requires, whatever the "
+                        },
+                        {
+                            "text": "iphone",
+                            "code": true
+                        },
+                        {
+                            "text": " settings say."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Once an App Store version supports iPad, later versions can't drop it, and App Review needs iPad screenshots. Decide before you upload."
+                },
+                {
+                    "type": "text",
+                    "text": "On iPad, Firstlight uses the regular-width presentations: Date Picker, Time Picker and Select open as popovers next to their field, and Confirmation Dialog is a centred alert with both actions."
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/ipad-date-picker/ios-light.png",
+                    "text": "Date Picker popover on iPad in landscape on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/ipad-date-picker/ios-dark.png",
+                    "text": "Date Picker popover on iPad in landscape on iOS in dark mode"
+                }
+            ]
+        },
+        "use-firstlights-tab-bar-on-android": {
+            "title": "Use Firstlight's tab bar on Android",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "On Android, NativePHP draws a layout's tabs as Material's 80 dp navigation bar. It stays above the keyboard, so it can cover the field being edited, and in landscape it and the app bar leave little room for content. Select Firstlight's tab bar in your layout instead:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use Native\\Mobile\\Edge\\Layouts\\Builders\\Tab;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\TabBar;\nuse Native\\Mobile\\Edge\\NativeComponent;\n\npublic function tabBar(NativeComponent $screen): ?TabBar\n{\n    return TabBar::make()\n        ->presentation('firstlight:tabs')\n        ->add(Tab::link('Home', '/', icon: 'home'))\n        ->add(Tab::link('Settings', '/settings', icon: 'settings'));\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "NativePHP still owns the tabs, selection, badges and navigation. Firstlight draws the bar the way Material recommends:"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Keyboard up"
+                    },
+                    "items": [
+                        {
+                            "label": "Bar",
+                            "text": "Hidden, so the field stays visible"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Window shorter than 480 dp, such as a phone in landscape"
+                    },
+                    "items": [
+                        {
+                            "label": "Bar",
+                            "text": "Short bar, 64 dp, label beside the icon"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Otherwise"
+                    },
+                    "items": [
+                        {
+                            "label": "Bar",
+                            "text": "Standard navigation bar, 80 dp"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Transient Feedback snackbars sit above whichever bar is showing."
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-tab-bar/ios-light.png",
+                    "text": "Tabs on a phone in landscape on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-tab-bar/ios-dark.png",
+                    "text": "Tabs on a phone in landscape on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-tab-bar/android-light.png",
+                    "text": "Tabs on a phone in landscape on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-tab-bar/android-dark.png",
+                    "text": "Tabs on a phone in landscape on Android in dark mode"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "iOS keeps the system tab bar, which already behaves this way. In debug builds NativePHP logs one line saying no iOS presenter is registered for "
+                        },
+                        {
+                            "text": "firstlight:tabs",
+                            "code": true
+                        },
+                        {
+                            "text": "; that is expected."
+                        }
+                    ]
+                }
+            ]
+        },
+        "what-changes-in-landscape": {
+            "title": "What changes in landscape",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Date Picker and Time Picker on a short Android screen put the header beside the calendar and the time beside the clock dial, in a dialog that fits the screen and scrolls, with Cancel and Confirm always visible. iPhone keeps a sheet sized to the picker."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The Media crop sheet puts its controls beside the image."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Bottom Sheet detents don't apply on a phone in landscape: iOS shows the sheet at full height."
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-date-picker/ios-light.png",
+                    "text": "Date Picker open on a phone in landscape on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-date-picker/ios-dark.png",
+                    "text": "Date Picker open on a phone in landscape on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-date-picker/android-light.png",
+                    "text": "Date Picker open on a phone in landscape on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/landscape-date-picker/android-dark.png",
+                    "text": "Date Picker open on a phone in landscape on Android in dark mode"
+                }
+            ]
+        }
+    },
+    "links": []
+}

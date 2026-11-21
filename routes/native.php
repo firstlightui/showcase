@@ -52,6 +52,7 @@ use App\NativeComponents\ContactScreen;
 use App\NativeComponents\ContactsScreen;
 use App\NativeComponents\CreatePostScreen;
 use App\NativeComponents\CustomIconsShowcase;
+use App\NativeComponents\CustomTabsDemoScreen;
 use App\NativeComponents\DatePickerShowcase;
 use App\NativeComponents\DocumentationArticleScreen;
 use App\NativeComponents\DocumentationScreen;
@@ -61,6 +62,7 @@ use App\NativeComponents\GalleryScreen;
 use App\NativeComponents\HapticsShowcase;
 use App\NativeComponents\IconButtonShowcase;
 use App\NativeComponents\Layouts\AppLayout;
+use App\NativeComponents\Layouts\CustomTabsLayout;
 use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
@@ -460,6 +462,15 @@ Route::native('/settings/privacy', PrivacyScreen::class)
 Route::native('/shortcuts', AppShortcutsScreen::class)
     ->name('recipes.shortcuts')
     ->layout(AppLayout::class);
+
+// Customise tabs: a tab bar people arrange, with a More screen and editor from custom-tabs.
+foreach (['home', 'inbox', 'calendar', 'reports', 'people', 'files'] as $tab) {
+    Route::native('/tabs/'.$tab, CustomTabsDemoScreen::class)
+        ->defaults('tab', $tab)
+        ->name('recipes.tabs.'.$tab)
+        ->layout(CustomTabsLayout::class);
+}
+Route::customTabs('tabs-demo', CustomTabsLayout::class);
 
 // App Guard's app-lock middleware keeps the vault closed while the app is locked and always lets /lock through.
 Route::middleware('app-lock')->group(function () {

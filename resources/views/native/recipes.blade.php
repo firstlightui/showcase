@@ -142,5 +142,16 @@
             a11y-hint="Opens the app shortcuts recipe"
             @press="openShortcuts"
         />
+        <firstlight:list-item
+            headline="Customise tabs"
+            supporting="Let people reorder the tab bar and move tabs to More"
+            leading-icon="tab"
+            leading-icon-ios="square.grid.3x1.below.line.grid.1x2"
+            leading-icon-android="tab"
+            leading-icon-tone="info"
+            navigates
+            a11y-hint="Opens the customisable tab bar recipe"
+            @press="openCustomTabs"
+        />
     </firstlight:list-section>
 </firstlight:list>
