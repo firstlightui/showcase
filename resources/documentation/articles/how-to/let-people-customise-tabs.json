@@ -1,0 +1,766 @@
+{
+    "id": "how-to/let-people-customise-tabs",
+    "title": "Let people customise their tabs",
+    "description": "Recipe for a tab bar people rearrange themselves, with a More screen and a drag-and-drop editor, within the tabs, locks and limits you declare.",
+    "group": "Guides",
+    "anchors": {
+        "let-people-customise-their-tabs": "overview",
+        "before-you-start": "before-you-start",
+        "how-the-pieces-fit": "how-the-pieces-fit",
+        "1-declare-the-tabs": "1-declare-the-tabs",
+        "2-show-the-bar-and-add-its-screens": "2-show-the-bar-and-add-its-screens",
+        "3-what-people-see": "3-what-people-see",
+        "use-your-own-settings-screen": "use-your-own-settings-screen",
+        "test-the-bar": "test-the-bar"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe gives an app a tab bar that people arrange themselves. You declare which tabs exist, which stay put and how many fit. Tabs that don't fit go to a More screen, and an editor lets people drag tabs between the bar and More, like the iPhone's own More tab editing."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "This recipe runs in the "
+                        },
+                        {
+                            "text": "showcase app",
+                            "link": 0
+                        },
+                        {
+                            "text": ", where "
+                        },
+                        {
+                            "text": "CustomTabsRecipeTest",
+                            "link": 1,
+                            "code": true
+                        },
+                        {
+                            "text": " exercises it."
+                        }
+                    ]
+                }
+            ]
+        },
+        "before-you-start": {
+            "title": "Before you start",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The recipe uses "
+                        },
+                        {
+                            "text": "firstlightui/custom-tabs",
+                            "link": 2,
+                            "code": true
+                        },
+                        {
+                            "text": ", free and MIT licensed. It is not released yet: it is planned alongside Firstlight 1.2 and needs Firstlight's "
+                        },
+                        {
+                            "text": "Reorder List",
+                            "link": 3
+                        },
+                        {
+                            "text": ", which is on Firstlight's "
+                        },
+                        {
+                            "text": "main",
+                            "code": true
+                        },
+                        {
+                            "text": " branch. Until then, install both from "
+                        },
+                        {
+                            "text": "main",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "json",
+                    "text": "// composer.json\n\"repositories\": [\n    { \"type\": \"vcs\", \"url\": \"https://github.com/firstlightui/custom-tabs\" }\n],"
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer require firstlightui/nativephp:dev-main firstlightui/custom-tabs:dev-main"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Custom Tabs is PHP only, so it needs no "
+                        },
+                        {
+                            "text": "native:plugin:register",
+                            "code": true
+                        },
+                        {
+                            "text": " and no rebuild beyond Firstlight's own."
+                        }
+                    ]
+                }
+            ]
+        },
+        "how-the-pieces-fit": {
+            "title": "How the pieces fit",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "CustomTabs::define()",
+                            "code": true
+                        },
+                        {
+                            "text": " declares one bar's tabs and rules, once, in a service provider."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "CustomTabs::bar()",
+                            "code": true
+                        },
+                        {
+                            "text": " returns the person's bar as a NativePHP "
+                        },
+                        {
+                            "text": "TabBar",
+                            "code": true
+                        },
+                        {
+                            "text": ", ready for a layout's "
+                        },
+                        {
+                            "text": "tabBar()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Route::customTabs()",
+                            "code": true
+                        },
+                        {
+                            "text": " adds the More screen at the More tab's URL and the editor below it."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "The person's choice is saved in a JSON file in the app's storage, so it needs no migration and goes away with the app. Bind your own "
+                        },
+                        {
+                            "text": "TabPreferenceStore",
+                            "code": true
+                        },
+                        {
+                            "text": " to keep it somewhere else."
+                        }
+                    ]
+                }
+            ]
+        },
+        "1-declare-the-tabs": {
+            "title": "1. Declare the tabs",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "// app/Providers/AppServiceProvider.php\nuse FirstlightUI\\CustomTabs\\Facades\\CustomTabs;\nuse FirstlightUI\\CustomTabs\\TabSet;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\Tab;\n\npublic function boot(): void\n{\n    CustomTabs::define('main', fn (TabSet $tabs) => $tabs\n        ->tab('home', Tab::link('Home', '/home', icon: 'home', ios: 'house', android: 'home'))->locked()\n        ->tab('inbox', Tab::link('Inbox', '/inbox', icon: 'inbox', ios: 'tray', android: 'inbox'))\n        ->tab('calendar', Tab::link('Calendar', '/calendar', icon: 'calendar_month', ios: 'calendar', android: 'calendar_month'))\n        ->tab('reports', Tab::link('Reports', '/reports', icon: 'bar_chart', ios: 'chart.bar', android: 'bar_chart'))->can('view-reports')\n        ->tab('files', Tab::link('Files', '/files', icon: 'folder', ios: 'folder', android: 'folder'))->inMoreByDefault()\n        ->more(Tab::link('More', '/more', icon: 'more_horiz', ios: 'ellipsis', android: 'more_horiz')));\n}"
+                },
+                {
+                    "type": "text",
+                    "text": "Declaration order is the default order. Each modifier applies to the tab added just before it:"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "tab($id, $tab)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "runs": [
+                                {
+                                    "text": "Adds a tab. The id is what saved choices refer to: lowercase letters and digits joined by hyphens. Keep it stable; it replaces the id "
+                                },
+                                {
+                                    "text": "Tab::link()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " derives from the label, which changes when the label is translated. "
+                                },
+                                {
+                                    "text": "more",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is reserved."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "locked()",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Keeps the tab in the bar at its declared place. Locked tabs must be declared before or after every movable tab."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "inMoreByDefault()",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Starts the tab in More instead of the bar. A locked tab can't."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "can($ability, $arguments)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Shows the tab only to people the Gate allows. While hidden it keeps its saved place."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "more($tab)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "The tab that opens the More screen. It shows only while More holds a tab. Required when any tab can move."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "maxInBar($count)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Most tabs in the bar, counting More: 2 to 5. Defaults to 5, the most Material 3 and the iPhone tab bar allow."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "minInBar($count)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Meaning",
+                            "text": "Fewest tabs in the bar, not counting More. Defaults to 2, and must leave room for More."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "A definition the rules can't fill, such as more locked tabs than fit, throws at the first render rather than drawing a broken bar."
+                }
+            ]
+        },
+        "2-show-the-bar-and-add-its-screens": {
+            "title": "2. Show the bar and add its screens",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Return the person's bar from the layout. Every "
+                        },
+                        {
+                            "text": "TabBar",
+                            "code": true
+                        },
+                        {
+                            "text": " option still works on it:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\CustomTabs\\Facades\\CustomTabs;\nuse Native\\Mobile\\Edge\\Layouts\\Builders\\TabBar;\nuse Native\\Mobile\\Edge\\NativeComponent;\n\npublic function tabBar(NativeComponent $screen): ?TabBar\n{\n    return CustomTabs::bar('main')->presentation('firstlight:tabs');\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "presentation('firstlight:tabs')",
+                            "code": true
+                        },
+                        {
+                            "text": " is optional; see "
+                        },
+                        {
+                            "text": "Tabs",
+                            "link": 4
+                        },
+                        {
+                            "text": ". Then register the More screen and the editor in "
+                        },
+                        {
+                            "text": "routes/native.php",
+                            "code": true
+                        },
+                        {
+                            "text": ", with the layout that shows the bar:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "Route::customTabs('main', TabsLayout::class);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "With the declaration above, the More screen opens at "
+                        },
+                        {
+                            "text": "/more",
+                            "code": true
+                        },
+                        {
+                            "text": " and the editor at "
+                        },
+                        {
+                            "text": "/more/edit",
+                            "code": true
+                        },
+                        {
+                            "text": ", so the editor opens inside the More tab. While a screen from More is open, the bar highlights More."
+                        }
+                    ]
+                }
+            ]
+        },
+        "3-what-people-see": {
+            "title": "3. What people see",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "More screen.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Lists the tabs that are in More, in the person's order, with Edit in the navigation bar."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Editor.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Shows the bar and More as two sections of a Reorder List. People drag tabs with the handles, or use the VoiceOver and TalkBack actions: Move up, Move down, and Move to the other section. Locked tabs show a lock and don't move."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Rules apply at once.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Each move is checked against the declaration immediately, without saving. A tab dropped into a full bar pushes the last movable tab into More."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Done saves.",
+                            "strong": true
+                        },
+                        {
+                            "text": " The real bar changes only on Done. Leaving without Done discards the draft. Reset to default asks first, then puts the declared order back."
+                        }
+                    ]
+                }
+            ]
+        },
+        "use-your-own-settings-screen": {
+            "title": "Use your own settings screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "To put the editor in an existing settings screen, extend "
+                        },
+                        {
+                            "text": "FirstlightUI\\CustomTabs\\Screens\\EditorScreen",
+                            "code": true
+                        },
+                        {
+                            "text": ", or build it from the facade:"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "CustomTabs::arrangement($name)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Returns",
+                            "runs": [
+                                {
+                                    "text": "Where each tab the person may see sits now: "
+                                },
+                                {
+                                    "text": "bar",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "more",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", and where More goes."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "CustomTabs::preview($name, $bar, $more)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Returns",
+                            "text": "What a choice would become under the rules, without saving it."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "CustomTabs::save($name, $bar, $more)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Returns",
+                            "runs": [
+                                {
+                                    "text": "Checks and saves a choice, and dispatches "
+                                },
+                                {
+                                    "text": "TabsCustomized",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "CustomTabs::reset($name)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Returns",
+                            "text": "Forgets the choice and returns the declared defaults."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "CustomTabs::tabs($name)",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Returns",
+                            "text": "Each visible tab's id, label, icon, badge, URL and whether it is locked."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Bind "
+                        },
+                        {
+                            "text": "preview()",
+                            "code": true
+                        },
+                        {
+                            "text": " to a "
+                        },
+                        {
+                            "text": "<firstlight:reorder-list>",
+                            "code": true
+                        },
+                        {
+                            "text": "'s "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": " so every drop shows the corrected arrangement, and call "
+                        },
+                        {
+                            "text": "save()",
+                            "code": true
+                        },
+                        {
+                            "text": " from your own Done action. Listen for "
+                        },
+                        {
+                            "text": "FirstlightUI\\CustomTabs\\Events\\TabsCustomized",
+                            "code": true
+                        },
+                        {
+                            "text": " to react to a new choice."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The strings are in the package's "
+                        },
+                        {
+                            "text": "lang/en/tabs.php",
+                            "code": true
+                        },
+                        {
+                            "text": ". Publish them to translate or reword them:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "php artisan vendor:publish --tag=custom-tabs-lang"
+                }
+            ]
+        },
+        "test-the-bar": {
+            "title": "Test the bar",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Visit a screen with "
+                        },
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": " and read the labels in its tab bar:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use FirstlightUI\\CustomTabs\\Facades\\CustomTabs;\nuse Native\\Mobile\\Testing\\Native;\n\nbeforeEach(fn () => CustomTabs::reset('main'));\n\nit('changes the bar only when the editor saves', function () {\n    $editor = Native::visit('/more/edit');\n    $editor->call('move', ['bar' => ['home', 'files', 'inbox', 'calendar'], 'more' => ['reports']]);\n    $editor->call('done');\n\n    expect(CustomTabs::arrangement('main')->bar)->toBe(['home', 'files', 'inbox', 'calendar']);\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Reset the bar before each test, because the choice is saved in storage. See "
+                        },
+                        {
+                            "text": "Test screens",
+                            "link": 5
+                        },
+                        {
+                            "text": " for more of "
+                        },
+                        {
+                            "text": "Native::test()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "showcase app",
+            "url": "https://github.com/firstlightui/showcase"
+        },
+        {
+            "label": "CustomTabsRecipeTest",
+            "url": "https://github.com/firstlightui/showcase/blob/main/tests/Feature/Recipes/CustomTabsRecipeTest.php"
+        },
+        {
+            "label": "firstlightui/custom-tabs",
+            "url": "https://github.com/firstlightui/custom-tabs"
+        },
+        {
+            "label": "Reorder List",
+            "url": "../components/reorder-list.md"
+        },
+        {
+            "label": "Tabs",
+            "url": "../components/tabs.md"
+        },
+        {
+            "label": "Test screens",
+            "url": "test-screens.md"
+        }
+    ]
+}

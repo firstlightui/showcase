@@ -1,0 +1,724 @@
+{
+    "id": "how-to/generate-text-on-device",
+    "title": "Generate text on the device",
+    "description": "Recipe for a screen that streams an answer from the phone's own language model with Local AI, and falls back cleanly where the model can't run.",
+    "group": "Guides",
+    "anchors": {
+        "generate-text-on-the-device": "overview",
+        "before-you-start": "before-you-start",
+        "how-the-pieces-fit": "how-the-pieces-fit",
+        "1-build-the-screen": "1-build-the-screen",
+        "2-offer-the-download-on-android": "2-offer-the-download-on-android",
+        "3-catch-up-after-navigation": "3-catch-up-after-navigation",
+        "continue-a-conversation": "continue-a-conversation",
+        "failures-and-limits": "failures-and-limits",
+        "test-the-screen": "test-the-screen"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "This recipe adds a screen that asks the phone's own language model a question and shows the answer as it streams in. The prompt and the answer never leave the phone. On a phone without a supported model, the screen says why and the rest of the app carries on."
+                }
+            ]
+        },
+        "before-you-start": {
+            "title": "Before you start",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The recipe uses "
+                        },
+                        {
+                            "text": "firstlightui/local-ai",
+                            "link": 0,
+                            "code": true
+                        },
+                        {
+                            "text": " 1.0, free and MIT licensed:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "bash",
+                    "text": "composer require firstlightui/local-ai:^1.0\nphp artisan native:plugin:register firstlightui/local-ai"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Rebuild the app with "
+                        },
+                        {
+                            "text": "php artisan native:run",
+                            "code": true
+                        },
+                        {
+                            "text": " after installing. It needs no permissions, API keys or environment variables."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Model"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "Apple Foundation Models"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Gemini Nano, through the ML Kit GenAI Prompt API (a Google beta)"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Generates on"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "iOS 26 or later, on a device that supports Apple Intelligence, with it turned on"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Devices on Google's Prompt API list, such as a Pixel 9 or a Galaxy S25 or later"
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "text": "Installs on"
+                    },
+                    "items": [
+                        {
+                            "label": "iOS",
+                            "text": "iOS 18 or later"
+                        },
+                        {
+                            "label": "Android",
+                            "text": "Android 10 (API 29) or later"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The app installs and runs on every version in the last row. Where the model can't run, Local AI reports "
+                        },
+                        {
+                            "text": "unavailable",
+                            "code": true
+                        },
+                        {
+                            "text": " with a reason instead."
+                        }
+                    ]
+                }
+            ]
+        },
+        "how-the-pieces-fit": {
+            "title": "How the pieces fit",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "LocalAI::availability()",
+                            "code": true
+                        },
+                        {
+                            "text": " says whether the model can be used now: "
+                        },
+                        {
+                            "text": "available",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "downloadable",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "downloading",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "unavailable",
+                            "code": true
+                        },
+                        {
+                            "text": ", with a "
+                        },
+                        {
+                            "text": "reason",
+                            "code": true
+                        },
+                        {
+                            "text": " such as "
+                        },
+                        {
+                            "text": "not_enabled",
+                            "code": true
+                        },
+                        {
+                            "text": " when Apple Intelligence is turned off."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "LocalAI::generate()",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "LocalAI::chat()",
+                            "code": true
+                        },
+                        {
+                            "text": " queue a generation and return a "
+                        },
+                        {
+                            "text": "Generation",
+                            "code": true
+                        },
+                        {
+                            "text": " straight away. Its "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": " ties together the events that follow."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "The text arrives as "
+                        },
+                        {
+                            "text": "TextDeltaGenerated",
+                            "code": true
+                        },
+                        {
+                            "text": " events, then one "
+                        },
+                        {
+                            "text": "GenerationCompleted",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "GenerationFailed",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "GenerationCancelled",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Events reach only the screen that is live when they arrive. After the user navigates away and back, read the generation's text again by its "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "1-build-the-screen": {
+            "title": "1. Build the screen",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\LocalAI\\Events\\GenerationCancelled;\nuse FirstlightUI\\LocalAI\\Events\\GenerationCompleted;\nuse FirstlightUI\\LocalAI\\Events\\GenerationFailed;\nuse FirstlightUI\\LocalAI\\Events\\TextDeltaGenerated;\nuse FirstlightUI\\LocalAI\\Facades\\LocalAI;\nuse FirstlightUI\\LocalAI\\LocalAIException;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\View\\View;\nuse Native\\Mobile\\Attributes\\On;\n\nclass AskScreen extends NativeComponent\n{\n    public bool $available = false;\n\n    public string $question = '';\n\n    public string $answer = '';\n\n    public ?string $generationId = null;\n\n    public ?string $error = null;\n\n    public function mount(): void\n    {\n        try {\n            $this->available = LocalAI::availability()->isAvailable();\n        } catch (LocalAIException) {\n            // Off the device, or the plugin isn't registered.\n            $this->available = false;\n        }\n    }\n\n    public function navTitle(): string\n    {\n        return 'Ask';\n    }\n\n    public function ask(): void\n    {\n        $this->answer = '';\n        $this->error = null;\n\n        try {\n            $this->generationId = LocalAI::generate(\n                $this->question,\n                instructions: 'Answer in two or three sentences.',\n                options: ['maxTokens' => 256],\n            )->id;\n        } catch (LocalAIException $exception) {\n            $this->error = $exception->getMessage();\n        }\n    }\n\n    public function stop(): void\n    {\n        if ($this->generationId !== null) {\n            LocalAI::cancel($this->generationId);\n        }\n    }\n\n    #[On(TextDeltaGenerated::class)]\n    public function delta(string $id, int $sequence, string $delta): void\n    {\n        if ($id === $this->generationId) {\n            $this->answer .= $delta;\n        }\n    }\n\n    #[On(GenerationCompleted::class)]\n    public function completed(string $id, string $text): void\n    {\n        if ($id === $this->generationId) {\n            // The authoritative text replaces the streamed deltas.\n            $this->answer = $text;\n            $this->generationId = null;\n        }\n    }\n\n    #[On(GenerationFailed::class)]\n    public function failed(string $id, string $code, string $message, string $text = ''): void\n    {\n        if ($id === $this->generationId) {\n            $this->answer = $text;\n            $this->error = $code === 'guardrail'\n                ? \"That question can't be answered here.\"\n                : \"Couldn't finish the answer. {$message}\";\n            $this->generationId = null;\n        }\n    }\n\n    #[On(GenerationCancelled::class)]\n    public function cancelled(string $id, string $text = ''): void\n    {\n        if ($id === $this->generationId) {\n            $this->answer = $text;\n            $this->generationId = null;\n        }\n    }\n\n    public function render(): View\n    {\n        return view('native.ask');\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Save the view as "
+                        },
+                        {
+                            "text": "resources/views/native/ask.blade.php",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:scroll-view class=\"w-full flex-1 bg-theme-background\">\n    <native:column class=\"w-full p-4 gap-4\">\n        @if (! $available)\n            <firstlight:callout message=\"Answers need a phone with Apple Intelligence or Gemini Nano.\" tone=\"info\" />\n        @endif\n\n        <firstlight:text-area\n            label=\"Question\"\n            :min-lines=\"2\"\n            :disabled=\"! $available\"\n            native:model.blur=\"question\"\n        />\n\n        @if ($generationId)\n            <firstlight:button variant=\"secondary\" @press=\"stop\">Stop</firstlight:button>\n        @else\n            <firstlight:button :disabled=\"! $available || $question === ''\" @press=\"ask\">Ask</firstlight:button>\n        @endif\n\n        @if ($error)\n            <firstlight:callout :message=\"$error\" tone=\"warning\" />\n        @endif\n\n        @if ($answer !== '')\n            <native:text class=\"text-base text-theme-on-background\">{{ $answer }}</native:text>\n        @endif\n    </native:column>\n</native:scroll-view>"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "cancel()",
+                            "code": true
+                        },
+                        {
+                            "text": " is a request: the answer keeps streaming until "
+                        },
+                        {
+                            "text": "GenerationCancelled",
+                            "code": true
+                        },
+                        {
+                            "text": " arrives with any partial text."
+                        }
+                    ]
+                }
+            ]
+        },
+        "2-offer-the-download-on-android": {
+            "title": "2. Offer the download on Android",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "When Gemini Nano is supported but not yet on the phone, "
+                        },
+                        {
+                            "text": "availability()",
+                            "code": true
+                        },
+                        {
+                            "text": " reports "
+                        },
+                        {
+                            "text": "downloadable",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "LocalAI::download()",
+                            "code": true
+                        },
+                        {
+                            "text": " asks the system for it and reports "
+                        },
+                        {
+                            "text": "downloading",
+                            "code": true
+                        },
+                        {
+                            "text": "; progress arrives as "
+                        },
+                        {
+                            "text": "ModelDownloadProgress",
+                            "code": true
+                        },
+                        {
+                            "text": " events with a "
+                        },
+                        {
+                            "text": "status",
+                            "code": true
+                        },
+                        {
+                            "text": " of "
+                        },
+                        {
+                            "text": "started",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "downloading",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "completed",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "failed",
+                            "code": true
+                        },
+                        {
+                            "text": ". iOS manages Apple Intelligence itself, so there "
+                        },
+                        {
+                            "text": "download()",
+                            "code": true
+                        },
+                        {
+                            "text": " only reports availability."
+                        }
+                    ]
+                }
+            ]
+        },
+        "3-catch-up-after-navigation": {
+            "title": "3. Catch up after navigation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Events don't queue for a screen that isn't showing. Read the text again when the screen comes back:"
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "public function onResume(): void\n{\n    if ($this->generationId !== null) {\n        $snapshot = LocalAI::snapshot($this->generationId);\n        $this->answer = $snapshot['text'];\n\n        if (in_array($snapshot['status'], ['completed', 'failed', 'cancelled'], true)) {\n            $this->generationId = null;\n        }\n    }\n}"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The runtime keeps the last 32 finished generations in memory. An older "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": ", or any "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": " after the app restarts, throws a "
+                        },
+                        {
+                            "text": "LocalAIException",
+                            "code": true
+                        },
+                        {
+                            "text": " with the code "
+                        },
+                        {
+                            "text": "unknown_operation",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "continue-a-conversation": {
+            "title": "Continue a conversation",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "LocalAI::chat()",
+                            "code": true
+                        },
+                        {
+                            "text": " takes the whole conversation. System messages may only come first, and the last message must come from the user:"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "$generation = LocalAI::chat([\n    ['role' => 'system', 'content' => 'Be brief.'],\n    ['role' => 'user', 'content' => 'Hi'],\n    ['role' => 'assistant', 'content' => 'Hello.'],\n    ['role' => 'user', 'content' => 'Name a colour.'],\n], ['temperature' => 0.7, 'maxTokens' => 128]);"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The only options are "
+                        },
+                        {
+                            "text": "temperature",
+                            "code": true
+                        },
+                        {
+                            "text": ", from 0 to 2, and "
+                        },
+                        {
+                            "text": "maxTokens",
+                            "code": true
+                        },
+                        {
+                            "text": ". Any other option, an unknown role or an empty message throws "
+                        },
+                        {
+                            "text": "InvalidArgumentException",
+                            "code": true
+                        },
+                        {
+                            "text": " before any native call."
+                        }
+                    ]
+                }
+            ]
+        },
+        "failures-and-limits": {
+            "title": "Failures and limits",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "unavailable",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "What to tell the user",
+                            "runs": [
+                                {
+                                    "text": "The model can't be used on this phone now. Check "
+                                },
+                                {
+                                    "text": "availability()",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "busy",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "What to tell the user",
+                            "text": "8 generations are already waiting. Try again shortly."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "context_exceeded",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "What to tell the user",
+                            "text": "The question and history are too long. Shorten them."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "guardrail",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "What to tell the user",
+                            "text": "The system's safety checks blocked the question or the answer."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "rate_limited",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "What to tell the user",
+                            "text": "The system is busy or the app's quota is used up. Try again later."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "background_blocked",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "What to tell the user",
+                            "text": "Android blocked generation while the app was in the background."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The plugin's "
+                        },
+                        {
+                            "text": "README",
+                            "link": 1
+                        },
+                        {
+                            "text": " lists every code and availability reason. Generations run one at a time, and queued ones wait while the app is in the background. Both models take about 4,000 tokens of input."
+                        }
+                    ]
+                }
+            ]
+        },
+        "test-the-screen": {
+            "title": "Test the screen",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Deliver the plugin's events with "
+                        },
+                        {
+                            "text": "emitNative()",
+                            "code": true
+                        },
+                        {
+                            "text": ":"
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "use App\\NativeComponents\\AskScreen;\nuse FirstlightUI\\LocalAI\\Events\\GenerationCompleted;\nuse FirstlightUI\\LocalAI\\Events\\TextDeltaGenerated;\nuse Native\\Mobile\\Testing\\Native;\n\nit('streams the answer, then shows the final text', function () {\n    Native::test(AskScreen::class)\n        ->set('generationId', 'gen-1')\n        ->emitNative(TextDeltaGenerated::class, ['id' => 'gen-1', 'sequence' => 1, 'delta' => 'Io, '])\n        ->assertSet('answer', 'Io, ')\n        ->emitNative(GenerationCompleted::class, ['id' => 'gen-1', 'text' => 'Io, Europa and Ganymede.'])\n        ->assertSet('answer', 'Io, Europa and Ganymede.')\n        ->assertSet('generationId', null)\n        ->assertSee('Io, Europa and Ganymede.');\n});\n\nit('ignores text from an earlier question', function () {\n    Native::test(AskScreen::class)\n        ->set('generationId', 'gen-2')\n        ->emitNative(TextDeltaGenerated::class, ['id' => 'gen-1', 'sequence' => 1, 'delta' => 'Old'])\n        ->assertSet('answer', '');\n});"
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Generation itself needs a device or simulator. The iOS 26 and later Simulator uses the Mac's own Apple Intelligence model; Android emulators have no model and report "
+                        },
+                        {
+                            "text": "unavailable",
+                            "code": true
+                        },
+                        {
+                            "text": ". See "
+                        },
+                        {
+                            "text": "Test screens",
+                            "link": 2
+                        },
+                        {
+                            "text": " for more of "
+                        },
+                        {
+                            "text": "Native::test()",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "firstlightui/local-ai",
+            "url": "https://github.com/firstlightui/local-ai"
+        },
+        {
+            "label": "README",
+            "url": "https://github.com/firstlightui/local-ai#readme"
+        },
+        {
+            "label": "Test screens",
+            "url": "test-screens.md"
+        }
+    ]
+}
