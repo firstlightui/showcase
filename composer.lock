@@ -855,13 +855,13 @@
             "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "git@github.com:firstlightui/custom-tabs.git",
-                "reference": "8a9e609a1603c172c1b73f2fdb34380cfe3754fb"
+                "url": "https://github.com/firstlightui/custom-tabs.git",
+                "reference": "1e76e84ded53105ee0755bc71693bd704af9884d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/custom-tabs/zipball/8a9e609a1603c172c1b73f2fdb34380cfe3754fb",
-                "reference": "8a9e609a1603c172c1b73f2fdb34380cfe3754fb",
+                "url": "https://api.github.com/repos/firstlightui/custom-tabs/zipball/1e76e84ded53105ee0755bc71693bd704af9884d",
+                "reference": "1e76e84ded53105ee0755bc71693bd704af9884d",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,11 @@
                 "MIT"
             ],
             "description": "Let people choose and reorder the tabs of your NativePHP Mobile app, within the tabs, locks and limits you declare.",
-            "time": "2026-11-21T09:11:30+00:00"
+            "support": {
+                "source": "https://github.com/firstlightui/custom-tabs/tree/main",
+                "issues": "https://github.com/firstlightui/custom-tabs/issues"
+            },
+            "time": "2026-11-26T10:24:25+00:00"
         },
         {
             "name": "firstlightui/local-ai",
@@ -1046,12 +1050,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/nativephp.git",
-                "reference": "6851e2761902f40cd5551fd15577221ba293e2f6"
+                "reference": "d70d3da202f062ec75c7bb92b56ccdbb8c443de8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/6851e2761902f40cd5551fd15577221ba293e2f6",
-                "reference": "6851e2761902f40cd5551fd15577221ba293e2f6",
+                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/d70d3da202f062ec75c7bb92b56ccdbb8c443de8",
+                "reference": "d70d3da202f062ec75c7bb92b56ccdbb8c443de8",
                 "shasum": ""
             },
             "require": {
@@ -1113,8 +1117,8 @@
                 "issues": "https://github.com/firstlightui/nativephp/issues",
                 "source": "https://github.com/firstlightui/nativephp"
             },
-            "time": "2026-11-21T17:56:53+00:00",
-            "published-time": "2026-11-21T17:58:27+00:00"
+            "time": "2026-11-26T10:24:10+00:00",
+            "published-time": "2026-11-26T10:24:17+00:00"
         },
         {
             "name": "fruitcake/php-cors",

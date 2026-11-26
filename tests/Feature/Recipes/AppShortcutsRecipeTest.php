@@ -28,13 +28,16 @@ it('lists the built-in shortcuts with where each appears, and opens their screen
 });
 
 it('runs the quick-post action from the native queue and opens the post it added', function () {
-    $bridge = Native::fakeBridge()->respondTo('AppShortcuts.TakeQueued', ['invocations' => [
-        ['id' => 'inv-1', 'shortcut' => 'quick-post', 'at' => CarbonImmutable::parse('2026-11-13 22:05:00 UTC')->getTimestampMs()],
-    ]]);
+    // NativePHP after 4.8 fires ScreenMounted on visit(), which takes the queue, so fill it afterwards.
+    $bridge = Native::fakeBridge()->respondTo('AppShortcuts.TakeQueued', ['invocations' => []]);
 
     $screen = Native::visit('/shortcuts')
         ->assertSee('Siri: “Add a quick post in Firstlight Showcase” · Spotlight · App icon · Unlock first')
         ->assertSee('0 quick posts so far');
+
+    $bridge->respondTo('AppShortcuts.TakeQueued', ['invocations' => [
+        ['id' => 'inv-1', 'shortcut' => 'quick-post', 'at' => CarbonImmutable::parse('2026-11-13 22:05:00 UTC')->getTimestampMs()],
+    ]]);
 
     expect(AppShortcuts::runQueuedActions())->toBe(1);
     $bridge->assertCalled('AppShortcuts.TakeQueued');
