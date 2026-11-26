@@ -856,12 +856,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/custom-tabs.git",
-                "reference": "1e76e84ded53105ee0755bc71693bd704af9884d"
+                "reference": "05b45deaceb62e9d027a1f2d81976d9efd91c52f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/custom-tabs/zipball/1e76e84ded53105ee0755bc71693bd704af9884d",
-                "reference": "1e76e84ded53105ee0755bc71693bd704af9884d",
+                "url": "https://api.github.com/repos/firstlightui/custom-tabs/zipball/05b45deaceb62e9d027a1f2d81976d9efd91c52f",
+                "reference": "05b45deaceb62e9d027a1f2d81976d9efd91c52f",
                 "shasum": ""
             },
             "require": {
@@ -913,7 +913,7 @@
                 "source": "https://github.com/firstlightui/custom-tabs/tree/main",
                 "issues": "https://github.com/firstlightui/custom-tabs/issues"
             },
-            "time": "2026-11-26T10:24:25+00:00"
+            "time": "2026-11-26T10:30:14+00:00"
         },
         {
             "name": "firstlightui/local-ai",
@@ -1050,12 +1050,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/nativephp.git",
-                "reference": "d70d3da202f062ec75c7bb92b56ccdbb8c443de8"
+                "reference": "99f53e8d4d0a9da36b0af5c3fcff0883a727142b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/d70d3da202f062ec75c7bb92b56ccdbb8c443de8",
-                "reference": "d70d3da202f062ec75c7bb92b56ccdbb8c443de8",
+                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/99f53e8d4d0a9da36b0af5c3fcff0883a727142b",
+                "reference": "99f53e8d4d0a9da36b0af5c3fcff0883a727142b",
                 "shasum": ""
             },
             "require": {
@@ -1117,8 +1117,8 @@
                 "issues": "https://github.com/firstlightui/nativephp/issues",
                 "source": "https://github.com/firstlightui/nativephp"
             },
-            "time": "2026-11-26T10:24:10+00:00",
-            "published-time": "2026-11-26T10:24:17+00:00"
+            "time": "2026-11-26T10:32:29+00:00",
+            "published-time": "2026-11-26T10:32:36+00:00"
         },
         {
             "name": "fruitcake/php-cors",

@@ -688,7 +688,14 @@
                     "type": "text",
                     "runs": [
                         {
-                            "text": "Fake the queue a shortcut would leave, then run it as the first screen of a launch would. See "
+                            "text": "Open the screen with an empty queue, then fake the queue a shortcut would leave and run it as the first screen of a launch would. Fill the queue after "
+                        },
+                        {
+                            "text": "Native::visit()",
+                            "code": true
+                        },
+                        {
+                            "text": ": NativePHP releases after 4.8 mount the screen there, which takes the queue. See "
                         },
                         {
                             "text": "Test screens",
@@ -702,7 +709,7 @@
                 {
                     "type": "code",
                     "language": "php",
-                    "text": "use Carbon\\CarbonImmutable;\nuse FirstlightUI\\AppShortcuts\\Facades\\AppShortcuts;\nuse Native\\Mobile\\Testing\\Native;\n\n$bridge = Native::fakeBridge()->respondTo('AppShortcuts.TakeQueued', ['invocations' => [\n    ['id' => 'inv-1', 'shortcut' => 'quick-post', 'at' => CarbonImmutable::parse('2026-11-13 22:05:00 UTC')->getTimestampMs()],\n]]);\n\n$screen = Native::visit('/shortcuts')->assertSee('0 quick posts so far');\n\nexpect(AppShortcuts::runQueuedActions())->toBe(1);\n\n$screen->assertFeedbackSent('A shortcut added a quick post')\n    ->assertSee('1 quick post so far');"
+                    "text": "use Carbon\\CarbonImmutable;\nuse FirstlightUI\\AppShortcuts\\Facades\\AppShortcuts;\nuse Native\\Mobile\\Testing\\Native;\n\n$bridge = Native::fakeBridge()->respondTo('AppShortcuts.TakeQueued', ['invocations' => []]);\n\n$screen = Native::visit('/shortcuts')->assertSee('0 quick posts so far');\n\n$bridge->respondTo('AppShortcuts.TakeQueued', ['invocations' => [\n    ['id' => 'inv-1', 'shortcut' => 'quick-post', 'at' => CarbonImmutable::parse('2026-11-13 22:05:00 UTC')->getTimestampMs()],\n]]);\n\nexpect(AppShortcuts::runQueuedActions())->toBe(1);\n\n$screen->assertFeedbackSent('A shortcut added a quick post')\n    ->assertSee('1 quick post so far');"
                 },
                 {
                     "type": "text",
