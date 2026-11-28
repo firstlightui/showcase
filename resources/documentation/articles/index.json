@@ -714,8 +714,36 @@
                     "depth": 0,
                     "runs": [
                         {
-                            "text": "Media",
+                            "text": "Chat",
                             "link": 43
+                        },
+                        {
+                            "text": " — Show a conversation with grouped bubbles, photos and files, receipts, typing and a windowed mode for long chats."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Chat Composer",
+                            "link": 44
+                        },
+                        {
+                            "text": " — Write and send messages with a growing field, attachments and throttled typing events."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Media",
+                            "link": 45
                         },
                         {
                             "text": " — Capture one image or document into Storage with optional crop and ValidatesFields."
@@ -729,7 +757,7 @@
                     "runs": [
                         {
                             "text": "Alert Dialog",
-                            "link": 44
+                            "link": 46
                         },
                         {
                             "text": " — Present one native acknowledgement with a single action."
@@ -743,7 +771,7 @@
                     "runs": [
                         {
                             "text": "Confirmation Dialog",
-                            "link": 45
+                            "link": 47
                         },
                         {
                             "text": " — Ask for one native confirmation with explicit cancellation and destructive action semantics."
@@ -757,7 +785,7 @@
                     "runs": [
                         {
                             "text": "Modal",
-                            "link": 46
+                            "link": 48
                         },
                         {
                             "text": " — Present authored content in a full-screen native overlay with server-controlled dismissal."
@@ -771,7 +799,7 @@
                     "runs": [
                         {
                             "text": "Bottom Sheet",
-                            "link": 47
+                            "link": 49
                         },
                         {
                             "text": " — Present authored content in a native bottom sheet with server-controlled dismissal."
@@ -785,7 +813,7 @@
                     "runs": [
                         {
                             "text": "Date Picker",
-                            "link": 48
+                            "link": 50
                         },
                         {
                             "text": " — Choose strict nullable calendar dates with inclusive bounds and native confirmation."
@@ -799,7 +827,7 @@
                     "runs": [
                         {
                             "text": "Time Picker",
-                            "link": 49
+                            "link": 51
                         },
                         {
                             "text": " — Choose strict nullable wall-clock times with localized native confirmation."
@@ -813,7 +841,7 @@
                     "runs": [
                         {
                             "text": "Icon Button",
-                            "link": 50
+                            "link": 52
                         },
                         {
                             "text": " — Configure compact icon-only actions, platform icon overrides, semantic variants, states, and accessibility."
@@ -827,7 +855,7 @@
                     "runs": [
                         {
                             "text": "List Item",
-                            "link": 51
+                            "link": 53
                         },
                         {
                             "text": " — Configure tappable application rows with leading identity, trailing affordances, disabled behaviour, and platform icon overrides."
@@ -841,7 +869,7 @@
                     "runs": [
                         {
                             "text": "List",
-                            "link": 52
+                            "link": 54
                         },
                         {
                             "text": " — Compose finite vertical collections of List Item rows with optional grouped sections and refresh or pagination hooks."
@@ -855,7 +883,7 @@
                     "runs": [
                         {
                             "text": "List Section",
-                            "link": 53
+                            "link": 55
                         },
                         {
                             "text": " — Group List Item rows with optional headers and footers inside a parent List."
@@ -869,7 +897,7 @@
                     "runs": [
                         {
                             "text": "Pill Group",
-                            "link": 54
+                            "link": 56
                         },
                         {
                             "text": " — Configure compact single- or multiple-selection native options."
@@ -883,7 +911,7 @@
                     "runs": [
                         {
                             "text": "Progress",
-                            "link": 55
+                            "link": 57
                         },
                         {
                             "text": " — Communicate determinate or indeterminate work with strict values and native accessibility."
@@ -897,7 +925,7 @@
                     "runs": [
                         {
                             "text": "Segmented",
-                            "link": 56
+                            "link": 58
                         },
                         {
                             "text": " — Look up the Segmented control's complete public contract and platform evidence."
@@ -911,7 +939,7 @@
                     "runs": [
                         {
                             "text": "Tabs",
-                            "link": 57
+                            "link": 59
                         },
                         {
                             "text": " — Switch between sections of one object with stable values, counts, and native tab semantics."
@@ -925,7 +953,7 @@
                     "runs": [
                         {
                             "text": "Search Field",
-                            "link": 58
+                            "link": 60
                         },
                         {
                             "text": " — Configure native query entry, clear, submission, and synchronisation behaviour."
@@ -939,7 +967,7 @@
                     "runs": [
                         {
                             "text": "Select",
-                            "link": 59
+                            "link": 61
                         },
                         {
                             "text": " — Choose one stable string or integer value with automatic searchable presentation for larger option sets."
@@ -953,7 +981,7 @@
                     "runs": [
                         {
                             "text": "Slider",
-                            "link": 60
+                            "link": 62
                         },
                         {
                             "text": " — Choose one strictly validated numeric value from an evenly spaced native range."
@@ -967,7 +995,7 @@
                     "runs": [
                         {
                             "text": "Stepper",
-                            "link": 61
+                            "link": 63
                         },
                         {
                             "text": " — Increment or decrement an exact bounded number while PHP remains authoritative."
@@ -981,7 +1009,7 @@
                     "runs": [
                         {
                             "text": "Status Label",
-                            "link": 62
+                            "link": 64
                         },
                         {
                             "text": " — Look up display-only status text, semantic tones, accessibility, and platform evidence."
@@ -995,7 +1023,7 @@
                     "runs": [
                         {
                             "text": "Metric",
-                            "link": 63
+                            "link": 65
                         },
                         {
                             "text": " — Display one labelled value with tabular figures, optional detail and grouped accessibility."
@@ -1009,7 +1037,7 @@
                     "runs": [
                         {
                             "text": "Text Field",
-                            "link": 64
+                            "link": 66
                         },
                         {
                             "text": " — Configure native single-line editing, input hints, icons, and synchronisation."
@@ -1023,7 +1051,7 @@
                     "runs": [
                         {
                             "text": "Text Area",
-                            "link": 65
+                            "link": 67
                         },
                         {
                             "text": " — Configure native multiline editing, line bounds, validation, accessibility, and synchronisation."
@@ -1037,7 +1065,7 @@
                     "runs": [
                         {
                             "text": "Code Editor",
-                            "link": 66
+                            "link": 68
                         },
                         {
                             "text": " — Edit JSON, YAML, env, and plain text with native indentation, a key row, and follow mode for live logs."
@@ -1051,7 +1079,7 @@
                     "runs": [
                         {
                             "text": "Toolbar",
-                            "link": 67
+                            "link": 69
                         },
                         {
                             "text": " — Give a screen a bottom row of icon actions with one separate primary action, drawn by each platform's own toolbar."
@@ -1065,7 +1093,7 @@
                     "runs": [
                         {
                             "text": "Toolbar Item",
-                            "link": 68
+                            "link": 70
                         },
                         {
                             "text": " — Configure one toolbar action, menu or primary action with badges, disabled state and accessibility."
@@ -1079,7 +1107,7 @@
                     "runs": [
                         {
                             "text": "Switch",
-                            "link": 69
+                            "link": 71
                         },
                         {
                             "text": " — Configure native boolean settings, server-authoritative state, and accessibility."
@@ -1098,7 +1126,7 @@
                     "runs": [
                         {
                             "text": "ValidatesFields",
-                            "link": 70
+                            "link": 72
                         },
                         {
                             "text": " — Look up the public "
@@ -1119,7 +1147,7 @@
                     "runs": [
                         {
                             "text": "Screen assertions",
-                            "link": 71
+                            "link": 73
                         },
                         {
                             "text": " — Look up the Firstlight "
@@ -1147,7 +1175,7 @@
                     "runs": [
                         {
                             "text": "Compatibility",
-                            "link": 72
+                            "link": 74
                         },
                         {
                             "text": " — Check the currently supported PHP, NativePHP, iOS, Android, and Swift versions."
@@ -1329,6 +1357,14 @@
         {
             "label": "Reorder List",
             "url": "components/reorder-list.md"
+        },
+        {
+            "label": "Chat",
+            "url": "components/chat.md"
+        },
+        {
+            "label": "Chat Composer",
+            "url": "components/chat-composer.md"
         },
         {
             "label": "Media",

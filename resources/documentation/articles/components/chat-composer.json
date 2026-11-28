@@ -1,0 +1,810 @@
+{
+    "id": "components/chat-composer",
+    "title": "Chat Composer",
+    "description": "The message bar for Chat, with a growing text field, photo, camera and file attachments, a removable tray, send, and throttled typing events.",
+    "group": "Components",
+    "anchors": {
+        "chat-composer": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "events": "events",
+        "state-timing": "state-timing",
+        "accessibility": "accessibility",
+        "platform-behaviour": "platform-behaviour",
+        "host-application-setup": "host-application-setup",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Chat Composer is the bar people write messages in: an attach button, a text field that grows with its text, and a send button, with a tray of picked photos and files above. Put it in a "
+                        },
+                        {
+                            "text": "<native:bottom-bar>",
+                            "code": true
+                        },
+                        {
+                            "text": " under a "
+                        },
+                        {
+                            "text": "Chat",
+                            "link": 0
+                        },
+                        {
+                            "text": ", so it stays above the keyboard."
+                        }
+                    ]
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "See "
+                        },
+                        {
+                            "text": "Chat",
+                            "link": 1
+                        },
+                        {
+                            "text": " for the screen class."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:bottom-bar>\n    <firstlight:chat-composer\n        native:model.debounce.300ms=\"draft\"\n        :attachments=\"$pending\"\n        placeholder=\"Message\"\n        attach=\"photos,camera,files\"\n        @send=\"send\"\n        @attach=\"addAttachment\"\n        @removeAttachment=\"removeAttachment\"\n        @typing=\"whisperTyping\"\n        label=\"Message to Sam\"\n    />\n</native:bottom-bar>"
+                }
+            ]
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "value",
+                                "code": true
+                            },
+                            {
+                                "text": " / "
+                            },
+                            {
+                                "text": "native:model",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "The draft text. "
+                                },
+                                {
+                                    "text": "native:model",
+                                    "code": true
+                                },
+                                {
+                                    "text": " takes "
+                                },
+                                {
+                                    "text": ".live",
+                                    "code": true
+                                },
+                                {
+                                    "text": " (default), "
+                                },
+                                {
+                                    "text": ".blur",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": ".lazy",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": ".debounce.Nms",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required. Accessible name of the field, such as \"Message to Sam\"."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "placeholder",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Hint text in the empty field."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "attachments",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "list of "
+                                },
+                                {
+                                    "text": "MediaValue",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", at most 10"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Files waiting to be sent, shown as a tray above the field."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "attach",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "any of "
+                                },
+                                {
+                                    "text": "photos",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "camera",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "files",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", comma-separated or a list"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Sources the attach button offers. Absent hides the button. With one source, the button opens it directly."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "max-lines",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "positive "
+                                },
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Lines the field grows to before it scrolls. Defaults to "
+                                },
+                                {
+                                    "text": "6",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "disabled",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Disables typing, attach, remove and send."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "a11y-hint",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Additional VoiceOver and TalkBack guidance."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "External EDGE layout."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "disk",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "directory",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " are rejected: "
+                        },
+                        {
+                            "text": "@attach",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the picked file's temporary path, and the screen decides where to store it."
+                        }
+                    ]
+                }
+            ]
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@send",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "text": "nothing"
+                        },
+                        {
+                            "label": "When",
+                            "runs": [
+                                {
+                                    "text": "The person pressed Send. Send is enabled when the draft has non-whitespace text or the tray has an attachment, and not while "
+                                },
+                                {
+                                    "text": "disabled",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". The draft is flushed to "
+                                },
+                                {
+                                    "text": "native:model",
+                                    "code": true
+                                },
+                                {
+                                    "text": " first, whatever the sync mode, so PHP reads the text being sent. Clear the draft and tray by publishing."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@attach",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "text": "temporary absolute path"
+                        },
+                        {
+                            "label": "When",
+                            "runs": [
+                                {
+                                    "text": "Once for each picked file, in pick order. Commit it with "
+                                },
+                                {
+                                    "text": "MediaStorage::commit()",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and add the "
+                                },
+                                {
+                                    "text": "MediaValue",
+                                    "code": true
+                                },
+                                {
+                                    "text": " to "
+                                },
+                                {
+                                    "text": "attachments",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Required when "
+                                },
+                                {
+                                    "text": "attach",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is set."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@removeAttachment",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "text": "tray index"
+                        },
+                        {
+                            "label": "When",
+                            "text": "The person removed a tray item. The tile hides until the next publication."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@typing",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "text": "nothing"
+                        },
+                        {
+                            "label": "When",
+                            "text": "At most once every 3 seconds while the person edits a non-empty draft. Use it to tell others someone is typing without sending every keystroke."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@change",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "text": "the draft text"
+                        },
+                        {
+                            "label": "When",
+                            "runs": [
+                                {
+                                    "text": "As "
+                                },
+                                {
+                                    "text": "native:model",
+                                    "code": true
+                                },
+                                {
+                                    "text": " syncs it."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Photos are stored as JPEG. Picked files are copied to the app's temporary directory before "
+                        },
+                        {
+                            "text": "@attach",
+                            "code": true
+                        },
+                        {
+                            "text": " receives the path."
+                        }
+                    ]
+                }
+            ]
+        },
+        "state-timing": {
+            "title": "State timing",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The draft is native focused text, as on "
+                        },
+                        {
+                            "text": "Text Area",
+                            "link": 2
+                        },
+                        {
+                            "text": ": typing, selection and composition stay native while the field is focused, and a publication doesn't replace text the person typed after the last sync. A publication that clears the sent draft clears the field, even while it keeps focus. The tray is PHP's: removals hide a tile only until PHP publishes the tray again."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "A screen using "
+                        },
+                        {
+                            "text": "KeepsDrafts",
+                            "code": true
+                        },
+                        {
+                            "text": " keeps the draft text, but not the tray."
+                        }
+                    ]
+                }
+            ]
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The field uses "
+                        },
+                        {
+                            "text": "label",
+                            "code": true
+                        },
+                        {
+                            "text": " as its accessible name. Attach, Send and Remove for each tray item are labelled buttons with 44-point (iOS) and 48-dp (Android) touch targets. Send, Attach, Remove, Photo Library, Camera and Browse Files are package chrome; see "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "iOS uses a vertical SwiftUI "
+                        },
+                        {
+                            "text": "TextField",
+                            "code": true
+                        },
+                        {
+                            "text": ", a menu of sources, PhotosPicker for up to 10 photos, the system camera and "
+                        },
+                        {
+                            "text": "fileImporter",
+                            "code": true
+                        },
+                        {
+                            "text": " for several files. Android uses a Material 3 "
+                        },
+                        {
+                            "text": "OutlinedTextField",
+                            "code": true
+                        },
+                        {
+                            "text": ", a bottom sheet of sources, the system photo picker for up to 10 photos, the system camera app and the system document picker for several files."
+                        }
+                    ]
+                }
+            ]
+        },
+        "host-application-setup": {
+            "title": "Host application setup",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "The Camera source needs the same camera usage description as "
+                        },
+                        {
+                            "text": "Media",
+                            "link": 4
+                        },
+                        {
+                            "text": "; Firstlight's manifest supplies a generic one."
+                        }
+                    ]
+                }
+            ]
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Chat Composer supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 5
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat-composer/ios-light.png",
+                    "text": "Chat Composer on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat-composer/ios-dark.png",
+                    "text": "Chat Composer on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat-composer/android-light.png",
+                    "text": "Chat Composer on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat-composer/android-dark.png",
+                    "text": "Chat Composer on Android in dark mode"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Chat",
+            "url": "chat.md"
+        },
+        {
+            "label": "Chat",
+            "url": "chat.md#complete-example"
+        },
+        {
+            "label": "Text Area",
+            "url": "text-area.md"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "Media",
+            "url": "media.md#host-application-setup"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c3fd865f76da57b4c33b9e9f029e731",
+    "content-hash": "563e2499a247f2de6f500499896a8abc",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1045,16 +1045,16 @@
         },
         {
             "name": "firstlightui/nativephp",
-            "version": "v1.2.0",
+            "version": "v1.3.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firstlightui/nativephp.git",
-                "reference": "7a3708544f171ede72ce1367340b76510bcc0d65"
+                "reference": "645519723e32a207b8d9e5fd12be48ef608ffe40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/7a3708544f171ede72ce1367340b76510bcc0d65",
-                "reference": "7a3708544f171ede72ce1367340b76510bcc0d65",
+                "url": "https://api.github.com/repos/firstlightui/nativephp/zipball/645519723e32a207b8d9e5fd12be48ef608ffe40",
+                "reference": "645519723e32a207b8d9e5fd12be48ef608ffe40",
                 "shasum": ""
             },
             "require": {
@@ -1115,8 +1115,8 @@
                 "issues": "https://github.com/firstlightui/nativephp/issues",
                 "source": "https://github.com/firstlightui/nativephp"
             },
-            "time": "2026-11-28T04:45:59+00:00",
-            "published-time": "2026-11-28T04:50:02+00:00"
+            "time": "2026-11-28T08:53:26+00:00",
+            "published-time": "2026-11-28T08:53:38+00:00"
         },
         {
             "name": "fruitcake/php-cors",

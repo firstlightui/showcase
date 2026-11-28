@@ -33,6 +33,8 @@ dataset('component demos', [
     ['Haptics', '/components/haptics'],
     ['Badge', '/components/badge'],
     ['Checkbox', '/components/checkbox'],
+    ['Chat', '/components/chat'],
+    ['Long Chat', '/components/chat-long'],
     ['Media', '/components/media'],
     ['Choice Group', '/components/choice-group'],
     ['Alert Dialog', '/components/alert-dialog'],
@@ -96,7 +98,7 @@ it('lists every published component with a tinted icon and no Blade tag overline
     $catalogue = (new ShowcaseHome)->components;
 
     expect(showcaseHeadlines($screen->tree()))->toEqualCanonicalizing(array_column($catalogue, 'label'))
-        ->and($items)->toHaveCount(35);
+        ->and($items)->toHaveCount(37);
 
     foreach ($items as $item) {
         expect($item['props'])->not->toHaveKey('overline')
@@ -138,7 +140,7 @@ it('explains an empty catalogue search and clears it', function () {
         ]);
 
     $screen->press('clearSearch')->assertSet('query', '');
-    expect(showcaseHeadlines($screen->tree()))->toHaveCount(35);
+    expect(showcaseHeadlines($screen->tree()))->toHaveCount(37);
 });
 
 it('pushes each component demo inside the Components tab', function (string $label, string $path) {

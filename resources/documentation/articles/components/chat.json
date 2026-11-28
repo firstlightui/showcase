@@ -1,0 +1,1569 @@
+{
+    "id": "components/chat",
+    "title": "Chat",
+    "description": "A native chat transcript with grouped bubbles, photos and files, delivery and read receipts, typing, older history and a windowed mode for long conversations.",
+    "group": "Components",
+    "anchors": {
+        "chat": "overview",
+        "complete-example": "complete-example",
+        "props": "props",
+        "messages": "props",
+        "events": "events",
+        "presentation": "presentation",
+        "read-receipts": "read-receipts",
+        "scrolling": "scrolling",
+        "long-chats": "long-chats",
+        "accessibility": "accessibility",
+        "validation-and-failure-behaviour": "validation-and-failure-behaviour",
+        "platform-behaviour": "platform-behaviour",
+        "compatibility": "compatibility",
+        "screenshots": "screenshots"
+    },
+    "chapters": {
+        "overview": {
+            "title": "Overview",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Chat shows a conversation as native message bubbles. PHP publishes the messages, oldest first; the native list keys them by ID, groups them, opens at the newest one, and reports reads, retries, message actions and file opens back to PHP. It doesn't send, store or sync anything itself: your screen owns the messages and decides how they reach a server."
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Pair it with "
+                        },
+                        {
+                            "text": "Chat Composer",
+                            "link": 0
+                        },
+                        {
+                            "text": " in a "
+                        },
+                        {
+                            "text": "<native:bottom-bar>",
+                            "code": true
+                        },
+                        {
+                            "text": ", so the composer sits above the keyboard."
+                        }
+                    ]
+                }
+            ]
+        },
+        "complete-example": {
+            "title": "Complete example",
+            "blocks": [
+                {
+                    "type": "code",
+                    "language": "php",
+                    "text": "<?php\n\nnamespace App\\NativeComponents;\n\nuse FirstlightUI\\Media\\MediaStorage;\nuse FirstlightUI\\Media\\MediaValue;\nuse FirstlightUI\\NativeComponent;\nuse Illuminate\\Support\\Str;\nuse Illuminate\\View\\View;\n\nclass Conversation extends NativeComponent\n{\n    /** @var list<array<string, mixed>> */\n    public array $messages = [];\n\n    /** @var list<MediaValue> */\n    public array $pending = [];\n\n    public string $draft = '';\n\n    public function send(): void\n    {\n        $this->messages[] = [\n            'id' => (string) Str::uuid(),\n            'author' => (string) auth()->id(),\n            'body' => trim($this->draft),\n            'sent-at' => now()->toIso8601String(),\n            'status' => 'sending',\n            'actions' => ['delete'],\n            'attachments' => array_map(fn (MediaValue $media, int $index) => [\n                'id' => (string) $index,\n                'kind' => str_starts_with($media->mime, 'image/') ? 'image' : 'file',\n                'source' => $media,\n            ], $this->pending, array_keys($this->pending)),\n        ];\n        $this->draft = '';\n        $this->pending = [];\n        // Send to your server here, then republish the same id as sent or failed.\n    }\n\n    public function addAttachment(string $tempPath): void\n    {\n        $this->pending[] = MediaStorage::commit($tempPath, 'mobile_public', 'chat');\n    }\n\n    public function removeAttachment(int $index): void\n    {\n        MediaStorage::delete($this->pending[$index] ?? null);\n        array_splice($this->pending, $index, 1);\n    }\n\n    public function markReadUpTo(string $messageId): void {}\n\n    public function resend(string $messageId): void {}\n\n    public function messageAction(string $key, string $messageId): void {}\n\n    public function render(): View\n    {\n        return view('native.conversation');\n    }\n}"
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<native:column class=\"w-full flex-1\">\n    <firstlight:chat\n        class=\"w-full flex-1\"\n        :messages=\"$messages\"\n        me=\"{{ auth()->id() }}\"\n        :actions=\"['delete' => ['label' => 'Delete', 'destructive' => true, 'icon' => 'delete']]\"\n        @read=\"markReadUpTo\"\n        @retry=\"resend\"\n        @action=\"messageAction\"\n        label=\"Chat with Sam\"\n    />\n\n    <native:bottom-bar>\n        <firstlight:chat-composer\n            native:model.debounce.300ms=\"draft\"\n            :attachments=\"$pending\"\n            placeholder=\"Message\"\n            attach=\"photos,camera,files\"\n            @send=\"send\"\n            @attach=\"addAttachment\"\n            @removeAttachment=\"removeAttachment\"\n            label=\"Message to Sam\"\n        />\n    </native:bottom-bar>\n</native:column>"
+                }
+            ]
+        },
+        "props": {
+            "title": "Props",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "messages",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "list of message arrays"
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Required. Oldest first by "
+                                },
+                                {
+                                    "text": "sent-at",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; see "
+                                },
+                                {
+                                    "text": "Messages",
+                                    "link": 1
+                                },
+                                {
+                                    "text": ". At most 500 per publication."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "me",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Required. The "
+                                },
+                                {
+                                    "text": "author",
+                                    "code": true
+                                },
+                                {
+                                    "text": " value of the current user. Messages with this author are outgoing."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "label",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required. Accessible name of the transcript, such as \"Chat with Sam\"."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "typing",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "list of display names"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Shows a typing row after the newest message. Empty hides it."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "has-older",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "bool",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Shows an activity row at the top and allows "
+                                },
+                                {
+                                    "text": "@loadOlder",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Defaults to "
+                                },
+                                {
+                                    "text": "false",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "actions",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "map of key to label, or to "
+                                },
+                                {
+                                    "text": "label",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "destructive",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Up to 4 authored message actions. "
+                                },
+                                {
+                                    "text": "icon",
+                                    "code": true
+                                },
+                                {
+                                    "text": " takes "
+                                },
+                                {
+                                    "text": "icon-ios",
+                                    "code": true
+                                },
+                                {
+                                    "text": " and "
+                                },
+                                {
+                                    "text": "icon-android",
+                                    "code": true
+                                },
+                                {
+                                    "text": " overrides."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "scroll-to",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "message "
+                                },
+                                {
+                                    "text": "id",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Brings that message on screen when the value changes. It must be a published id."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "count",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "window-from",
+                                "code": true
+                            },
+                            {
+                                "text": ", "
+                            },
+                            {
+                                "text": "window-to",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "int",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Windowed mode; see "
+                                },
+                                {
+                                    "text": "Long chats",
+                                    "link": 2
+                                },
+                                {
+                                    "text": ". All three or none."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "class",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "External EDGE layout. Give the transcript "
+                                },
+                                {
+                                    "text": "flex-1",
+                                    "code": true
+                                },
+                                {
+                                    "text": " so it fills the screen."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Chat has no "
+                        },
+                        {
+                            "text": "native:model",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "value",
+                            "code": true
+                        },
+                        {
+                            "text": ", selection or editing. "
+                        },
+                        {
+                            "text": "@change",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "@press",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "@submit",
+                            "code": true
+                        },
+                        {
+                            "text": " are rejected."
+                        }
+                    ]
+                },
+                {
+                    "type": "heading",
+                    "text": "Messages"
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "id",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required and unique. A client-generated UUID works for unsent messages."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "author",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "non-empty "
+                                },
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "runs": [
+                                {
+                                    "text": "Required. Compared with "
+                                },
+                                {
+                                    "text": "me",
+                                    "code": true
+                                },
+                                {
+                                    "text": "."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "sent-at",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "ISO 8601 instant"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Required. Messages must be in this order."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "body",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "The text. A message needs a body, attachments, or both."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "author-name",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "string",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Shown above an incoming group when more than one other person writes."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "status",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "sending",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "sent",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "delivered",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "read",
+                                    "code": true
+                                },
+                                {
+                                    "text": " | "
+                                },
+                                {
+                                    "text": "failed",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Outgoing only."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "read-by",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "list of display names"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Outgoing only. Who has read this message."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "actions",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "runs": [
+                                {
+                                    "text": "list of keys from "
+                                },
+                                {
+                                    "text": "actions",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "Which authored actions this message offers."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "attachments",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Accepted type",
+                            "text": "list, at most 10"
+                        },
+                        {
+                            "label": "Purpose",
+                            "text": "See below."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Each attachment has an "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": " unique within its message, a "
+                        },
+                        {
+                            "text": "kind",
+                            "code": true
+                        },
+                        {
+                            "text": " of "
+                        },
+                        {
+                            "text": "image",
+                            "code": true
+                        },
+                        {
+                            "text": " or "
+                        },
+                        {
+                            "text": "file",
+                            "code": true
+                        },
+                        {
+                            "text": ", and a "
+                        },
+                        {
+                            "text": "source",
+                            "code": true
+                        },
+                        {
+                            "text": ": a "
+                        },
+                        {
+                            "text": "MediaValue",
+                            "code": true
+                        },
+                        {
+                            "text": ", an absolute local path, or, for images only, an "
+                        },
+                        {
+                            "text": "https://",
+                            "code": true
+                        },
+                        {
+                            "text": " URL. A file can have no "
+                        },
+                        {
+                            "text": "source",
+                            "code": true
+                        },
+                        {
+                            "text": "; opening it then fires "
+                        },
+                        {
+                            "text": "@openAttachment",
+                            "code": true
+                        },
+                        {
+                            "text": ". Optional keys are "
+                        },
+                        {
+                            "text": "name",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "mime",
+                            "code": true
+                        },
+                        {
+                            "text": ", "
+                        },
+                        {
+                            "text": "size",
+                            "code": true
+                        },
+                        {
+                            "text": " in bytes, "
+                        },
+                        {
+                            "text": "width",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "height",
+                            "code": true
+                        },
+                        {
+                            "text": " for images, "
+                        },
+                        {
+                            "text": "progress",
+                            "code": true
+                        },
+                        {
+                            "text": " from 0 to 1 while sending, and "
+                        },
+                        {
+                            "text": "a11y-label",
+                            "code": true
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "events": {
+            "title": "Events",
+            "blocks": [
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@read",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "runs": [
+                                {
+                                    "text": "message "
+                                },
+                                {
+                                    "text": "id",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "When",
+                            "text": "The newest incoming message that has been fully on screen while the app is in the foreground, when it is newer than the last one reported. At most once a second."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@loadOlder",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "text": "nothing"
+                        },
+                        {
+                            "label": "When",
+                            "runs": [
+                                {
+                                    "text": "Once when the reader nears the oldest message while "
+                                },
+                                {
+                                    "text": "has-older",
+                                    "code": true
+                                },
+                                {
+                                    "text": " is true. It fires again only after the next publication."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@retry",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "runs": [
+                                {
+                                    "text": "message "
+                                },
+                                {
+                                    "text": "id",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "When",
+                            "runs": [
+                                {
+                                    "text": "The reader chose Try again on a "
+                                },
+                                {
+                                    "text": "failed",
+                                    "code": true
+                                },
+                                {
+                                    "text": " message."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@action",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "runs": [
+                                {
+                                    "text": "action key, message "
+                                },
+                                {
+                                    "text": "id",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "When",
+                            "text": "The reader chose an authored action from a message's menu."
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@openAttachment",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "runs": [
+                                {
+                                    "text": "message "
+                                },
+                                {
+                                    "text": "id",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", attachment "
+                                },
+                                {
+                                    "text": "id",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "When",
+                            "runs": [
+                                {
+                                    "text": "The reader opened a file with no "
+                                },
+                                {
+                                    "text": "source",
+                                    "code": true
+                                },
+                                {
+                                    "text": ". Download it and republish it with a local "
+                                },
+                                {
+                                    "text": "source",
+                                    "code": true
+                                },
+                                {
+                                    "text": "; it then opens."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "definition",
+                    "term": {
+                        "runs": [
+                            {
+                                "text": "@windowChange",
+                                "code": true
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "label": "Receives",
+                            "runs": [
+                                {
+                                    "text": "$from",
+                                    "code": true
+                                },
+                                {
+                                    "text": ", "
+                                },
+                                {
+                                    "text": "$to",
+                                    "code": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "When",
+                            "text": "Windowed mode only. The range of messages to publish next."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "Programmatic publications never fire events."
+                }
+            ]
+        },
+        "presentation": {
+            "title": "Presentation",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Bubbles.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Outgoing messages sit on the trailing side in the theme's primary colour; incoming ones on the leading side in its surface variant. Messages from one author within five minutes on the same day form a group with tighter spacing and one tail."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Days.",
+                            "strong": true
+                        },
+                        {
+                            "text": " A separator precedes each calendar day, in the application locale and timezone. Tap a bubble to show its time."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Images",
+                            "strong": true
+                        },
+                        {
+                            "text": " show at their aspect ratio; several form a grid of up to four tiles with a \"+N\" count. Tapping one opens a full-screen viewer with pinch zoom and swiping between the message's images."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Files",
+                            "strong": true
+                        },
+                        {
+                            "text": " show an icon for the MIME type, the name and the size. Tapping one with a local source opens the platform preview."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Sending.",
+                            "strong": true
+                        },
+                        {
+                            "text": " An attachment with "
+                        },
+                        {
+                            "text": "progress",
+                            "code": true
+                        },
+                        {
+                            "text": " shows a progress ring."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Status.",
+                            "strong": true
+                        },
+                        {
+                            "text": " Only the newest outgoing message shows its status: Sending, Sent, Delivered, Read, \"Read by Sam\", \"Read by Sam and Alex\" or \"Read by Sam and 2 others\". A "
+                        },
+                        {
+                            "text": "failed",
+                            "code": true
+                        },
+                        {
+                            "text": " message shows \"Not sent\" with Try again."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Typing",
+                            "strong": true
+                        },
+                        {
+                            "text": " reads \"Sam is typing\", \"Sam and Alex are typing\" or \"Several people are typing\", with pulsing dots that stay still under Reduce Motion."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Long press",
+                            "strong": true
+                        },
+                        {
+                            "text": " opens the platform menu: Copy for a message with a body, then the message's actions. Destructive actions use the destructive style. Confirm destruction in PHP, for example with "
+                        },
+                        {
+                            "text": "Confirmation Dialog",
+                            "link": 3
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Copy, Try again, Not sent, statuses, typing and New messages are package chrome; see "
+                        },
+                        {
+                            "text": "Localize chrome",
+                            "link": 4
+                        },
+                        {
+                            "text": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        "read-receipts": {
+            "title": "Read receipts",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Chat never computes receipts. Set "
+                        },
+                        {
+                            "text": "status",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "read-by",
+                            "code": true
+                        },
+                        {
+                            "text": " on the newest outgoing message from your server's read cursors (\"read up to message N\" per member); older messages need neither."
+                        }
+                    ]
+                }
+            ]
+        },
+        "scrolling": {
+            "title": "Scrolling",
+            "blocks": [
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "The transcript opens at the newest message."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "A new message at the end keeps the reader at the bottom. When they have scrolled up, they stay put and a New messages button shows the count. A new outgoing message always scrolls to the bottom."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Older messages published above keep the reader's place."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Changing a message's status, body or progress updates that row in place."
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "text": "Scrolling down dismisses the keyboard."
+                }
+            ]
+        },
+        "long-chats": {
+            "title": "Long chats",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Only rows near the screen exist natively, whatever the length. The cost of a long chat is the publication, so Chat has two modes:"
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Plain mode",
+                            "strong": true
+                        },
+                        {
+                            "text": " (default): "
+                        },
+                        {
+                            "text": "messages",
+                            "code": true
+                        },
+                        {
+                            "text": " is everything loaded so far, at most 500. Use "
+                        },
+                        {
+                            "text": "has-older",
+                            "code": true
+                        },
+                        {
+                            "text": " and "
+                        },
+                        {
+                            "text": "@loadOlder",
+                            "code": true
+                        },
+                        {
+                            "text": " to fetch more history."
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "marker": "•",
+                    "depth": 0,
+                    "runs": [
+                        {
+                            "text": "Windowed mode",
+                            "strong": true
+                        },
+                        {
+                            "text": ", for longer conversations, follows "
+                        },
+                        {
+                            "text": "native:virtual-list",
+                            "code": true
+                        },
+                        {
+                            "text": ". "
+                        },
+                        {
+                            "text": "count",
+                            "code": true
+                        },
+                        {
+                            "text": " is the total number of messages, index 0 the oldest; "
+                        },
+                        {
+                            "text": "messages",
+                            "code": true
+                        },
+                        {
+                            "text": " is only the slice from "
+                        },
+                        {
+                            "text": "window-from",
+                            "code": true
+                        },
+                        {
+                            "text": " to "
+                        },
+                        {
+                            "text": "window-to",
+                            "code": true
+                        },
+                        {
+                            "text": " inclusive, at most 500. As the reader scrolls, "
+                        },
+                        {
+                            "text": "@windowChange($from, $to)",
+                            "code": true
+                        },
+                        {
+                            "text": " asks for the next slice. Rows outside the window keep the height they last had, so nothing on screen moves when a slice arrives. The first window should end at "
+                        },
+                        {
+                            "text": "count - 1",
+                            "code": true
+                        },
+                        {
+                            "text": ". Core's "
+                        },
+                        {
+                            "text": "HasVirtualListWindow",
+                            "code": true
+                        },
+                        {
+                            "text": " concern can hold the window. Status shows only while the window reaches the newest message."
+                        }
+                    ]
+                },
+                {
+                    "type": "code",
+                    "language": "blade",
+                    "text": "<firstlight:chat\n    class=\"w-full flex-1\"\n    :messages=\"$window\"\n    me=\"{{ auth()->id() }}\"\n    :count=\"$count\"\n    :window-from=\"$from\"\n    :window-to=\"$to\"\n    @windowChange=\"setWindow\"\n    label=\"Chat with Sam\"\n/>"
+                }
+            ]
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "text": "Each message reads as one element: \"You\" or the author's name, the body, \"2 photos\" or the file's name and size, the time, and for the newest outgoing message its status. Copy, each authored action, Try again and Open for each attachment are accessibility actions, so nothing needs a long press. When the reader is at the bottom, an arriving message is announced politely; the typing row is announced when it appears. Day separators are headings, and rows outside a window are hidden from assistive technology."
+                }
+            ]
+        },
+        "validation-and-failure-behaviour": {
+            "title": "Validation and failure behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Invalid messages, such as a missing "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": ", a duplicate "
+                        },
+                        {
+                            "text": "id",
+                            "code": true
+                        },
+                        {
+                            "text": ", messages out of order, an unknown "
+                        },
+                        {
+                            "text": "status",
+                            "code": true
+                        },
+                        {
+                            "text": ", a "
+                        },
+                        {
+                            "text": "status",
+                            "code": true
+                        },
+                        {
+                            "text": " on an incoming message, more than 500 messages, more than 10 attachments or an "
+                        },
+                        {
+                            "text": "https://",
+                            "code": true
+                        },
+                        {
+                            "text": " file source, are rejected before publication with a message naming the problem."
+                        }
+                    ]
+                }
+            ]
+        },
+        "platform-behaviour": {
+            "title": "Platform behaviour",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "iOS uses a SwiftUI lazy stack anchored to the bottom, the system context menu, Quick Look for files and a full-screen pager for photos. Android uses a reversed Compose "
+                        },
+                        {
+                            "text": "LazyColumn",
+                            "code": true
+                        },
+                        {
+                            "text": ", a Material dropdown menu, the system viewer for files through a FileProvider, and a full-screen pager for photos."
+                        }
+                    ]
+                }
+            ]
+        },
+        "compatibility": {
+            "title": "Compatibility",
+            "blocks": [
+                {
+                    "type": "text",
+                    "runs": [
+                        {
+                            "text": "Chat supports the versions listed in the current "
+                        },
+                        {
+                            "text": "compatibility reference",
+                            "link": 5
+                        },
+                        {
+                            "text": ". The host application must compile both Firstlight-owned native renderers declared by the package manifest."
+                        }
+                    ]
+                }
+            ]
+        },
+        "screenshots": {
+            "title": "Screenshots",
+            "blocks": [
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat/ios-light.png",
+                    "text": "Chat on iOS in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat/ios-dark.png",
+                    "text": "Chat on iOS in dark mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat/android-light.png",
+                    "text": "Chat on Android in light mode"
+                },
+                {
+                    "type": "image",
+                    "src": "documentation/screenshots/chat/android-dark.png",
+                    "text": "Chat on Android in dark mode"
+                }
+            ]
+        }
+    },
+    "links": [
+        {
+            "label": "Chat Composer",
+            "url": "chat-composer.md"
+        },
+        {
+            "label": "Messages",
+            "url": "#messages"
+        },
+        {
+            "label": "Long chats",
+            "url": "#long-chats"
+        },
+        {
+            "label": "Confirmation Dialog",
+            "url": "confirmation-dialog.md"
+        },
+        {
+            "label": "Localize chrome",
+            "url": "../how-to/localize.md"
+        },
+        {
+            "label": "compatibility reference",
+            "url": "../reference/compatibility.md"
+        }
+    ]
+}

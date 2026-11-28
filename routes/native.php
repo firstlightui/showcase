@@ -25,6 +25,8 @@ use App\NativeComponents\Captures\ListCapture;
 use App\NativeComponents\Captures\ListItemCapture;
 use App\NativeComponents\Captures\ListItemContextMenuCapture;
 use App\NativeComponents\Captures\ListSectionCapture;
+use App\NativeComponents\Captures\ChatCapture;
+use App\NativeComponents\Captures\ChatComposerCapture;
 use App\NativeComponents\Captures\MediaCapture;
 use App\NativeComponents\Captures\MetricCapture;
 use App\NativeComponents\Captures\ModalCapture;
@@ -68,6 +70,8 @@ use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
 use App\NativeComponents\LockScreen;
+use App\NativeComponents\ChatLongShowcase;
+use App\NativeComponents\ChatShowcase;
 use App\NativeComponents\MediaShowcase;
 use App\NativeComponents\MetricShowcase;
 use App\NativeComponents\ModalShowcase;
@@ -180,8 +184,24 @@ Route::native('/captures/checkbox', CheckboxCapture::class)
     ->name('captures.checkbox')
     ->layout(ShowcaseLayout::class);
 
+Route::native('/components/chat', ChatShowcase::class)
+    ->name('chat')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/components/chat-long', ChatLongShowcase::class)
+    ->name('chat-long')
+    ->layout(ShowcaseLayout::class);
+
 Route::native('/components/media', MediaShowcase::class)
     ->name('media')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/chat', ChatCapture::class)
+    ->name('captures.chat')
+    ->layout(ShowcaseLayout::class);
+
+Route::native('/captures/chat-composer', ChatComposerCapture::class)
+    ->name('captures.chat-composer')
     ->layout(ShowcaseLayout::class);
 
 Route::native('/captures/media', MediaCapture::class)
