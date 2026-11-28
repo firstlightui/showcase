@@ -186,6 +186,7 @@ it('opens each plugin recipe from the Plugins tab', function (string $label, str
     ['App lock', '/vault'],
     ['App shortcuts', '/shortcuts'],
     ['Customise tabs', '/tabs/home'],
+    ['Chat', '/chats'],
     ['Scan documents', '/scan'],
     ['Ask on-device AI', '/ask'],
 ]);
@@ -206,7 +207,7 @@ it('presents the plugins as app entry points with icons and descriptions', funct
     $screen = Native::visit('/plugins')->assertAccessible();
     $items = showcaseNodesOfType($screen->tree(), 'firstlight.list-item');
 
-    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['App lock', 'App shortcuts', 'Customise tabs', 'Scan documents', 'Ask on-device AI']);
+    expect(array_column(array_column($items, 'props'), 'headline'))->toBe(['App lock', 'App shortcuts', 'Customise tabs', 'Chat', 'Scan documents', 'Ask on-device AI']);
 
     foreach ($items as $item) {
         expect($item['props']['leading_type'] ?? null)->toBe('icon')

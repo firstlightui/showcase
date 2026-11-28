@@ -36,6 +36,19 @@
             @press="openCustomTabs"
         />
     </firstlight:list-section>
+    <firstlight:list-section header="Messaging" footer="The chat server runs inside Showcase, so it needs no account or network.">
+        <firstlight:list-item
+            headline="Chat"
+            supporting="Conversations with an offline outbox, read receipts and photos, from the Chat plugin"
+            leading-icon="chat"
+            leading-icon-ios="bubble.left.and.bubble.right"
+            leading-icon-android="chat"
+            leading-icon-tone="info"
+            navigates
+            a11y-hint="Opens the chat recipe"
+            @press="openChats"
+        />
+    </firstlight:list-section>
     <firstlight:list-section header="On device" footer="Nothing leaves the phone. Scanning needs a real device; answers need Apple Intelligence or Gemini Nano.">
         <firstlight:list-item
             headline="Scan documents"

@@ -30,6 +30,11 @@ class PluginsScreen extends ShowcaseScreen
         $this->navigate('/scan');
     }
 
+    public function openChats(): void
+    {
+        $this->navigate('/chats');
+    }
+
     public function openAsk(): void
     {
         $this->navigate('/ask');

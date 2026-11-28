@@ -14,6 +14,8 @@ use App\NativeComponents\Captures\BadgeCapture;
 use App\NativeComponents\Captures\BottomSheetCapture;
 use App\NativeComponents\Captures\ButtonCapture;
 use App\NativeComponents\Captures\CalloutCapture;
+use App\NativeComponents\Captures\ChatCapture;
+use App\NativeComponents\Captures\ChatComposerCapture;
 use App\NativeComponents\Captures\CheckboxCapture;
 use App\NativeComponents\Captures\ChoiceGroupCapture;
 use App\NativeComponents\Captures\CodeEditorCapture;
@@ -25,8 +27,6 @@ use App\NativeComponents\Captures\ListCapture;
 use App\NativeComponents\Captures\ListItemCapture;
 use App\NativeComponents\Captures\ListItemContextMenuCapture;
 use App\NativeComponents\Captures\ListSectionCapture;
-use App\NativeComponents\Captures\ChatCapture;
-use App\NativeComponents\Captures\ChatComposerCapture;
 use App\NativeComponents\Captures\MediaCapture;
 use App\NativeComponents\Captures\MetricCapture;
 use App\NativeComponents\Captures\ModalCapture;
@@ -47,6 +47,10 @@ use App\NativeComponents\Captures\ToolbarCapture;
 use App\NativeComponents\Captures\ToolbarItemCapture;
 use App\NativeComponents\Captures\TransientFeedbackCapture;
 use App\NativeComponents\Captures\ValidateFieldsCapture;
+use App\NativeComponents\ChatLongShowcase;
+use App\NativeComponents\ChatScreen;
+use App\NativeComponents\ChatShowcase;
+use App\NativeComponents\ChatsScreen;
 use App\NativeComponents\CheckboxShowcase;
 use App\NativeComponents\ChoiceGroupShowcase;
 use App\NativeComponents\CodeEditorShowcase;
@@ -70,8 +74,6 @@ use App\NativeComponents\Layouts\ShowcaseLayout;
 use App\NativeComponents\ListItemShowcase;
 use App\NativeComponents\ListShowcase;
 use App\NativeComponents\LockScreen;
-use App\NativeComponents\ChatLongShowcase;
-use App\NativeComponents\ChatShowcase;
 use App\NativeComponents\MediaShowcase;
 use App\NativeComponents\MetricShowcase;
 use App\NativeComponents\ModalShowcase;
@@ -493,6 +495,15 @@ Route::native('/scan', ScanScreen::class)
 // Local AI: stream an answer from the phone's own language model.
 Route::native('/ask', AskScreen::class)
     ->name('recipes.ask')
+    ->layout(AppLayout::class);
+
+// Chat: conversations, an offline outbox and receipts from firstlightui/chat.
+Route::native('/chats', ChatsScreen::class)
+    ->name('recipes.chats')
+    ->layout(AppLayout::class);
+
+Route::native('/chats/{conversation}', ChatScreen::class)
+    ->name('recipes.chat')
     ->layout(AppLayout::class);
 
 // The shortcuts in config/app-shortcuts.php, and one added at runtime.

@@ -21,6 +21,8 @@
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
         "firstlightui/app-shortcuts": "^1.0@alpha",
+        "firstlightui/chat": "dev-main",
+        "firstlightui/chat-server": "dev-main",
         "firstlightui/custom-tabs": "^1.0",
         "firstlightui/local-ai": "^1.0",
         "firstlightui/local-ocr": "^1.0",
@@ -120,6 +122,18 @@
             "name": "nativephp-plugins",
             "type": "composer",
             "url": "https://plugins.nativephp.com"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/firstlightui/chat"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/firstlightui/chat-protocol"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/firstlightui/chat-server"
         }
     ]
 }

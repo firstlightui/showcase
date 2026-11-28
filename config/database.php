@@ -38,10 +38,13 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-            'busy_timeout' => null,
-            'journal_mode' => null,
-            'synchronous' => null,
-            'transaction_mode' => 'DEFERRED',
+            // Screens and background tasks (such as the Chat plugin's sync) write this file from
+            // separate PHP threads: wait for the lock, let readers run beside the writer, and take
+            // the write lock when a transaction starts so it never fails halfway through.
+            'busy_timeout' => 5000,
+            'journal_mode' => 'wal',
+            'synchronous' => 'normal',
+            'transaction_mode' => 'IMMEDIATE',
         ],
 
         'mysql' => [
