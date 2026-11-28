@@ -5,6 +5,7 @@
         me="me"
         :typing="['Sam']"
         @retry="resend"
+        timezone="UTC"
         label="Dinner with Sam and Alex"
     />
 
