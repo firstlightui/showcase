@@ -21,7 +21,7 @@
                             "text": "This documentation covers Firstlight "
                         },
                         {
-                            "text": "1.1.1",
+                            "text": "1.2.0",
                             "strong": true
                         },
                         {
@@ -56,7 +56,7 @@
                             "label": "Current requirement",
                             "runs": [
                                 {
-                                    "text": "^4.8.0",
+                                    "text": "^4.9.0",
                                     "code": true
                                 }
                             ]
@@ -73,7 +73,7 @@
                             "label": "Current requirement",
                             "runs": [
                                 {
-                                    "text": "^0.10.0",
+                                    "text": "^0.11.0",
                                     "code": true
                                 }
                             ]
@@ -196,7 +196,7 @@
                             "code": true
                         },
                         {
-                            "text": ". Mobile UI 0.10 requires Mobile 4.8. "
+                            "text": ". Mobile UI 0.11 requires Mobile 4.9. "
                         },
                         {
                             "text": "ValidatesFields",

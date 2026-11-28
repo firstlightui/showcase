@@ -46,14 +46,14 @@
                             "text": "Use NativePHP Mobile "
                         },
                         {
-                            "text": "^4.8.0",
+                            "text": "^4.9.0",
                             "code": true
                         },
                         {
                             "text": " and Mobile UI "
                         },
                         {
-                            "text": "^0.10.0",
+                            "text": "^0.11.0",
                             "code": true
                         },
                         {
@@ -82,12 +82,12 @@
             "blocks": [
                 {
                     "type": "text",
-                    "text": "Install Firstlight 1.1.1, the current stable release, as a normal Composer dependency:"
+                    "text": "Install Firstlight 1.2.0, the current stable release, as a normal Composer dependency:"
                 },
                 {
                     "type": "code",
                     "language": "bash",
-                    "text": "composer require \"firstlightui/nativephp:^1.1.1\""
+                    "text": "composer require \"firstlightui/nativephp:^1.2.0\""
                 },
                 {
                     "type": "text",

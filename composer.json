@@ -21,17 +21,17 @@
         "php": "^8.4",
         "firstlightui/app-guard": "^1.0",
         "firstlightui/app-shortcuts": "^1.0@alpha",
-        "firstlightui/custom-tabs": "dev-main",
+        "firstlightui/custom-tabs": "^1.0",
         "firstlightui/local-ai": "^1.0",
         "firstlightui/local-ocr": "^1.0",
-        "firstlightui/nativephp": "dev-main",
+        "firstlightui/nativephp": "^1.2",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
-        "nativephp/mobile": "^4.8.0",
+        "nativephp/mobile": "^4.9.0",
         "nativephp/mobile-biometrics": "^1.0.3",
         "nativephp/mobile-browser": "^1.2",
         "nativephp/mobile-network": "^1.1",
-        "nativephp/mobile-ui": "^0.10.0"
+        "nativephp/mobile-ui": "^0.11.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

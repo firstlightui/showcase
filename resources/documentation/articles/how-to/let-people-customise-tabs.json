@@ -61,40 +61,21 @@
                             "code": true
                         },
                         {
-                            "text": ", free and MIT licensed. It is not released yet: it is planned alongside Firstlight 1.2 and needs Firstlight's "
+                            "text": ", free and MIT licensed. It needs Firstlight 1.2 or later for the "
                         },
                         {
                             "text": "Reorder List",
                             "link": 3
                         },
                         {
-                            "text": ", which is on Firstlight's "
-                        },
-                        {
-                            "text": "main",
-                            "code": true
-                        },
-                        {
-                            "text": " branch. Until then, install both from "
-                        },
-                        {
-                            "text": "main",
-                            "code": true
-                        },
-                        {
-                            "text": ":"
+                            "text": "."
                         }
                     ]
                 },
                 {
                     "type": "code",
-                    "language": "json",
-                    "text": "// composer.json\n\"repositories\": [\n    { \"type\": \"vcs\", \"url\": \"https://github.com/firstlightui/custom-tabs\" }\n],"
-                },
-                {
-                    "type": "code",
                     "language": "bash",
-                    "text": "composer require firstlightui/nativephp:dev-main firstlightui/custom-tabs:dev-main"
+                    "text": "composer require firstlightui/custom-tabs:^1.0"
                 },
                 {
                     "type": "text",
